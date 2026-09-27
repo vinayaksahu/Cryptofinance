@@ -72,6 +72,84 @@ export async function distribute12LevelSignupBonus(
 }
 
 /**
+ * Returns accurate bonus lock status and withdrawable balance for a user.
+ * Single source of truth for auth/me, dashboard, and transactional views.
+ */
+export async function getUserBonusAndWithdrawableStatus(userId: string) {
+  const minActiveRequired = await getNumericConfig(
+    "BONUS_REDEMPTION_MIN_ACTIVE_USDT",
+    APP_CONFIG.bonusRedemptionMinActiveUsdt ?? 20.0
+  );
+  const minActiveDec = new Decimal(minActiveRequired);
+
+  const user = await db.user.findUnique({
+    where: { id: userId },
+    select: {
+      id: true,
+      incomeBalance: true,
+      contracts: {
+        where: { status: "ACTIVE" },
+        select: { amountInUsdt: true, amountInInr: true },
+      },
+    },
+  });
+
+  if (!user) {
+    return {
+      activeTotalUsdt: 0,
+      totalBonusReceived: 0,
+      lockedBonus: 0,
+      withdrawableBalance: 0,
+      isBonusLocked: false,
+      minActiveBonusRequired: minActiveRequired,
+    };
+  }
+
+  let activeTotalUsdt = new Decimal(0);
+  for (const c of user.contracts) {
+    const amt = c.amountInUsdt
+      ? new Decimal(c.amountInUsdt.toString())
+      : c.amountInInr
+      ? new Decimal(c.amountInInr.toString())
+      : new Decimal(0);
+    activeTotalUsdt = activeTotalUsdt.plus(amt);
+  }
+
+  // Aggregate ALL signup bonus entries across user's history
+  const bonusAgg = await db.ledgerEntry.aggregate({
+    where: {
+      userId: user.id,
+      type: "SIGNUP_BONUS",
+    },
+    _sum: { amount: true },
+  });
+
+  const totalBonusReceived = bonusAgg._sum.amount
+    ? new Decimal(bonusAgg._sum.amount.toString())
+    : new Decimal(0);
+
+  const isBonusLocked = activeTotalUsdt.lessThan(minActiveDec);
+  const currentIncomeBal = new Decimal(user.incomeBalance.toString());
+
+  const lockedBonusDec = isBonusLocked
+    ? Decimal.min(totalBonusReceived, currentIncomeBal)
+    : new Decimal(0);
+
+  // Available withdrawable floored strictly to 1 decimal place (never rounded up)
+  const rawWithdrawable = Decimal.max(0, currentIncomeBal.minus(lockedBonusDec));
+  const withdrawableBalDec = rawWithdrawable.toDecimalPlaces(1, Decimal.ROUND_DOWN);
+
+  return {
+    activeTotalUsdt: activeTotalUsdt.toNumber(),
+    totalBonusReceived: totalBonusReceived.toNumber(),
+    lockedBonus: lockedBonusDec.toNumber(),
+    withdrawableBalance: withdrawableBalDec.toNumber(),
+    isBonusLocked,
+    minActiveBonusRequired: minActiveRequired,
+  };
+}
+
+/**
  * Validates whether a user meets the "$20+ Active IDs" criteria for using/redeeming
  * their Signup and 12-Level Registration Bounty balance.
  *
@@ -103,10 +181,6 @@ export async function validateBonusUsageEligibility(
       contracts: {
         where: { status: "ACTIVE" },
         select: { amountInUsdt: true, amountInInr: true },
-      },
-      ledgers: {
-        where: { type: "SIGNUP_BONUS" },
-        select: { amount: true },
       },
     },
   });
@@ -140,11 +214,18 @@ export async function validateBonusUsageEligibility(
     };
   }
 
-  // Calculate total signup/level bonus received
-  let totalBonusReceived = new Decimal(0);
-  for (const entry of user.ledgers) {
-    totalBonusReceived = totalBonusReceived.plus(new Decimal(entry.amount.toString()));
-  }
+  // Aggregate ALL signup bonus entries across user's history
+  const bonusAgg = await db.ledgerEntry.aggregate({
+    where: {
+      userId: user.id,
+      type: "SIGNUP_BONUS",
+    },
+    _sum: { amount: true },
+  });
+
+  const totalBonusReceived = bonusAgg._sum.amount
+    ? new Decimal(bonusAgg._sum.amount.toString())
+    : new Decimal(0);
 
   // If the user has received no bonus, no restrictions apply
   if (totalBonusReceived.isZero() || !totalBonusReceived.isPositive()) {
