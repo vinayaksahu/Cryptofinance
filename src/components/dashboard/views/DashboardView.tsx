@@ -74,6 +74,11 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
   // Mathematical Consistency: Total Income = Available Balance + Total Withdrawn
   const totalInc = Number(user?.totalIncome ?? (incomeBal + totalWithdrawn));
 
+  // Withdrawable Balance (Respecting $20 Active ID criteria for Joining Bonus, floored to 1 decimal)
+  const withdrawableBal = user?.withdrawableBalance !== undefined
+    ? Number(user.withdrawableBalance)
+    : Math.max(0, Math.floor((incomeBal - (user?.lockedBonus ?? 0)) * 10) / 10);
+
   // Team counts (Direct, Active Direct, Total Team, Active Team)
   const directTeamCount = user?.directTeamCount ?? (user?.directs?.length ?? 0);
   const activeDirectCount = user?.activeDirectCount ?? (user?.directs || []).filter((d: any) => d.activation === "Active" || Number(d.amount || 0) > 0).length;
@@ -463,7 +468,7 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
           </div>
         </div>
 
-        {/* Row 2: 2 Cards */}
+        {/* Row 2: Cards */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           {/* TOTAL ROI INCOME */}
           <div
@@ -488,6 +493,20 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
             </p>
             <p className="text-base sm:text-lg font-extrabold text-cyan-400 font-mono">
               {currency} {basicTotalLevel.toFixed(2)}
+            </p>
+          </div>
+
+          {/* WITHDRAWABLE BALANCE */}
+          <div
+            onClick={() => setActiveTab("tx-withdraw")}
+            className="bg-[#091124] border border-cyan-500/40 hover:border-cyan-400 rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:shadow-cyan-500/10 transition-all cursor-pointer flex flex-col justify-center items-center group relative overflow-hidden"
+          >
+            <p className="text-[10px] sm:text-[11px] font-bold text-cyan-400 uppercase tracking-wider mb-1 flex items-center justify-center gap-1">
+              <span>WITHDRAWABLE BALANCE</span>
+              <span className="text-[10px] opacity-70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">↗</span>
+            </p>
+            <p className="text-base sm:text-lg font-extrabold text-cyan-300 font-mono">
+              {currency} {withdrawableBal.toFixed(1)}
             </p>
           </div>
         </div>
