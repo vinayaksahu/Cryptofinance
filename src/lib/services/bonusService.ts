@@ -156,14 +156,14 @@ export async function validateBonusUsageEligibility(
   }
 
   const currentIncomeBalance = new Decimal(user.incomeBalance.toString());
-  // The available income that does NOT come from the bonus
-  const nonBonusAvailable = Decimal.max(0, currentIncomeBalance.minus(totalBonusReceived));
+  // The available income that does NOT come from the bonus, floored to 1 decimal place (never rounded up)
+  const nonBonusAvailable = Decimal.max(0, currentIncomeBalance.minus(totalBonusReceived)).toDecimalPlaces(1, Decimal.ROUND_DOWN);
 
   // If requested amount exceeds non-bonus income, it requires using the bonus funds
   if (reqAmountDec.greaterThan(nonBonusAvailable)) {
     return {
       allowed: false,
-      error: `Bonus funds are usable only on active IDs with $${minActiveDec.toFixed(2)}+ active package. You have $${totalBonusReceived.toFixed(2)} USDT in Signup/Level Bonus, and your current active package is $${activeTotalUsdt.toFixed(2)} USDT. Please activate a package of $${minActiveDec.toFixed(2)} or more to redeem this bonus.`,
+      error: `Bonus funds are usable only on active IDs with $${minActiveDec.toFixed(2)}+ active package. You have $${totalBonusReceived.toFixed(2)} USDT in Signup/Level Bonus. Maximum withdrawable without activating a $${minActiveDec.toFixed(2)}+ package is $${nonBonusAvailable.toFixed(1)} USDT.`,
       activeTotalUsdt,
       bonusBalanceUsdt: totalBonusReceived,
     };

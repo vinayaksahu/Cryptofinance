@@ -125,6 +125,18 @@ export async function POST(req: NextRequest) {
       }, { status: 400 });
     }
 
+    // Validate maximum withdrawable balance floored strictly to 1 decimal place (never rounded up)
+    let maxWithdrawable = incomeBal;
+    if (bonusCheck.bonusBalanceUsdt && bonusCheck.bonusBalanceUsdt.greaterThan(0)) {
+      maxWithdrawable = Decimal.max(0, incomeBal.minus(bonusCheck.bonusBalanceUsdt));
+    }
+    const flooredWithdrawable = maxWithdrawable.toDecimalPlaces(1, Decimal.ROUND_DOWN);
+    if (amountUsdtDec.greaterThan(flooredWithdrawable)) {
+      return NextResponse.json({
+        error: `Requested amount ($${amountUsdtDec.toString()} USDT) exceeds your Available Withdrawable Balance ($${flooredWithdrawable.toFixed(1)} USDT).`,
+      }, { status: 400 });
+    }
+
     const feePercent = await getNumericConfig("WITHDRAWAL_FEE_PERCENT", APP_CONFIG.withdrawalAdminFeePercent);
     const feeRateDec = new Decimal(feePercent).dividedBy(100);
     const feeAmountDec = amountUsdtDec.times(feeRateDec);

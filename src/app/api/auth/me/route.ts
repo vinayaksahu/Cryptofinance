@@ -390,12 +390,14 @@ export async function GET() {
   }));
 
   // Calculate bonus lock and withdrawable balance ($20+ Active ID criteria)
+  // Floored strictly to 1 decimal place for all users (e.g. 4.27 -> 4.2, never rounded up)
   const totalActiveInvestment = basicPackageTotal.plus(fdPackageTotal);
   const minActiveBonusRequired = 20.0;
   const isBonusLocked = totalActiveInvestment.lessThan(minActiveBonusRequired);
   const currentIncomeNum = Number(user.incomeBalance?.toString() ?? 0);
   const lockedBonusAmount = isBonusLocked ? Math.min(joiningBonus, currentIncomeNum) : 0;
-  const withdrawableBalance = Math.max(0, Number((new Decimal(currentIncomeNum).minus(lockedBonusAmount)).toFixed(2)));
+  const rawWithdrawable = Decimal.max(0, new Decimal(currentIncomeNum).minus(lockedBonusAmount));
+  const withdrawableBalance = rawWithdrawable.toDecimalPlaces(1, Decimal.ROUND_DOWN).toNumber();
 
   return NextResponse.json({
     systemConfig,

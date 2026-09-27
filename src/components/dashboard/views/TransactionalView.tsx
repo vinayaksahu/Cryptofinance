@@ -66,7 +66,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
   const isBonusLocked = user.isBonusLocked !== undefined ? Boolean(user.isBonusLocked) : totalActivePkg < minActiveBonusReq;
   const joiningBonusAmt = Number(user.incomeBreakdown?.joiningBonus || user.lockedBonus || 0);
   const lockedBonus = isBonusLocked ? Math.min(joiningBonusAmt, incomeBal) : 0;
-  const withdrawableBal = user.withdrawableBalance !== undefined ? Number(user.withdrawableBalance) : Math.max(0, Number((incomeBal - lockedBonus).toFixed(2)));
+  const withdrawableBal = user.withdrawableBalance !== undefined ? Number(user.withdrawableBalance) : Math.max(0, Math.floor((incomeBal - lockedBonus) * 10) / 10);
 
   const cfg = user?.systemConfig || {};
 
@@ -144,7 +144,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
     e.preventDefault();
     if (Number(withdrawAmount) > withdrawableBal) {
       setMessage({
-        text: `Requested amount ($${Number(withdrawAmount).toFixed(2)} USDT) exceeds your Available Withdrawable Balance ($${withdrawableBal.toFixed(2)} USDT).${
+        text: `Requested amount ($${Number(withdrawAmount).toFixed(1)} USDT) exceeds your Available Withdrawable Balance ($${withdrawableBal.toFixed(1)} USDT).${
           isBonusLocked && lockedBonus > 0
             ? ` Note: $${lockedBonus.toFixed(2)} USDT Joining Bonus is locked until you activate a $20+ package.`
             : ""
@@ -483,7 +483,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
           <div className="p-3.5 rounded-2xl bg-[#070e20] border border-[#162544] text-xs space-y-2 mb-5">
             <div className="flex justify-between items-center">
               <span className="text-slate-400">Available Withdrawable Balance:</span>
-              <span className="text-cyan-400 font-bold text-sm font-mono">${withdrawableBal.toFixed(2)} USDT</span>
+              <span className="text-cyan-400 font-bold text-sm font-mono">${withdrawableBal.toFixed(1)} USDT</span>
             </div>
             {isBonusLocked && lockedBonus > 0 && (
               <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-300 flex items-start gap-2">
