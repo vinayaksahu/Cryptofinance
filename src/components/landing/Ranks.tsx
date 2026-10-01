@@ -88,7 +88,7 @@ export function Ranks() {
       weak: "$25,000",
       total: "$50,000",
       cash: "$2,500.00 USDT",
-      reward: "Dubai 5-Star VIP Tour",
+      reward: "Swiss Alps & Geneva VIP Tour",
       icon: Plane,
       featured: true,
     },
@@ -110,18 +110,18 @@ export function Ranks() {
       weak: "$5,000,000",
       total: "$10,000,000",
       cash: "$500,000.00 USDT",
-      reward: "Luxury Waterfront Villa (Dubai)",
+      reward: "Executive Waterfront Penthouse",
       icon: Crown,
       featured: true,
     },
   ];
 
   return (
-    <section id="ranks" className="relative z-10 py-20 border-t border-cyan-500/20 bg-[var(--bg-secondary)]/30">
+    <section id="ranks" className="relative z-10 py-20 border-t border-slate-200/80 dark:border-cyan-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 font-mono">
+          <span className="text-sky-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25 font-mono">
             LEADERSHIP RECOGNITION &bull; SLIDES 18 &amp; 19
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-black text-[var(--text-main)] mt-3">
@@ -133,10 +133,10 @@ export function Ranks() {
         </div>
 
         {/* 50:50 Rule Notice Banner */}
-        <div className="p-4 rounded-2xl bg-inner-panel border border-cyan-500/30 max-w-3xl mx-auto mb-12 text-center text-xs sm:text-sm text-[var(--text-muted)] flex items-center justify-center gap-3">
-          <CheckCircle2 className="w-5 h-5 text-cyan-400 shrink-0" />
+        <div className="p-4 rounded-2xl bg-white/70 dark:bg-slate-900/60 border border-slate-200/80 dark:border-cyan-500/30 max-w-3xl mx-auto mb-12 text-center text-xs sm:text-sm text-[var(--text-muted)] flex items-center justify-center gap-3 shadow-sm">
+          <CheckCircle2 className="w-5 h-5 text-sky-500 dark:text-cyan-400 shrink-0" />
           <span>
-            <strong>50:50 Ratio Rule:</strong> Strong aur Weak leg 50-50% team business volume hone par reward release hoga. Turnover accumulates permanently with zero time expiry!
+            <strong>50:50 Ratio Rule:</strong> 50% team business volume from Strong Leg and 50% from other legs. Turnover accumulates permanently with zero time expiry!
           </span>
         </div>
 
@@ -148,16 +148,16 @@ export function Ranks() {
               <div
                 key={r.id}
                 className={`glass-card p-5 rounded-3xl flex flex-col justify-between relative transition duration-200 hover:-translate-y-1 ${
-                  r.featured ? "border-cyan-400 shadow-lg shadow-cyan-500/15" : "border-cyan-500/25"
+                  r.featured ? "border-sky-400 dark:border-cyan-400 shadow-lg shadow-sky-500/15" : "border-slate-200/80 dark:border-cyan-500/25"
                 }`}
               >
                 <div>
                   <div className="flex justify-between items-start mb-3">
-                    <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                    <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-500 dark:text-cyan-400">
                       <Icon className="w-5 h-5" />
                     </div>
                     {r.featured && (
-                      <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-cyan-400 text-slate-950 font-black uppercase">
+                      <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-sky-500 text-white font-black uppercase">
                         Featured
                       </span>
                     )}
@@ -167,25 +167,25 @@ export function Ranks() {
                     {r.rank}
                   </h4>
 
-                  <div className="p-2.5 rounded-xl bg-inner-panel border border-[var(--border-subtle)] text-[11px] font-mono space-y-1 mb-3">
+                  <div className="p-2.5 rounded-xl bg-slate-50/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-[var(--border-subtle)] text-[11px] font-mono space-y-1 mb-3">
                     <div className="flex justify-between text-[var(--text-subtle)]">
                       <span>Strong (50%):</span>
-                      <span className="font-bold text-cyan-400">{r.strong}</span>
+                      <span className="font-bold text-sky-600 dark:text-cyan-400">{r.strong}</span>
                     </div>
                     <div className="flex justify-between text-[var(--text-subtle)]">
                       <span>Weak (50%):</span>
-                      <span className="font-bold text-cyan-400">{r.weak}</span>
+                      <span className="font-bold text-sky-600 dark:text-cyan-400">{r.weak}</span>
                     </div>
-                    <div className="flex justify-between text-[var(--text-main)] pt-1 border-t border-[var(--border-subtle)]">
+                    <div className="flex justify-between text-[var(--text-main)] pt-1 border-t border-slate-200/80 dark:border-[var(--border-subtle)]">
                       <span>Total Volume:</span>
-                      <span className="font-bold text-amber-400">{r.total}</span>
+                      <span className="font-bold text-indigo-600 dark:text-indigo-400">{r.total}</span>
                     </div>
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-[var(--border-subtle)] space-y-1.5 text-xs font-mono">
+                <div className="pt-2 border-t border-slate-200/80 dark:border-[var(--border-subtle)] space-y-1.5 text-xs font-mono">
                   <div className="text-[10px] text-[var(--text-subtle)] uppercase">Reward Option A:</div>
-                  <div className="font-bold text-emerald-400">{r.cash}</div>
+                  <div className="font-bold text-emerald-600 dark:text-emerald-400">{r.cash}</div>
                   <div className="text-[10px] text-[var(--text-subtle)] uppercase pt-1">Reward Option B:</div>
                   <div className="font-bold text-[var(--text-main)] text-[11px]">{r.reward}</div>
                 </div>

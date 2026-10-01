@@ -38,7 +38,7 @@ export function Faq() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 font-mono">
+          <span className="text-sky-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25 font-mono">
             FREQUENTLY ASKED QUESTIONS &bull; PROTOCOL DECK
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-black text-[var(--text-main)] mt-3">
@@ -56,21 +56,21 @@ export function Faq() {
             return (
               <div
                 key={item.q}
-                className="glass-card rounded-2xl overflow-hidden transition-all duration-200 border border-cyan-500/25"
+                className="glass-card rounded-2xl overflow-hidden transition-all duration-200 border border-slate-200/80 dark:border-cyan-500/25"
               >
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? null : idx)}
-                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 font-display font-bold text-base sm:text-lg text-[var(--text-main)] hover:text-cyan-400 transition"
+                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 font-display font-bold text-base sm:text-lg text-[var(--text-main)] hover:text-sky-600 dark:hover:text-cyan-400 transition"
                   aria-expanded={isOpen}
                 >
                   <span className="flex items-center gap-3">
-                    <HelpCircle className="w-5 h-5 text-cyan-400 shrink-0" />
+                    <HelpCircle className="w-5 h-5 text-sky-500 dark:text-cyan-400 shrink-0" />
                     {item.q}
                   </span>
                   <ChevronDown
                     className={`w-5 h-5 text-[var(--text-subtle)] shrink-0 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-cyan-400" : ""
+                      isOpen ? "rotate-180 text-sky-500 dark:text-cyan-400" : ""
                     }`}
                   />
                 </button>

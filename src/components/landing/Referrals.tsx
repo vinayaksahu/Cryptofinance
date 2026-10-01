@@ -8,16 +8,16 @@ import { APP_CONFIG } from "@/lib/constants";
 export function Referrals() {
   // Exact 10-Level Royalty Matrix from Slide 16 & 17
   const levels = [
-    { level: 1, percent: 10, rule: "1 Active Direct", totalDirects: "1 Direct", color: "text-cyan-400 font-bold" },
-    { level: 2, percent: 5, rule: "2 Active Directs", totalDirects: "2 Directs", color: "text-sky-400 font-bold" },
-    { level: 3, percent: 2, rule: "3 Active Directs", totalDirects: "3 Directs", color: "text-emerald-400 font-bold" },
-    { level: 4, percent: 2, rule: "4 Active Directs", totalDirects: "4 Directs", color: "text-emerald-400 font-bold" },
-    { level: 5, percent: 2, rule: "5 Active Directs", totalDirects: "5 Directs", color: "text-emerald-400 font-bold" },
-    { level: 6, percent: 1, rule: "6 Active Directs", totalDirects: "6 Directs", color: "text-amber-400 font-bold" },
-    { level: 7, percent: 1, rule: "7 Active Directs", totalDirects: "7 Directs", color: "text-amber-400 font-bold" },
-    { level: 8, percent: 1, rule: "8 Active Directs", totalDirects: "8 Directs", color: "text-amber-400 font-bold" },
-    { level: 9, percent: 1, rule: "9 Active Directs", totalDirects: "9 Directs", color: "text-purple-400 font-bold" },
-    { level: 10, percent: 1, rule: "10 Active Directs", totalDirects: "10 Directs (Full)", color: "text-cyan-300 font-bold" },
+    { level: 1, percent: 10, rule: "1 Active Direct", totalDirects: "1 Direct", color: "text-sky-600 dark:text-cyan-400 font-bold" },
+    { level: 2, percent: 5, rule: "2 Active Directs", totalDirects: "2 Directs", color: "text-sky-600 dark:text-sky-400 font-bold" },
+    { level: 3, percent: 2, rule: "3 Active Directs", totalDirects: "3 Directs", color: "text-emerald-600 dark:text-emerald-400 font-bold" },
+    { level: 4, percent: 2, rule: "4 Active Directs", totalDirects: "4 Directs", color: "text-emerald-600 dark:text-emerald-400 font-bold" },
+    { level: 5, percent: 2, rule: "5 Active Directs", totalDirects: "5 Directs", color: "text-emerald-600 dark:text-emerald-400 font-bold" },
+    { level: 6, percent: 1, rule: "6 Active Directs", totalDirects: "6 Directs", color: "text-indigo-600 dark:text-indigo-400 font-bold" },
+    { level: 7, percent: 1, rule: "7 Active Directs", totalDirects: "7 Directs", color: "text-indigo-600 dark:text-indigo-400 font-bold" },
+    { level: 8, percent: 1, rule: "8 Active Directs", totalDirects: "8 Directs", color: "text-indigo-600 dark:text-indigo-400 font-bold" },
+    { level: 9, percent: 1, rule: "9 Active Directs", totalDirects: "9 Directs", color: "text-purple-600 dark:text-purple-400 font-bold" },
+    { level: 10, percent: 1, rule: "10 Active Directs", totalDirects: "10 Directs (Full)", color: "text-sky-600 dark:text-cyan-300 font-bold" },
   ];
 
   return (
@@ -25,7 +25,7 @@ export function Referrals() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 font-mono">
+          <span className="text-sky-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25 font-mono">
             NETWORK INCENTIVES &bull; SLIDES 05, 15, 16 &amp; 17
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-black text-[var(--text-main)] mt-3">
@@ -38,17 +38,17 @@ export function Referrals() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
           {/* Left Column: Direct Bonus & Free Rewards Card (5 Cols) from Slide 05 & 15 */}
-          <div className="lg:col-span-5 glass-card-gold p-8 rounded-3xl flex flex-col justify-between border border-cyan-500/30">
+          <div className="lg:col-span-5 glass-card-elevated p-8 rounded-3xl flex flex-col justify-between border border-sky-500/30">
             <div>
-              <div className="w-14 h-14 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-6 shadow-sm">
+              <div className="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-500 dark:text-cyan-400 mb-6 shadow-sm">
                 <Gift className="w-7 h-7" />
               </div>
 
               <div className="flex items-center gap-2 mb-3">
-                <span className="px-3 py-1 rounded-full bg-cyan-400 text-slate-950 text-xs font-black uppercase tracking-wider font-mono">
+                <span className="px-3 py-1 rounded-full bg-sky-500 text-white text-xs font-black uppercase tracking-wider font-mono">
                   Slide 15 Commission
                 </span>
-                <span className="text-xs text-amber-400 font-bold font-mono">
+                <span className="text-xs text-indigo-600 dark:text-indigo-400 font-bold font-mono">
                   Instant Working Wallet Credit
                 </span>
               </div>
@@ -62,17 +62,17 @@ export function Referrals() {
               </p>
 
               {/* Free Registration Rewards Box (Slide 05) */}
-              <div className="my-6 p-4 rounded-2xl bg-inner-panel border border-cyan-500/20 text-xs sm:text-sm space-y-3">
-                <div className="font-bold text-cyan-400 uppercase tracking-wider text-xs flex items-center gap-1.5 font-mono">
-                  <Sparkles className="w-4 h-4 text-cyan-400" /> Free Community Signup Rewards (Slide 05)
+              <div className="my-6 p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-cyan-500/20 text-xs sm:text-sm space-y-3">
+                <div className="font-bold text-sky-600 dark:text-cyan-400 uppercase tracking-wider text-xs flex items-center gap-1.5 font-mono">
+                  <Sparkles className="w-4 h-4 text-sky-500 dark:text-cyan-400" /> Free Community Signup Rewards (Slide 05)
                 </div>
                 <div className="flex justify-between items-center py-1.5 border-b border-[var(--border-subtle)]">
                   <span className="text-[var(--text-muted)]">Free Self Registration:</span>
-                  <span className="font-mono font-bold text-amber-400">$1.00 USDT Bonus</span>
+                  <span className="font-mono font-bold text-indigo-600 dark:text-indigo-400">$1.00 USDT Bonus</span>
                 </div>
                 <div className="flex justify-between items-center py-1.5 border-b border-[var(--border-subtle)]">
                   <span className="text-[var(--text-muted)]">10-Tier Team Signup Bounty:</span>
-                  <span className="font-mono font-bold text-cyan-400">$0.40 / Tier (10 Levels)</span>
+                  <span className="font-mono font-bold text-sky-600 dark:text-cyan-400">$0.40 / Tier (10 Levels)</span>
                 </div>
                 <div className="text-[11px] text-[var(--text-subtle)]">
                   ★ Stored in Bonus Wallet &bull; Funds up to 10% of any activation or compounding!
@@ -82,21 +82,21 @@ export function Referrals() {
               {/* Affiliate Highlights from Slide 15 */}
               <div className="space-y-2.5 text-xs text-[var(--text-muted)]">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-sky-500 dark:text-cyan-400 shrink-0" />
                   <span><strong>Zero Lockups:</strong> Withdrawable immediately with min $2.00 USDT.</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-sky-500 dark:text-cyan-400 shrink-0" />
                   <span><strong>Repeat Compounding:</strong> Earn 10% on every repeat compounding top-up!</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-sky-500 dark:text-cyan-400 shrink-0" />
                   <span><strong>Unlimited Width:</strong> Refer as many direct members as you wish.</span>
                 </div>
               </div>
             </div>
 
-            <div className="pt-6 mt-6 border-t border-cyan-500/20">
+            <div className="pt-6 mt-6 border-t border-slate-200/80 dark:border-cyan-500/20">
               <Link
                 href="/register"
                 className="w-full crypto-btn py-3.5 rounded-2xl text-center font-bold text-sm flex items-center justify-center gap-2 shadow-lg"
@@ -107,11 +107,11 @@ export function Referrals() {
           </div>
 
           {/* Right Column: 10-Level Royalty Matrix (7 Cols) from Slide 16 & 17 */}
-          <div className="lg:col-span-7 glass-card p-6 sm:p-8 rounded-3xl flex flex-col justify-between border border-cyan-500/20">
+          <div className="lg:col-span-7 glass-card p-6 sm:p-8 rounded-3xl flex flex-col justify-between border border-slate-200/80 dark:border-cyan-500/20">
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                  <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-500 dark:text-cyan-400">
                     <Users className="w-5 h-5" />
                   </div>
                   <div>
@@ -123,7 +123,7 @@ export function Referrals() {
                     </span>
                   </div>
                 </div>
-                <span className="hidden sm:inline-block px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 text-xs font-mono font-bold">
+                <span className="hidden sm:inline-block px-3 py-1 rounded-full bg-sky-500/10 text-sky-600 dark:text-cyan-400 text-xs font-mono font-bold">
                   10 Tiers
                 </span>
               </div>
@@ -131,7 +131,7 @@ export function Referrals() {
               {/* Levels Table */}
               <div className="overflow-x-auto rounded-2xl border border-[var(--border-subtle)]">
                 <table className="w-full text-left text-xs sm:text-sm">
-                  <thead className="bg-inner-panel text-[var(--text-muted)] font-mono">
+                  <thead className="bg-slate-100 dark:bg-[#0B132B] text-[var(--text-muted)] font-mono">
                     <tr>
                       <th className="py-3 px-4 font-bold">Generation Tier</th>
                       <th className="py-3 px-4 font-bold text-center">Daily Royalty %</th>

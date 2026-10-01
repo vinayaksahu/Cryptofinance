@@ -67,18 +67,18 @@ export function Hero() {
         </div>
 
         {/* High-Impact Modern Headline */}
-        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-white">
+        <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6 text-slate-900 dark:text-white">
           Quantitative Algo &amp; <br />
           <span className="crypto-gradient">DeFi Arbitrage Protocol.</span>
         </h1>
 
         {/* Subtitle & Value Proposition */}
-        <p className="text-base sm:text-xl text-slate-300 leading-relaxed mb-8 max-w-3xl mx-auto font-normal">
-          Start with as low as <strong className="text-white font-bold">$2.00 USDT</strong>.
+        <p className="text-base sm:text-xl text-slate-600 dark:text-slate-300 leading-relaxed mb-8 max-w-3xl mx-auto font-normal">
+          Start with as low as <strong className="text-slate-900 dark:text-white font-bold">$2.00 USDT</strong>.
           Next-generation quantitative wealth protocol engineered for mathematical certainty, sustainable{" "}
-          <span className="text-sky-400 font-bold">4.00% Daily Yields</span> (via 2% daily release from your 2X contract allocation pool),{" "}
-          <span className="text-indigo-400 font-bold">35-Day 2X Compounding Engine</span>, and{" "}
-          <span className="text-emerald-400 font-bold">10-Level Daily Team Royalty</span>.
+          <span className="text-sky-600 dark:text-sky-400 font-bold">4.00% Daily Yields</span> (via 2% daily release from your 2X contract allocation pool),{" "}
+          <span className="text-indigo-600 dark:text-indigo-400 font-bold">35-Day 2X Compounding Engine</span>, and{" "}
+          <span className="text-emerald-600 dark:text-emerald-400 font-bold">10-Level Daily Team Royalty</span>.
         </p>
 
         {/* Action Buttons */}
@@ -103,32 +103,32 @@ export function Hero() {
           <a
             href={pdfHref}
             download={pdfFileName}
-            className="w-full sm:w-auto px-6 py-3.5 rounded-full glass-btn-secondary text-sm font-semibold flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-6 py-3.5 rounded-full glass-btn-secondary text-sm font-semibold flex items-center justify-center gap-2 text-slate-700 dark:text-slate-300"
           >
-            <Download className="w-4 h-4 text-sky-400" />
+            <Download className="w-4 h-4 text-sky-500 dark:text-sky-400" />
             Presentation Deck (PDF)
           </a>
 
           <a
             href="#calculator"
-            className="w-full sm:w-auto px-6 py-3.5 rounded-full glass-btn-secondary text-sm font-semibold flex items-center justify-center gap-2 text-slate-300"
+            className="w-full sm:w-auto px-6 py-3.5 rounded-full glass-btn-secondary text-sm font-semibold flex items-center justify-center gap-2 text-slate-700 dark:text-slate-300"
           >
             ROI Calculator
           </a>
         </div>
 
         {/* Live Trust Bar */}
-        <div className="flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs sm:text-sm text-slate-400 font-medium">
+        <div className="flex flex-wrap items-center justify-center gap-y-2 gap-x-6 text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">
           <span className="flex items-center gap-1.5">
-            <Building2 className="w-4 h-4 text-sky-400" />
+            <Building2 className="w-4 h-4 text-sky-500 dark:text-sky-400" />
             Crypto Valley Tower, Zug, Switzerland
           </span>
           <span className="flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <ShieldCheck className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
             100% USDT (BEP-20) Binance Smart Chain
           </span>
           <span className="flex items-center gap-1.5">
-            <Award className="w-4 h-4 text-indigo-400" />
+            <Award className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
             Audited Triple-Isolated Solvency
           </span>
         </div>
@@ -140,17 +140,17 @@ export function Hero() {
       <div className="max-w-4xl mx-auto my-12 relative">
         {/* Layered Stacked Sheets Behind Main Tablet (Exact depth from uploaded picture) */}
         <div className="absolute inset-x-8 -inset-y-4 bg-gradient-to-r from-sky-500/10 via-indigo-500/10 to-emerald-500/10 rounded-[36px] blur-xl -z-10 pointer-events-none" />
-        <div className="absolute inset-0 bg-white/[0.02] border border-white/10 rounded-[36px] translate-x-3 translate-y-3 pointer-events-none -z-10" />
+        <div className="absolute inset-0 bg-white/40 dark:bg-white/[0.02] border border-slate-200/80 dark:border-white/10 rounded-[36px] translate-x-3 translate-y-3 pointer-events-none -z-10" />
 
         {/* Main Floating Frosted Glass Tablet */}
-        <div className="relative glass-card-elevated p-6 sm:p-10 overflow-hidden shadow-[0_30px_70px_rgba(0,0,0,0.6)]">
+        <div className="relative glass-card-elevated p-6 sm:p-10 overflow-hidden shadow-[0_20px_50px_rgba(2,132,199,0.12)] dark:shadow-[0_30px_70px_rgba(0,0,0,0.6)]">
           {/* Top Row: Tracked Micro-Label & Rounded Dropdown Selector */}
           <div className="flex items-center justify-between gap-4 mb-6">
             <div className="flex items-center gap-2">
-              <span className="text-xs sm:text-sm font-bold tracking-widest text-slate-400 uppercase">
+              <span className="text-xs sm:text-sm font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase">
                 SALES REPORT
               </span>
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
             </div>
 
             {/* Glass Dropdown Styled directly like "Accessories ⌄" in uploaded image */}
@@ -158,10 +158,10 @@ export function Hero() {
               <button
                 type="button"
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="glass-pill px-4 py-1.5 text-xs font-semibold text-white hover:bg-white/15 transition flex items-center gap-2 cursor-pointer"
+                className="glass-pill px-4 py-1.5 text-xs font-semibold text-slate-800 dark:text-white hover:bg-slate-200/50 dark:hover:bg-white/15 transition flex items-center gap-2 cursor-pointer"
               >
                 <span>{selectedAsset}</span>
-                <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                <ChevronDown className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
               </button>
 
               {dropdownOpen && (
@@ -173,10 +173,10 @@ export function Hero() {
                         setSelectedAsset(option);
                         setDropdownOpen(false);
                       }}
-                      className="w-full text-left px-3 py-2 text-xs font-semibold text-slate-200 hover:text-white hover:bg-white/10 rounded-xl transition flex items-center justify-between"
+                      className="w-full text-left px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 rounded-xl transition flex items-center justify-between"
                     >
                       <span>{option}</span>
-                      {selectedAsset === option && <Check className="w-3.5 h-3.5 text-emerald-400" />}
+                      {selectedAsset === option && <Check className="w-3.5 h-3.5 text-emerald-500" />}
                     </button>
                   ))}
                 </div>
@@ -187,32 +187,32 @@ export function Hero() {
           {/* Central Highlight: Big Bold $1,024 Currency & Neon Growth Pill */}
           <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 items-center my-4">
             <div className="sm:col-span-6">
-              <div className="text-4xl sm:text-6xl font-black tracking-tight text-white flex items-baseline gap-1">
+              <div className="text-4xl sm:text-6xl font-black tracking-tight text-slate-900 dark:text-white flex items-baseline gap-1">
                 <span>$1,024</span>
               </div>
 
               <div className="flex items-center gap-2 mt-2">
-                <span className="text-xs sm:text-sm text-slate-400 font-medium">Net volume</span>
-                <span className="text-slate-500">•</span>
-                <span className="glass-pill px-2.5 py-0.5 text-xs font-bold text-emerald-400 bg-emerald-500/20 border-emerald-500/30">
+                <span className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium">Net volume</span>
+                <span className="text-slate-400 dark:text-slate-500">•</span>
+                <span className="glass-pill px-2.5 py-0.5 text-xs font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/15 border-emerald-500/30">
                   <span>3.2%</span>
                   <span className="text-xs">↗</span>
                 </span>
               </div>
 
-              <p className="text-xs text-slate-400 mt-4 leading-relaxed max-w-sm">
+              <p className="text-xs text-slate-600 dark:text-slate-400 mt-4 leading-relaxed max-w-sm">
                 Triple-isolated liquidity engine automatically calculating high-frequency quantitative yield releases every 24 hours.
               </p>
             </div>
 
             {/* Glowing 3D Vector Graphic: Neon Green & Royal Blue Waves (From Uploaded Photo) */}
             <div className="sm:col-span-6 relative flex items-center justify-center">
-              <div className="w-full h-36 rounded-2xl bg-slate-900/50 border border-white/10 relative overflow-hidden flex items-center justify-center p-3">
+              <div className="w-full h-36 rounded-2xl bg-white/70 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10 relative overflow-hidden flex items-center justify-center p-3 shadow-inner">
                 {/* Horizontal Dashed Measurement Lines */}
-                <div className="absolute inset-0 flex flex-col justify-between py-4 px-6 opacity-25 pointer-events-none">
-                  <div className="w-full border-b border-dashed border-white/40" />
-                  <div className="w-full border-b border-dashed border-white/40" />
-                  <div className="w-full border-b border-dashed border-white/40" />
+                <div className="absolute inset-0 flex flex-col justify-between py-4 px-6 opacity-30 pointer-events-none">
+                  <div className="w-full border-b border-dashed border-slate-400 dark:border-white/40" />
+                  <div className="w-full border-b border-dashed border-slate-400 dark:border-white/40" />
+                  <div className="w-full border-b border-dashed border-slate-400 dark:border-white/40" />
                 </div>
 
                 {/* SVG 3D Glowing Curves */}
@@ -234,7 +234,7 @@ export function Hero() {
                   {/* Electric Blue Curve */}
                   <path
                     d="M 15 90 Q 90 100, 160 65 T 280 45 T 385 20"
-                    stroke="#38bdf8"
+                    stroke="#0284c7"
                     strokeWidth="6"
                     strokeLinecap="round"
                     filter="url(#neon-glow-blue)"
@@ -243,7 +243,7 @@ export function Hero() {
                   {/* Neon Lime Green Curve (Intersecting in front) */}
                   <path
                     d="M 15 75 Q 100 110, 180 60 T 300 30 T 385 15"
-                    stroke="#22c55e"
+                    stroke="#16a34a"
                     strokeWidth="6.5"
                     strokeLinecap="round"
                     filter="url(#neon-glow-green)"
@@ -254,19 +254,19 @@ export function Hero() {
           </div>
 
           {/* Floating Action Dock at Bottom of Card (Like in reference picture!) */}
-          <div className="mt-6 pt-5 border-t border-white/10 flex flex-wrap items-center justify-between gap-3">
+          <div className="mt-6 pt-5 border-t border-slate-200/80 dark:border-white/10 flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-sky-400" />
-              <span className="text-xs font-semibold text-slate-300">Live Mathematical Proof</span>
+              <span className="w-2 h-2 rounded-full bg-sky-500" />
+              <span className="text-xs font-semibold text-slate-600 dark:text-slate-300">Live Mathematical Proof</span>
             </div>
 
             {/* Pill Capsule Action Dock */}
             <div className="glass-dock py-1.5 px-4 flex items-center gap-3">
-              <span className="text-[11px] font-bold text-sky-400">BEP-20 Validated</span>
-              <span className="text-slate-600">|</span>
-              <span className="text-[11px] font-bold text-emerald-400">Zero Slippage</span>
-              <span className="text-slate-600">|</span>
-              <span className="text-[11px] font-bold text-indigo-400">Isolated 10% Fee</span>
+              <span className="text-[11px] font-bold text-sky-600 dark:text-sky-400">BEP-20 Validated</span>
+              <span className="text-slate-300 dark:text-slate-600">|</span>
+              <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400">Zero Slippage</span>
+              <span className="text-slate-300 dark:text-slate-600">|</span>
+              <span className="text-[11px] font-bold text-indigo-600 dark:text-indigo-400">Isolated 10% Fee</span>
             </div>
           </div>
         </div>
@@ -275,61 +275,61 @@ export function Hero() {
       {/* 4 Core Pillars Metric Cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 max-w-5xl mx-auto">
         <div className="glass-card-elevated p-6 text-center group hover:-translate-y-1 transition duration-200">
-          <div className="w-11 h-11 rounded-2xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center text-sky-400 mx-auto mb-3 shadow-md shadow-sky-500/20">
+          <div className="w-11 h-11 rounded-2xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center text-sky-500 dark:text-sky-400 mx-auto mb-3 shadow-md shadow-sky-500/20">
             <TrendingUp className="w-5 h-5" />
           </div>
-          <div className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight mb-1 font-mono">
+          <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-1 font-mono">
             4.00% Daily
           </div>
-          <div className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+          <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
             Dynamic Capital Yield
           </div>
-          <div className="text-[11px] text-slate-400 mt-1 font-medium">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">
             2% Daily from 2X Pool
           </div>
         </div>
 
         <div className="glass-card-elevated p-6 text-center group hover:-translate-y-1 transition duration-200">
-          <div className="w-11 h-11 rounded-2xl bg-indigo-500/15 border border-indigo-400/30 flex items-center justify-center text-indigo-400 mx-auto mb-3 shadow-md shadow-indigo-500/20">
+          <div className="w-11 h-11 rounded-2xl bg-indigo-500/15 border border-indigo-400/30 flex items-center justify-center text-indigo-500 dark:text-indigo-400 mx-auto mb-3 shadow-md shadow-indigo-500/20">
             <Layers className="w-5 h-5" />
           </div>
-          <div className="text-2xl sm:text-3xl font-extrabold text-indigo-400 tracking-tight mb-1 font-mono">
+          <div className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 tracking-tight mb-1 font-mono">
             3-Wallet Engine
           </div>
-          <div className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+          <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
             Isolated Liquidity
           </div>
-          <div className="text-[11px] text-slate-400 mt-1 font-medium">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">
             10% Utility &bull; Zero Leakage
           </div>
         </div>
 
         <div className="glass-card-elevated p-6 text-center group hover:-translate-y-1 transition duration-200">
-          <div className="w-11 h-11 rounded-2xl bg-emerald-500/15 border border-emerald-400/30 flex items-center justify-center text-emerald-400 mx-auto mb-3 shadow-md shadow-emerald-500/20">
+          <div className="w-11 h-11 rounded-2xl bg-emerald-500/15 border border-emerald-400/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mx-auto mb-3 shadow-md shadow-emerald-500/20">
             <RefreshCw className="w-5 h-5" />
           </div>
-          <div className="text-2xl sm:text-3xl font-extrabold text-emerald-400 tracking-tight mb-1 font-mono">
+          <div className="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 tracking-tight mb-1 font-mono">
             35 Days
           </div>
-          <div className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+          <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
             2X Doubling Engine
           </div>
-          <div className="text-[11px] text-slate-400 mt-1 font-medium">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">
             (1.02)^35 ≈ 2.000 &bull; 4X Max
           </div>
         </div>
 
         <div className="glass-card-elevated p-6 text-center group hover:-translate-y-1 transition duration-200">
-          <div className="w-11 h-11 rounded-2xl bg-purple-500/15 border border-purple-400/30 flex items-center justify-center text-purple-400 mx-auto mb-3 shadow-md shadow-purple-500/20">
+          <div className="w-11 h-11 rounded-2xl bg-purple-500/15 border border-purple-400/30 flex items-center justify-center text-purple-600 dark:text-purple-400 mx-auto mb-3 shadow-md shadow-purple-500/20">
             <Zap className="w-5 h-5" />
           </div>
-          <div className="text-2xl sm:text-3xl font-extrabold text-purple-400 tracking-tight mb-1 font-mono">
+          <div className="text-2xl sm:text-3xl font-extrabold text-purple-600 dark:text-purple-400 tracking-tight mb-1 font-mono">
             10 Tiers
           </div>
-          <div className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+          <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
             Daily Team Royalty
           </div>
-          <div className="text-[11px] text-slate-400 mt-1 font-medium">
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">
             10% - 5% - 2% - 1% Matrix
           </div>
         </div>

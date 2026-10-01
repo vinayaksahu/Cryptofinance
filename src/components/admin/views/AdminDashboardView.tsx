@@ -43,21 +43,21 @@ export function AdminDashboardView({
       {/* Top Welcome & Health Bar */}
       <div className="glass-card-elevated p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="flex items-center gap-3.5">
-          <div className="w-11 h-11 rounded-2xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center shrink-0 text-sky-400 shadow-md shadow-sky-500/20">
+          <div className="w-11 h-11 rounded-2xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center shrink-0 text-sky-500 dark:text-sky-400 shadow-md shadow-sky-500/20">
             <Sparkles className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="font-bold text-lg text-white tracking-tight">
+            <h2 className="font-bold text-lg text-slate-900 dark:text-white tracking-tight">
               Executive Overview
             </h2>
-            <p className="text-xs text-slate-400">
+            <p className="text-xs text-slate-500 dark:text-slate-400">
               Real-time analytics for Crypto Finance Protocol &bull; Binance Smart Chain (BEP-20)
             </p>
           </div>
         </div>
 
-        <div className="glass-pill border-emerald-500/30 bg-emerald-500/15 text-emerald-400 text-xs font-bold self-start sm:self-auto px-3.5 py-1.5">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+        <div className="glass-pill border-emerald-500/30 bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 text-xs font-bold self-start sm:self-auto px-3.5 py-1.5">
+          <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
           Protocol Engine Operational &bull; 100% USDT
         </div>
       </div>
@@ -69,29 +69,29 @@ export function AdminDashboardView({
           onClick={() => setActiveTab?.("users")}
           className="glass-card-elevated p-4 sm:p-5 group cursor-pointer flex flex-col justify-between"
         >
-          <div className="flex items-center justify-between text-slate-400 mb-2">
+          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
             <span className="text-[10px] font-bold uppercase tracking-widest">MEMBERS</span>
-            <Users className="w-4 h-4 text-sky-400 group-hover:scale-110 transition-transform" />
+            <Users className="w-4 h-4 text-sky-500 dark:text-sky-400 group-hover:scale-110 transition-transform" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-1 font-mono">
+          <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-1 font-mono">
             {safeStats.totalUsers || 0}
           </h3>
-          <div className="flex items-center gap-1.5 text-xs text-slate-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-            <span><strong className="text-emerald-400">{safeStats.activeUsers || 0}</strong> active</span>
+          <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+            <span><strong className="text-emerald-600 dark:text-emerald-400">{safeStats.activeUsers || 0}</strong> active</span>
           </div>
         </div>
         
         {/* Active Contracts */}
         <div className="glass-card-elevated p-4 sm:p-5 flex flex-col justify-between">
-          <div className="flex items-center justify-between text-slate-400 mb-2">
+          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
             <span className="text-[10px] font-bold uppercase tracking-widest">STAKES</span>
-            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <ShieldCheck className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-emerald-400 tracking-tight mb-1 font-mono">
+          <h3 className="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight mb-1 font-mono">
             {safeStats.activeContracts || 0}
           </h3>
-          <p className="text-xs text-slate-400 font-medium font-mono">2X Pool Target</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-medium font-mono">2X Pool Target</p>
         </div>
 
         {/* Pending Deposits */}
@@ -99,14 +99,14 @@ export function AdminDashboardView({
           onClick={() => setActiveTab?.("deposits")}
           className="glass-card-elevated p-4 sm:p-5 group cursor-pointer flex flex-col justify-between hover:border-sky-400/50"
         >
-          <div className="flex items-center justify-between text-sky-400 mb-2">
+          <div className="flex items-center justify-between text-sky-600 dark:text-sky-400 mb-2">
             <span className="text-[10px] font-bold uppercase tracking-widest">DEPOSITS</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-sky-400 tracking-tight mb-1 font-mono">
+          <h3 className="text-2xl sm:text-3xl font-black text-sky-600 dark:text-sky-400 tracking-tight mb-1 font-mono">
             {safeStats.pendingDeposits || 0}
           </h3>
-          <p className="text-xs text-sky-400/80 font-semibold">Review &rarr;</p>
+          <p className="text-xs text-sky-600 dark:text-sky-400/80 font-semibold">Review &rarr;</p>
         </div>
 
         {/* Pending Withdrawals */}
@@ -114,14 +114,14 @@ export function AdminDashboardView({
           onClick={() => setActiveTab?.("withdrawals")}
           className="glass-card-elevated p-4 sm:p-5 group cursor-pointer flex flex-col justify-between hover:border-rose-400/50"
         >
-          <div className="flex items-center justify-between text-rose-400 mb-2">
+          <div className="flex items-center justify-between text-rose-600 dark:text-rose-400 mb-2">
             <span className="text-[10px] font-bold uppercase tracking-widest">PAYOUTS</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-rose-400 tracking-tight mb-1 font-mono">
+          <h3 className="text-2xl sm:text-3xl font-black text-rose-600 dark:text-rose-400 tracking-tight mb-1 font-mono">
             {safeStats.pendingWithdrawals || 0}
           </h3>
-          <p className="text-xs text-rose-400/80 font-semibold">Process &rarr;</p>
+          <p className="text-xs text-rose-600 dark:text-rose-400/80 font-semibold">Process &rarr;</p>
         </div>
 
         {/* Admin Fee Income (10%) */}
@@ -129,44 +129,44 @@ export function AdminDashboardView({
           onClick={() => setActiveTab?.("admin-income")}
           className="glass-card-elevated p-4 sm:p-5 group cursor-pointer flex flex-col justify-between hover:border-indigo-400/50"
         >
-          <div className="flex items-center justify-between text-indigo-400 mb-2">
+          <div className="flex items-center justify-between text-indigo-600 dark:text-indigo-400 mb-2">
             <span className="text-[10px] font-bold uppercase tracking-widest">PROTOCOL FEE</span>
             <Landmark className="w-4 h-4 group-hover:scale-110 transition-transform" />
           </div>
-          <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight mb-1 truncate font-mono" title={formatUsdt(safeStats.adminFeeIncomeUsdt || 0)}>
+          <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-1 truncate font-mono" title={formatUsdt(safeStats.adminFeeIncomeUsdt || 0)}>
             {formatUsdt(safeStats.adminFeeIncomeUsdt || 0)}
           </h3>
-          <p className="text-xs text-indigo-300 font-semibold">10% Platform &rarr;</p>
+          <p className="text-xs text-indigo-600 dark:text-indigo-300 font-semibold">10% Platform &rarr;</p>
         </div>
 
         {/* Total Approved USDT */}
         <div className="glass-card-elevated p-4 sm:p-5 flex flex-col justify-between hover:border-emerald-400/50">
-          <div className="flex items-center justify-between text-emerald-400 mb-2">
+          <div className="flex items-center justify-between text-emerald-600 dark:text-emerald-400 mb-2">
             <span className="text-[10px] font-bold uppercase tracking-widest">LIQUIDITY</span>
             <Wallet className="w-4 h-4" />
           </div>
-          <h3 className="text-xl sm:text-2xl font-black text-emerald-400 tracking-tight mb-1 truncate font-mono" title={formatUsdt(safeStats.totalApprovedDepositsUsdt || 0)}>
+          <h3 className="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight mb-1 truncate font-mono" title={formatUsdt(safeStats.totalApprovedDepositsUsdt || 0)}>
             {formatUsdt(safeStats.totalApprovedDepositsUsdt || 0)}
           </h3>
-          <p className="text-xs text-slate-400 font-medium">Approved Pool</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Approved Pool</p>
         </div>
       </div>
 
       {/* Next Upcoming Cycle ROI Engine */}
       <div className="glass-card-elevated p-6 sm:p-7 relative overflow-hidden space-y-6">
         {/* Header with Global Protocol Time Info */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10 pb-4 border-b border-white/10">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10 pb-4 border-b border-slate-200/80 dark:border-white/10">
           <div className="space-y-2">
             <div className="flex items-center gap-2 flex-wrap font-mono">
-              <span className="glass-pill px-3 py-1 text-xs font-bold text-sky-400 bg-sky-500/15 border-sky-400/30">
-                <Clock className="h-3.5 w-3.5 text-sky-400" />
+              <span className="glass-pill px-3 py-1 text-xs font-bold text-sky-600 dark:text-sky-400 bg-sky-500/15 border-sky-400/30">
+                <Clock className="h-3.5 w-3.5 text-sky-500 dark:text-sky-400" />
                 <span>
                   {cycleTz === "UTC" && "Universal 08:01 PM UTC Protocol Cycle"}
                   {cycleTz === "IST" && "Midnight 01:31 AM IST Protocol Cycle"}
                 </span>
               </span>
-              <span className="glass-pill px-3 py-1 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border-emerald-500/30">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="glass-pill px-3 py-1 text-xs font-semibold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border-emerald-500/30">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 <span>
                   Next Cycle:{" "}
                   {cycleTz === "UTC"
@@ -175,10 +175,10 @@ export function AdminDashboardView({
                 </span>
               </span>
             </div>
-            <h2 className="font-bold text-xl sm:text-2xl text-white tracking-tight">
+            <h2 className="font-bold text-xl sm:text-2xl text-slate-900 dark:text-white tracking-tight">
               Next Upcoming Cycle Yield &amp; Royalty Automation
             </h2>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed font-mono">
+            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed font-mono">
               Returns are queued and distributed daily via automated protocol closing. Projected next cycle distribution is shown below.
             </p>
           </div>
@@ -186,14 +186,14 @@ export function AdminDashboardView({
           <div className="flex flex-col sm:flex-row lg:flex-col items-start lg:items-end gap-2.5">
             {/* Timezone Switcher & Live Clock */}
             <div className="flex flex-col items-start lg:items-end gap-2 font-mono">
-              <div className="inline-flex items-center gap-1 p-1 rounded-2xl bg-slate-900/60 border border-white/10 text-[11px] backdrop-blur-xl">
+              <div className="inline-flex items-center gap-1 p-1 rounded-2xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 text-[11px] backdrop-blur-xl">
                 <button
                   type="button"
                   onClick={() => setCycleTz("UTC")}
                   className={`px-3 py-1 rounded-xl font-bold transition-all ${
                     cycleTz === "UTC"
                       ? "bg-sky-500 text-white shadow-md shadow-sky-500/30"
-                      : "text-slate-400 hover:text-white"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white"
                   }`}
                 >
                   UTC (Global)
@@ -204,19 +204,19 @@ export function AdminDashboardView({
                   className={`px-3 py-1 rounded-xl font-bold transition-all ${
                     cycleTz === "IST"
                       ? "bg-sky-500 text-white shadow-md shadow-sky-500/30"
-                      : "text-slate-400 hover:text-white"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white"
                   }`}
                 >
                   IST (Local)
                 </button>
               </div>
 
-              <div className="text-xs text-slate-400 bg-slate-900/40 border border-white/10 px-3 py-1.5 rounded-xl font-mono">
+              <div className="text-xs text-slate-600 dark:text-slate-400 bg-white/70 dark:bg-slate-900/40 border border-slate-200/80 dark:border-white/10 px-3 py-1.5 rounded-xl font-mono">
                 {cycleTz === "UTC" && (
-                  <>UTC Time: <span className="text-cyan-400 font-bold">{upcoming.currentUtcTime || "Loading..."}</span></>
+                  <>UTC Time: <span className="text-sky-600 dark:text-cyan-400 font-bold">{upcoming.currentUtcTime || "Loading..."}</span></>
                 )}
                 {cycleTz === "IST" && (
-                  <>IST Time: <span className="text-indigo-400 font-bold">{upcoming.currentIstTime || "Loading..."}</span></>
+                  <>IST Time: <span className="text-indigo-600 dark:text-indigo-400 font-bold">{upcoming.currentIstTime || "Loading..."}</span></>
                 )}
               </div>
             </div>
@@ -275,37 +275,37 @@ export function AdminDashboardView({
 
         {/* 3 Projected Metric Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
-          <div className="bg-[#050b18]/80 border border-cyan-500/30 rounded-2xl p-4 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">
+          <div className="bg-white/80 dark:bg-[#050b18]/80 border border-sky-400/30 dark:border-cyan-500/30 rounded-2xl p-4 shadow-sm">
+            <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">
               <span>Upcoming Stake Yield (4.0%)</span>
-              <Banknote className="w-4 h-4 text-[#00D2FF]" />
+              <Banknote className="w-4 h-4 text-sky-500 dark:text-[#00D2FF]" />
             </div>
-            <h4 className="text-2xl font-black text-[#00D2FF]">
+            <h4 className="text-2xl font-black text-sky-600 dark:text-[#00D2FF]">
               {formatUsdt(upcoming.projectedBasicRoiUsdt || 0)}
             </h4>
             <p className="text-[11px] text-slate-500 mt-1">Credited to ROI Wallet (Daily Release)</p>
           </div>
 
-          <div className="bg-[#050b18]/80 border border-[#00FFA3]/30 rounded-2xl p-4 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">
+          <div className="bg-white/80 dark:bg-[#050b18]/80 border border-emerald-400/30 dark:border-[#00FFA3]/30 rounded-2xl p-4 shadow-sm">
+            <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">
               <span>Upcoming 10-Level Royalties</span>
-              <Layers className="w-4 h-4 text-[#00FFA3]" />
+              <Layers className="w-4 h-4 text-emerald-500 dark:text-[#00FFA3]" />
             </div>
-            <h4 className="text-2xl font-black text-[#00FFA3]">
+            <h4 className="text-2xl font-black text-emerald-600 dark:text-[#00FFA3]">
               {formatUsdt(upcoming.projectedLevelIncomeUsdt || 0)}
             </h4>
             <p className="text-[11px] text-slate-500 mt-1">10-Level Downline Royalties</p>
           </div>
 
-          <div className="bg-gradient-to-br from-[#00D2FF]/20 to-[#00FFA3]/20 border border-[#00FFA3]/40 rounded-2xl p-4 shadow-sm">
-            <div className="flex items-center justify-between text-[#00FFA3] text-xs font-bold uppercase tracking-wider mb-1">
+          <div className="bg-gradient-to-br from-sky-500/15 via-emerald-500/10 to-indigo-500/15 border border-emerald-500/30 rounded-2xl p-4 shadow-sm">
+            <div className="flex items-center justify-between text-emerald-600 dark:text-[#00FFA3] text-xs font-bold uppercase tracking-wider mb-1">
               <span>Total Next Cycle Payout</span>
-              <Sparkles className="w-4 h-4 text-[#00FFA3]" />
+              <Sparkles className="w-4 h-4 text-emerald-500 dark:text-[#00FFA3]" />
             </div>
-            <h4 className="text-2xl font-black text-[#00FFA3]">
+            <h4 className="text-2xl font-black text-emerald-600 dark:text-[#00FFA3]">
               {formatUsdt(upcoming.projectedTotalPayoutUsdt || 0)}
             </h4>
-            <p className="text-[11px] text-emerald-300/80 mt-1 font-semibold">
+            <p className="text-[11px] text-emerald-700 dark:text-emerald-300/80 mt-1 font-semibold">
               Across {upcoming.totalScheduledContracts || 0} active contracts
             </p>
           </div>
@@ -313,12 +313,12 @@ export function AdminDashboardView({
 
         {/* Queued Contracts List Toggle & Table */}
         <div className="pt-2">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-[#070e20] border border-[#162544] p-3.5 rounded-xl">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-white/70 dark:bg-[#070e20] border border-slate-200 dark:border-[#162544] p-3.5 rounded-xl">
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-slate-200">
+              <span className="text-xs font-bold text-slate-700 dark:text-slate-200">
                 Queued Contracts for Next Cycle:
               </span>
-              <span className="px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-extrabold text-xs">
+              <span className="px-2 py-0.5 rounded-full bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 font-extrabold text-xs">
                 {queued.length} Contracts
               </span>
             </div>
@@ -326,7 +326,7 @@ export function AdminDashboardView({
             <button
               type="button"
               onClick={() => setShowQueuedList(!showQueuedList)}
-              className="text-xs font-bold text-amber-400 hover:text-amber-300 flex items-center gap-1.5 transition cursor-pointer"
+              className="text-xs font-bold text-sky-600 dark:text-sky-400 hover:text-sky-700 dark:hover:text-sky-300 flex items-center gap-1.5 transition cursor-pointer"
             >
               <span>{showQueuedList ? "Hide Queue Breakdown" : "View Contract-by-Contract Breakdown"}</span>
               {showQueuedList ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -334,23 +334,23 @@ export function AdminDashboardView({
           </div>
 
           {showQueuedList && (
-            <div className="mt-3 bg-[#070e20] border border-[#162544] rounded-2xl p-4 space-y-3 animate-in fade-in duration-200">
+            <div className="mt-3 bg-white/80 dark:bg-[#070e20] border border-slate-200 dark:border-[#162544] rounded-2xl p-4 space-y-3 animate-in fade-in duration-200">
               {/* Search Bar */}
               <div className="relative">
-                <Search className="w-4 h-4 absolute left-3 top-3 text-slate-500" />
+                <Search className="w-4 h-4 absolute left-3 top-3 text-slate-400" />
                 <input
                   type="text"
                   placeholder="Search by User ID, Name, or Contract ID..."
                   value={contractSearch}
                   onChange={(e) => setContractSearch(e.target.value)}
-                  className="w-full bg-[#050b18] border border-slate-800 rounded-xl pl-9 pr-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-500 font-mono"
+                  className="w-full bg-white dark:bg-[#050b18] border border-slate-200 dark:border-slate-800 rounded-xl pl-9 pr-3.5 py-2 text-xs text-slate-900 dark:text-white placeholder-slate-400 focus:outline-none focus:border-sky-500 font-mono"
                 />
               </div>
 
               {/* Table */}
-              <div className="overflow-x-auto rounded-xl border border-slate-800">
-                <table className="w-full text-left text-xs text-slate-300">
-                  <thead className="bg-[#050b18] text-slate-400 text-[11px] uppercase tracking-wider font-semibold border-b border-slate-800">
+              <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-slate-800">
+                <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+                  <thead className="bg-slate-50 dark:bg-[#050b18] text-slate-500 dark:text-slate-400 text-[11px] uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-slate-800">
                     <tr>
                       <th className="py-2.5 px-3">SR</th>
                       <th className="py-2.5 px-3">Member</th>
@@ -362,10 +362,10 @@ export function AdminDashboardView({
                       <th className="py-2.5 px-3">Wallet</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800/80">
+                  <tbody className="divide-y divide-slate-200 dark:divide-slate-800/80">
                     {filteredQueued.length === 0 ? (
                       <tr>
-                        <td colSpan={8} className="py-6 text-center text-slate-500">
+                        <td colSpan={8} className="py-6 text-center text-slate-400">
                           {queued.length === 0
                             ? "No active contracts currently queued for next cycle."
                             : "No matching contracts found."}
@@ -373,36 +373,36 @@ export function AdminDashboardView({
                       </tr>
                     ) : (
                       filteredQueued.map((c: any, idx: number) => (
-                        <tr key={c.contractId || idx} className="hover:bg-white/5 transition-colors">
-                          <td className="py-2.5 px-3 font-mono text-slate-500">{idx + 1}</td>
+                        <tr key={c.contractId || idx} className="hover:bg-slate-50 dark:hover:bg-white/5 transition-colors">
+                          <td className="py-2.5 px-3 font-mono text-slate-400">{idx + 1}</td>
                           <td className="py-2.5 px-3">
-                            <span className="font-bold text-white block">{c.userCustomId}</span>
-                            <span className="text-[10px] text-slate-400 truncate max-w-[120px] block">{c.userFullName}</span>
+                            <span className="font-bold text-slate-900 dark:text-white block">{c.userCustomId}</span>
+                            <span className="text-[10px] text-slate-500 dark:text-slate-400 truncate max-w-[120px] block">{c.userFullName}</span>
                           </td>
                           <td className="py-2.5 px-3">
-                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#00D2FF]/10 text-[#00D2FF] border border-[#00D2FF]/30">
+                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-sky-500/10 text-sky-600 dark:text-sky-400 border border-sky-500/30">
                               Active Stake
                             </span>
                           </td>
-                          <td className="py-2.5 px-3 font-semibold text-slate-200">
+                          <td className="py-2.5 px-3 font-semibold text-slate-800 dark:text-slate-200">
                             ${c.amountInUsdt.toFixed(2)} USDT
                           </td>
-                          <td className="py-2.5 px-3 font-mono text-amber-400 font-bold">
+                          <td className="py-2.5 px-3 font-mono text-indigo-600 dark:text-indigo-400 font-bold">
                             {c.dailyRoiRate}%
                           </td>
-                          <td className="py-2.5 px-3 font-bold text-emerald-400">
+                          <td className="py-2.5 px-3 font-bold text-emerald-600 dark:text-emerald-400">
                             +${c.upcomingRoiUsdt.toFixed(2)} USDT
                           </td>
                           <td className="py-2.5 px-3">
                             <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                               c.isFirstCycle
-                                ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
-                                : "bg-slate-800 text-slate-300 border border-slate-700"
+                                ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 border border-emerald-500/40"
+                                : "bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-slate-700"
                             }`}>
                               {c.cycleLabel}
                             </span>
                           </td>
-                          <td className="py-2.5 px-3 text-[11px] text-slate-400">
+                          <td className="py-2.5 px-3 text-[11px] text-slate-500 dark:text-slate-400">
                             {c.targetWallet}
                           </td>
                         </tr>
@@ -417,17 +417,17 @@ export function AdminDashboardView({
       </div>
 
       {/* Admin Revenue & 10% Fee Breakdown Banner */}
-      <div className="bg-gradient-to-br from-[#0c1322] via-[#091124] to-[#1a120a] border border-amber-500/30 p-6 rounded-2xl shadow-xl">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+      <div className="bg-white/85 dark:bg-gradient-to-br dark:from-[#0c1322] dark:via-[#091124] dark:to-[#1a120a] border border-slate-200/80 dark:border-indigo-500/30 p-6 rounded-2xl shadow-xl">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
           <div>
-            <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-widest mb-1">
-              <Landmark className="w-4 h-4 text-amber-400" />
+            <div className="flex items-center gap-2 text-indigo-600 dark:text-indigo-400 text-xs font-bold uppercase tracking-widest mb-1">
+              <Landmark className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
               <span>Platform Revenue Accounting</span>
             </div>
-            <h3 className="font-display font-black text-xl text-white">
+            <h3 className="font-display font-black text-xl text-slate-900 dark:text-white">
               Admin Income (10% Withdrawal Charges)
             </h3>
-            <p className="text-xs text-slate-400 mt-0.5">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
               Every withdrawal automatically retains 10% as pure admin profit. For example, $450 is dispatched per $500 requested.
             </p>
           </div>
@@ -435,7 +435,7 @@ export function AdminDashboardView({
           <button
             type="button"
             onClick={() => setActiveTab?.("admin-income")}
-            className="px-4 py-2 rounded-xl bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 border border-amber-500/40 text-xs font-bold transition-all flex items-center gap-1.5 self-start sm:self-auto"
+            className="px-4 py-2 rounded-xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-300 hover:bg-indigo-500/25 border border-indigo-500/30 text-xs font-bold transition-all flex items-center gap-1.5 self-start sm:self-auto"
           >
             <span>Open Revenue Ledger</span>
             <ArrowUpRight className="w-3.5 h-3.5" />
@@ -443,29 +443,29 @@ export function AdminDashboardView({
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-4">
-          <div className="bg-[#050b18] border border-slate-800 rounded-xl p-4">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-400 block mb-1">
+          <div className="bg-slate-50 dark:bg-[#050b18] border border-slate-200 dark:border-slate-800 rounded-xl p-4">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 block mb-1">
               Gross Requested (100%)
             </span>
-            <span className="text-xl font-black text-white">
+            <span className="text-xl font-black text-slate-900 dark:text-white">
               {formatUsdt(safeStats.totalProcessedWithdrawalsUsdt || 0)}
             </span>
           </div>
 
-          <div className="bg-[#050b18] border border-emerald-500/30 rounded-xl p-4">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400 block mb-1">
+          <div className="bg-slate-50 dark:bg-[#050b18] border border-emerald-500/30 rounded-xl p-4">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 block mb-1">
               Net Member Payouts (90%)
             </span>
-            <span className="text-xl font-black text-emerald-300">
+            <span className="text-xl font-black text-emerald-600 dark:text-emerald-300">
               {formatUsdt(safeStats.totalNetDispatchedUsdt || 0)}
             </span>
           </div>
 
-          <div className="bg-[#050b18] border border-amber-500/30 rounded-xl p-4">
-            <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400 block mb-1">
+          <div className="bg-slate-50 dark:bg-[#050b18] border border-indigo-500/30 rounded-xl p-4">
+            <span className="text-[11px] font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400 block mb-1">
               Retained Admin Profit (10%)
             </span>
-            <span className="text-xl font-black text-amber-300">
+            <span className="text-xl font-black text-indigo-600 dark:text-indigo-300">
               +{formatUsdt(safeStats.adminFeeIncomeUsdt || 0)}
             </span>
           </div>

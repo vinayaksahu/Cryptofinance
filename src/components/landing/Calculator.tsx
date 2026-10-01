@@ -210,14 +210,14 @@ export function Calculator() {
 
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-12">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#00FFA3]/10 border border-[#00FFA3]/25 text-[#00FFA3] text-xs font-bold uppercase tracking-wider font-mono mb-3">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-[#00FFA3] text-xs font-bold uppercase tracking-wider font-mono mb-3">
           <Sparkles className="w-3.5 h-3.5" />
           <span>OFFICIAL ROI PLAN SIMULATOR &bull; SLIDES 10 - 14</span>
         </div>
-        <h2 className="font-display text-3xl sm:text-5xl font-black text-white tracking-tight">
+        <h2 className="font-display text-3xl sm:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
           Live Yield &amp; Compounding Engine
         </h2>
-        <p className="text-slate-400 text-sm sm:text-base mt-3 font-medium">
+        <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-3 font-medium">
           Experience the mathematical precision of Crypto Finance: dynamic 4% daily yield, 10% bonus subsidy, 2X decaying balance pool, and 35-day exponential compounding.
         </p>
       </div>
@@ -225,9 +225,9 @@ export function Calculator() {
       {/* Main Glass Simulation Station */}
       <div className="glass-card-elevated glass-glow-top p-6 sm:p-8 max-w-5xl mx-auto shadow-2xl">
         {/* Preset Amount Pills */}
-        <div className="flex flex-wrap items-center justify-between gap-3 mb-8 pb-6 border-b border-white/10">
-          <span className="text-xs font-bold text-slate-400 font-mono flex items-center gap-1.5">
-            <Zap className="w-4 h-4 text-[#00D2FF]" />
+        <div className="flex flex-wrap items-center justify-between gap-3 mb-8 pb-6 border-b border-slate-200/80 dark:border-white/10">
+          <span className="text-xs font-bold text-slate-600 dark:text-slate-400 font-mono flex items-center gap-1.5">
+            <Zap className="w-4 h-4 text-sky-500 dark:text-[#00D2FF]" />
             Quick Preset Stakes:
           </span>
           <div className="flex flex-wrap gap-2">
@@ -241,8 +241,8 @@ export function Calculator() {
                 }}
                 className={`px-3 py-1.5 rounded-xl text-xs font-bold font-mono transition-all ${
                   capital === val
-                    ? "bg-[#00FFA3] text-slate-950 font-black shadow-lg shadow-[#00FFA3]/25 scale-105"
-                    : "bg-white/5 border border-white/10 text-slate-300 hover:border-[#00FFA3]/40 hover:text-white"
+                    ? "bg-emerald-500 dark:bg-[#00FFA3] text-white dark:text-slate-950 font-black shadow-lg shadow-emerald-500/25 scale-105"
+                    : "bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 hover:text-slate-950 dark:hover:text-white"
                 }`}
               >
                 ${val} USDT
@@ -254,15 +254,15 @@ export function Calculator() {
         {/* Inputs Grid: Capital Stake + 10% Bonus Wallet */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-8">
           {/* Capital Stake */}
-          <div className="p-4 rounded-2xl bg-slate-900/60 border border-white/10">
+          <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-white/10">
             <div className="flex justify-between items-center mb-2">
-              <label className="text-xs font-bold text-slate-300 uppercase tracking-wider">
+              <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                 Investment / Stake (USDT)
               </label>
-              <span className="text-xs font-bold text-[#00FFA3] font-mono">Min $2.00</span>
+              <span className="text-xs font-bold text-emerald-600 dark:text-[#00FFA3] font-mono">Min $2.00</span>
             </div>
             <div className="relative flex items-center">
-              <span className="absolute left-3.5 text-lg font-bold text-[#00FFA3] font-mono">$</span>
+              <span className="absolute left-3.5 text-lg font-bold text-emerald-600 dark:text-[#00FFA3] font-mono">$</span>
               <input
                 type="number"
                 min="2"
@@ -273,65 +273,65 @@ export function Calculator() {
                   setCapital(val);
                   setBonusInput(+(val * 0.1).toFixed(2));
                 }}
-                className="w-full bg-slate-950/80 border border-white/15 focus:border-[#00FFA3] rounded-xl py-3 pl-8 pr-4 text-white font-mono text-xl font-bold outline-none transition-all shadow-inner"
+                className="w-full bg-white dark:bg-slate-950/80 border border-slate-300 dark:border-white/15 focus:border-emerald-500 rounded-xl py-3 pl-8 pr-4 text-slate-900 dark:text-white font-mono text-xl font-bold outline-none transition-all shadow-inner"
               />
             </div>
-            <p className="text-[11px] text-slate-400 mt-2 font-mono">
-              Creates instant <strong className="text-white">${pool.toLocaleString()} (2X)</strong> Contract Pool
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2 font-mono">
+              Creates instant <strong className="text-slate-900 dark:text-white">${pool.toLocaleString()} (2X)</strong> Contract Pool
             </p>
           </div>
 
           {/* 10% Bonus Wallet Subsidy */}
-          <div className="p-4 rounded-2xl bg-[#FFB800]/5 border border-[#FFB800]/20">
+          <div className="p-4 rounded-2xl bg-indigo-500/5 border border-indigo-500/25">
             <div className="flex justify-between items-center mb-2">
-              <label className="text-xs font-bold text-[#FFB800] uppercase tracking-wider flex items-center gap-1.5">
+              <label className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider flex items-center gap-1.5">
                 <Layers className="w-3.5 h-3.5" />
                 Bonus Wallet (10% Usable)
               </label>
-              <span className="text-xs font-bold text-[#FFB800] font-mono">
+              <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 font-mono">
                 ${maxBonusUsable.toFixed(2)} Max
               </span>
             </div>
             <div className="relative flex items-center">
-              <span className="absolute left-3.5 text-lg font-bold text-[#FFB800] font-mono">$</span>
+              <span className="absolute left-3.5 text-lg font-bold text-indigo-600 dark:text-indigo-400 font-mono">$</span>
               <input
                 type="number"
                 min="0"
                 step="0.1"
                 value={bonusInput}
                 onChange={(e) => setBonusInput(Number(e.target.value))}
-                className="w-full bg-slate-950/80 border border-[#FFB800]/30 focus:border-[#FFB800] rounded-xl py-3 pl-8 pr-4 text-[#FFB800] font-mono text-xl font-bold outline-none transition-all shadow-inner"
+                className="w-full bg-white dark:bg-slate-950/80 border border-indigo-300 dark:border-indigo-500/30 focus:border-indigo-500 rounded-xl py-3 pl-8 pr-4 text-indigo-700 dark:text-indigo-300 font-mono text-xl font-bold outline-none transition-all shadow-inner"
               />
             </div>
-            <div className="flex justify-between text-[11px] text-slate-300 mt-2 font-mono">
-              <span>Bonus Used: <strong className="text-[#FFB800]">${bonusUsed.toFixed(2)}</strong></span>
-              <span>Net USDT: <strong className="text-[#00FFA3]">${netUsdt.toFixed(2)}</strong></span>
+            <div className="flex justify-between text-[11px] text-slate-600 dark:text-slate-300 mt-2 font-mono">
+              <span>Bonus Used: <strong className="text-indigo-600 dark:text-indigo-400">${bonusUsed.toFixed(2)}</strong></span>
+              <span>Net USDT: <strong className="text-emerald-600 dark:text-[#00FFA3]">${netUsdt.toFixed(2)}</strong></span>
             </div>
           </div>
         </div>
 
         {/* Strategy Control: Withdraw / Reinvest / Manual */}
-        <div className="mb-8 p-5 rounded-2xl bg-slate-900/50 border border-white/10">
+        <div className="mb-8 p-5 rounded-2xl bg-white/70 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-            <span className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-              <Sliders className="w-4 h-4 text-[#00D2FF]" />
+            <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+              <Sliders className="w-4 h-4 text-sky-500 dark:text-[#00D2FF]" />
               Select Strategy Mode:
             </span>
-            <span className="text-xs text-slate-400 font-mono">
+            <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
               {mode === "withdraw" && "Daily Payout • Starts 4% on Principal"}
               {mode === "reinvest" && "Exponential Compounding • 35-Day 2X Doubling"}
               {mode === "manual" && "Custom Strategy • Day-by-Day Control"}
             </span>
           </div>
 
-          <div className="grid grid-cols-3 gap-2 p-1.5 rounded-2xl bg-slate-950/80 border border-white/10">
+          <div className="grid grid-cols-3 gap-2 p-1.5 rounded-2xl bg-slate-100/90 dark:bg-slate-950/80 border border-slate-200/80 dark:border-white/10">
             <button
               type="button"
               onClick={() => handleSetMode("withdraw")}
               className={`py-3 px-2 rounded-xl text-center transition-all ${
                 mode === "withdraw"
-                  ? "bg-[#00D2FF]/20 border border-[#00D2FF]/40 text-[#00D2FF] font-bold shadow-md shadow-[#00D2FF]/10"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-sky-500/20 border border-sky-500/40 text-sky-600 dark:text-[#00D2FF] font-bold shadow-md shadow-sky-500/10"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white"
               }`}
             >
               <div className="text-base mb-0.5">📉</div>
@@ -344,8 +344,8 @@ export function Calculator() {
               onClick={() => handleSetMode("reinvest")}
               className={`py-3 px-2 rounded-xl text-center transition-all ${
                 mode === "reinvest"
-                  ? "bg-[#00FFA3]/20 border border-[#00FFA3]/40 text-[#00FFA3] font-bold shadow-md shadow-[#00FFA3]/10"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-emerald-500/20 border border-emerald-500/40 text-emerald-600 dark:text-[#00FFA3] font-bold shadow-md shadow-emerald-500/10"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white"
               }`}
             >
               <div className="text-base mb-0.5">🚀</div>
@@ -358,8 +358,8 @@ export function Calculator() {
               onClick={() => handleSetMode("manual")}
               className={`py-3 px-2 rounded-xl text-center transition-all ${
                 mode === "manual"
-                  ? "bg-[#FFB800]/20 border border-[#FFB800]/40 text-[#FFB800] font-bold shadow-md shadow-[#FFB800]/10"
-                  : "text-slate-400 hover:text-white"
+                  ? "bg-indigo-500/20 border border-indigo-500/40 text-indigo-600 dark:text-indigo-300 font-bold shadow-md shadow-indigo-500/10"
+                  : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white"
               }`}
             >
               <div className="text-base mb-0.5">🎛️</div>
@@ -391,17 +391,17 @@ export function Calculator() {
           )}
 
           {/* 2X Cap Progress Bar */}
-          <div className="mt-5 pt-4 border-t border-white/10">
+          <div className="mt-5 pt-4 border-t border-slate-200/80 dark:border-white/10">
             <div className="flex justify-between text-xs font-mono mb-1.5">
-              <span className="text-slate-400">Peak Balance &rarr; 2X Cap Lock (${(capBal).toLocaleString()})</span>
-              <span className="font-bold text-white">{capPct.toFixed(1)}%</span>
+              <span className="text-slate-500 dark:text-slate-400">Peak Balance &rarr; 2X Cap Lock (${(capBal).toLocaleString()})</span>
+              <span className="font-bold text-slate-900 dark:text-white">{capPct.toFixed(1)}%</span>
             </div>
-            <div className="h-2 rounded-full bg-slate-800 overflow-hidden relative">
+            <div className="h-2 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden relative">
               <div
                 className={`h-full transition-all duration-300 rounded-full ${
                   capPct >= 95
-                    ? "bg-gradient-to-r from-[#FFB800] to-[#FF3366]"
-                    : "bg-gradient-to-r from-[#00FFA3] to-[#00D2FF]"
+                    ? "bg-gradient-to-r from-rose-500 to-indigo-600"
+                    : "bg-gradient-to-r from-emerald-500 to-sky-500"
                 }`}
                 style={{ width: `${capPct}%` }}
               />
@@ -412,79 +412,79 @@ export function Calculator() {
         {/* KPI Strip */}
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-8">
           <div className="glass-panel p-3.5 text-center">
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+            <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">
               Investment
             </p>
-            <p className="text-lg sm:text-xl font-black text-white font-mono">
+            <p className="text-lg sm:text-xl font-black text-slate-900 dark:text-white font-mono">
               ${safeCap.toLocaleString()}
             </p>
-            <p className="text-[10px] text-[#00FFA3] font-mono mt-0.5">
+            <p className="text-[10px] text-emerald-600 dark:text-[#00FFA3] font-mono mt-0.5">
               ${bonusUsed}B + ${netUsdt}U
             </p>
           </div>
 
           <div className="glass-panel p-3.5 text-center">
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+            <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">
               2X Contract Pool
             </p>
-            <p className="text-lg sm:text-xl font-black text-[#00D2FF] font-mono">
+            <p className="text-lg sm:text-xl font-black text-sky-600 dark:text-[#00D2FF] font-mono">
               ${pool.toLocaleString()}
             </p>
-            <p className="text-[10px] text-slate-400 font-mono mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
               Initial Release Base
             </p>
           </div>
 
           <div className="glass-panel p-3.5 text-center">
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+            <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">
               Total Withdrawn
             </p>
-            <p className="text-lg sm:text-xl font-black text-[#00D2FF] font-mono">
+            <p className="text-lg sm:text-xl font-black text-sky-600 dark:text-[#00D2FF] font-mono">
               ${totalWithdrawn.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </p>
-            <p className="text-[10px] text-slate-400 font-mono mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
               {((totalWithdrawn / pool) * 100).toFixed(1)}% of Pool
             </p>
           </div>
 
           <div className="glass-panel p-3.5 text-center">
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+            <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">
               Active Days
             </p>
-            <p className="text-lg sm:text-xl font-black text-[#00FFA3] font-mono">
+            <p className="text-lg sm:text-xl font-black text-emerald-600 dark:text-[#00FFA3] font-mono">
               {totalDays}
             </p>
-            <p className="text-[10px] text-slate-400 font-mono mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
               Until $0.005 Bal
             </p>
           </div>
 
           <div className="glass-panel p-3.5 text-center col-span-2 sm:col-span-1">
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+            <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">
               Peak Balance
             </p>
-            <p className="text-lg sm:text-xl font-black text-[#FFB800] font-mono">
+            <p className="text-lg sm:text-xl font-black text-indigo-600 dark:text-indigo-400 font-mono">
               ${peakBalance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </p>
-            <p className="text-[10px] text-slate-400 font-mono mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
               ${totalReinvested.toFixed(0)} Reinvested
             </p>
           </div>
         </div>
 
         {/* Performance Chart */}
-        <div className="p-5 rounded-2xl bg-slate-900/60 border border-white/10 mb-8">
+        <div className="p-5 rounded-2xl bg-white/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-white/10 mb-8 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-            <span className="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-1.5 font-mono">
-              <TrendingUp className="w-4 h-4 text-[#00FFA3]" />
+            <span className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5 font-mono">
+              <TrendingUp className="w-4 h-4 text-emerald-500 dark:text-[#00FFA3]" />
               Simulation Curve: Balance vs Cumulative Cashout
             </span>
             <div className="flex items-center gap-3 text-xs font-mono">
-              <span className="flex items-center gap-1 text-[#00FFA3]">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#00FFA3]" /> Pool Balance
+              <span className="flex items-center gap-1 text-emerald-600 dark:text-[#00FFA3]">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 dark:bg-[#00FFA3]" /> Pool Balance
               </span>
-              <span className="flex items-center gap-1 text-[#00D2FF]">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#00D2FF]" /> Cumulative Cashout
+              <span className="flex items-center gap-1 text-sky-600 dark:text-[#00D2FF]">
+                <span className="w-2.5 h-2.5 rounded-full bg-sky-500 dark:bg-[#00D2FF]" /> Cumulative Cashout
               </span>
             </div>
           </div>
@@ -498,19 +498,19 @@ export function Calculator() {
             >
               <defs>
                 <linearGradient id="balGlow" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#00FFA3" stopOpacity="0.25" />
-                  <stop offset="100%" stopColor="#00FFA3" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#10b981" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#10b981" stopOpacity="0" />
                 </linearGradient>
                 <linearGradient id="cumGlow" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#00D2FF" stopOpacity="0.25" />
-                  <stop offset="100%" stopColor="#00D2FF" stopOpacity="0" />
+                  <stop offset="0%" stopColor="#0284c7" stopOpacity="0.25" />
+                  <stop offset="100%" stopColor="#0284c7" stopOpacity="0" />
                 </linearGradient>
               </defs>
 
               {/* Grid Lines */}
-              <line x1="0" y1="60" x2="800" y2="60" stroke="rgba(255,255,255,0.05)" strokeDasharray="4 4" />
-              <line x1="0" y1="120" x2="800" y2="120" stroke="rgba(255,255,255,0.05)" strokeDasharray="4 4" />
-              <line x1="0" y1="180" x2="800" y2="180" stroke="rgba(255,255,255,0.05)" strokeDasharray="4 4" />
+              <line x1="0" y1="60" x2="800" y2="60" stroke="currentColor" className="text-slate-300 dark:text-white/10" strokeDasharray="4 4" />
+              <line x1="0" y1="120" x2="800" y2="120" stroke="currentColor" className="text-slate-300 dark:text-white/10" strokeDasharray="4 4" />
+              <line x1="0" y1="180" x2="800" y2="180" stroke="currentColor" className="text-slate-300 dark:text-white/10" strokeDasharray="4 4" />
 
               {/* Balance Curve Area & Line */}
               {chartPoints.balPath && (
@@ -522,7 +522,7 @@ export function Calculator() {
                   <path
                     d={chartPoints.balPath}
                     fill="none"
-                    stroke="#00FFA3"
+                    stroke="#10b981"
                     strokeWidth="2.5"
                     strokeLinecap="round"
                   />
@@ -539,7 +539,7 @@ export function Calculator() {
                   <path
                     d={chartPoints.cumPath}
                     fill="none"
-                    stroke="#00D2FF"
+                    stroke="#0284c7"
                     strokeWidth="2.5"
                     strokeLinecap="round"
                   />
@@ -550,28 +550,28 @@ export function Calculator() {
         </div>
 
         {/* Day-by-Day Ledger Table */}
-        <div className="p-5 rounded-2xl bg-slate-900/60 border border-white/10 mb-8">
+        <div className="p-5 rounded-2xl bg-white/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-white/10 mb-8 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
             <div>
-              <h3 className="text-sm font-bold text-white uppercase tracking-wider font-mono">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
                 Day-by-Day Financial Ledger
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-500 dark:text-slate-400">
                 {mode === "manual" ? "Click any row's action to toggle Withdraw / Reinvest" : "Automated release protocol"}
               </p>
             </div>
             <button
               onClick={handleDownloadCSV}
-              className="px-3.5 py-1.5 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-slate-200 hover:text-white flex items-center gap-1.5 transition font-mono"
+              className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white flex items-center gap-1.5 transition font-mono"
             >
-              <Download className="w-3.5 h-3.5 text-[#00FFA3]" />
+              <Download className="w-3.5 h-3.5 text-emerald-600 dark:text-[#00FFA3]" />
               Export CSV
             </button>
           </div>
 
-          <div className="overflow-x-auto max-h-80 overflow-y-auto rounded-xl border border-white/10 bg-slate-950/60">
+          <div className="overflow-x-auto max-h-80 overflow-y-auto rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/60 dark:bg-slate-950/60">
             <table className="w-full text-left text-xs font-mono">
-              <thead className="sticky top-0 bg-[#0B132B] text-[#00FFA3] border-b border-white/10 uppercase text-[10px] tracking-wider z-10">
+              <thead className="sticky top-0 bg-slate-100 dark:bg-[#0B132B] text-slate-800 dark:text-[#00FFA3] border-b border-slate-200 dark:border-white/10 uppercase text-[10px] tracking-wider z-10">
                 <tr>
                   <th className="py-2.5 px-3 text-center">Day</th>
                   <th className="py-2.5 px-3 text-right">Start Pool</th>
@@ -581,21 +581,21 @@ export function Calculator() {
                   <th className="py-2.5 px-3 text-right">Cum. Payout</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-white/5">
+              <tbody className="divide-y divide-slate-200 dark:divide-white/5">
                 {simData.slice(0, visibleRows).map((r, i) => (
                   <tr
                     key={r.day}
-                    className={`hover:bg-white/[0.02] transition ${
-                      r.capLocked ? "bg-[#FFB800]/10" : ""
+                    className={`hover:bg-slate-100/50 dark:hover:bg-white/[0.02] transition ${
+                      r.capLocked ? "bg-indigo-500/10" : ""
                     }`}
                   >
-                    <td className="py-2 px-3 text-center text-slate-400 font-bold">{r.day}</td>
-                    <td className="py-2 px-3 text-right text-slate-200">${r.bal.toFixed(2)}</td>
-                    <td className="py-2 px-3 text-right text-[#00FFA3] font-bold">+${r.roi.toFixed(2)}</td>
+                    <td className="py-2 px-3 text-center text-slate-500 dark:text-slate-400 font-bold">{r.day}</td>
+                    <td className="py-2 px-3 text-right text-slate-800 dark:text-slate-200">${r.bal.toFixed(2)}</td>
+                    <td className="py-2 px-3 text-right text-emerald-600 dark:text-[#00FFA3] font-bold">+${r.roi.toFixed(2)}</td>
                     <td className="py-2 px-3 text-center">
                       {r.capLocked ? (
                         <span className="toggle-pill locked">
-                          <Lock className="w-3 h-3 text-[#FFB800]" /> Cap Lock
+                          <Lock className="w-3 h-3 text-indigo-500" /> Cap Lock
                         </span>
                       ) : r.action === "R" ? (
                         <span
@@ -613,8 +613,8 @@ export function Calculator() {
                         </span>
                       )}
                     </td>
-                    <td className="py-2 px-3 text-right text-slate-300">${r.after.toFixed(2)}</td>
-                    <td className="py-2 px-3 text-right text-[#00D2FF] font-bold">${r.cumW.toFixed(2)}</td>
+                    <td className="py-2 px-3 text-right text-slate-700 dark:text-slate-300">${r.after.toFixed(2)}</td>
+                    <td className="py-2 px-3 text-right text-sky-600 dark:text-[#00D2FF] font-bold">${r.cumW.toFixed(2)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -627,7 +627,7 @@ export function Calculator() {
               <button
                 type="button"
                 onClick={() => setVisibleRows((v) => Math.min(simData.length, v + 40))}
-                className="px-5 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-xs font-bold text-[#00FFA3] transition font-mono"
+                className="px-5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-xs font-bold text-emerald-600 dark:text-[#00FFA3] transition font-mono"
               >
                 Load More Days ({visibleRows} / {simData.length}) &darr;
               </button>
@@ -637,42 +637,42 @@ export function Calculator() {
 
         {/* 4 Info Explainer Cards from index.html & PDF */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="p-4 rounded-2xl bg-slate-900/50 border border-white/10">
-            <h4 className="text-xs font-bold text-[#FFB800] uppercase tracking-wider mb-1.5 flex items-center gap-1.5 font-mono">
-              <Layers className="w-4 h-4 text-[#FFB800]" />
+          <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10">
+            <h4 className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5 font-mono">
+              <Layers className="w-4 h-4 text-indigo-500" />
               10% Bonus Utility Rule
             </h4>
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               Up to 10% of any activation or compounding can be funded from your non-withdrawable Bonus Wallet. The remaining 90% is funded in external BEP-20 USDT, eliminating bank-run risks.
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-slate-900/50 border border-white/10">
-            <h4 className="text-xs font-bold text-[#00D2FF] uppercase tracking-wider mb-1.5 flex items-center gap-1.5 font-mono">
-              <TrendingUp className="w-4 h-4 text-[#00D2FF]" />
+          <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10">
+            <h4 className="text-xs font-bold text-sky-600 dark:text-[#00D2FF] uppercase tracking-wider mb-1.5 flex items-center gap-1.5 font-mono">
+              <TrendingUp className="w-4 h-4 text-sky-500 dark:text-[#00D2FF]" />
               Decaying Pool Balance
             </h4>
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               2.00% daily is released from the <em>remaining</em> 2X pool balance each day. Day 1 starts at an exact 4.00% on your capital stake, gradually decaying until 100% of the 2X pool is claimed.
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-slate-900/50 border border-white/10">
-            <h4 className="text-xs font-bold text-[#00FFA3] uppercase tracking-wider mb-1.5 flex items-center gap-1.5 font-mono">
-              <Zap className="w-4 h-4 text-[#00FFA3]" />
+          <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10">
+            <h4 className="text-xs font-bold text-emerald-600 dark:text-[#00FFA3] uppercase tracking-wider mb-1.5 flex items-center gap-1.5 font-mono">
+              <Zap className="w-4 h-4 text-emerald-500 dark:text-[#00FFA3]" />
               35-Day Doubling Engine
             </h4>
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               By reinvesting your 2% daily release, the mathematical formula $(1.02)^{35} \approx 2.000$ doubles your principal in exactly 35 days, accelerating your capital exponentially.
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-slate-900/50 border border-white/10">
-            <h4 className="text-xs font-bold text-[#FF3366] uppercase tracking-wider mb-1.5 flex items-center gap-1.5 font-mono">
-              <Lock className="w-4 h-4 text-[#FF3366]" />
+          <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10">
+            <h4 className="text-xs font-bold text-rose-600 dark:text-[#FF3366] uppercase tracking-wider mb-1.5 flex items-center gap-1.5 font-mono">
+              <Lock className="w-4 h-4 text-rose-500 dark:text-[#FF3366]" />
               2X Cap Lock &amp; 4X Profit
             </h4>
-            <p className="text-xs text-slate-300 leading-relaxed">
+            <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
               When compounding reaches 2X of initial stake, compounding enters an automated safety freeze. The investor MUST take at least 1 withdrawal, unlocking up to ~400% (4X) total extraction.
             </p>
           </div>

@@ -22,51 +22,51 @@ export function Terms() {
       title: "10% Bonus Wallet Utility",
       desc: "Bonus Wallet funds up to 10% of any ID activation or compounding transaction. Non-withdrawable to guarantee company solvency.",
       tag: "10% Utility",
-      color: "text-amber-400",
+      color: "text-indigo-600 dark:text-indigo-400",
     },
     {
       icon: RefreshCw,
       title: "35-Day 2X Compounding",
       desc: "Reinvesting 2% daily pool returns doubles principal in 35 days ((1.02)^35 ≈ 2.000). At 2X, 1 mandatory withdrawal is required before resuming.",
       tag: "2X Safety Lock",
-      color: "text-emerald-400",
+      color: "text-emerald-500 dark:text-emerald-400",
     },
     {
       icon: Percent,
       title: "10% Liquidity Fee",
       desc: "Flat 10% system liquidity fee on external withdrawals. Funds the smart contract reserve pool and 24/7 arbitrage liquidity.",
       tag: "Solvency Fee",
-      color: "text-cyan-400",
+      color: "text-sky-500 dark:text-cyan-400",
     },
     {
       icon: ArrowRightLeft,
       title: "0% Fee P2P Transfers",
       desc: "Instant internal P2P transfers from Working Wallet to any member ID with 0% fee for peer activations and team coordination.",
       tag: "Free P2P",
-      color: "text-purple-400",
+      color: "text-purple-500 dark:text-purple-400",
     },
     {
       icon: ShieldCheck,
       title: "Cashout Limits",
       desc: "Minimum cashout is $2.00 USDT. Maximum per transaction is $5,000 USDT. Automated Web3 dispatches 24/7.",
       tag: "Min $2 | Max $5,000",
-      color: "text-emerald-400",
+      color: "text-emerald-500 dark:text-emerald-400",
     },
     {
       icon: Lock,
       title: "50:50 Rank Ratio Criteria",
       desc: "Rank milestone rewards require a 50:50 ratio of team volume between Strong and Weak legs. Turnover accumulates permanently.",
       tag: "50:50 Leg Ratio",
-      color: "text-amber-400",
+      color: "text-indigo-600 dark:text-indigo-400",
     },
   ];
 
   return (
-    <section id="terms" className="relative z-10 py-20 border-t border-cyan-500/20 bg-[var(--bg-secondary)]/50">
+    <section id="terms" className="relative z-10 py-20 border-t border-slate-200/80 dark:border-cyan-500/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 font-mono">
+          <span className="text-sky-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25 font-mono">
             IMMUTABLE PROTOCOL STANDARDS &bull; SLIDE 20
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-black text-[var(--text-main)] mt-3">
@@ -84,14 +84,14 @@ export function Terms() {
             return (
               <div
                 key={item.title}
-                className="glass-card p-6 rounded-3xl flex flex-col justify-between hover:border-cyan-400/50 hover:-translate-y-1 transition duration-200 border border-cyan-500/25"
+                className="glass-card p-6 rounded-3xl flex flex-col justify-between hover:border-sky-400/50 hover:-translate-y-1 transition duration-200 border border-slate-200/80 dark:border-cyan-500/25"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400">
+                    <div className="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-500 dark:text-cyan-400">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-inner-panel text-cyan-400 border border-cyan-500/20 uppercase tracking-wider">
+                    <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-slate-50 dark:bg-slate-900/60 text-sky-600 dark:text-cyan-400 border border-slate-200 dark:border-cyan-500/20 uppercase tracking-wider">
                       {item.tag}
                     </span>
                   </div>

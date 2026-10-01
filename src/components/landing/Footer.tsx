@@ -56,9 +56,9 @@ export function Footer() {
   const pdfFileName = "Crypto_Finance_Presentation.pdf";
 
   return (
-    <footer className="relative z-10 border-t border-cyan-500/20 bg-[var(--bg-main)] transition-colors duration-200 pt-16 pb-12">
+    <footer className="relative z-10 border-t border-slate-200/80 dark:border-cyan-500/20 bg-transparent transition-colors duration-200 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-12 border-b border-cyan-500/20">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 pb-12 border-b border-slate-200/80 dark:border-cyan-500/20">
           {/* Brand & Address (5 Cols) from Slide 03 & 21 */}
           <div className="lg:col-span-5 space-y-4">
             <Link href="/" className="flex items-center gap-3">
@@ -74,7 +74,7 @@ export function Footer() {
                 </div>
               </div>
               <div>
-                <span className="font-display font-black text-xl tracking-wider text-cyan-400 uppercase">
+                <span className="font-display font-black text-xl tracking-wider text-sky-600 dark:text-cyan-400 uppercase">
                   CRYPTO FINANCE
                 </span>
                 <span className="block text-[10px] text-[var(--text-subtle)] tracking-widest uppercase font-mono">
@@ -89,11 +89,11 @@ export function Footer() {
 
             <div className="space-y-2 text-xs text-[var(--text-subtle)] pt-1">
               <div className="flex items-start gap-2">
-                <MapPin className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+                <MapPin className="w-4 h-4 text-sky-500 dark:text-cyan-400 shrink-0 mt-0.5" />
                 <span>{APP_CONFIG.headquarters}</span>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-cyan-400 shrink-0" />
+                <Mail className="w-4 h-4 text-sky-500 dark:text-cyan-400 shrink-0" />
                 <span>{APP_CONFIG.officialEmail}</span>
               </div>
             </div>
@@ -101,38 +101,38 @@ export function Footer() {
 
           {/* Quick Links (3 Cols) */}
           <div className="lg:col-span-3 space-y-3">
-            <span className="text-xs font-bold text-cyan-400 uppercase tracking-widest block font-mono">
+            <span className="text-xs font-bold text-sky-600 dark:text-cyan-400 uppercase tracking-widest block font-mono">
               Ecosystem Navigation
             </span>
             <ul className="space-y-2 text-xs font-medium text-[var(--text-muted)]">
               <li>
-                <a href="#about" className="hover:text-cyan-400 transition">About Protocol &amp; Swiss HQ</a>
+                <a href="#about" className="hover:text-sky-600 dark:hover:text-cyan-400 transition">About Protocol &amp; Swiss HQ</a>
               </li>
               <li>
-                <a href="#packages" className="hover:text-cyan-400 transition">2X Pool &bull; 4% Dynamic Yield</a>
+                <a href="#packages" className="hover:text-sky-600 dark:hover:text-cyan-400 transition">2X Pool &bull; 4% Dynamic Yield</a>
               </li>
               <li>
-                <a href="#calculator" className="hover:text-cyan-400 transition">Interactive Yield Calculator</a>
+                <a href="#calculator" className="hover:text-sky-600 dark:hover:text-cyan-400 transition">Interactive Yield Calculator</a>
               </li>
               <li>
-                <a href="#referrals" className="hover:text-cyan-400 transition">10-Level Daily Team Royalty</a>
+                <a href="#referrals" className="hover:text-sky-600 dark:hover:text-cyan-400 transition">10-Level Daily Team Royalty</a>
               </li>
               <li>
-                <a href="#ranks" className="hover:text-cyan-400 transition">Milestone Rank Rewards (50:50)</a>
+                <a href="#ranks" className="hover:text-sky-600 dark:hover:text-cyan-400 transition">Milestone Rank Rewards (50:50)</a>
               </li>
               <li>
-                <a href="#terms" className="hover:text-cyan-400 transition">Official Rules &amp; Regulations</a>
+                <a href="#terms" className="hover:text-sky-600 dark:hover:text-cyan-400 transition">Official Rules &amp; Regulations</a>
               </li>
             </ul>
           </div>
 
           {/* Official Deck & Controls (4 Cols) */}
           <div className="lg:col-span-4 space-y-4">
-            <span className="text-xs font-bold text-cyan-400 uppercase tracking-widest block font-mono">
+            <span className="text-xs font-bold text-sky-600 dark:text-cyan-400 uppercase tracking-widest block font-mono">
               Presentation &bull; Controls
             </span>
 
-            <div className="p-4 rounded-2xl bg-inner-panel border border-cyan-500/20 space-y-3">
+            <div className="p-4 rounded-2xl bg-slate-50/80 dark:bg-inner-panel border border-slate-200/80 dark:border-cyan-500/20 space-y-3">
               <div className="flex items-center justify-between">
                 <span className="text-xs text-[var(--text-main)] font-semibold">Theme Mode:</span>
                 <ThemeToggle variant="segmented" />
