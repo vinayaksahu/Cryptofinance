@@ -40,9 +40,9 @@ export function Terms() {
     },
     {
       icon: ArrowRightLeft,
-      title: "0% Fee P2P Transfers",
-      desc: "Instant internal P2P transfers from Working Wallet to any member ID with 0% fee for peer activations and team coordination.",
-      tag: "Free P2P",
+      title: "P2P Transfers",
+      desc: "Instant internal P2P transfers from Working Wallet to any member ID for peer activations and team coordination.",
+      tag: "P2P Utility",
       color: "text-purple-500 dark:text-purple-400",
     },
     {

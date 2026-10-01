@@ -145,7 +145,7 @@ export function WalletEcosystem() {
               </div>
               <div className="flex justify-between pt-1 border-t border-white/10">
                 <span className="text-slate-400">Internal Transfers:</span>
-                <span className="text-[#00FFA3] font-bold">0% Fee P2P</span>
+                <span className="text-[#00FFA3] font-bold">P2P Transfer</span>
               </div>
             </div>
           </div>

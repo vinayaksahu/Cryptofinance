@@ -110,8 +110,12 @@ export default function MemberDashboardPage() {
             <StakeActivationView user={user} onRefresh={fetchUser} onRefreshUser={fetchUser} />
           )}
 
-          {activeTab === "wallets" && (
-            <WalletsHubView user={user} initialWallet="all" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
+          {(activeTab === "wallets" || activeTab === "wallets-internal") && (
+            <WalletsHubView user={user} initialWallet="all" initialEngine="internal" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
+          )}
+
+          {activeTab === "wallets-external" && (
+            <WalletsHubView user={user} initialWallet="all" initialEngine="external" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
           )}
 
           {activeTab === "wallet-bonus" && (

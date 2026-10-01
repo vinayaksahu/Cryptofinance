@@ -129,7 +129,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Swipe failed");
-      setMessage({ text: data.message || "Swipe to Fund Wallet successful with 0% fee!" });
+      setMessage({ text: data.message || "Swipe to Fund Wallet successful!" });
       setSwipeAmount("");
       setSwipePin("");
       onRefresh();
@@ -211,7 +211,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
       {mode === "transfer" && (
         <div className="max-w-xl bg-[#091124] border border-[#17274a] rounded-3xl p-6 sm:p-8 shadow-xl">
           <p className="text-xs text-slate-400 mb-4">
-            Transfer funds from your Fund Wallet to another member instantly with 0% fee.
+            Transfer funds from your Fund Wallet to another member instantly.
           </p>
           <div className="p-3.5 rounded-2xl bg-[#070e20] border border-[#162544] text-xs flex justify-between mb-5">
             <span className="text-slate-400">Available Fund Balance:</span>
@@ -273,7 +273,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
       {mode === "swipe" && (
         <div className="max-w-xl bg-[#091124] border border-[#17274a] rounded-3xl p-6 sm:p-8 shadow-xl">
           <p className="text-xs text-slate-400 mb-4">
-            Convert your earnings in Income Wallet to Fund Wallet instantly at <strong>0% fee</strong> for reinvestment or transfer.
+            Convert your earnings in Income Wallet to Fund Wallet instantly for reinvestment or transfer.
           </p>
           <div className="p-3.5 rounded-2xl bg-[#070e20] border border-[#162544] text-xs flex justify-between mb-5">
             <span className="text-slate-400">Available Income Balance:</span>
@@ -314,7 +314,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
               disabled={submitting}
               className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all disabled:opacity-50"
             >
-              {submitting ? "Swiping..." : "Swipe to Fund Wallet (0% Fee)"}
+              {submitting ? "Swiping..." : "Swipe to Fund Wallet"}
             </button>
           </form>
         </div>

@@ -228,69 +228,25 @@ export function MemberSidebar({
               <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-10 pr-2 py-1 space-y-1`}>
                 <button
                   type="button"
-                  onClick={() => handleSelectTab("wallets")}
+                  onClick={() => handleSelectTab("wallets-internal")}
                   className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "wallets"
-                      ? "text-sky-300 bg-sky-500/20 border-l-2 border-sky-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
-                >
-                  • Wallets Overview
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("wallet-bonus")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "wallet-bonus"
-                      ? "text-[#FFB800] bg-[#FFB800]/20 border-l-2 border-[#FFB800]"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
-                >
-                  • Bonus Wallet (10% Use)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("wallet-roi")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "wallet-roi"
+                    activeTab === "wallets-internal" || activeTab === "wallets"
                       ? "text-[#00FFA3] bg-[#00FFA3]/20 border-l-2 border-[#00FFA3]"
                       : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • ROI Wallet (4% Daily)
+                  • Internal Wallet Transfer Engine
                 </button>
                 <button
                   type="button"
-                  onClick={() => handleSelectTab("wallet-working")}
+                  onClick={() => handleSelectTab("wallets-external")}
                   className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "wallet-working"
-                      ? "text-[#00D2FF] bg-[#00D2FF]/20 border-l-2 border-[#00D2FF]"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
-                >
-                  • Working Wallet (Direct/Royalty)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("wallet-p2p")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "wallet-p2p"
+                    activeTab === "wallets-external"
                       ? "text-purple-300 bg-purple-500/20 border-l-2 border-purple-400"
                       : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • P2P Wallet (0% Transfer)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("wallet-main")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "wallet-main"
-                      ? "text-emerald-300 bg-emerald-500/20 border-l-2 border-emerald-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
-                >
-                  • Main Wallet (Withdrawal)
+                  • External Wallet Transfer Engine
                 </button>
               </div>
             )}

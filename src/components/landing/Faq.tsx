@@ -25,7 +25,7 @@ export function Faq() {
     },
     {
       q: "What are the cashout rules and limits?",
-      a: "Withdrawals are 100% automated on Binance Smart Chain (BEP-20 USDT) with minimum $2.00 USDT and maximum $5,000 USDT per transaction. A flat 10% system liquidity fee applies to external cashouts. Internal P2P transfers from Working Wallet to other members are 100% instant and zero-fee (0%).",
+      a: "Withdrawals are 100% automated on Binance Smart Chain (BEP-20 USDT) with minimum $2.00 USDT and maximum $5,000 USDT per transaction. A flat 10% system liquidity fee applies to external cashouts. Internal P2P transfers to other members are 100% instant.",
     },
     {
       q: "How does the 10-Level Daily Team Royalty work?",
