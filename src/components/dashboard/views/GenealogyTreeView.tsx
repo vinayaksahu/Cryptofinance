@@ -186,7 +186,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
           >
             {/* Header: Name + Badge */}
             <div className="flex items-center justify-between gap-2 mb-1">
-              <h3 className="text-slate-100 font-bold text-sm sm:text-[15px] truncate">
+              <h3 className="text-slate-900 dark:text-white font-bold text-sm sm:text-[15px] truncate">
                 {node.name}
               </h3>
               <span
@@ -201,7 +201,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
             </div>
 
             {/* Username / Handle */}
-            <p className="text-slate-400 text-xs font-mono mb-3">
+            <p className="text-slate-500 dark:text-slate-400 text-xs font-mono mb-3">
               {node.username}
             </p>
 
@@ -211,13 +211,13 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
             {/* Stats */}
             <div className="space-y-1.5 text-xs">
               <div className="flex items-center justify-between">
-                <span className="text-slate-400">Active Investment:</span>
+                <span className="text-slate-500 dark:text-slate-400">Active Investment:</span>
                 <span className="text-emerald-400 font-bold font-mono">
                   ${node.activeInvestment.toFixed(2)}
                 </span>
               </div>
               <div className="flex items-center justify-between">
-                <span className="text-slate-400">Direct Team:</span>
+                <span className="text-slate-500 dark:text-slate-400">Direct Team:</span>
                 <span className="text-indigo-300 font-semibold">
                   {node.directTeamCount} Members
                 </span>
@@ -236,7 +236,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
           >
             {/* Header: Name + Badge */}
             <div className="flex items-center justify-between gap-2 mb-1">
-              <h4 className="text-slate-100 font-bold text-xs sm:text-sm truncate">
+              <h4 className="text-slate-900 dark:text-white font-bold text-xs sm:text-sm truncate">
                 {node.name}
               </h4>
               <span
@@ -251,7 +251,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
             </div>
 
             {/* Username */}
-            <p className="text-slate-400 text-[11px] font-mono mb-2">
+            <p className="text-slate-500 dark:text-slate-400 text-[11px] font-mono mb-2">
               {node.username}
             </p>
 
@@ -260,7 +260,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
 
             {/* Investment Row */}
             <div className="flex items-center justify-between text-xs">
-              <span className="text-slate-400">Investment:</span>
+              <span className="text-slate-500 dark:text-slate-400">Investment:</span>
               <span
                 className={`font-bold font-mono ${
                   node.activeInvestment > 0 ? "text-emerald-400" : "text-emerald-400"
@@ -326,18 +326,18 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
 
         {/* If Root Node has no downline yet, display referral invitation */}
         {isRoot && (!node.children || node.children.length === 0) && (
-          <div className="mt-8 flex flex-col items-center text-center max-w-sm p-6 rounded-2xl bg-[#091124] border border-[#17274a] shadow-xl animate-in fade-in duration-300">
+          <div className="mt-8 flex flex-col items-center text-center max-w-sm p-6 rounded-2xl glass-card-elevated shadow-xl shadow-slate-200/50 dark:shadow-black/20 animate-in fade-in duration-300">
             <div className="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-center text-indigo-400 mb-3">
               <Users className="w-6 h-6" />
             </div>
             <h4 className="text-sm font-bold text-white mb-1">No Direct Team Members Yet</h4>
-            <p className="text-xs text-slate-400 mb-4 leading-relaxed">
+            <p className="text-xs text-slate-500 dark:text-slate-400 mb-4 leading-relaxed">
               Start building your 12-level network tree by inviting friends and partners using your personal referral link.
             </p>
             <button
               type="button"
               onClick={copyReferral}
-              className="px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center gap-2 transition shadow-lg shadow-indigo-600/20"
+              className="px-4 py-2 rounded-xl bg-gradient-to-r from-sky-500 to-[#00D2FF] hover:from-sky-400 hover:to-[#00D2FF]/80 text-slate-950 text-xs font-bold flex items-center gap-2 transition shadow-lg shadow-sky-500/25"
             >
               {copiedId ? (
                 <>
@@ -362,34 +362,34 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
       {/* Top Header & Breadcrumb */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-100 tracking-tight flex items-center gap-2.5">
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight flex items-center gap-2.5">
             <Users className="w-7 h-7 text-indigo-400" />
             <span>Genealogy Tree</span>
           </h1>
-          <p className="text-xs text-slate-400 mt-1">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
             Visual downline network & referral team hierarchy
           </p>
         </div>
 
         {/* Breadcrumb / Tab Switcher */}
-        <div className="flex items-center gap-2 bg-[#091124] border border-[#17274a] p-1.5 rounded-xl">
+        <div className="flex items-center gap-2 bg-white/60 dark:bg-slate-900/60 p-1.5 rounded-xl border border-slate-200 dark:border-slate-800 backdrop-blur-sm">
           <button
             type="button"
             onClick={() => onNavigateTab && onNavigateTab("downline-direct")}
-            className="px-3 py-1 text-xs font-medium rounded-lg text-slate-400 hover:text-slate-200 transition-colors"
+            className="px-3 py-1 text-xs font-medium rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-200 transition-colors"
           >
             Direct Team
           </button>
           <button
             type="button"
             onClick={() => onNavigateTab && onNavigateTab("downline-team")}
-            className="px-3 py-1 text-xs font-medium rounded-lg text-slate-400 hover:text-slate-200 transition-colors"
+            className="px-3 py-1 text-xs font-medium rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-200 transition-colors"
           >
             Team List
           </button>
           <button
             type="button"
-            className="px-3 py-1 text-xs font-bold rounded-lg bg-indigo-600 text-white shadow-md shadow-indigo-600/30"
+            className="px-3 py-1 text-xs font-bold rounded-lg bg-white dark:bg-slate-800 text-sky-600 dark:text-[#00D2FF] shadow-sm"
           >
             Tree View
           </button>
@@ -398,17 +398,17 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
 
       {/* Network Overview Stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-        <div className="bg-[#091124] border border-[#17274a] rounded-2xl p-4 shadow-lg">
+        <div className="glass-card-elevated rounded-2xl p-4 shadow-lg">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs text-slate-400 font-medium">Total Network</span>
+            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">Total Network</span>
             <Users className="w-4 h-4 text-indigo-400" />
           </div>
-          <p className="text-xl sm:text-2xl font-black text-slate-100 font-mono">
+          <p className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white font-mono">
             {stats?.totalMembers ?? (activeTree.children.length > 0 ? activeTree.totalTeamCount + 1 : 1)}
           </p>
         </div>
 
-        <div className="bg-[#091124] border border-[#17274a] rounded-2xl p-4 shadow-lg">
+        <div className="glass-card-elevated rounded-2xl p-4 shadow-lg">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-emerald-400 font-medium flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
@@ -421,7 +421,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
           </p>
         </div>
 
-        <div className="bg-[#091124] border border-[#17274a] rounded-2xl p-4 shadow-lg">
+        <div className="glass-card-elevated rounded-2xl p-4 shadow-lg">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-rose-400 font-medium flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-rose-500" />
@@ -434,7 +434,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
           </p>
         </div>
 
-        <div className="bg-[#091124] border border-[#17274a] rounded-2xl p-4 shadow-lg">
+        <div className="glass-card-elevated rounded-2xl p-4 shadow-lg">
           <div className="flex items-center justify-between mb-2">
             <span className="text-xs text-amber-400 font-medium">Direct Team</span>
             <Sparkles className="w-4 h-4 text-amber-400" />
@@ -458,13 +458,13 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
                 placeholder="Search member (@name or ID)..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full bg-[#0d172e] border border-[#1d3159] rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500"
+                className="w-full bg-[#0d172e] border border-[#1d3159] rounded-xl pl-8 pr-3 py-1.5 text-xs text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
               />
-              <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" />
+              <Search className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400 absolute left-2.5 top-2.5" />
               {searchTerm && (
                 <button
                   onClick={() => setSearchTerm("")}
-                  className="absolute right-2.5 top-2 text-slate-400 hover:text-white text-xs"
+                  className="absolute right-2.5 top-2 text-slate-500 dark:text-slate-400 hover:text-white text-xs"
                 >
                   ✕
                 </button>
@@ -478,8 +478,8 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
                 onClick={() => setStatusFilter("ALL")}
                 className={`px-2.5 py-1 rounded-lg font-medium transition-all ${
                   statusFilter === "ALL"
-                    ? "bg-indigo-600 text-white font-bold shadow-sm"
-                    : "text-slate-400 hover:text-slate-200"
+                    ? "bg-gradient-to-r from-sky-500 to-[#00D2FF] text-slate-950 font-bold shadow-sm"
+                    : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-200"
                 }`}
               >
                 All
@@ -490,7 +490,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
                 className={`px-2.5 py-1 rounded-lg font-medium transition-all ${
                   statusFilter === "ACTIVE"
                     ? "bg-emerald-600 text-white font-bold shadow-sm"
-                    : "text-slate-400 hover:text-emerald-300"
+                    : "text-slate-500 dark:text-slate-400 hover:text-emerald-300"
                 }`}
               >
                 Active
@@ -501,7 +501,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
                 className={`px-2.5 py-1 rounded-lg font-medium transition-all ${
                   statusFilter === "INACTIVE"
                     ? "bg-rose-600 text-white font-bold shadow-sm"
-                    : "text-slate-400 hover:text-rose-300"
+                    : "text-slate-500 dark:text-slate-400 hover:text-rose-300"
                 }`}
               >
                 Inactive
@@ -528,7 +528,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
               type="button"
               onClick={handleExpandAll}
               title="Expand All Nodes"
-              className="p-1.5 rounded-xl bg-[#0d172e] border border-[#1d3159] text-slate-300 hover:text-white hover:bg-[#132244] text-xs font-medium flex items-center gap-1"
+              className="p-1.5 rounded-xl bg-[#0d172e] border border-[#1d3159] text-slate-700 dark:text-slate-300 hover:text-white hover:bg-[#132244] text-xs font-medium flex items-center gap-1"
             >
               <Maximize2 className="w-3.5 h-3.5" />
               <span className="hidden md:inline">Expand All</span>
@@ -537,7 +537,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
               type="button"
               onClick={handleCollapseAll}
               title="Collapse All Nodes"
-              className="p-1.5 rounded-xl bg-[#0d172e] border border-[#1d3159] text-slate-300 hover:text-white hover:bg-[#132244] text-xs font-medium flex items-center gap-1"
+              className="p-1.5 rounded-xl bg-[#0d172e] border border-[#1d3159] text-slate-700 dark:text-slate-300 hover:text-white hover:bg-[#132244] text-xs font-medium flex items-center gap-1"
             >
               <Minimize2 className="w-3.5 h-3.5" />
               <span className="hidden md:inline">Collapse All</span>
@@ -549,18 +549,18 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
                 type="button"
                 onClick={handleZoomOut}
                 title="Zoom Out"
-                className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-[#15254b] transition-colors"
+                className="p-1.5 rounded-lg text-slate-700 dark:text-slate-300 hover:text-white hover:bg-[#15254b] transition-colors"
               >
                 <ZoomOut className="w-3.5 h-3.5" />
               </button>
-              <span className="px-2 text-[11px] font-mono text-slate-300 font-semibold select-none">
+              <span className="px-2 text-[11px] font-mono text-slate-700 dark:text-slate-300 font-semibold select-none">
                 {Math.round(zoomLevel * 100)}%
               </span>
               <button
                 type="button"
                 onClick={handleZoomIn}
                 title="Zoom In"
-                className="p-1.5 rounded-lg text-slate-300 hover:text-white hover:bg-[#15254b] transition-colors"
+                className="p-1.5 rounded-lg text-slate-700 dark:text-slate-300 hover:text-white hover:bg-[#15254b] transition-colors"
               >
                 <ZoomIn className="w-3.5 h-3.5" />
               </button>
@@ -568,7 +568,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
                 type="button"
                 onClick={handleResetZoom}
                 title="Reset Zoom"
-                className="p-1.5 rounded-lg text-slate-400 hover:text-amber-300 hover:bg-[#15254b] transition-colors"
+                className="p-1.5 rounded-lg text-slate-500 dark:text-slate-400 hover:text-amber-300 hover:bg-[#15254b] transition-colors"
               >
                 <RotateCcw className="w-3.5 h-3.5" />
               </button>
@@ -586,7 +586,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
           }}
         >
           {loading ? (
-            <div className="flex flex-col items-center justify-center h-72 gap-3 text-slate-400">
+            <div className="flex flex-col items-center justify-center h-72 gap-3 text-slate-500 dark:text-slate-400">
               <div className="w-8 h-8 rounded-full border-2 border-indigo-500 border-t-transparent animate-spin" />
               <p className="text-xs font-semibold uppercase tracking-wider">
                 Loading Tree Hierarchy...
@@ -605,24 +605,24 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
         </div>
 
         {/* Bottom Legend & Quick Tip */}
-        <div className="mt-4 pt-3 border-t border-[#142344] flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400">
+        <div className="mt-4 pt-3 border-t border-[#142344] flex flex-wrap items-center justify-between gap-3 text-xs text-slate-500 dark:text-slate-400">
           <div className="flex items-center gap-4">
             <span className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 border border-emerald-300" />
-              <span className="text-slate-300 font-medium">Active Member</span>
+              <span className="text-slate-700 dark:text-slate-300 font-medium">Active Member</span>
             </span>
             <span className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full bg-rose-500 border border-rose-400" />
-              <span className="text-slate-300 font-medium">Inactive Member</span>
+              <span className="text-slate-700 dark:text-slate-300 font-medium">Inactive Member</span>
             </span>
             <span className="flex items-center gap-1.5">
               <span className="w-2.5 h-2.5 rounded-full bg-indigo-500 border border-indigo-400" />
-              <span className="text-slate-300 font-medium">Root Node (You)</span>
+              <span className="text-slate-700 dark:text-slate-300 font-medium">Root Node (You)</span>
             </span>
           </div>
 
           <div className="flex items-center gap-2">
-            <Info className="w-3.5 h-3.5 text-slate-400" />
+            <Info className="w-3.5 h-3.5 text-slate-500 dark:text-slate-400" />
             <span>Click on any member card to view detailed performance profile.</span>
           </div>
         </div>
@@ -631,11 +631,11 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
       {/* Member Detail Modal */}
       {selectedNode && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-[#0b1429] border border-indigo-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl relative text-slate-100">
+          <div className="bg-[#0b1429] border border-indigo-500/40 rounded-3xl max-w-md w-full p-6 shadow-2xl relative text-slate-900 dark:text-white">
             {/* Close Button */}
             <button
               onClick={() => setSelectedNode(null)}
-              className="absolute right-4 top-4 p-1.5 rounded-xl border border-slate-700 text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+              className="absolute right-4 top-4 p-1.5 rounded-xl border border-slate-700 text-slate-500 dark:text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -667,36 +667,36 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
             </div>
 
             {/* Detail Rows */}
-            <div className="bg-[#070e20] border border-[#1a2d52] rounded-2xl p-4 space-y-2.5 text-xs mb-6">
+            <div className="glass-panel rounded-2xl p-4 space-y-2.5 text-xs mb-6">
               <div className="flex items-center justify-between py-1 border-b border-[#142344]">
-                <span className="text-slate-400">Custom User ID</span>
-                <span className="font-mono font-bold text-slate-200">{selectedNode.customId}</span>
+                <span className="text-slate-500 dark:text-slate-400">Custom User ID</span>
+                <span className="font-mono font-bold text-slate-800 dark:text-slate-200">{selectedNode.customId}</span>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-[#142344]">
-                <span className="text-slate-400">Active Investment</span>
+                <span className="text-slate-500 dark:text-slate-400">Active Investment</span>
                 <span className="font-mono font-bold text-emerald-400">
                   ${selectedNode.activeInvestment.toFixed(2)} USDT
                 </span>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-[#142344]">
-                <span className="text-slate-400">Direct Team</span>
+                <span className="text-slate-500 dark:text-slate-400">Direct Team</span>
                 <span className="font-bold text-indigo-300">
                   {selectedNode.directTeamCount} Members
                 </span>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-[#142344]">
-                <span className="text-slate-400">Total Downline</span>
-                <span className="font-bold text-slate-200">
+                <span className="text-slate-500 dark:text-slate-400">Total Downline</span>
+                <span className="font-bold text-slate-800 dark:text-slate-200">
                   {selectedNode.totalTeamCount} Members
                 </span>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-[#142344]">
-                <span className="text-slate-400">Join Date</span>
-                <span className="text-slate-300">{selectedNode.joinDate || "-"}</span>
+                <span className="text-slate-500 dark:text-slate-400">Join Date</span>
+                <span className="text-slate-700 dark:text-slate-300">{selectedNode.joinDate || "-"}</span>
               </div>
               <div className="flex items-center justify-between py-1">
-                <span className="text-slate-400">Sponsor ID</span>
-                <span className="font-mono text-slate-300">{selectedNode.sponsorCustomId || "-"}</span>
+                <span className="text-slate-500 dark:text-slate-400">Sponsor ID</span>
+                <span className="font-mono text-slate-700 dark:text-slate-300">{selectedNode.sponsorCustomId || "-"}</span>
               </div>
             </div>
 
@@ -706,7 +706,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
                 <button
                   type="button"
                   onClick={() => handleFocusNode(selectedNode)}
-                  className="flex-1 py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-colors shadow-lg shadow-indigo-600/30 flex items-center justify-center gap-1.5"
+                  className="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-sky-500 to-[#00D2FF] hover:from-sky-400 hover:to-[#00D2FF]/80 text-slate-950 text-xs font-bold transition-colors shadow-lg shadow-sky-500/25 flex items-center justify-center gap-1.5"
                 >
                   <ExternalLink className="w-3.5 h-3.5" />
                   <span>Focus Tree View</span>
@@ -715,7 +715,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
               <button
                 type="button"
                 onClick={() => setSelectedNode(null)}
-                className="flex-1 py-2.5 px-4 rounded-xl bg-[#0d1a36] border border-[#1d335e] text-slate-300 hover:text-white text-xs font-semibold transition-colors"
+                className="flex-1 py-2.5 px-4 rounded-xl bg-[#0d1a36] border border-[#1d335e] text-slate-700 dark:text-slate-300 hover:text-white text-xs font-semibold transition-colors"
               >
                 Close
               </button>

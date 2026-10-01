@@ -186,16 +186,16 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
     <div className="space-y-6">
       {/* Header & Breadcrumb */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-        <h1 className="text-2xl sm:text-3xl font-bold text-slate-100 tracking-tight">
+        <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
           {mode === "transfer" && "Fund Transfer (P2P)"}
           {mode === "swipe" && "Swipe (Income ➔ Fund)"}
           {mode === "withdraw" && "Withdrawal Request"}
           {mode === "withdraw-report" && "Withdrawal History"}
         </h1>
-        <div className="text-xs text-slate-400 font-medium flex items-center gap-1.5">
+        <div className="text-xs text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1.5">
           <span>🏠 Transactional</span>
           <span>/</span>
-          <span className="text-slate-200 font-semibold capitalize">{mode}</span>
+          <span className="text-slate-800 dark:text-slate-200 font-semibold capitalize">{mode}</span>
         </div>
       </div>
 
@@ -209,29 +209,29 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
 
       {/* Mode 1: P2P Fund Transfer */}
       {mode === "transfer" && (
-        <div className="max-w-xl bg-[#091124] border border-[#17274a] rounded-3xl p-6 sm:p-8 shadow-xl">
-          <p className="text-xs text-slate-400 mb-4">
+        <div className="max-w-xl glass-card-elevated p-6 sm:p-8 shadow-xl shadow-slate-200/50 dark:shadow-black/20">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
             Transfer funds from your Fund Wallet to another member instantly.
           </p>
-          <div className="p-3.5 rounded-2xl bg-[#070e20] border border-[#162544] text-xs flex justify-between mb-5">
-            <span className="text-slate-400">Available Fund Balance:</span>
+          <div className="p-3.5 rounded-2xl glass-panel text-xs flex justify-between mb-5">
+            <span className="text-slate-500 dark:text-slate-400">Available Fund Balance:</span>
             <span className="text-emerald-400 font-bold">${fundBal.toFixed(2)} USDT</span>
           </div>
 
           <form onSubmit={handleP2pTransfer} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Target Member User ID</label>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Target Member User ID</label>
               <input
                 type="text"
                 placeholder="e.g. DF478752"
                 value={p2pTarget}
                 onChange={(e) => setP2pTarget(e.target.value)}
-                className="w-full bg-[#070e20] border border-[#1a2d52] rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 font-mono uppercase"
+                className="w-full bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-sky-500 dark:focus:border-[#00D2FF] font-mono uppercase"
                 required
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Transfer Amount (USDT)</label>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Transfer Amount (USDT)</label>
               <input
                 type="number"
                 min="1"
@@ -239,12 +239,12 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                 placeholder="e.g. 50"
                 value={p2pAmount}
                 onChange={(e) => setP2pAmount(e.target.value)}
-                className="w-full bg-[#070e20] border border-[#1a2d52] rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                className="w-full bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-sky-500 dark:focus:border-[#00D2FF]"
                 required
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                 6-Digit Transaction PIN
               </label>
               <input
@@ -254,14 +254,14 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                 placeholder="Enter 6-digit Transaction PIN"
                 value={p2pPin}
                 onChange={(e) => setP2pPin(e.target.value.replace(/\D/g, ""))}
-                className="w-full bg-[#070e20] border border-[#1a2d52] focus:border-blue-500 rounded-xl px-3.5 py-2.5 text-sm text-amber-300 placeholder-slate-500 focus:outline-none text-center tracking-widest font-mono font-bold"
+                className="w-full bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 focus:border-sky-500 dark:focus:border-[#00D2FF] rounded-xl px-3.5 py-2.5 text-sm text-sky-600 dark:text-[#00D2FF] placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none text-center tracking-widest font-mono font-bold"
                 required
               />
             </div>
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all disabled:opacity-50"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-[#00D2FF] hover:from-sky-400 hover:to-[#00D2FF]/80 text-slate-950 font-bold text-sm shadow-lg shadow-sky-500/25 transition-all disabled:opacity-50"
             >
               {submitting ? "Transferring..." : "Confirm & Send Funds"}
             </button>
@@ -271,18 +271,18 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
 
       {/* Mode 2: Swipe (Income to Fund) */}
       {mode === "swipe" && (
-        <div className="max-w-xl bg-[#091124] border border-[#17274a] rounded-3xl p-6 sm:p-8 shadow-xl">
-          <p className="text-xs text-slate-400 mb-4">
+        <div className="max-w-xl glass-card-elevated p-6 sm:p-8 shadow-xl shadow-slate-200/50 dark:shadow-black/20">
+          <p className="text-xs text-slate-500 dark:text-slate-400 mb-4">
             Convert your earnings in Income Wallet to Fund Wallet instantly for reinvestment or transfer.
           </p>
-          <div className="p-3.5 rounded-2xl bg-[#070e20] border border-[#162544] text-xs flex justify-between mb-5">
-            <span className="text-slate-400">Available Income Balance:</span>
+          <div className="p-3.5 rounded-2xl glass-panel text-xs flex justify-between mb-5">
+            <span className="text-slate-500 dark:text-slate-400">Available Income Balance:</span>
             <span className="text-cyan-400 font-bold">${incomeBal.toFixed(2)} USDT</span>
           </div>
 
           <form onSubmit={handleSwipe} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">Swipe Amount (USDT)</label>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Swipe Amount (USDT)</label>
               <input
                 type="number"
                 min="1"
@@ -290,12 +290,12 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                 placeholder="e.g. 10"
                 value={swipeAmount}
                 onChange={(e) => setSwipeAmount(e.target.value)}
-                className="w-full bg-[#070e20] border border-[#1a2d52] rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                className="w-full bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-sky-500 dark:focus:border-[#00D2FF]"
                 required
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                 6-Digit Transaction PIN
               </label>
               <input
@@ -305,14 +305,14 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                 placeholder="Enter 6-digit Transaction PIN"
                 value={swipePin}
                 onChange={(e) => setSwipePin(e.target.value.replace(/\D/g, ""))}
-                className="w-full bg-[#070e20] border border-[#1a2d52] focus:border-blue-500 rounded-xl px-3.5 py-2.5 text-sm text-amber-300 placeholder-slate-500 focus:outline-none text-center tracking-widest font-mono font-bold"
+                className="w-full bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 focus:border-sky-500 dark:focus:border-[#00D2FF] rounded-xl px-3.5 py-2.5 text-sm text-sky-600 dark:text-[#00D2FF] placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none text-center tracking-widest font-mono font-bold"
                 required
               />
             </div>
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/30 transition-all disabled:opacity-50"
+              className="w-full py-3 rounded-xl bg-gradient-to-r from-sky-500 to-[#00D2FF] hover:from-sky-400 hover:to-[#00D2FF]/80 text-slate-950 font-bold text-sm shadow-lg shadow-sky-500/25 transition-all disabled:opacity-50"
             >
               {submitting ? "Swiping..." : "Swipe to Fund Wallet"}
             </button>
@@ -322,7 +322,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
 
       {/* Mode 3: Withdrawal Request */}
       {mode === "withdraw" && (
-        <div className="max-w-xl bg-[#091124] border border-[#17274a] rounded-3xl p-6 sm:p-8 shadow-xl">
+        <div className="max-w-xl glass-card-elevated p-6 sm:p-8 shadow-xl shadow-slate-200/50 dark:shadow-black/20">
           {/* Timing Banner with Multi-Timezone Selector */}
           <div className={`p-4 sm:p-5 rounded-2xl text-xs font-semibold mb-5 transition-all ${
             windowStatus.isOpen
@@ -354,7 +354,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                       className={`px-2 py-0.5 rounded-lg text-[10px] font-black transition-all flex items-center gap-1 ${
                         selectedTz === "UTC"
                           ? "bg-cyan-500 text-black shadow-sm font-extrabold"
-                          : "text-slate-400 hover:text-white"
+                          : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                       }`}
                       title="Universal Coordinated Time (Protocol Standard)"
                     >
@@ -366,7 +366,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                       className={`px-2 py-0.5 rounded-lg text-[10px] font-bold transition-all ${
                         selectedTz === "IST"
                           ? "bg-blue-500 text-white shadow-sm font-extrabold"
-                          : "text-slate-400 hover:text-white"
+                          : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                       }`}
                       title="Indian Standard Time"
                     >
@@ -378,7 +378,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                       className={`px-2 py-0.5 rounded-lg text-[10px] font-bold transition-all ${
                         selectedTz === "ALL"
                           ? "bg-purple-500 text-white shadow-sm font-extrabold"
-                          : "text-slate-400 hover:text-white"
+                          : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
                       }`}
                       title="View all timezones side-by-side"
                     >
@@ -394,7 +394,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                       <Globe className="w-3.5 h-3.5 shrink-0" />
                       <span>Withdrawal Window Schedule &amp; Live Clocks:</span>
                     </div>
-                    <span className="text-[10px] text-slate-400 font-normal">Click a zone to focus</span>
+                    <span className="text-[10px] text-slate-500 dark:text-slate-400 font-normal">Click a zone to focus</span>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
@@ -412,7 +412,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                         <span className="text-[9px] px-1 rounded bg-cyan-500/20 text-cyan-300 font-extrabold">PRIMARY</span>
                       </div>
                       <div className="text-xs font-black text-white mt-1">{windowStatus.utcLabel || windowStatus.gstLabel}</div>
-                      <div className="text-[10px] text-slate-400 mt-1 font-mono">
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 font-mono">
                         Live: <span className="text-cyan-300 font-bold">{windowStatus.currentUtcTime}</span>
                       </div>
                     </div>
@@ -431,7 +431,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                         <span className="text-[9px] px-1 rounded bg-blue-500/20 text-blue-300 font-bold">IST</span>
                       </div>
                       <div className="text-xs font-black text-white mt-1">{windowStatus.istLabel}</div>
-                      <div className="text-[10px] text-slate-400 mt-1 font-mono">
+                      <div className="text-[10px] text-slate-500 dark:text-slate-400 mt-1 font-mono">
                         Live: <span className="text-blue-300 font-bold">{windowStatus.currentIstTime}</span>
                       </div>
                     </div>
@@ -449,13 +449,13 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
             </div>
           </div>
 
-          <div className="p-3.5 rounded-2xl bg-[#070e20] border border-[#162544] text-xs space-y-2 mb-5">
+          <div className="p-3.5 rounded-2xl glass-panel text-xs space-y-2 mb-5">
             <div className="flex justify-between items-center">
-              <span className="text-slate-400">Available Withdrawable Balance:</span>
+              <span className="text-slate-500 dark:text-slate-400">Available Withdrawable Balance:</span>
               <span className="text-cyan-400 font-bold text-sm font-mono">${withdrawableBal.toFixed(1)} USDT</span>
             </div>
             {isBonusLocked && lockedBonus > 0 && (
-              <div className="p-2.5 rounded-xl bg-amber-500/10 border border-amber-500/20 text-[11px] text-amber-300 flex items-start gap-2">
+              <div className="p-2.5 rounded-xl bg-sky-500/10 border border-sky-500/30 text-[11px] text-sky-600 dark:text-[#00D2FF] flex items-start gap-2">
                 <span className="shrink-0 text-xs mt-0.5">⚠️</span>
                 <span>
                   <strong>${lockedBonus.toFixed(2)} USDT Joining Bonus</strong> is locked. It will become withdrawable once your active package reaches $20.00 USDT (Current Active: ${totalActivePkg.toFixed(2)} USDT).
@@ -463,29 +463,29 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
               </div>
             )}
             <div className="flex justify-between">
-              <span className="text-slate-400">Deduction / Admin Charge:</span>
-              <span className="text-amber-400 font-bold">{adminFeePercent}% Admin Charge</span>
+              <span className="text-slate-500 dark:text-slate-400">Deduction / Admin Charge:</span>
+              <span className="text-sky-600 dark:text-[#00D2FF] font-bold">{adminFeePercent}% Admin Charge</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-slate-400">Min / Max Limit:</span>
+              <span className="text-slate-500 dark:text-slate-400">Min / Max Limit:</span>
               <span className="text-slate-200">${minWithdraw} to ${maxWithdraw.toLocaleString()} USDT</span>
             </div>
           </div>
 
           <form onSubmit={handleWithdrawal} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">USDT BEP-20 Receiving Address</label>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">USDT BEP-20 Receiving Address</label>
               <input
                 type="text"
                 placeholder="0x... USDT BEP-20 Wallet Address"
                 value={withdrawAddress}
                 onChange={(e) => setWithdrawAddress(e.target.value)}
-                className="w-full bg-[#070e20] border border-[#1a2d52] rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 font-mono"
+                className="w-full bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-sky-500 dark:focus:border-[#00D2FF] font-mono"
                 required
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold text-slate-300 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
                 Withdrawal Amount (USDT) &bull; Min ${minWithdraw}, Max ${maxWithdraw.toLocaleString()}
               </label>
               <input
@@ -496,11 +496,11 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                 placeholder={`$${minWithdraw} - $${maxWithdraw.toLocaleString()} USDT`}
                 value={withdrawAmount}
                 onChange={(e) => setWithdrawAmount(e.target.value)}
-                className="w-full bg-[#070e20] border border-[#1a2d52] rounded-xl px-3.5 py-2.5 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500"
+                className="w-full bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 rounded-xl px-3.5 py-2.5 text-sm text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-sky-500 dark:focus:border-[#00D2FF]"
                 required
               />
               {Number(withdrawAmount) > 0 && (
-                <div className="text-[11px] text-slate-400 mt-1 flex justify-between">
+                <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 flex justify-between">
                   <span>Fee ({adminFeePercent}%): ${(Number(withdrawAmount) * (adminFeePercent / 100)).toFixed(2)} USDT</span>
                   <span className="text-emerald-400 font-bold">Net Payout: ${(Number(withdrawAmount) * (1 - adminFeePercent / 100)).toFixed(2)} USDT</span>
                 </div>
@@ -508,12 +508,12 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
             </div>
             <div>
               <div className="flex items-center justify-between mb-1">
-                <label className="block text-xs font-semibold text-amber-400">Email Verification Code (OTP)</label>
+                <label className="block text-xs font-semibold text-sky-600 dark:text-[#00D2FF]">Email Verification Code (OTP)</label>
                 <button
                   type="button"
                   onClick={handleSendTxOtp}
                   disabled={txOtpSending}
-                  className="text-xs font-bold text-amber-400 hover:text-amber-300 underline disabled:opacity-50"
+                  className="text-xs font-bold text-sky-600 dark:text-[#00D2FF] hover:text-sky-500 dark:hover:text-[#00D2FF] underline disabled:opacity-50"
                 >
                   {txOtpSending ? "Sending OTP..." : txOtpSent ? "Resend OTP" : "Get OTP on Email"}
                 </button>
@@ -524,7 +524,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                 placeholder="Enter 6-digit OTP code"
                 value={withdrawPin}
                 onChange={(e) => setWithdrawPin(e.target.value.replace(/\D/g, ""))}
-                className="w-full bg-[#070e20] border border-[#1a2d52] focus:border-amber-400 rounded-xl px-3.5 py-2.5 text-sm text-amber-300 placeholder-slate-500 focus:outline-none text-center tracking-widest font-mono font-bold"
+                className="w-full bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 focus:border-sky-500 dark:focus:border-[#00D2FF] rounded-xl px-3.5 py-2.5 text-sm text-sky-600 dark:text-[#00D2FF] placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none text-center tracking-widest font-mono font-bold"
                 required
               />
             </div>
@@ -533,7 +533,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
               disabled={submitting || !windowStatus.isOpen}
               className={`w-full py-3.5 rounded-xl font-bold text-sm transition-all shadow-lg ${
                 windowStatus.isOpen
-                  ? "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-blue-600/30"
+                  ? "bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white shadow-sky-500/25"
                   : "bg-slate-800 text-slate-500 border border-slate-700 cursor-not-allowed opacity-60"
               }`}
             >
@@ -557,15 +557,15 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
 
       {/* Mode 4: Withdrawal History */}
       {mode === "withdraw-report" && (
-        <div className="bg-[#091124] border border-[#17274a] rounded-3xl p-5 sm:p-6 shadow-xl">
+        <div className="glass-card-elevated p-5 sm:p-6 shadow-xl shadow-slate-200/50 dark:shadow-black/20">
           <div className="flex items-center gap-2 mb-5">
-            <div className="w-2 h-5 bg-blue-500 rounded-sm" />
-            <h2 className="text-lg font-bold text-slate-100">Withdrawal History</h2>
+            <div className="w-2 h-5 bg-gradient-to-b from-sky-400 to-[#00D2FF] rounded-sm" />
+            <h2 className="text-lg font-bold text-slate-900 dark:text-white">Withdrawal History</h2>
           </div>
 
-          <div className="overflow-x-auto rounded-xl border border-[#152342]">
-            <table className="w-full text-left text-xs text-slate-300">
-              <thead className="bg-[#070e20] text-slate-400 text-[11px] uppercase tracking-wider font-semibold border-b border-[#152342]">
+          <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-white/10">
+            <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+              <thead className="bg-slate-100/80 dark:bg-slate-950/60 text-slate-500 dark:text-slate-400 text-[11px] uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-white/10">
                 <tr>
                   <th className="py-3 px-4">SR</th>
                   <th className="py-3 px-4">DATE</th>
@@ -574,20 +574,20 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                   <th className="py-3 px-4">STATUS</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#132042]">
+              <tbody className="divide-y divide-slate-200/80 dark:divide-white/10">
                 {withdrawals.length === 0 ? (
                   <tr>
-                    <td colSpan={5} className="py-8 text-center text-slate-400 font-medium">
+                    <td colSpan={5} className="py-8 text-center text-slate-500 dark:text-slate-400 font-medium">
                       No withdrawal records found
                     </td>
                   </tr>
                 ) : (
                   withdrawals.map((w: any, idx: number) => (
-                    <tr key={w.id || idx} className="hover:bg-[#0c1630] transition-colors">
+                    <tr key={w.id || idx} className="hover:bg-slate-100/60 dark:hover:bg-slate-900/40 transition-colors">
                       <td className="py-3 px-4 font-mono">{idx + 1}</td>
                       <td className="py-3 px-4">{new Date(w.createdAt).toISOString().split("T")[0]}</td>
                       <td className="py-3 px-4 font-bold text-cyan-400">${Number(w.amountInUsdt ?? w.amountUsdt ?? (Number(w.amountInInr || 0) > 5000 ? Number(w.amountInInr) / 110 : Number(w.amountInInr || 0))).toFixed(2)} USDT</td>
-                      <td className="py-3 px-4 font-mono truncate max-w-[140px] text-slate-400">{w.toAddress || w.targetAddress}</td>
+                      <td className="py-3 px-4 font-mono truncate max-w-[140px] text-slate-500 dark:text-slate-400">{w.toAddress || w.targetAddress}</td>
                       <td className="py-3 px-4">
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                           w.status === "COMPLETED"

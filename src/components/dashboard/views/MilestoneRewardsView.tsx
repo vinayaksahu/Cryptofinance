@@ -371,15 +371,15 @@ export function MilestoneRewardsView({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-amber-500 font-black text-xs tracking-wider uppercase bg-amber-500/10 border border-amber-500/30 px-3 py-1 rounded-full">
+            <span className="text-sky-600 dark:text-[#00D2FF] font-black text-xs tracking-wider uppercase bg-sky-500/10 border border-sky-500/30 px-3 py-1 rounded-full">
               INCOME STREAM #5 &bull; SLIDES 18 &amp; 19
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-100 tracking-tight font-display mt-2 flex items-center gap-2.5">
-            <Trophy className="w-7 h-7 text-amber-400" />
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight font-display mt-2 flex items-center gap-2.5">
+            <Trophy className="w-7 h-7 text-sky-500 dark:text-[#00D2FF]" />
             Milestone Rewards &amp; Leadership Ranks
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
             Turnover Milestones based on 50% Strong Leg &amp; 50% Weak Leg distribution. Permanent rank advancement with no volume expiration.
           </p>
         </div>

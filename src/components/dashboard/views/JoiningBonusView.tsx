@@ -241,11 +241,11 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
       {/* Header Breadcrumb */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-black text-slate-100 tracking-tight flex items-center gap-2">
-            <Gift className="w-6 h-6 text-amber-400" />
+          <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
+            <Gift className="w-6 h-6 text-sky-500 dark:text-[#00D2FF]" />
             Joining Bonus Report
           </h1>
-          <p className="text-xs sm:text-sm text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
             Detailed breakdown of your Welcome Signup Bonus & 12-Level Downline Registration Bounties.
           </p>
         </div>
@@ -277,49 +277,49 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
       {/* 3 Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Total Joining Bonus */}
-        <div className="bg-[#091124] border border-[#17274a] rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-lg">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl pointer-events-none" />
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+        <div className="glass-card-elevated rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-xl shadow-slate-200/50 dark:shadow-black/20">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-sky-500/10 dark:bg-[#00D2FF]/10 rounded-full blur-2xl pointer-events-none" />
+          <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-sky-500 dark:text-[#00D2FF]" />
             Total Joining Bonus
           </p>
-          <p className="text-2xl sm:text-3xl font-extrabold text-amber-400 font-mono mt-1">
-            ${stats.totalJoiningBonus.toFixed(4)} <span className="text-xs text-slate-400 font-normal">USDT</span>
+          <p className="text-2xl sm:text-3xl font-extrabold text-sky-500 dark:text-[#00D2FF] font-mono mt-1">
+            ${stats.totalJoiningBonus.toFixed(4)} <span className="text-xs text-slate-500 dark:text-slate-400 font-normal">USDT</span>
           </p>
-          <p className="text-[11px] text-slate-500 mt-2">Combined Self & Team Registration Earnings</p>
+          <p className="text-[11px] text-slate-600 dark:text-slate-500 mt-2">Combined Self & Team Registration Earnings</p>
         </div>
 
         {/* Self Welcome Bonus */}
-        <div className="bg-[#091124] border border-[#17274a] rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-lg">
+        <div className="glass-card-elevated rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-xl shadow-slate-200/50 dark:shadow-black/20">
           <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl pointer-events-none" />
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-            <Gift className="w-3.5 h-3.5 text-blue-400" />
+          <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+            <Gift className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
             Self Welcome Bonus
           </p>
-          <p className="text-2xl sm:text-3xl font-extrabold text-blue-400 font-mono mt-1">
-            ${stats.selfTotal.toFixed(4)} <span className="text-xs text-slate-400 font-normal">USDT</span>
+          <p className="text-2xl sm:text-3xl font-extrabold text-blue-500 dark:text-blue-400 font-mono mt-1">
+            ${stats.selfTotal.toFixed(4)} <span className="text-xs text-slate-500 dark:text-slate-400 font-normal">USDT</span>
           </p>
-          <p className="text-[11px] text-slate-500 mt-2">Credited upon your account registration</p>
+          <p className="text-[11px] text-slate-600 dark:text-slate-500 mt-2">Credited upon your account registration</p>
         </div>
 
         {/* Team 12-Level Bounties */}
-        <div className="bg-[#091124] border border-[#17274a] rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-lg">
+        <div className="glass-card-elevated rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-xl shadow-slate-200/50 dark:shadow-black/20">
           <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-            <Users className="w-3.5 h-3.5 text-emerald-400" />
+          <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+            <Users className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
             Team Downline Bounties
           </p>
-          <p className="text-2xl sm:text-3xl font-extrabold text-emerald-400 font-mono mt-1">
-            ${stats.teamTotal.toFixed(4)} <span className="text-xs text-slate-400 font-normal">USDT</span>
+          <p className="text-2xl sm:text-3xl font-extrabold text-emerald-500 dark:text-emerald-400 font-mono mt-1">
+            ${stats.teamTotal.toFixed(4)} <span className="text-xs text-slate-500 dark:text-slate-400 font-normal">USDT</span>
           </p>
-          <p className="text-[11px] text-slate-500 mt-2">12-Level registration rewards from your team</p>
+          <p className="text-[11px] text-slate-600 dark:text-slate-500 mt-2">12-Level registration rewards from your team</p>
         </div>
       </div>
 
       {/* Main Table Card */}
-      <div className="bg-[#091124] border border-[#17274a] rounded-2xl p-4 sm:p-6 shadow-xl space-y-4">
+      <div className="glass-card-elevated rounded-2xl p-4 sm:p-6 shadow-xl shadow-slate-200/50 dark:shadow-black/20 space-y-4">
         {/* Category Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#17274a] pb-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/80 dark:border-white/10 pb-4">
           <div className="flex items-center gap-2">
             <button
               onClick={() => {
@@ -328,8 +328,8 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
               }}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                 filterCategory === "all"
-                  ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20"
-                  : "bg-[#0c162d] border border-[#1c2e54] text-slate-400 hover:text-slate-200"
+                  ? "bg-sky-500 text-white shadow-md shadow-sky-500/20"
+                  : "bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
               }`}
             >
               All Bonuses ({allBonusEntries.length})
@@ -342,7 +342,7 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                 filterCategory === "self"
                   ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
-                  : "bg-[#0c162d] border border-[#1c2e54] text-slate-400 hover:text-slate-200"
+                  : "bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
               }`}
             >
               Self Welcome Bonus ({allBonusEntries.filter((e) => e.category === "SELF").length})
@@ -355,7 +355,7 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                 filterCategory === "team"
                   ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/20"
-                  : "bg-[#0c162d] border border-[#1c2e54] text-slate-400 hover:text-slate-200"
+                  : "bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
               }`}
             >
               Team Bounties ({allBonusEntries.filter((e) => e.category === "TEAM").length})

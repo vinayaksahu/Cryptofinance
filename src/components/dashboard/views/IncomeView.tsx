@@ -227,23 +227,23 @@ export function IncomeView({ user, incomeType, onRefresh }: IncomeViewProps) {
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* 1. Header & Breadcrumb */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
-        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-100 tracking-tight font-display">
+        <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight font-display">
           {current.title}
         </h1>
-        <div className="text-xs text-slate-400 font-medium flex items-center gap-1.5 bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-800 self-start sm:self-auto">
+        <div className="text-xs text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1.5 bg-white/60 dark:bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 backdrop-blur-sm self-start sm:self-auto">
           <span>🏠 Income</span>
           <span className="text-slate-600">/</span>
-          <span className="text-slate-200 font-semibold">{current.title}</span>
+          <span className="text-sky-600 dark:text-[#00D2FF] font-semibold">{current.title}</span>
         </div>
       </div>
 
       {/* 2. Main Card Container */}
-      <div className="bg-[#091124] border border-[#17274a] rounded-3xl p-5 sm:p-6 shadow-xl space-y-5">
+      <div className="glass-card-elevated rounded-3xl p-5 sm:p-6 shadow-xl shadow-slate-200/50 dark:shadow-black/20 space-y-5">
         {/* Card Header with Title & Total Badge (IndiaFinance style) */}
-        <div className="flex items-center justify-between gap-3 border-b border-[#152342] pb-4">
+        <div className="flex items-center justify-between gap-3 border-b border-slate-200/80 dark:border-white/10 pb-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-2.5 h-6 bg-blue-500 rounded-sm" />
-            <h2 className="text-lg sm:text-xl font-bold text-slate-100">
+            <div className="w-2.5 h-6 bg-gradient-to-b from-sky-400 to-[#00D2FF] rounded-sm" />
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
               {current.cardTitle}
             </h2>
           </div>
@@ -276,22 +276,22 @@ export function IncomeView({ user, incomeType, onRefresh }: IncomeViewProps) {
         />
 
         {/* 4. Table */}
-        <div className="overflow-x-auto rounded-xl border border-[#152342]">
-          <table className="w-full text-left text-xs text-slate-300">
-            <thead className="bg-[#070e20] text-slate-400 text-[11px] uppercase tracking-wider font-semibold border-b border-[#152342]">
+        <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-white/10">
+          <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+            <thead className="bg-slate-100/80 dark:bg-slate-950/60 text-slate-500 dark:text-slate-400 text-[11px] uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-white/10">
               <tr>
                 {/* SR Sortable */}
                 <th
                   onClick={() => handleSort("sr")}
-                  className="py-3 px-4 cursor-pointer select-none hover:text-slate-200"
+                  className="py-3 px-4 cursor-pointer select-none hover:text-slate-800 dark:hover:text-slate-200"
                 >
                   <div className="flex items-center gap-1">
                     <span>SR</span>
                     {sortField === "sr" ? (
                       sortOrder === "asc" ? (
-                        <ArrowUp className="w-3 h-3 text-amber-400" />
+                        <ArrowUp className="w-3 h-3 text-sky-500 dark:text-[#00D2FF]" />
                       ) : (
-                        <ArrowDown className="w-3 h-3 text-amber-400" />
+                        <ArrowDown className="w-3 h-3 text-sky-500 dark:text-[#00D2FF]" />
                       )
                     ) : (
                       <ArrowUpDown className="w-3 h-3 text-slate-500" />
@@ -302,15 +302,15 @@ export function IncomeView({ user, incomeType, onRefresh }: IncomeViewProps) {
                 {/* DATE Sortable */}
                 <th
                   onClick={() => handleSort("date")}
-                  className="py-3 px-4 cursor-pointer select-none hover:text-slate-200"
+                  className="py-3 px-4 cursor-pointer select-none hover:text-slate-800 dark:hover:text-slate-200"
                 >
                   <div className="flex items-center gap-1">
                     <span>DATE</span>
                     {sortField === "date" ? (
                       sortOrder === "asc" ? (
-                        <ArrowUp className="w-3 h-3 text-amber-400" />
+                        <ArrowUp className="w-3 h-3 text-sky-500 dark:text-[#00D2FF]" />
                       ) : (
-                        <ArrowDown className="w-3 h-3 text-amber-400" />
+                        <ArrowDown className="w-3 h-3 text-sky-500 dark:text-[#00D2FF]" />
                       )
                     ) : (
                       <ArrowUpDown className="w-3 h-3 text-slate-500" />
@@ -324,15 +324,15 @@ export function IncomeView({ user, incomeType, onRefresh }: IncomeViewProps) {
                 {/* AMOUNT Sortable */}
                 <th
                   onClick={() => handleSort("amount")}
-                  className="py-3 px-4 text-right cursor-pointer select-none hover:text-slate-200"
+                  className="py-3 px-4 text-right cursor-pointer select-none hover:text-slate-800 dark:hover:text-slate-200"
                 >
                   <div className="flex items-center justify-end gap-1">
                     <span>AMOUNT</span>
                     {sortField === "amount" ? (
                       sortOrder === "asc" ? (
-                        <ArrowUp className="w-3 h-3 text-amber-400" />
+                        <ArrowUp className="w-3 h-3 text-sky-500 dark:text-[#00D2FF]" />
                       ) : (
-                        <ArrowDown className="w-3 h-3 text-amber-400" />
+                        <ArrowDown className="w-3 h-3 text-sky-500 dark:text-[#00D2FF]" />
                       )
                     ) : (
                       <ArrowUpDown className="w-3 h-3 text-slate-500" />
@@ -341,12 +341,12 @@ export function IncomeView({ user, incomeType, onRefresh }: IncomeViewProps) {
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#132042]">
+            <tbody className="divide-y divide-slate-200/80 dark:divide-white/10">
               {pageItems.length === 0 ? (
                 <tr>
                   <td
                     colSpan={4}
-                    className="py-12 text-center text-slate-400 font-medium"
+                    className="py-12 text-center text-slate-500 dark:text-slate-400 font-medium"
                   >
                     No records found for {current.title}
                   </td>
@@ -360,18 +360,18 @@ export function IncomeView({ user, incomeType, onRefresh }: IncomeViewProps) {
                   return (
                     <tr
                       key={entry.id || idx}
-                      className="hover:bg-[#0c1630] transition-colors"
+                      className="hover:bg-slate-100/60 dark:hover:bg-slate-900/40 transition-colors"
                     >
-                      <td className="py-3.5 px-4 font-mono text-slate-400">
+                      <td className="py-3.5 px-4 font-mono text-slate-500 dark:text-slate-400">
                         {absoluteIndex}
                       </td>
-                      <td className="py-3.5 px-4 font-mono text-slate-300">
+                      <td className="py-3.5 px-4 font-mono text-slate-700 dark:text-slate-300">
                         {formatDateTime(entry.createdAt)}
                       </td>
-                      <td className="py-3.5 px-4 text-slate-200 font-medium">
+                      <td className="py-3.5 px-4 text-slate-800 dark:text-slate-200 font-medium">
                         {entry.description || current.title}
                       </td>
-                      <td className="py-3.5 px-4 text-right font-bold text-slate-100 font-mono text-sm">
+                      <td className="py-3.5 px-4 text-right font-bold text-slate-900 dark:text-slate-100 font-mono text-sm">
                         {Number(entry.amount || 0).toFixed(2)}
                       </td>
                     </tr>
@@ -383,7 +383,7 @@ export function IncomeView({ user, incomeType, onRefresh }: IncomeViewProps) {
         </div>
 
         {/* 5. Pagination Footer */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 text-xs text-slate-400">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 text-xs text-slate-500 dark:text-slate-400">
           <div>
             Showing {totalItems === 0 ? 0 : startIndex + 1} to{" "}
             {Math.min(startIndex + pageSize, totalItems)} of {totalItems} entries
@@ -395,13 +395,13 @@ export function IncomeView({ user, incomeType, onRefresh }: IncomeViewProps) {
                 type="button"
                 disabled={validCurrentPage <= 1}
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                className="px-2.5 py-1.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 transition-colors"
+                className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 transition-colors"
               >
                 <ChevronLeft className="w-3.5 h-3.5" />
                 Previous
               </button>
 
-              <span className="px-3 py-1 font-semibold text-slate-300">
+              <span className="px-3 py-1 font-semibold text-slate-700 dark:text-slate-300">
                 {validCurrentPage} / {totalPages}
               </span>
 
@@ -409,7 +409,7 @@ export function IncomeView({ user, incomeType, onRefresh }: IncomeViewProps) {
                 type="button"
                 disabled={validCurrentPage >= totalPages}
                 onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                className="px-2.5 py-1.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 transition-colors"
+                className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 transition-colors"
               >
                 Next
                 <ChevronRight className="w-3.5 h-3.5" />

@@ -627,32 +627,32 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
       {/* 1. Header & Breadcrumb */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-2 border-b border-[#17274a]">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-2 border-b border-slate-200/80 dark:border-white/10">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 shrink-0">
+          <div className="w-10 h-10 rounded-xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-600 dark:text-[#00D2FF] shrink-0">
             <HeaderIcon className="w-5 h-5" />
           </div>
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-100 tracking-tight font-display">
+            <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight font-display">
               {currentConfig.title}
             </h1>
-            <p className="text-xs text-slate-400 mt-0.5">{currentConfig.subtitle}</p>
+            <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">{currentConfig.subtitle}</p>
           </div>
         </div>
-        <div className="text-xs text-slate-400 font-medium flex items-center gap-1.5 self-start sm:self-auto bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-800">
+        <div className="text-xs text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1.5 self-start sm:self-auto bg-white/60 dark:bg-slate-900/60 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 backdrop-blur-sm">
           <span>📊 Reports</span>
-          <span className="text-slate-600">/</span>
-          <span className="text-amber-400 font-semibold">{currentConfig.title}</span>
+          <span className="text-slate-400 dark:text-slate-600">/</span>
+          <span className="text-sky-600 dark:text-[#00D2FF] font-semibold">{currentConfig.title}</span>
         </div>
       </div>
 
       {/* 2. Main Card Container with Total Badge */}
-      <div className="bg-[#091124] border border-[#17274a] rounded-3xl p-5 sm:p-6 shadow-xl space-y-5">
-        {/* Card Header (India Finance style with Red Total Badge) */}
-        <div className="flex items-center justify-between gap-3 border-b border-[#152342] pb-4">
+      <div className="glass-card-elevated p-5 sm:p-6 shadow-xl shadow-slate-200/50 dark:shadow-black/20 space-y-5">
+        {/* Card Header */}
+        <div className="flex items-center justify-between gap-3 border-b border-slate-200/80 dark:border-white/10 pb-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-2.5 h-6 bg-blue-500 rounded-sm" />
-            <h2 className="text-lg sm:text-xl font-bold text-slate-100">
+            <div className="w-2.5 h-6 bg-gradient-to-b from-sky-400 to-[#00D2FF] rounded-sm" />
+            <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
               {currentConfig.cardTitle}
             </h2>
           </div>
@@ -665,7 +665,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
 
         {/* Optional Sub-filter tabs for Fund & Income Wallets */}
         {(reportType === "fund-wallet" || reportType === "income-wallet") && (
-          <div className="flex bg-slate-950 rounded-xl p-1 border border-slate-800 w-fit">
+          <div className="flex bg-slate-100 dark:bg-slate-950 rounded-xl p-1 border border-slate-200 dark:border-slate-800 w-fit">
             <button
               type="button"
               onClick={() => {
@@ -674,8 +674,8 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
               }}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 walletFilter === "ALL"
-                  ? "bg-amber-500 text-slate-950 font-bold"
-                  : "text-slate-400 hover:text-slate-200"
+                  ? "bg-sky-500 text-white font-bold"
+                  : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
               }`}
             >
               All Records
@@ -689,7 +689,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
               className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 walletFilter === "CREDIT"
                   ? "bg-emerald-600 text-white font-bold"
-                  : "text-slate-400 hover:text-slate-200"
+                  : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
               }`}
             >
               Credits (+)
@@ -703,7 +703,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
               className={`px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-all ${
                 walletFilter === "DEBIT"
                   ? "bg-rose-600 text-white font-bold"
-                  : "text-slate-400 hover:text-slate-200"
+                  : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:hover:text-slate-200"
               }`}
             >
               Debits (-)
@@ -733,9 +733,9 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
         />
 
         {/* 4. Table Views */}
-        <div className="overflow-x-auto rounded-xl border border-[#152342]">
-          <table className="w-full text-left text-xs text-slate-300">
-            <thead className="bg-[#070e20] text-slate-400 text-[11px] uppercase tracking-wider font-semibold border-b border-[#152342]">
+        <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-white/10">
+          <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+            <thead className="bg-slate-100/80 dark:bg-slate-950/60 text-slate-500 dark:text-slate-400 text-[11px] uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-white/10">
               {/* Daily Table Header */}
               {reportType === "daily" && (
                 <tr>
@@ -830,7 +830,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
               )}
             </thead>
 
-            <tbody className="divide-y divide-[#132042]">
+            <tbody className="divide-y divide-slate-200/80 dark:divide-white/10">
               {paginatedData.length === 0 ? (
                 <tr>
                   <td colSpan={10} className="py-12 text-center text-slate-400 font-medium">
@@ -846,10 +846,10 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                     const isExpanded = expandedRow === row.date;
                     return (
                       <React.Fragment key={row.date}>
-                        <tr className="hover:bg-[#0c1630] transition-colors">
+                        <tr className="hover:bg-slate-100/60 dark:hover:bg-slate-900/40 transition-colors">
                           <td className="py-3.5 px-4 font-mono text-slate-400">{absoluteIndex}</td>
                           <td className="py-3.5 px-4 font-semibold text-slate-100 flex items-center gap-2">
-                            <Calendar className="w-3.5 h-3.5 text-amber-400" />
+                            <Calendar className="w-3.5 h-3.5 text-sky-500 dark:text-[#00D2FF]" />
                             {row.date}
                             {row.date === todayStr && (
                               <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 text-[9px] font-bold border border-amber-500/30">
@@ -895,10 +895,10 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                         </tr>
 
                         {isExpanded && (
-                          <tr className="bg-slate-950/60">
+                          <tr className="bg-slate-50/60 dark:bg-slate-950/60">
                             <td colSpan={9} className="p-4">
-                              <div className="bg-[#070e20] border border-slate-800/80 rounded-xl p-3 space-y-2">
-                                <div className="text-[11px] font-bold text-amber-400 uppercase tracking-wider flex items-center gap-2">
+                              <div className="glass-panel rounded-xl p-3 space-y-2">
+                                <div className="text-[11px] font-bold text-sky-600 dark:text-[#00D2FF] uppercase tracking-wider flex items-center gap-2">
                                   <Clock className="w-3.5 h-3.5" />
                                   Transactions on {row.date}
                                 </div>
@@ -906,7 +906,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                                   {row.items?.map((item: any, iIdx: number) => (
                                     <div
                                       key={item.id || iIdx}
-                                      className="flex items-center justify-between text-xs py-1.5 px-3 rounded-lg bg-slate-900/80 border border-slate-800/50"
+                                      className="flex items-center justify-between text-xs py-1.5 px-3 rounded-lg bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800/50"
                                     >
                                       <div className="flex items-center gap-2">
                                         <span className="text-[10px] font-mono text-slate-500">
@@ -936,10 +936,10 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                   // Monthly Row
                   if (reportType === "monthly") {
                     return (
-                      <tr key={row.key} className="hover:bg-[#0c1630] transition-colors">
+                      <tr key={row.key} className="hover:bg-slate-100/60 dark:hover:bg-slate-900/40 transition-colors">
                         <td className="py-3.5 px-4 font-mono text-slate-400">{absoluteIndex}</td>
                         <td className="py-3.5 px-4 font-bold text-slate-100 text-sm flex items-center gap-2">
-                          <Calendar className="w-4 h-4 text-amber-400" />
+                          <Calendar className="w-4 h-4 text-sky-500 dark:text-[#00D2FF]" />
                           {row.label}
                         </td>
                         <td className="py-3.5 px-4 text-right font-medium text-emerald-400">
@@ -972,7 +972,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                   if (reportType === "fund-wallet" || reportType === "income-wallet") {
                     const isCredit = num(row.amount) >= 0;
                     return (
-                      <tr key={row.id || idx} className="hover:bg-[#0c1630] transition-colors">
+                      <tr key={row.id || idx} className="hover:bg-slate-100/60 dark:hover:bg-slate-900/40 transition-colors">
                         <td className="py-3.5 px-4 font-mono text-slate-400">{absoluteIndex}</td>
                         <td className="py-3.5 px-4 font-mono text-slate-300">
                           {formatDateTime(row.createdAt)}
@@ -1016,7 +1016,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                   // Statement Row
                   if (reportType === "statement") {
                     return (
-                      <tr key={row.id || idx} className="hover:bg-[#0c1630] transition-colors">
+                      <tr key={row.id || idx} className="hover:bg-slate-100/60 dark:hover:bg-slate-900/40 transition-colors">
                         <td className="py-3 px-4 font-mono text-slate-400">{absoluteIndex}</td>
                         <td className="py-3 px-4">{formatDate(row.createdAt)}</td>
                         <td className="py-3 px-4">
@@ -1059,7 +1059,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                         ? Number(row.amountInInr) / 110
                         : Number(row.amountInInr || 0);
                     return (
-                      <tr key={row.id || idx} className="hover:bg-[#0c1630] transition-colors">
+                      <tr key={row.id || idx} className="hover:bg-slate-100/60 dark:hover:bg-slate-900/40 transition-colors">
                         <td className="py-3 px-4 font-mono text-slate-400">{absoluteIndex}</td>
                         <td className="py-3 px-4">{formatDate(row.createdAt)}</td>
                         <td className="py-3 px-4 font-bold text-slate-100">
@@ -1099,7 +1099,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
         </div>
 
         {/* 5. Pagination Footer */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 text-xs text-slate-400">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-2 text-xs text-slate-500 dark:text-slate-400">
           <div>
             Showing {totalItems === 0 ? 0 : startIndex + 1} to{" "}
             {Math.min(startIndex + pageSize, totalItems)} of {totalItems} entries
@@ -1111,13 +1111,13 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                 type="button"
                 disabled={validCurrentPage <= 1}
                 onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                className="px-2.5 py-1.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 transition-colors"
+                className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 transition-colors"
               >
                 <ChevronLeft className="w-3.5 h-3.5" />
                 Previous
               </button>
 
-              <span className="px-3 py-1 font-semibold text-slate-300">
+              <span className="px-3 py-1 font-semibold text-slate-700 dark:text-slate-300">
                 {validCurrentPage} / {totalPages}
               </span>
 
@@ -1125,7 +1125,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                 type="button"
                 disabled={validCurrentPage >= totalPages}
                 onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-                className="px-2.5 py-1.5 rounded-lg border border-slate-800 bg-slate-900 text-slate-300 hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 transition-colors"
+                className="px-2.5 py-1.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1 transition-colors"
               >
                 Next
                 <ChevronRight className="w-3.5 h-3.5" />

@@ -58,8 +58,8 @@ export default function MemberDashboardPage() {
     return (
       <div className="min-h-screen bg-[var(--bg-main)] flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-12 h-12 rounded-full border-4 border-amber-500 border-t-transparent animate-spin" />
-          <p className="text-amber-500 dark:text-amber-400 font-extrabold tracking-widest text-sm uppercase">
+          <div className="w-12 h-12 rounded-full border-4 border-sky-500 dark:border-[#00D2FF] border-t-transparent animate-spin" />
+          <p className="text-sky-600 dark:text-[#00D2FF] font-extrabold tracking-widest text-sm uppercase">
             Loading Crypto Finance Portal...
           </p>
         </div>
