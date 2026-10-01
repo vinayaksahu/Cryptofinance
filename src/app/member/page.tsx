@@ -98,7 +98,7 @@ export default function MemberDashboardPage() {
         {/* Dynamic View Body */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
           {activeTab === "dashboard" && (
-            <DashboardView user={user} setActiveTab={setActiveTab} />
+            <DashboardView user={user} setActiveTab={setActiveTab} onRefresh={fetchUser} />
           )}
 
           {activeTab === "recharge" && (

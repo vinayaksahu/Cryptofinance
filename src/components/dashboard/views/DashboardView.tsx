@@ -26,13 +26,15 @@ import {
   PieChart,
 } from "lucide-react";
 import { APP_CONFIG } from "@/lib/constants";
+import { DayByDayLedger } from "@/components/dashboard/DayByDayLedger";
 
 interface DashboardViewProps {
   user: any;
   setActiveTab: (tab: string) => void;
+  onRefresh?: () => void;
 }
 
-export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
+export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewProps) {
   const [copied, setCopied] = useState(false);
   const [calcStake, setCalcStake] = useState<number>(100);
   const [calcMode, setCalcMode] = useState<"withdraw" | "reinvest">("withdraw");
@@ -552,6 +554,11 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
           </button>
         </div>
       </div>
+
+      {/* =========================================================================
+          📋 DAY-BY-DAY LEDGER WITH GST AUTO-CLAIM TIMER (Slides 10-12 & index.html)
+          ========================================================================= */}
+      <DayByDayLedger user={user} onRefresh={onRefresh} onNavigateTab={setActiveTab} />
 
       {/* =========================================================================
           EMBEDDED QUICK ROI & COMPOUNDING SIMULATOR (From index.html)
