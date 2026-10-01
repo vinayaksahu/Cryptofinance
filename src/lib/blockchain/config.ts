@@ -113,8 +113,27 @@ export async function isBlockchainMonitorEnabled(): Promise<boolean> {
  * If userId belongs to an admin branch, returns that specific admin's configured vault.
  */
 export async function getEffectiveDepositVault(userId?: string | null): Promise<{ address: string; qr: string }> {
-  const defaultAddress = await getSystemConfigValue("COMPANY_USDT_ADDRESS", "0x39a0B29A5c66e927598Fa4eCE9bFf84a44bA8812");
-  const defaultQr = await getSystemConfigValue("COMPANY_USDT_QR", "");
+  // Read COMPANY_USDT_ADDRESS directly from db to ensure live consistency
+  let companyAddress = "";
+  let companyQr = "";
+
+  try {
+    const [addrRow, qrRow] = await Promise.all([
+      db.systemConfig.findUnique({ where: { key: "COMPANY_USDT_ADDRESS" } }),
+      db.systemConfig.findUnique({ where: { key: "COMPANY_USDT_QR" } }),
+    ]);
+    companyAddress = addrRow?.value || "";
+    companyQr = qrRow?.value || "";
+  } catch (err) {
+    console.warn("[getEffectiveDepositVault] Error querying systemConfig:", err);
+  }
+
+  if (!companyAddress) {
+    companyAddress = await getSystemConfigValue("COMPANY_USDT_ADDRESS", "0x71C25e3F62985149C9031024D984F49a786EB47e");
+  }
+
+  const defaultAddress = companyAddress || "0x71C25e3F62985149C9031024D984F49a786EB47e";
+  const defaultQr = companyQr || (await getSystemConfigValue("COMPANY_USDT_QR", ""));
 
   if (!userId) {
     return {
@@ -153,7 +172,7 @@ export async function getEffectiveDepositVault(userId?: string | null): Promise<
       const branchAddr = branchAddrRow?.value;
       const branchQr = branchQrRow?.value;
 
-      if (branchAddr && branchAddr.trim().startsWith("0x")) {
+      if (branchAddr && branchAddr.trim().startsWith("0x") && branchAddr.trim().toLowerCase() !== "0x39a0b29a5c66e927598fa4ece9bff84a44ba8812") {
         const clean = branchAddr.trim();
         return {
           address: clean,
@@ -167,7 +186,7 @@ export async function getEffectiveDepositVault(userId?: string | null): Promise<
         select: { usdtAddress: true },
       });
 
-      if (admin?.usdtAddress && admin.usdtAddress.trim().startsWith("0x")) {
+      if (admin?.usdtAddress && admin.usdtAddress.trim().startsWith("0x") && admin.usdtAddress.trim().toLowerCase() !== "0x39a0b29a5c66e927598fa4ece9bff84a44ba8812") {
         const clean = admin.usdtAddress.trim();
         return {
           address: clean,

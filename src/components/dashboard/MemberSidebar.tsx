@@ -9,7 +9,6 @@ import {
   Package,
   Users,
   Banknote,
-  Repeat,
   BarChart3,
   Headphones,
   LogOut,
@@ -48,7 +47,6 @@ export function MemberSidebar({
     wallets: false,
     downline: false,
     income: false,
-    transactional: false,
     reports: false,
   });
 
@@ -64,8 +62,6 @@ export function MemberSidebar({
       ? "downline"
       : tab.startsWith("income-")
       ? "income"
-      : tab.startsWith("tx-")
-      ? "transactional"
       : tab.startsWith("report-")
       ? "reports"
       : null;
@@ -73,7 +69,6 @@ export function MemberSidebar({
       wallets: parentKey === "wallets",
       downline: parentKey === "downline",
       income: parentKey === "income",
-      transactional: parentKey === "transactional",
       reports: parentKey === "reports",
     });
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
@@ -404,81 +399,7 @@ export function MemberSidebar({
             )}
           </div>
 
-          {/* Transactions Accordion */}
-          <div>
-            <button
-              type="button"
-              onClick={() => toggleMenu("transactional")}
-              title={isCollapsed ? "Transactions" : undefined}
-              className={`w-full flex items-center ${
-                isCollapsed ? "lg:justify-center lg:px-2" : "justify-between px-3.5"
-              } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
-                activeTab.startsWith("tx-")
-                  ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-white border border-sky-400/40 shadow-lg shadow-sky-500/15"
-                  : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
-              }`}
-            >
-              <div className="flex items-center gap-3.5">
-                <Repeat className="w-4 h-4 text-purple-400 shrink-0" />
-                <span className={isCollapsed ? "lg:hidden" : "inline"}>Transactions</span>
-              </div>
-              <span className={isCollapsed ? "lg:hidden" : "inline"}>
-                {openMenus.transactional ? (
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
-                ) : (
-                  <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-                )}
-              </span>
-            </button>
-            {openMenus.transactional && (
-              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-10 pr-2 py-1 space-y-1`}>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("tx-transfer")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "tx-transfer"
-                      ? "text-purple-300 bg-purple-500/20 border-l-2 border-purple-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
-                >
-                  • P2P Fund Transfer
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("tx-swipe")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "tx-swipe"
-                      ? "text-purple-300 bg-purple-500/20 border-l-2 border-purple-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
-                >
-                  • Internal Wallet Convert
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("tx-withdraw")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "tx-withdraw"
-                      ? "text-emerald-300 bg-emerald-500/20 border-l-2 border-emerald-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
-                >
-                  • Request Withdrawal
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("tx-withdraw-report")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "tx-withdraw-report"
-                      ? "text-purple-300 bg-purple-500/20 border-l-2 border-purple-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
-                >
-                  • Withdrawal Logs
-                </button>
-              </div>
-            )}
-          </div>
+
 
           {/* Audit Reports Accordion */}
           <div>

@@ -15,7 +15,6 @@ import {
   ShieldCheck,
   Activity,
   Layers,
-  Repeat,
   Wallet,
   ChevronRight,
   Lock,
@@ -503,21 +502,7 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
             <span>Activate Stake</span>
           </button>
 
-          <button
-            onClick={() => setActiveTab("tx-transfer")}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-800 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white text-xs font-bold transition-all active:scale-95 shrink-0 font-mono"
-          >
-            <Repeat className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
-            <span>P2P Transfer</span>
-          </button>
 
-          <button
-            onClick={() => setActiveTab("tx-withdraw")}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-500/15 hover:bg-emerald-500 text-emerald-600 hover:text-white dark:text-[#00FFA3] dark:hover:text-slate-950 text-xs font-bold transition-all shadow-sm active:scale-95 shrink-0 font-mono"
-          >
-            <ArrowUpRight className="w-4 h-4" />
-            <span>Withdraw ($2 Min)</span>
-          </button>
 
           <button
             onClick={() => setActiveTab("downline-tree")}

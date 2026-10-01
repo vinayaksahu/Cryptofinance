@@ -8,7 +8,7 @@ export const APP_CONFIG = {
   cmdBio: "Veteran quantitative architect and FinTech strategist with over 15 years directing algorithmic trading desks across Zurich, London, and Singapore.",
   headquarters: "Crypto Valley Tower, Zug, Switzerland",
   hqDetails: "Headquartered in the world's premier digital finance and blockchain jurisdiction, operating under rigorous Swiss FinTech regulatory standards.",
-  depositAddress: "0x39a0B29A5c66e927598Fa4eCE9bFf84a44bA8812", // Company USDT BEP-20
+  depositAddress: "0x71C25e3F62985149C9031024D984F49a786EB47e", // Company USDT BEP-20
   depositNetwork: "USDT BEP-20 (Binance Smart Chain)",
   
   // Slide 05: Free Registration Rewards

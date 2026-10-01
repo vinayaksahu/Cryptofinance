@@ -10,7 +10,6 @@ import { StakeActivationView } from "@/components/dashboard/views/StakeActivatio
 import { WalletsHubView } from "@/components/dashboard/views/WalletsHubView";
 import { DownlineView } from "@/components/dashboard/views/DownlineView";
 import { GenealogyTreeView } from "@/components/dashboard/views/GenealogyTreeView";
-import { TransactionalView } from "@/components/dashboard/views/TransactionalView";
 import { IncomeView } from "@/components/dashboard/views/IncomeView";
 import { JoiningBonusView } from "@/components/dashboard/views/JoiningBonusView";
 import { MilestoneRewardsView } from "@/components/dashboard/views/MilestoneRewardsView";
@@ -182,21 +181,7 @@ export default function MemberDashboardPage() {
             <MilestoneRewardsView user={user} onRefresh={fetchUser} />
           )}
 
-          {activeTab === "tx-transfer" && (
-            <TransactionalView user={user} mode="transfer" onRefresh={fetchUser} />
-          )}
 
-          {activeTab === "tx-swipe" && (
-            <TransactionalView user={user} mode="swipe" onRefresh={fetchUser} />
-          )}
-
-          {activeTab === "tx-withdraw" && (
-            <TransactionalView user={user} mode="withdraw" onRefresh={fetchUser} />
-          )}
-
-          {activeTab === "tx-withdraw-report" && (
-            <TransactionalView user={user} mode="withdraw-report" onRefresh={fetchUser} />
-          )}
 
           {activeTab === "report-daily" && (
             <ReportsView user={user} reportType="daily" onRefresh={fetchUser} />

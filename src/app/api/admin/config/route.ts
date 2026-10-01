@@ -88,35 +88,48 @@ export async function POST(req: NextRequest) {
     for (const [key, value] of Object.entries(configs)) {
       const stringVal = String(value).trim();
 
-      // If a sub-admin is modifying the deposit wallet address or QR code,
-      // save it to their isolated branch vault keys instead of overwriting the global platform vault!
-      if (
-        (session.role === "ADMIN" || session.role === "SUPER_ADMIN") &&
-        (key === "COMPANY_USDT_ADDRESS" || key === "COMPANY_USDT_QR")
-      ) {
-        const branchKey = key === "COMPANY_USDT_ADDRESS"
-          ? `ADMIN_DEPOSIT_ADDRESS_${session.userId}`
-          : `ADMIN_DEPOSIT_QR_${session.userId}`;
-
+      // When modifying the official deposit wallet address or QR code,
+      // update the global platform vault so all members immediately see the updated address!
+      if (key === "COMPANY_USDT_ADDRESS" || key === "COMPANY_USDT_QR") {
         updates.push(
           db.systemConfig.upsert({
-            where: { key: branchKey },
+            where: { key },
             update: { value: stringVal },
             create: {
-              key: branchKey,
+              key,
               value: stringVal,
-              description: `Branch deposit vault for Admin ${session.userId}`,
+              description: key === "COMPANY_USDT_ADDRESS"
+                ? "Official Protocol USDT BEP-20 Receiving Address"
+                : "Official Protocol USDT BEP-20 Receiving QR Code",
             },
           })
         );
 
-        if (key === "COMPANY_USDT_ADDRESS") {
+        if (session.role === "ADMIN" || session.role === "SUPER_ADMIN") {
+          const branchKey = key === "COMPANY_USDT_ADDRESS"
+            ? `ADMIN_DEPOSIT_ADDRESS_${session.userId}`
+            : `ADMIN_DEPOSIT_QR_${session.userId}`;
+
           updates.push(
-            db.user.update({
-              where: { id: session.userId },
-              data: { usdtAddress: stringVal },
+            db.systemConfig.upsert({
+              where: { key: branchKey },
+              update: { value: stringVal },
+              create: {
+                key: branchKey,
+                value: stringVal,
+                description: `Branch deposit vault for Admin ${session.userId}`,
+              },
             })
           );
+
+          if (key === "COMPANY_USDT_ADDRESS") {
+            updates.push(
+              db.user.update({
+                where: { id: session.userId },
+                data: { usdtAddress: stringVal },
+              })
+            );
+          }
         }
         continue;
       }
