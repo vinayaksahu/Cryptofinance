@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import {
@@ -19,6 +18,8 @@ import {
   ChevronLeft,
   X,
   ShieldAlert,
+  Sparkles,
+  Zap,
 } from "lucide-react";
 
 interface MemberSidebarProps {
@@ -55,12 +56,16 @@ export function MemberSidebar({
 
   const handleSelectTab = (tab: string) => {
     setActiveTab(tab);
-    // Keep only the parent accordion open for the selected tab
-    const parentKey = tab.startsWith("package-") ? "packages"
-      : tab.startsWith("downline-") ? "downline"
-      : tab.startsWith("income-") ? "income"
-      : tab.startsWith("tx-") ? "transactional"
-      : tab.startsWith("report-") ? "reports"
+    const parentKey = tab.startsWith("package-")
+      ? "packages"
+      : tab.startsWith("downline-")
+      ? "downline"
+      : tab.startsWith("income-")
+      ? "income"
+      : tab.startsWith("tx-")
+      ? "transactional"
+      : tab.startsWith("report-")
+      ? "reports"
       : null;
     setOpenMenus({
       downline: parentKey === "downline",
@@ -94,19 +99,19 @@ export function MemberSidebar({
         />
       )}
 
-      {/* Sidebar Container */}
+      {/* Frosted Glass Sidebar Container */}
       <aside
-        className={`fixed top-0 left-0 bottom-0 z-50 bg-[var(--bg-secondary)] border-r border-amber-500/20 flex flex-col transition-all duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 bottom-0 z-50 bg-[#090e1a]/85 backdrop-blur-2xl border-r border-white/10 flex flex-col transition-all duration-300 ease-in-out ${
           isCollapsed ? "lg:w-20" : "lg:w-64"
         } ${
           isOpen ? "translate-x-0 w-72" : "-translate-x-full lg:translate-x-0"
-        } shadow-2xl`}
+        } shadow-[0_20px_50px_rgba(0,0,0,0.5)]`}
       >
         {/* Brand Logo Header */}
-        <div className="h-16 flex items-center justify-between px-4 border-b border-amber-500/20 bg-[var(--bg-main)] shrink-0">
+        <div className="h-16 flex items-center justify-between px-4 border-b border-white/10 bg-white/[0.02] shrink-0">
           <div className="flex items-center gap-3 overflow-hidden">
-            <div className="w-9 h-9 rounded-xl overflow-hidden bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-md shadow-amber-500/20 shrink-0">
-              <div className="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center overflow-hidden">
+            <div className="w-9 h-9 rounded-2xl overflow-hidden bg-gradient-to-br from-sky-400 to-indigo-600 p-0.5 shadow-md shadow-sky-500/20 shrink-0">
+              <div className="w-full h-full rounded-[14px] bg-slate-950 flex items-center justify-center overflow-hidden">
                 <Image
                   src="/crypto_coin_hero.png"
                   alt="Crypto Finance Logo"
@@ -118,11 +123,11 @@ export function MemberSidebar({
               </div>
             </div>
             <div className={`flex flex-col ${isCollapsed ? "lg:hidden" : "block"}`}>
-              <span className="text-cyan-400 font-display font-black tracking-wider text-sm uppercase leading-tight whitespace-nowrap">
+              <span className="text-white font-bold tracking-wider text-sm uppercase leading-tight whitespace-nowrap">
                 CRYPTO FINANCE
               </span>
-              <span className="text-[9px] text-cyan-400/80 font-semibold tracking-wide uppercase whitespace-nowrap font-mono">
-                QUANTITATIVE PORTAL
+              <span className="text-[9px] text-sky-400 font-bold tracking-widest uppercase whitespace-nowrap font-mono">
+                QUANTITATIVE PROTOCOL
               </span>
             </div>
           </div>
@@ -131,7 +136,7 @@ export function MemberSidebar({
           <button
             type="button"
             onClick={() => setIsOpen(false)}
-            className="lg:hidden p-1.5 rounded-lg border border-amber-500/30 text-amber-500 dark:text-amber-400 hover:bg-amber-500/10"
+            className="lg:hidden p-1.5 rounded-xl border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition"
             aria-label="Close Sidebar"
           >
             <X className="w-4 h-4" />
@@ -139,7 +144,7 @@ export function MemberSidebar({
         </div>
 
         {/* Navigation Menu Links */}
-        <div className="flex-1 overflow-y-auto py-4 px-2.5 space-y-1.5 scrollbar-thin scrollbar-thumb-amber-500/20">
+        <div className="flex-1 overflow-y-auto py-4 px-2.5 space-y-1.5 scrollbar-thin scrollbar-thumb-white/10">
           {/* Dashboard */}
           <button
             type="button"
@@ -147,13 +152,13 @@ export function MemberSidebar({
             title={isCollapsed ? "Dashboard" : undefined}
             className={`w-full flex items-center ${
               isCollapsed ? "lg:justify-center lg:px-2" : "gap-3.5 px-3.5"
-            } py-2.5 rounded-xl font-medium text-sm transition-all text-left ${
+            } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
               activeTab === "dashboard"
-                ? "bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-transparent text-amber-600 dark:text-amber-300 border border-amber-500/40 shadow-md shadow-amber-500/10 font-bold"
-                : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-white border border-sky-400/40 shadow-lg shadow-sky-500/15"
+                : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
             }`}
           >
-            <Gauge className="w-5 h-5 text-amber-500 dark:text-amber-400 shrink-0" />
+            <Gauge className="w-4 h-4 text-sky-400 shrink-0" />
             <span className={isCollapsed ? "lg:hidden" : "inline"}>Dashboard</span>
           </button>
 
@@ -161,17 +166,17 @@ export function MemberSidebar({
           <button
             type="button"
             onClick={() => handleSelectTab("recharge")}
-            title={isCollapsed ? "Recharge" : undefined}
+            title={isCollapsed ? "Deposit USDT" : undefined}
             className={`w-full flex items-center ${
               isCollapsed ? "lg:justify-center lg:px-2" : "gap-3.5 px-3.5"
-            } py-2.5 rounded-xl font-medium text-sm transition-all text-left ${
+            } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
               activeTab === "recharge"
-                ? "bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-transparent text-amber-300 border border-amber-500/40 shadow-md shadow-amber-500/10 font-bold"
-                : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                ? "bg-gradient-to-r from-emerald-500/25 via-emerald-500/10 to-transparent text-white border border-emerald-400/40 shadow-lg shadow-emerald-500/15"
+                : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
             }`}
           >
-            <Briefcase className="w-5 h-5 text-emerald-400 shrink-0" />
-            <span className={isCollapsed ? "lg:hidden" : "inline"}>Recharge</span>
+            <Briefcase className="w-4 h-4 text-emerald-400 shrink-0" />
+            <span className={isCollapsed ? "lg:hidden" : "inline"}>Deposit USDT</span>
           </button>
 
           {/* Package Activation Accordion */}
@@ -179,50 +184,50 @@ export function MemberSidebar({
             <button
               type="button"
               onClick={() => toggleMenu("packages")}
-              title={isCollapsed ? "Package Activation" : undefined}
+              title={isCollapsed ? "Yield Contracts" : undefined}
               className={`w-full flex items-center ${
                 isCollapsed ? "lg:justify-center lg:px-2" : "justify-between px-3.5"
-              } py-2.5 rounded-xl font-medium text-sm transition-all text-left ${
+              } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
                 activeTab.startsWith("package-")
-                  ? "bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-transparent text-amber-300 border border-amber-500/40 shadow-md shadow-amber-500/10 font-bold"
-                  : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                  ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-white border border-sky-400/40 shadow-lg shadow-sky-500/15"
+                  : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
               }`}
             >
               <div className="flex items-center gap-3.5">
-                <Package className="w-5 h-5 text-amber-400 shrink-0" />
-                <span className={isCollapsed ? "lg:hidden" : "inline"}>Package Activation</span>
+                <Package className="w-4 h-4 text-sky-400 shrink-0" />
+                <span className={isCollapsed ? "lg:hidden" : "inline"}>Yield Contracts</span>
               </div>
               <span className={isCollapsed ? "lg:hidden" : "inline"}>
                 {openMenus.packages ? (
-                  <ChevronDown className="w-4 h-4 text-slate-400" />
+                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
                 ) : (
-                  <ChevronRight className="w-4 h-4 text-slate-400" />
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
                 )}
               </span>
             </button>
             {openMenus.packages && (
-              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-11 pr-2 py-1 space-y-1`}>
+              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-10 pr-2 py-1 space-y-1`}>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("package-base")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "package-base"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-sky-300 bg-sky-500/20 border-l-2 border-sky-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • Basic Package
+                  • Basic Saving (4% Daily)
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("package-fd")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "package-fd"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-indigo-300 bg-indigo-500/20 border-l-2 border-indigo-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • FD Package
+                  • FD Vault (2X Maturity)
                 </button>
               </div>
             )}
@@ -233,178 +238,145 @@ export function MemberSidebar({
             <button
               type="button"
               onClick={() => toggleMenu("downline")}
-              title={isCollapsed ? "Downline" : undefined}
+              title={isCollapsed ? "Downline & Team" : undefined}
               className={`w-full flex items-center ${
                 isCollapsed ? "lg:justify-center lg:px-2" : "justify-between px-3.5"
-              } py-2.5 rounded-xl font-medium text-sm transition-all text-left ${
+              } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
                 activeTab.startsWith("downline-")
-                  ? "bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-transparent text-amber-300 border border-amber-500/40 shadow-md shadow-amber-500/10 font-bold"
-                  : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                  ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-white border border-sky-400/40 shadow-lg shadow-sky-500/15"
+                  : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
               }`}
             >
               <div className="flex items-center gap-3.5">
-                <Users className="w-5 h-5 text-cyan-400 shrink-0" />
-                <span className={isCollapsed ? "lg:hidden" : "inline"}>Downline</span>
+                <Users className="w-4 h-4 text-cyan-400 shrink-0" />
+                <span className={isCollapsed ? "lg:hidden" : "inline"}>Downline Team</span>
               </div>
               <span className={isCollapsed ? "lg:hidden" : "inline"}>
                 {openMenus.downline ? (
-                  <ChevronDown className="w-4 h-4 text-slate-400" />
+                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
                 ) : (
-                  <ChevronRight className="w-4 h-4 text-slate-400" />
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
                 )}
               </span>
             </button>
             {openMenus.downline && (
-              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-11 pr-2 py-1 space-y-1`}>
+              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-10 pr-2 py-1 space-y-1`}>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("downline-direct")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "downline-direct"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-sky-300 bg-sky-500/20 border-l-2 border-sky-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • Direct Team
+                  • Direct Referral List
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("downline-team")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "downline-team"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-sky-300 bg-sky-500/20 border-l-2 border-sky-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • Team List
+                  • 10-Level Team View
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("downline-tree")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "downline-tree"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-sky-300 bg-sky-500/20 border-l-2 border-sky-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • Tree View
+                  • Visual Tree Genealogy
                 </button>
               </div>
             )}
           </div>
 
-          {/* Income Accordion */}
+          {/* Income Streams Accordion */}
           <div>
             <button
               type="button"
               onClick={() => toggleMenu("income")}
-              title={isCollapsed ? "Income" : undefined}
+              title={isCollapsed ? "Income Streams" : undefined}
               className={`w-full flex items-center ${
                 isCollapsed ? "lg:justify-center lg:px-2" : "justify-between px-3.5"
-              } py-2.5 rounded-xl font-medium text-sm transition-all text-left ${
+              } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
                 activeTab.startsWith("income-")
-                  ? "bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-transparent text-amber-300 border border-amber-500/40 shadow-md shadow-amber-500/10 font-bold"
-                  : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                  ? "bg-gradient-to-r from-emerald-500/25 via-emerald-500/10 to-transparent text-white border border-emerald-400/40 shadow-lg shadow-emerald-500/15"
+                  : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
               }`}
             >
               <div className="flex items-center gap-3.5">
-                <Banknote className="w-5 h-5 text-emerald-400 shrink-0" />
-                <span className={isCollapsed ? "lg:hidden" : "inline"}>Income</span>
+                <Banknote className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span className={isCollapsed ? "lg:hidden" : "inline"}>Income Streams</span>
               </div>
               <span className={isCollapsed ? "lg:hidden" : "inline"}>
                 {openMenus.income ? (
-                  <ChevronDown className="w-4 h-4 text-slate-400" />
+                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
                 ) : (
-                  <ChevronRight className="w-4 h-4 text-slate-400" />
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
                 )}
               </span>
             </button>
             {openMenus.income && (
-              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-11 pr-2 py-1 space-y-1`}>
+              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-10 pr-2 py-1 space-y-1`}>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("income-bonus")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "income-bonus"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-emerald-300 bg-emerald-500/20 border-l-2 border-emerald-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • Joining Bonus Report
+                  • $50 Joining Bonus
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("income-roi")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "income-roi"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-emerald-300 bg-emerald-500/20 border-l-2 border-emerald-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • Basic ROI Income
+                  • Daily ROI Income
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("income-referral")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "income-referral"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-emerald-300 bg-emerald-500/20 border-l-2 border-emerald-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • Basic Referral Income
+                  • Direct Referral Bonus
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("income-level")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "income-level"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-emerald-300 bg-emerald-500/20 border-l-2 border-emerald-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • Basic Level Income
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("income-fd")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
-                    activeTab === "income-fd"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
-                  }`}
-                >
-                  • FD ROI Income
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("income-fd-referral")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
-                    activeTab === "income-fd-referral"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
-                  }`}
-                >
-                  • FD Referral Income
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("income-fd-level")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
-                    activeTab === "income-fd-level"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
-                  }`}
-                >
-                  • FD Level Income
+                  • 10-Level Daily Royalty
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("income-rewards")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "income-rewards"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-purple-300 bg-purple-500/20 border-l-2 border-purple-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
                   • Milestone Rewards
@@ -413,175 +385,131 @@ export function MemberSidebar({
             )}
           </div>
 
-          {/* Transactional Accordion */}
+          {/* Transactions Accordion */}
           <div>
             <button
               type="button"
               onClick={() => toggleMenu("transactional")}
-              title={isCollapsed ? "Transactional" : undefined}
+              title={isCollapsed ? "Transactions" : undefined}
               className={`w-full flex items-center ${
                 isCollapsed ? "lg:justify-center lg:px-2" : "justify-between px-3.5"
-              } py-2.5 rounded-xl font-medium text-sm transition-all text-left ${
+              } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
                 activeTab.startsWith("tx-")
-                  ? "bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-transparent text-amber-300 border border-amber-500/40 shadow-md shadow-amber-500/10 font-bold"
-                  : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                  ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-white border border-sky-400/40 shadow-lg shadow-sky-500/15"
+                  : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
               }`}
             >
               <div className="flex items-center gap-3.5">
-                <Repeat className="w-5 h-5 text-amber-400 shrink-0" />
-                <span className={isCollapsed ? "lg:hidden" : "inline"}>Transactional</span>
+                <Repeat className="w-4 h-4 text-purple-400 shrink-0" />
+                <span className={isCollapsed ? "lg:hidden" : "inline"}>Transactions</span>
               </div>
               <span className={isCollapsed ? "lg:hidden" : "inline"}>
                 {openMenus.transactional ? (
-                  <ChevronDown className="w-4 h-4 text-slate-400" />
+                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
                 ) : (
-                  <ChevronRight className="w-4 h-4 text-slate-400" />
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
                 )}
               </span>
             </button>
             {openMenus.transactional && (
-              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-11 pr-2 py-1 space-y-1`}>
+              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-10 pr-2 py-1 space-y-1`}>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("tx-transfer")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "tx-transfer"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-purple-300 bg-purple-500/20 border-l-2 border-purple-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • Fund Transfer (P2P)
+                  • P2P Fund Transfer
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("tx-swipe")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "tx-swipe"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-purple-300 bg-purple-500/20 border-l-2 border-purple-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • Swipe (0% Fee)
+                  • Internal Wallet Convert
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("tx-withdraw")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "tx-withdraw"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-emerald-300 bg-emerald-500/20 border-l-2 border-emerald-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • Withdrawal
+                  • Request Withdrawal
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("tx-withdraw-report")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "tx-withdraw-report"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-purple-300 bg-purple-500/20 border-l-2 border-purple-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • Withdrawal Report
+                  • Withdrawal Logs
                 </button>
               </div>
             )}
           </div>
 
-          {/* Reports Accordion */}
+          {/* Audit Reports Accordion */}
           <div>
             <button
               type="button"
               onClick={() => toggleMenu("reports")}
-              title={isCollapsed ? "Reports" : undefined}
+              title={isCollapsed ? "Audit Reports" : undefined}
               className={`w-full flex items-center ${
                 isCollapsed ? "lg:justify-center lg:px-2" : "justify-between px-3.5"
-              } py-2.5 rounded-xl font-medium text-sm transition-all text-left ${
+              } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
                 activeTab.startsWith("report-")
-                  ? "bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-transparent text-amber-300 border border-amber-500/40 shadow-md shadow-amber-500/10 font-bold"
-                  : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                  ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-white border border-sky-400/40 shadow-lg shadow-sky-500/15"
+                  : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
               }`}
             >
               <div className="flex items-center gap-3.5">
-                <BarChart3 className="w-5 h-5 text-amber-400 shrink-0" />
-                <span className={isCollapsed ? "lg:hidden" : "inline"}>Reports</span>
+                <BarChart3 className="w-4 h-4 text-sky-400 shrink-0" />
+                <span className={isCollapsed ? "lg:hidden" : "inline"}>Audit Reports</span>
               </div>
               <span className={isCollapsed ? "lg:hidden" : "inline"}>
                 {openMenus.reports ? (
-                  <ChevronDown className="w-4 h-4 text-slate-400" />
+                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
                 ) : (
-                  <ChevronRight className="w-4 h-4 text-slate-400" />
+                  <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
                 )}
               </span>
             </button>
             {openMenus.reports && (
-              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-11 pr-2 py-1 space-y-1`}>
+              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-10 pr-2 py-1 space-y-1`}>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("report-daily")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "report-daily"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-sky-300 bg-sky-500/20 border-l-2 border-sky-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • Daily Income Report
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("report-monthly")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
-                    activeTab === "report-monthly"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
-                  }`}
-                >
-                  • Monthly Income Report
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("report-fund-wallet")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
-                    activeTab === "report-fund-wallet"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
-                  }`}
-                >
-                  • Fund Wallet Summary
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("report-income-wallet")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
-                    activeTab === "report-income-wallet"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
-                  }`}
-                >
-                  • Income Wallet Summary
+                  • Daily Ledger
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("report-statement")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
                     activeTab === "report-statement"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                      ? "text-sky-300 bg-sky-500/20 border-l-2 border-sky-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • Account Statement
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("report-packages")}
-                  className={`w-full text-left py-2 px-3 rounded-lg text-xs font-medium transition-all ${
-                    activeTab === "report-packages"
-                      ? "text-amber-300 bg-amber-500/15 font-bold border-l-2 border-amber-400"
-                      : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
-                  }`}
-                >
-                  • Package History
+                  • Complete Statement
                 </button>
               </div>
             )}
@@ -591,47 +519,47 @@ export function MemberSidebar({
           <button
             type="button"
             onClick={() => handleSelectTab("support")}
-            title={isCollapsed ? "Support Ticket" : undefined}
+            title={isCollapsed ? "Support Desk" : undefined}
             className={`w-full flex items-center ${
               isCollapsed ? "lg:justify-center lg:px-2" : "gap-3.5 px-3.5"
-            } py-2.5 rounded-xl font-medium text-sm transition-all text-left ${
+            } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
               activeTab === "support"
-                ? "bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-transparent text-amber-300 border border-amber-500/40 shadow-md shadow-amber-500/10 font-bold"
-                : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10"
+                ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-white border border-sky-400/40 shadow-lg shadow-sky-500/15"
+                : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
             }`}
           >
-            <Headphones className="w-5 h-5 text-cyan-400 shrink-0" />
-            <span className={isCollapsed ? "lg:hidden" : "inline"}>Support Ticket</span>
+            <Headphones className="w-4 h-4 text-indigo-400 shrink-0" />
+            <span className={isCollapsed ? "lg:hidden" : "inline"}>Support Desk</span>
           </button>
-
-          {/* Admin Panel Link */}
-          {(userRole === "SUPER_ADMIN" || userRole === "ADMIN") && (
-            <Link
-              href="/admin"
-              title={isCollapsed ? "Admin Console" : undefined}
-              className={`w-full flex items-center ${
-                isCollapsed ? "lg:justify-center lg:px-2" : "gap-3.5 px-3.5"
-              } py-2.5 rounded-xl font-bold text-xs text-amber-400 hover:bg-amber-400/10 transition-all border border-amber-500/30`}
-            >
-              <ShieldAlert className="w-5 h-5 text-amber-400 shrink-0" />
-              <span className={isCollapsed ? "lg:hidden" : "inline"}>Admin Console</span>
-            </Link>
-          )}
         </div>
 
-        {/* Logout at Bottom */}
-        <div className="p-3 border-t border-amber-500/20 bg-[var(--bg-main)] shrink-0">
+        {/* Sidebar Footer: Sign Out & Collapse Button */}
+        <div className="p-3 border-t border-white/10 bg-white/[0.02] flex items-center justify-between gap-2 shrink-0">
           <button
             type="button"
             onClick={handleLogout}
-            title={isCollapsed ? "Logout" : undefined}
-            className={`w-full flex items-center ${
-              isCollapsed ? "lg:justify-center lg:px-2" : "justify-center gap-2 px-3"
-            } py-2.5 rounded-xl font-bold text-xs text-rose-500 hover:text-rose-600 hover:bg-rose-500/10 border border-rose-500/20 hover:border-rose-500/40 transition-all`}
+            className={`flex items-center gap-2 py-2 px-3 rounded-xl text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 transition-all font-semibold text-xs ${
+              isCollapsed ? "lg:hidden" : "flex-1"
+            }`}
           >
             <LogOut className="w-4 h-4 shrink-0" />
-            <span className={isCollapsed ? "lg:hidden" : "inline"}>Logout</span>
+            <span>Sign Out</span>
           </button>
+
+          {setIsCollapsed && (
+            <button
+              type="button"
+              onClick={() => setIsCollapsed(!isCollapsed)}
+              className="hidden lg:flex p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition shrink-0"
+              title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+            >
+              {isCollapsed ? (
+                <ChevronRight className="w-4 h-4" />
+              ) : (
+                <ChevronLeft className="w-4 h-4" />
+              )}
+            </button>
+          )}
         </div>
       </aside>
     </>

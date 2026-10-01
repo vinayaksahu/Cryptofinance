@@ -41,132 +41,132 @@ export function AdminDashboardView({
   return (
     <div className="space-y-6">
       {/* Top Welcome & Health Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-4 rounded-2xl bg-[#0c1322] border border-amber-500/20 shadow-md">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center shrink-0">
-            <Sparkles className="w-5 h-5 text-amber-400" />
+      <div className="glass-card-elevated p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5">
+          <div className="w-11 h-11 rounded-2xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center shrink-0 text-sky-400 shadow-md shadow-sky-500/20">
+            <Sparkles className="w-5 h-5" />
           </div>
           <div>
-            <h2 className="font-display font-black text-lg text-slate-100 uppercase tracking-wide">
+            <h2 className="font-bold text-lg text-white tracking-tight">
               Executive Overview
             </h2>
             <p className="text-xs text-slate-400">
-              Real-time analytics for Dubai Finance Pre-Launching Phase &bull; Binance Smart Chain (BEP-20)
+              Real-time analytics for Crypto Finance Protocol &bull; Binance Smart Chain (BEP-20)
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 self-start sm:self-auto text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-3 py-1.5 rounded-xl">
+        <div className="glass-pill border-emerald-500/30 bg-emerald-500/15 text-emerald-400 text-xs font-bold self-start sm:self-auto px-3.5 py-1.5">
           <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-          System Operational &bull; 100% USDT
+          Protocol Engine Operational &bull; 100% USDT
         </div>
       </div>
 
-      {/* Stats row - 6 High-Impact Metric Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4">
+      {/* Stats row - 6 High-Impact Glass Metric Cards (Styled after reference image) */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
         {/* Total Members */}
         <div 
           onClick={() => setActiveTab?.("users")}
-          className="bg-white dark:bg-[#0c1322]/90 backdrop-blur-xl border border-slate-200 dark:border-slate-800/80 hover:border-amber-500/40 p-4 sm:p-5 rounded-2xl transition-all duration-200 group cursor-pointer shadow-md hover:-translate-y-0.5"
+          className="glass-card-elevated p-4 sm:p-5 group cursor-pointer flex flex-col justify-between"
         >
-          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider">Total Members</span>
-            <Users className="w-4 h-4 text-amber-500 dark:text-amber-400 group-hover:scale-110 transition-transform" />
+          <div className="flex items-center justify-between text-slate-400 mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest">MEMBERS</span>
+            <Users className="w-4 h-4 text-sky-400 group-hover:scale-110 transition-transform" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-display font-black text-slate-900 dark:text-slate-100 mb-1">
+          <h3 className="text-2xl sm:text-3xl font-black text-white tracking-tight mb-1 font-mono">
             {safeStats.totalUsers || 0}
           </h3>
-          <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-            <span><strong className="text-emerald-600 dark:text-emerald-400">{safeStats.activeUsers || 0}</strong> active</span>
+          <div className="flex items-center gap-1.5 text-xs text-slate-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+            <span><strong className="text-emerald-400">{safeStats.activeUsers || 0}</strong> active</span>
           </div>
         </div>
         
         {/* Active Contracts */}
-        <div className="bg-white dark:bg-[#0c1322]/90 backdrop-blur-xl border border-slate-200 dark:border-slate-800/80 hover:border-amber-500/40 p-4 sm:p-5 rounded-2xl transition-all duration-200 shadow-md">
-          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider">Active Contracts</span>
-            <ShieldCheck className="w-4 h-4 text-amber-500 dark:text-amber-400" />
+        <div className="glass-card-elevated p-4 sm:p-5 flex flex-col justify-between">
+          <div className="flex items-center justify-between text-slate-400 mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest">CONTRACTS</span>
+            <ShieldCheck className="w-4 h-4 text-emerald-400" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-display font-black text-amber-600 dark:text-amber-400 mb-1">
+          <h3 className="text-2xl sm:text-3xl font-black text-emerald-400 tracking-tight mb-1 font-mono">
             {safeStats.activeContracts || 0}
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400">28-Day &amp; FD</p>
+          <p className="text-xs text-slate-400 font-medium">Basic &amp; FD Vault</p>
         </div>
 
         {/* Pending Deposits */}
         <div 
           onClick={() => setActiveTab?.("deposits")}
-          className="bg-white dark:bg-[#0c1322]/90 backdrop-blur-xl border border-cyan-500/30 hover:border-cyan-400 p-4 sm:p-5 rounded-2xl transition-all duration-200 group cursor-pointer shadow-md hover:-translate-y-0.5"
+          className="glass-card-elevated p-4 sm:p-5 group cursor-pointer flex flex-col justify-between hover:border-sky-400/50"
         >
-          <div className="flex items-center justify-between text-cyan-600 dark:text-cyan-400 mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider">Pending Deposits</span>
+          <div className="flex items-center justify-between text-sky-400 mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest">DEPOSITS</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-display font-black text-cyan-600 dark:text-cyan-300 mb-1">
+          <h3 className="text-2xl sm:text-3xl font-black text-sky-400 tracking-tight mb-1 font-mono">
             {safeStats.pendingDeposits || 0}
           </h3>
-          <p className="text-xs text-cyan-600/80 dark:text-cyan-400/80 font-medium">Review &rarr;</p>
+          <p className="text-xs text-sky-400/80 font-semibold">Review &rarr;</p>
         </div>
 
         {/* Pending Withdrawals */}
         <div 
           onClick={() => setActiveTab?.("withdrawals")}
-          className="bg-white dark:bg-[#0c1322]/90 backdrop-blur-xl border border-rose-500/30 hover:border-rose-400 p-4 sm:p-5 rounded-2xl transition-all duration-200 group cursor-pointer shadow-md hover:-translate-y-0.5"
+          className="glass-card-elevated p-4 sm:p-5 group cursor-pointer flex flex-col justify-between hover:border-rose-400/50"
         >
-          <div className="flex items-center justify-between text-rose-600 dark:text-rose-400 mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider">Pending Payouts</span>
+          <div className="flex items-center justify-between text-rose-400 mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest">PAYOUTS</span>
             <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-display font-black text-rose-600 dark:text-rose-400 mb-1">
+          <h3 className="text-2xl sm:text-3xl font-black text-rose-400 tracking-tight mb-1 font-mono">
             {safeStats.pendingWithdrawals || 0}
           </h3>
-          <p className="text-xs text-rose-600/80 dark:text-rose-400/80 font-medium">Process &rarr;</p>
+          <p className="text-xs text-rose-400/80 font-semibold">Process &rarr;</p>
         </div>
 
         {/* Admin Fee Income (10%) */}
         <div 
           onClick={() => setActiveTab?.("admin-income")}
-          className="bg-white dark:bg-[#0c1322]/90 backdrop-blur-xl border border-amber-500/30 hover:border-amber-400 p-4 sm:p-5 rounded-2xl transition-all duration-200 group cursor-pointer shadow-md hover:-translate-y-0.5"
+          className="glass-card-elevated p-4 sm:p-5 group cursor-pointer flex flex-col justify-between hover:border-indigo-400/50"
         >
-          <div className="flex items-center justify-between text-amber-600 dark:text-amber-400 mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider">Admin Fee (10%)</span>
+          <div className="flex items-center justify-between text-indigo-400 mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest">PROTOCOL FEE</span>
             <Landmark className="w-4 h-4 group-hover:scale-110 transition-transform" />
           </div>
-          <h3 className="text-xl sm:text-2xl font-display font-black text-amber-600 dark:text-amber-400 mb-1 truncate" title={formatUsdt(safeStats.adminFeeIncomeUsdt || 0)}>
+          <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight mb-1 truncate font-mono" title={formatUsdt(safeStats.adminFeeIncomeUsdt || 0)}>
             {formatUsdt(safeStats.adminFeeIncomeUsdt || 0)}
           </h3>
-          <p className="text-xs text-amber-600/80 dark:text-amber-400/80 font-medium">Platform Profit &rarr;</p>
+          <p className="text-xs text-indigo-300 font-semibold">10% Platform &rarr;</p>
         </div>
 
         {/* Total Approved USDT */}
-        <div className="bg-white dark:bg-[#0c1322]/90 backdrop-blur-xl border border-emerald-500/30 p-4 sm:p-5 rounded-2xl transition-all duration-200 shadow-md">
-          <div className="flex items-center justify-between text-emerald-600 dark:text-emerald-400 mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider">Total Approved</span>
+        <div className="glass-card-elevated p-4 sm:p-5 flex flex-col justify-between hover:border-emerald-400/50">
+          <div className="flex items-center justify-between text-emerald-400 mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest">LIQUIDITY</span>
             <Wallet className="w-4 h-4" />
           </div>
-          <h3 className="text-xl sm:text-2xl font-display font-black text-emerald-600 dark:text-emerald-400 mb-1 truncate" title={formatUsdt(safeStats.totalApprovedDepositsUsdt || 0)}>
+          <h3 className="text-xl sm:text-2xl font-black text-emerald-400 tracking-tight mb-1 truncate font-mono" title={formatUsdt(safeStats.totalApprovedDepositsUsdt || 0)}>
             {formatUsdt(safeStats.totalApprovedDepositsUsdt || 0)}
           </h3>
-          <p className="text-xs text-emerald-600 dark:text-emerald-500 font-medium">Liquidity Pool</p>
+          <p className="text-xs text-slate-400 font-medium">Approved Pool</p>
         </div>
       </div>
 
-      {/* Next Upcoming Cycle ROI Engine (Dubai 12:01 AM GST) */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-amber-500/10 via-amber-50/50 to-amber-100/30 dark:from-amber-500/15 dark:via-[#0c1322] dark:to-amber-900/10 border border-amber-500/30 p-6 rounded-2xl shadow-xl space-y-6">
-        {/* Header with Dubai Time Info */}
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10 pb-4 border-b border-amber-500/20">
+      {/* Next Upcoming Cycle ROI Engine */}
+      <div className="glass-card-elevated p-6 sm:p-7 relative overflow-hidden space-y-6">
+        {/* Header with Global Protocol Time Info */}
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10 pb-4 border-b border-white/10">
           <div className="space-y-2">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider">
-                <Clock className="h-3.5 w-3.5 text-amber-500" />
+              <span className="glass-pill px-3 py-1 text-xs font-bold text-sky-400 bg-sky-500/15 border-sky-400/30">
+                <Clock className="h-3.5 w-3.5 text-sky-400" />
                 <span>
-                  {cycleTz === "GST" && "Dubai 12:01 AM GST Cycle (Primary)"}
-                  {cycleTz === "IST" && "India 01:31 AM IST Cycle"}
-                  {cycleTz === "UTC" && "Global 08:01 PM UTC Cycle"}
+                  {cycleTz === "GST" && "Midnight 12:01 AM GST Protocol Cycle"}
+                  {cycleTz === "IST" && "Midnight 01:31 AM IST Protocol Cycle"}
+                  {cycleTz === "UTC" && "Global 08:01 PM UTC Protocol Cycle"}
                 </span>
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
+              <span className="glass-pill px-3 py-1 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border-emerald-500/30">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span>
                   Next Cycle:{" "}
@@ -178,62 +178,62 @@ export function AdminDashboardView({
                 </span>
               </span>
             </div>
-            <h2 className="font-display font-black text-xl sm:text-2xl text-slate-900 dark:text-slate-100">
+            <h2 className="font-bold text-xl sm:text-2xl text-white tracking-tight">
               Next Upcoming Cycle Income &amp; ROI Automation
             </h2>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 max-w-2xl leading-relaxed">
-              New package activations do not credit Day 1 immediately. Instead, returns are queued and auto-calculated every night at <strong>12:01 AM Dubai Time (GST)</strong>. Below is the projected payout for the next cycle.
+            <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+              New package activations credit via daily automation. Returns are queued and auto-calculated every night at <strong>12:01 AM GST</strong>. Below is the projected payout for the next cycle.
             </p>
           </div>
           
           <div className="flex flex-col sm:flex-row lg:flex-col items-start lg:items-end gap-2.5">
             {/* Timezone Switcher & Live Clock */}
-            <div className="flex flex-col items-start lg:items-end gap-1.5">
-              <div className="inline-flex items-center gap-1 p-1 rounded-xl bg-black/40 border border-slate-800 text-[11px]">
+            <div className="flex flex-col items-start lg:items-end gap-2">
+              <div className="inline-flex items-center gap-1 p-1 rounded-2xl bg-slate-900/60 border border-white/10 text-[11px] backdrop-blur-xl">
                 <button
                   type="button"
                   onClick={() => setCycleTz("GST")}
-                  className={`px-2.5 py-0.5 rounded-lg font-bold transition-all ${
+                  className={`px-3 py-1 rounded-xl font-bold transition-all ${
                     cycleTz === "GST"
-                      ? "bg-amber-500 text-black font-black"
+                      ? "bg-sky-500 text-white shadow-md shadow-sky-500/30"
                       : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  🇦🇪 GST (Dubai)
+                  GST
                 </button>
                 <button
                   type="button"
                   onClick={() => setCycleTz("IST")}
-                  className={`px-2.5 py-0.5 rounded-lg font-bold transition-all ${
+                  className={`px-3 py-1 rounded-xl font-bold transition-all ${
                     cycleTz === "IST"
-                      ? "bg-blue-500 text-white font-black"
+                      ? "bg-sky-500 text-white shadow-md shadow-sky-500/30"
                       : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  🇮🇳 IST
+                  IST
                 </button>
                 <button
                   type="button"
                   onClick={() => setCycleTz("UTC")}
-                  className={`px-2.5 py-0.5 rounded-lg font-bold transition-all ${
+                  className={`px-3 py-1 rounded-xl font-bold transition-all ${
                     cycleTz === "UTC"
-                      ? "bg-cyan-500 text-black font-black"
+                      ? "bg-sky-500 text-white shadow-md shadow-sky-500/30"
                       : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  🌐 UTC
+                  UTC
                 </button>
               </div>
 
-              <div className="text-xs text-slate-500 dark:text-slate-400 bg-black/30 border border-slate-800 px-3 py-1.5 rounded-xl font-mono">
+              <div className="text-xs text-slate-400 bg-slate-900/40 border border-white/10 px-3 py-1.5 rounded-xl font-mono">
                 {cycleTz === "GST" && (
-                  <>🇦🇪 Dubai: <span className="text-amber-400 font-bold">{upcoming.currentDubaiTime || "Loading..."}</span></>
+                  <>GST Time: <span className="text-sky-400 font-bold">{upcoming.currentDubaiTime || "Loading..."}</span></>
                 )}
                 {cycleTz === "IST" && (
-                  <>🇮🇳 India: <span className="text-blue-400 font-bold">{upcoming.currentIstTime || "Loading..."}</span></>
+                  <>IST Time: <span className="text-indigo-400 font-bold">{upcoming.currentIstTime || "Loading..."}</span></>
                 )}
                 {cycleTz === "UTC" && (
-                  <>🌐 UTC: <span className="text-cyan-400 font-bold">{upcoming.currentUtcTime || "Loading..."}</span></>
+                  <>UTC Time: <span className="text-cyan-400 font-bold">{upcoming.currentUtcTime || "Loading..."}</span></>
                 )}
               </div>
             </div>
@@ -244,14 +244,14 @@ export function AdminDashboardView({
                   <button
                     type="button"
                     disabled={true}
-                    className="px-6 py-3 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-emerald-950/40 text-emerald-400 border-2 border-emerald-500/50 shadow-lg shadow-emerald-950/30 whitespace-nowrap cursor-not-allowed opacity-90 transition-all select-none"
+                    className="px-6 py-3 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-lg shadow-emerald-950/30 whitespace-nowrap cursor-not-allowed opacity-90 transition-all select-none"
                     title="Today's ROI & Royalty cycle is already complete. Next automated cycle runs at 12:01 AM GST."
                   >
                     <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
                     <span>Closing Already Complete</span>
                   </button>
 
-                  <div className="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-400/90 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-lg">
+                  <div className="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-400/90 glass-pill px-2.5 py-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                     <span>Today&apos;s cycle credited &bull; Next: {upcoming.nextCycleDubaiTime || "12:01 AM GST"}</span>
                   </div>
@@ -262,25 +262,21 @@ export function AdminDashboardView({
                     type="button"
                     onClick={onTriggerCron}
                     disabled={cronLoading}
-                    className="gold-btn px-6 py-3 rounded-xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-amber-500/20 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer"
+                    className="crypto-btn px-6 py-3 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-sky-500/25 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer"
                   >
                     {cronLoading ? (
                       <>
-                        <Activity className="h-4 w-4 animate-spin text-slate-950" />
+                        <Activity className="h-4 w-4 animate-spin text-white" />
                         <span>Executing Cycle...</span>
                       </>
                     ) : (
                       <>
-                        <Play className="h-4 w-4 text-slate-950 fill-slate-950" />
+                        <Play className="h-4 w-4 text-white fill-white" />
                         <span>Execute Cycle Now ({pendingContractsCount} Pending)</span>
                       </>
                     )}
                   </button>
-
-                  <div className="flex items-center gap-1.5 text-[11px] font-semibold text-amber-400 bg-amber-500/10 border border-amber-500/30 px-2.5 py-1 rounded-lg">
-                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
-                    <span>Closing Pending: {pendingContractsCount} active contract{pendingContractsCount !== 1 ? "s" : ""}</span>
-                  </div>
+                  <p className="text-[11px] text-slate-400 font-medium">Auto-distributes 4% daily contract pool</p>
                 </div>
               )}
             </div>

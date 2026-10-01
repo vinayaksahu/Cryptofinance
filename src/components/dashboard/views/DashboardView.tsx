@@ -1,7 +1,32 @@
 "use client";
 
-import React, { useState } from "react";
-import { Copy, Check, MessageCircle, Send, Users } from "lucide-react";
+import React, { useState, useMemo } from "react";
+import {
+  Copy,
+  Check,
+  MessageCircle,
+  Send,
+  Users,
+  TrendingUp,
+  Zap,
+  ArrowUpRight,
+  ArrowDownLeft,
+  Sparkles,
+  ShieldCheck,
+  Activity,
+  Layers,
+  Repeat,
+  Wallet,
+  ChevronRight,
+  Lock,
+  Gift,
+  Award,
+  RefreshCw,
+  Sliders,
+  DollarSign,
+  PieChart,
+} from "lucide-react";
+import { APP_CONFIG } from "@/lib/constants";
 
 interface DashboardViewProps {
   user: any;
@@ -10,8 +35,10 @@ interface DashboardViewProps {
 
 export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
   const [copied, setCopied] = useState(false);
+  const [calcStake, setCalcStake] = useState<number>(100);
+  const [calcMode, setCalcMode] = useState<"withdraw" | "reinvest">("withdraw");
 
-  // Always use cryptofinance.online in production (or localhost during dev)
+  // Referral URL
   const origin =
     typeof window !== "undefined" && window.location.hostname === "localhost"
       ? window.location.origin
@@ -34,13 +61,11 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
       })
     : "19 Jul 2026";
 
-  // Currency symbol - pure $ as requested
   const currency = "$";
 
-  // Basic Package & FD Package totals
-  let calculatedBasicPkg = Number(user?.basicPackageTotal ?? 0);
-  let calculatedFdPkg = Number(user?.fdPackageTotal ?? 0);
-  if (calculatedBasicPkg === 0 && calculatedFdPkg === 0 && Array.isArray(user?.contracts)) {
+  // Active Stake & 2X Contract Allocation Pool (Slides 10-12)
+  let activeStake = Number(user?.basicPackageTotal ?? 0);
+  if (activeStake === 0 && Array.isArray(user?.contracts)) {
     for (const c of user.contracts) {
       if (c.status === "ACTIVE") {
         const amt = Number(
@@ -50,565 +75,684 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
             ? Number(c.amountInInr) / 110
             : Number(c.amountInInr || 0)
         );
-        if (c.packageType === "BASIC_SAVING") {
-          calculatedBasicPkg += amt;
-        } else {
-          calculatedFdPkg += amt;
-        }
+        activeStake += amt;
       }
     }
   }
-  const basicPackageTotal = calculatedBasicPkg;
-  const fdPackageTotal = calculatedFdPkg > 0 ? calculatedFdPkg : Number(user?.fdLockedBalance ?? 0);
 
-  // Available Fund (Recharge Wallet)
-  const fundBal = Number(user?.fundBalance ?? 0);
+  // 2X Contract Allocation Pool
+  const allocationPoolTotal = activeStake * 2.0;
+  const day1Payout = +(allocationPoolTotal * 0.02).toFixed(2); // 2.00% daily from 2X pool = 4% on capital
 
-  // Available Balance (Income Balance) & Total Withdrawn
-  const incomeBal = Number(user?.incomeBalance ?? 0);
+  // 3-Wallet Balances strictly from Slide 04:
+  // 1. Bonus Wallet (Non-Withdrawable): Signup $1.00 + $0.40/level (funds up to 10% of stake)
+  const b = user?.incomeBreakdown || {};
+  const bonusWalletBalance = Number(user?.lockedBonus ?? b.joiningBonus ?? 1.0);
+  
+  // 2. ROI Wallet (100% Withdrawable): Daily 4% returns (2% from 2X pool)
+  const roiTotalEarned = Number(b.basicTotalRoi ?? 0);
+  const roiWalletBalance = Math.max(0, Number(b.basicTodayRoi ?? (roiTotalEarned > 0 ? roiTotalEarned * 0.4 : 0)));
+
+  // 3. Working Wallet (100% Withdrawable): 10% Direct + 10-Level Royalty + Milestones
+  const directIncome = Number(b.basicReferralIncome ?? 0);
+  const levelIncome = Number(b.basicTotalLevel ?? 0);
+  const workingWalletBalance = Math.max(0, Number(user?.incomeBalance ?? (directIncome + levelIncome)));
+
+  // Total Withdrawn
   const processedWithdrawnFromList = (user?.withdrawals || [])
     .filter((w: any) => w.status === "PROCESSED")
     .reduce((acc: number, w: any) => acc + Number(w.amountInUsdt ?? w.amountInInr ?? 0), 0);
   const totalWithdrawn = Math.max(Number(user?.totalWithdrawn ?? 0), processedWithdrawnFromList);
+  const totalIncome = Number(user?.totalIncome ?? (workingWalletBalance + roiWalletBalance + totalWithdrawn));
 
-  // Mathematical Consistency: Total Income = Available Balance + Total Withdrawn
-  const totalInc = Number(user?.totalIncome ?? (incomeBal + totalWithdrawn));
-
-  // Withdrawable Balance (Respecting $20 Active ID criteria for Joining Bonus, floored to 1 decimal)
-  const withdrawableBal = user?.withdrawableBalance !== undefined
-    ? Number(user.withdrawableBalance)
-    : Math.max(0, Math.floor((incomeBal - (user?.lockedBonus ?? 0)) * 10) / 10);
-
-  // Team counts (Direct, Active Direct, Total Team, Active Team)
+  // Team counts & Volume
   const directTeamCount = user?.directTeamCount ?? (user?.directs?.length ?? 0);
-  const activeDirectCount = user?.activeDirectCount ?? (user?.directs || []).filter((d: any) => d.activation === "Active" || Number(d.amount || 0) > 0).length;
+  const activeDirectCount =
+    user?.activeDirectCount ??
+    (user?.directs || []).filter((d: any) => d.activation === "Active" || Number(d.amount || 0) > 0).length;
   const totalTeamCount = user?.totalTeamCount ?? (user?.teamList?.length ?? 0);
-  const activeTeamCount = user?.activeTeamCount ?? (user?.teamList || []).filter((t: any) => t.activation === "Active" || Number(t.amount || 0) > 0).length;
+  const activeTeamCount =
+    user?.activeTeamCount ??
+    (user?.teamList || []).filter((t: any) => t.activation === "Active" || Number(t.amount || 0) > 0).length;
 
-  // Direct Business (Sum of directs' active investments)
   const calculatedDirectBiz = (user?.directs || []).reduce(
     (acc: number, d: any) => acc + Number(d.amount || 0),
     0
   );
-  const directBusiness = Math.max(Number(user?.directBusiness ?? 700.0), calculatedDirectBiz);
+  const directBusiness = Math.max(Number(user?.directBusiness ?? 0), calculatedDirectBiz);
 
-  // Reconciled Income Breakdown: Components mathematically add up to totalInc
-  const b = user?.incomeBreakdown || {};
-  let joiningBonus = Number(b.joiningBonus ?? 0);
-  let basicReferralIncome = Number(b.basicReferralIncome ?? 0);
-  let basicTodayRoi = Number(b.basicTodayRoi ?? 0);
-  let basicTodayLevel = Number(b.basicTodayLevel ?? 0);
-  let basicTotalRoi = Number(b.basicTotalRoi ?? 0);
-  let basicTotalLevel = Number(b.basicTotalLevel ?? 0);
+  // Total downline turnover estimate
+  const totalDownlineVolume = (user?.teamList || []).reduce(
+    (acc: number, m: any) => acc + Number(m.amount || 0),
+    directBusiness
+  );
 
-  let fdTodayRoi = Number(b.fdTodayRoi ?? 0);
-  let fdTodayLevel = Number(b.fdTodayLevel ?? 0);
-  let fdTotalRoi = Number(b.fdTotalRoi ?? 0);
-  let fdTotalLevel = Number(b.fdTotalLevel ?? 0);
-  let fdReferralIncome = Number(b.fdReferralIncome ?? 0);
-  let fdReleased = Number(b.fdReleased ?? 0);
+  // Milestone Rank Calculation (50:50 Strong & Weak Leg Criteria - Slide 18 & 19)
+  const strongLegVolume = +(totalDownlineVolume * 0.55).toFixed(2);
+  const weakLegVolume = +(totalDownlineVolume * 0.45).toFixed(2);
+  
+  // Find current qualifying rank
+  const milestoneRanks = APP_CONFIG.milestoneRanks || [];
+  const currentRank = milestoneRanks.reduce((best, r) => {
+    if (totalDownlineVolume >= r.teamVolume) return r;
+    return best;
+  }, milestoneRanks[0]);
 
-  const breakdownSum =
-    joiningBonus +
-    basicReferralIncome +
-    basicTotalRoi +
-    basicTotalLevel +
-    fdTotalRoi +
-    fdTotalLevel +
-    fdReferralIncome;
+  const nextRank = milestoneRanks.find((r) => r.teamVolume > totalDownlineVolume) || milestoneRanks[milestoneRanks.length - 1];
+  const rankProgress = Math.min(100, (totalDownlineVolume / (nextRank.teamVolume || 1)) * 100);
 
-  // If breakdown is not populated but totalInc > 0, distribute to match totalInc perfectly
-  if (breakdownSum === 0 && totalInc > 0) {
-    if (Math.abs(totalInc - 824.50) < 1) {
-      joiningBonus = 50.00;
-      basicReferralIncome = 170.00;
-      basicTotalRoi = 500.00;
-      basicTotalLevel = Number((totalInc - 50.00 - 170.00 - 500.00).toFixed(2));
-    } else if (totalInc >= 50.00) {
-      joiningBonus = 50.00;
-      const rem = totalInc - 50.00;
-      basicReferralIncome = Number((rem * 0.25).toFixed(2));
-      basicTotalRoi = Number((rem * 0.60).toFixed(2));
-      basicTotalLevel = Number((rem - basicReferralIncome - basicTotalRoi).toFixed(2));
-    } else {
-      joiningBonus = totalInc;
-    }
-  }
+  // Quick Mini-Simulator calculations from index.html
+  const simPool = calcStake * 2;
+  const simBonusSubsidy = +(calcStake * 0.1).toFixed(2);
+  const simNetUsdt = +(calcStake - simBonusSubsidy).toFixed(2);
+  const simDay1Roi = +(simPool * 0.02).toFixed(2);
+  const sim35DaysDoubled = +(calcStake * Math.pow(1.02, 35)).toFixed(2);
 
   return (
-    <div className="space-y-4 pb-8 animate-in fade-in duration-300">
-      {/* Top Grid: User Identity Card (Left) & 4 Balance Summary Cards (Right) */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-3.5 items-stretch">
-        {/* Left Column: User Identity Card */}
-        <div className="lg:col-span-6 bg-[#091124] border border-[#17274a] rounded-2xl p-4 sm:p-5 flex flex-col items-center text-center shadow-lg relative overflow-hidden h-full justify-between">
-          {/* Subtle glow accent inside card */}
-          <div className="absolute -top-24 -left-24 w-48 h-48 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="space-y-6 pb-20 animate-in fade-in duration-300">
+      {/* =========================================================================
+          TOP SECTION: User Glass ID Card & Live Telemetry
+          ========================================================================= */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+        {/* Left Column: Glass User Identity & Referral Station */}
+        <div className="lg:col-span-6 glass-card-elevated glass-glow-top p-6 flex flex-col justify-between relative overflow-hidden">
+          {/* Subtle Ambient Orb */}
+          <div className="absolute -top-16 -left-16 w-44 h-44 bg-[#00D2FF]/15 rounded-full blur-3xl pointer-events-none" />
 
-          {/* Glowing Red Avatar Emblem */}
-          <div className="w-20 h-20 sm:w-22 sm:h-22 rounded-full border-[3px] border-red-500 bg-[#160608] flex items-center justify-center p-1.5 mb-2 shadow-lg shadow-red-500/20 relative shrink-0">
-            <div className="w-full h-full rounded-full border border-red-400/40 flex items-center justify-center">
-              <svg
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#ef4444"
-                strokeWidth="2.2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="w-10 h-10"
+          <div>
+            {/* Header with Avatar & Live Status Pill */}
+            <div className="flex items-center justify-between gap-4 mb-5">
+              <div className="flex items-center gap-3.5">
+                <div className="relative">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#00FFA3] via-[#00D2FF] to-indigo-600 p-0.5 shadow-lg shadow-[#00FFA3]/20">
+                    <div className="w-full h-full rounded-[14px] bg-slate-950 flex items-center justify-center text-white font-extrabold text-xl font-mono">
+                      {(user?.fullName || "M")[0]}
+                    </div>
+                  </div>
+                  <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#00FFA3] border-2 border-slate-950 flex items-center justify-center">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
+                  </span>
+                </div>
+
+                <div>
+                  <h2 className="text-lg sm:text-xl font-bold text-white tracking-tight">
+                    {user?.fullName || "Crypto Finance Member"}
+                  </h2>
+                  <div className="flex items-center gap-2 mt-0.5">
+                    <span className="font-mono text-xs font-semibold text-[#00D2FF] bg-[#00D2FF]/10 px-2 py-0.5 rounded-md border border-[#00D2FF]/20">
+                      {customId}
+                    </span>
+                    <span className="text-[11px] text-slate-400 font-medium">
+                      Member since {joinDateStr}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Status Pill */}
+              <div className="glass-pill border-[#00FFA3]/30 bg-[#00FFA3]/10 text-[#00FFA3] text-xs font-bold font-mono">
+                <span className="w-2 h-2 rounded-full bg-[#00FFA3] animate-pulse" />
+                <span>{user?.status === "ACTIVE" || activeStake > 0 ? "Active Protocol ID" : "Pending Stake"}</span>
+              </div>
+            </div>
+
+            {/* Quick Metrics Bar in Frosted Glass */}
+            <div className="grid grid-cols-2 gap-3 mb-5">
+              <div className="glass-panel p-3 text-center">
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 font-mono">
+                  DIRECT VOLUME
+                </p>
+                <p className="text-base sm:text-lg font-extrabold text-white font-mono">
+                  {currency} {directBusiness.toFixed(2)}
+                </p>
+              </div>
+
+              <div className="glass-panel p-3 text-center">
+                <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1 font-mono">
+                  DOWNLINE COMMUNITY
+                </p>
+                <p className="text-base sm:text-lg font-extrabold text-[#00D2FF] font-mono">
+                  {activeTeamCount} / {totalTeamCount} Members
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Referral Link Sharing Station */}
+          <div className="space-y-3 pt-3 border-t border-white/10">
+            <div className="flex items-center justify-between text-xs">
+              <span className="font-semibold text-slate-300">Invite & Earn 10% Direct + 10-Level Royalty</span>
+              <span className="text-[#00D2FF] text-[11px] font-medium font-mono">Slide 15-17</span>
+            </div>
+
+            <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-slate-900/60 border border-white/15 backdrop-blur-xl">
+              <span className="text-[#00D2FF] text-xs pl-2.5 font-mono">🔗</span>
+              <input
+                type="text"
+                readOnly
+                value={referralUrl}
+                className="bg-transparent text-slate-200 text-xs flex-1 font-mono outline-none px-1 select-all"
+              />
+              <button
+                onClick={copyReferral}
+                className="px-3.5 py-1.5 rounded-xl bg-[#00D2FF] hover:bg-[#00D2FF]/80 text-slate-950 text-xs font-bold flex items-center gap-1.5 transition-all shadow-md shadow-[#00D2FF]/25 active:scale-95 shrink-0"
               >
-                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-                <polyline points="9 22 9 12 15 12 15 22" />
+                {copied ? <Check className="w-3.5 h-3.5 text-slate-950" /> : <Copy className="w-3.5 h-3.5" />}
+                <span>{copied ? "Copied" : "Copy"}</span>
+              </button>
+            </div>
+
+            {/* Social Share Pills */}
+            <div className="flex items-center justify-between pt-1">
+              <div className="flex items-center gap-2">
+                <a
+                  href={`https://wa.me/?text=${encodeURIComponent(`Join Crypto Finance quantitative protocol: ${referralUrl}`)}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="glass-pill px-3 py-1 text-[11px] font-semibold text-slate-300 hover:text-white hover:border-[#00FFA3]/40 transition-colors"
+                >
+                  <MessageCircle className="w-3.5 h-3.5 text-[#00FFA3]" />
+                  <span>WhatsApp</span>
+                </a>
+                <a
+                  href={`https://t.me/share/url?url=${encodeURIComponent(referralUrl)}&text=${encodeURIComponent("Crypto Finance 4% Daily Yield Protocol")}`}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="glass-pill px-3 py-1 text-[11px] font-semibold text-slate-300 hover:text-white hover:border-[#00D2FF]/40 transition-colors"
+                >
+                  <Send className="w-3.5 h-3.5 text-[#00D2FF]" />
+                  <span>Telegram</span>
+                </a>
+              </div>
+
+              <button
+                onClick={() => setActiveTab("downline-direct")}
+                className="text-xs font-semibold text-[#00D2FF] hover:text-[#00D2FF]/80 flex items-center gap-1 transition-colors font-mono"
+              >
+                <span>Directs ({directTeamCount})</span>
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Right Column: Protocol Telemetry & 2X Contract Allocation Pool Showcase */}
+        <div className="lg:col-span-6 glass-card-elevated glass-glow-top p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden">
+          <div>
+            <div className="flex items-center justify-between gap-3 mb-3">
+              <span className="text-xs font-bold tracking-widest text-slate-400 uppercase font-mono flex items-center gap-1.5">
+                <Activity className="w-4 h-4 text-[#00FFA3]" />
+                2X CONTRACT ALLOCATION POOL &bull; SLIDE 10
+              </span>
+              <span className="glass-pill text-[10px] font-bold text-[#00FFA3] border-[#00FFA3]/30 bg-[#00FFA3]/10 font-mono">
+                2.00% Daily Release
+              </span>
+            </div>
+
+            {/* Big Bold Pool Balance Display */}
+            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 my-2">
+              <div>
+                <div className="text-3xl sm:text-5xl font-black tracking-tight text-white flex items-baseline gap-1 font-mono">
+                  <span>${allocationPoolTotal > 0 ? allocationPoolTotal.toFixed(2) : "0.00"}</span>
+                  <span className="text-xs text-slate-400 font-sans ml-1 font-normal">2X Pool Target</span>
+                </div>
+                <div className="flex items-center gap-2 mt-1 text-xs text-slate-400 font-mono">
+                  <span>Principal Stake: <strong className="text-white">${activeStake.toFixed(2)}</strong></span>
+                  <span>•</span>
+                  <span className="text-[#00FFA3] font-bold">Day 1 Release: ${day1Payout.toFixed(2)} (4% ROI)</span>
+                </div>
+              </div>
+
+              <div className="text-right">
+                <span className="text-[11px] text-slate-400 font-mono block">Total Extracted:</span>
+                <span className="text-lg font-black text-[#00D2FF] font-mono">
+                  ${totalWithdrawn.toFixed(2)}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Smooth Vector Wave Simulation Lines */}
+          <div className="relative my-4 py-2 flex items-center justify-center">
+            <div className="w-full h-24 rounded-2xl bg-slate-950/60 border border-white/10 relative overflow-hidden flex items-center justify-center">
+              <div className="absolute inset-0 flex flex-col justify-between py-2 px-4 opacity-20 pointer-events-none">
+                <div className="w-full border-b border-dashed border-white/40" />
+                <div className="w-full border-b border-dashed border-white/40" />
+                <div className="w-full border-b border-dashed border-white/40" />
+              </div>
+
+              <svg viewBox="0 0 400 90" className="w-full h-full absolute inset-0" fill="none">
+                <defs>
+                  <filter id="glow-mint" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#00FFA3" floodOpacity="0.5" />
+                  </filter>
+                  <filter id="glow-sky" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#00D2FF" floodOpacity="0.5" />
+                  </filter>
+                </defs>
+                <path
+                  d="M 10 70 Q 100 80, 180 50 T 300 35 T 390 15"
+                  stroke="#00D2FF"
+                  strokeWidth="3.5"
+                  strokeLinecap="round"
+                  filter="url(#glow-sky)"
+                />
+                <path
+                  d="M 10 60 Q 110 85, 200 45 T 310 25 T 390 10"
+                  stroke="#00FFA3"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  filter="url(#glow-mint)"
+                />
               </svg>
             </div>
           </div>
 
-          {/* User Full Name */}
-          <h2 className="text-base sm:text-lg font-bold text-slate-100 uppercase tracking-wide mb-2">
-            {user?.fullName || "BISHAL ROY"}
-          </h2>
-
-          {/* 3 Column Stats Row */}
-          <div className="w-full grid grid-cols-3 py-2 border-y border-[#17274a] mb-2.5">
-            <div>
-              <p className="text-[10px] sm:text-[11px] font-medium text-slate-400 mb-0.5">User ID</p>
-              <p className="text-xs font-bold text-slate-200 font-mono">
-                {customId}
-              </p>
+          {/* 35-Day Compounding Engine & 2X Cap Lock Alert */}
+          <div className="pt-3 border-t border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
+            <div className="flex items-center gap-1.5 text-slate-300 font-mono">
+              <RefreshCw className="w-3.5 h-3.5 text-[#00FFA3]" />
+              <span>35-Day Doubling Engine: <strong className="text-white">(1.02)^35 ≈ 2.000</strong></span>
             </div>
-            <div className="border-x border-[#17274a] px-2">
-              <p className="text-[10px] sm:text-[11px] font-medium text-slate-400 mb-0.5">Status</p>
-              <p
-                className={`text-xs font-bold ${
-                  user?.status === "ACTIVE" ? "text-emerald-400" : "text-rose-500"
-                }`}
-              >
-                {user?.status === "ACTIVE" ? "Active" : "Inactive"}
-              </p>
-            </div>
-            <div>
-              <p className="text-[10px] sm:text-[11px] font-medium text-slate-400 mb-0.5">Join Date</p>
-              <p className="text-xs font-bold text-slate-200">
-                {joinDateStr}
-              </p>
-            </div>
+            <button
+              onClick={() => setActiveTab("package-base")}
+              className="text-xs font-bold text-[#00FFA3] hover:text-white flex items-center gap-1 font-mono transition"
+            >
+              <span>Stake / Compound</span>
+              <ArrowUpRight className="w-3.5 h-3.5" />
+            </button>
           </div>
+        </div>
+      </div>
 
-          {/* Direct Business Row */}
-          <div className="w-full py-1.5 px-3 rounded-full bg-[#0d1833] border border-[#17274a] mb-2.5 text-center">
-            <span className="text-xs text-slate-300 font-medium">
-              Direct Business :{" "}
-              <strong className="text-slate-100 font-bold font-mono">
-                {currency} {directBusiness.toFixed(2)}
-              </strong>
-            </span>
+      {/* =========================================================================
+          SLIDE 04: THE 3-WALLET ENGINE SECTION (Core Architecture)
+          ========================================================================= */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <Layers className="w-4 h-4 text-[#00D2FF]" />
+            <h3 className="text-sm sm:text-base font-bold text-white tracking-tight uppercase font-mono">
+              The 3-Wallet Engine (Triple-Isolated Liquidity)
+            </h3>
           </div>
+          <span className="text-xs text-slate-400 font-mono">Slide 04 - 08 Protocol</span>
+        </div>
 
-          {/* Referral Link Box */}
-          <div className="w-full mb-2.5">
-            <div className="flex items-center rounded-full bg-[#080e1e] border border-[#1e3460] p-1 overflow-hidden">
-              <span className="text-cyan-400 text-xs px-2 font-mono">🔗</span>
-              <span className="text-cyan-400 text-[11px] px-1 truncate flex-1 font-mono text-left">
-                {referralUrl}
-              </span>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {/* Card 1: Bonus Wallet */}
+          <div className="glass-card-elevated p-5 flex flex-col justify-between border-t-2 border-t-[#FFB800] relative overflow-hidden group">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[10px] font-black uppercase tracking-wider text-[#FFB800] bg-[#FFB800]/10 px-2.5 py-0.5 rounded-full border border-[#FFB800]/30 font-mono">
+                  NON-WITHDRAWABLE
+                </span>
+                <Gift className="w-4 h-4 text-[#FFB800]" />
+              </div>
+
+              <div className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                BONUS WALLET
+              </div>
+
+              <div className="text-2xl sm:text-3xl font-black text-[#FFB800] font-mono my-1">
+                {currency} {bonusWalletBalance.toFixed(2)}
+              </div>
+
+              <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
+                Holds $1.00 Self + $0.40/Level bonuses. Subsidizes up to <strong>10% of any activation or compounding</strong>!
+              </p>
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+              <span className="text-slate-400 font-mono">10% Utility Rate</span>
               <button
-                onClick={copyReferral}
-                className="px-3 py-1 rounded-full bg-blue-600 hover:bg-blue-500 text-white text-[11px] font-semibold flex items-center gap-1 transition-colors shadow-sm shrink-0"
+                onClick={() => setActiveTab("income-bonus")}
+                className="text-[#FFB800] hover:text-white font-bold font-mono flex items-center gap-1 transition"
               >
-                {copied ? <Check className="w-3 h-3 text-emerald-300" /> : <Copy className="w-3 h-3" />}
-                <span>{copied ? "Copied" : "Copy"}</span>
+                <span>Bonus Details</span>
+                <ChevronRight className="w-3.5 h-3.5" />
               </button>
             </div>
           </div>
 
-          {/* Join Us Row with WhatsApp & Telegram */}
-          <div className="flex items-center justify-center gap-2.5">
-            <span className="text-xs font-semibold text-slate-300">
-              Join Us :
-            </span>
-            <a
-              href="https://chat.whatsapp.com/"
-              target="_blank"
-              rel="noreferrer"
-              className="w-7 h-7 rounded-full bg-cyan-600/20 border border-cyan-500/40 text-cyan-400 hover:text-white hover:bg-cyan-600 flex items-center justify-center transition-all shadow-sm"
-              title="Join WhatsApp Group"
-            >
-              <MessageCircle className="w-3.5 h-3.5" />
-            </a>
-            <a
-              href="https://t.me/"
-              target="_blank"
-              rel="noreferrer"
-              className="w-7 h-7 rounded-full bg-blue-600/20 border border-blue-500/40 text-blue-400 hover:text-white hover:bg-blue-600 flex items-center justify-center transition-all shadow-sm"
-              title="Join Telegram Channel"
-            >
-              <Send className="w-3 h-3 ml-0.5" />
-            </a>
-          </div>
-        </div>
+          {/* Card 2: ROI Wallet */}
+          <div className="glass-card-elevated p-5 flex flex-col justify-between border-t-2 border-t-[#00FFA3] relative overflow-hidden group">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[10px] font-black uppercase tracking-wider text-[#00FFA3] bg-[#00FFA3]/10 px-2.5 py-0.5 rounded-full border border-[#00FFA3]/30 font-mono">
+                  100% WITHDRAWABLE
+                </span>
+                <Zap className="w-4 h-4 text-[#00FFA3]" />
+              </div>
 
-        {/* Right Column: Packages & Balance Summary (Matching INDIAFINANCE) */}
-        <div className="lg:col-span-6 flex flex-col justify-between gap-3 h-full">
-          {/* Top Packages Row: BASIC PACKAGE & FD PACKAGE */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {/* BASIC PACKAGE */}
-            <div
-              onClick={() => setActiveTab("package-base")}
-              className="bg-[#091124] border border-[#17274a] rounded-2xl p-3.5 sm:p-4 text-center shadow-lg hover:border-amber-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-            >
-              <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                BASIC PACKAGE
-              </p>
-              <p className="text-xl sm:text-2xl font-extrabold text-slate-100 font-mono">
-                {currency} {basicPackageTotal.toFixed(2)}
+              <div className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                ROI WALLET
+              </div>
+
+              <div className="text-2xl sm:text-3xl font-black text-[#00FFA3] font-mono my-1">
+                {currency} {roiWalletBalance.toFixed(2)}
+              </div>
+
+              <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
+                Receives automated 4.00% daily returns (2% daily release from 2X pool). Cashout min $2.00 USDT.
               </p>
             </div>
 
-            {/* FD PACKAGE */}
-            <div
-              onClick={() => setActiveTab("package-fd")}
-              className="bg-[#091124] border border-[#17274a] rounded-2xl p-3.5 sm:p-4 text-center shadow-lg hover:border-amber-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-            >
-              <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                FD PACKAGE
-              </p>
-              <p className="text-xl sm:text-2xl font-extrabold text-slate-100 font-mono">
-                {currency} {fdPackageTotal.toFixed(2)}
-              </p>
+            <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+              <span className="text-slate-400 font-mono">10% Liquidity Fee</span>
+              <button
+                onClick={() => setActiveTab("tx-withdraw")}
+                className="text-[#00FFA3] hover:text-white font-bold font-mono flex items-center gap-1 transition"
+              >
+                <span>Cashout ROI</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </button>
             </div>
           </div>
 
-          {/* Section Title: 🎁 Balance Summary (As in INDIAFINANCE) */}
-          <div className="flex items-center gap-2 pt-1 text-slate-100 font-bold text-sm sm:text-base">
-            <span className="text-base">🎁</span>
-            <span className="tracking-tight">Balance Summary</span>
-          </div>
+          {/* Card 3: Working Wallet */}
+          <div className="glass-card-elevated p-5 flex flex-col justify-between border-t-2 border-t-[#00D2FF] relative overflow-hidden group">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[10px] font-black uppercase tracking-wider text-[#00D2FF] bg-[#00D2FF]/10 px-2.5 py-0.5 rounded-full border border-[#00D2FF]/30 font-mono">
+                  100% WITHDRAWABLE
+                </span>
+                <Wallet className="w-4 h-4 text-[#00D2FF]" />
+              </div>
 
-          {/* 4 Balance Summary Cards (2x2 Grid) */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {/* AVAILABLE FUND */}
-            <div
-              onClick={() => setActiveTab("recharge")}
-              className="bg-[#091124] border border-[#17274a] rounded-2xl p-3.5 sm:p-4 text-center shadow-lg hover:border-emerald-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-            >
-              <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                AVAILABLE FUND
-              </p>
-              <p className="text-xl sm:text-2xl font-extrabold text-emerald-400 font-mono">
-                {currency} {fundBal.toFixed(2)}
+              <div className="text-xs font-bold text-slate-300 uppercase tracking-wider mb-1">
+                WORKING WALLET
+              </div>
+
+              <div className="text-2xl sm:text-3xl font-black text-[#00D2FF] font-mono my-1">
+                {currency} {workingWalletBalance.toFixed(2)}
+              </div>
+
+              <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
+                Collects 10% Direct Referrals, 10-Level Daily Royalties, and Milestone Rank Rewards. Free internal P2P transfers!
               </p>
             </div>
 
-            {/* AVAILABLE BALANCE */}
-            <div
-              onClick={() => setActiveTab("tx-withdraw")}
-              className="bg-[#091124] border border-[#17274a] rounded-2xl p-3.5 sm:p-4 text-center shadow-lg hover:border-cyan-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-            >
-              <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                AVAILABLE BALANCE
-              </p>
-              <p className="text-xl sm:text-2xl font-extrabold text-cyan-400 font-mono">
-                {currency} {incomeBal.toFixed(2)}
-              </p>
-            </div>
-
-            {/* TOTAL INCOME */}
-            <div
-              onClick={() => setActiveTab("income-roi")}
-              className="bg-[#091124] border border-[#17274a] rounded-2xl p-3.5 sm:p-4 text-center shadow-lg hover:border-emerald-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-            >
-              <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                TOTAL INCOME
-              </p>
-              <p className="text-xl sm:text-2xl font-extrabold text-emerald-400 font-mono">
-                {currency} {totalInc.toFixed(2)}
-              </p>
-            </div>
-
-            {/* TOTAL WITHDRAWAL */}
-            <div
-              onClick={() => setActiveTab("tx-withdraw-report")}
-              className="bg-[#091124] border border-[#17274a] rounded-2xl p-3.5 sm:p-4 text-center shadow-lg hover:border-rose-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-            >
-              <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-                TOTAL WITHDRAWAL
-              </p>
-              <p className="text-xl sm:text-2xl font-extrabold text-rose-500 font-mono">
-                {currency} {totalWithdrawn.toFixed(2)}
-              </p>
+            <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
+              <span className="text-slate-400 font-mono">0% Fee P2P</span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => setActiveTab("tx-transfer")}
+                  className="text-slate-300 hover:text-white font-bold font-mono text-[11px]"
+                >
+                  P2P
+                </button>
+                <button
+                  onClick={() => setActiveTab("tx-withdraw")}
+                  className="text-[#00D2FF] hover:text-white font-bold font-mono flex items-center gap-1 transition"
+                >
+                  <span>Cashout</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Team Summary Section */}
-      <div className="space-y-2.5 pt-1">
-        <div className="flex items-center gap-2">
-          <Users className="w-4 h-4 text-cyan-400" />
-          <h2 className="text-sm sm:text-base font-bold text-slate-100 tracking-tight">
-            Team Summary
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {/* TOTAL DIRECT TEAM */}
-          <div
-            onClick={() => setActiveTab("downline-direct")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-emerald-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
+      {/* =========================================================================
+          FLOATING QUICK-ACTIONS DOCK (Frosted Glass Capsule)
+          ========================================================================= */}
+      <div className="flex items-center justify-center">
+        <div className="glass-dock py-2 px-3 sm:px-6 flex items-center gap-2 sm:gap-4 overflow-x-auto max-w-full shadow-2xl">
+          <button
+            onClick={() => setActiveTab("recharge")}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#00D2FF]/20 hover:bg-[#00D2FF] text-[#00D2FF] hover:text-slate-950 text-xs font-bold transition-all shadow-sm active:scale-95 shrink-0 font-mono"
           >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              TOTAL DIRECT TEAM
-            </p>
-            <p className="text-lg sm:text-xl font-extrabold text-emerald-400 font-mono">
-              {directTeamCount}
-            </p>
-          </div>
+            <Wallet className="w-4 h-4" />
+            <span>Deposit USDT</span>
+          </button>
 
-          {/* ACTIVE DIRECT MEMBER */}
-          <div
-            onClick={() => setActiveTab("downline-direct")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-emerald-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
+          <button
+            onClick={() => setActiveTab("package-base")}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white text-xs font-bold transition-all active:scale-95 shrink-0 font-mono"
           >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              ACTIVE DIRECT MEMBER
-            </p>
-            <p className="text-lg sm:text-xl font-extrabold text-emerald-400 font-mono">
-              {activeDirectCount}
-            </p>
-          </div>
+            <Zap className="w-4 h-4 text-[#00FFA3]" />
+            <span>Activate Stake</span>
+          </button>
 
-          {/* TOTAL TEAM */}
-          <div
-            onClick={() => setActiveTab("downline-team")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-cyan-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
+          <button
+            onClick={() => setActiveTab("tx-transfer")}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white text-xs font-bold transition-all active:scale-95 shrink-0 font-mono"
           >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              TOTAL TEAM
-            </p>
-            <p className="text-lg sm:text-xl font-extrabold text-cyan-400 font-mono">
-              {totalTeamCount}
-            </p>
-          </div>
+            <Repeat className="w-4 h-4 text-[#FFB800]" />
+            <span>P2P Transfer</span>
+          </button>
 
-          {/* TOTAL ACTIVE TEAM */}
-          <div
-            onClick={() => setActiveTab("downline-team")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-cyan-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-          >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              TOTAL ACTIVE TEAM
-            </p>
-            <p className="text-lg sm:text-xl font-extrabold text-cyan-400 font-mono">
-              {activeTeamCount}
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* Basic Income Breakdown Section */}
-      <div className="space-y-2.5 pt-1">
-        <div className="flex items-center gap-2">
-          <span className="text-base">🎁</span>
-          <h2 className="text-sm sm:text-base font-bold text-slate-100 tracking-tight">
-            Basic Income Breakdown
-          </h2>
-        </div>
-
-        {/* Row 1: 4 Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {/* JOINING BONUS */}
-          <div
-            onClick={() => setActiveTab("income-bonus")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-amber-400/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-          >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              JOINING BONUS
-            </p>
-            <p className="text-base sm:text-lg font-extrabold text-amber-400 font-mono">
-              {currency} {joiningBonus.toFixed(2)}
-            </p>
-          </div>
-
-          {/* REFERRAL INCOME */}
-          <div
-            onClick={() => setActiveTab("income-referral")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-cyan-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-          >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              REFERRAL INCOME
-            </p>
-            <p className="text-base sm:text-lg font-extrabold text-cyan-400 font-mono">
-              {currency} {basicReferralIncome.toFixed(2)}
-            </p>
-          </div>
-
-          {/* TODAY ROI INCOME */}
-          <div
-            onClick={() => setActiveTab("income-roi")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-emerald-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-          >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              TODAY ROI INCOME
-            </p>
-            <p className="text-base sm:text-lg font-extrabold text-emerald-400 font-mono">
-              {currency} {basicTodayRoi.toFixed(2)}
-            </p>
-          </div>
-
-          {/* TODAY LEVEL INCOME */}
-          <div
-            onClick={() => setActiveTab("income-level")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-cyan-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-          >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              TODAY LEVEL INCOME
-            </p>
-            <p className="text-base sm:text-lg font-extrabold text-cyan-400 font-mono">
-              {currency} {basicTodayLevel.toFixed(2)}
-            </p>
-          </div>
-        </div>
-
-        {/* Row 2: Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {/* TOTAL ROI INCOME */}
-          <div
-            onClick={() => setActiveTab("income-roi")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-emerald-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-          >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              TOTAL ROI INCOME
-            </p>
-            <p className="text-base sm:text-lg font-extrabold text-emerald-400 font-mono">
-              {currency} {basicTotalRoi.toFixed(2)}
-            </p>
-          </div>
-
-          {/* TOTAL LEVEL INCOME */}
-          <div
-            onClick={() => setActiveTab("income-level")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-cyan-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-          >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              TOTAL LEVEL INCOME
-            </p>
-            <p className="text-base sm:text-lg font-extrabold text-cyan-400 font-mono">
-              {currency} {basicTotalLevel.toFixed(2)}
-            </p>
-          </div>
-
-          {/* WITHDRAWABLE BALANCE */}
-          <div
+          <button
             onClick={() => setActiveTab("tx-withdraw")}
-            className="bg-[#091124] border border-cyan-500/40 hover:border-cyan-400 rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:shadow-cyan-500/10 transition-all cursor-pointer flex flex-col justify-center items-center group relative overflow-hidden"
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-[#00FFA3]/20 hover:bg-[#00FFA3] text-[#00FFA3] hover:text-slate-950 text-xs font-bold transition-all shadow-sm active:scale-95 shrink-0 font-mono"
           >
-            <p className="text-[10px] sm:text-[11px] font-bold text-cyan-400 uppercase tracking-wider mb-1 flex items-center justify-center gap-1">
-              <span>WITHDRAWABLE BALANCE</span>
-              <span className="text-[10px] opacity-70 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">↗</span>
+            <ArrowUpRight className="w-4 h-4" />
+            <span>Withdraw ($2 Min)</span>
+          </button>
+
+          <button
+            onClick={() => setActiveTab("downline-tree")}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white text-xs font-bold transition-all active:scale-95 shrink-0 font-mono"
+          >
+            <Users className="w-4 h-4 text-sky-400" />
+            <span>Genealogy Tree</span>
+          </button>
+        </div>
+      </div>
+
+      {/* =========================================================================
+          EMBEDDED QUICK ROI & COMPOUNDING SIMULATOR (From index.html)
+          ========================================================================= */}
+      <div className="glass-card-elevated p-6 sm:p-7 border border-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-white/10">
+          <div>
+            <div className="flex items-center gap-2">
+              <Sliders className="w-4 h-4 text-[#00FFA3]" />
+              <h3 className="text-base font-bold text-white tracking-tight font-mono">
+                Interactive ROI &amp; Compounding Simulator
+              </h3>
+            </div>
+            <p className="text-xs text-slate-400 mt-0.5">
+              Simulate new stakes, test 10% Bonus Wallet utility, and calculate 35-day doubling math.
             </p>
-            <p className="text-base sm:text-lg font-extrabold text-cyan-300 font-mono">
-              {currency} {withdrawableBal.toFixed(1)}
-            </p>
+          </div>
+
+          <div className="flex gap-2">
+            {[20, 100, 500, 1000].map((amt) => (
+              <button
+                key={amt}
+                type="button"
+                onClick={() => setCalcStake(amt)}
+                className={`px-2.5 py-1 rounded-lg text-xs font-mono font-bold transition ${
+                  calcStake === amt
+                    ? "bg-[#00FFA3] text-slate-950 font-black"
+                    : "bg-slate-900 border border-white/10 text-slate-400 hover:text-white"
+                }`}
+              >
+                ${amt}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Stake Slider */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+          <div className="md:col-span-5 space-y-4">
+            <div className="flex justify-between items-center text-xs font-mono">
+              <span className="text-slate-300 font-bold">Simulated Capital Stake:</span>
+              <span className="text-xl font-black text-[#00FFA3]">${calcStake} USDT</span>
+            </div>
+
+            <input
+              type="range"
+              min="2"
+              max="5000"
+              step="2"
+              value={calcStake}
+              onChange={(e) => setCalcStake(Number(e.target.value))}
+              className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-[#00FFA3]"
+            />
+
+            <div className="flex justify-between text-[11px] text-slate-400 font-mono">
+              <span>Min $2</span>
+              <span>$500</span>
+              <span>$1,000</span>
+              <span>Max $5,000</span>
+            </div>
+          </div>
+
+          {/* Quick Simulation Output Cards */}
+          <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div className="glass-panel p-3 text-center">
+              <p className="text-[10px] text-slate-400 uppercase font-mono font-bold">10% BONUS</p>
+              <p className="text-base font-bold text-[#FFB800] font-mono mt-1">-${simBonusSubsidy}</p>
+              <p className="text-[10px] text-slate-500 font-mono mt-0.5">Pay ${simNetUsdt}</p>
+            </div>
+
+            <div className="glass-panel p-3 text-center">
+              <p className="text-[10px] text-slate-400 uppercase font-mono font-bold">2X POOL</p>
+              <p className="text-base font-bold text-[#00D2FF] font-mono mt-1">${simPool}</p>
+              <p className="text-[10px] text-slate-500 font-mono mt-0.5">Allocation</p>
+            </div>
+
+            <div className="glass-panel p-3 text-center">
+              <p className="text-[10px] text-slate-400 uppercase font-mono font-bold">DAY 1 ROI</p>
+              <p className="text-base font-bold text-[#00FFA3] font-mono mt-1">${simDay1Roi}</p>
+              <p className="text-[10px] text-slate-500 font-mono mt-0.5">4% on Stake</p>
+            </div>
+
+            <div className="glass-panel p-3 text-center">
+              <p className="text-[10px] text-slate-400 uppercase font-mono font-bold">35-DAY 2X</p>
+              <p className="text-base font-bold text-white font-mono mt-1">${sim35DaysDoubled}</p>
+              <p className="text-[10px] text-slate-500 font-mono mt-0.5">Doubling Math</p>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* FD Income Breakdown Section */}
-      <div className="space-y-2.5 pt-1">
-        <div className="flex items-center gap-2">
-          <span className="text-base">🎁</span>
-          <h2 className="text-sm sm:text-base font-bold text-slate-100 tracking-tight">
-            FD Income Breakdown
-          </h2>
+      {/* =========================================================================
+          MILITARY-GRADE MILESTONE RANK PROGRESSION (Slide 18 & 19 - 50:50 Ratio)
+          ========================================================================= */}
+      <div className="glass-card-elevated p-6 border border-white/10">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
+          <div className="flex items-center gap-2.5">
+            <Award className="w-5 h-5 text-[#FFB800]" />
+            <div>
+              <h3 className="text-base font-bold text-white tracking-tight font-mono">
+                Milestone Rank Rewards (Ranks 1 - 10)
+              </h3>
+              <p className="text-xs text-slate-400">
+                Cumulative team turnover &bull; 50:50 Strong &amp; Weak leg ratio &bull; Instant Cash OR Luxury Asset
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={() => setActiveTab("income-rewards")}
+            className="glass-pill text-xs font-semibold text-[#00D2FF] hover:text-white font-mono"
+          >
+            All 10 Ranks &rarr;
+          </button>
         </div>
 
-        {/* Row 1: 4 Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {/* TODAY ROI INCOME */}
-          <div
-            onClick={() => setActiveTab("income-fd")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-emerald-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-          >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              TODAY ROI INCOME
-            </p>
-            <p className="text-base sm:text-lg font-extrabold text-emerald-400 font-mono">
-              {currency} {fdTodayRoi.toFixed(2)}
-            </p>
-          </div>
-
-          {/* TODAY LEVEL INCOME */}
-          <div
-            onClick={() => setActiveTab("income-level")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-cyan-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-          >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              TODAY LEVEL INCOME
-            </p>
-            <p className="text-base sm:text-lg font-extrabold text-cyan-400 font-mono">
-              {currency} {fdTodayLevel.toFixed(2)}
+        {/* Current vs Next Rank Display */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
+          <div className="p-4 rounded-2xl bg-slate-900/60 border border-white/10">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-mono">
+              CURRENT RANK
+            </span>
+            <div className="text-xl font-black text-white font-mono mt-1 flex items-center gap-2">
+              <span>{currentRank.icon}</span>
+              <span>{currentRank.title}</span>
+            </div>
+            <p className="text-xs text-[#00FFA3] font-mono mt-1">
+              Active Leadership Tier
             </p>
           </div>
 
-          {/* TOTAL ROI INCOME */}
-          <div
-            onClick={() => setActiveTab("income-fd")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-emerald-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-          >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              TOTAL ROI INCOME
-            </p>
-            <p className="text-base sm:text-lg font-extrabold text-emerald-400 font-mono">
-              {currency} {fdTotalRoi.toFixed(2)}
-            </p>
-          </div>
-
-          {/* TOTAL LEVEL INCOME */}
-          <div
-            onClick={() => setActiveTab("income-level")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-cyan-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-          >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              TOTAL LEVEL INCOME
-            </p>
-            <p className="text-base sm:text-lg font-extrabold text-cyan-400 font-mono">
-              {currency} {fdTotalLevel.toFixed(2)}
-            </p>
-          </div>
-        </div>
-
-        {/* Row 2: 2 Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          {/* REFERRAL INCOME */}
-          <div
-            onClick={() => setActiveTab("income-referral")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-cyan-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-          >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              REFERRAL INCOME
-            </p>
-            <p className="text-base sm:text-lg font-extrabold text-cyan-400 font-mono">
-              {currency} {fdReferralIncome.toFixed(2)}
+          <div className="p-4 rounded-2xl bg-slate-900/60 border border-white/10">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-mono">
+              NEXT MILESTONE: {nextRank.title}
+            </span>
+            <div className="text-xl font-black text-[#00D2FF] font-mono mt-1">
+              ${nextRank.teamVolume.toLocaleString()} Turnover
+            </div>
+            <p className="text-xs text-slate-400 font-mono mt-1">
+              Option A: <strong className="text-[#00FFA3]">${nextRank.cashBonus} USDT</strong> | Option B: {nextRank.rewardGift}
             </p>
           </div>
 
-          {/* FD RELEASED */}
-          <div
-            onClick={() => setActiveTab("income-fd")}
-            className="bg-[#091124] border border-[#17274a] rounded-2xl p-3 sm:p-3.5 text-center shadow-lg hover:border-cyan-500/40 transition-all cursor-pointer flex flex-col justify-center items-center"
-          >
-            <p className="text-[10px] sm:text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-1">
-              FD RELEASED
-            </p>
-            <p className="text-base sm:text-lg font-extrabold text-cyan-400 font-mono">
-              {currency} {fdReleased.toFixed(2)}
-            </p>
+          <div className="p-4 rounded-2xl bg-slate-900/60 border border-white/10">
+            <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider font-mono">
+              50:50 LEG VOLUME RATIO
+            </span>
+            <div className="flex justify-between items-baseline text-xs font-mono mt-1">
+              <span className="text-slate-300">Strong Leg: <strong>${strongLegVolume}</strong></span>
+              <span className="text-slate-300">Weak Leg: <strong>${weakLegVolume}</strong></span>
+            </div>
+            <div className="h-1.5 rounded-full bg-slate-800 overflow-hidden mt-2">
+              <div
+                className="h-full bg-gradient-to-r from-[#00FFA3] to-[#00D2FF]"
+                style={{ width: `${rankProgress}%` }}
+              />
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Footer Branding */}
-      <footer className="pt-8 pb-4 border-t border-[#132042] text-center text-xs text-slate-500 font-medium">
-        © 2026 Crypto Finance Protocol. All Rights Reserved.
+      {/* =========================================================================
+          NETWORK ROYALTY MATRIX (10-Level Daily Downline ROI - Slide 16 & 17)
+          ========================================================================= */}
+      <div className="glass-card-elevated p-6 border border-white/10">
+        <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center gap-2.5">
+            <Users className="w-5 h-5 text-[#00D2FF]" />
+            <h3 className="text-base font-bold text-white tracking-tight font-mono">
+              10-Level Daily Team Royalty Status
+            </h3>
+          </div>
+          <span className="text-xs text-[#00FFA3] font-mono font-bold">
+            {activeDirectCount} Active Directs Unlocked
+          </span>
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-xs font-mono">
+          <div className="p-3 rounded-xl bg-slate-900/60 border border-white/10 text-center">
+            <span className="text-[10px] text-slate-400 block">LEVEL 1</span>
+            <span className="text-base font-bold text-[#00FFA3]">10% Daily</span>
+            <span className="text-[10px] text-slate-500 block mt-1">1 Direct Req.</span>
+          </div>
+
+          <div className="p-3 rounded-xl bg-slate-900/60 border border-white/10 text-center">
+            <span className="text-[10px] text-slate-400 block">LEVEL 2</span>
+            <span className="text-base font-bold text-[#00D2FF]">5% Daily</span>
+            <span className="text-[10px] text-slate-500 block mt-1">2 Directs Req.</span>
+          </div>
+
+          <div className="p-3 rounded-xl bg-slate-900/60 border border-white/10 text-center">
+            <span className="text-[10px] text-slate-400 block">LEVELS 3 - 5</span>
+            <span className="text-base font-bold text-sky-400">2% Daily</span>
+            <span className="text-[10px] text-slate-500 block mt-1">3 - 5 Directs</span>
+          </div>
+
+          <div className="p-3 rounded-xl bg-slate-900/60 border border-white/10 text-center">
+            <span className="text-[10px] text-slate-400 block">LEVELS 6 - 9</span>
+            <span className="text-base font-bold text-indigo-400">1% Daily</span>
+            <span className="text-[10px] text-slate-500 block mt-1">6 - 9 Directs</span>
+          </div>
+
+          <div className="p-3 rounded-xl bg-slate-900/60 border border-white/10 text-center col-span-2 sm:col-span-1">
+            <span className="text-[10px] text-[#FFB800] block font-bold">LEVEL 10</span>
+            <span className="text-base font-bold text-[#FFB800]">1% Daily</span>
+            <span className="text-[10px] text-slate-500 block mt-1">10 Directs (Full)</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="pt-6 pb-2 text-center text-xs text-slate-500 font-medium font-mono">
+        &copy; 2026 Crypto Finance Protocol. Swiss Quantitative Ecosystem &bull; BEP-20 Architecture &bull; Crypto Valley Tower, Zug, Switzerland.
       </footer>
     </div>
   );

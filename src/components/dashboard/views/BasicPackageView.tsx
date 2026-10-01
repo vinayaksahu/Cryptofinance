@@ -10,16 +10,15 @@ interface BasicPackageViewProps {
 }
 
 const PACKAGE_TEMPLATES = [
-  { id: 1, name: "Starter", amount: 5 },
-  { id: 2, name: "Basic", amount: 10 },
-  { id: 3, name: "Silver", amount: 20 },
-  { id: 4, name: "Gold", amount: 50 },
-  { id: 5, name: "Platinum", amount: 100 },
-  { id: 6, name: "Ruby", amount: 200 },
-  { id: 7, name: "Diamond", amount: 500 },
-  { id: 8, name: "Elite", amount: 1000 },
-  { id: 9, name: "Royal", amount: 2000 },
-  { id: 10, name: "Crown", amount: 5000 },
+  { id: 1, name: "Min Starter", amount: 2 },
+  { id: 2, name: "Growth Entry", amount: 20 },
+  { id: 3, name: "Silver Tier", amount: 50 },
+  { id: 4, name: "Core Standard", amount: 100 },
+  { id: 5, name: "Platinum Tier", amount: 250 },
+  { id: 6, name: "Gold VIP", amount: 500 },
+  { id: 7, name: "VIP Platinum", amount: 1000 },
+  { id: 8, name: "Diamond Whale", amount: 2500 },
+  { id: 9, name: "Institutional Whale", amount: 5000 },
 ];
 
 export function BasicPackageView({ user, onRefresh, onRefreshUser }: BasicPackageViewProps) {
@@ -55,8 +54,8 @@ export function BasicPackageView({ user, onRefresh, onRefreshUser }: BasicPackag
 
   // Dynamic system configurations set by Admin
   const cfg = user?.systemConfig || {};
-  const dailyRoiRate = cfg.BASIC_PLAN_DAILY_ROI !== undefined ? Number(cfg.BASIC_PLAN_DAILY_ROI) : 5.0;
-  const tenureDays = cfg.BASIC_PLAN_TENURE_DAYS !== undefined ? Number(cfg.BASIC_PLAN_TENURE_DAYS) : 28;
+  const dailyRoiRate = cfg.BASIC_PLAN_DAILY_ROI !== undefined ? Number(cfg.BASIC_PLAN_DAILY_ROI) : 4.0;
+  const tenureDays = cfg.BASIC_PLAN_TENURE_DAYS !== undefined ? Number(cfg.BASIC_PLAN_TENURE_DAYS) : 525;
 
   const dynamicPackages = PACKAGE_TEMPLATES.map((tmpl) => {
     const dailyRoi = (tmpl.amount * dailyRoiRate) / 100;

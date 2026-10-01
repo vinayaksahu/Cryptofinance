@@ -432,7 +432,7 @@ export function AdminConfigView() {
               System Configuration
             </h1>
             <p className="text-slate-400 text-sm mt-1 max-w-xl">
-              Edit global financial parameters according to the Dubai Finance plan. Changes instantly apply to User Dashboards, Package calculations, Referral rewards, 12-Level royalties, and Withdrawal limits.
+              Edit global financial parameters according to the Crypto Finance Protocol plan. Changes instantly apply to User Dashboards, Package calculations, Referral rewards, 10-Level royalties, and Withdrawal limits.
             </p>
           </div>
 

@@ -2,7 +2,6 @@
 
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import { 
   LayoutDashboard, 
   Wallet, 
@@ -12,7 +11,6 @@ import {
   Headphones, 
   Settings,
   LogOut,
-  ExternalLink,
   ChevronLeft,
   ChevronRight,
   X,
@@ -48,9 +46,9 @@ export default function AdminSidebar({
   const isSuper = userRole === "SUPER_ADMIN" || userRole === "SUPER_ROOT_ADMIN";
   const navItems = [
     { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { id: "deposits", label: "Deposit Management", icon: Wallet, badge: pendingDepositsCount > 0 ? pendingDepositsCount : null, badgeColor: "bg-cyan-500/20 text-cyan-400 border-cyan-500/40" },
+    { id: "deposits", label: "Deposit Management", icon: Wallet, badge: pendingDepositsCount > 0 ? pendingDepositsCount : null, badgeColor: "bg-sky-500/20 text-sky-400 border-sky-500/40" },
     { id: "withdrawals", label: "Withdrawal Management", icon: Banknote, badge: pendingWithdrawalsCount > 0 ? pendingWithdrawalsCount : null, badgeColor: "bg-rose-500/20 text-rose-400 border-rose-500/40" },
-    { id: "admin-income", label: "Admin Fee Income", icon: Landmark, badge: "10%", badgeColor: "bg-amber-500/20 text-amber-400 border-amber-500/40" },
+    { id: "admin-income", label: "Admin Fee Income", icon: Landmark, badge: "10%", badgeColor: "bg-indigo-500/20 text-indigo-300 border-indigo-500/40" },
     { id: "users", label: "User Management", icon: Users },
     { id: "roi-engine", label: "ROI Engine", icon: Zap },
     { id: "tickets", label: "Support Tickets", icon: Headphones },
@@ -79,67 +77,72 @@ export default function AdminSidebar({
         />
       )}
 
-      {/* Sidebar Container */}
+      {/* Frosted Glass Sidebar Container */}
       <aside
-        className={`fixed top-0 left-0 bottom-0 z-50 bg-[var(--bg-secondary)] border-r border-amber-500/20 flex flex-col transition-all duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 bottom-0 z-50 bg-[#090e1a]/85 backdrop-blur-2xl border-r border-white/10 flex flex-col transition-all duration-300 ease-in-out ${
           isCollapsed ? "lg:w-20" : "lg:w-64"
         } ${
           isOpen ? "translate-x-0 w-72" : "-translate-x-full lg:translate-x-0"
-        } shadow-2xl`}
+        } shadow-[0_20px_50px_rgba(0,0,0,0.5)]`}
       >
         {/* Brand Header */}
-        <div className="h-20 bg-[var(--bg-main)] border-b border-amber-500/20 flex items-center justify-between px-4 shrink-0 relative overflow-hidden">
-          {/* Subtle gold gradient glow in header */}
-          <div className="absolute inset-0 bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent pointer-events-none" />
-
-          {/* Logo & Brand title */}
+        <div className="h-16 bg-white/[0.02] border-b border-white/10 flex items-center justify-between px-4 shrink-0 relative overflow-hidden">
           <div className="flex items-center gap-3 relative z-10 overflow-hidden">
-            <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-gradient-to-br from-cyan-400 via-sky-500 to-blue-600 p-0.5 shadow-md shadow-cyan-500/30 shrink-0">
-              <div className="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center overflow-hidden">
+            <div className="relative w-9 h-9 rounded-2xl overflow-hidden bg-gradient-to-br from-sky-400 via-indigo-500 to-purple-600 p-0.5 shadow-md shadow-sky-500/25 shrink-0">
+              <div className="w-full h-full rounded-[14px] bg-slate-950 flex items-center justify-center overflow-hidden">
                 <Image
                   src="/crypto_coin_hero.png"
                   alt="Crypto Finance Logo"
-                  width={36}
-                  height={36}
+                  width={32}
+                  height={32}
                   className="object-contain"
                   priority
                 />
               </div>
             </div>
 
-            {/* Brand Text (Hidden when collapsed on desktop) */}
             <div className={`flex flex-col transition-opacity duration-200 ${
               isCollapsed ? "lg:hidden" : "block"
             }`}>
-              <div className="font-display font-black text-base tracking-wider text-cyan-400 uppercase whitespace-nowrap leading-none">
+              <div className="font-bold text-sm tracking-wider text-white uppercase whitespace-nowrap leading-none">
                 CRYPTO FINANCE
               </div>
-              <div className="text-[9px] font-bold tracking-[0.2em] text-cyan-400/80 uppercase mt-1 whitespace-nowrap flex items-center gap-1 leading-none font-mono">
+              <div className="text-[9px] font-bold tracking-widest text-sky-400 uppercase mt-1 whitespace-nowrap flex items-center gap-1 leading-none font-mono">
                 <ShieldCheck className="w-3 h-3 text-emerald-400" />
                 ADMIN CONSOLE
               </div>
             </div>
           </div>
 
-          {/* Mobile Close Button */}
-          <button 
+          <button
             type="button"
-            className="lg:hidden p-2 rounded-lg border border-amber-500/30 text-amber-500 dark:text-amber-400 hover:bg-amber-500/10 relative z-10"
             onClick={() => setIsOpen(false)}
-            aria-label="Close Mobile Sidebar"
+            className="lg:hidden p-1.5 rounded-xl border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition"
+            aria-label="Close Sidebar"
           >
-            <X className="w-5 h-5" />
+            <X className="w-4 h-4" />
           </button>
         </div>
 
+        {/* Super Root Admin Floating Badge */}
+        {isSuper && (
+          <div className={`px-3 pt-3 ${isCollapsed ? "lg:hidden" : "block"}`}>
+            <div className="glass-pill w-full py-1.5 px-3 bg-gradient-to-r from-purple-500/20 to-sky-500/20 border-purple-500/40 text-[10px] font-black text-purple-300 uppercase tracking-widest flex items-center justify-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+              SUPER ROOT PRIVILEGES
+            </div>
+          </div>
+        )}
+
         {/* Navigation Items */}
-        <div className="flex-1 overflow-y-auto py-5 px-3 space-y-1.5 scrollbar-thin scrollbar-thumb-amber-500/20 scrollbar-track-transparent">
+        <div className="flex-1 overflow-y-auto py-3 px-2.5 space-y-1 scrollbar-thin scrollbar-thumb-white/10">
           {navItems.map((item) => {
+            const Icon = item.icon;
             const isActive = activeTab === item.id;
-            
             return (
               <button
                 key={item.id}
+                type="button"
                 onClick={() => {
                   setActiveTab(item.id);
                   if (typeof window !== "undefined" && window.innerWidth < 1024) {
@@ -149,84 +152,53 @@ export default function AdminSidebar({
                 title={isCollapsed ? item.label : undefined}
                 className={`w-full flex items-center ${
                   isCollapsed ? "lg:justify-center lg:px-2" : "justify-between px-3.5"
-                } py-3 rounded-xl font-semibold text-xs transition-all duration-200 group relative overflow-hidden ${
-                  isActive 
-                    ? "bg-gradient-to-r from-amber-500/20 via-amber-500/10 to-transparent text-amber-600 dark:text-amber-300 border border-amber-500/40 shadow-sm font-bold" 
-                    : "text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-200 hover:bg-amber-500/10 border border-transparent"
+                } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
+                  isActive
+                    ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-white border border-sky-400/40 shadow-lg shadow-sky-500/15"
+                    : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
                 }`}
               >
-                {/* Active Left Indicator Bar */}
-                {isActive && (
-                  <div className="absolute left-0 top-0 bottom-0 w-1 bg-amber-500 shadow-[0_0_10px_rgba(245,158,11,0.9)]" />
-                )}
-                
-                <div className="flex items-center gap-3 min-w-0">
-                  <item.icon className={`w-5 h-5 shrink-0 transition-colors ${
-                    isActive ? "text-amber-500 dark:text-amber-400" : "text-slate-500 dark:text-slate-400 group-hover:text-amber-500"
-                  }`} />
-                  
-                  {/* Label (Hidden when collapsed on desktop) */}
-                  <span className={`truncate text-left ${isCollapsed ? "lg:hidden" : "block"}`}>
+                <div className={`flex items-center ${isCollapsed ? "gap-0" : "gap-3"}`}>
+                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-sky-400" : "text-slate-400"}`} />
+                  <span className={isCollapsed ? "lg:hidden" : "inline"}>
                     {item.label}
                   </span>
                 </div>
 
-                {/* Badge (Pending counts) */}
-                {item.badge !== null && item.badge !== undefined && (
-                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-black border ${item.badgeColor} ${
-                    isCollapsed ? "lg:hidden" : "inline-block"
-                  }`}>
+                {item.badge && (
+                  <span className={`${isCollapsed ? "lg:hidden" : "inline"} px-2 py-0.5 rounded-full text-[10px] font-black border ${item.badgeColor || "bg-sky-500/20 text-sky-300 border-sky-500/30"}`}>
                     {item.badge}
                   </span>
                 )}
               </button>
             );
           })}
-
-          <div className="my-4 border-t border-amber-500/15" />
-
-          {/* Member View Link */}
-          <Link
-            href="/member"
-            title={isCollapsed ? "Member View" : undefined}
-            className={`w-full flex items-center ${
-              isCollapsed ? "lg:justify-center lg:px-2" : "px-3.5"
-            } py-3 rounded-xl font-semibold text-xs text-slate-600 dark:text-slate-400 hover:text-amber-600 dark:hover:text-amber-300 hover:bg-amber-500/10 border border-transparent hover:border-amber-500/30 transition-all duration-200 group`}
-          >
-            <div className="flex items-center gap-3">
-              <ExternalLink className="w-5 h-5 shrink-0 text-slate-500 dark:text-slate-400 group-hover:text-amber-500 transition-colors" />
-              <span className={isCollapsed ? "lg:hidden" : "block"}>
-                Member View
-              </span>
-            </div>
-          </Link>
         </div>
 
-        {/* Footer / Quick Collapse Indicator & Logout */}
-        <div className="p-3 bg-[var(--bg-main)] border-t border-amber-500/20 shrink-0 space-y-2">
-          {/* Collapse status hint (desktop only) */}
-          <div className={`hidden lg:flex items-center justify-between text-[10px] text-slate-500 dark:text-slate-400 px-2 font-medium ${
-            isCollapsed ? "lg:hidden" : "flex"
-          }`}>
-            <span>Console Status</span>
-            <span className="flex items-center gap-1.5 text-emerald-500 dark:text-emerald-400 font-bold">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              ONLINE
-            </span>
-          </div>
-
-          <button 
+        {/* Footer Actions */}
+        <div className="p-3 border-t border-white/10 bg-white/[0.02] flex items-center justify-between gap-2 shrink-0">
+          <button
             type="button"
             onClick={handleLogout}
-            title={isCollapsed ? "Logout" : undefined}
-            className={`w-full flex items-center ${
-              isCollapsed ? "lg:justify-center lg:px-2" : "justify-center gap-2 px-3"
-            } py-2.5 rounded-xl font-bold text-xs text-rose-500 hover:text-rose-600 hover:bg-rose-500/10 border border-rose-500/20 hover:border-rose-500/40 transition-all duration-200`}
+            className={`flex items-center gap-2 py-2 px-3 rounded-xl text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 transition-all font-semibold text-xs ${
+              isCollapsed ? "lg:hidden" : "flex-1"
+            }`}
           >
             <LogOut className="w-4 h-4 shrink-0" />
-            <span className={isCollapsed ? "lg:hidden" : "inline"}>
-              Logout
-            </span>
+            <span>Sign Out</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setIsCollapsed(!isCollapsed)}
+            className="hidden lg:flex p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition shrink-0"
+            title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+          >
+            {isCollapsed ? (
+              <ChevronRight className="w-4 h-4" />
+            ) : (
+              <ChevronLeft className="w-4 h-4" />
+            )}
           </button>
         </div>
       </aside>

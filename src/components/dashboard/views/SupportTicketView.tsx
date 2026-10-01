@@ -36,7 +36,7 @@ export function SupportTicketView() {
         <div className="md:col-span-7 bg-[#091124] border border-[#17274a] rounded-3xl p-6 sm:p-8 shadow-xl">
           <h2 className="text-lg font-bold text-slate-100 mb-2">Create New Support Ticket</h2>
           <p className="text-xs text-slate-400 mb-6">
-            Our 24/7 Dubai Finance VIP Support Desk resolves all queries in priority.
+            Our 24/7 Crypto Finance Protocol VIP Support Desk resolves all queries in priority.
           </p>
 
           {submitted ? (

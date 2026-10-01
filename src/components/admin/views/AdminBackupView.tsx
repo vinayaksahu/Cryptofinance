@@ -95,7 +95,7 @@ export function AdminBackupView() {
       const a = document.createElement("a");
       a.href = url;
       const timestamp = new Date().toISOString().slice(0, 10);
-      a.download = `dubaifinance_backup_${timestamp}.${format === "excel" ? "xlsx" : "json"}`;
+      a.download = `cryptofinance_backup_${timestamp}.${format === "excel" ? "xlsx" : "json"}`;
       document.body.appendChild(a);
       a.click();
       a.remove();
@@ -245,7 +245,7 @@ export function AdminBackupView() {
           <div className="font-display text-2xl sm:text-3xl font-black text-purple-400 mt-1">
             {loadingStats ? "..." : metadata?.totalRecords?.toLocaleString() || 0}
           </div>
-          <div className="text-[10px] text-slate-500 mt-1">Schema: {metadata?.schema || "dubaifinance"}</div>
+          <div className="text-[10px] text-slate-500 mt-1">Schema: {metadata?.schema || "cryptofinance"}</div>
         </div>
       </div>
 

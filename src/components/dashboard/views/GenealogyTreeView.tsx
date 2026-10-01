@@ -141,8 +141,8 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
     const origin =
       typeof window !== "undefined" && window.location.hostname === "localhost"
         ? window.location.origin
-        : "https://dubaifinance.online";
-    const refUrl = `${origin}/register?r=${user?.customId || "DF000001"}`;
+        : "https://cryptofinance.online";
+    const refUrl = `${origin}/register?r=${user?.customId || "CF000001"}`;
     navigator.clipboard.writeText(refUrl);
     setCopiedId(true);
     setTimeout(() => setCopiedId(false), 2000);

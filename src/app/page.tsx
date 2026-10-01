@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/landing/Navbar";
 import { Hero } from "@/components/landing/Hero";
 import { About } from "@/components/landing/About";
+import { WalletEcosystem } from "@/components/landing/WalletEcosystem";
 import { Packages } from "@/components/landing/Packages";
 import { Calculator } from "@/components/landing/Calculator";
 import { Referrals } from "@/components/landing/Referrals";
@@ -24,8 +25,11 @@ export default async function HomePage() {
   return (
     <div className="relative min-h-screen bg-[var(--bg-main)] text-[var(--text-main)] overflow-x-hidden transition-colors duration-200">
       {/* Decorative ambient glow orbs */}
-      <div className="bg-glow-gold -top-40 -right-40" />
-      <div className="bg-glow-blue -bottom-40 -left-40" />
+      <div className="ambient-container">
+        <div className="orb-drift-1" />
+        <div className="orb-drift-2" />
+        <div className="orb-drift-3" />
+      </div>
 
       <Navbar />
       <main className="pt-24 sm:pt-28">
@@ -34,6 +38,7 @@ export default async function HomePage() {
         )}
         <Hero />
         <About />
+        <WalletEcosystem />
         <Packages />
         <Calculator />
         <Referrals />
