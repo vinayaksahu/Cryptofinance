@@ -2,144 +2,117 @@ import { db } from "./db";
 import { APP_CONFIG } from "./constants";
 
 export const DEFAULT_SYSTEM_CONFIGS: Record<string, { value: string; description: string; category: string }> = {
-  // 1. Financial & Wallet
+  // 1. Receiving Wallet & Financial (BEP-20 Architecture)
   COMPANY_USDT_ADDRESS: {
     value: APP_CONFIG.depositAddress,
-    description: "Official USDT BEP-20 receiving wallet address for recharges",
+    description: "Official USDT (BEP-20) receiving wallet address for protocol deposits",
     category: "wallet",
   },
   COMPANY_USDT_QR: {
     value: "",
-    description: "Official USDT BEP-20 receiving wallet QR code image (Uploaded file or Custom URL)",
+    description: "Official USDT (BEP-20) deposit QR code image (Uploaded file or custom URL)",
     category: "wallet",
   },
 
-  // 2. Basic Saving Package (Dark PDF Slide 5-9 & 11)
+  // 2. Stake Engine & 2X Contract Allocation Pool (Slides 10 - 14)
   BASIC_PLAN_DAILY_ROI: {
-    value: String(APP_CONFIG.basicPlan.dailyRoiRate),
-    description: "Basic Saving plan daily return percentage (5.0 for 5% daily)",
+    value: "4.0",
+    description: "Daily quantitative yield rate percentage (4.0% daily on principal stake / 2.0% daily release from 2X pool)",
     category: "plan",
   },
   BASIC_PLAN_TENURE_DAYS: {
-    value: String(APP_CONFIG.basicPlan.tenureDays),
-    description: "Basic Saving contract duration in days (28 days = 140% total gross / 40% net profit)",
+    value: "50",
+    description: "Standard tenure duration until 200% pool cap is reached (50 days / ~35 days with daily compounding)",
     category: "plan",
   },
   BASIC_PLAN_MIN_USDT: {
-    value: String(APP_CONFIG.basicPlan.minUsdt),
-    description: "Minimum package amount in USDT for Basic Saving ($5)",
+    value: "2",
+    description: "Minimum package stake amount in USDT ($2.00)",
     category: "plan",
   },
   BASIC_PLAN_MAX_USDT: {
-    value: String(APP_CONFIG.basicPlan.maxUsdt),
-    description: "Maximum package amount in USDT for Basic Saving ($5,000)",
+    value: "10000",
+    description: "Maximum package stake amount in USDT ($10,000.00)",
     category: "plan",
   },
 
-  // 3. Fix Deposit (FD) Staking (Dark PDF Slide 12, 13, 14)
-  FD_PLAN_180_DAILY_ROI: {
+  // 3. Bonus Wallet Utility & Registration Bounties (Slides 05 & 06)
+  BONUS_UTILITY_PERCENT: {
     value: "10.0",
-    description: "180-Day FD daily yield percentage (10% daily = 1,800% / 18X total)",
-    category: "plan",
+    description: "Maximum percentage of stake that can be funded from Non-Withdrawable Bonus Wallet (10.0% max)",
+    category: "bonus",
   },
-  FD_PLAN_180_DAYS: {
-    value: "180",
-    description: "180-Day FD contract duration in days",
-    category: "plan",
+  SIGNUP_BONUS_USDT: {
+    value: "1.00",
+    description: "Welcome signup bonus credited to member's Bonus Wallet ($1.00 USDT)",
+    category: "bonus",
   },
-  FD_PLAN_210_DAILY_ROI: {
-    value: "15.0",
-    description: "210-Day FD daily yield percentage (15% daily = 3,150% / 31.5X total)",
-    category: "plan",
-  },
-  FD_PLAN_210_DAYS: {
-    value: "210",
-    description: "210-Day FD contract duration in days",
-    category: "plan",
-  },
-  FD_MIN_USDT: {
-    value: "50",
-    description: "Minimum investment in USDT for Fix Deposit ($50)",
-    category: "plan",
-  },
-  FD_MAX_USDT: {
-    value: "5000",
-    description: "Maximum investment in USDT for Fix Deposit ($5,000)",
-    category: "plan",
+  SIGNUP_LEVEL_BOUNTY_USDT: {
+    value: "0.40",
+    description: "Downline referral registration bounty credited to upline Bonus Wallet ($0.40 per level up to 10 levels)",
+    category: "bonus",
   },
 
-  // 4. Direct Referral Income (Dark PDF Slide 10 & 15: 10% Instant)
+  // 4. Direct Sponsor Commission & 10-Level Daily Royalties (Slides 15, 16 & 17)
   DIRECT_REFERRAL_PERCENT: {
-    value: String(APP_CONFIG.directReferralPercent),
-    description: "Instant direct sponsor commission percentage (10.0 for 10% instant)",
+    value: "10.0",
+    description: "Instant Direct Sponsor Referral Commission percentage (10.0% flat)",
     category: "royalty",
   },
-
-  // 5. 12-Level Daily Royalty Income (Dark PDF Slide 16 & 17 - calculated on downline daily ROI)
   LEVEL_1_PERCENT: {
-    value: "5.0",
-    description: "Level 1 Royalty % (Requires 1 Active Direct Referral)",
+    value: "10.0",
+    description: "Level 1 Daily Royalty % (Requires 1 Active Direct Referral)",
     category: "royalty",
   },
   LEVEL_2_PERCENT: {
-    value: "3.0",
-    description: "Level 2 Royalty % (Requires 2 Active Direct Referrals)",
+    value: "5.0",
+    description: "Level 2 Daily Royalty % (Requires 2 Active Direct Referrals)",
     category: "royalty",
   },
   LEVEL_3_PERCENT: {
     value: "2.0",
-    description: "Level 3 Royalty % (Requires 3 Active Direct Referrals)",
+    description: "Level 3 Daily Royalty % (Requires 3 Active Direct Referrals)",
     category: "royalty",
   },
   LEVEL_4_PERCENT: {
     value: "2.0",
-    description: "Level 4 Royalty % (Requires 4 Active Direct Referrals)",
+    description: "Level 4 Daily Royalty % (Requires 4 Active Direct Referrals)",
     category: "royalty",
   },
   LEVEL_5_PERCENT: {
     value: "2.0",
-    description: "Level 5 Royalty % (Requires 5 Active Direct Referrals)",
+    description: "Level 5 Daily Royalty % (Requires 5 Active Direct Referrals)",
     category: "royalty",
   },
   LEVEL_6_PERCENT: {
-    value: "2.0",
-    description: "Level 6 Royalty % (Requires 6 Active Direct Referrals)",
+    value: "1.0",
+    description: "Level 6 Daily Royalty % (Requires 6 Active Direct Referrals)",
     category: "royalty",
   },
   LEVEL_7_PERCENT: {
     value: "1.0",
-    description: "Level 7 Royalty % (Requires 7 Active Direct Referrals)",
+    description: "Level 7 Daily Royalty % (Requires 7 Active Direct Referrals)",
     category: "royalty",
   },
   LEVEL_8_PERCENT: {
     value: "1.0",
-    description: "Level 8 Royalty % (Requires 8 Active Direct Referrals)",
+    description: "Level 8 Daily Royalty % (Requires 8 Active Direct Referrals)",
     category: "royalty",
   },
   LEVEL_9_PERCENT: {
     value: "1.0",
-    description: "Level 9 Royalty % (Requires 9 Active Direct Referrals)",
+    description: "Level 9 Daily Royalty % (Requires 9 Active Direct Referrals)",
     category: "royalty",
   },
   LEVEL_10_PERCENT: {
     value: "1.0",
-    description: "Level 10 Royalty % (Requires 10 Active Direct Referrals)",
-    category: "royalty",
-  },
-  LEVEL_11_PERCENT: {
-    value: "1.0",
-    description: "Level 11 Royalty % (Requires 11 Active Direct Referrals)",
-    category: "royalty",
-  },
-  LEVEL_12_PERCENT: {
-    value: "1.0",
-    description: "Level 12 Royalty % (Requires 12 Active Direct Referrals)",
+    description: "Level 10 Daily Royalty % (Requires 10 Active Direct Referrals - Full Matrix Unlocked)",
     category: "royalty",
   },
 
-  // 6. Withdrawal Rules & Timings (Dark PDF Slide 21)
+  // 5. Withdrawal Rules & Protocol Liquidity Fee (Slide 21)
   WITHDRAWAL_24H_OPEN: {
-    value: "false",
+    value: "true",
     description: "Allow 24/7 withdrawals anytime without timing restriction (true / false)",
     category: "withdrawal",
   },
@@ -153,119 +126,64 @@ export const DEFAULT_SYSTEM_CONFIGS: Record<string, { value: string; description
     description: "Daily withdrawal window close time in HH:MM IST (e.g. 14:00 or 23:59)",
     category: "withdrawal",
   },
-  WITHDRAWAL_START_HOUR: {
-    value: String(APP_CONFIG.withdrawalWindow.startHour),
-    description: "Daily withdrawal window start hour in 24h IST (e.g. 10 for 10:00 AM)",
-    category: "withdrawal",
-  },
-  WITHDRAWAL_END_HOUR: {
-    value: String(APP_CONFIG.withdrawalWindow.endHour),
-    description: "Daily withdrawal window close hour in 24h IST (e.g. 14 for 02:00 PM)",
-    category: "withdrawal",
-  },
   MIN_WITHDRAWAL_USDT: {
-    value: String(APP_CONFIG.minWithdrawalUsdt),
-    description: "Minimum single withdrawal amount in USDT ($2)",
+    value: "2.00",
+    description: "Minimum single external withdrawal amount in USDT ($2.00 USDT)",
     category: "withdrawal",
   },
   MAX_WITHDRAWAL_USDT: {
-    value: String(APP_CONFIG.maxWithdrawalUsdt),
-    description: "Maximum single withdrawal amount in USDT ($5,000)",
+    value: "5000",
+    description: "Maximum single external withdrawal amount in USDT ($5,000.00 USDT)",
     category: "withdrawal",
   },
   WITHDRAWAL_FEE_PERCENT: {
-    value: String(APP_CONFIG.withdrawalAdminFeePercent),
-    description: "Withdrawal admin fee percentage (10% flat as per Dark PDF Slide 21)",
+    value: "10.0",
+    description: "Protocol liquidity fee / retained admin fee deducted upon external cashouts (10.0%)",
     category: "withdrawal",
   },
 
-  // 7. Wallet Transfers & Bonus (Dark PDF Slide 20 & 21)
-  SIGNUP_BONUS_USDT: {
-    value: "0.50",
-    description: "Welcome bonus credited upon registration in USDT ($0.50 as per Dark PDF Slide 21)",
-    category: "transfers",
-  },
-  SIGNUP_LEVEL_BONUS_TOTAL_USDT: {
-    value: "0.50",
-    description: "Total 12-Level Registration Bounty distributed equally across 12 uplines upon signup in USDT ($0.50 / 12)",
-    category: "transfers",
-  },
-  BONUS_REDEMPTION_MIN_ACTIVE_USDT: {
-    value: "20.00",
-    description: "Minimum active package investment required on ID to use/withdraw bonus balance in USDT ($20+)",
-    category: "transfers",
-  },
+  // 6. P2P & Internal Wallet Transfers (Slide 04)
   MIN_P2P_TRANSFER_USDT: {
     value: "1",
-    description: "Minimum P2P fund transfer amount in USDT",
+    description: "Minimum P2P fund transfer amount between members in USDT ($1.00)",
     category: "transfers",
   },
   P2P_FEE_PERCENT: {
     value: "0.0",
-    description: "P2P wallet-to-wallet transfer fee percentage (0%)",
+    description: "Member-to-member P2P transfer fee percentage (0.0% free transfer)",
     category: "transfers",
   },
-  SWIPE_FEE_PERCENT: {
+  WALLET_TRANSFER_FEE_PERCENT: {
     value: "0.0",
-    description: "Income Wallet to Fund Wallet swipe deduction percentage (0%)",
+    description: "Internal wallet transfer fee from ROI / Working to Main / P2P wallet (0.0% free)",
     category: "transfers",
   },
 
-  // 8. Corporate Information (PDF Page 2)
+  // 7. Corporate Headquarters & Customer Support
   OFFICIAL_EMAIL: {
-    value: APP_CONFIG.officialEmail,
-    description: "Official customer care & support email",
-    category: "company",
-  },
-  CMD_NAME: {
-    value: APP_CONFIG.cmd,
-    description: "Platform Director / CMD name",
+    value: "support@cryptofinance.online",
+    description: "Official customer care & technical support email",
     category: "company",
   },
   HEADQUARTERS: {
-    value: APP_CONFIG.headquarters,
-    description: "Registered office and headquarters address",
+    value: "Crypto Valley Tower, Zug, Switzerland",
+    description: "Registered corporate protocol foundation headquarters",
     category: "company",
   },
 
-  // 9. Platform Status & Operational Mode Control
-  PRELAUNCH_MODE: {
-    value: "true",
-    description: "Enable Pre-launching phase mode (shows countdown banner on homescreen, direct registration & login active via link)",
-    category: "system_mode",
-  },
+  // 8. Platform Operational Mode & Emergency Controls
   MAINTENANCE_MODE: {
     value: "false",
-    description: "Enable System Maintenance mode (locks member access, shows maintenance screen, admin can still login via /adminlogin)",
-    category: "system_mode",
-  },
-  PRELAUNCH_NOTICE_TEXT: {
-    value: "Crypto Finance is currently in its exclusive Pre-Launch phase. The official global platform launch and public member activations go LIVE on September 21, 2026! Get ready to experience institutional 5% to 15% Daily ROI Staking and 12-Level Team Royalties. Stay tuned!",
-    description: "Notice message displayed to visitors when Pre-launch mode is active",
-    category: "system_mode",
-  },
-  PRELAUNCH_TIMER_ENABLED: {
-    value: "true",
-    description: "Display big countdown timer on homescreen when Pre-Launching mode is active (true / false)",
-    category: "system_mode",
-  },
-  PRELAUNCH_TARGET_DATE: {
-    value: "2026-09-21T20:00",
-    description: "Official launch target date and time in Dubai Time / GST (e.g. 2026-09-21T20:00 for 08:00 PM Dubai Time on September 21, 2026)",
-    category: "system_mode",
-  },
-  PRELAUNCH_TIMER_TITLE: {
-    value: "OFFICIAL GLOBAL PLATFORM LAUNCH • SEPTEMBER 21, 2026",
-    description: "Countdown timer banner header title",
+    description: "Enable System Maintenance mode (locks member access, admin can still login via /adminlogin)",
     category: "system_mode",
   },
   MAINTENANCE_NOTICE_TEXT: {
-    value: "Our engineers are performing scheduled system upgrades and database optimizations to maximize platform security and network throughput. All user funds and records are 100% safe.",
+    value: "Crypto Finance Protocol is undergoing scheduled infrastructure upgrades. All assets and ledger balances are completely safe.",
     description: "Notice message displayed to visitors when Maintenance mode is active",
     category: "system_mode",
   },
 
-  // 10. Crypto & Blockchain Deposit Processing
+  // 9. Crypto & Blockchain Deposit Processing
   DEPOSIT_PROCESSING_MODE: {
     value: "MANUAL",
     description: "Global USDT BEP-20 deposit processing mode (AUTOMATIC or MANUAL)",
@@ -288,12 +206,7 @@ export const DEFAULT_SYSTEM_CONFIGS: Record<string, { value: string; description
   },
   USDT_BEP20_CONTRACT: {
     value: "0x55d398326f99059ff775485246999027b3197955",
-    description: "Configured official USDT BEP-20 token contract address on BSC",
-    category: "crypto_deposit",
-  },
-  BSC_RPC_URL: {
-    value: "",
-    description: "Custom BSC JSON-RPC URL",
+    description: "Official USDT BEP-20 token contract address on BSC",
     category: "crypto_deposit",
   },
 };

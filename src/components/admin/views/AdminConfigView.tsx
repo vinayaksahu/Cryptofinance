@@ -24,10 +24,11 @@ import {
   Check,
   ShieldAlert,
   Power,
-  Activity
+  Activity,
+  Gift,
+  Zap,
 } from "lucide-react";
 import { getWithdrawalWindowStatus } from "@/lib/constants";
-import { CountdownBanner } from "@/components/landing/CountdownBanner";
 
 interface ConfigItem {
   value: string;
@@ -37,91 +38,77 @@ interface ConfigItem {
 }
 
 const CATEGORY_ICONS: Record<string, any> = {
-  system_mode: Power,
-  wallet: Wallet,
-  withdrawal: Clock,
-  plan: TrendingUp,
+  plan: Zap,
+  bonus: Gift,
   royalty: Crown,
+  withdrawal: Clock,
   transfers: ArrowLeftRight,
+  wallet: Wallet,
   company: Building2,
+  system_mode: Power,
 };
 
 const CATEGORY_NAMES: Record<string, string> = {
   all: "All Configurations",
-  system_mode: "Platform Status & Operational Mode",
-  wallet: "USDT Wallet Settings",
-  withdrawal: "Withdrawal Window & Limits",
-  plan: "Basic & FD Staking Plans",
-  royalty: "Direct & 12-Level Royalty",
-  transfers: "P2P, Swipe & Bonus",
-  company: "Company & Headquarters",
+  plan: "Stake Engine & 2X Pool",
+  bonus: "Bonus Wallet Utility (10%)",
+  royalty: "10-Level Daily Royalties",
+  withdrawal: "Withdrawal & 10% Fee",
+  transfers: "P2P & Multi-Wallet",
+  wallet: "USDT (BEP-20) Vault & QR",
+  company: "Protocol Foundation",
+  system_mode: "Platform Access Mode",
 };
 
 const FRIENDLY_NAMES: Record<string, string> = {
-  // Platform Status & Operational Mode Control
-  PRELAUNCH_MODE: "Pre-Launching Phase Mode (true / false)",
-  MAINTENANCE_MODE: "System Maintenance Mode (true / false)",
-  PRELAUNCH_NOTICE_TEXT: "Pre-Launching Phase Public Visitor Notice",
-  MAINTENANCE_NOTICE_TEXT: "System Maintenance Public Visitor Notice",
-  PRELAUNCH_TIMER_ENABLED: "Homescreen Big Countdown Timer (true / false)",
-  PRELAUNCH_TARGET_DATE: "Official Launch Target Date & Time (Dubai Time / GST)",
-  PRELAUNCH_TIMER_TITLE: "Countdown Timer Header Title",
-
   // Financial & Wallet
-  COMPANY_USDT_ADDRESS: "Company USDT (BEP-20) Receiving Wallet",
-  COMPANY_USDT_QR: "Company USDT (BEP-20) Receiving QR Code Image",
+  COMPANY_USDT_ADDRESS: "Official USDT (BEP-20) Receiving Wallet",
+  COMPANY_USDT_QR: "Official USDT (BEP-20) Receiving QR Code Image",
 
-  // Basic Saving Plan
-  BASIC_PLAN_DAILY_ROI: "Basic Saving Daily ROI (%)",
-  BASIC_PLAN_TENURE_DAYS: "Basic Saving Tenure (28 Days)",
-  BASIC_PLAN_MIN_USDT: "Basic Saving Minimum (USDT)",
-  BASIC_PLAN_MAX_USDT: "Basic Saving Maximum (USDT)",
+  // Stake Engine & 2X Allocation Pool
+  BASIC_PLAN_DAILY_ROI: "Protocol Daily Stake Yield (%) [Default: 4.0%]",
+  BASIC_PLAN_TENURE_DAYS: "Standard Tenure Horizon [Default: 50 Days / 200% Cap]",
+  BASIC_PLAN_MIN_USDT: "Minimum Activation Stake (USDT) [Default: $2.00]",
+  BASIC_PLAN_MAX_USDT: "Maximum Activation Stake (USDT) [Default: $10,000.00]",
 
-  // Fix Deposit (FD) Staking
-  FD_PLAN_180_DAILY_ROI: "FD 180-Day Daily Yield (%)",
-  FD_PLAN_180_DAYS: "FD 180-Day Duration (Days)",
-  FD_PLAN_210_DAILY_ROI: "FD 210-Day Daily Yield (%)",
-  FD_PLAN_210_DAYS: "FD 210-Day Duration (Days)",
-  FD_MIN_USDT: "Fix Deposit Minimum (USDT)",
-  FD_MAX_USDT: "Fix Deposit Maximum (USDT)",
+  // Bonus Wallet Utility
+  BONUS_UTILITY_PERCENT: "Max Bonus Utility Rate for Activations (%) [Default: 10.0%]",
+  SIGNUP_BONUS_USDT: "Self Welcome Bonus to Bonus Wallet ($1.00 USDT)",
+  SIGNUP_LEVEL_BOUNTY_USDT: "Downline Registration Bounty ($0.40 USDT / level)",
 
-  // Direct Referral & 12-Level Royalty
-  DIRECT_REFERRAL_PERCENT: "Direct Sponsor Referral Commission (%)",
-  LEVEL_1_PERCENT: "Level 1 Royalty % (Req: 1 Direct)",
-  LEVEL_2_PERCENT: "Level 2 Royalty % (Req: 2 Directs)",
-  LEVEL_3_PERCENT: "Level 3 Royalty % (Req: 3 Directs)",
-  LEVEL_4_PERCENT: "Level 4 Royalty % (Req: 4 Directs)",
-  LEVEL_5_PERCENT: "Level 5 Royalty % (Req: 5 Directs)",
-  LEVEL_6_PERCENT: "Level 6 Royalty % (Req: 6 Directs)",
-  LEVEL_7_PERCENT: "Level 7 Royalty % (Req: 7 Directs)",
-  LEVEL_8_PERCENT: "Level 8 Royalty % (Req: 8 Directs)",
-  LEVEL_9_PERCENT: "Level 9 Royalty % (Req: 9 Directs)",
-  LEVEL_10_PERCENT: "Level 10 Royalty % (Req: 10 Directs)",
-  LEVEL_11_PERCENT: "Level 11 Royalty % (Req: 11 Directs)",
-  LEVEL_12_PERCENT: "Level 12 Royalty % (Req: 12 Directs)",
+  // Direct Referral & 10-Level Daily Royalty
+  DIRECT_REFERRAL_PERCENT: "Direct Sponsor Referral Commission (%) [Default: 10.0%]",
+  LEVEL_1_PERCENT: "Level 1 Daily Royalty % (Req: 1 Direct) [Default: 10.0%]",
+  LEVEL_2_PERCENT: "Level 2 Daily Royalty % (Req: 2 Directs) [Default: 5.0%]",
+  LEVEL_3_PERCENT: "Level 3 Daily Royalty % (Req: 3 Directs) [Default: 2.0%]",
+  LEVEL_4_PERCENT: "Level 4 Daily Royalty % (Req: 4 Directs) [Default: 2.0%]",
+  LEVEL_5_PERCENT: "Level 5 Daily Royalty % (Req: 5 Directs) [Default: 2.0%]",
+  LEVEL_6_PERCENT: "Level 6 Daily Royalty % (Req: 6 Directs) [Default: 1.0%]",
+  LEVEL_7_PERCENT: "Level 7 Daily Royalty % (Req: 7 Directs) [Default: 1.0%]",
+  LEVEL_8_PERCENT: "Level 8 Daily Royalty % (Req: 8 Directs) [Default: 1.0%]",
+  LEVEL_9_PERCENT: "Level 9 Daily Royalty % (Req: 9 Directs) [Default: 1.0%]",
+  LEVEL_10_PERCENT: "Level 10 Daily Royalty % (Req: 10 Directs - Full Unlocked) [Default: 1.0%]",
 
   // Withdrawal Rules & Timings
   WITHDRAWAL_24H_OPEN: "24/7 Unlimited Withdrawal Window (Always Open)",
-  WITHDRAWAL_START_TIME: "Withdrawal Window Start Time (HH:MM IST)",
-  WITHDRAWAL_END_TIME: "Withdrawal Window End Time (HH:MM IST)",
-  WITHDRAWAL_START_HOUR: "Withdrawal Window Start Hour (Legacy 24h IST)",
-  WITHDRAWAL_END_HOUR: "Withdrawal Window End Hour (Legacy 24h IST)",
-  MIN_WITHDRAWAL_USDT: "Minimum Single Withdrawal (USDT)",
+  WITHDRAWAL_START_TIME: "Daily Withdrawal Start Time (HH:MM)",
+  WITHDRAWAL_END_TIME: "Daily Withdrawal Close Time (HH:MM)",
+  MIN_WITHDRAWAL_USDT: "Minimum Withdrawal Amount (USDT) [Default: $2.00]",
   MAX_WITHDRAWAL_USDT: "Maximum Single Withdrawal (USDT)",
-  WITHDRAWAL_FEE_PERCENT: "Withdrawal Admin Fee (%)",
+  WITHDRAWAL_FEE_PERCENT: "Protocol Liquidity Fee / Retained Admin Fee (%) [Default: 10.0%]",
 
-  // Transfers & Bonus
-  SIGNUP_BONUS_USDT: "Welcome Signup Bonus (USDT)",
-  SIGNUP_LEVEL_BONUS_TOTAL_USDT: "12-Level Registration Bounty Total (USDT)",
-  BONUS_REDEMPTION_MIN_ACTIVE_USDT: "Min Active ID to Redeem Bonus (USDT)",
-  MIN_P2P_TRANSFER_USDT: "Minimum P2P Transfer (USDT)",
-  P2P_FEE_PERCENT: "P2P Transfer Fee (%)",
-  SWIPE_FEE_PERCENT: "Income-to-Fund Swipe Fee (%)",
+  // Transfers & Multi-Wallet
+  MIN_P2P_TRANSFER_USDT: "Minimum P2P Transfer (USDT) [Default: $1.00]",
+  P2P_FEE_PERCENT: "P2P Member Transfer Fee (%) [Default: 0.0%]",
+  WALLET_TRANSFER_FEE_PERCENT: "Internal Multi-Wallet Transfer Fee (%) [Default: 0.0%]",
 
   // Corporate Information
-  OFFICIAL_EMAIL: "Official Customer Support Email",
-  CMD_NAME: "Platform Director / CMD Name",
-  HEADQUARTERS: "Headquarters Registered Address",
+  OFFICIAL_EMAIL: "Official Support & Technical Care Email",
+  HEADQUARTERS: "Registered Protocol Foundation Headquarters",
+
+  // Platform Status & Emergency
+  MAINTENANCE_MODE: "System Maintenance Mode (true / false)",
+  MAINTENANCE_NOTICE_TEXT: "System Maintenance Public Visitor Notice",
 };
 
 export function AdminConfigView() {
@@ -135,7 +122,6 @@ export function AdminConfigView() {
   const [, setTimeTick] = useState(0);
   const [copiedAddress, setCopiedAddress] = useState(false);
   const [copiedAdminLink, setCopiedAdminLink] = useState(false);
-  const [adminLaunchPreview, setAdminLaunchPreview] = useState<boolean>(true);
 
   const handleQrUpload = (file: File) => {
     if (!file) return;
@@ -182,8 +168,8 @@ export function AdminConfigView() {
     formValues.WITHDRAWAL_24H_OPEN === "true" || 
     (formValues.WITHDRAWAL_START_TIME === "00:00" && (formValues.WITHDRAWAL_END_TIME === "23:59" || formValues.WITHDRAWAL_END_TIME === "24:00"));
 
-  const currentStartTime = formValues.WITHDRAWAL_START_TIME || (formValues.WITHDRAWAL_START_HOUR !== undefined ? `${String(formValues.WITHDRAWAL_START_HOUR).padStart(2, "0")}:00` : "10:00");
-  const currentEndTime = formValues.WITHDRAWAL_END_TIME || (formValues.WITHDRAWAL_END_HOUR !== undefined ? (Number(formValues.WITHDRAWAL_END_HOUR) >= 23 ? "23:59" : `${String(formValues.WITHDRAWAL_END_HOUR).padStart(2, "0")}:00`) : "14:00");
+  const currentStartTime = formValues.WITHDRAWAL_START_TIME || "10:00";
+  const currentEndTime = formValues.WITHDRAWAL_END_TIME || "14:00";
 
   const toggle24h = () => {
     const willBe24h = !is24hActive;
@@ -192,78 +178,23 @@ export function AdminConfigView() {
       WITHDRAWAL_24H_OPEN: willBe24h ? "true" : "false",
       WITHDRAWAL_START_TIME: willBe24h ? "00:00" : "10:00",
       WITHDRAWAL_END_TIME: willBe24h ? "23:59" : "14:00",
-      WITHDRAWAL_START_HOUR: willBe24h ? "0" : "10",
-      WITHDRAWAL_END_HOUR: willBe24h ? "23" : "14",
     }));
   };
 
   const updateStartTime = (timeStr: string) => {
-    const [h = 10] = timeStr.split(":").map(Number);
     setFormValues((prev) => ({
       ...prev,
       WITHDRAWAL_START_TIME: timeStr,
-      WITHDRAWAL_START_HOUR: String(h),
       WITHDRAWAL_24H_OPEN: "false",
     }));
   };
 
   const updateEndTime = (timeStr: string) => {
-    const [h = 14] = timeStr.split(":").map(Number);
     setFormValues((prev) => ({
       ...prev,
       WITHDRAWAL_END_TIME: timeStr,
-      WITHDRAWAL_END_HOUR: String(h),
       WITHDRAWAL_24H_OPEN: "false",
     }));
-  };
-
-  const applyPreset = (preset: "24h" | "default" | "morning" | "afternoon" | "evening") => {
-    if (preset === "24h") {
-      setFormValues((prev) => ({
-        ...prev,
-        WITHDRAWAL_24H_OPEN: "true",
-        WITHDRAWAL_START_TIME: "00:00",
-        WITHDRAWAL_END_TIME: "23:59",
-        WITHDRAWAL_START_HOUR: "0",
-        WITHDRAWAL_END_HOUR: "23",
-      }));
-    } else if (preset === "default") {
-      setFormValues((prev) => ({
-        ...prev,
-        WITHDRAWAL_24H_OPEN: "false",
-        WITHDRAWAL_START_TIME: "10:00",
-        WITHDRAWAL_END_TIME: "14:00",
-        WITHDRAWAL_START_HOUR: "10",
-        WITHDRAWAL_END_HOUR: "14",
-      }));
-    } else if (preset === "morning") {
-      setFormValues((prev) => ({
-        ...prev,
-        WITHDRAWAL_24H_OPEN: "false",
-        WITHDRAWAL_START_TIME: "09:00",
-        WITHDRAWAL_END_TIME: "13:00",
-        WITHDRAWAL_START_HOUR: "9",
-        WITHDRAWAL_END_HOUR: "13",
-      }));
-    } else if (preset === "afternoon") {
-      setFormValues((prev) => ({
-        ...prev,
-        WITHDRAWAL_24H_OPEN: "false",
-        WITHDRAWAL_START_TIME: "12:00",
-        WITHDRAWAL_END_TIME: "18:00",
-        WITHDRAWAL_START_HOUR: "12",
-        WITHDRAWAL_END_HOUR: "18",
-      }));
-    } else if (preset === "evening") {
-      setFormValues((prev) => ({
-        ...prev,
-        WITHDRAWAL_24H_OPEN: "false",
-        WITHDRAWAL_START_TIME: "16:00",
-        WITHDRAWAL_END_TIME: "22:00",
-        WITHDRAWAL_START_HOUR: "16",
-        WITHDRAWAL_END_HOUR: "22",
-      }));
-    }
   };
 
   const fetchConfigs = async () => {
@@ -294,46 +225,18 @@ export function AdminConfigView() {
   const handleInputChange = (key: string, value: string) => {
     setFormValues((prev) => {
       const next = { ...prev, [key]: value };
-      if (key === "WITHDRAWAL_START_TIME") {
-        const [h = 10] = value.split(":").map(Number);
-        next.WITHDRAWAL_START_HOUR = String(h);
-      } else if (key === "WITHDRAWAL_START_HOUR") {
-        const h = Number(value);
-        next.WITHDRAWAL_START_TIME = `${String(isNaN(h) ? 10 : h).padStart(2, "0")}:00`;
-      } else if (key === "WITHDRAWAL_END_TIME") {
-        const [h = 14] = value.split(":").map(Number);
-        next.WITHDRAWAL_END_HOUR = String(h);
-      } else if (key === "WITHDRAWAL_END_HOUR") {
-        const h = Number(value);
-        next.WITHDRAWAL_END_TIME = h >= 23 ? "23:59" : `${String(isNaN(h) ? 14 : h).padStart(2, "0")}:00`;
-      } else if (key === "WITHDRAWAL_24H_OPEN") {
-        if (value === "true") {
-          next.WITHDRAWAL_START_TIME = "00:00";
-          next.WITHDRAWAL_END_TIME = "23:59";
-          next.WITHDRAWAL_START_HOUR = "0";
-          next.WITHDRAWAL_END_HOUR = "23";
-        }
+      if (key === "WITHDRAWAL_24H_OPEN" && value === "true") {
+        next.WITHDRAWAL_START_TIME = "00:00";
+        next.WITHDRAWAL_END_TIME = "23:59";
       }
       return next;
     });
   };
 
   const isMaintenanceActive = formValues.MAINTENANCE_MODE === "true";
-  const isPrelaunchActive = formValues.PRELAUNCH_MODE === "true";
-  const currentMode = isMaintenanceActive ? "MAINTENANCE" : isPrelaunchActive ? "PRELAUNCH" : "LIVE";
 
-  const handleSetPlatformMode = async (mode: "LIVE" | "PRELAUNCH" | "MAINTENANCE") => {
-    const updated = { ...formValues };
-    if (mode === "LIVE") {
-      updated.PRELAUNCH_MODE = "false";
-      updated.MAINTENANCE_MODE = "false";
-    } else if (mode === "PRELAUNCH") {
-      updated.PRELAUNCH_MODE = "true";
-      updated.MAINTENANCE_MODE = "false";
-    } else if (mode === "MAINTENANCE") {
-      updated.PRELAUNCH_MODE = "false";
-      updated.MAINTENANCE_MODE = "true";
-    }
+  const handleSetPlatformMode = async (isMaint: boolean) => {
+    const updated = { ...formValues, MAINTENANCE_MODE: isMaint ? "true" : "false" };
     setFormValues(updated);
 
     setSaving(true);
@@ -348,9 +251,7 @@ export function AdminConfigView() {
       if (!res.ok) throw new Error(data.error || "Failed to switch platform mode");
       setStatusMessage({
         type: "success",
-        text: `Platform operational mode successfully switched to ${
-          mode === "LIVE" ? "Normal Live Protocol" : mode === "PRELAUNCH" ? "Pre-Launching Phase" : "System Maintenance"
-        }!`,
+        text: `Platform operational mode switched to ${isMaint ? "System Maintenance" : "Live Normal Mode"}!`,
       });
       await fetchConfigs();
       setTimeout(() => setStatusMessage(null), 4000);
@@ -387,7 +288,10 @@ export function AdminConfigView() {
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Failed to save configuration");
 
-      setStatusMessage({ type: "success", text: data.message || "Configurations saved successfully and applied across all user portals!" });
+      setStatusMessage({
+        type: "success",
+        text: data.message || "Configurations saved successfully and applied across all user portals!",
+      });
       await fetchConfigs();
       setTimeout(() => setStatusMessage(null), 4000);
     } catch (err: any) {
@@ -417,22 +321,22 @@ export function AdminConfigView() {
   );
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-20 animate-in fade-in duration-300">
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-purple-950/40 via-slate-900 to-amber-950/30 border border-purple-500/20 rounded-3xl p-6 sm:p-8 backdrop-blur shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
+      <div className="glass-card-elevated glass-glow-top p-6 sm:p-8 backdrop-blur shadow-2xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-[#00D2FF]/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
         
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <div className="flex items-center gap-2.5 text-purple-400 text-xs font-bold uppercase tracking-widest mb-1.5">
+            <div className="flex items-center gap-2.5 text-[#00D2FF] text-xs font-bold uppercase tracking-widest font-mono mb-1.5">
               <Settings className="w-4 h-4 animate-spin-slow" />
-              <span>Real-Time System Governance</span>
+              <span>Real-Time Protocol Governance</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
-              System Configuration
+              Protocol Configuration &amp; Governance
             </h1>
-            <p className="text-slate-400 text-sm mt-1 max-w-xl">
-              Edit global financial parameters according to the Crypto Finance Protocol plan. Changes instantly apply to User Dashboards, Package calculations, Referral rewards, 10-Level royalties, and Withdrawal limits.
+            <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-xl font-mono">
+              Configure parameters strictly matching the Crypto Finance Protocol plan: 4% Daily Yield, 2X Allocation Pool, 10% Bonus Wallet utility, 10-Level Royalties, and 10% Liquidity Fee.
             </p>
           </div>
 
@@ -441,7 +345,7 @@ export function AdminConfigView() {
               type="button"
               onClick={handleReset}
               disabled={saving || !hasUnsavedChanges}
-              className="px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800/80 hover:bg-slate-700 text-slate-300 text-sm font-semibold flex items-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+              className="px-4 py-2.5 rounded-xl border border-white/10 bg-slate-900/60 hover:bg-white/10 text-slate-300 text-xs font-semibold flex items-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed font-mono"
             >
               <RotateCcw className="w-4 h-4" />
               <span>Discard</span>
@@ -451,16 +355,16 @@ export function AdminConfigView() {
               type="button"
               onClick={() => handleSave()}
               disabled={saving || !hasUnsavedChanges}
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-amber-500 hover:from-purple-500 hover:to-amber-400 text-white font-bold text-sm flex items-center gap-2 shadow-lg shadow-purple-600/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#00FFA3] to-[#00D2FF] hover:opacity-95 text-slate-950 font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg shadow-[#00FFA3]/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-mono"
             >
               {saving ? (
                 <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
+                  <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
                   <span>Saving...</span>
                 </>
               ) : (
                 <>
-                  <Save className="w-4 h-4" />
+                  <Save className="w-4 h-4 text-slate-950" />
                   <span>Save Changes</span>
                 </>
               )}
@@ -471,7 +375,7 @@ export function AdminConfigView() {
         {/* Status Toast Message */}
         {statusMessage && (
           <div
-            className={`mt-5 p-4 rounded-xl text-sm font-medium flex items-center gap-3 transition-all animate-in fade-in ${
+            className={`mt-5 p-4 rounded-xl text-xs sm:text-sm font-medium flex items-center gap-3 transition-all animate-in fade-in ${
               statusMessage.type === "success"
                 ? "bg-emerald-950/60 border border-emerald-500/40 text-emerald-300"
                 : "bg-rose-950/60 border border-rose-500/40 text-rose-300"
@@ -487,9 +391,9 @@ export function AdminConfigView() {
         )}
 
         {hasUnsavedChanges && !statusMessage && (
-          <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold">
+          <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold font-mono">
             <AlertCircle className="w-3.5 h-3.5" />
-            <span>You have unsaved modifications. Click &quot;Save Changes&quot; to apply immediately.</span>
+            <span>Unsaved modifications detected. Click &quot;Save Changes&quot; to apply immediately.</span>
           </div>
         )}
       </div>
@@ -497,18 +401,18 @@ export function AdminConfigView() {
       {/* Filter and Category Tabs */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         {/* Category Pills */}
-        <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-[#070e20] border border-[#152238] overflow-x-auto max-w-full">
-          {["all", "system_mode", "wallet", "withdrawal", "plan", "royalty", "transfers", "company"].map((cat) => {
+        <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-900/80 border border-white/10 overflow-x-auto max-w-full">
+          {["all", "plan", "bonus", "royalty", "withdrawal", "transfers", "wallet", "company", "system_mode"].map((cat) => {
             const Icon = CATEGORY_ICONS[cat] || Settings;
             const isActive = activeCategory === cat;
             return (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all whitespace-nowrap ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold font-mono flex items-center gap-1.5 transition-all whitespace-nowrap ${
                   isActive
-                    ? "bg-purple-600 text-white shadow-md shadow-purple-600/20"
-                    : "text-slate-400 hover:text-slate-200 hover:bg-[#0d1830]"
+                    ? "bg-[#00D2FF] text-slate-950 shadow-md shadow-[#00D2FF]/20"
+                    : "text-slate-400 hover:text-white"
                 }`}
               >
                 <Icon className="w-3.5 h-3.5" />
@@ -526,46 +430,40 @@ export function AdminConfigView() {
             placeholder="Search configuration..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-[#070e20] border border-[#152238] rounded-xl pl-9 pr-4 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-purple-500 transition-colors"
+            className="w-full bg-slate-900/80 border border-white/10 rounded-xl pl-9 pr-4 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-[#00D2FF] transition-colors font-mono"
           />
         </div>
       </div>
 
-      {/* Dedicated Platform Status & Operational Mode Controller */}
+      {/* Dedicated Platform Status Controller */}
       {(activeCategory === "system_mode" || activeCategory === "all") && !searchQuery && (
-        <div className="bg-gradient-to-br from-[#0c1222] via-[#0f172a] to-[#1a1333] border-2 border-amber-500/40 rounded-3xl p-6 sm:p-7 backdrop-blur shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
-
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-800">
+        <div className="glass-card-elevated glass-glow-top p-6 sm:p-7 relative overflow-hidden">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/10">
             <div>
-              <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-widest mb-1.5">
-                <Power className="w-4 h-4 text-amber-400" />
-                <span>Platform Status &amp; Access Control</span>
+              <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-widest font-mono mb-1.5">
+                <Power className="w-4 h-4" />
+                <span>Platform Operational Access Mode</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-black text-white flex flex-wrap items-center gap-3">
-                <span>System Operational Mode</span>
-                <span className={`text-xs px-3 py-1 rounded-full font-bold uppercase border flex items-center gap-1.5 ${
-                  currentMode === "LIVE"
+                <span>System Access Controller</span>
+                <span className={`text-xs px-3 py-1 rounded-full font-bold uppercase border flex items-center gap-1.5 font-mono ${
+                  !isMaintenanceActive
                     ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
-                    : currentMode === "PRELAUNCH"
-                    ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/40"
                     : "bg-rose-500/20 text-rose-300 border-rose-500/40"
                 }`}>
-                  <span className={`w-2 h-2 rounded-full ${
-                    currentMode === "LIVE" ? "bg-emerald-400" : currentMode === "PRELAUNCH" ? "bg-cyan-400 animate-pulse" : "bg-rose-400 animate-ping"
-                  }`} />
-                  {currentMode === "LIVE" ? "Live: Normal Operations" : currentMode === "PRELAUNCH" ? "Pre-Launching Phase Active" : "Maintenance Mode Active"}
+                  <span className={`w-2 h-2 rounded-full ${!isMaintenanceActive ? "bg-emerald-400" : "bg-rose-400 animate-ping"}`} />
+                  {!isMaintenanceActive ? "Normal Live Operations" : "Maintenance Mode Active"}
                 </span>
               </h2>
               <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl leading-relaxed">
-                Control visitor access in real-time. Turn on <strong>Pre-Launching</strong> or <strong>Maintenance Mode</strong> anytime. When active, public user registration and member login panels are hidden. Administrators can always log in directly via the private admin link.
+                When Maintenance Mode is ON, member login and registrations are safely paused. Administrators can always log in directly via the direct admin link.
               </p>
             </div>
 
             {/* Direct Admin Link Security Guarantee Callout */}
-            <div className="bg-[#050b18]/90 border border-amber-500/30 p-4 rounded-2xl max-w-sm shrink-0">
+            <div className="bg-slate-950/80 border border-amber-500/30 p-4 rounded-2xl max-w-sm shrink-0">
               <div className="flex items-center justify-between gap-2 mb-1.5">
-                <span className="text-xs font-bold text-amber-400 flex items-center gap-1.5">
+                <span className="text-xs font-bold text-amber-400 flex items-center gap-1.5 font-mono">
                   <ShieldAlert className="w-3.5 h-3.5" /> Direct Admin Login Link
                 </span>
                 <button
@@ -578,284 +476,71 @@ export function AdminConfigView() {
                       setTimeout(() => setCopiedAdminLink(false), 2500);
                     }
                   }}
-                  className="text-[11px] font-bold px-2 py-0.5 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 flex items-center gap-1 transition cursor-pointer"
+                  className="text-[11px] font-bold px-2 py-0.5 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 flex items-center gap-1 transition font-mono"
                 >
                   {copiedAdminLink ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                  <span>{copiedAdminLink ? "Copied" : "Copy Link"}</span>
+                  <span>{copiedAdminLink ? "Copied" : "Copy"}</span>
                 </button>
               </div>
               <p className="text-[11px] text-slate-300 font-mono bg-black/40 px-2.5 py-1.5 rounded-lg border border-slate-800 break-all select-all">
                 /adminlogin
               </p>
-              <p className="text-[10px] text-slate-400 mt-1.5 leading-snug">
-                Even when maintenance or pre-launch is ON, admins can manually open this link to log in.
-              </p>
             </div>
           </div>
 
-          {/* 3 Interactive Mode Selector Cards */}
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-            {/* Mode 1: Normal Live */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
             <div className={`p-5 rounded-2xl border transition-all flex flex-col justify-between ${
-              currentMode === "LIVE"
-                ? "bg-emerald-950/40 border-emerald-500 shadow-xl shadow-emerald-950/50 ring-1 ring-emerald-500/40"
-                : "bg-[#060c1c] border-slate-800 hover:border-slate-700 opacity-85 hover:opacity-100"
+              !isMaintenanceActive
+                ? "bg-emerald-950/30 border-emerald-500/50"
+                : "bg-slate-900/40 border-white/10"
             }`}>
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-black uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
-                    <Activity className="w-3.5 h-3.5" /> 1. Normal Live
-                  </span>
-                  {currentMode === "LIVE" && (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
-                      CURRENT
-                    </span>
-                  )}
-                </div>
-                <h4 className="text-base font-bold text-white mb-1">Live Operation</h4>
-                <p className="text-xs text-slate-400 leading-relaxed mb-4">
-                  Normal live status. User registration, member login, wallet deposit, package purchase, and dashboards are 100% open to everyone.
+                <span className="text-xs font-black uppercase text-emerald-400 font-mono flex items-center gap-1.5 mb-1">
+                  <Activity className="w-3.5 h-3.5" /> Normal Live Status
+                </span>
+                <p className="text-xs text-slate-400 mb-4">
+                  All member activations, wallet transfers, P2P, and withdrawals operate normally without restriction.
                 </p>
               </div>
               <button
                 type="button"
-                onClick={() => handleSetPlatformMode("LIVE")}
-                disabled={saving || currentMode === "LIVE"}
-                className={`w-full py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 ${
-                  currentMode === "LIVE"
+                onClick={() => handleSetPlatformMode(false)}
+                disabled={saving || !isMaintenanceActive}
+                className={`w-full py-2.5 rounded-xl text-xs font-bold font-mono transition ${
+                  !isMaintenanceActive
                     ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 cursor-default"
-                    : "bg-emerald-600 hover:bg-emerald-500 text-white shadow-lg shadow-emerald-600/30 cursor-pointer"
+                    : "bg-emerald-600 hover:bg-emerald-500 text-white"
                 }`}
               >
-                {currentMode === "LIVE" ? "Currently Active" : "Switch to Normal Live"}
+                {!isMaintenanceActive ? "Currently Active" : "Switch to Live Normal Mode"}
               </button>
             </div>
 
-            {/* Mode 2: Pre-Launching Mode */}
             <div className={`p-5 rounded-2xl border transition-all flex flex-col justify-between ${
-              currentMode === "PRELAUNCH"
-                ? "bg-cyan-950/40 border-cyan-500 shadow-xl shadow-cyan-950/50 ring-1 ring-cyan-500/40"
-                : "bg-[#060c1c] border-slate-800 hover:border-slate-700 opacity-85 hover:opacity-100"
+              isMaintenanceActive
+                ? "bg-rose-950/30 border-rose-500/50"
+                : "bg-slate-900/40 border-white/10"
             }`}>
               <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-black uppercase tracking-wider text-cyan-400 flex items-center gap-1.5">
-                    <Sparkles className="w-3.5 h-3.5" /> 2. Pre-Launching
-                  </span>
-                  {currentMode === "PRELAUNCH" && (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
-                      CURRENT
-                    </span>
-                  )}
-                </div>
-                <h4 className="text-base font-bold text-white mb-1">Pre-Launch Phase</h4>
-                <p className="text-xs text-slate-400 leading-relaxed mb-4">
-                  Member login and registration panels are hidden. Visitors see official Pre-Launching status. Admin access remains open at /adminlogin.
+                <span className="text-xs font-black uppercase text-rose-400 font-mono flex items-center gap-1.5 mb-1">
+                  <ShieldAlert className="w-3.5 h-3.5" /> System Maintenance
+                </span>
+                <p className="text-xs text-slate-400 mb-4">
+                  Member login and user registration are temporarily locked with maintenance notice while upgrades occur.
                 </p>
               </div>
               <button
                 type="button"
-                onClick={() => handleSetPlatformMode("PRELAUNCH")}
-                disabled={saving || currentMode === "PRELAUNCH"}
-                className={`w-full py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 ${
-                  currentMode === "PRELAUNCH"
-                    ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 cursor-default"
-                    : "bg-cyan-600 hover:bg-cyan-500 text-white shadow-lg shadow-cyan-600/30 cursor-pointer"
-                }`}
-              >
-                {currentMode === "PRELAUNCH" ? "Currently Active" : "Activate Pre-Launch"}
-              </button>
-            </div>
-
-            {/* Mode 3: Maintenance Mode */}
-            <div className={`p-5 rounded-2xl border transition-all flex flex-col justify-between ${
-              currentMode === "MAINTENANCE"
-                ? "bg-rose-950/40 border-rose-500 shadow-xl shadow-rose-950/50 ring-1 ring-rose-500/40"
-                : "bg-[#060c1c] border-slate-800 hover:border-slate-700 opacity-85 hover:opacity-100"
-            }`}>
-              <div>
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-black uppercase tracking-wider text-rose-400 flex items-center gap-1.5">
-                    <ShieldAlert className="w-3.5 h-3.5" /> 3. Maintenance
-                  </span>
-                  {currentMode === "MAINTENANCE" && (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/40">
-                      CURRENT
-                    </span>
-                  )}
-                </div>
-                <h4 className="text-base font-bold text-white mb-1">System Maintenance</h4>
-                <p className="text-xs text-slate-400 leading-relaxed mb-4">
-                  Locks member login &amp; dashboard with maintenance screen. User registration is blocked. Admin access remains open at /adminlogin.
-                </p>
-              </div>
-              <button
-                type="button"
-                onClick={() => handleSetPlatformMode("MAINTENANCE")}
-                disabled={saving || currentMode === "MAINTENANCE"}
-                className={`w-full py-2.5 rounded-xl text-xs font-bold transition flex items-center justify-center gap-2 ${
-                  currentMode === "MAINTENANCE"
+                onClick={() => handleSetPlatformMode(true)}
+                disabled={saving || isMaintenanceActive}
+                className={`w-full py-2.5 rounded-xl text-xs font-bold font-mono transition ${
+                  isMaintenanceActive
                     ? "bg-rose-500/20 text-rose-300 border border-rose-500/40 cursor-default"
-                    : "bg-rose-600 hover:bg-rose-500 text-white shadow-lg shadow-rose-600/30 cursor-pointer"
+                    : "bg-rose-600 hover:bg-rose-500 text-white"
                 }`}
               >
-                {currentMode === "MAINTENANCE" ? "Currently Active" : "Activate Maintenance"}
+                {isMaintenanceActive ? "Currently Active" : "Activate Maintenance Mode"}
               </button>
-            </div>
-          </div>
-
-          {/* Notice Messages Customizer */}
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 pt-5 border-t border-slate-800">
-            <div>
-              <label className="text-xs font-bold text-cyan-300 block mb-1">
-                Pre-Launching Visitor Notice Message
-              </label>
-              <textarea
-                rows={2}
-                value={formValues.PRELAUNCH_NOTICE_TEXT || ""}
-                onChange={(e) => handleInputChange("PRELAUNCH_NOTICE_TEXT", e.target.value)}
-                placeholder="Notice displayed during pre-launch phase..."
-                className="w-full bg-[#050b18] border border-slate-700 rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-cyan-500 transition"
-              />
-            </div>
-
-            <div>
-              <label className="text-xs font-bold text-rose-300 block mb-1">
-                Maintenance Mode Visitor Notice Message
-              </label>
-              <textarea
-                rows={2}
-                value={formValues.MAINTENANCE_NOTICE_TEXT || ""}
-                onChange={(e) => handleInputChange("MAINTENANCE_NOTICE_TEXT", e.target.value)}
-                placeholder="Notice displayed during maintenance..."
-                className="w-full bg-[#050b18] border border-slate-700 rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-rose-500 transition"
-              />
-            </div>
-          </div>
-
-          {/* Pre-Launching Live Countdown Timer Controller */}
-          <div className="relative z-10 mt-6 pt-5 border-t border-slate-800 bg-[#060c1d]/60 p-5 rounded-2xl border border-amber-500/20">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
-              <div>
-                <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-wider">
-                  <Clock className="w-4 h-4 text-amber-400" />
-                  <span>Homescreen Big Launch Countdown Timer</span>
-                </div>
-                <p className="text-xs text-slate-400 mt-0.5">
-                  Displays a prominent real-time countdown (Days, Hours, Minutes, Seconds) on the Homescreen when Pre-Launching mode is active.
-                </p>
-              </div>
-
-              {/* Toggle Switch */}
-              <div className="flex items-center gap-3 shrink-0">
-                <span className="text-xs text-slate-300 font-bold">
-                  {formValues.PRELAUNCH_TIMER_ENABLED === "false" ? "Timer OFF" : "Timer ON"}
-                </span>
-                <button
-                  type="button"
-                  onClick={() =>
-                    handleInputChange(
-                      "PRELAUNCH_TIMER_ENABLED",
-                      formValues.PRELAUNCH_TIMER_ENABLED === "false" ? "true" : "false"
-                    )
-                  }
-                  className={`relative inline-flex h-8 w-16 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                    formValues.PRELAUNCH_TIMER_ENABLED !== "false"
-                      ? "bg-amber-500 shadow-md shadow-amber-500/30"
-                      : "bg-slate-700"
-                  }`}
-                  title="Toggle homescreen countdown timer"
-                >
-                  <span
-                    className={`pointer-events-none inline-block h-7 w-7 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out flex items-center justify-center text-[10px] font-black ${
-                      formValues.PRELAUNCH_TIMER_ENABLED !== "false"
-                        ? "translate-x-8 text-amber-600"
-                        : "translate-x-0 text-slate-700"
-                    }`}
-                  >
-                    {formValues.PRELAUNCH_TIMER_ENABLED !== "false" ? "ON" : "OFF"}
-                  </span>
-                </button>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="text-xs font-bold text-amber-300 block mb-1">
-                  Target Launch Date &amp; Time (Dubai Time / GST)
-                </label>
-                <input
-                  type="datetime-local"
-                  value={formValues.PRELAUNCH_TARGET_DATE || "2026-09-21T20:00"}
-                  onChange={(e) => handleInputChange("PRELAUNCH_TARGET_DATE", e.target.value)}
-                  className="w-full bg-[#050b18] border border-slate-700 rounded-xl px-3 py-2 text-white font-mono text-xs focus:outline-none focus:border-amber-500 transition"
-                />
-                <span className="text-[10px] text-slate-500 mt-1 block">
-                  Set to <strong>2026-09-21 20:00 (08:00 PM Dubai Time)</strong> for September 21 launch
-                </span>
-              </div>
-
-              <div>
-                <label className="text-xs font-bold text-amber-300 block mb-1">
-                  Countdown Header Banner Title
-                </label>
-                <input
-                  type="text"
-                  value={formValues.PRELAUNCH_TIMER_TITLE || ""}
-                  onChange={(e) => handleInputChange("PRELAUNCH_TIMER_TITLE", e.target.value)}
-                  placeholder="OFFICIAL GLOBAL PLATFORM LAUNCH • SEPTEMBER 21, 2026"
-                  className="w-full bg-[#050b18] border border-slate-700 rounded-xl px-3 py-2 text-white text-xs focus:outline-none focus:border-amber-500 transition"
-                />
-                <span className="text-[10px] text-slate-500 mt-1 block">
-                  Displayed as the headline above the digital clock numbers
-                </span>
-              </div>
-            </div>
-
-            {/* Live Launch Celebration & Timer Preview Controller */}
-            <div className="mt-6 pt-5 border-t border-amber-500/20">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
-                <div>
-                  <h4 className="text-sm font-bold text-white flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-amber-400" />
-                    <span>Launch State Live Visual Preview (Admin Inspector)</span>
-                  </h4>
-                  <p className="text-xs text-slate-400 mt-0.5">
-                    Test how the countdown banner looks right now vs. how the graphic celebration animation and Login / Register buttons appear when the timer finishes.
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-2 p-1 rounded-xl bg-black/60 border border-slate-800 self-start sm:self-auto">
-                  <button
-                    type="button"
-                    onClick={() => setAdminLaunchPreview(false)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                      !adminLaunchPreview ? "bg-amber-500 text-black font-extrabold shadow-sm" : "text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    🕒 Countdown Mode
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setAdminLaunchPreview(true)}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
-                      adminLaunchPreview ? "bg-emerald-500 text-white font-extrabold shadow-sm" : "text-slate-400 hover:text-white"
-                    }`}
-                  >
-                    <span>🎉 Timer Ended (Celebration &amp; Buttons)</span>
-                  </button>
-                </div>
-              </div>
-
-              {/* Embedded Live CountdownBanner Preview */}
-              <div className="p-3 sm:p-5 rounded-2xl bg-[#060c1c] border border-amber-500/30 overflow-hidden shadow-inner">
-                <CountdownBanner
-                  targetDateStr={formValues.PRELAUNCH_TARGET_DATE || "2026-09-21T20:00"}
-                  title={formValues.PRELAUNCH_TIMER_TITLE || "OFFICIAL GLOBAL PLATFORM LAUNCH • SEPTEMBER 21, 2026"}
-                  forcePast={adminLaunchPreview}
-                  isAdminPreview={true}
-                />
-              </div>
             </div>
           </div>
         </div>
@@ -863,52 +548,50 @@ export function AdminConfigView() {
 
       {/* Dedicated Withdrawal Window & 24/7 Hours Controller */}
       {(activeCategory === "withdrawal" || activeCategory === "all") && !searchQuery && (
-        <div className="bg-gradient-to-br from-[#091326] via-[#0d1633] to-[#141030] border-2 border-purple-500/40 rounded-3xl p-6 sm:p-7 backdrop-blur shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
-
-          <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-slate-800">
+        <div className="glass-card-elevated glass-glow-top p-6 sm:p-7 relative overflow-hidden">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/10">
             <div>
-              <div className="flex items-center gap-2 text-purple-400 text-xs font-bold uppercase tracking-widest mb-1.5">
-                <Clock className="w-4 h-4 text-purple-400" />
-                <span>Withdrawal Timing &amp; Schedule Controller</span>
+              <div className="flex items-center gap-2 text-[#00FFA3] text-xs font-bold uppercase tracking-widest font-mono mb-1.5">
+                <Clock className="w-4 h-4" />
+                <span>Withdrawal Timing &amp; Liquidity Schedule</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-black text-white flex items-center gap-3">
-                <span>Withdrawal Window &amp; 24/7 Hours</span>
-                <span className={`text-xs px-2.5 py-1 rounded-full font-bold uppercase border ${
+                <span>Withdrawal Hours &amp; 24/7 Operations</span>
+                <span className={`text-xs px-2.5 py-1 rounded-full font-bold uppercase border font-mono ${
                   previewStatus.isOpen
                     ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
                     : "bg-rose-500/20 text-rose-300 border-rose-500/40"
                 }`}>
-                  {previewStatus.isOpen ? "● Live: Open Now" : "● Live: Closed"}
+                  {previewStatus.isOpen ? "● Open Now" : "● Closed"}
                 </span>
               </h2>
-              <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-xl">
-                Set custom daily withdrawal hours (HH:MM IST) or toggle 24/7 withdrawals. Changes apply instantly to Member Dashboards, withdrawal modals, and backend validation.
+              <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-xl font-mono">
+                Set custom withdrawal window or toggle 24/7 mode. Minimum withdrawal is $2.00 USDT, with 10% Protocol Liquidity fee retained.
               </p>
             </div>
 
             {/* 24/7 Mode Switch */}
-            <div className="flex items-center gap-4 bg-[#060c1d] border border-purple-500/40 p-4 rounded-2xl shadow-lg">
+            <div className="flex items-center gap-4 bg-slate-950/80 border border-white/10 p-4 rounded-2xl shadow-lg">
               <div className="text-left sm:text-right">
-                <div className="text-xs font-bold text-white flex items-center gap-1.5 sm:justify-end">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-400" />
+                <div className="text-xs font-bold text-white flex items-center gap-1.5 sm:justify-end font-mono">
+                  <Sparkles className="w-3.5 h-3.5 text-[#00FFA3]" />
                   <span>24/7 Mode (Always Open)</span>
                 </div>
-                <div className="text-[11px] text-slate-400">
-                  {is24hActive ? "Members can withdraw anytime 24 hours" : "Strict HH:MM window active"}
+                <div className="text-[11px] text-slate-400 font-mono">
+                  {is24hActive ? "Members can withdraw anytime 24h" : "Strict daily window active"}
                 </div>
               </div>
               <button
                 type="button"
                 onClick={toggle24h}
                 className={`relative inline-flex h-9 w-18 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none ${
-                  is24hActive ? "bg-emerald-500 shadow-lg shadow-emerald-500/30" : "bg-slate-700"
+                  is24hActive ? "bg-[#00FFA3] shadow-lg shadow-[#00FFA3]/30" : "bg-slate-700"
                 }`}
                 title="Toggle 24/7 withdrawals"
               >
                 <span
                   className={`pointer-events-none inline-block h-8 w-8 transform rounded-full bg-white shadow-md ring-0 transition duration-200 ease-in-out flex items-center justify-center text-[10px] font-black tracking-tighter ${
-                    is24hActive ? "translate-x-9 text-emerald-600" : "translate-x-0 text-slate-700"
+                    is24hActive ? "translate-x-9 text-slate-950" : "translate-x-0 text-slate-700"
                   }`}
                 >
                   {is24hActive ? "ON" : "OFF"}
@@ -918,139 +601,44 @@ export function AdminConfigView() {
           </div>
 
           {/* Timing Pickers & Live Preview */}
-          <div className="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-5 mt-6">
-            {/* Start Time Picker */}
-            <div className="bg-[#050b18] border border-slate-800 rounded-2xl p-4 flex flex-col justify-between">
-              <div>
-                <label className="text-xs font-bold text-slate-200 block mb-1">
-                  Daily Window Start Time (HH:MM IST)
-                </label>
-                <p className="text-[11px] text-slate-400 mb-3">
-                  Time when withdrawal button becomes active and open
-                </p>
-              </div>
-              <div>
-                <input
-                  type="time"
-                  value={currentStartTime}
-                  disabled={is24hActive}
-                  onChange={(e) => updateStartTime(e.target.value)}
-                  className="w-full bg-[#081023] border border-slate-700 rounded-xl px-3 py-2 text-white font-mono text-sm focus:outline-none focus:border-purple-500 disabled:opacity-40 disabled:cursor-not-allowed"
-                />
-                {!is24hActive && (
-                  <div className="mt-2 text-[11px] font-mono text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-lg">
-                    🇦🇪 GST (Dubai): <strong>{previewStatus.startFormattedGst}</strong>
-                  </div>
-                )}
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
+            <div className="p-4 rounded-2xl bg-slate-950/60 border border-white/10">
+              <label className="text-xs font-bold text-slate-200 block mb-1 font-mono">
+                Daily Window Start Time (HH:MM)
+              </label>
+              <input
+                type="time"
+                value={currentStartTime}
+                disabled={is24hActive}
+                onChange={(e) => updateStartTime(e.target.value)}
+                className="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-white font-mono text-sm focus:outline-none focus:border-[#00D2FF] disabled:opacity-40 disabled:cursor-not-allowed"
+              />
             </div>
 
-            {/* End Time Picker */}
-            <div className="bg-[#050b18] border border-slate-800 rounded-2xl p-4 flex flex-col justify-between">
-              <div>
-                <label className="text-xs font-bold text-slate-200 block mb-1">
-                  Daily Window End Time (HH:MM IST)
-                </label>
-                <p className="text-[11px] text-slate-400 mb-3">
-                  Time when withdrawal button automatically closes
-                </p>
-              </div>
-              <div>
-                <input
-                  type="time"
-                  value={currentEndTime}
-                  disabled={is24hActive}
-                  onChange={(e) => updateEndTime(e.target.value)}
-                  className="w-full bg-[#081023] border border-slate-700 rounded-xl px-3 py-2 text-white font-mono text-sm focus:outline-none focus:border-purple-500 disabled:opacity-40 disabled:cursor-not-allowed"
-                />
-                {!is24hActive && (
-                  <div className="mt-2 text-[11px] font-mono text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-lg">
-                    🇦🇪 GST (Dubai): <strong>{previewStatus.endFormattedGst}</strong>
-                  </div>
-                )}
-              </div>
+            <div className="p-4 rounded-2xl bg-slate-950/60 border border-white/10">
+              <label className="text-xs font-bold text-slate-200 block mb-1 font-mono">
+                Daily Window Close Time (HH:MM)
+              </label>
+              <input
+                type="time"
+                value={currentEndTime}
+                disabled={is24hActive}
+                onChange={(e) => updateEndTime(e.target.value)}
+                className="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-white font-mono text-sm focus:outline-none focus:border-[#00D2FF] disabled:opacity-40 disabled:cursor-not-allowed"
+              />
             </div>
-
-            {/* Live Member Portal Preview */}
-            <div className="bg-[#050b18] border border-purple-500/30 rounded-2xl p-4 flex flex-col justify-between">
-              <div>
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs font-bold text-purple-300">Live Member Portal View</span>
-                  <div className="text-[10px] font-mono text-slate-400 flex flex-col items-end">
-                    <span>GST: {previewStatus.currentGstTime}</span>
-                    <span>IST: {previewStatus.currentIstTime}</span>
-                  </div>
-                </div>
-                <div className="text-sm font-black text-amber-300 mt-1">
-                  🇦🇪 {previewStatus.gstLabel}
-                </div>
-                <div className="text-xs font-semibold text-slate-400 mt-0.5">
-                  🇮🇳 {previewStatus.istLabel}
-                </div>
-              </div>
-              <div className="mt-4 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-                <span className="text-slate-400">User Button Status:</span>
-                <span className={`font-bold px-2.5 py-0.5 rounded-full text-[11px] ${
-                  previewStatus.isOpen
-                    ? "bg-emerald-950 text-emerald-300 border border-emerald-500/40"
-                    : "bg-rose-950 text-rose-300 border border-rose-500/40"
-                }`}>
-                  {previewStatus.isOpen ? "Enabled (Open Now)" : "Disabled (Closed)"}
-                </span>
-              </div>
-            </div>
-          </div>
-
-          {/* Quick Timing Presets */}
-          <div className="relative z-10 mt-5 pt-4 border-t border-slate-800/80 flex flex-wrap items-center gap-2">
-            <span className="text-xs font-semibold text-slate-400 mr-2">Quick Timing Presets:</span>
-            <button
-              type="button"
-              onClick={() => applyPreset("24h")}
-              className="px-3.5 py-1.5 rounded-xl bg-purple-950/60 hover:bg-purple-900/60 text-purple-300 border border-purple-500/30 text-xs font-semibold transition-all"
-            >
-              ⚡ 24 Hours Always Open (00:00 - 23:59 GST / IST)
-            </button>
-            <button
-              type="button"
-              onClick={() => applyPreset("default")}
-              className="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-semibold transition-all"
-            >
-              🕒 Standard (08:30 AM – 12:30 PM GST / 10:00 AM – 02:00 PM IST)
-            </button>
-            <button
-              type="button"
-              onClick={() => applyPreset("morning")}
-              className="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-semibold transition-all"
-            >
-              🌅 Morning (07:30 AM – 11:30 AM GST / 09:00 AM – 01:00 PM IST)
-            </button>
-            <button
-              type="button"
-              onClick={() => applyPreset("afternoon")}
-              className="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-semibold transition-all"
-            >
-              🌇 Afternoon (10:30 AM – 04:30 PM GST / 12:00 PM – 06:00 PM IST)
-            </button>
-            <button
-              type="button"
-              onClick={() => applyPreset("evening")}
-              className="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-semibold transition-all"
-            >
-              🌙 Evening (02:30 PM – 08:30 PM GST / 04:00 PM – 10:00 PM IST)
-            </button>
           </div>
         </div>
       )}
 
       {/* Configuration Form Grid */}
       {loading ? (
-        <div className="flex flex-col items-center justify-center py-20 bg-slate-900/30 rounded-3xl border border-slate-800/40">
-          <Loader2 className="w-8 h-8 text-purple-500 animate-spin mb-3" />
-          <p className="text-slate-400 text-sm font-medium">Loading system configurations...</p>
+        <div className="flex flex-col items-center justify-center py-20 bg-slate-900/30 rounded-3xl border border-white/10">
+          <Loader2 className="w-8 h-8 text-[#00D2FF] animate-spin mb-3" />
+          <p className="text-slate-400 text-sm font-medium font-mono">Loading protocol configurations...</p>
         </div>
       ) : filteredKeys.length === 0 ? (
-        <div className="text-center py-16 bg-slate-900/30 rounded-3xl border border-slate-800/40 text-slate-400 text-sm">
+        <div className="text-center py-16 bg-slate-900/30 rounded-3xl border border-white/10 text-slate-400 text-sm font-mono">
           No configurations match your search or filter.
         </div>
       ) : (
@@ -1069,43 +657,38 @@ export function AdminConfigView() {
               return (
                 <div
                   key={key}
-                  className="col-span-1 md:col-span-2 lg:col-span-3 bg-gradient-to-br from-slate-900/90 via-[#0a1228] to-purple-950/30 backdrop-blur border-2 border-purple-500/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden"
+                  className="col-span-1 md:col-span-2 lg:col-span-3 glass-card-elevated glass-glow-top p-6 sm:p-8 relative overflow-hidden"
                 >
-                  <div className="absolute top-0 right-0 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
-
-                  {/* Header Row */}
-                  <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+                  <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-white/10">
                     <div>
-                      <div className="flex items-center gap-2 text-purple-400 text-xs font-bold uppercase tracking-widest mb-1">
-                        <Wallet className="w-4 h-4 text-purple-400" />
-                        <span>Branch Dedicated Deposit Vault</span>
+                      <div className="flex items-center gap-2 text-[#00D2FF] text-xs font-bold uppercase tracking-widest font-mono mb-1">
+                        <Wallet className="w-4 h-4" />
+                        <span>Official Protocol Receiving Vault</span>
                       </div>
                       <h2 className="text-xl sm:text-2xl font-black text-white">
                         USDT (BEP-20) Receiving Wallet &amp; QR Code
                       </h2>
-                      <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl">
-                        This receiving address and QR code are dedicated to your branch. Members registered under your team will see this exact wallet and QR code when making crypto deposits. Changes made here remain 100% isolated to your branch.
+                      <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl font-mono">
+                        This receiving address and QR code are displayed to members when making USDT deposits.
                       </p>
                     </div>
 
                     <div className="flex items-center gap-2 self-start md:self-auto">
                       {(isAddressModified || isQrModified) && (
-                        <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider bg-amber-950/80 px-2.5 py-1 rounded-lg border border-amber-500/40">
+                        <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider bg-amber-950/80 px-2.5 py-1 rounded-lg border border-amber-500/40 font-mono">
                           Unsaved Edits
                         </span>
                       )}
-                      <span className="font-mono text-xs px-3 py-1 rounded-lg bg-purple-950/80 text-purple-300 border border-purple-500/30">
+                      <span className="font-mono text-xs px-3 py-1 rounded-lg bg-sky-950/80 text-sky-300 border border-sky-500/30">
                         BEP-20 Network
                       </span>
                     </div>
                   </div>
 
-                  {/* Two-Column Grid: Left Address & Controls, Right QR Code & Upload */}
                   <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6 items-start">
-                    {/* Left: Address Input & Specs */}
                     <div className="lg:col-span-7 space-y-4">
                       <div>
-                        <div className="text-xs font-bold text-slate-200 mb-1.5 flex items-center justify-between">
+                        <div className="text-xs font-bold text-slate-200 mb-1.5 flex items-center justify-between font-mono">
                           <span>Deposit Wallet Address (BSC BEP-20)</span>
                           {currentAddress && (
                             <button
@@ -1115,7 +698,7 @@ export function AdminConfigView() {
                                 setCopiedAddress(true);
                                 setTimeout(() => setCopiedAddress(false), 2000);
                               }}
-                              className="text-[11px] text-purple-400 hover:text-purple-300 flex items-center gap-1 font-semibold"
+                              className="text-[11px] text-[#00D2FF] hover:text-white flex items-center gap-1 font-semibold font-mono"
                             >
                               {copiedAddress ? (
                                 <>
@@ -1131,53 +714,22 @@ export function AdminConfigView() {
                             </button>
                           )}
                         </div>
-                        <div className="relative">
-                          <input
-                            type="text"
-                            value={currentAddress}
-                            onChange={(e) => handleInputChange("COMPANY_USDT_ADDRESS", e.target.value.trim())}
-                            className={`w-full bg-[#050b18] border rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-100 font-mono focus:outline-none transition-all ${
-                              isAddressModified
-                                ? "border-amber-400 focus:border-amber-300 bg-amber-950/10"
-                                : "border-slate-800 focus:border-purple-500"
-                            }`}
-                            placeholder="e.g. 0x1234567890abcdef..."
-                            required
-                          />
-                        </div>
-                        <p className="text-[11px] text-slate-500 mt-1.5">
-                          Make sure this is a valid Binance Smart Chain (BEP-20) USDT address. Incorrect addresses will cause deposit loss.
-                        </p>
+                        <input
+                          type="text"
+                          value={currentAddress}
+                          onChange={(e) => handleInputChange("COMPANY_USDT_ADDRESS", e.target.value.trim())}
+                          className="w-full bg-slate-950/70 border border-white/15 focus:border-[#00D2FF] rounded-xl px-4 py-3 text-xs sm:text-sm text-white font-mono focus:outline-none"
+                          placeholder="e.g. 0x1234567890abcdef..."
+                          required
+                        />
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
-                        <div className="bg-[#060c1c] border border-slate-800/80 rounded-2xl p-3.5">
-                          <div className="text-[11px] text-slate-400 font-semibold uppercase tracking-wider mb-1">
-                            Accepted Token
-                          </div>
-                          <div className="text-sm font-bold text-emerald-400 flex items-center gap-1.5">
-                            <span>USDT (Tether USD)</span>
-                          </div>
-                          <div className="text-[10px] text-slate-500 mt-0.5">Pegged on Binance Smart Chain</div>
-                        </div>
-                        <div className="bg-[#060c1c] border border-slate-800/80 rounded-2xl p-3.5">
-                          <div className="text-[11px] text-slate-400 font-semibold uppercase tracking-wider mb-1">
-                            Deposit Confirmation
-                          </div>
-                          <div className="text-sm font-bold text-purple-400 flex items-center gap-1.5">
-                            <span>Admin Approved</span>
-                          </div>
-                          <div className="text-[10px] text-slate-500 mt-0.5">Users submit TxHash + Screenshot</div>
-                        </div>
-                      </div>
-
-                      {/* QR Upload Action Buttons */}
                       <div className="pt-2">
-                        <div className="text-xs font-bold text-slate-200 mb-2">
+                        <div className="text-xs font-bold text-slate-200 mb-2 font-mono">
                           Manage Deposit QR Code
                         </div>
                         <div className="flex flex-wrap items-center gap-3">
-                          <label className="cursor-pointer px-4 py-2.5 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold flex items-center gap-2 shadow-lg shadow-purple-600/30 transition-all">
+                          <label className="cursor-pointer px-4 py-2.5 rounded-xl bg-[#00D2FF] hover:bg-[#00D2FF]/80 text-slate-950 text-xs font-bold flex items-center gap-2 shadow-lg transition-all font-mono">
                             <Upload className="w-4 h-4" />
                             <span>Upload Custom QR Image</span>
                             <input
@@ -1191,32 +743,22 @@ export function AdminConfigView() {
                             />
                           </label>
 
-                          {customQr ? (
+                          {customQr && (
                             <button
                               type="button"
                               onClick={() => handleInputChange("COMPANY_USDT_QR", "")}
-                              className="px-4 py-2.5 rounded-xl bg-rose-950/60 hover:bg-rose-900/60 text-rose-300 border border-rose-500/30 text-xs font-bold flex items-center gap-1.5 transition-all"
+                              className="px-4 py-2.5 rounded-xl bg-rose-950/60 hover:bg-rose-900/60 text-rose-300 border border-rose-500/30 text-xs font-bold flex items-center gap-1.5 transition-all font-mono"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
-                              <span>Reset to Auto Dynamic QR</span>
+                              <span>Reset to Auto QR</span>
                             </button>
-                          ) : null}
+                          )}
                         </div>
-                        <p className="text-[11px] text-slate-400 mt-2">
-                          Supported formats: PNG, JPG, WEBP. The image is automatically optimized for fast loading on all user devices.
-                        </p>
                       </div>
                     </div>
 
-                    {/* Right: Live QR Preview Card */}
-                    <div className="lg:col-span-5 flex flex-col items-center justify-center bg-[#060c1d] border border-slate-800/80 rounded-2xl p-6 text-center">
-                      <div className="text-xs font-bold text-slate-300 mb-3 flex items-center gap-1.5">
-                        <QrCode className="w-4 h-4 text-purple-400" />
-                        <span>Live Deposit QR Preview</span>
-                      </div>
-
-                      {/* QR Box with white background padding for scan clarity */}
-                      <div className="relative group p-3 bg-white rounded-2xl shadow-xl shadow-purple-950/50 border border-slate-200">
+                    <div className="lg:col-span-5 flex flex-col items-center justify-center bg-slate-950/60 border border-white/10 rounded-2xl p-6 text-center">
+                      <div className="relative p-3 bg-white rounded-2xl shadow-xl border border-slate-200 mb-3">
                         {activeQrUrl ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
@@ -1231,35 +773,17 @@ export function AdminConfigView() {
                           </div>
                         )}
                       </div>
-
-                      {/* QR Status Pill */}
-                      <div className="mt-4 flex items-center gap-2">
-                        {customQr ? (
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-emerald-950 border border-emerald-500/40 text-emerald-300">
-                            <Check className="w-3 h-3 text-emerald-400" />
-                            <span>Custom Uploaded QR Active</span>
-                          </span>
-                        ) : (
-                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-bold bg-purple-950 border border-purple-500/40 text-purple-300">
-                            <Sparkles className="w-3 h-3 text-purple-400" />
-                            <span>Auto-Generated From Wallet Address</span>
-                          </span>
-                        )}
-                      </div>
-
-                      <p className="text-[11px] text-slate-500 mt-2 max-w-xs">
-                        This exact QR code is rendered in the Recharge modal when members deposit USDT.
-                      </p>
+                      <span className="text-[11px] font-bold text-slate-400 font-mono">
+                        {customQr ? "Custom Uploaded QR Active" : "Auto-Generated from Address"}
+                      </span>
                     </div>
                   </div>
                 </div>
               );
             }
 
-            const isAddress = key.includes("ADDRESS");
             const isRoyaltyLevel = key.startsWith("LEVEL_") && key.endsWith("_PERCENT");
             const levelNum = isRoyaltyLevel ? key.split("_")[1] : null;
-
             const is24hToggle = key === "WITHDRAWAL_24H_OPEN";
             const isTimePicker = key === "WITHDRAWAL_START_TIME" || key === "WITHDRAWAL_END_TIME";
             const isNumber = 
@@ -1267,41 +791,35 @@ export function AdminConfigView() {
               !is24hToggle &&
               (key.includes("RATE") || 
               key.includes("PERCENT") || 
-              key.includes("HOUR") || 
               key.includes("MIN") || 
               key.includes("MAX") || 
               key.includes("BONUS") ||
-              key.includes("DAYS"));
+              key.includes("DAYS") ||
+              key.includes("ROI"));
 
             return (
               <div
                 key={key}
-                className={`bg-slate-900/50 backdrop-blur border rounded-2xl p-5 transition-all flex flex-col justify-between shadow-md ${
-                  isRoyaltyLevel
-                    ? "border-amber-500/30 bg-gradient-to-br from-slate-900/60 to-amber-950/20"
-                    : is24hToggle || isTimePicker
-                    ? "border-purple-500/40 bg-gradient-to-br from-slate-900/70 to-purple-950/20"
-                    : "border-slate-800/60 hover:border-purple-500/40"
-                }`}
+                className="glass-card-elevated p-5 flex flex-col justify-between transition-all"
               >
                 <div>
                   <div className="flex items-start justify-between gap-2 mb-1.5">
-                    <label className="text-sm font-bold text-slate-100 tracking-tight block">
+                    <label className="text-sm font-bold text-white tracking-tight block">
                       {FRIENDLY_NAMES[key] || key}
                     </label>
-                    <span className="font-mono text-[10px] px-2 py-0.5 rounded-md bg-purple-950/60 text-purple-300 border border-purple-500/30 shrink-0">
+                    <span className="font-mono text-[10px] px-2 py-0.5 rounded-md bg-sky-950/60 text-sky-300 border border-sky-500/30 shrink-0">
                       {key}
                     </span>
                   </div>
 
-                  <p className="text-xs text-slate-400 mb-3 leading-relaxed">
+                  <p className="text-xs text-slate-400 mb-3 leading-relaxed font-mono">
                     {item.description}
                   </p>
 
                   {isRoyaltyLevel && (
-                    <div className="flex items-center gap-1.5 mb-2 text-[11px] font-semibold text-amber-400 bg-amber-950/40 border border-amber-500/30 rounded-lg px-2.5 py-1">
+                    <div className="flex items-center gap-1.5 mb-2 text-[11px] font-semibold text-[#00FFA3] bg-[#00FFA3]/10 border border-[#00FFA3]/30 rounded-lg px-2.5 py-1 font-mono">
                       <Users className="w-3.5 h-3.5" />
-                      <span>Unlock Condition: Requires {levelNum} Active Direct Referral{Number(levelNum) > 1 ? "s" : ""}</span>
+                      <span>Unlock: Requires {levelNum} Active Direct Member{Number(levelNum) > 1 ? "s" : ""}</span>
                     </div>
                   )}
                 </div>
@@ -1312,45 +830,33 @@ export function AdminConfigView() {
                       <select
                         value={formValues[key] ?? item.value}
                         onChange={(e) => handleInputChange(key, e.target.value)}
-                        className={`w-full bg-[#050b18] border rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none transition-all font-semibold ${
-                          formValues[key] !== item.value
-                            ? "border-amber-400 focus:border-amber-300 bg-amber-950/10"
-                            : "border-slate-800 focus:border-purple-500"
-                        }`}
+                        className="w-full bg-slate-950/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#00D2FF] font-semibold font-mono"
                       >
-                        <option value="false">Scheduled Window (IST Hours)</option>
                         <option value="true">24/7 Open (Always Accessible)</option>
+                        <option value="false">Scheduled Daily Window</option>
                       </select>
                     ) : isTimePicker ? (
                       <input
                         type="time"
                         value={formValues[key] ?? item.value}
                         onChange={(e) => handleInputChange(key, e.target.value)}
-                        className={`w-full bg-[#050b18] border rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none transition-all font-mono font-semibold ${
-                          formValues[key] !== item.value
-                            ? "border-amber-400 focus:border-amber-300 bg-amber-950/10"
-                            : "border-slate-800 focus:border-purple-500"
-                        }`}
+                        className="w-full bg-slate-950/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#00D2FF] font-mono font-semibold"
                         required
                       />
                     ) : (
                       <input
                         type={isNumber ? "number" : "text"}
-                        step={key.includes("PERCENT") || key.includes("RATE") ? "any" : "1"}
+                        step={key.includes("PERCENT") || key.includes("ROI") ? "any" : "1"}
                         value={formValues[key] ?? item.value}
                         onChange={(e) => handleInputChange(key, e.target.value)}
-                        className={`w-full bg-[#050b18] border rounded-xl px-3.5 py-2.5 text-sm text-slate-100 focus:outline-none transition-all ${
-                          formValues[key] !== item.value
-                            ? "border-amber-400 focus:border-amber-300 bg-amber-950/10"
-                            : "border-slate-800 focus:border-purple-500"
-                        } ${isAddress ? "font-mono text-xs" : "font-semibold"}`}
+                        className="w-full bg-slate-950/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#00D2FF] font-mono font-semibold"
                         placeholder={`Enter ${FRIENDLY_NAMES[key] || key}`}
                         required
                       />
                     )}
 
                     {formValues[key] !== item.value && (
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-amber-400 uppercase tracking-wider bg-amber-950/80 px-1.5 py-0.5 rounded border border-amber-500/40 pointer-events-none">
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-amber-400 uppercase tracking-wider bg-amber-950/80 px-1.5 py-0.5 rounded border border-amber-500/40 pointer-events-none font-mono">
                         Modified
                       </span>
                     )}
@@ -1365,12 +871,12 @@ export function AdminConfigView() {
       {/* Floating Save Footer Bar when changes exist */}
       {hasUnsavedChanges && (
         <div className="fixed bottom-6 right-6 sm:right-10 z-40 animate-in slide-in-from-bottom-5">
-          <div className="bg-[#0b1429] border-2 border-purple-500/60 rounded-2xl px-5 py-3 shadow-2xl shadow-purple-600/40 flex items-center gap-4 backdrop-blur-md">
-            <div className="flex items-center gap-2 text-xs text-purple-300 font-semibold">
+          <div className="bg-[#090e1a]/95 border border-[#00FFA3]/50 rounded-2xl px-5 py-3 shadow-2xl flex items-center gap-4 backdrop-blur-md">
+            <div className="flex items-center gap-2 text-xs text-slate-300 font-semibold font-mono">
               <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
               <span>Unsaved changes detected</span>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 font-mono">
               <button
                 type="button"
                 onClick={handleReset}
@@ -1382,7 +888,7 @@ export function AdminConfigView() {
                 type="button"
                 onClick={() => handleSave()}
                 disabled={saving}
-                className="px-4 py-1.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold flex items-center gap-1.5 shadow-lg shadow-purple-600/30"
+                className="px-4 py-1.5 rounded-lg bg-gradient-to-r from-[#00FFA3] to-[#00D2FF] text-slate-950 text-xs font-black flex items-center gap-1.5 shadow-lg"
               >
                 {saving ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
                 <span>Save Now</span>

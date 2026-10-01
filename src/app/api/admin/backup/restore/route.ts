@@ -62,7 +62,7 @@ export async function POST(req: NextRequest) {
 
     if (totalRecords === 0) {
       return NextResponse.json(
-        { error: "The uploaded file does not contain recognized Dubai Finance database tables." },
+        { error: "The uploaded file does not contain recognized Crypto Finance database tables." },
         { status: 400 }
       );
     }

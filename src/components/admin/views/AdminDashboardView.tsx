@@ -22,7 +22,7 @@ export function AdminDashboardView({
   const safeStats = stats || {};
   const [showQueuedList, setShowQueuedList] = useState(false);
   const [contractSearch, setContractSearch] = useState("");
-  const [cycleTz, setCycleTz] = useState<"GST" | "IST" | "UTC">("GST");
+  const [cycleTz, setCycleTz] = useState<"UTC" | "IST">("UTC");
   const upcoming = safeStats.upcomingCycle || {};
   const isClosingComplete = upcoming.isClosingCompleteToday !== false && (upcoming.pendingContractsToday === undefined || upcoming.pendingContractsToday === 0);
   const pendingContractsCount = upcoming.pendingContractsToday ?? 0;
@@ -62,7 +62,7 @@ export function AdminDashboardView({
         </div>
       </div>
 
-      {/* Stats row - 6 High-Impact Glass Metric Cards (Styled after reference image) */}
+      {/* Stats row - 6 High-Impact Glass Metric Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
         {/* Total Members */}
         <div 
@@ -85,13 +85,13 @@ export function AdminDashboardView({
         {/* Active Contracts */}
         <div className="glass-card-elevated p-4 sm:p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between text-slate-400 mb-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest">CONTRACTS</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest">STAKES</span>
             <ShieldCheck className="w-4 h-4 text-emerald-400" />
           </div>
           <h3 className="text-2xl sm:text-3xl font-black text-emerald-400 tracking-tight mb-1 font-mono">
             {safeStats.activeContracts || 0}
           </h3>
-          <p className="text-xs text-slate-400 font-medium">Basic &amp; FD Vault</p>
+          <p className="text-xs text-slate-400 font-medium font-mono">2X Pool Target</p>
         </div>
 
         {/* Pending Deposits */}
@@ -157,49 +157,46 @@ export function AdminDashboardView({
         {/* Header with Global Protocol Time Info */}
         <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 relative z-10 pb-4 border-b border-white/10">
           <div className="space-y-2">
-            <div className="flex items-center gap-2 flex-wrap">
+            <div className="flex items-center gap-2 flex-wrap font-mono">
               <span className="glass-pill px-3 py-1 text-xs font-bold text-sky-400 bg-sky-500/15 border-sky-400/30">
                 <Clock className="h-3.5 w-3.5 text-sky-400" />
                 <span>
-                  {cycleTz === "GST" && "Midnight 12:01 AM GST Protocol Cycle"}
+                  {cycleTz === "UTC" && "Universal 08:01 PM UTC Protocol Cycle"}
                   {cycleTz === "IST" && "Midnight 01:31 AM IST Protocol Cycle"}
-                  {cycleTz === "UTC" && "Global 08:01 PM UTC Protocol Cycle"}
                 </span>
               </span>
               <span className="glass-pill px-3 py-1 text-xs font-semibold text-emerald-400 bg-emerald-500/10 border-emerald-500/30">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                 <span>
                   Next Cycle:{" "}
-                  {cycleTz === "GST"
-                    ? upcoming.nextCycleDubaiTime || "12:01 AM GST"
-                    : cycleTz === "IST"
-                    ? upcoming.nextCycleIstTime || "01:31 AM IST"
-                    : upcoming.nextCycleUtcTime || "08:01 PM UTC"}
+                  {cycleTz === "UTC"
+                    ? upcoming.nextCycleUtcTime || "08:01 PM UTC"
+                    : upcoming.nextCycleIstTime || "01:31 AM IST"}
                 </span>
               </span>
             </div>
             <h2 className="font-bold text-xl sm:text-2xl text-white tracking-tight">
-              Next Upcoming Cycle Income &amp; ROI Automation
+              Next Upcoming Cycle Yield &amp; Royalty Automation
             </h2>
-            <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
-              New package activations credit via daily automation. Returns are queued and auto-calculated every night at <strong>12:01 AM GST</strong>. Below is the projected payout for the next cycle.
+            <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed font-mono">
+              Returns are queued and distributed daily via automated protocol closing. Projected next cycle distribution is shown below.
             </p>
           </div>
           
           <div className="flex flex-col sm:flex-row lg:flex-col items-start lg:items-end gap-2.5">
             {/* Timezone Switcher & Live Clock */}
-            <div className="flex flex-col items-start lg:items-end gap-2">
+            <div className="flex flex-col items-start lg:items-end gap-2 font-mono">
               <div className="inline-flex items-center gap-1 p-1 rounded-2xl bg-slate-900/60 border border-white/10 text-[11px] backdrop-blur-xl">
                 <button
                   type="button"
-                  onClick={() => setCycleTz("GST")}
+                  onClick={() => setCycleTz("UTC")}
                   className={`px-3 py-1 rounded-xl font-bold transition-all ${
-                    cycleTz === "GST"
+                    cycleTz === "UTC"
                       ? "bg-sky-500 text-white shadow-md shadow-sky-500/30"
                       : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  GST
+                  UTC (Global)
                 </button>
                 <button
                   type="button"
@@ -210,30 +207,16 @@ export function AdminDashboardView({
                       : "text-slate-400 hover:text-white"
                   }`}
                 >
-                  IST
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setCycleTz("UTC")}
-                  className={`px-3 py-1 rounded-xl font-bold transition-all ${
-                    cycleTz === "UTC"
-                      ? "bg-sky-500 text-white shadow-md shadow-sky-500/30"
-                      : "text-slate-400 hover:text-white"
-                  }`}
-                >
-                  UTC
+                  IST (Local)
                 </button>
               </div>
 
               <div className="text-xs text-slate-400 bg-slate-900/40 border border-white/10 px-3 py-1.5 rounded-xl font-mono">
-                {cycleTz === "GST" && (
-                  <>GST Time: <span className="text-sky-400 font-bold">{upcoming.currentDubaiTime || "Loading..."}</span></>
+                {cycleTz === "UTC" && (
+                  <>UTC Time: <span className="text-cyan-400 font-bold">{upcoming.currentUtcTime || "Loading..."}</span></>
                 )}
                 {cycleTz === "IST" && (
                   <>IST Time: <span className="text-indigo-400 font-bold">{upcoming.currentIstTime || "Loading..."}</span></>
-                )}
-                {cycleTz === "UTC" && (
-                  <>UTC Time: <span className="text-cyan-400 font-bold">{upcoming.currentUtcTime || "Loading..."}</span></>
                 )}
               </div>
             </div>
@@ -245,7 +228,7 @@ export function AdminDashboardView({
                     type="button"
                     disabled={true}
                     className="px-6 py-3 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-lg shadow-emerald-950/30 whitespace-nowrap cursor-not-allowed opacity-90 transition-all select-none"
-                    title="Today's ROI & Royalty cycle is already complete. Next automated cycle runs at 12:01 AM GST."
+                    title="Today's ROI & Royalty cycle is already complete. Next automated cycle runs at 12:01 AM UTC."
                   >
                     <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
                     <span>Closing Already Complete</span>
@@ -253,7 +236,7 @@ export function AdminDashboardView({
 
                   <div className="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-400/90 glass-pill px-2.5 py-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                    <span>Today&apos;s cycle credited &bull; Next: {upcoming.nextCycleDubaiTime || "12:01 AM GST"}</span>
+                    <span>Today&apos;s cycle credited &bull; Next: {upcoming.nextCycleDubaiTime ? upcoming.nextCycleDubaiTime.replace("GST", "UTC") : "12:01 AM UTC"}</span>
                   </div>
                 </div>
               ) : (
@@ -290,47 +273,36 @@ export function AdminDashboardView({
           </div>
         )}
 
-        {/* 4 Projected Metric Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
-          <div className="bg-[#050b18]/80 border border-amber-500/30 rounded-2xl p-4 shadow-sm">
-            <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">
-              <span>Upcoming Basic ROI (5%)</span>
-              <Banknote className="w-4 h-4 text-amber-400" />
-            </div>
-            <h4 className="text-2xl font-black text-amber-400">
-              {formatUsdt(upcoming.projectedBasicRoiUsdt || 0)}
-            </h4>
-            <p className="text-[11px] text-slate-500 mt-1">Credited to Available Income</p>
-          </div>
-
+        {/* 3 Projected Metric Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
           <div className="bg-[#050b18]/80 border border-cyan-500/30 rounded-2xl p-4 shadow-sm">
             <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">
-              <span>Upcoming FD ROI (10-15%)</span>
-              <ShieldCheck className="w-4 h-4 text-cyan-400" />
+              <span>Upcoming Stake Yield (4.0%)</span>
+              <Banknote className="w-4 h-4 text-[#00D2FF]" />
             </div>
-            <h4 className="text-2xl font-black text-cyan-400">
-              {formatUsdt(upcoming.projectedFdRoiUsdt || 0)}
+            <h4 className="text-2xl font-black text-[#00D2FF]">
+              {formatUsdt(upcoming.projectedBasicRoiUsdt || 0)}
             </h4>
-            <p className="text-[11px] text-slate-500 mt-1">Accumulated in FD Locked</p>
+            <p className="text-[11px] text-slate-500 mt-1">Credited to ROI Wallet (Daily Release)</p>
           </div>
 
-          <div className="bg-[#050b18]/80 border border-indigo-500/30 rounded-2xl p-4 shadow-sm">
+          <div className="bg-[#050b18]/80 border border-[#00FFA3]/30 rounded-2xl p-4 shadow-sm">
             <div className="flex items-center justify-between text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">
-              <span>Upcoming Level Royalties</span>
-              <Layers className="w-4 h-4 text-indigo-400" />
+              <span>Upcoming 10-Level Royalties</span>
+              <Layers className="w-4 h-4 text-[#00FFA3]" />
             </div>
-            <h4 className="text-2xl font-black text-indigo-400">
+            <h4 className="text-2xl font-black text-[#00FFA3]">
               {formatUsdt(upcoming.projectedLevelIncomeUsdt || 0)}
             </h4>
-            <p className="text-[11px] text-slate-500 mt-1">12-Level Downline Royalties</p>
+            <p className="text-[11px] text-slate-500 mt-1">10-Level Downline Royalties</p>
           </div>
 
-          <div className="bg-gradient-to-br from-amber-500/20 to-emerald-500/20 border border-emerald-500/40 rounded-2xl p-4 shadow-sm">
-            <div className="flex items-center justify-between text-emerald-300 text-xs font-bold uppercase tracking-wider mb-1">
+          <div className="bg-gradient-to-br from-[#00D2FF]/20 to-[#00FFA3]/20 border border-[#00FFA3]/40 rounded-2xl p-4 shadow-sm">
+            <div className="flex items-center justify-between text-[#00FFA3] text-xs font-bold uppercase tracking-wider mb-1">
               <span>Total Next Cycle Payout</span>
-              <Sparkles className="w-4 h-4 text-emerald-400" />
+              <Sparkles className="w-4 h-4 text-[#00FFA3]" />
             </div>
-            <h4 className="text-2xl font-black text-emerald-400">
+            <h4 className="text-2xl font-black text-[#00FFA3]">
               {formatUsdt(upcoming.projectedTotalPayoutUsdt || 0)}
             </h4>
             <p className="text-[11px] text-emerald-300/80 mt-1 font-semibold">
@@ -408,12 +380,8 @@ export function AdminDashboardView({
                             <span className="text-[10px] text-slate-400 truncate max-w-[120px] block">{c.userFullName}</span>
                           </td>
                           <td className="py-2.5 px-3">
-                            <span className={`px-2 py-0.5 rounded-md text-[10px] font-bold ${
-                              c.packageType === "BASIC_SAVING"
-                                ? "bg-amber-500/10 text-amber-300 border border-amber-500/30"
-                                : "bg-cyan-500/10 text-cyan-300 border border-cyan-500/30"
-                            }`}>
-                              {c.packageType === "BASIC_SAVING" ? "Basic Saving" : "Fix Deposit"}
+                            <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-[#00D2FF]/10 text-[#00D2FF] border border-[#00D2FF]/30">
+                              Active Stake
                             </span>
                           </td>
                           <td className="py-2.5 px-3 font-semibold text-slate-200">

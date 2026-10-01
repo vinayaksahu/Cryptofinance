@@ -694,7 +694,7 @@ export function ActionModals({ user, onRefresh }: { user: any; onRefresh: () => 
                     </div>
                     <div className="pl-6 space-y-1 text-[11px]">
                       <div>
-                        🇦🇪 <strong className="text-amber-200">GST (Dubai • Primary):</strong> {windowStatus.gstLabel}{" "}
+                        🌐 <strong className="text-amber-200">UTC (Universal):</strong> {windowStatus.gstLabel}{" "}
                         <span className="text-slate-400 font-mono">(Live: {windowStatus.currentGstTime})</span>
                       </div>
                       <div>

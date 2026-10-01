@@ -216,7 +216,7 @@ export async function POST(req: NextRequest) {
       if (isMaintenance) {
         const msg = await getSystemConfigValue(
           "MAINTENANCE_NOTICE_TEXT",
-          "Dubai Finance is currently undergoing scheduled system maintenance. Member login is temporarily paused."
+          "Crypto Finance is currently undergoing scheduled system maintenance. Member login is temporarily paused."
         );
         return NextResponse.json({ error: msg, mode: "MAINTENANCE" }, { status: 503 });
       }

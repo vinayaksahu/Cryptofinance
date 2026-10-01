@@ -103,14 +103,14 @@ export function MemberSidebar({
 
       {/* Frosted Glass Sidebar Container */}
       <aside
-        className={`fixed top-0 left-0 bottom-0 z-50 bg-[#090e1a]/85 backdrop-blur-2xl border-r border-white/10 flex flex-col transition-all duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 bottom-0 z-50 bg-white/85 dark:bg-[#090e1a]/85 backdrop-blur-2xl border-r border-slate-200/80 dark:border-white/10 flex flex-col transition-all duration-300 ease-in-out ${
           isCollapsed ? "lg:w-20" : "lg:w-64"
         } ${
           isOpen ? "translate-x-0 w-72" : "-translate-x-full lg:translate-x-0"
-        } shadow-[0_20px_50px_rgba(0,0,0,0.5)]`}
+        } shadow-[0_20px_50px_rgba(2,132,199,0.08)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]`}
       >
         {/* Brand Logo Header */}
-        <div className="h-16 flex items-center justify-between px-4 border-b border-white/10 bg-white/[0.02] shrink-0">
+        <div className="h-16 flex items-center justify-between px-4 border-b border-slate-200/80 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.02] shrink-0">
           <div className="flex items-center gap-3 overflow-hidden">
             <div className="w-9 h-9 rounded-2xl overflow-hidden bg-gradient-to-br from-sky-400 to-indigo-600 p-0.5 shadow-md shadow-sky-500/20 shrink-0">
               <div className="w-full h-full rounded-[14px] bg-slate-950 flex items-center justify-center overflow-hidden">
@@ -125,10 +125,10 @@ export function MemberSidebar({
               </div>
             </div>
             <div className={`flex flex-col ${isCollapsed ? "lg:hidden" : "block"}`}>
-              <span className="text-white font-bold tracking-wider text-sm uppercase leading-tight whitespace-nowrap">
+              <span className="text-slate-900 dark:text-white font-bold tracking-wider text-sm uppercase leading-tight whitespace-nowrap">
                 CRYPTO FINANCE
               </span>
-              <span className="text-[9px] text-sky-400 font-bold tracking-widest uppercase whitespace-nowrap font-mono">
+              <span className="text-[9px] text-sky-600 dark:text-sky-400 font-bold tracking-widest uppercase whitespace-nowrap font-mono">
                 QUANTITATIVE PROTOCOL
               </span>
             </div>
@@ -138,7 +138,7 @@ export function MemberSidebar({
           <button
             type="button"
             onClick={() => setIsOpen(false)}
-            className="lg:hidden p-1.5 rounded-xl border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition"
+            className="lg:hidden p-1.5 rounded-xl border border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition"
             aria-label="Close Sidebar"
           >
             <X className="w-4 h-4" />
@@ -597,11 +597,11 @@ export function MemberSidebar({
         </div>
 
         {/* Sidebar Footer: Sign Out & Collapse Button */}
-        <div className="p-3 border-t border-white/10 bg-white/[0.02] flex items-center justify-between gap-2 shrink-0">
+        <div className="p-3 border-t border-slate-200/80 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.02] flex items-center justify-between gap-2 shrink-0">
           <button
             type="button"
             onClick={handleLogout}
-            className={`flex items-center gap-2 py-2 px-3 rounded-xl text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 transition-all font-semibold text-xs ${
+            className={`flex items-center gap-2 py-2 px-3 rounded-xl text-rose-500 dark:text-rose-400 hover:text-rose-600 dark:hover:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-all font-semibold text-xs ${
               isCollapsed ? "lg:hidden" : "flex-1"
             }`}
           >
@@ -613,7 +613,7 @@ export function MemberSidebar({
             <button
               type="button"
               onClick={() => setIsCollapsed(!isCollapsed)}
-              className="hidden lg:flex p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition shrink-0"
+              className="hidden lg:flex p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition shrink-0"
               title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
             >
               {isCollapsed ? (

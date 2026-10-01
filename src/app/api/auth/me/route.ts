@@ -21,7 +21,7 @@ export async function GET() {
     if (isMaintenance) {
       const msg = await getSystemConfigValue(
         "MAINTENANCE_NOTICE_TEXT",
-        "Dubai Finance is currently undergoing scheduled system maintenance."
+        "Crypto Finance is currently undergoing scheduled system maintenance."
       );
       return NextResponse.json({ error: msg, isLocked: true, mode: "MAINTENANCE" }, { status: 503 });
     }

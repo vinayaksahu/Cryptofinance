@@ -350,15 +350,15 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                   <div className="flex items-center gap-1 bg-black/40 border border-white/10 rounded-xl p-1">
                     <button
                       type="button"
-                      onClick={() => setSelectedTz("GST")}
+                      onClick={() => setSelectedTz("UTC")}
                       className={`px-2 py-0.5 rounded-lg text-[10px] font-black transition-all flex items-center gap-1 ${
-                        selectedTz === "GST"
-                          ? "bg-amber-500 text-black shadow-sm font-extrabold"
+                        selectedTz === "UTC"
+                          ? "bg-cyan-500 text-black shadow-sm font-extrabold"
                           : "text-slate-400 hover:text-white"
                       }`}
-                      title="Gulf Standard Time (Dubai) - Primary"
+                      title="Universal Coordinated Time (Protocol Standard)"
                     >
-                      <span>GST (Primary)</span>
+                      <span>UTC (Primary)</span>
                     </button>
                     <button
                       type="button"
@@ -371,18 +371,6 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                       title="Indian Standard Time"
                     >
                       IST
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setSelectedTz("UTC")}
-                      className={`px-2 py-0.5 rounded-lg text-[10px] font-bold transition-all ${
-                        selectedTz === "UTC"
-                          ? "bg-cyan-500 text-black shadow-sm font-extrabold"
-                          : "text-slate-400 hover:text-white"
-                      }`}
-                      title="Coordinated Universal Time"
-                    >
-                      UTC
                     </button>
                     <button
                       type="button"
@@ -409,23 +397,23 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                     <span className="text-[10px] text-slate-400 font-normal">Click a zone to focus</span>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-2 mt-1">
-                    {/* 1. Dubai (GST) */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mt-1">
+                    {/* 1. Global (UTC) */}
                     <div
-                      onClick={() => setSelectedTz("GST")}
+                      onClick={() => setSelectedTz("UTC")}
                       className={`p-2.5 rounded-xl bg-black/40 border cursor-pointer transition-all ${
-                        selectedTz === "GST"
-                          ? "border-amber-400 shadow-md shadow-amber-500/20 ring-1 ring-amber-400/40"
-                          : "border-amber-500/30 hover:border-amber-400/60"
+                        selectedTz === "UTC"
+                          ? "border-cyan-400 shadow-md shadow-cyan-500/20 ring-1 ring-cyan-400/40"
+                          : "border-cyan-500/30 hover:border-cyan-400/60"
                       }`}
                     >
-                      <div className="text-[10px] text-amber-400 font-bold uppercase tracking-wider flex items-center justify-between">
-                        <span>🇦🇪 Dubai (GST, UTC+4)</span>
-                        <span className="text-[9px] px-1 rounded bg-amber-500/20 text-amber-300 font-extrabold">PRIMARY</span>
+                      <div className="text-[10px] text-cyan-400 font-bold uppercase tracking-wider flex items-center justify-between">
+                        <span>🌐 Universal (UTC)</span>
+                        <span className="text-[9px] px-1 rounded bg-cyan-500/20 text-cyan-300 font-extrabold">PRIMARY</span>
                       </div>
-                      <div className="text-xs font-black text-white mt-1">{windowStatus.gstLabel}</div>
+                      <div className="text-xs font-black text-white mt-1">{windowStatus.utcLabel || windowStatus.gstLabel}</div>
                       <div className="text-[10px] text-slate-400 mt-1 font-mono">
-                        Live: <span className="text-amber-300 font-bold">{windowStatus.currentGstTime}</span>
+                        Live: <span className="text-cyan-300 font-bold">{windowStatus.currentUtcTime}</span>
                       </div>
                     </div>
 
@@ -447,33 +435,14 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
                         Live: <span className="text-blue-300 font-bold">{windowStatus.currentIstTime}</span>
                       </div>
                     </div>
-
-                    {/* 3. Global (UTC) */}
-                    <div
-                      onClick={() => setSelectedTz("UTC")}
-                      className={`p-2.5 rounded-xl bg-black/40 border cursor-pointer transition-all ${
-                        selectedTz === "UTC"
-                          ? "border-cyan-400 shadow-md shadow-cyan-500/20 ring-1 ring-cyan-400/40"
-                          : "border-cyan-500/30 hover:border-cyan-400/60"
-                      }`}
-                    >
-                      <div className="text-[10px] text-cyan-400 font-bold uppercase tracking-wider flex items-center justify-between">
-                        <span>🌐 Global (UTC, UTC+0)</span>
-                        <span className="text-[9px] px-1 rounded bg-cyan-500/20 text-cyan-300 font-bold">UTC</span>
-                      </div>
-                      <div className="text-xs font-black text-white mt-1">{windowStatus.utcLabel}</div>
-                      <div className="text-[10px] text-slate-400 mt-1 font-mono">
-                        Live: <span className="text-cyan-300 font-bold">{windowStatus.currentUtcTime}</span>
-                      </div>
-                    </div>
                   </div>
 
                   <p className="text-[11px] opacity-80 mt-2">
                     {windowStatus.is24h
                       ? "24/7 Instant Withdrawals Active! You can submit withdrawal requests anytime without time restrictions."
                       : windowStatus.isOpen
-                      ? `Window is currently OPEN! You can submit withdrawal requests before ${windowStatus.endFormattedGst} GST / ${windowStatus.endFormattedIst} IST.`
-                      : `Window is currently CLOSED. Requests are accepted daily during ${windowStatus.gstLabel} (Dubai) / ${windowStatus.istLabel} (India).`}
+                      ? `Window is currently OPEN! You can submit withdrawal requests before ${windowStatus.endFormattedGst} UTC / ${windowStatus.endFormattedIst} IST.`
+                      : `Window is currently CLOSED. Requests are accepted daily during ${windowStatus.gstLabel} (UTC) / ${windowStatus.istLabel} (IST).`}
                   </p>
                 </div>
               </div>

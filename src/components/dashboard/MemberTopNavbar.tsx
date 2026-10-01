@@ -181,20 +181,20 @@ export function MemberTopNavbar({
 
   return (
     <>
-      <header className="h-16 bg-[#090e1a]/80 backdrop-blur-2xl border-b border-white/10 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 transition-colors duration-200">
+      <header className="h-16 bg-white/80 dark:bg-[#090e1a]/80 backdrop-blur-2xl border-b border-slate-200/80 dark:border-white/10 px-4 sm:px-6 flex items-center justify-between sticky top-0 z-30 transition-colors duration-200 shadow-sm dark:shadow-none">
         {/* Left: Sidebar Slide/Collapse Toggle & Theme Toggle */}
         <div className="flex items-center gap-2 sm:gap-3">
           <button
             type="button"
             onClick={onToggleSidebar}
-            className="p-2 rounded-2xl border border-white/10 text-slate-300 hover:text-white hover:bg-white/10 transition-colors shrink-0"
+            className="p-2 rounded-2xl border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors shrink-0"
             title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
             aria-label="Toggle Side Panel"
           >
             {isCollapsed ? (
-              <PanelLeft className="w-5 h-5 text-sky-400" />
+              <PanelLeft className="w-5 h-5 text-sky-500 dark:text-sky-400" />
             ) : (
-              <PanelLeftClose className="w-5 h-5 text-sky-400" />
+              <PanelLeftClose className="w-5 h-5 text-sky-500 dark:text-sky-400" />
             )}
           </button>
 
@@ -206,7 +206,7 @@ export function MemberTopNavbar({
           <button
             type="button"
             onClick={() => setDropdownOpen((prev) => !prev)}
-            className="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-white/[0.06] hover:bg-white/[0.12] border border-white/15 backdrop-blur-xl transition-all text-left shadow-sm cursor-pointer"
+            className="flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-white/70 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.12] border border-slate-200 dark:border-white/15 backdrop-blur-xl transition-all text-left shadow-sm cursor-pointer"
           >
             {/* Sleek Modern Monogram Avatar */}
             <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center text-white font-extrabold text-xs shadow-sm">
@@ -215,28 +215,28 @@ export function MemberTopNavbar({
 
             {/* Full Name & UID Pill */}
             <div className="hidden sm:flex flex-col text-left">
-              <span className="text-xs font-bold text-white tracking-tight leading-tight">
+              <span className="text-xs font-bold text-slate-900 dark:text-white tracking-tight leading-tight">
                 {user.fullName || "Member"}
               </span>
-              <span className="text-[10px] text-sky-400 font-mono font-medium">
+              <span className="text-[10px] text-sky-600 dark:text-sky-400 font-mono font-medium">
                 {user.customId}
               </span>
             </div>
 
-            <ChevronDown className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`} />
+            <ChevronDown className={`w-3.5 h-3.5 text-slate-500 dark:text-slate-400 transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`} />
           </button>
 
           {/* Frosted Glass Dropdown Menu */}
           {dropdownOpen && (
-            <div className="absolute right-0 mt-2 w-64 glass-card-elevated p-2 text-slate-200 z-50 animate-in fade-in zoom-in-95 duration-100">
+            <div className="absolute right-0 mt-2 w-64 glass-card-elevated p-2 text-slate-700 dark:text-slate-200 z-50 animate-in fade-in zoom-in-95 duration-100 shadow-xl">
               {/* Header: UID & Level */}
-              <div className="px-3 py-2 border-b border-white/10">
-                <p className="text-xs font-bold text-white tracking-wide font-mono">
+              <div className="px-3 py-2 border-b border-slate-200 dark:border-white/10">
+                <p className="text-xs font-bold text-slate-900 dark:text-white tracking-wide font-mono">
                   UID: {user.customId}
                 </p>
                 <div className="flex items-center gap-1.5 mt-0.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                  <span className="text-[11px] font-semibold text-emerald-400">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-emerald-400" />
+                  <span className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
                     {user.status === "ACTIVE" ? "Active Account" : "Pending Activation"}
                   </span>
                 </div>
@@ -251,9 +251,9 @@ export function MemberTopNavbar({
                     setProfileMsg(null);
                     setActiveModal("profile");
                   }}
-                  className="w-full text-left px-3 py-2 text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/[0.08] rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer"
+                  className="w-full text-left px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.08] rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer"
                 >
-                  <User className="w-4 h-4 text-sky-400 shrink-0" />
+                  <User className="w-4 h-4 text-sky-500 dark:text-sky-400 shrink-0" />
                   <span>Edit Profile</span>
                 </button>
 
@@ -264,9 +264,9 @@ export function MemberTopNavbar({
                     setPwdMsg(null);
                     setActiveModal("password");
                   }}
-                  className="w-full text-left px-3 py-2 text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/[0.08] rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer"
+                  className="w-full text-left px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.08] rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer"
                 >
-                  <Key className="w-4 h-4 text-indigo-400 shrink-0" />
+                  <Key className="w-4 h-4 text-indigo-500 dark:text-indigo-400 shrink-0" />
                   <span>Change Password</span>
                 </button>
 
@@ -277,21 +277,21 @@ export function MemberTopNavbar({
                     setWalletMsg(null);
                     setActiveModal("wallet");
                   }}
-                  className="w-full text-left px-3 py-2 text-xs font-semibold text-slate-300 hover:text-white hover:bg-white/[0.08] rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer"
+                  className="w-full text-left px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.08] rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer"
                 >
-                  <Wallet className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <Wallet className="w-4 h-4 text-emerald-500 dark:text-emerald-400 shrink-0" />
                   <span>BEP-20 Wallet Address</span>
                 </button>
               </div>
 
               {/* Sign out */}
-              <div className="border-t border-white/10 pt-1 mt-1">
+              <div className="border-t border-slate-200 dark:border-white/10 pt-1 mt-1">
                 <button
                   type="button"
                   onClick={handleLogout}
-                  className="w-full text-left px-3 py-2 text-xs font-bold text-rose-400 hover:bg-rose-500/10 rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer"
+                  className="w-full text-left px-3 py-2 text-xs font-bold text-rose-500 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer"
                 >
-                  <LogOut className="w-4 h-4 text-rose-400 shrink-0" />
+                  <LogOut className="w-4 h-4 text-rose-500 shrink-0" />
                   <span>Sign Out</span>
                 </button>
               </div>
@@ -323,8 +323,8 @@ export function MemberTopNavbar({
                 <User className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white">Edit Profile</h3>
-                <p className="text-xs text-slate-400">Update your protocol account details</p>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">Edit Profile</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400">Update your protocol account details</p>
               </div>
             </div>
 
@@ -347,45 +347,45 @@ export function MemberTopNavbar({
 
             <form onSubmit={handleUpdateProfile} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">User ID</label>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">User ID</label>
                 <input
                   type="text"
                   value={user.customId}
                   disabled
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-400 font-mono opacity-80 cursor-not-allowed"
+                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-500 dark:text-slate-400 font-mono opacity-80 cursor-not-allowed"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">Full Name</label>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Full Name</label>
                 <input
                   type="text"
                   value={profileName}
                   onChange={(e) => setProfileName(e.target.value)}
                   placeholder="Enter full name"
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-white placeholder-slate-500"
+                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">Email Address</label>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Email Address</label>
                 <input
                   type="email"
                   value={user.email}
                   disabled
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-400 opacity-80 cursor-not-allowed"
+                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-500 dark:text-slate-400 opacity-80 cursor-not-allowed"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">Phone Number</label>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Phone Number</label>
                 <input
                   type="tel"
                   value={profilePhone}
                   onChange={(e) => setProfilePhone(e.target.value)}
                   placeholder="e.g. +971 50 123 4567"
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-white placeholder-slate-500"
+                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
                 />
               </div>
 
@@ -433,8 +433,8 @@ export function MemberTopNavbar({
                 <Key className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white">Change Password</h3>
-                <p className="text-xs text-slate-400">Update your account authentication credentials</p>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">Change Password</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400">Update your account authentication credentials</p>
               </div>
             </div>
 
@@ -457,39 +457,39 @@ export function MemberTopNavbar({
 
             <form onSubmit={handleChangePassword} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">Current Password</label>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Current Password</label>
                 <input
                   type="password"
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-white placeholder-slate-500 font-mono"
+                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 font-mono"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">New Password</label>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">New Password</label>
                 <input
                   type="password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="Min. 6 characters"
                   minLength={6}
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-white placeholder-slate-500 font-mono"
+                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 font-mono"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">Confirm New Password</label>
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Confirm New Password</label>
                 <input
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Re-enter new password"
                   minLength={6}
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-white placeholder-slate-500 font-mono"
+                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 font-mono"
                   required
                 />
               </div>
@@ -538,8 +538,8 @@ export function MemberTopNavbar({
                 <Wallet className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white">USDT BEP-20 Wallet</h3>
-                <p className="text-xs text-slate-400">Set or change your withdrawal destination address</p>
+                <h3 className="text-lg font-bold text-slate-900 dark:text-white">USDT BEP-20 Wallet</h3>
+                <p className="text-xs text-slate-600 dark:text-slate-400">Set or change your withdrawal destination address</p>
               </div>
             </div>
 
@@ -561,15 +561,15 @@ export function MemberTopNavbar({
             )}
 
             <form onSubmit={handleUpdateWallet} className="space-y-4">
-              <div className="p-3.5 rounded-2xl bg-slate-900/60 border border-white/10 text-xs">
-                <span className="text-slate-400 block mb-1">Current Receiving Address:</span>
-                <span className="font-mono text-emerald-400 break-all select-all font-semibold">
+              <div className="p-3.5 rounded-2xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 text-xs">
+                <span className="text-slate-600 dark:text-slate-400 block mb-1">Current Receiving Address:</span>
+                <span className="font-mono text-emerald-600 dark:text-emerald-400 break-all select-all font-semibold">
                   {user.usdtAddress || "No wallet address linked yet"}
                 </span>
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
+                <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
                   USDT BEP-20 Receiving Address
                 </label>
                 <input
@@ -577,14 +577,14 @@ export function MemberTopNavbar({
                   value={walletAddress}
                   onChange={(e) => setWalletAddress(e.target.value)}
                   placeholder="0x... USDT BEP-20 Wallet Address"
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-white placeholder-slate-500 font-mono"
+                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 font-mono"
                   required
                 />
               </div>
 
               <div>
                 <div className="flex items-center justify-between mb-1.5">
-                  <label className="block text-xs font-semibold text-slate-300">
+                  <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
                     Security Code (Email OTP)
                   </label>
                   <button

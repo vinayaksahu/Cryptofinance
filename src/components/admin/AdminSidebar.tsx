@@ -50,11 +50,10 @@ export default function AdminSidebar({
     { id: "withdrawals", label: "Withdrawal Management", icon: Banknote, badge: pendingWithdrawalsCount > 0 ? pendingWithdrawalsCount : null, badgeColor: "bg-rose-500/20 text-rose-400 border-rose-500/40" },
     { id: "admin-income", label: "Admin Fee Income", icon: Landmark, badge: "10%", badgeColor: "bg-indigo-500/20 text-indigo-300 border-indigo-500/40" },
     { id: "users", label: "User Management", icon: Users },
-    { id: "roi-engine", label: "ROI Engine", icon: Zap },
     { id: "tickets", label: "Support Tickets", icon: Headphones },
-    { id: "profile", label: "Admin Profile", icon: UserCog },
     { id: "config", label: "System Config", icon: Settings },
     { id: "backup", label: "Database Backup", icon: Database },
+    { id: "profile", label: "Admin Profile", icon: UserCog },
   ];
 
   const handleLogout = async () => {
@@ -79,14 +78,14 @@ export default function AdminSidebar({
 
       {/* Frosted Glass Sidebar Container */}
       <aside
-        className={`fixed top-0 left-0 bottom-0 z-50 bg-[#090e1a]/85 backdrop-blur-2xl border-r border-white/10 flex flex-col transition-all duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 bottom-0 z-50 bg-white/85 dark:bg-[#090e1a]/85 backdrop-blur-2xl border-r border-slate-200/80 dark:border-white/10 flex flex-col transition-all duration-300 ease-in-out ${
           isCollapsed ? "lg:w-20" : "lg:w-64"
         } ${
           isOpen ? "translate-x-0 w-72" : "-translate-x-full lg:translate-x-0"
-        } shadow-[0_20px_50px_rgba(0,0,0,0.5)]`}
+        } shadow-[0_20px_50px_rgba(2,132,199,0.08)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]`}
       >
         {/* Brand Header */}
-        <div className="h-16 bg-white/[0.02] border-b border-white/10 flex items-center justify-between px-4 shrink-0 relative overflow-hidden">
+        <div className="h-16 bg-slate-50/50 dark:bg-white/[0.02] border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between px-4 shrink-0 relative overflow-hidden">
           <div className="flex items-center gap-3 relative z-10 overflow-hidden">
             <div className="relative w-9 h-9 rounded-2xl overflow-hidden bg-gradient-to-br from-sky-400 via-indigo-500 to-purple-600 p-0.5 shadow-md shadow-sky-500/25 shrink-0">
               <div className="w-full h-full rounded-[14px] bg-slate-950 flex items-center justify-center overflow-hidden">
@@ -104,11 +103,11 @@ export default function AdminSidebar({
             <div className={`flex flex-col transition-opacity duration-200 ${
               isCollapsed ? "lg:hidden" : "block"
             }`}>
-              <div className="font-bold text-sm tracking-wider text-white uppercase whitespace-nowrap leading-none">
+              <div className="font-bold text-sm tracking-wider text-slate-900 dark:text-white uppercase whitespace-nowrap leading-none">
                 CRYPTO FINANCE
               </div>
-              <div className="text-[9px] font-bold tracking-widest text-sky-400 uppercase mt-1 whitespace-nowrap flex items-center gap-1 leading-none font-mono">
-                <ShieldCheck className="w-3 h-3 text-emerald-400" />
+              <div className="text-[9px] font-bold tracking-widest text-sky-600 dark:text-sky-400 uppercase mt-1 whitespace-nowrap flex items-center gap-1 leading-none font-mono">
+                <ShieldCheck className="w-3 h-3 text-emerald-500 dark:text-emerald-400" />
                 ADMIN CONSOLE
               </div>
             </div>
@@ -117,7 +116,7 @@ export default function AdminSidebar({
           <button
             type="button"
             onClick={() => setIsOpen(false)}
-            className="lg:hidden p-1.5 rounded-xl border border-white/10 text-slate-400 hover:text-white hover:bg-white/10 transition"
+            className="lg:hidden p-1.5 rounded-xl border border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition"
             aria-label="Close Sidebar"
           >
             <X className="w-4 h-4" />
@@ -127,8 +126,8 @@ export default function AdminSidebar({
         {/* Super Root Admin Floating Badge */}
         {isSuper && (
           <div className={`px-3 pt-3 ${isCollapsed ? "lg:hidden" : "block"}`}>
-            <div className="glass-pill w-full py-1.5 px-3 bg-gradient-to-r from-purple-500/20 to-sky-500/20 border-purple-500/40 text-[10px] font-black text-purple-300 uppercase tracking-widest flex items-center justify-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping" />
+            <div className="glass-pill w-full py-1.5 px-3 bg-gradient-to-r from-purple-500/15 to-sky-500/15 border-purple-500/30 text-[10px] font-black text-purple-600 dark:text-purple-300 uppercase tracking-widest flex items-center justify-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping" />
               SUPER ROOT PRIVILEGES
             </div>
           </div>
@@ -154,12 +153,12 @@ export default function AdminSidebar({
                   isCollapsed ? "lg:justify-center lg:px-2" : "justify-between px-3.5"
                 } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
                   isActive
-                    ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-white border border-sky-400/40 shadow-lg shadow-sky-500/15"
-                    : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
+                    ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-slate-900 dark:text-white border border-sky-400/50 shadow-lg shadow-sky-500/15"
+                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-sky-50/80 dark:hover:bg-white/[0.06]"
                 }`}
               >
                 <div className={`flex items-center ${isCollapsed ? "gap-0" : "gap-3"}`}>
-                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-sky-400" : "text-slate-400"}`} />
+                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-sky-600 dark:text-sky-400" : "text-slate-500 dark:text-slate-400"}`} />
                   <span className={isCollapsed ? "lg:hidden" : "inline"}>
                     {item.label}
                   </span>
@@ -176,11 +175,11 @@ export default function AdminSidebar({
         </div>
 
         {/* Footer Actions */}
-        <div className="p-3 border-t border-white/10 bg-white/[0.02] flex items-center justify-between gap-2 shrink-0">
+        <div className="p-3 border-t border-slate-200/80 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.02] flex items-center justify-between gap-2 shrink-0">
           <button
             type="button"
             onClick={handleLogout}
-            className={`flex items-center gap-2 py-2 px-3 rounded-xl text-rose-400 hover:text-rose-300 hover:bg-rose-500/10 transition-all font-semibold text-xs ${
+            className={`flex items-center gap-2 py-2 px-3 rounded-xl text-rose-500 dark:text-rose-400 hover:text-rose-600 dark:hover:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-all font-semibold text-xs ${
               isCollapsed ? "lg:hidden" : "flex-1"
             }`}
           >
@@ -191,7 +190,7 @@ export default function AdminSidebar({
           <button
             type="button"
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="hidden lg:flex p-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition shrink-0"
+            className="hidden lg:flex p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition shrink-0"
             title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
           >
             {isCollapsed ? (
