@@ -4,7 +4,7 @@ import "dotenv/config";
 
 function getDatabaseUrl(): string {
   let url = process.env.DIRECT_URL || process.env.DATABASE_URL || "";
-  const schema = process.env.DB_SCHEMA || "dubaifinance";
+  const schema = process.env.DB_SCHEMA || "public";
   if (url && !url.includes("schema=")) {
     const sep = url.includes("?") ? "&" : "?";
     url = `${url}${sep}schema=${schema}`;

@@ -39,7 +39,7 @@ function createPrismaClient(): PrismaClient {
     } catch {}
   }
   if (!schema) {
-    schema = "dubaifinance";
+    schema = "public";
   }
 
   const adapter = new PrismaPg(pool, { schema });
