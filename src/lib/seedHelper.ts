@@ -10,13 +10,13 @@ export async function ensureInitialSeed(prismaClient: any) {
     const count = await prismaClient.user.count();
     if (count === 0) {
       console.log("[AutoSeed] Empty database detected. Seeding admin and demo users...");
-      const adminPass = await hashPassword("adminPassword123!");
+      const adminPass = await hashPassword("Admin@123");
       const adminPin = await hashPin("123456");
 
       const admin = await prismaClient.user.create({
         data: {
-          customId: "DF000001",
-          fullName: "Crypto Finance CMD",
+          customId: "CF000001",
+          fullName: "Crypto Finance CMD (Alex Rivera)",
           email: "admin@cryptofinance.online",
           phone: "+971500000001",
           passwordHash: adminPass,
@@ -25,45 +25,48 @@ export async function ensureInitialSeed(prismaClient: any) {
           status: "ACTIVE",
           fundBalance: 1000000,
           incomeBalance: 500000,
+          teamPrefix: "1",
           usdtAddress: "0x39a0B29A5c66e927598Fa4eCE9bFf84a44bA8812",
         },
       });
 
-      const memberPass = await hashPassword("qwer1234");
+      const memberPass = await hashPassword("User@123");
       const memberPin = await hashPin("123456");
 
-      // Primary requested member: BISHAL ROY (DF478752)
-      await prismaClient.user.create({
+      // Primary member: Alex Turner (CF478752)
+      const member1 = await prismaClient.user.create({
         data: {
-          customId: "DF478752",
-          fullName: "Bishal Roy",
-          email: "bishal@cryptofinance.online",
+          customId: "CF478752",
+          fullName: "Alex Turner",
+          email: "user@cryptofinance.online",
           phone: "+919876543210",
           passwordHash: memberPass,
           transactionPin: memberPin,
           role: "USER",
           status: "ACTIVE",
           sponsorId: admin.id,
+          adminId: admin.id,
           fundBalance: 10000,
-          incomeBalance: 5000,
+          incomeBalance: 2500,
           usdtAddress: "0x71CBishalRoyBep20Address",
         },
       });
 
-      // Alias demo member: DF836419
+      // Member 2: Rahul Sharma (CF836419)
       await prismaClient.user.create({
         data: {
-          customId: "DF836419",
-          fullName: "Bishal Roy",
-          email: "vinayak@cryptofinance.online",
+          customId: "CF836419",
+          fullName: "Rahul Sharma",
+          email: "rahul@cryptofinance.online",
           phone: "+919876543211",
           passwordHash: memberPass,
           transactionPin: memberPin,
           role: "USER",
           status: "ACTIVE",
-          sponsorId: admin.id,
-          fundBalance: 10000,
-          incomeBalance: 5000,
+          sponsorId: member1.id,
+          adminId: admin.id,
+          fundBalance: 2500,
+          incomeBalance: 650,
           usdtAddress: "0x71CAutoSeededBep20Address",
         },
       });
