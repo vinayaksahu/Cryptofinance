@@ -6,7 +6,7 @@
     "dev": "next dev --webpack",
     "build": "prisma generate && next build --webpack",
     "db:push": "prisma db push",
-    "seed": "tsx scripts/seed_demo_accounts.ts",
+    "seed": "npx tsx scripts/seed_demo_accounts.ts",
     "postinstall": "prisma generate",
     "start": "next start",
     "lint": "next lint"
