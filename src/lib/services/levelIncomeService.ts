@@ -4,6 +4,14 @@ import { getNumericConfig } from "../configService";
 import { APP_CONFIG } from "../constants";
 import Decimal from "decimal.js";
 
+/**
+ * Slide 16 & 17: 10-Level Team Daily Royalty
+ * Earn daily passive royalties calculated on the daily ROI generation of downline team members.
+ * Level 1: 10% (1 active direct)
+ * Level 2: 5% (2 active directs)
+ * Level 3-5: 2% each (3, 4, 5 active directs)
+ * Level 6-10: 1% each (6, 7, 8, 9, 10 active directs)
+ */
 export async function processLevelIncomeForRoi(
   sourceUserId: string,
   contractId: string,
@@ -12,9 +20,9 @@ export async function processLevelIncomeForRoi(
   dateStr: string
 ) {
   let currentUserId = sourceUserId;
-  const targetWallet: WalletType = packageType === "BASIC_SAVING" ? "INCOME" : "FD_LOCKED";
+  const targetWallet: WalletType = "INCOME";
 
-  for (let level = 1; level <= 12; level++) {
+  for (let level = 1; level <= 10; level++) {
     // Find upline sponsor
     const currentUser = await db.user.findUnique({
       where: { id: currentUserId },
@@ -26,7 +34,12 @@ export async function processLevelIncomeForRoi(
     }
 
     const sponsorId = currentUser.sponsorId;
-    const sponsor = await db.user.findUnique({
+    const sponsor: {
+      id: string;
+      customId: string;
+      status: any;
+      contracts: { id: string }[];
+    } | null = await db.user.findUnique({
       where: { id: sponsorId },
       select: {
         id: true,
@@ -41,7 +54,7 @@ export async function processLevelIncomeForRoi(
 
     if (!sponsor) break;
 
-    // Check Qualification: Need sponsor to have an ACTIVE ID (status ACTIVE + active contract) and required Direct Active Referrals
+    // Check Qualification: Sponsor must have an ACTIVE ID and required Direct Active Referrals
     const isSponsorActive = sponsor.status === "ACTIVE" && Boolean(sponsor.contracts && sponsor.contracts.length > 0);
     const activeDirectsCount = await db.user.count({
       where: { sponsorId: sponsor.id, status: "ACTIVE" },
@@ -49,7 +62,7 @@ export async function processLevelIncomeForRoi(
     const isQualified = isSponsorActive && activeDirectsCount >= level;
 
     if (isQualified) {
-      // Dynamic Level Royalty rate from System Config
+      // Dynamic Level Royalty rate from System Config or APP_CONFIG
       const defaultRate = APP_CONFIG.levelRates.find((r) => r.level === level)?.percent ?? 1.0;
       const ratePercent = await getNumericConfig(`LEVEL_${level}_PERCENT`, defaultRate);
 
@@ -57,15 +70,14 @@ export async function processLevelIncomeForRoi(
 
       if (levelIncomeUsdt.isPositive() && !levelIncomeUsdt.isZero()) {
         const referenceKey = `LEVEL_${contractId}_${sponsor.id}_L${level}_${dateStr}`;
-        const descType = packageType === "BASIC_SAVING" ? "Basic" : "FD";
 
         await executeLedgerTransaction({
           userId: sponsor.id,
-          type: packageType === "BASIC_SAVING" ? "BASIC_LEVEL_INCOME" : "FD_LEVEL_INCOME",
+          type: "BASIC_LEVEL_INCOME",
           wallet: targetWallet,
           amount: levelIncomeUsdt,
           referenceKey,
-          description: `${descType} Level ${level} Royalty (${ratePercent}%) from ${sourceUserId}`,
+          description: `Level ${level} Team Royalty (${ratePercent}%) from ${sourceUserId}`,
           sourceUserId,
           levelNumber: level,
         });

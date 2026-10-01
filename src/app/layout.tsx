@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Space_Grotesk } from "next/font/google";
+import { Plus_Jakarta_Sans, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import "./globals.css";
 
@@ -17,11 +17,18 @@ const spaceGrotesk = Space_Grotesk({
   display: "swap",
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-jetbrains-mono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Dubai Finance - Institutional Crypto Staking & Multi-Tier Royalty Protocol",
-  description: "Official Dubai Finance Investment Portal. Earn 5% to 15% Daily ROI in USDT BEP-20. 12-Level Team Royalty, Instant Direct Referral Rewards, and Dubai VIP Rewards.",
+  title: "Crypto Finance - Quantitative Algo & DeFi Arbitrage Protocol | 4% Daily Yield",
+  description: "Official Crypto Finance Protocol Portal. Next-generation quantitative wealth protocol engineered for mathematical certainty, sustainable 4% daily yields, and triple-isolated liquidity. Powered by USDT BEP-20.",
   icons: {
-    icon: "/dubaiLogo.png",
+    icon: "/crypto_coin_hero.png",
   },
 };
 
@@ -34,7 +41,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${plusJakartaSans.variable} ${spaceGrotesk.variable} dark`}
+      className={`${plusJakartaSans.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} dark`}
     >
       <head>
         <script
@@ -42,7 +49,7 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  var saved = localStorage.getItem('df_theme');
+                  var saved = localStorage.getItem('cf_theme') || localStorage.getItem('df_theme');
                   var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                   var isDark = saved === 'dark' || (!saved && prefersDark) || (saved === 'system' && prefersDark);
                   var root = document.documentElement;
@@ -63,7 +70,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-screen bg-[var(--bg-main)] text-[var(--text-main)] font-sans antialiased selection:bg-amber-400 selection:text-black transition-colors duration-200">
+      <body className="min-h-screen bg-[var(--bg-main)] text-[var(--text-main)] font-sans antialiased selection:bg-cyan-400 selection:text-black transition-colors duration-200">
         <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>

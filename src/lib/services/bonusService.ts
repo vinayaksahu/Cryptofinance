@@ -5,11 +5,10 @@ import { APP_CONFIG } from "../constants";
 import Decimal from "decimal.js";
 
 /**
- * Distributes the $0.50 / 12-Level Registration Bounty equally across the upper
- * 12 sponsor generations whenever a new user signs up.
- * Total: $0.50 USDT => ~$0.04166667 USDT per upline level.
+ * Distributes the $0.40 / Tier Team Registration Bonus across 10 referral tiers
+ * whenever a new user registers (Slide 05: 10-Level Team Signup Bonus).
  */
-export async function distribute12LevelSignupBonus(
+export async function distribute10LevelSignupBonus(
   newUserId: string,
   initialSponsorId: string | null
 ) {
@@ -22,21 +21,18 @@ export async function distribute12LevelSignupBonus(
     });
     if (!newUser) return;
 
-    // Configurable total 12-level bounty (Default: 0.50 USDT)
-    const totalBountyUsdt = await getNumericConfig(
-      "SIGNUP_LEVEL_BONUS_TOTAL_USDT",
-      APP_CONFIG.signupLevelBonusTotalUsdt ?? 0.50
+    // Configurable per-tier bounty (Default: $0.40 USDT per tier)
+    const perTierUsdt = await getNumericConfig(
+      "SIGNUP_LEVEL_BONUS_PER_TIER_USDT",
+      APP_CONFIG.signupLevelBonusPerTierUsdt ?? 0.40
     );
 
-    const totalBountyDec = new Decimal(totalBountyUsdt);
-    if (!totalBountyDec.isPositive() || totalBountyDec.isZero()) return;
-
-    const levelAmountDec = totalBountyDec.dividedBy(12);
+    const levelAmountDec = new Decimal(perTierUsdt);
     if (!levelAmountDec.isPositive() || levelAmountDec.isZero()) return;
 
     let currentSponsorId: string | null = initialSponsorId;
 
-    for (let level = 1; level <= 12; level++) {
+    for (let level = 1; level <= 10; level++) {
       if (!currentSponsorId) break;
 
       const sponsor: {
@@ -59,7 +55,7 @@ export async function distribute12LevelSignupBonus(
         wallet: "INCOME",
         amount: levelAmountDec,
         referenceKey,
-        description: `12-Level Registration Bounty ($${levelAmountDec.toFixed(4)} USDT) from ${newUser.customId} (Level ${level})`,
+        description: `10-Tier Team Signup Bonus ($${levelAmountDec.toFixed(2)} USDT) from ${newUser.customId} (Tier ${level})`,
         sourceUserId: newUser.id,
         levelNumber: level,
       });
@@ -67,18 +63,22 @@ export async function distribute12LevelSignupBonus(
       currentSponsorId = sponsor.sponsorId;
     }
   } catch (error) {
-    console.error("[12-Level Signup Bonus Error]:", error);
+    console.error("[10-Level Signup Bonus Error]:", error);
   }
 }
+
+// Backward-compatible alias
+export const distribute12LevelSignupBonus = distribute10LevelSignupBonus;
 
 /**
  * Returns accurate bonus lock status and withdrawable balance for a user.
  * Single source of truth for auth/me, dashboard, and transactional views.
+ * Slide 06: Bonus Wallet is non-withdrawable and subsidizes up to 10% of activations/compounding.
  */
 export async function getUserBonusAndWithdrawableStatus(userId: string) {
   const minActiveRequired = await getNumericConfig(
     "BONUS_REDEMPTION_MIN_ACTIVE_USDT",
-    APP_CONFIG.bonusRedemptionMinActiveUsdt ?? 20.0
+    APP_CONFIG.minStakeUsdt ?? 2.0
   );
   const minActiveDec = new Decimal(minActiveRequired);
 
@@ -128,14 +128,13 @@ export async function getUserBonusAndWithdrawableStatus(userId: string) {
     ? new Decimal(bonusAgg._sum.amount.toString())
     : new Decimal(0);
 
-  const isBonusLocked = activeTotalUsdt.lessThan(minActiveDec);
+  // Bonus is strictly non-withdrawable (Slide 06 & 08)
+  const isBonusLocked = true;
   const currentIncomeBal = new Decimal(user.incomeBalance.toString());
 
-  const lockedBonusDec = isBonusLocked
-    ? Decimal.min(totalBonusReceived, currentIncomeBal)
-    : new Decimal(0);
+  const lockedBonusDec = Decimal.min(totalBonusReceived, currentIncomeBal);
 
-  // Available withdrawable floored strictly to 1 decimal place (never rounded up)
+  // Available withdrawable floored strictly to 1 decimal place
   const rawWithdrawable = Decimal.max(0, currentIncomeBal.minus(lockedBonusDec));
   const withdrawableBalDec = rawWithdrawable.toDecimalPlaces(1, Decimal.ROUND_DOWN);
 
@@ -150,13 +149,27 @@ export async function getUserBonusAndWithdrawableStatus(userId: string) {
 }
 
 /**
- * Validates whether a user meets the "$20+ Active IDs" criteria for using/redeeming
- * their Signup and 12-Level Registration Bounty balance.
- *
- * Rules:
- * 1. If user's active packages total >= $20 (or config), 100% of balance is unlocked.
- * 2. If user's active packages total < $20, bonus funds are reserved/locked.
- *    Any requested amount that dips into the bonus portion is blocked until they activate a $20+ package.
+ * Calculates 10% bonus wallet subsidy for activation or compounding (Slide 06)
+ */
+export function calculateBonusUtilityDiscount(
+  stakeAmount: number | Decimal,
+  availableBonus: number | Decimal
+): { bonusDiscount: number; externalRequired: number } {
+  const stake = new Decimal(stakeAmount.toString());
+  const bonus = new Decimal(availableBonus.toString());
+
+  const maxBonusAllowed = stake.times(0.10); // 10% Utility Rule
+  const bonusDiscount = Decimal.min(maxBonusAllowed, bonus);
+  const externalRequired = stake.minus(bonusDiscount);
+
+  return {
+    bonusDiscount: bonusDiscount.toDecimalPlaces(2, Decimal.ROUND_DOWN).toNumber(),
+    externalRequired: externalRequired.toDecimalPlaces(2, Decimal.ROUND_UP).toNumber(),
+  };
+}
+
+/**
+ * Validates whether a user can withdraw, reserving non-withdrawable bonus wallet funds (Slide 08)
  */
 export async function validateBonusUsageEligibility(
   userId: string,
@@ -164,14 +177,12 @@ export async function validateBonusUsageEligibility(
 ): Promise<{ allowed: boolean; error?: string; activeTotalUsdt: Decimal; bonusBalanceUsdt: Decimal }> {
   const reqAmountDec = new Decimal(requestedAmount.toString());
 
-  // Get min active package requirement from config (Default: $20.00 USDT)
   const minActiveRequired = await getNumericConfig(
     "BONUS_REDEMPTION_MIN_ACTIVE_USDT",
-    APP_CONFIG.bonusRedemptionMinActiveUsdt ?? 20.0
+    APP_CONFIG.minStakeUsdt ?? 2.0
   );
   const minActiveDec = new Decimal(minActiveRequired);
 
-  // 1. Fetch user's active investment contracts
   const user = await db.user.findUnique({
     where: { id: userId },
     select: {
@@ -194,7 +205,6 @@ export async function validateBonusUsageEligibility(
     };
   }
 
-  // Calculate total active contract investment
   let activeTotalUsdt = new Decimal(0);
   for (const c of user.contracts) {
     const amt = c.amountInUsdt
@@ -205,16 +215,6 @@ export async function validateBonusUsageEligibility(
     activeTotalUsdt = activeTotalUsdt.plus(amt);
   }
 
-  // If user has $20+ active package, they are 100% eligible
-  if (activeTotalUsdt.greaterThanOrEqualTo(minActiveDec)) {
-    return {
-      allowed: true,
-      activeTotalUsdt,
-      bonusBalanceUsdt: new Decimal(0),
-    };
-  }
-
-  // Aggregate ALL signup bonus entries across user's history
   const bonusAgg = await db.ledgerEntry.aggregate({
     where: {
       userId: user.id,
@@ -227,7 +227,6 @@ export async function validateBonusUsageEligibility(
     ? new Decimal(bonusAgg._sum.amount.toString())
     : new Decimal(0);
 
-  // If the user has received no bonus, no restrictions apply
   if (totalBonusReceived.isZero() || !totalBonusReceived.isPositive()) {
     return {
       allowed: true,
@@ -237,14 +236,12 @@ export async function validateBonusUsageEligibility(
   }
 
   const currentIncomeBalance = new Decimal(user.incomeBalance.toString());
-  // The available income that does NOT come from the bonus, floored to 1 decimal place (never rounded up)
   const nonBonusAvailable = Decimal.max(0, currentIncomeBalance.minus(totalBonusReceived)).toDecimalPlaces(1, Decimal.ROUND_DOWN);
 
-  // If requested amount exceeds non-bonus income, it requires using the bonus funds
   if (reqAmountDec.greaterThan(nonBonusAvailable)) {
     return {
       allowed: false,
-      error: `Bonus funds are usable only on active IDs with $${minActiveDec.toFixed(2)}+ active package. You have $${totalBonusReceived.toFixed(2)} USDT in Signup/Level Bonus. Maximum withdrawable without activating a $${minActiveDec.toFixed(2)}+ package is $${nonBonusAvailable.toFixed(1)} USDT.`,
+      error: `Bonus Wallet is non-withdrawable (Slide 06 Liquidity Safeguard). You have $${totalBonusReceived.toFixed(2)} USDT in Bonus Wallet usable up to 10% for ID activations and compounding. Maximum withdrawable cash balance is $${nonBonusAvailable.toFixed(1)} USDT.`,
       activeTotalUsdt,
       bonusBalanceUsdt: totalBonusReceived,
     };

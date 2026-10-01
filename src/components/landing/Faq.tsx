@@ -8,28 +8,28 @@ export function Faq() {
 
   const faqs = [
     {
-      q: "How does Dubai Finance generate sustainable daily returns?",
-      a: "Our yields are backed by dual pillars: a solid physical asset foundation built over 25+ years in prime Real Estate, luxury Hospitality, and Tour & Travels, coupled with 7+ years of elite quantitative trading in Crypto Futures, Options hedging, Forex, and high-frequency cross-exchange arbitrage.",
+      q: "How does Crypto Finance generate sustainable 4% daily yields?",
+      a: "Our yields are backed by institutional quantitative excellence: high-frequency algorithmic arbitrage across major decentralized liquidity venues, triangular spreads, and multi-exchange AI bots. 60% of staked capital is deployed in quant arbitrage, 35% is locked in smart contract liquidity reserves to guarantee instant cashouts, and 5% is dedicated to compliance and dev security.",
     },
     {
-      q: "What is the base currency and blockchain network?",
-      a: "All deposits and withdrawals operate strictly in USDT on the BNB Smart Chain (BEP-20). This provides stable dollar pricing, negligible blockchain gas fees, and lightning-fast confirmation times.",
+      q: "How does the Dynamic 4% Daily ROI and 2X Contract Pool operate?",
+      a: "Every stake instantly unlocks a 2X Contract Allocation Pool (e.g. $100 stake unlocks a $200 pool). The smart contract pays 2.00% daily calculated on the remaining pool balance. On Day 1, you receive $200 × 2% = $4.00 USDT (an exact 4.00% daily ROI on your stake). Payouts continue daily on the decaying balance until 100% of the 2X pool ($200) is extracted over 525 days!",
     },
     {
-      q: "Are there any withdrawal fees or administrative deductions?",
-      a: "A flat 10% Admin Charge applies on withdrawals to support platform liquidity reserves and server infrastructure. All withdrawals are processed directly to your BEP-20 USDT wallet.",
+      q: "What is the 10% Bonus Utility Rule?",
+      a: "Every member receives a free $1.00 USDT Self Signup Bonus plus $0.40 USDT per level across 10 referral tiers into their Bonus Wallet. Whenever you or your team activates a new stake or executes compounding, up to 10% can be funded directly from the Bonus Wallet, saving real capital while strictly preserving company liquidity reserves.",
     },
     {
-      q: "What is the difference between Basic Saving and Fix Deposit (FD)?",
-      a: "Basic Saving (10 packages from $5 to $5,000 USDT, including $200 Growth Ruby) pays 5% Daily ROI for a disciplined 28-day contract delivering 140% gross return (40% pure net profit) with daily withdrawal liquidity. Fix Deposit offers exponential yields of 10% to 15% Daily for 180-day or 210-day maturities.",
+      q: "What is the 35-Day Compounding Engine and 2X Cap Lock Rule?",
+      a: "By choosing compounding instead of daily withdrawal, reinvesting your 2% daily pool returns doubles your principal in exactly 35 days: (1.02)^35 ≈ 2.000. When your balance reaches 2X of initial stake, compounding automatically pauses (2X Cap Lock Rule) and requires taking at least 1 withdrawal to resume. This safety mechanism unlocks up to ~400% (4X) total profit power!",
     },
     {
-      q: "When can I place daily withdrawal requests?",
-      a: "Withdrawals are open 7 days a week strictly between 08:30 AM and 12:30 PM GST (Dubai Time • Primary) / 10:00 AM and 02:00 PM IST (India Time). Requests placed during this window are queued for automated blockchain dispatch without delay.",
+      q: "What are the cashout rules and limits?",
+      a: "Withdrawals are 100% automated on Binance Smart Chain (BEP-20 USDT) with minimum $2.00 USDT and maximum $5,000 USDT per transaction. A flat 10% system liquidity fee applies to external cashouts. Internal P2P transfers from Working Wallet to other members are 100% instant and zero-fee (0%).",
     },
     {
-      q: "How does the 12-Level Team Royalty income work?",
-      a: "Team royalty is paid daily as a percentage of your downline's ROI earnings (5% on Level 1, 1% on Levels 2 through 12). Sponsoring 1 active direct referral unlocks Level 1, and each additional direct referral unlocks subsequent levels up to all 12 levels.",
+      q: "How does the 10-Level Daily Team Royalty work?",
+      a: "Team royalty is paid daily based on the daily ROI generation of downline members. You earn 10% on Level 1, 5% on Level 2, 2% on Levels 3 through 5, and 1% on Levels 6 through 10. Sponsoring 1 active direct referral unlocks Level 1, and 10 active direct referrals unlocks all 10 tiers permanently.",
     },
   ];
 
@@ -38,14 +38,14 @@ export function Faq() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-amber-500 dark:text-amber-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/25">
-            FREQUENTLY ASKED QUESTIONS
+          <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 font-mono">
+            FREQUENTLY ASKED QUESTIONS &bull; PROTOCOL DECK
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-black text-[var(--text-main)] mt-3">
             Got Questions? We Have Answers.
           </h2>
           <p className="text-[var(--text-muted)] text-base sm:text-lg mt-3 font-medium">
-            Everything you need to know about the official Dubai Finance presentation and business plan (23-Slide Official Deck).
+            Everything you need to know about the official Crypto Finance quantitative architecture and yield protocol.
           </p>
         </div>
 
@@ -56,21 +56,21 @@ export function Faq() {
             return (
               <div
                 key={item.q}
-                className="glass-card rounded-2xl overflow-hidden transition-all duration-200"
+                className="glass-card rounded-2xl overflow-hidden transition-all duration-200 border border-cyan-500/25"
               >
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? null : idx)}
-                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 font-display font-bold text-base sm:text-lg text-[var(--text-main)] hover:text-amber-500 transition"
+                  className="w-full p-5 sm:p-6 text-left flex items-center justify-between gap-4 font-display font-bold text-base sm:text-lg text-[var(--text-main)] hover:text-cyan-400 transition"
                   aria-expanded={isOpen}
                 >
                   <span className="flex items-center gap-3">
-                    <HelpCircle className="w-5 h-5 text-amber-500 shrink-0" />
+                    <HelpCircle className="w-5 h-5 text-cyan-400 shrink-0" />
                     {item.q}
                   </span>
                   <ChevronDown
                     className={`w-5 h-5 text-[var(--text-subtle)] shrink-0 transition-transform duration-200 ${
-                      isOpen ? "rotate-180 text-amber-500" : ""
+                      isOpen ? "rotate-180 text-cyan-400" : ""
                     }`}
                   />
                 </button>

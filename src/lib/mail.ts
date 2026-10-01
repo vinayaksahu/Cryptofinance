@@ -3,7 +3,7 @@ import { db } from "@/lib/db";
 
 // Create reusable Gmail SMTP transporter
 function getGmailTransporter() {
-  const user = process.env.GMAIL_USER || "dubaifinance.support@gmail.com";
+  const user = process.env.GMAIL_USER || "cryptofinance.support@gmail.com";
   const pass = (process.env.GMAIL_APP_PASSWORD || "afod ydtb adop milg").replace(/\s+/g, "");
 
   return nodemailer.createTransport({
@@ -23,24 +23,24 @@ export function generateOtpCode(): string {
 }
 
 /**
- * HTML Email Template for Dubai Finance OTP
+ * HTML Email Template for Crypto Finance OTP
  */
 function getOtpHtmlTemplate(otp: string, purpose: string = "REGISTRATION"): string {
-  let title = "Dubai Finance Security Code";
+  let title = "Crypto Finance Security Code";
   let message = "Use the following 6-digit verification code to complete your verification request.";
 
   if (purpose === "REGISTRATION") {
     title = "Verify Your Email Address";
-    message = "Thank you for joining Dubai Finance. Use the 6-digit verification code below to complete your registration.";
+    message = "Thank you for joining Crypto Finance. Use the 6-digit verification code below to complete your registration.";
   } else if (purpose === "FORGOT_PASSWORD") {
     title = "Reset Your Account Password";
-    message = "You recently requested to reset your Dubai Finance account password. Use the 6-digit security code below to proceed.";
+    message = "You recently requested to reset your Crypto Finance account password. Use the 6-digit security code below to proceed.";
   } else if (purpose === "TRANSACTION") {
     title = "Authorize Transaction";
-    message = "A transaction has been initiated on your Dubai Finance account. Use the 6-digit verification code below to authorize this action.";
+    message = "A transaction has been initiated on your Crypto Finance account. Use the 6-digit verification code below to authorize this action.";
   } else if (purpose === "ADMIN_PROFILE_UPDATE") {
     title = "Admin Profile Verification Code";
-    message = "A request has been initiated to update your Dubai Finance Administrator profile details. Enter the 6-digit verification code below to authorize this update.";
+    message = "A request has been initiated to update your Crypto Finance Administrator profile details. Enter the 6-digit verification code below to authorize this update.";
   }
 
   return `
@@ -152,7 +152,7 @@ function getOtpHtmlTemplate(otp: string, purpose: string = "REGISTRATION"): stri
 <body>
   <div class="container">
     <div class="header">
-      <div class="brand-title">Dubai Finance</div>
+      <div class="brand-title">Crypto Finance</div>
       <div class="brand-subtitle">Smart Wealth & Asset Management</div>
     </div>
     <div class="content">
@@ -165,7 +165,7 @@ function getOtpHtmlTemplate(otp: string, purpose: string = "REGISTRATION"): stri
       </div>
       
       <div class="warning">
-        <strong>Security Notice:</strong> Never share this verification code with anyone, including Dubai Finance support representatives. Our team will never ask for your OTP.
+        <strong>Security Notice:</strong> Never share this verification code with anyone, including Crypto Finance support representatives. Our team will never ask for your OTP.
       </div>
       
       <p class="text" style="margin-bottom: 0; font-size: 12px; color: #64748b;">
@@ -173,7 +173,7 @@ function getOtpHtmlTemplate(otp: string, purpose: string = "REGISTRATION"): stri
       </p>
     </div>
     <div class="footer">
-      &copy; ${new Date().getFullYear()} Dubai Finance. All rights reserved. <br>
+      &copy; ${new Date().getFullYear()} Crypto Finance. All rights reserved. <br>
       This is an automated system notification.
     </div>
   </div>
@@ -213,21 +213,21 @@ export async function sendOtpEmail(email: string, purpose: string = "REGISTRATIO
   });
 
   const transporter = getGmailTransporter();
-  const fromName = process.env.SMTP_FROM_NAME || "Dubai Finance Security";
-  const fromEmail = process.env.GMAIL_USER || "dubaifinance.support@gmail.com";
+  const fromName = process.env.SMTP_FROM_NAME || "Crypto Finance Security";
+  const fromEmail = process.env.GMAIL_USER || "cryptofinance.support@gmail.com";
 
-  let subject = `Your Dubai Finance Verification Code: ${otp}`;
-  let text = `Your Dubai Finance verification code is ${otp}. It will expire in 10 minutes. Do not share this code with anyone.`;
+  let subject = `Your Crypto Finance Verification Code: ${otp}`;
+  let text = `Your Crypto Finance verification code is ${otp}. It will expire in 10 minutes. Do not share this code with anyone.`;
 
   if (purpose === "FORGOT_PASSWORD") {
-    subject = `Reset Password Security Code: ${otp} - Dubai Finance`;
-    text = `Use ${otp} to reset your Dubai Finance account password. Valid for 10 minutes.`;
+    subject = `Reset Password Security Code: ${otp} - Crypto Finance`;
+    text = `Use ${otp} to reset your Crypto Finance account password. Valid for 10 minutes.`;
   } else if (purpose === "TRANSACTION") {
-    subject = `Transaction Authorization Code: ${otp} - Dubai Finance`;
-    text = `Use ${otp} to authorize your Dubai Finance fund transaction. Valid for 10 minutes.`;
+    subject = `Transaction Authorization Code: ${otp} - Crypto Finance`;
+    text = `Use ${otp} to authorize your Crypto Finance fund transaction. Valid for 10 minutes.`;
   } else if (purpose === "ADMIN_PROFILE_UPDATE") {
-    subject = `Admin Profile Update Code: ${otp} - Dubai Finance Security`;
-    text = `Use ${otp} to authorize your Dubai Finance Admin profile changes. Valid for 10 minutes.`;
+    subject = `Admin Profile Update Code: ${otp} - Crypto Finance Security`;
+    text = `Use ${otp} to authorize your Crypto Finance Admin profile changes. Valid for 10 minutes.`;
   }
 
   const mailOptions = {
@@ -297,19 +297,19 @@ export async function sendWelcomeCredentialsEmail({
 }) {
   const normalizedEmail = email.toLowerCase().trim();
   const transporter = getGmailTransporter();
-  const fromName = process.env.SMTP_FROM_NAME || "Dubai Finance Security";
-  const fromEmail = process.env.GMAIL_USER || "dubaifinance.support@gmail.com";
+  const fromName = process.env.SMTP_FROM_NAME || "Crypto Finance Security";
+  const fromEmail = process.env.GMAIL_USER || "cryptofinance.support@gmail.com";
 
   // Resolve official portal login URL
   // Prioritize dynamically detected appUrl (from request origin), then NEXT_PUBLIC_APP_URL, with strict fallback to official domain
-  let baseUrl = (appUrl || process.env.NEXT_PUBLIC_APP_URL || "https://dubaifinance.online").trim();
+  let baseUrl = (appUrl || process.env.NEXT_PUBLIC_APP_URL || "https://cryptofinance.online").trim();
 
   // Strip trailing slashes
   baseUrl = baseUrl.replace(/\/+$/, "");
 
   // Prevent old/obsolete domains (such as nexarise.us) from ever leaking into user emails
   if (!baseUrl || baseUrl.includes("nexarise") || (baseUrl.includes("localhost") && process.env.NODE_ENV === "production")) {
-    baseUrl = "https://dubaifinance.online";
+    baseUrl = "https://cryptofinance.online";
   }
 
   const loginUrl = `${baseUrl}/login`;
@@ -320,7 +320,7 @@ export async function sendWelcomeCredentialsEmail({
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Welcome to Dubai Finance</title>
+  <title>Welcome to Crypto Finance</title>
   <style>
     body {
       margin: 0;
@@ -457,14 +457,14 @@ export async function sendWelcomeCredentialsEmail({
 <body>
   <div class="container">
     <div class="header">
-      <div class="brand-title">Dubai Finance</div>
+      <div class="brand-title">Crypto Finance</div>
       <div class="brand-subtitle">Smart Wealth & Asset Management</div>
     </div>
     <div class="content">
       <div class="badge">&check; Account Created Successfully</div>
       <h2 class="heading">Congratulations, ${fullName}!</h2>
       <p class="text">
-        Welcome to Dubai Finance. Your investor account is now active. Please find your essential account credentials below:
+        Welcome to Crypto Finance. Your investor account is now active. Please find your essential account credentials below:
       </p>
 
       <div class="credentials-card">
@@ -498,7 +498,7 @@ export async function sendWelcomeCredentialsEmail({
       </div>
     </div>
     <div class="footer">
-      &copy; ${new Date().getFullYear()} Dubai Finance. All rights reserved. <br>
+      &copy; ${new Date().getFullYear()} Crypto Finance. All rights reserved. <br>
       Automated account security notice.
     </div>
   </div>
@@ -509,8 +509,8 @@ export async function sendWelcomeCredentialsEmail({
   const mailOptions = {
     from: `"${fromName}" <${fromEmail}>`,
     to: normalizedEmail,
-    subject: `Account Created: Your Dubai Finance User ID (${customId}) & PIN`,
-    text: `Congratulations ${fullName}!\n\nYour Dubai Finance investor account has been created successfully.\n\nMember / User ID: ${customId}\nRegistered Email: ${normalizedEmail}\n6-Digit Transaction PIN: ${transactionPin}\n\nSign in to your member portal: ${loginUrl}\n\nPlease keep your credentials safe and never share your PIN.`,
+    subject: `Account Created: Your Crypto Finance User ID (${customId}) & PIN`,
+    text: `Congratulations ${fullName}!\n\nYour Crypto Finance investor account has been created successfully.\n\nMember / User ID: ${customId}\nRegistered Email: ${normalizedEmail}\n6-Digit Transaction PIN: ${transactionPin}\n\nSign in to your member portal: ${loginUrl}\n\nPlease keep your credentials safe and never share your PIN.`,
     html,
   };
 

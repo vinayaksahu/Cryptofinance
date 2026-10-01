@@ -36,13 +36,13 @@ export default function RegisterPage() {
             setSystemMode("MAINTENANCE");
             setNoticeText(
               data.configs.MAINTENANCE_NOTICE_TEXT ||
-                "Dubai Finance is currently undergoing scheduled infrastructure upgrades. Public registration will resume shortly."
+                "Crypto Finance is currently undergoing scheduled infrastructure upgrades. Public registration will resume shortly."
             );
           } else if (data.configs.PRELAUNCH_MODE === "true") {
             setSystemMode("PRELAUNCH");
             setNoticeText(
               data.configs.PRELAUNCH_NOTICE_TEXT ||
-                "Dubai Finance is currently in its official Pre-Launch phase. Public registration will open upon launch."
+                "Crypto Finance is currently in its official Pre-Launch phase. Public registration will open upon launch."
             );
           } else {
             setSystemMode("LIVE");
@@ -132,7 +132,7 @@ export default function RegisterPage() {
         <div className="w-full max-w-lg glass-card-gold p-8 sm:p-10 rounded-3xl relative z-10 shadow-2xl text-center">
           <div className="w-14 h-14 rounded-2xl overflow-hidden bg-gradient-to-br from-amber-400 via-amber-500 to-amber-700 p-0.5 shadow-lg shadow-amber-500/30 mx-auto mb-5">
             <div className="w-full h-full rounded-[14px] bg-slate-950 flex items-center justify-center">
-              <img src="/dubaiLogo.png" alt="Dubai Finance Logo" className="w-10 h-10 object-contain" />
+              <img src="/crypto_coin_hero.png" alt="Crypto Finance Logo" className="w-10 h-10 object-contain" />
             </div>
           </div>
 
@@ -200,8 +200,8 @@ export default function RegisterPage() {
             <div className="w-12 h-12 rounded-xl overflow-hidden bg-gradient-to-br from-amber-400 to-amber-700 p-0.5 shadow-lg shadow-amber-500/30">
               <div className="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center overflow-hidden">
                 <img
-                  src="/dubaiLogo.png"
-                  alt="Dubai Finance Logo"
+                  src="/crypto_coin_hero.png"
+                  alt="Crypto Finance Logo"
                   className="w-10 h-10 object-contain"
                 />
               </div>
@@ -231,7 +231,7 @@ export default function RegisterPage() {
                 required
                 value={sponsorCode}
                 onChange={(e) => setSponsorCode(e.target.value)}
-                placeholder="DFXXXXX"
+                placeholder="CFXXXXX"
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-black/50 border border-amber-500/40 focus:border-amber-400 text-amber-300 text-sm font-bold outline-none"
               />
             </div>
@@ -373,7 +373,7 @@ export default function RegisterPage() {
               {registeredCreds.fullName}
             </p>
             <p className="text-xs text-slate-400 mt-2">
-              Your Dubai Finance account is successfully registered. We have also emailed your User ID and Transaction PIN to <strong className="text-slate-200">{registeredCreds.email}</strong>.
+              Your Crypto Finance account is successfully registered. We have also emailed your User ID and Transaction PIN to <strong className="text-slate-200">{registeredCreds.email}</strong>.
             </p>
 
             {/* Credentials Box */}

@@ -11,12 +11,12 @@ interface DashboardViewProps {
 export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
   const [copied, setCopied] = useState(false);
 
-  // Always use dubaifinance.online in production (or localhost during dev)
+  // Always use cryptofinance.online in production (or localhost during dev)
   const origin =
     typeof window !== "undefined" && window.location.hostname === "localhost"
       ? window.location.origin
-      : "https://dubaifinance.online";
-  const customId = user?.customId || "DF478752";
+      : "https://cryptofinance.online";
+  const customId = user?.customId || "CF478752";
   const referralUrl = `${origin}/register?r=${customId}`;
 
   const copyReferral = () => {
@@ -608,7 +608,7 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
 
       {/* Footer Branding */}
       <footer className="pt-8 pb-4 border-t border-[#132042] text-center text-xs text-slate-500 font-medium">
-        © 2026 Dubai Finance. All Rights Reserved.
+        © 2026 Crypto Finance Protocol. All Rights Reserved.
       </footer>
     </div>
   );

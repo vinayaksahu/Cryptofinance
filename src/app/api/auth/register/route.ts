@@ -118,12 +118,12 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Generate unique customId like DF123456, DF223456, DF323456
+    // Generate unique customId like CF123456, CF223456, CF323456
     let customId = "";
     let isUnique = false;
     while (!isUnique) {
       const rand5 = Math.floor(10000 + Math.random() * 90000); // 5 random digits
-      customId = `DF${teamPrefix}${rand5}`;
+      customId = `CF${teamPrefix}${rand5}`;
       const found = await db.user.findUnique({ where: { customId } });
       if (!found) isUnique = true;
     }
@@ -147,7 +147,7 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Credit Signup Welcome Bonus directly in USDT ($0.50 USDT per Dark PDF Slide 21)
+    // Credit Free Self Signup Welcome Bonus directly in Bonus Wallet ($1.00 USDT per Slide 05)
     const bonusUsdtNum = await getNumericConfig("SIGNUP_BONUS_USDT", APP_CONFIG.signupBonusUsdt);
     const bonusUsdt = new Decimal(bonusUsdtNum);
     if (bonusUsdt.isPositive() && !bonusUsdt.isZero()) {
@@ -157,11 +157,11 @@ export async function POST(req: NextRequest) {
         wallet: "INCOME",
         amount: bonusUsdt,
         referenceKey: `SIGNUP_BONUS_${newUser.id}`,
-        description: `Welcome Bonus $${bonusUsdt.toFixed(2)} USDT`,
+        description: `Welcome Bonus $${bonusUsdt.toFixed(2)} USDT (Bonus Wallet)`,
       });
     }
 
-    // Distribute $0.50 / 12-Level Registration Bounty equally across 12 uplines
+    // Distribute $0.40 / 10-Level Team Registration Bonus equally across 10 upline tiers
     if (newUser.sponsorId) {
       await distribute12LevelSignupBonus(newUser.id, newUser.sponsorId);
     }

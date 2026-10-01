@@ -1,109 +1,196 @@
 export const APP_CONFIG = {
-  name: "Dubai Finance",
-  tagline: "Decentralized High-Yield Wealth Ecosystem • Powered by USDT (BEP-20)",
-  domain: "dubaifinance.online",
-  officialEmail: "support@dubaifinance.online",
-  cmd: "Mr. Sheikh Tariq Al Mansoori",
-  headquarters: "Office 3802, Latifa Tower, Sheikh Zayed Road, Financial District, Dubai, UAE",
+  name: "Crypto Finance",
+  tagline: "Decentralized Quantitative Yield Protocol • Swiss Algo & DeFi Arbitrage",
+  domain: "cryptofinance.online",
+  officialEmail: "support@cryptofinance.online",
+  cmd: "Mr. Alex Rivera",
+  cmdTitle: "Chairman & Managing Director (CMD)",
+  cmdBio: "Veteran quantitative architect and FinTech strategist with over 15 years directing algorithmic trading desks across Zurich, London, and Singapore.",
+  headquarters: "Crypto Valley Tower, Zug, Switzerland",
+  hqDetails: "Headquartered in the world's premier digital finance and blockchain jurisdiction, operating under rigorous Swiss FinTech regulatory standards.",
   depositAddress: "0x39a0B29A5c66e927598Fa4eCE9bFf84a44bA8812", // Company USDT BEP-20
   depositNetwork: "USDT BEP-20 (Binance Smart Chain)",
-  signupBonusUsdt: 0.50, // Dark PDF Slide 21: $0.50 Signup Bonus
-  signupLevelBonusTotalUsdt: 0.50, // Dark PDF Slide 21: $0.50 distributed across 12 levels
-  bonusRedemptionMinActiveUsdt: 20, // Dark PDF Slide 21: Usable on $20+ active IDs
+  
+  // Slide 05: Free Registration Rewards
+  signupBonusUsdt: 1.00, // $1.00 Free Self Signup Bonus in Bonus Wallet
+  signupLevelBonusPerTierUsdt: 0.40, // $0.40 USDT per level across 10 referral tiers
+  signupLevelBonusTotalUsdt: 4.00, // $4.00 total distributed across 10 tiers
+  bonusMaxUtilityPercent: 10.0, // Slide 06: Funds up to 10% of any activation or compounding
+  
   usdtToInrRate: 1, // 1:1 Pure USDT throughout
-  directReferralPercent: 10.0, // Dark PDF Slide 1, 10, 15: 10% INSTANT DIRECT
-  minWithdrawalUsdt: 2, // Dark PDF Slide 21: Min $2 USDT
-  maxWithdrawalUsdt: 5000, // Dark PDF Slide 21: Max $5,000 USDT
-  withdrawalAdminFeePercent: 10.0, // Dark PDF Slide 21: Flat 10% Admin Charge
+  directReferralPercent: 10.0, // Slide 15: 10% INSTANT DIRECT to Working Wallet
+  minWithdrawalUsdt: 2.0, // Slide 08 & 20: Min $2 USDT
+  maxWithdrawalUsdt: 5000.0, // Slide 20: Max $5,000 USDT per Tx
+  withdrawalAdminFeePercent: 10.0, // Slide 08 & 20: Flat 10% System Liquidity Fee
+  p2pTransferFeePercent: 0.0, // Slide 08 & 20: Free Instant Internal P2P Transfers
+  
   withdrawalWindow: {
-    startHour: 10, // 10:00 AM IST
-    endHour: 14, // 02:00 PM IST
-    timezone: "Asia/Kolkata",
+    startHour: 10,
+    endHour: 14,
+    timezone: "UTC", // Global 24/7 or window
   },
-  // Dark PDF Slide 5-9: $5 to $5,000 USDT Packages (28 Days)
-  basicPackagesUsd: [5, 10, 20, 50, 100, 200, 500, 1000, 2000, 5000],
-  basicPlan: {
-    minUsdt: 5,
-    maxUsdt: 5000,
-    dailyRoiRate: 5.0, // 5% daily (Dark PDF Slide 1, 5, 11)
-    tenureDays: 28, // 28 Days Fixed Contract (Dark PDF Slide 1, 4, 5, 9, 11, 21)
-    netProfitPercent: 40.0, // 40% Net Profit (Dark PDF Slide 6, 7, 8, 9, 11)
-    principalPercent: 100.0,
-    totalReturnPercent: 140.0, // 140% Gross Total Payout (28 * 5%)
-  },
-  // Slide 12, 13, 14: Fix Deposit (FD) High-Yield
-  fdPlans: [
-    {
-      id: "pkg-1",
-      tier: "STARTER FD",
-      amountUsdt: 50,
-      plans: [
-        { days: 180, rate: 10.0, dailyUsdt: 5, profitUsdt: 900, multiple: "18X" },
-        { days: 210, rate: 15.0, dailyUsdt: 7.5, profitUsdt: 1575, multiple: "31.5X" },
-      ],
-    },
-    {
-      id: "pkg-2",
-      tier: "GROWTH FD",
-      amountUsdt: 100,
-      plans: [
-        { days: 180, rate: 10.0, dailyUsdt: 10, profitUsdt: 1800, multiple: "18X" },
-        { days: 210, rate: 15.0, dailyUsdt: 15, profitUsdt: 3150, multiple: "31.5X" },
-      ],
-    },
-    {
-      id: "pkg-3",
-      tier: "POPULAR FD",
-      featured: true,
-      amountUsdt: 500,
-      plans: [
-        { days: 180, rate: 10.0, dailyUsdt: 50, profitUsdt: 9000, multiple: "18X" },
-        { days: 210, rate: 15.0, dailyUsdt: 75, profitUsdt: 15750, multiple: "31.5X" },
-      ],
-    },
-    {
-      id: "pkg-4",
-      tier: "VIP PLATINUM FD",
-      amountUsdt: 1000,
-      plans: [
-        { days: 180, rate: 10.0, dailyUsdt: 100, profitUsdt: 18000, multiple: "18X" },
-        { days: 210, rate: 15.0, dailyUsdt: 150, profitUsdt: 31500, multiple: "31.5X" },
-      ],
-    },
-    {
-      id: "pkg-5",
-      tier: "VIP DIAMOND FD",
-      amountUsdt: 2000,
-      plans: [
-        { days: 180, rate: 10.0, dailyUsdt: 200, profitUsdt: 36000, multiple: "18X" },
-        { days: 210, rate: 15.0, dailyUsdt: 300, profitUsdt: 63000, multiple: "31.5X" },
-      ],
-    },
-    {
-      id: "pkg-6",
-      tier: "ROYAL CROWN VIP FD",
-      featured: true,
-      amountUsdt: 5000,
-      plans: [
-        { days: 180, rate: 10.0, dailyUsdt: 500, profitUsdt: 90000, multiple: "18X" },
-        { days: 210, rate: 15.0, dailyUsdt: 750, profitUsdt: 157500, multiple: "31.5X" },
-      ],
-    },
+
+  // Slide 07, 10, 11: Dynamic 4% Daily ROI / 2X Contract Allocation Pool
+  dailyRoiInitialPercent: 4.0, // Starts at 4.00% daily on principal stake
+  poolAllocationMultiplier: 2.0, // Stake converts to 2X Contract Pool ($100 -> $200)
+  poolDailyReleasePercent: 2.0, // 2.00% daily released from remaining pool balance
+  compoundingDoublingDays: 35, // Slide 13: (1.02)^35 ≈ 2.000 doubles capital in 35 days
+  compoundingCapMultiplier: 2.0, // Slide 14: 2X Cap Lock Rule (must take >= 1 withdrawal)
+  maxExtractionMultiplier: 4.0, // Slide 14: ~400% (4X) Total Extraction Power
+
+  minStakeUsdt: 2.0, // Slide 07 & 20: Minimum entry $2.00 USDT (Zero fixed packages)
+  
+  // Audited Stake Benchmark Walkthroughs (Slide 12)
+  stakeBenchmarks: [
+    { stake: 2.0, pool: 4.0, days: 331, extracted: 3.999, tier: "Min Entry", status: "AUDITED ✓" },
+    { stake: 20.0, pool: 40.0, days: 445, extracted: 39.995, tier: "Growth Entry", status: "AUDITED ✓" },
+    { stake: 100.0, pool: 200.0, days: 525, extracted: 199.995, tier: "Core Tier", status: "CORE ★" },
+    { stake: 1000.0, pool: 2000.0, days: 639, extracted: 1999.995, tier: "VIP Platinum", status: "VIP TIER" },
+    { stake: 5000.0, pool: 10000.0, days: 720, extracted: 9999.995, tier: "Whale Tier", status: "WHALE TIER" },
   ],
-  // Slide 16 & 17: Official 12-Level Team Royalty Distribution
+
+  basicPlan: {
+    minUsdt: 2.0,
+    maxUsdt: 100000.0,
+    dailyRoiRate: 4.0, // Initial 4% daily on capital (2% of 2X pool)
+    poolMultiplier: 2.0,
+    poolReleaseRate: 2.0,
+    tenureDays: 525,
+    netProfitPercent: 100.0, // 200% Gross Return (2X)
+    principalPercent: 100.0,
+    totalReturnPercent: 200.0,
+  },
+
+  // Slide 16 & 17: Official 10-Level Team Daily Royalty (on Downline Daily ROI)
   levelRates: [
-    { level: 1, percent: 5.0, directsNeeded: 1 }, // Level 1: 5% Daily (1 Direct)
-    { level: 2, percent: 3.0, directsNeeded: 2 }, // Level 2: 3% Daily (2 Directs)
-    { level: 3, percent: 2.0, directsNeeded: 3 }, // Level 3: 2% Daily (3 Directs)
-    { level: 4, percent: 2.0, directsNeeded: 4 }, // Level 4: 2% Daily (4 Directs)
-    { level: 5, percent: 2.0, directsNeeded: 5 }, // Level 5: 2% Daily (5 Directs)
-    { level: 6, percent: 2.0, directsNeeded: 6 }, // Level 6: 2% Daily (6 Directs)
-    { level: 7, percent: 1.0, directsNeeded: 7 }, // Level 7: 1% Daily (7 Directs)
-    { level: 8, percent: 1.0, directsNeeded: 8 }, // Level 8: 1% Daily (8 Directs)
-    { level: 9, percent: 1.0, directsNeeded: 9 }, // Level 9: 1% Daily (9 Directs)
-    { level: 10, percent: 1.0, directsNeeded: 10 }, // Level 10: 1% Daily (10 Directs)
-    { level: 11, percent: 1.0, directsNeeded: 11 }, // Level 11: 1% Daily (11 Directs)
-    { level: 12, percent: 1.0, directsNeeded: 12 }, // Level 12: 1% Daily (12 Directs Total)
+    { level: 1, percent: 10.0, directsNeeded: 1 }, // Level 1: 10% Daily (1 Active Direct)
+    { level: 2, percent: 5.0, directsNeeded: 2 },  // Level 2: 5% Daily (2 Active Directs)
+    { level: 3, percent: 2.0, directsNeeded: 3 },  // Level 3: 2% Daily (3 Active Directs)
+    { level: 4, percent: 2.0, directsNeeded: 4 },  // Level 4: 2% Daily (4 Active Directs)
+    { level: 5, percent: 2.0, directsNeeded: 5 },  // Level 5: 2% Daily (5 Active Directs)
+    { level: 6, percent: 1.0, directsNeeded: 6 },  // Level 6: 1% Daily (6 Active Directs)
+    { level: 7, percent: 1.0, directsNeeded: 7 },  // Level 7: 1% Daily (7 Active Directs)
+    { level: 8, percent: 1.0, directsNeeded: 8 },  // Level 8: 1% Daily (8 Active Directs)
+    { level: 9, percent: 1.0, directsNeeded: 9 },  // Level 9: 1% Daily (9 Active Directs)
+    { level: 10, percent: 1.0, directsNeeded: 10 }, // Level 10: 1% Daily (10 Active Directs - Full Unlock)
+  ],
+
+  // Slide 18 & 19: Milestone Rank Rewards (Ranks 1 - 10, 50:50 Ratio Criteria)
+  milestoneRanks: [
+    {
+      id: 1,
+      rankNumber: 1,
+      title: "STARTER",
+      icon: "⭐",
+      teamVolume: 100,
+      strongRatio: 50,
+      weakRatio: 50,
+      cashBonus: 5.0,
+      rewardGift: "Official Welcome Kit",
+    },
+    {
+      id: 2,
+      rankNumber: 2,
+      title: "BRONZE",
+      icon: "⭐⭐",
+      teamVolume: 250,
+      strongRatio: 125,
+      weakRatio: 125,
+      cashBonus: 12.5,
+      rewardGift: "Branded Polo / Merchandise",
+    },
+    {
+      id: 3,
+      rankNumber: 3,
+      title: "SILVER",
+      icon: "⭐⭐⭐",
+      teamVolume: 500,
+      strongRatio: 250,
+      weakRatio: 250,
+      cashBonus: 25.0,
+      rewardGift: "Wireless Bluetooth Earbuds",
+    },
+    {
+      id: 4,
+      rankNumber: 4,
+      title: "GOLD",
+      icon: "🥇",
+      teamVolume: 1000,
+      strongRatio: 500,
+      weakRatio: 500,
+      cashBonus: 50.0,
+      rewardGift: "Smart Fitness Tracker Band",
+      featured: true,
+    },
+    {
+      id: 5,
+      rankNumber: 5,
+      title: "PLATINUM",
+      icon: "💎",
+      teamVolume: 2500,
+      strongRatio: 1250,
+      weakRatio: 1250,
+      cashBonus: 125.0,
+      rewardGift: "Smart Android Tablet",
+    },
+    {
+      id: 6,
+      rankNumber: 6,
+      title: "SAPPHIRE",
+      icon: "🔷",
+      teamVolume: 10000,
+      strongRatio: 5000,
+      weakRatio: 5000,
+      cashBonus: 500.0,
+      rewardGift: "Latest Flagship Smartphone",
+      featured: true,
+    },
+    {
+      id: 7,
+      rankNumber: 7,
+      title: "RUBY",
+      icon: "♦️",
+      teamVolume: 25000,
+      strongRatio: 12500,
+      weakRatio: 12500,
+      cashBonus: 1250.0,
+      rewardGift: "Apple MacBook Pro",
+    },
+    {
+      id: 8,
+      rankNumber: 8,
+      title: "EMERALD",
+      icon: "🟢",
+      teamVolume: 50000,
+      strongRatio: 25000,
+      weakRatio: 25000,
+      cashBonus: 2500.0,
+      rewardGift: "Dubai 5-Star VIP Tour",
+      featured: true,
+    },
+    {
+      id: 9,
+      rankNumber: 9,
+      title: "DIAMOND",
+      icon: "💠",
+      teamVolume: 100000,
+      strongRatio: 50000,
+      weakRatio: 50000,
+      cashBonus: 5000.0,
+      rewardGift: "Rolex Luxury Timepiece",
+    },
+    {
+      id: 10,
+      rankNumber: 10,
+      title: "CROWN",
+      icon: "👑",
+      teamVolume: 10000000,
+      strongRatio: 5000000,
+      weakRatio: 5000000,
+      cashBonus: 500000.0,
+      rewardGift: "Luxury Waterfront Villa (Dubai)",
+      featured: true,
+    },
   ],
 };
 
@@ -112,15 +199,15 @@ export interface WithdrawalWindowStatus {
   is24h: boolean;
   startTime: string;
   endTime: string;
-  startFormatted: string; // IST formatted
-  endFormatted: string;   // IST formatted
+  startFormatted: string;
+  endFormatted: string;
   startFormattedGst: string;
   endFormattedGst: string;
   startFormattedIst: string;
   endFormattedIst: string;
   startFormattedUtc: string;
   endFormattedUtc: string;
-  label: string; // Primary GST display
+  label: string;
   gstLabel: string;
   istLabel: string;
   utcLabel: string;
@@ -134,9 +221,9 @@ export function getWithdrawalWindowStatus(config?: Record<string, any>): Withdra
   const is24hFlag =
     config?.WITHDRAWAL_24H_OPEN === true ||
     config?.WITHDRAWAL_24H_OPEN === "true" ||
-    config?.WITHDRAWAL_24H_OPEN === "1";
+    config?.WITHDRAWAL_24H_OPEN === "1" ||
+    true; // Default 24/7 automated Web3 withdrawals for Crypto Finance
 
-  // Parse Start Time (stored in IST reference)
   let startTime = "10:00";
   if (config?.WITHDRAWAL_START_TIME && String(config.WITHDRAWAL_START_TIME).includes(":")) {
     startTime = String(config.WITHDRAWAL_START_TIME).trim();
@@ -145,7 +232,6 @@ export function getWithdrawalWindowStatus(config?: Record<string, any>): Withdra
     startTime = `${String(isNaN(h) ? 10 : h).padStart(2, "0")}:00`;
   }
 
-  // Parse End Time (stored in IST reference)
   let endTime = "14:00";
   if (config?.WITHDRAWAL_END_TIME && String(config.WITHDRAWAL_END_TIME).includes(":")) {
     endTime = String(config.WITHDRAWAL_END_TIME).trim();
@@ -168,25 +254,23 @@ export function getWithdrawalWindowStatus(config?: Record<string, any>): Withdra
   const startTotalMinutes = startH * 60 + startM;
   const endTotalMinutes = endH * 60 + endM;
 
-  // Effectively 24h if flag is set or start is 00:00 and end is 23:59
   const isEffectively24h = is24hFlag || (startTotalMinutes === 0 && endTotalMinutes >= 1439);
 
-  // UTC Base
   const now = new Date();
   const utcMs = now.getTime() + now.getTimezoneOffset() * 60000;
 
-  // GST (Dubai Time, UTC+4:00)
-  const gstDate = new Date(utcMs + 4 * 3600000);
-  const curGstH = gstDate.getHours();
-  const curGstM = gstDate.getMinutes();
+  // Swiss Zurich Time (CET / CEST = UTC+1 / UTC+2)
+  const cetDate = new Date(utcMs + 1 * 3600000);
+  const curGstH = cetDate.getHours();
+  const curGstM = cetDate.getMinutes();
 
-  // IST (India Standard Time, UTC+5:30)
+  // IST (UTC+5:30)
   const istDate = new Date(utcMs + 5.5 * 3600000);
   const curIstH = istDate.getHours();
   const curIstM = istDate.getMinutes();
   const curTotalMinutes = curIstH * 60 + curIstM;
 
-  // UTC (UTC+00:00)
+  // UTC
   const utcDate = new Date(utcMs);
   const curUtcH = utcDate.getHours();
   const curUtcM = utcDate.getMinutes();
@@ -197,7 +281,6 @@ export function getWithdrawalWindowStatus(config?: Record<string, any>): Withdra
   } else if (startTotalMinutes <= endTotalMinutes) {
     isOpen = curTotalMinutes >= startTotalMinutes && curTotalMinutes <= endTotalMinutes;
   } else {
-    // Overnight window
     isOpen = curTotalMinutes >= startTotalMinutes || curTotalMinutes <= endTotalMinutes;
   }
 
@@ -214,32 +297,24 @@ export function getWithdrawalWindowStatus(config?: Record<string, any>): Withdra
     return formatTime12h(h, m);
   };
 
-  // IST Timings (10:00 AM - 02:00 PM)
   const startFormattedIst = formatTime12h(startH, startM);
   const endFormattedIst = formatTime12h(endH, endM);
 
-  // GST Timings: IST - 90 mins (08:30 AM - 12:30 PM)
   const startFormattedGst = minutesToH12(startTotalMinutes - 90);
   const endFormattedGst = minutesToH12(endTotalMinutes - 90);
 
-  // UTC Timings: IST - 330 mins (04:30 AM - 08:30 AM)
   const startFormattedUtc = minutesToH12(startTotalMinutes - 330);
   const endFormattedUtc = minutesToH12(endTotalMinutes - 330);
 
-  // Clocks
   const currentGstTime = formatTime12h(curGstH, curGstM);
   const currentIstTime = formatTime12h(curIstH, curIstM);
   const currentUtcTime = formatTime12h(curUtcH, curUtcM);
 
-  const gstLabel = isEffectively24h ? "24/7 (Always Open)" : `${startFormattedGst} – ${endFormattedGst} GST`;
+  const gstLabel = isEffectively24h ? "24/7 (Always Open)" : `${startFormattedGst} – ${endFormattedGst} CET`;
   const istLabel = isEffectively24h ? "24/7 (Always Open)" : `${startFormattedIst} – ${endFormattedIst} IST`;
   const utcLabel = isEffectively24h ? "24/7 (Always Open)" : `${startFormattedUtc} – ${endFormattedUtc} UTC`;
-  const multiZoneLabel = isEffectively24h
-    ? "24/7 (Always Open)"
-    : `${startFormattedGst} – ${endFormattedGst} GST (${startFormattedIst} – ${endFormattedIst} IST)`;
-
-  // Primary label defaults to GST with Dubai context
-  const label = isEffectively24h ? "24/7 (Always Open)" : `${startFormattedGst} – ${endFormattedGst} GST (Dubai Time)`;
+  const multiZoneLabel = "24/7 Instant Automated Web3 Dispatches";
+  const label = "24/7 Instant Automated Web3 Dispatches";
 
   return {
     isOpen,

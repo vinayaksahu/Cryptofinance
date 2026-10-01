@@ -70,7 +70,7 @@ export default function AdminLoginPage() {
             </div>
           </div>
           <h1 className="text-2xl font-black tracking-tight text-white flex items-center justify-center gap-2">
-            Dubai Finance <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">Admin</span>
+            Crypto Finance <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-200">Admin</span>
           </h1>
           <p className="text-xs text-slate-400 mt-1.5">
             Authorized Super Admin &amp; Management Console Access

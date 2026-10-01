@@ -17,8 +17,8 @@ export function MemberHeader({ user }: { user: any }) {
   const origin =
     typeof window !== "undefined" && window.location.hostname === "localhost"
       ? window.location.origin
-      : "https://dubaifinance.online";
-  const referralUrl = `${origin}/register?r=${user?.customId || "DF000001"}`;
+      : "https://cryptofinance.online";
+  const referralUrl = `${origin}/register?r=${user?.customId || "CF000001"}`;
 
   const copyLink = () => {
     navigator.clipboard.writeText(referralUrl);

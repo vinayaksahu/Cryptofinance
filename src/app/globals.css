@@ -8,45 +8,56 @@
   :root[data-theme="light"] {
     --font-sans: var(--font-plus-jakarta), 'Plus Jakarta Sans', system-ui, sans-serif;
     --font-display: var(--font-space-grotesk), 'Space Grotesk', system-ui, sans-serif;
+    --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
 
-    /* Light Mode Default Variables (Ivory Alabaster Luxury Theme) */
-    --bg-main: #FAF7F2;
+    /* Light Mode Variables (Glacier Cyber Platinum) */
+    --bg-main: #F0F4FA;
     --bg-secondary: #FFFFFF;
     --bg-card: #FFFFFF;
-    --bg-card-gold: linear-gradient(145deg, rgba(255, 251, 235, 0.95), rgba(254, 243, 199, 0.85));
-    --bg-inner: rgba(243, 236, 225, 0.7);
-    --text-main: #0F172A;
-    --text-muted: #475569;
+    --bg-card-gold: linear-gradient(145deg, #FFFFFF 0%, #EFF6FF 100%);
+    --bg-inner: rgba(241, 245, 249, 0.9);
+    --text-main: #0A1128;
+    --text-muted: #334155;
     --text-subtle: #64748B;
-    --border-subtle: rgba(203, 213, 225, 0.8);
-    --border-gold: rgba(217, 119, 6, 0.28);
-    --border-gold-hover: rgba(217, 119, 6, 0.65);
+    --border-subtle: rgba(203, 213, 225, 0.9);
+    --border-gold: rgba(2, 132, 199, 0.35);
+    --border-gold-hover: rgba(2, 132, 199, 0.85);
+    --cyan-primary: #0284C7;
+    --cyan-light: #38BDF8;
     --gold-primary: #D97706;
     --gold-light: #F59E0B;
     --gold-dark: #92400E;
+    --emerald-primary: #059669;
     --glow-opacity: 0.08;
-    --card-shadow: 0 15px 35px rgba(180, 122, 18, 0.07), 0 2px 10px rgba(0, 0, 0, 0.03);
+    --card-shadow: 0 15px 35px rgba(2, 132, 199, 0.08), 0 2px 10px rgba(0, 0, 0, 0.04);
   }
 
   html.dark,
   :root[data-theme="dark"] {
-    /* Dark Mode Variables (Dubai Midnight Obsidian Theme) */
-    --bg-main: #080C14;
-    --bg-secondary: #0D1424;
-    --bg-card: rgba(15, 23, 42, 0.75);
-    --bg-card-gold: linear-gradient(145deg, rgba(30, 27, 75, 0.8), rgba(15, 23, 42, 0.9));
-    --bg-inner: rgba(0, 0, 0, 0.45);
+    --font-sans: var(--font-plus-jakarta), 'Plus Jakarta Sans', system-ui, sans-serif;
+    --font-display: var(--font-space-grotesk), 'Space Grotesk', system-ui, sans-serif;
+    --font-mono: var(--font-jetbrains-mono), 'JetBrains Mono', monospace;
+
+    /* Dark Mode Variables (Cosmic Quantum Obsidian Theme) */
+    --bg-main: #020614;
+    --bg-secondary: #060D24;
+    --bg-card: rgba(7, 16, 44, 0.82);
+    --bg-card-gold: linear-gradient(145deg, rgba(14, 27, 65, 0.9), rgba(4, 10, 28, 0.95));
+    --bg-inner: rgba(2, 6, 20, 0.85);
     --text-main: #F8FAFC;
     --text-muted: #94A3B8;
     --text-subtle: #64748B;
-    --border-subtle: rgba(51, 65, 85, 0.7);
-    --border-gold: rgba(245, 192, 66, 0.25);
-    --border-gold-hover: rgba(245, 192, 66, 0.65);
-    --gold-primary: #FFD056;
-    --gold-light: #FCE082;
-    --gold-dark: #B47A12;
-    --glow-opacity: 0.16;
-    --card-shadow: 0 15px 35px rgba(0, 0, 0, 0.55), 0 0 25px rgba(245, 192, 66, 0.06);
+    --border-subtle: rgba(30, 58, 106, 0.7);
+    --border-gold: rgba(0, 210, 255, 0.3);
+    --border-gold-hover: rgba(0, 210, 255, 0.85);
+    --cyan-primary: #00D2FF;
+    --cyan-light: #38BDF8;
+    --gold-primary: #FFD700;
+    --gold-light: #FFE57F;
+    --gold-dark: #B7950B;
+    --emerald-primary: #10B981;
+    --glow-opacity: 0.22;
+    --card-shadow: 0 20px 45px rgba(0, 0, 0, 0.65), 0 0 30px rgba(0, 210, 255, 0.1);
   }
 }
 
@@ -67,56 +78,96 @@ body {
   font-family: var(--font-sans);
 }
 
-/* Luxury Gold & Glass Styling */
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+/* Cyber Cyan & Gold Gradient Styling */
+.cyan-text {
+  color: var(--cyan-primary);
+}
+
 .gold-text {
   color: var(--gold-primary);
 }
 
+.cyan-gradient {
+  background: linear-gradient(135deg, #38BDF8 0%, #00D2FF 50%, #0284C7 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 .gold-gradient {
-  background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 50%, #D97706 100%);
+  background: linear-gradient(135deg, #FFE57F 0%, #FFD700 50%, #F59E0B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-html.dark .gold-gradient {
-  background: linear-gradient(135deg, #FCE082 0%, #FFD056 50%, #F59E0B 100%);
+.crypto-gradient {
+  background: linear-gradient(135deg, #00D2FF 0%, #38BDF8 40%, #FFD700 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
+/* Primary Crypto Cyan Button */
+.crypto-btn,
 .gold-btn {
-  background: linear-gradient(135deg, #FCE082, #FFD056, #D97706);
-  color: #030712;
-  font-weight: 700;
-  font-family: var(--font-sans);
+  background: linear-gradient(135deg, #00F0FF, #00D2FF, #0284C7);
+  color: #020614;
+  font-weight: 800;
+  font-family: var(--font-display);
+  letter-spacing: 0.5px;
   transition: all 0.25s ease-in-out;
-  box-shadow: 0 4px 20px rgba(245, 192, 66, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 210, 255, 0.35);
 }
 
+.crypto-btn:hover,
 .gold-btn:hover {
-  filter: brightness(1.08);
-  box-shadow: 0 6px 28px rgba(245, 192, 66, 0.45);
+  filter: brightness(1.12);
+  box-shadow: 0 6px 30px rgba(0, 210, 255, 0.55);
   transform: translateY(-2px);
 }
 
+/* Secondary Cyber Button */
+.crypto-btn-secondary,
 .gold-btn-secondary {
   background: transparent;
   color: var(--text-main);
   border: 1px solid var(--border-gold);
   font-weight: 600;
+  font-family: var(--font-sans);
   transition: all 0.25s ease-in-out;
 }
 
+.crypto-btn-secondary:hover,
 .gold-btn-secondary:hover {
   border-color: var(--border-gold-hover);
-  background: rgba(245, 192, 66, 0.08);
+  background: rgba(0, 210, 255, 0.1);
+  box-shadow: 0 0 15px rgba(0, 210, 255, 0.2);
   transform: translateY(-1px);
 }
 
+/* Gold Accent Button */
+.gold-accent-btn {
+  background: linear-gradient(135deg, #FFE57F, #FFD700, #F59E0B);
+  color: #020614;
+  font-weight: 800;
+  font-family: var(--font-display);
+  transition: all 0.25s ease-in-out;
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+}
+
+.gold-accent-btn:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 6px 28px rgba(255, 215, 0, 0.5);
+  transform: translateY(-2px);
+}
+
+/* High-Tech Glass Cards */
 .glass-card {
   background: var(--bg-card);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-gold);
   box-shadow: var(--card-shadow);
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
@@ -128,8 +179,8 @@ html.dark .gold-gradient {
 
 .glass-card-gold {
   background: var(--bg-card-gold);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--border-gold-hover);
   box-shadow: var(--card-shadow);
   transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -140,12 +191,22 @@ html.dark .gold-gradient {
   border: 1px solid var(--border-subtle);
 }
 
+.bg-glow-cyan {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 210, 255, var(--glow-opacity)) 0%, rgba(0, 210, 255, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .bg-glow-gold {
   position: absolute;
   width: 600px;
   height: 600px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(245, 192, 66, var(--glow-opacity)) 0%, rgba(245, 192, 66, 0) 70%);
+  background: radial-gradient(circle, rgba(255, 215, 0, var(--glow-opacity)) 0%, rgba(255, 215, 0) 0 70%);
   pointer-events: none;
   z-index: 0;
 }
@@ -160,6 +221,14 @@ html.dark .gold-gradient {
   z-index: 0;
 }
 
+/* Cyber Matrix Background Grid */
+.bg-cyber-grid {
+  background-image: 
+    linear-gradient(to right, rgba(0, 210, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 210, 255, 0.04) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
 /* Scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
@@ -170,17 +239,16 @@ html.dark .gold-gradient {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(245, 192, 66, 0.3);
+  background: rgba(0, 210, 255, 0.3);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(245, 192, 66, 0.6);
+  background: rgba(0, 210, 255, 0.6);
 }
 
 /* =========================================================
-   LIGHT THEME OVERRIDES (DASHBOARDS, PANELS & CARDS)
-   Ensures seamless, elegant luxury ivory light mode
+   LIGHT THEME OVERRIDES
    ========================================================= */
 html.light,
 :root[data-theme="light"] {
@@ -215,7 +283,7 @@ html.light .bg-\[\#0a1226\],
 html.light .bg-\[\#0b1429\] {
   background-color: #FFFFFF !important;
   color: #0F172A;
-  border-color: rgba(217, 119, 6, 0.2) !important;
+  border-color: rgba(2, 132, 199, 0.2) !important;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04) !important;
 }
 

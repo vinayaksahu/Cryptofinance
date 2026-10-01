@@ -60,7 +60,7 @@ export default function MemberDashboardPage() {
         <div className="flex flex-col items-center gap-3">
           <div className="w-12 h-12 rounded-full border-4 border-amber-500 border-t-transparent animate-spin" />
           <p className="text-amber-500 dark:text-amber-400 font-extrabold tracking-widest text-sm uppercase">
-            Loading Dubai Finance Portal...
+            Loading Crypto Finance Portal...
           </p>
         </div>
       </div>

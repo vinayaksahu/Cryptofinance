@@ -94,11 +94,11 @@ export default function AdminSidebar({
 
           {/* Logo & Brand title */}
           <div className="flex items-center gap-3 relative z-10 overflow-hidden">
-            <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-gradient-to-br from-amber-400 via-amber-500 to-amber-700 p-0.5 shadow-md shadow-amber-500/30 shrink-0">
+            <div className="relative w-10 h-10 rounded-xl overflow-hidden bg-gradient-to-br from-cyan-400 via-sky-500 to-blue-600 p-0.5 shadow-md shadow-cyan-500/30 shrink-0">
               <div className="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center overflow-hidden">
                 <Image
-                  src="/dubaiLogo.png"
-                  alt="Dubai Finance Logo"
+                  src="/crypto_coin_hero.png"
+                  alt="Crypto Finance Logo"
                   width={36}
                   height={36}
                   className="object-contain"
@@ -111,11 +111,11 @@ export default function AdminSidebar({
             <div className={`flex flex-col transition-opacity duration-200 ${
               isCollapsed ? "lg:hidden" : "block"
             }`}>
-              <div className="font-display font-black text-base tracking-wider text-amber-600 dark:text-amber-400 uppercase whitespace-nowrap leading-none">
-                DUBAI FINANCE
+              <div className="font-display font-black text-base tracking-wider text-cyan-400 uppercase whitespace-nowrap leading-none">
+                CRYPTO FINANCE
               </div>
-              <div className="text-[9px] font-bold tracking-[0.2em] text-amber-600/80 dark:text-amber-500/70 uppercase mt-1 whitespace-nowrap flex items-center gap-1 leading-none">
-                <ShieldCheck className="w-3 h-3 text-emerald-500 dark:text-emerald-400" />
+              <div className="text-[9px] font-bold tracking-[0.2em] text-cyan-400/80 uppercase mt-1 whitespace-nowrap flex items-center gap-1 leading-none font-mono">
+                <ShieldCheck className="w-3 h-3 text-emerald-400" />
                 ADMIN CONSOLE
               </div>
             </div>

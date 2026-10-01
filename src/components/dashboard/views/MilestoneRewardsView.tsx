@@ -332,7 +332,7 @@ export function MilestoneRewardsView({
 
   const handlePdf = () => {
     printOrExportPdf(
-      "Dubai Finance • Milestone Rewards Schedule",
+      "Crypto Finance • Milestone Rewards Schedule",
       exportColumns,
       filteredRanks,
       `Total Unlocked Rewards: $${rankAnalysis.totalUnlockedCash.toLocaleString()} USDT`,
@@ -342,7 +342,7 @@ export function MilestoneRewardsView({
 
   const handlePrint = () => {
     printOrExportPdf(
-      "Dubai Finance • Milestone Rewards Schedule",
+      "Crypto Finance • Milestone Rewards Schedule",
       exportColumns,
       filteredRanks,
       `Total Unlocked Rewards: $${rankAnalysis.totalUnlockedCash.toLocaleString()} USDT`,

@@ -5,12 +5,16 @@ import path from "path";
 export const dynamic = "force-dynamic";
 
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const themeParam = searchParams.get("theme");
-  const isLight = themeParam?.toLowerCase() === "light";
-  const theme = isLight ? "Light" : "Dark";
-  const fileName = `Dubai_Finance_Presentation_${theme}.pdf`;
-  const filePath = path.join(process.cwd(), "public", fileName);
+  const fileName = "Crypto_Finance_Presentation.pdf";
+  let filePath = path.join(process.cwd(), "public", fileName);
+
+  if (!fs.existsSync(filePath)) {
+    filePath = path.join(process.cwd(), fileName);
+  }
+
+  if (!fs.existsSync(filePath)) {
+    filePath = path.join(process.cwd(), "pdf_content", fileName);
+  }
 
   if (!fs.existsSync(filePath)) {
     return new NextResponse("Presentation file not found", { status: 404 });

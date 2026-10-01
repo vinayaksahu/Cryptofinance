@@ -1,5 +1,5 @@
 /**
- * Export and Print Utilities for Dubai Finance Tables
+ * Export and Print Utilities for Crypto Finance Tables
  * Supports Copy to clipboard (TSV), CSV/Excel download with UTF-8 BOM, and clean Printable/PDF view.
  */
 
@@ -86,7 +86,7 @@ export function exportToExcel(
 }
 
 /**
- * Opens a dedicated printable window with official Dubai Finance letterhead,
+ * Opens a dedicated printable window with official Crypto Finance letterhead,
  * clean responsive table styles, and automatic print/PDF trigger.
  */
 export function printOrExportPdf(
@@ -127,7 +127,7 @@ export function printOrExportPdf(
     <html>
       <head>
         <meta charset="utf-8" />
-        <title>${title} - Dubai Finance</title>
+        <title>${title} - Crypto Finance</title>
         <style>
           * { box-sizing: border-box; }
           body {
@@ -199,7 +199,7 @@ export function printOrExportPdf(
       <body>
         <div class="header-bar">
           <div>
-            <div class="brand-title">DUBAI FINANCE</div>
+            <div class="brand-title">CRYPTO FINANCE</div>
             <div class="report-title">${title}</div>
             <div class="meta-info">
               Printed on: ${new Date().toLocaleString()} ${
@@ -224,7 +224,7 @@ export function printOrExportPdf(
         </table>
 
         <div class="footer">
-          <span>Official Dubai Finance System Audit Report</span>
+          <span>Official Crypto Finance System Audit Report</span>
           <span>Confidential • For Account Holder Use Only</span>
         </div>
 

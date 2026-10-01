@@ -426,8 +426,8 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                   type="email"
                   value={profileEmail}
                   onChange={(e) => setProfileEmail(e.target.value)}
-                  placeholder="admin@dubaifinance.online"
-                  className="w-full bg-[#070e20] border border-[#1a2d52] rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-amber-400 font-mono text-xs"
+                  placeholder="admin@cryptofinance.online"
+                  className="w-full bg-[#070e20] border border-[#1a2d52] rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-cyan-400 font-mono text-xs"
                   required
                 />
               </div>

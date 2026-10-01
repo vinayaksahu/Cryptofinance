@@ -697,7 +697,7 @@ export default function SuperRootAdminPage() {
         {/* Top Header */}
         <div className="absolute top-6 left-6 right-6 flex items-center justify-between z-20">
           <div className="text-xs font-bold text-slate-400 flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-slate-800 bg-slate-900/60 backdrop-blur-md">
-            Dubai Finance Security
+            Crypto Finance Security
           </div>
           <div className="flex items-center gap-2">
             <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-rose-400 px-3 py-1 rounded-lg bg-rose-500/10 border border-rose-500/30 tracking-wider">
@@ -716,7 +716,7 @@ export default function SuperRootAdminPage() {
               </div>
             </div>
             <h1 className="text-2xl font-black tracking-tight text-white flex items-center justify-center gap-2">
-              Dubai Finance <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-amber-400">Root</span>
+              Crypto Finance <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-amber-400">Root</span>
             </h1>
             <p className="text-xs text-slate-400 mt-1.5 font-mono">
               Master Super Root Administrative Terminal
@@ -806,7 +806,7 @@ export default function SuperRootAdminPage() {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-base font-black text-white tracking-wide">
-                Dubai Finance <span className="text-rose-400 font-mono">SUPER ROOT</span>
+                Crypto Finance <span className="text-rose-400 font-mono">SUPER ROOT</span>
               </h1>
               <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
                 MASTER COMMANDER
@@ -2543,7 +2543,7 @@ export default function SuperRootAdminPage() {
                   required
                   value={createForm.email}
                   onChange={(e) => setCreateForm({ ...createForm, email: e.target.value })}
-                  placeholder="admin2@dubaifinance.online"
+                  placeholder="admin2@cryptofinance.online"
                   className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-rose-500"
                 />
               </div>
@@ -2747,7 +2747,7 @@ export default function SuperRootAdminPage() {
                   required
                   value={editForm.fullName}
                   onChange={(e) => setEditForm({ ...editForm, fullName: e.target.value })}
-                  placeholder="e.g. Dubai Finance CMD"
+                  placeholder="e.g. Crypto Finance CMD"
                   className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-amber-400 text-xs font-medium"
                 />
               </div>
@@ -2762,7 +2762,7 @@ export default function SuperRootAdminPage() {
                   required
                   value={editForm.email}
                   onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
-                  placeholder="admin@dubaifinance.online"
+                  placeholder="admin@cryptofinance.online"
                   className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-amber-400 text-xs font-mono"
                 />
               </div>

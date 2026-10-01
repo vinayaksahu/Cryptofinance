@@ -240,7 +240,7 @@ export const DEFAULT_SYSTEM_CONFIGS: Record<string, { value: string; description
     category: "system_mode",
   },
   PRELAUNCH_NOTICE_TEXT: {
-    value: "Dubai Finance is currently in its exclusive Pre-Launch phase. The official global platform launch and public member activations go LIVE on September 21, 2026! Get ready to experience institutional 5% to 15% Daily ROI Staking and 12-Level Team Royalties. Stay tuned!",
+    value: "Crypto Finance is currently in its exclusive Pre-Launch phase. The official global platform launch and public member activations go LIVE on September 21, 2026! Get ready to experience institutional 5% to 15% Daily ROI Staking and 12-Level Team Royalties. Stay tuned!",
     description: "Notice message displayed to visitors when Pre-launch mode is active",
     category: "system_mode",
   },

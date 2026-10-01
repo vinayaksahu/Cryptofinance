@@ -331,7 +331,7 @@ export function ActionModals({ user, onRefresh }: { user: any; onRefresh: () => 
               <form onSubmit={handleDeposit}>
                 <h3 className="text-lg font-black text-white mb-1">Recharge Fund Wallet</h3>
                 <p className="text-xs text-slate-400 mb-4">
-                  Send USDT (BEP-20) to the official Dubai Finance address below:
+                  Send USDT (BEP-20) to the official Crypto Finance address below:
                 </p>
 
                 <div className="p-3 rounded-xl bg-black/60 border border-slate-800 mb-4 text-center">
@@ -582,7 +582,7 @@ export function ActionModals({ user, onRefresh }: { user: any; onRefresh: () => 
                       required
                       value={p2pRecipient}
                       onChange={(e) => setP2pRecipient(e.target.value)}
-                      placeholder="e.g. DF836419"
+                      placeholder="e.g. CF836419"
                       className="w-full px-3.5 py-2.5 rounded-xl bg-black/50 border border-slate-700 text-white text-sm outline-none uppercase font-bold"
                     />
                   </div>

@@ -25,13 +25,13 @@ export default function LoginPage() {
             setSystemMode("MAINTENANCE");
             setNoticeText(
               data.configs.MAINTENANCE_NOTICE_TEXT ||
-                "Dubai Finance is currently undergoing scheduled infrastructure upgrades and database optimization. Public member access will resume shortly."
+                "Crypto Finance is currently undergoing scheduled infrastructure upgrades and database optimization. Public member access will resume shortly."
             );
           } else if (data.configs.PRELAUNCH_MODE === "true") {
             setSystemMode("PRELAUNCH");
             setNoticeText(
               data.configs.PRELAUNCH_NOTICE_TEXT ||
-                "Dubai Finance is currently in its official Pre-Launch phase. Public member registration and user dashboards will open shortly."
+                "Crypto Finance is currently in its official Pre-Launch phase. Public member registration and user dashboards will open shortly."
             );
           } else {
             setSystemMode("LIVE");
@@ -85,7 +85,7 @@ export default function LoginPage() {
         <div className="w-full max-w-lg glass-card-gold p-8 sm:p-10 rounded-3xl relative z-10 shadow-2xl text-center">
           <div className="w-14 h-14 rounded-2xl overflow-hidden bg-gradient-to-br from-amber-400 via-amber-500 to-amber-700 p-0.5 shadow-lg shadow-amber-500/30 mx-auto mb-5">
             <div className="w-full h-full rounded-[14px] bg-slate-950 flex items-center justify-center">
-              <img src="/dubaiLogo.png" alt="Dubai Finance Logo" className="w-10 h-10 object-contain" />
+              <img src="/crypto_coin_hero.png" alt="Crypto Finance Logo" className="w-10 h-10 object-contain" />
             </div>
           </div>
 
@@ -153,15 +153,15 @@ export default function LoginPage() {
             <div className="w-12 h-12 rounded-xl overflow-hidden bg-gradient-to-br from-amber-400 to-amber-700 p-0.5 shadow-lg shadow-amber-500/30">
               <div className="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center overflow-hidden">
                 <img
-                  src="/dubaiLogo.png"
-                  alt="Dubai Finance Logo"
+                  src="/crypto_coin_hero.png"
+                  alt="Crypto Finance Logo"
                   className="w-10 h-10 object-contain"
                 />
               </div>
             </div>
           </Link>
           <h2 className="font-display text-2xl font-black text-[var(--text-main)]">Member Portal</h2>
-          <p className="text-xs text-[var(--text-muted)] mt-1">Sign in to your Dubai Finance investor account</p>
+          <p className="text-xs text-[var(--text-muted)] mt-1">Sign in to your Crypto Finance investor account</p>
         </div>
 
         {error && (
@@ -182,7 +182,7 @@ export default function LoginPage() {
                 required
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
-                placeholder="e.g. DF478752"
+                placeholder="e.g. CF478752"
                 className="w-full pl-10 pr-4 py-3 rounded-xl bg-black/50 border border-slate-700 focus:border-amber-400 focus:ring-1 focus:ring-amber-400 text-white text-sm outline-none transition"
               />
             </div>

@@ -1,5 +1,5 @@
 /**
- * Dubai Finance Input Sanitization & Anti-XSS Utility
+ * Crypto Finance Input Sanitization & Anti-XSS Utility
  * Protects against Stored XSS, HTML injection, and malicious payloads.
  */
 

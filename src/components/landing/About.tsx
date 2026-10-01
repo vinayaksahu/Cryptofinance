@@ -1,21 +1,21 @@
 import Image from "next/image";
-import { Building, TrendingUp, DollarSign, Globe, MapPin, Calendar, Mail, CheckCircle2, Shield } from "lucide-react";
+import { Building, TrendingUp, DollarSign, Globe, MapPin, Calendar, Mail, CheckCircle2, Shield, Cpu, Lock, PieChart } from "lucide-react";
 import { APP_CONFIG } from "@/lib/constants";
 
 export function About() {
   return (
-    <section id="about" className="relative z-10 py-20 border-t border-[var(--border-subtle)] bg-[var(--bg-secondary)]/50">
+    <section id="about" className="relative z-10 py-20 border-t border-cyan-500/20 bg-[var(--bg-secondary)]/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-amber-500 dark:text-amber-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/25">
-            CORPORATE PROFILE &amp; EXECUTIVE MANAGEMENT
+          <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 font-mono">
+            SWISS JURISDICTION &bull; QUANTITATIVE ARCHITECTURE &bull; SLIDES 02-03
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-black text-[var(--text-main)] mt-3">
-            About Dubai Finance
+            About Crypto Finance
           </h2>
           <p className="text-[var(--text-muted)] text-base sm:text-lg mt-3 font-medium">
-            30+ Years of Cross-Industry Mastery &amp; 10+ Years of Crypto Market Leadership (Slides 02-04)
+            Pioneering algorithmic quantitative arbitrage, autonomous liquidity protocols, and mathematical solvency.
           </p>
         </div>
 
@@ -24,168 +24,162 @@ export function About() {
           {/* Left 4 Pillars (7 Cols) */}
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5">
             {/* Pillar 1 */}
-            <div className="glass-card p-6 rounded-3xl flex flex-col justify-between hover:border-amber-400/50 transition">
+            <div className="glass-card p-6 rounded-3xl flex flex-col justify-between hover:border-cyan-400/50 transition">
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500 mb-4">
-                  <Building className="w-6 h-6" />
+                <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-400 mb-4">
+                  <Cpu className="w-6 h-6" />
                 </div>
                 <h4 className="font-display text-lg font-bold text-[var(--text-main)] mb-2">
-                  30+ Years Proven Track Record
+                  Institutional Algo Arbitrage
                 </h4>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                  Deep-rooted experience in Prime Real Estate development, Five-Star Hospitality, Wholesale Trade, and Global Tourism &amp; Travel networks.
+                  Operates high-frequency algorithmic arbitrage across major blockchain liquidity venues, capturing risk-neutral price differentials 24/7.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-amber-500 font-semibold flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4" /> Solid Physical Asset Base
+              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-cyan-400 font-semibold flex items-center gap-1.5 font-mono">
+                <CheckCircle2 className="w-4 h-4" /> Zero Emotional Trading
               </div>
             </div>
 
             {/* Pillar 2 */}
             <div className="glass-card p-6 rounded-3xl flex flex-col justify-between hover:border-emerald-400/50 transition">
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-500 mb-4">
-                  <TrendingUp className="w-6 h-6" />
+                <div className="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 mb-4">
+                  <PieChart className="w-6 h-6" />
                 </div>
                 <h4 className="font-display text-lg font-bold text-[var(--text-main)] mb-2">
-                  10+ Years Crypto Leadership
+                  Audited Capital Allocation
                 </h4>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                  Proprietary quantitative arbitrage, crypto derivatives trading, automated high-frequency bot liquidity, and risk-hedged futures strategies.
+                  Disciplined 60% Quant Arbitrage deployment, 35% Smart Contract Liquidity Reserve for instant user cashouts, and 5% Security maintenance.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-emerald-500 font-semibold flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4" /> AI &amp; Algorithmic Execution
+              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-emerald-400 font-semibold flex items-center gap-1.5 font-mono">
+                <CheckCircle2 className="w-4 h-4" /> 35% Instant Cashout Reserve
               </div>
             </div>
 
             {/* Pillar 3 */}
             <div className="glass-card p-6 rounded-3xl flex flex-col justify-between hover:border-amber-400/50 transition">
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-500 mb-4">
-                  <DollarSign className="w-6 h-6" />
+                <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-amber-400 mb-4">
+                  <Lock className="w-6 h-6" />
                 </div>
                 <h4 className="font-display text-lg font-bold text-[var(--text-main)] mb-2">
-                  $25+ Million Generated
+                  3-Wallet Solvency Engine
                 </h4>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                  Substantial multi-million dollar liquidity reserves enabling guaranteed, sustainable daily returns to community members worldwide.
+                  Triple-isolated ledgers completely eliminate bank-run risks. Promotional community credits are isolated from withdrawable yield reserves.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-amber-500 font-semibold flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4" /> Deep Liquidity Reserves
+              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-amber-400 font-semibold flex items-center gap-1.5 font-mono">
+                <CheckCircle2 className="w-4 h-4" /> 10% Utility &bull; Zero Deficit
               </div>
             </div>
 
             {/* Pillar 4 */}
-            <div className="glass-card p-6 rounded-3xl flex flex-col justify-between hover:border-cyan-400/50 transition">
+            <div className="glass-card p-6 rounded-3xl flex flex-col justify-between hover:border-sky-400/50 transition">
               <div>
-                <div className="w-12 h-12 rounded-2xl bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-500 mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-400 mb-4">
                   <Globe className="w-6 h-6" />
                 </div>
                 <h4 className="font-display text-lg font-bold text-[var(--text-main)] mb-2">
-                  100% Capital Transparency
+                  100% On-Chain Standard
                 </h4>
                 <p className="text-sm text-[var(--text-muted)] leading-relaxed">
-                  100% USDT (BEP-20) standard on Binance Smart Chain. Automated smart execution, zero currency volatility, and verifiable audit trails.
+                  Binance Smart Chain (BEP-20 USDT) native architecture. Zero fiat delays, automated instant Web3 payouts, and 100% verifiable mathematical logic.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-cyan-500 font-semibold flex items-center gap-1.5">
-                <CheckCircle2 className="w-4 h-4" /> Zero Forced Directs to Withdraw
+              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-sky-400 font-semibold flex items-center gap-1.5 font-mono">
+                <CheckCircle2 className="w-4 h-4" /> Code Is Law &bull; Min $2 Payout
               </div>
             </div>
           </div>
 
           {/* Right Leadership & HQ Card (5 Cols) from Slide 03 */}
           <div className="lg:col-span-5 glass-card-gold p-8 rounded-3xl flex flex-col justify-between relative overflow-hidden">
-            {/* Background luxury office preview */}
-            <div className="absolute top-0 right-0 w-48 h-48 opacity-10 pointer-events-none rounded-bl-full overflow-hidden">
-              <Image
-                src="/assets/office_building.jpg"
-                alt="Dubai Office"
-                fill
-                className="object-cover"
-              />
-            </div>
+            {/* Header Badge */}
+            <div className="relative z-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/15 border border-cyan-500/30 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-6 font-mono">
+                <Building className="w-3.5 h-3.5" />
+                <span>CORPORATE LEADERSHIP &bull; SWISS JURISDICTION</span>
+              </div>
 
-            <div>
-              {/* CMD Profile Header */}
-              <div className="flex items-center gap-4 pb-6 border-b border-amber-500/30 mb-6">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-amber-400 via-amber-500 to-amber-700 flex items-center justify-center text-2xl font-black text-slate-950 shadow-lg shadow-amber-500/30 shrink-0">
-                  TM
-                </div>
-                <div>
-                  <h3 className="font-display text-2xl font-black text-[var(--text-main)]">
-                    {APP_CONFIG.cmd}
-                  </h3>
-                  <span className="text-xs font-bold text-amber-600 dark:text-amber-300 tracking-wider uppercase">
-                    Chairman &amp; Managing Director (CMD)
-                  </span>
+              {/* Managing Leadership Details */}
+              <div className="mb-6">
+                <span className="text-xs font-bold text-cyan-400 uppercase tracking-widest block font-mono">
+                  MANAGING LEADERSHIP
+                </span>
+                <h3 className="font-display text-2xl sm:text-3xl font-black text-[var(--text-main)] mt-1">
+                  Mr. Alex Rivera
+                </h3>
+                <p className="text-xs sm:text-sm font-semibold text-amber-400 mt-0.5">
+                  Chairman &amp; Managing Director (CMD)
+                </p>
+                <p className="text-xs sm:text-sm text-[var(--text-muted)] mt-2 leading-relaxed">
+                  Veteran quantitative architect and FinTech strategist with over 15 years directing algorithmic trading desks across Zurich, London, and Singapore.
+                </p>
+              </div>
+
+              {/* Physical Corporate Presence */}
+              <div className="p-4 rounded-2xl bg-inner-panel mb-6 border border-cyan-500/20">
+                <div className="flex items-start gap-3">
+                  <MapPin className="w-5 h-5 text-cyan-400 shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-xs font-bold text-[var(--text-main)] block">
+                      Global Headquarters
+                    </span>
+                    <span className="text-xs text-[var(--text-muted)] leading-relaxed mt-0.5 block">
+                      Crypto Valley Tower, Zug, Switzerland
+                    </span>
+                    <span className="text-[11px] text-cyan-400 font-semibold mt-1 block">
+                      Operating under rigorous Swiss FinTech regulatory standards.
+                    </span>
+                  </div>
                 </div>
               </div>
 
-              {/* Vision Quote from Slide 03 */}
-              <div className="mb-6 p-3.5 rounded-2xl bg-inner-panel text-xs italic text-[var(--text-muted)] leading-relaxed border-l-2 border-amber-500">
-                &ldquo;Our mission is to democratize high-frequency institutional finance, ensuring every individual enjoys steady, transparent, and profitable daily returns powered by next-gen blockchain automation.&rdquo;
-              </div>
-
-              {/* Verified Details from Slide 03 & 22 */}
-              <div className="space-y-3.5 text-sm">
-                <div className="flex items-start gap-3.5 p-3 rounded-2xl bg-inner-panel">
-                  <MapPin className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
-                  <div>
-                    <div className="font-bold text-[var(--text-subtle)] text-xs uppercase tracking-wider">
-                      Physical Corporate Headquarters
-                    </div>
-                    <div className="text-[var(--text-main)] font-semibold mt-0.5 leading-snug">
-                      {APP_CONFIG.headquarters}
-                    </div>
+              {/* Stake Allocation Breakdown (Slide 09) */}
+              <div className="space-y-3 pt-2">
+                <span className="text-xs font-bold text-[var(--text-subtle)] uppercase tracking-wider block font-mono">
+                  Audited Stake Deployment (Slide 09)
+                </span>
+                <div className="space-y-2">
+                  <div className="flex justify-between items-center text-xs">
+                    <span className="font-semibold text-[var(--text-main)]">Quant Arbitrage AI Bots</span>
+                    <span className="font-mono font-bold text-cyan-400">60%</span>
                   </div>
-                </div>
-
-                <div className="flex items-start gap-3.5 p-3 rounded-2xl bg-inner-panel">
-                  <Calendar className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
-                  <div>
-                    <div className="font-bold text-[var(--text-subtle)] text-xs uppercase tracking-wider">
-                      Operational Status
-                    </div>
-                    <div className="text-[var(--text-main)] font-semibold mt-0.5">
-                      Pre-Launching Phase &bull; Global Operations
-                    </div>
+                  <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                    <div className="h-full bg-cyan-400 rounded-full w-[60%]" />
                   </div>
-                </div>
 
-                <div className="flex items-start gap-3.5 p-3 rounded-2xl bg-inner-panel">
-                  <Mail className="w-5 h-5 text-amber-500 shrink-0 mt-0.5" />
-                  <div>
-                    <div className="font-bold text-[var(--text-subtle)] text-xs uppercase tracking-wider">
-                      Corporate Communications
-                    </div>
-                    <div className="text-[var(--text-main)] font-semibold mt-0.5">
-                      {APP_CONFIG.officialEmail} &bull; {APP_CONFIG.domain}
-                    </div>
+                  <div className="flex justify-between items-center text-xs pt-1">
+                    <span className="font-semibold text-[var(--text-main)]">Smart Contract Liquidity Reserve</span>
+                    <span className="font-mono font-bold text-emerald-400">35%</span>
                   </div>
-                </div>
+                  <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                    <div className="h-full bg-emerald-400 rounded-full w-[35%]" />
+                  </div>
 
-                <div className="flex items-start gap-3.5 p-3 rounded-2xl bg-inner-panel">
-                  <Shield className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
-                  <div>
-                    <div className="font-bold text-[var(--text-subtle)] text-xs uppercase tracking-wider">
-                      Network &amp; Security
-                    </div>
-                    <div className="text-[var(--text-main)] font-semibold mt-0.5">
-                      USDT BEP-20 &bull; Multi-Sig Liquidity Pools
-                    </div>
+                  <div className="flex justify-between items-center text-xs pt-1">
+                    <span className="font-semibold text-[var(--text-main)]">Compliance &amp; Dev Security</span>
+                    <span className="font-mono font-bold text-amber-400">5%</span>
+                  </div>
+                  <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                    <div className="h-full bg-amber-400 rounded-full w-[5%]" />
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Bottom Entity Badge */}
-            <div className="mt-8 pt-6 border-t border-amber-500/25 flex items-center justify-between text-xs text-amber-700 dark:text-amber-200">
-              <span className="font-medium">Dubai Financial District Presence</span>
-              <span className="font-black px-2 py-0.5 rounded bg-amber-500/15 border border-amber-500/30">
-                Latifa Tower #3802
+            {/* Official Support Footer */}
+            <div className="mt-8 pt-4 border-t border-cyan-500/20 flex flex-wrap items-center justify-between gap-3 text-xs text-[var(--text-subtle)]">
+              <span className="flex items-center gap-1.5 font-mono">
+                <Mail className="w-3.5 h-3.5 text-cyan-400" />
+                support@cryptofinance.online
+              </span>
+              <span className="font-mono font-bold text-cyan-400">
+                cryptofinance.online
               </span>
             </div>
           </div>

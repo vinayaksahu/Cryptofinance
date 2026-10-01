@@ -1,84 +1,75 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Link from "next/link";
-import { CheckCircle2, ArrowRight, ShieldCheck, Zap, Sparkles } from "lucide-react";
+import { CheckCircle2, ArrowRight, ShieldCheck, Zap, Sparkles, RefreshCw, Layers, TrendingUp, Lock } from "lucide-react";
+import { APP_CONFIG } from "@/lib/constants";
 
 export function Packages() {
-  const [activePlanType, setActivePlanType] = useState<"basic" | "fd">("basic");
-  const [fdActiveTenure, setFdActiveTenure] = useState<180 | 210>(180);
-  const [isPrelaunch, setIsPrelaunch] = useState(true);
+  const [activeStrategy, setActiveStrategy] = useState<"cashout" | "compounding">("cashout");
 
-  useEffect(() => {
-    let timer: NodeJS.Timeout | undefined;
-    fetch("/api/config")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data?.configs) {
-          if (data.configs.PRELAUNCH_MODE === "true") {
-            const targetDateStr = data.configs.PRELAUNCH_TARGET_DATE || "2026-09-21T20:00";
-            let targetTime: number;
-            if (/[+-]\d{2}(:\d{2})?$|Z$/i.test(targetDateStr)) {
-              targetTime = new Date(targetDateStr).getTime();
-            } else {
-              targetTime = new Date(`${targetDateStr}:00+04:00`).getTime();
-            }
-
-            const evaluateMode = () => {
-              if (!isNaN(targetTime) && Date.now() >= targetTime) {
-                setIsPrelaunch(false);
-              } else {
-                setIsPrelaunch(true);
-              }
-            };
-
-            evaluateMode();
-            timer = setInterval(evaluateMode, 1000);
-          } else {
-            setIsPrelaunch(false);
-          }
-        }
-      })
-      .catch(() => {});
-
-    return () => {
-      if (timer) clearInterval(timer);
-    };
-  }, []);
-
-  // Exact 10 Basic Packages from Dubai_Finance_Presentation_Dark.pdf Slides 05-09
-  const basicPackages = [
-    { amount: 5, dailyProfit: 0.25, day7: 1.75, day14: 3.50, gross: 7.00, netProfit: 2.00, tier: "Micro Starter", category: "Starter" },
-    { amount: 10, dailyProfit: 0.50, day7: 3.50, day14: 7.00, gross: 14.00, netProfit: 4.00, tier: "Basic Starter", category: "Starter" },
-    { amount: 20, dailyProfit: 1.00, day7: 7.00, day14: 14.00, gross: 28.00, netProfit: 8.00, tier: "Advanced Starter", category: "Starter" },
-    { amount: 50, dailyProfit: 2.50, day7: 17.50, day14: 35.00, gross: 70.00, netProfit: 20.00, tier: "Growth Pro", category: "Growth", qualifier: true },
-    { amount: 100, dailyProfit: 5.00, day7: 35.00, day14: 70.00, gross: 140.00, netProfit: 40.00, tier: "Growth Standard", category: "Growth", popular: true },
-    { amount: 200, dailyProfit: 10.00, day7: 70.00, day14: 140.00, gross: 280.00, netProfit: 80.00, tier: "Growth Ruby", category: "Growth" },
-    { amount: 500, dailyProfit: 25.00, day7: 175.00, day14: 350.00, gross: 700.00, netProfit: 200.00, tier: "Growth Elite", category: "Growth" },
-    { amount: 1000, dailyProfit: 50.00, day7: 350.00, day14: 700.00, gross: 1400.00, netProfit: 400.00, tier: "VIP Platinum", category: "VIP" },
-    { amount: 2000, dailyProfit: 100.00, day7: 700.00, day14: 1400.00, gross: 2800.00, netProfit: 800.00, tier: "VIP Diamond", category: "VIP" },
-    { amount: 5000, dailyProfit: 250.00, day7: 1750.00, day14: 3500.00, gross: 7000.00, netProfit: 2000.00, tier: "Royal Crown VIP", category: "VIP", popular: true },
-  ];
-
-  // Exact FD Plans from Slides 12-14
-  const fd180Plans = [
-    { amount: 50, daily: 5, m30: 150, m90: 450, total: 900, mult: "18X" },
-    { amount: 100, daily: 10, m30: 300, m90: 900, total: 1800, mult: "18X" },
-    { amount: 200, daily: 20, m30: 600, m90: 1800, total: 3600, mult: "18X" },
-    { amount: 500, daily: 50, m30: 1500, m90: 4500, total: 9000, mult: "18X", popular: true },
-    { amount: 1000, daily: 100, m30: 3000, m90: 9000, total: 18000, mult: "18X" },
-    { amount: 2000, daily: 200, m30: 6000, m90: 18000, total: 36000, mult: "18X" },
-    { amount: 5000, daily: 500, m30: 15000, m90: 45000, total: 90000, mult: "18X", popular: true },
-  ];
-
-  const fd210Plans = [
-    { amount: 50, daily: 7.5, m30: 225, m90: 675, total: 1575, mult: "31.5X" },
-    { amount: 100, daily: 15, m30: 450, m90: 1350, total: 3150, mult: "31.5X" },
-    { amount: 200, daily: 30, m30: 900, m90: 2700, total: 6300, mult: "31.5X" },
-    { amount: 500, daily: 75, m30: 2250, m90: 6750, total: 15750, mult: "31.5X", popular: true },
-    { amount: 1000, daily: 150, m30: 4500, m90: 13500, total: 31500, mult: "31.5X" },
-    { amount: 2000, daily: 300, m30: 9000, m90: 27000, total: 63000, mult: "31.5X" },
-    { amount: 5000, daily: 750, m30: 22500, m90: 67500, total: 157500, mult: "31.5X", popular: true },
+  // Audited Stake Benchmark Walkthroughs strictly from Slide 07 & 12
+  const benchmarks = [
+    {
+      stake: 2,
+      pool: 4,
+      bonusUtility: 0.20,
+      usdtRequired: 1.80,
+      day1Roi: 0.08,
+      duration: "331 Days",
+      totalExtracted: 3.999,
+      tier: "Min Starter",
+      tag: "Zero Barrier",
+      featured: false,
+    },
+    {
+      stake: 20,
+      pool: 40,
+      bonusUtility: 2.00,
+      usdtRequired: 18.00,
+      day1Roi: 0.80,
+      duration: "445 Days",
+      totalExtracted: 39.995,
+      tier: "Growth Entry",
+      tag: "Popular",
+      featured: false,
+    },
+    {
+      stake: 100,
+      pool: 200,
+      bonusUtility: 10.00,
+      usdtRequired: 90.00,
+      day1Roi: 4.00,
+      duration: "525 Days",
+      totalExtracted: 199.995,
+      tier: "Core Standard",
+      tag: "Live Walkthrough ★",
+      featured: true,
+    },
+    {
+      stake: 1000,
+      pool: 2000,
+      bonusUtility: 100.00,
+      usdtRequired: 900.00,
+      day1Roi: 40.00,
+      duration: "639 Days",
+      totalExtracted: 1999.995,
+      tier: "VIP Platinum",
+      tag: "High Yield",
+      featured: false,
+    },
+    {
+      stake: 5000,
+      pool: 10000,
+      bonusUtility: 500.00,
+      usdtRequired: 4500.00,
+      day1Roi: 200.00,
+      duration: "720 Days",
+      totalExtracted: 9999.995,
+      tier: "Whale Tier",
+      tag: "Institutional",
+      featured: true,
+    },
   ];
 
   return (
@@ -86,377 +77,195 @@ export function Packages() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="text-amber-500 dark:text-amber-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/25">
-            ACTIVATION TIERS &bull; SLIDES 05-14
+          <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 font-mono">
+            PROTOCOL ALLOCATION &bull; ZERO PACKAGES &bull; SLIDES 06 - 14
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-black text-[var(--text-main)] mt-3">
-            Joining Packages: $5 To $5,000 USDT
+            Dynamic 4% Daily Yield &bull; 2X Pool Protocol
           </h2>
           <p className="text-[var(--text-muted)] text-base sm:text-lg mt-3 font-medium">
-            All Basic packages run on a disciplined <strong>28-Day Tenure at 5% Daily ROI (140% Return)</strong>.
+            No rigid packages. Stake any amount starting from <strong>$2.00 USDT</strong>. Utilize up to <strong>10% from your Bonus Wallet</strong> and unlock an automated <strong>2X Contract Allocation Pool</strong>.
           </p>
 
-          {/* Plan Type Selector (Basic vs FD) */}
-          <div className="inline-flex p-1.5 rounded-2xl bg-[var(--bg-card)] border border-amber-500/30 mt-8 shadow-md">
+          {/* Strategy Toggle */}
+          <div className="inline-flex p-1.5 rounded-2xl bg-[var(--bg-card)] border border-cyan-500/30 mt-8 shadow-md">
             <button
               type="button"
-              onClick={() => setActivePlanType("basic")}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${
-                activePlanType === "basic"
-                  ? "bg-amber-400 text-slate-950 shadow-md shadow-amber-400/20 scale-[1.02]"
-                  : "text-[var(--text-muted)] hover:text-[var(--text-main)]"
+              onClick={() => setActiveStrategy("cashout")}
+              className={`px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 ${
+                activeStrategy === "cashout"
+                  ? "crypto-btn text-slate-950 shadow-md"
+                  : "text-[var(--text-muted)] hover:text-cyan-400"
               }`}
             >
-              <Zap className="w-4 h-4" />
-              Basic ROI: 5% Daily (28 Days)
+              <TrendingUp className="w-4 h-4" />
+              Dynamic Daily Cashout (4% Daily &bull; 200% Payout)
             </button>
             <button
               type="button"
-              onClick={() => setActivePlanType("fd")}
-              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-sm font-bold transition-all ${
-                activePlanType === "fd"
-                  ? "bg-emerald-500 text-slate-950 font-black shadow-md shadow-emerald-500/20 scale-[1.02]"
-                  : "text-[var(--text-muted)] hover:text-[var(--text-main)]"
+              onClick={() => setActiveStrategy("compounding")}
+              className={`px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all flex items-center gap-2 ${
+                activeStrategy === "compounding"
+                  ? "crypto-btn text-slate-950 shadow-md"
+                  : "text-[var(--text-muted)] hover:text-cyan-400"
               }`}
             >
-              <Sparkles className="w-4 h-4" />
-              Fix Deposit: 10% &amp; 15% Daily
+              <RefreshCw className="w-4 h-4" />
+              35-Day Compounding Engine (2X Doubling &bull; 4X Max)
             </button>
           </div>
         </div>
 
-        {/* BASIC SAVING PLAN VIEW */}
-        {activePlanType === "basic" && (
-          <div className="animate-in fade-in duration-300">
-            {/* Overview Banner Card */}
-            <div className="glass-card-gold p-8 sm:p-10 rounded-3xl mb-12 max-w-5xl mx-auto shadow-xl">
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-amber-500/30 mb-6">
-                <div>
-                  <span className="px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-300 text-xs font-bold uppercase tracking-wider">
-                    Disciplined 28-Day Tenure
+        {/* 10% Bonus Utility Rule Banner (Slide 06) */}
+        <div className="glass-card-gold p-6 rounded-3xl mb-12 border border-cyan-500/30 relative overflow-hidden">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-start gap-4">
+              <div className="w-12 h-12 rounded-2xl bg-cyan-500/20 border border-cyan-500/40 flex items-center justify-center text-cyan-400 shrink-0">
+                <Sparkles className="w-6 h-6 animate-pulse" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-bold uppercase tracking-wider text-cyan-400 font-mono">
+                    Slide 06 Protocol Rule
                   </span>
-                  <h3 className="font-display text-2xl sm:text-4xl font-black text-[var(--text-main)] mt-2">
-                    Basic Daily ROI: 5% Every Day
-                  </h3>
-                  <p className="text-[var(--text-muted)] text-sm sm:text-base mt-1 font-medium">
-                    Monday Through Sunday (No Non-Trading Days!) &bull; Packages: <strong>$5 to $5,000 USDT</strong>
-                  </p>
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 font-bold border border-emerald-500/30">
+                    10% Free Subsidy
+                  </span>
                 </div>
-
-                <div className="text-left md:text-right">
-                  <div className="font-display text-4xl sm:text-5xl font-black text-emerald-500 dark:text-emerald-400">
-                    140% Gross
-                  </div>
-                  <div className="text-xs sm:text-sm text-[var(--text-muted)] mt-1 font-semibold">
-                    100% Principal Returned + 40% Pure Net Profit
-                  </div>
-                </div>
-              </div>
-
-              {/* 3 Key Parameters from Slide 11 */}
-              <div className="grid grid-cols-1 sm:grid-cols-4 gap-3.5 mb-6">
-                <div className="p-3.5 rounded-2xl bg-inner-panel text-center">
-                  <div className="text-[11px] text-[var(--text-subtle)] font-bold uppercase">Contract Tenure</div>
-                  <div className="text-base font-black text-[var(--text-main)] mt-1">28 Days Fixed</div>
-                </div>
-
-                <div className="p-3.5 rounded-2xl bg-inner-panel text-center">
-                  <div className="text-[11px] text-[var(--text-subtle)] font-bold uppercase">Daily Cash Flow</div>
-                  <div className="text-base font-black text-amber-500 mt-1">5% Every Day</div>
-                </div>
-
-                <div className="p-3.5 rounded-2xl bg-inner-panel text-center">
-                  <div className="text-[11px] text-[var(--text-subtle)] font-bold uppercase">Net ROI Profit</div>
-                  <div className="text-base font-black text-emerald-500 mt-1">40% Pure Gain</div>
-                </div>
-
-                <div className="p-3.5 rounded-2xl bg-inner-panel text-center">
-                  <div className="text-[11px] text-[var(--text-subtle)] font-bold uppercase">Re-Topup Facility</div>
-                  <div className="text-base font-black text-cyan-500 mt-1">Available Anytime</div>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-                <span className="text-xs text-[var(--text-muted)] flex items-center gap-2 font-medium">
-                  <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
-                  Zero forced direct referrals required to withdraw &bull; Min withdrawal $2 USDT &bull; Flat 10% admin charge
-                </span>
-                {isPrelaunch ? (
-                  <a
-                    href="#calculator"
-                    className="w-full sm:w-auto gold-btn px-8 py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2"
-                  >
-                    Calculate ROI Returns <ArrowRight className="w-4 h-4" />
-                  </a>
-                ) : (
-                  <Link
-                    href="/register"
-                    className="w-full sm:w-auto gold-btn px-8 py-3 rounded-xl text-sm font-bold flex items-center justify-center gap-2"
-                  >
-                    Join With $5 USDT <ArrowRight className="w-4 h-4" />
-                  </Link>
-                )}
-              </div>
-            </div>
-
-            {/* 10 Complete Packages from Slides 05-09 */}
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-6">
-                <h4 className="font-display text-xl font-bold text-[var(--text-main)]">
-                  All 10 Joining Tiers &bull; 28-Day Projections Matrix (Slide 09)
+                <h4 className="font-display text-xl font-black text-[var(--text-main)] mt-1">
+                  10% Bonus Wallet Utility On Every Stake
                 </h4>
-                <p className="text-xs text-[var(--text-subtle)]">
-                  Full transparent calculation of 7-Day, 14-Day, 28-Day gross payout &amp; net profit
+                <p className="text-xs sm:text-sm text-[var(--text-muted)] mt-1 max-w-2xl leading-relaxed">
+                  Community sign-up credits ($1.00 Self + $0.40/Level down 10 tiers) fund up to <strong>10% of any ID activation or compounding</strong>. The remaining 90% is funded in external USDT. Zero company bank-runs guaranteed!
                 </p>
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {basicPackages.map((pkg) => (
-                  <div
-                    key={pkg.amount}
-                    className={`glass-card p-5 rounded-2xl flex flex-col justify-between hover:-translate-y-1 transition duration-200 ${
-                      pkg.popular ? "border-amber-400/80 shadow-amber-500/10 shadow-lg ring-1 ring-amber-400/30" : ""
-                    }`}
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="text-xs font-bold text-amber-500 uppercase tracking-wider">
-                          {pkg.tier}
-                        </span>
-                        {pkg.qualifier && (
-                          <span className="px-2 py-0.5 rounded-full bg-cyan-500/20 text-cyan-500 text-[10px] font-black uppercase">
-                            12-Level Qualifier
-                          </span>
-                        )}
-                        {pkg.popular && (
-                          <span className="px-2 py-0.5 rounded-full bg-amber-400 text-slate-950 text-[10px] font-black uppercase">
-                            Most Popular
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="font-display text-3xl font-black text-[var(--text-main)]">
-                        ${pkg.amount} <span className="text-xs font-bold text-[var(--text-subtle)]">USDT BEP-20</span>
-                      </div>
-
-                      <div className="my-4 p-3.5 rounded-xl bg-inner-panel space-y-2 text-xs">
-                        <div className="flex justify-between">
-                          <span className="text-[var(--text-muted)]">Daily Yield (5%):</span>
-                          <span className="font-bold text-emerald-500 dark:text-emerald-400">
-                            ${pkg.dailyProfit.toFixed(2)} USDT
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-[var(--text-muted)]">7 Days Return:</span>
-                          <span className="font-semibold text-[var(--text-main)]">
-                            ${pkg.day7.toFixed(2)} USDT
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-[var(--text-muted)]">14 Days Return:</span>
-                          <span className="font-semibold text-[var(--text-main)]">
-                            ${pkg.day14.toFixed(2)} USDT
-                          </span>
-                        </div>
-                        <div className="flex justify-between pt-1 border-t border-[var(--border-subtle)]">
-                          <span className="text-[var(--text-main)] font-bold">28 Days Gross (140%):</span>
-                          <span className="font-black text-amber-500">
-                            ${pkg.gross.toFixed(2)} USDT
-                          </span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-emerald-500 font-bold">Net Profit (40%):</span>
-                          <span className="font-bold text-emerald-500">
-                            +${pkg.netProfit.toFixed(2)} USDT
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {isPrelaunch ? (
-                      <a
-                        href="#calculator"
-                        className="w-full py-2.5 rounded-xl border border-amber-500/30 hover:border-amber-400 text-amber-600 dark:text-amber-300 hover:bg-amber-400/10 text-xs font-bold text-center transition block"
-                      >
-                        Calculate ${pkg.amount} Returns
-                      </a>
-                    ) : (
-                      <Link
-                        href="/register"
-                        className="w-full py-2.5 rounded-xl border border-amber-500/30 hover:border-amber-400 text-amber-600 dark:text-amber-300 hover:bg-amber-400/10 text-xs font-bold text-center transition block"
-                      >
-                        Activate ${pkg.amount} Package
-                      </Link>
-                    )}
-                  </div>
-                ))}
-              </div>
+            </div>
+            <div className="flex sm:flex-col gap-2 shrink-0 text-center sm:text-right">
+              <span className="text-xs text-[var(--text-subtle)] font-mono">Minimum Entry</span>
+              <span className="text-2xl font-black text-cyan-400 font-mono">$2.00 USDT</span>
             </div>
           </div>
-        )}
+        </div>
 
-        {/* FIX DEPOSIT (FD) VIEW */}
-        {activePlanType === "fd" && (
-          <div className="animate-in fade-in duration-300">
-            <div className="text-center max-w-2xl mx-auto mb-8">
-              <span className="text-cyan-500 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest">
-                INSTITUTIONAL STAKING CONTRACTS &bull; SLIDES 12-14
+        {/* Strategy Explainer Box */}
+        {activeStrategy === "cashout" ? (
+          <div className="p-6 rounded-3xl bg-inner-panel border border-cyan-500/20 mb-10 text-xs sm:text-sm text-[var(--text-muted)] flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <TrendingUp className="w-5 h-5 text-cyan-400 shrink-0" />
+              <span>
+                <strong>Dynamic 4% Daily Formula:</strong> Capital Stake unlocks an instant 2X Contract Allocation Pool. Daily payout releases 2.00% of remaining pool balance ($100 stake ➔ Day 1 pays $4.00, exact 4.00% daily ROI). Continues until 100% of the 2X pool ($200.00) is extracted!
               </span>
-              <h3 className="font-display text-2xl sm:text-4xl font-black text-[var(--text-main)] mt-1">
-                Fix Deposit (FD) High-Yield Staking
-              </h3>
-              <p className="text-[var(--text-muted)] text-sm sm:text-base mt-2">
-                Lock your capital in premier liquidity pools for massive guaranteed multiplier returns.
-              </p>
-
-              {/* FD Switcher */}
-              <div className="inline-flex p-1 rounded-xl bg-[var(--bg-card)] border border-[var(--border-subtle)] mt-6 shadow-sm">
-                <button
-                  type="button"
-                  onClick={() => setFdActiveTenure(180)}
-                  className={`px-6 py-2 rounded-lg text-xs sm:text-sm font-bold transition ${
-                    fdActiveTenure === 180
-                      ? "bg-amber-400 text-slate-950 shadow font-black"
-                      : "text-[var(--text-muted)] hover:text-[var(--text-main)]"
-                  }`}
-                >
-                  FD Plan A: 10% Daily (180 Days &bull; 18X Return)
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setFdActiveTenure(210)}
-                  className={`px-6 py-2 rounded-lg text-xs sm:text-sm font-bold transition ${
-                    fdActiveTenure === 210
-                      ? "bg-emerald-500 text-slate-950 shadow font-black"
-                      : "text-[var(--text-muted)] hover:text-[var(--text-main)]"
-                  }`}
-                >
-                  FD Plan B (VIP): 15% Daily (210 Days &bull; 31.5X Return)
-                </button>
-              </div>
             </div>
-
-            {/* 180 Days Grid (Slide 13) */}
-            {fdActiveTenure === 180 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
-                {fd180Plans.map((pkg) => (
-                  <div
-                    key={pkg.amount}
-                    className={`glass-card p-6 rounded-2xl flex flex-col justify-between hover:-translate-y-1 transition ${
-                      pkg.popular ? "border-amber-400/80 shadow-amber-500/10 shadow-lg ring-1 ring-amber-400/30" : ""
-                    }`}
-                  >
-                    <div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-xs font-bold text-[var(--text-subtle)] uppercase">180 Days Contract</span>
-                        <span className="px-2 py-0.5 rounded bg-amber-400/20 text-amber-500 text-[10px] font-black">{pkg.mult} Return</span>
-                      </div>
-
-                      <div className="font-display text-3xl font-black text-amber-500 dark:text-amber-300">
-                        ${pkg.amount} <span className="text-xs font-bold text-[var(--text-subtle)]">USDT</span>
-                      </div>
-
-                      <div className="my-5 p-4 rounded-xl bg-inner-panel space-y-2 text-xs">
-                        <div className="flex justify-between">
-                          <span className="text-[var(--text-muted)]">Daily Return (10%):</span>
-                          <span className="font-bold text-[var(--text-main)]">${pkg.daily}.00 / day</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-[var(--text-muted)]">30 Days Profit:</span>
-                          <span className="font-semibold text-cyan-500">${pkg.m30.toLocaleString()} USDT</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-[var(--text-muted)]">90 Days Profit:</span>
-                          <span className="font-semibold text-cyan-500">${pkg.m90.toLocaleString()} USDT</span>
-                        </div>
-                        <div className="flex justify-between pt-1 border-t border-[var(--border-subtle)]">
-                          <span className="font-bold text-[var(--text-main)]">Total 180 Days (1,800%):</span>
-                          <span className="font-black text-emerald-500">${pkg.total.toLocaleString()} USDT</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {isPrelaunch ? (
-                      <a
-                        href="#calculator"
-                        className="w-full py-2.5 rounded-xl border border-amber-500/30 text-amber-600 dark:text-amber-300 hover:bg-amber-400/10 text-xs font-bold text-center transition block"
-                      >
-                        Calculate ${pkg.amount} Plan
-                      </a>
-                    ) : (
-                      <Link
-                        href="/register"
-                        className="w-full py-2.5 rounded-xl border border-amber-500/30 text-amber-600 dark:text-amber-300 hover:bg-amber-400/10 text-xs font-bold text-center transition block"
-                      >
-                        Choose ${pkg.amount} Plan
-                      </Link>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* 210 Days Grid (Slide 14) */}
-            {fdActiveTenure === 210 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
-                {fd210Plans.map((pkg) => (
-                  <div
-                    key={pkg.amount}
-                    className={`glass-card p-6 rounded-2xl flex flex-col justify-between hover:-translate-y-1 transition ${
-                      pkg.popular ? "border-emerald-400/80 shadow-emerald-500/10 shadow-lg ring-1 ring-emerald-400/30" : ""
-                    }`}
-                  >
-                    <div>
-                      <div className="flex justify-between items-center mb-2">
-                        <span className="text-xs font-bold text-[var(--text-subtle)] uppercase">210 Days VIP Contract</span>
-                        <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-500 text-[10px] font-black">{pkg.mult} Return</span>
-                      </div>
-
-                      <div className="font-display text-3xl font-black text-emerald-500 dark:text-emerald-400">
-                        ${pkg.amount} <span className="text-xs font-bold text-[var(--text-subtle)]">USDT</span>
-                      </div>
-
-                      <div className="my-5 p-4 rounded-xl bg-inner-panel space-y-2 text-xs">
-                        <div className="flex justify-between">
-                          <span className="text-[var(--text-muted)]">Daily Return (15%):</span>
-                          <span className="font-bold text-[var(--text-main)]">${pkg.daily}.00 / day</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-[var(--text-muted)]">30 Days Profit:</span>
-                          <span className="font-semibold text-cyan-500">${pkg.m30.toLocaleString()} USDT</span>
-                        </div>
-                        <div className="flex justify-between">
-                          <span className="text-[var(--text-muted)]">90 Days Profit:</span>
-                          <span className="font-semibold text-cyan-500">${pkg.m90.toLocaleString()} USDT</span>
-                        </div>
-                        <div className="flex justify-between pt-1 border-t border-[var(--border-subtle)]">
-                          <span className="font-bold text-[var(--text-main)]">Total 210 Days (3,150%):</span>
-                          <span className="font-black text-emerald-500">${pkg.total.toLocaleString()} USDT</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {isPrelaunch ? (
-                      <a
-                        href="#calculator"
-                        className="w-full py-2.5 rounded-xl border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-400/10 text-xs font-bold text-center transition block"
-                      >
-                        Calculate ${pkg.amount} VIP Plan
-                      </a>
-                    ) : (
-                      <Link
-                        href="/register"
-                        className="w-full py-2.5 rounded-xl border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-400/10 text-xs font-bold text-center transition block"
-                      >
-                        Choose ${pkg.amount} VIP Plan
-                      </Link>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
+            <span className="px-3 py-1 rounded-full bg-cyan-500/10 text-cyan-400 font-mono font-bold shrink-0">
+              Dual Perspective Math
+            </span>
+          </div>
+        ) : (
+          <div className="p-6 rounded-3xl bg-inner-panel border border-emerald-500/20 mb-10 text-xs sm:text-sm text-[var(--text-muted)] flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <RefreshCw className="w-5 h-5 text-emerald-400 shrink-0" />
+              <span>
+                <strong>The 35-Day Compounding Engine:</strong> Reinvesting 2% daily pool returns doubles your principal in exactly 35 days: <code className="text-emerald-400 font-bold">(1.02)^35 ≈ 2.000</code>. At 2X, the <strong>2X Cap Lock Rule</strong> engages: execute 1 withdrawal to resume and unlock up to <strong>~400% (4X) Total Extraction</strong>!
+              </span>
+            </div>
+            <span className="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 font-mono font-bold shrink-0">
+              4X Profit Potential
+            </span>
           </div>
         )}
+
+        {/* Audited Benchmark Cards Grid (Slides 07 & 12) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 mb-14">
+          {benchmarks.map((b) => (
+            <div
+              key={b.stake}
+              className={`glass-card p-5 rounded-3xl flex flex-col justify-between relative transition duration-200 hover:-translate-y-1 ${
+                b.featured ? "border-cyan-400 shadow-lg shadow-cyan-500/15" : "border-cyan-500/30"
+              }`}
+            >
+              {b.featured && (
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-0.5 rounded-full bg-cyan-400 text-slate-950 text-[10px] font-black uppercase tracking-wider shadow-sm font-mono">
+                  {b.tag}
+                </div>
+              )}
+
+              <div>
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-[11px] font-bold text-cyan-400 uppercase tracking-wider font-mono">
+                    {b.tier}
+                  </span>
+                  {!b.featured && (
+                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-slate-800 text-[var(--text-subtle)] font-mono font-semibold">
+                      {b.tag}
+                    </span>
+                  )}
+                </div>
+
+                <div className="font-display text-3xl font-black text-[var(--text-main)] mb-1">
+                  ${b.stake.toLocaleString()}
+                  <span className="text-xs font-semibold text-[var(--text-subtle)] font-mono ml-1">USDT</span>
+                </div>
+
+                <div className="p-3 rounded-xl bg-inner-panel border border-[var(--border-subtle)] mb-4 text-xs space-y-1.5">
+                  <div className="flex justify-between">
+                    <span className="text-[var(--text-subtle)]">Bonus (10%):</span>
+                    <span className="font-mono font-bold text-amber-400">-${b.bonusUtility.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-[var(--text-subtle)]">External USDT:</span>
+                    <span className="font-mono font-bold text-cyan-400">${b.usdtRequired.toFixed(2)}</span>
+                  </div>
+                </div>
+
+                <div className="space-y-2 text-xs border-t border-[var(--border-subtle)] pt-3 mb-4">
+                  <div className="flex justify-between">
+                    <span className="text-[var(--text-muted)]">2X Pool Unlocked:</span>
+                    <span className="font-mono font-bold text-cyan-400">${b.pool.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-[var(--text-muted)]">Day 1 Payout (4%):</span>
+                    <span className="font-mono font-bold text-emerald-400">${b.day1Roi.toFixed(2)}/day</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-[var(--text-muted)]">Active Tenure:</span>
+                    <span className="font-mono font-bold text-[var(--text-main)]">{b.duration}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-[var(--text-muted)]">Total Extracted:</span>
+                    <span className="font-mono font-bold text-cyan-300">${b.totalExtracted.toFixed(2)}</span>
+                  </div>
+                </div>
+              </div>
+
+              <Link
+                href="/register"
+                className={`w-full py-2.5 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition ${
+                  b.featured
+                    ? "crypto-btn text-slate-950 font-black shadow-md"
+                    : "crypto-btn-secondary"
+                }`}
+              >
+                Stake ${b.stake} <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          ))}
+        </div>
+
+        {/* Bottom Highlights & Rules Badges */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-4xl mx-auto text-center text-xs">
+          <div className="p-4 rounded-2xl bg-[var(--bg-card)] border border-cyan-500/20">
+            <span className="font-bold text-cyan-400 block mb-1">Zero Lock On Earnings</span>
+            <span className="text-[var(--text-subtle)]">ROI and Working Wallets are 100% withdrawable with minimum $2.00 cashout.</span>
+          </div>
+          <div className="p-4 rounded-2xl bg-[var(--bg-card)] border border-cyan-500/20">
+            <span className="font-bold text-cyan-400 block mb-1">Free Internal P2P</span>
+            <span className="text-[var(--text-subtle)]">Instant 0% fee peer-to-peer transfers from Working Wallet to any member.</span>
+          </div>
+          <div className="p-4 rounded-2xl bg-[var(--bg-card)] border border-cyan-500/20">
+            <span className="font-bold text-cyan-400 block mb-1">Triple-Isolated Solvency</span>
+            <span className="text-[var(--text-subtle)]">Non-withdrawable Bonus Wallet ensures permanent company liquidity protection.</span>
+          </div>
+        </div>
       </div>
     </section>
   );

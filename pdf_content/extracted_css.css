@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dubai Finance - Business Presentation (DARK)</title>
+<style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@700;900&display=swap');
+
+    @page {
+        size: 1920px 1080px;
+        margin: 0;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Plus Jakarta Sans', sans-serif;
+        background-color: #070B12;
+        color: #FFFFFF;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .slide {
+        width: 1920px;
+        height: 1080px;
+        page-break-after: always;
+        page-break-inside: avoid;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(180deg, #0B111D 0%, #060911 100%);
+        padding: 50px 80px 40px 80px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* Header */
+    .slide-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid rgba(245, 158, 11, 0.25);
+        padding-bottom: 16px;
+        margin-bottom: 20px;
+        height: 68px;
+    }
+
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .header-logo-img {
+        height: 48px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    .logo-text {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 28px;
+        font-weight: 900;
+        letter-spacing: 2px;
+        color: #F59E0B;
+    }
+
+    .header-badge {
+        background: rgba(245, 158, 11, 0.15);
+        border: 1.5px solid #F59E0B;
+        color: #FDE68A;
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        padding: 8px 24px;
+        border-radius: 999px;
+    }
+
+    /* Footer */
+    .slide-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-top: 2px solid rgba(245, 158, 11, 0.25);
+        padding-top: 14px;
+        margin-top: 16px;
+        height: 46px;
+    }
+
+    .footer-left {
+        font-size: 16px;
+        font-weight: 700;
+        color: #94A3B8;
+        letter-spacing: 0.5px;
+    }
+
+    .footer-right {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 16px;
+        font-weight: 800;
+        color: #F59E0B;
+        background: rgba(245, 158, 11, 0.15);
+        padding: 4px 16px;
+        border-radius: 8px;
+        border: 1.5px solid #F59E0B;
+    }
+
+    /* Main Content Area */
+    .slide-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* Typography */
+    .category-title {
+        color: #F59E0B;
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: 2.5px;
+        text-transform: uppercase;
+        margin-bottom: 8px;
+    }
+
+    .main-title {
+        font-family: 'Space Grotesk', sans-serif;
+        font-size: 48px;
+        font-weight: 900;
+        color: #FFFFFF;
+        line-height: 1.15;
+        margin-bottom: 8px;
+    }
+
+    .subtitle {
+        font-size: 21px;
+        color: #94A3B8;
+        margin-bottom: 24px;
+        line-height: 1.4;
+        font-weight: 600;
+    }
+
+    /* Cards */
+    .card {
+        background: #0F172A;
+        border: 2px solid rgba(245, 158, 11, 0.4);
+        border-radius: 20px;
+        padding: 26px 28px;
+        position: relative;
+    }
+
+    .card-gold {
+        background: #161F33;
+        border: 2px solid #F59E0B;
+    }
+
+    .card-vip {
+        background: #1A233D;
+        border: 2px solid #F59E0B;
+    }
+
+    /* Grids */
+    .grid-2 {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 28px;
+    }
+
+    .grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+    }
+
+    .grid-4 {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 22px;
+    }
+
+    .grid-5 {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 18px;
+    }
+
+    /* Tables */
+    .custom-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        border-radius: 18px;
+        overflow: hidden;
+        border: 2px solid rgba(245, 158, 11, 0.35);
+    }
+
+    .custom-table th {
+        background: #1E293B;
+        color: #F59E0B;
+        padding: 16px 20px;
+        font-size: 19px;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        border-bottom: 2px solid rgba(245, 158, 11, 0.35);
+        text-align: left;
+    }
+
+    .custom-table td {
+        background: rgba(15, 23, 42, 0.85);
+        padding: 13px 20px;
+        font-size: 19px;
+        font-weight: 700;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        color: #FFFFFF;
+    }
+
+    .custom-table tr:last-child td {
+        border-bottom: none;
+    }
+
+    /* Buttons & Badges */
+    .btn-primary {
+        background: linear-gradient(135deg, #E11D48, #BE123C);
+        color: #FFFFFF;
+        font-size: 22px;
+        font-weight: 800;
+        padding: 16px 36px;
+        border-radius: 16px;
+        display: inline-block;
+    }
+
+    .btn-gold {
+        background: linear-gradient(135deg, #F59E0B, #D97706);
+        color: #030712;
+        font-size: 24px;
+        font-weight: 900;
+        padding: 18px 44px;
+        border-radius: 16px;
+        display: inline-block;
+    }
+
+    .visual-box {
+        border-radius: 22px;
+        overflow: hidden;
+        border: 2px solid rgba(245, 158, 11, 0.4);
+        height: 520px;
+        position: relative;
+    }
+
+    .visual-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    
+</style>

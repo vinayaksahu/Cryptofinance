@@ -213,12 +213,12 @@ export function CountdownBanner({
                 </div>
 
                 {/* Grand Headline */}
-                <h3 className="font-display text-2xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-300 via-yellow-200 to-amber-400 tracking-tight leading-tight max-w-2xl">
-                  WELCOME TO DUBAI FINANCE
+                <h3 className="font-display text-2xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-200 to-amber-300 tracking-tight leading-tight max-w-2xl">
+                  WELCOME TO CRYPTO FINANCE
                 </h3>
 
                 <p className="text-xs sm:text-sm text-slate-300 mt-3 max-w-xl leading-relaxed">
-                  The institutional USDT (BEP-20) wealth protocol is fully unlocked. Public member registrations, contract activations, and daily 5% ROI liquidity are now active worldwide.
+                  The quantitative algo &amp; DeFi arbitrage yield protocol is fully unlocked. Public registrations, 2X allocation contracts, and dynamic 4% daily yield liquidity are now active worldwide.
                 </p>
 
                 {/* Big Action Buttons (Register & Login) */}

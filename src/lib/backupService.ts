@@ -94,11 +94,11 @@ export async function getFullDatabaseDump(): Promise<DatabaseBackupPayload> {
 
   return {
     metadata: {
-      platform: "Dubai Finance",
+      platform: "Crypto Finance",
       version: "1.0.0",
       exportedAt: new Date().toISOString(),
       totalRecords,
-      schema: "dubaifinance",
+      schema: "cryptofinance",
       tableCounts,
     },
     data: {

@@ -1,0 +1,1461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Crypto Finance Presentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800;900&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+@page {
+    size: 1920px 1080px;
+    margin: 0;
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: #020614;
+    color: #F8FAFC;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+.slide {
+    width: 1920px;
+    height: 1080px;
+    page-break-after: always;
+    position: relative;
+    overflow: hidden;
+    background: radial-gradient(circle at 50% 10%, #0B1936 0%, #03081A 60%, #01040E 100%);
+    padding: 70px 90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.bg-grid {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(to right, rgba(0, 210, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(0, 210, 255, 0.035) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+}
+.frame {
+    position: absolute;
+    inset: 30px;
+    border: 1.5px solid rgba(255, 215, 0, 0.3);
+    border-radius: 20px;
+    pointer-events: none;
+}
+.slide-num {
+    position: absolute;
+    top: 24px;
+    left: 42px;
+    background: #01040E;
+    border: 1.5px solid #FFD700;
+    padding: 4px 18px;
+    border-radius: 8px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #FFD700;
+    letter-spacing: 2px;
+    z-index: 10;
+}
+.slide-header {
+    position: relative;
+    z-index: 5;
+    margin-top: 10px;
+}
+.slide-title {
+    font-family: 'Cinzel', serif;
+    font-size: 58px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #FFD700;
+    text-transform: uppercase;
+}
+.title-line {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+.diamonds {
+    color: #FFD700;
+    font-size: 16px;
+    letter-spacing: 4px;
+}
+.bar {
+    height: 2px;
+    width: 220px;
+    background: linear-gradient(90deg, #FFD700, transparent);
+}
+.slide-desc {
+    font-size: 32px;
+    font-weight: 500;
+    color: #94A3B8;
+    line-height: 1.4;
+}
+.slide-body {
+    position: relative;
+    z-index: 5;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 25px 0 15px 0;
+}
+.footer-ticker {
+    position: relative;
+    z-index: 5;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 6px;
+    color: #64748B;
+    text-transform: uppercase;
+}
+.footer-ticker span {
+    color: #FFD700;
+    margin: 0 10px;
+}
+.card {
+    background: #061330;
+    border: 2px solid rgba(255, 215, 0, 0.35);
+    border-radius: 20px;
+    padding: 38px 42px;
+    position: relative;
+}
+.card-cyan {
+    background: #041738;
+    border-color: rgba(0, 210, 255, 0.45);
+}
+.card-emerald {
+    background: #031D2A;
+    border-color: rgba(0, 255, 163, 0.45);
+}
+.card-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 38px;
+    font-weight: 800;
+    color: #FFD700;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+.card-text {
+    font-size: 30px;
+    font-weight: 500;
+    color: #CBD5E1;
+    line-height: 1.6;
+    margin-top: 14px;
+}
+.pill-badge {
+    display: inline-block;
+    padding: 8px 24px;
+    border-radius: 999px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+.pill-gold {
+    background: rgba(255, 215, 0, 0.12);
+    border: 1.5px solid #FFD700;
+    color: #FFD700;
+}
+.pill-cyan {
+    background: rgba(0, 210, 255, 0.12);
+    border: 1.5px solid #00D2FF;
+    color: #00D2FF;
+}
+.pill-emerald {
+    background: rgba(0, 255, 163, 0.12);
+    border: 1.5px solid #00FFA3;
+    color: #00FFA3;
+}
+.data-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    border-radius: 18px;
+    overflow: hidden;
+    background: #040D24;
+}
+.data-table th {
+    background: #08173B;
+    color: #FFD700;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    padding: 24px 30px;
+    text-align: left;
+    border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+    letter-spacing: 1px;
+}
+.data-table td {
+    padding: 22px 30px;
+    font-size: 30px;
+    font-weight: 600;
+    color: #E2E8F0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.data-table tr:last-child td {
+    border-bottom: none;
+}
+</style>
+</head>
+<body>
+
+<!-- ==========================================
+     SLIDE 01: COVER
+=============================================== -->
+<div class="slide" style="justify-content: center; align-items: center; text-align: center; padding: 60px;">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">01</div>
+
+    <div style="display: flex; align-items: center; justify-content: center; gap: 80px; width: 100%; max-width: 1700px;">
+        <div style="flex-shrink: 0;">
+            <img src="file:///c:/Users/user/Desktop/CryptoFinance/pdf_content/assets/crypto_finance_coin_3d_light.jpg" style="width: 480px; height: 480px; object-fit: contain; border-radius: 36px; border: 2px solid rgba(255, 215, 0, 0.5);" alt="Crypto Finance Coin">
+        </div>
+
+        <div style="text-align: left; max-width: 1050px;">
+            <div style="display: flex; gap: 16px; margin-bottom: 20px;">
+                <div class="pill-badge pill-gold" style="font-size: 24px; padding: 10px 28px;">DECENTRALIZED PROTOCOL</div>
+                <div class="pill-badge pill-cyan" style="font-size: 24px; padding: 10px 28px;">DYNAMIC 4% DAILY YIELD</div>
+            </div>
+
+            <h1 style="font-family: 'Cinzel', serif; font-size: 88px; font-weight: 900; color: #FFD700; letter-spacing: 3px; line-height: 1.1;">
+                CRYPTO FINANCE
+            </h1>
+
+            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 800; color: #00D2FF; margin-top: 14px; letter-spacing: 2px;">
+                QUANTITATIVE ALGO & DEFI ARBITRAGE
+            </div>
+
+            <div style="display: inline-block; background: rgba(2, 6, 20, 0.9); border: 2px solid #FFD700; border-radius: 999px; padding: 10px 36px; margin: 24px 0;">
+                <span style="font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 800; color: #FFF; letter-spacing: 3px;">
+                    TRADE &nbsp;•&nbsp; <span style="color: #FFD700;">COMPOUND</span> &nbsp;•&nbsp; <span style="color: #00FFA3;">SOVEREIGNTY</span>
+                </span>
+            </div>
+
+            <p style="font-size: 34px; color: #CBD5E1; line-height: 1.55; max-width: 1000px;">
+                Next-generation quantitative wealth protocol engineered for mathematical certainty, sustainable 4% daily yields, and triple-isolated liquidity.
+            </p>
+
+            <div style="display: flex; gap: 24px; margin-top: 32px;">
+                <div style="background: rgba(0, 255, 163, 0.1); border: 2px solid #00FFA3; border-radius: 14px; padding: 16px 28px;">
+                    <div style="font-size: 28px; font-weight: 800; color: #00FFA3;">4% DAILY ROI</div>
+                    <div style="font-size: 20px; color: #94A3B8; margin-top: 4px;">2% Daily from 2X Pool</div>
+                </div>
+                <div style="background: rgba(0, 210, 255, 0.1); border: 2px solid #00D2FF; border-radius: 14px; padding: 16px 28px;">
+                    <div style="font-size: 28px; font-weight: 800; color: #00D2FF;">3-WALLET ENGINE</div>
+                    <div style="font-size: 20px; color: #94A3B8; margin-top: 4px;">Zero Liquidity Leakage</div>
+                </div>
+                <div style="background: rgba(255, 215, 0, 0.1); border: 2px solid #FFD700; border-radius: 14px; padding: 16px 28px;">
+                    <div style="font-size: 28px; font-weight: 800; color: #FFD700;">BINANCE CHAIN</div>
+                    <div style="font-size: 20px; color: #94A3B8; margin-top: 4px;">BEP-20 Web3 Smart Contract</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-ticker" style="margin-top: 40px;">
+        TRADE <span>•</span> COMPOUND <span>•</span> GROW TOGETHER
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 02: ABOUT
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">02</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">ABOUT CRYPTO FINANCE</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Pioneering algorithmic quantitative arbitrage and autonomous liquidity protocols.</div>
+    </div>
+
+    <div class="slide-body">
+        <div class="card" style="padding: 56px 60px;">
+            <div class="card-title" style="margin-bottom: 24px;">
+                <span style="font-size: 44px;">🌐</span>
+                <span>INSTITUTIONAL QUANTITATIVE EXCELLENCE</span>
+            </div>
+            <p class="card-text" style="font-size: 34px; line-height: 1.65;">
+                <strong style="color: #FFD700;">Crypto Finance</strong> is an elite decentralized quantitative ecosystem operating high-frequency algorithmic arbitrage across major blockchain liquidity venues.
+            </p>
+            <p class="card-text" style="font-size: 34px; line-height: 1.65; margin-top: 24px;">
+                By combining automated mathematical precision with smart contract safeguards, we deliver reliable <strong style="color: #00FFA3;">4.00% daily yields</strong> (via 2% daily release from your 2X contract allocation pool) while completely shielding capital from market volatility.
+            </p>
+            <div style="display: flex; gap: 24px; margin-top: 36px;">
+                <div class="pill-badge pill-gold">100% ON-CHAIN TRANSPARENCY</div>
+                <div class="pill-badge pill-cyan">ZERO EMOTIONAL TRADING</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        INNOVATION <span>•</span> MATHEMATICAL PRECISION <span>•</span> WEB3 DEFI
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 03: CORPORATE LEADERSHIP & SWISS HQ
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">03</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">CORPORATE LEADERSHIP & SWISS HQ</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Institutional governance, certified executive leadership, and physical corporate presence.</div>
+    </div>
+
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 45px;">
+            <div class="card" style="padding: 48px;">
+                <div class="pill-badge pill-gold" style="font-size: 20px; margin-bottom: 20px;">MANAGING LEADERSHIP</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 46px; font-weight: 900; color: #FFF;">
+                    Mr. Alex Rivera
+                </div>
+                <div style="font-size: 28px; font-weight: 700; color: #00FFA3; margin: 8px 0 20px 0;">
+                    Chairman & Managing Director (CMD)
+                </div>
+                <p class="card-text" style="font-size: 30px; line-height: 1.6;">
+                    Veteran quantitative architect and FinTech strategist with over 15 years directing algorithmic trading desks across Zurich, London, and Singapore.
+                </p>
+            </div>
+
+            <div class="card card-cyan" style="padding: 48px;">
+                <div class="pill-badge pill-cyan" style="font-size: 20px; margin-bottom: 20px;">GLOBAL HEADQUARTERS</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 46px; font-weight: 900; color: #FFF;">
+                    Crypto Valley Tower
+                </div>
+                <div style="font-size: 28px; font-weight: 700; color: #00D2FF; margin: 8px 0 20px 0;">
+                    Zug, Switzerland
+                </div>
+                <p class="card-text" style="font-size: 30px; line-height: 1.6;">
+                    Headquartered in the world's premier digital finance and blockchain jurisdiction, operating under rigorous Swiss FinTech regulatory standards.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        SWISS JURISDICTION <span>•</span> EXECUTIVE INTEGRITY <span>•</span> GLOBAL COMPLIANCE
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 04: 3-WALLET ARCHITECTURE
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">04</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">3-WALLET ECOSYSTEM OVERVIEW</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Triple-isolated ledgers designed to eliminate bank-run risks and guarantee solvency.</div>
+    </div>
+
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px;">
+            <div class="card" style="padding: 40px 36px; border-color: #FFD700;">
+                <div class="pill-badge pill-gold" style="font-size: 18px;">NON-WITHDRAWABLE</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 900; color: #FFD700; margin: 18px 0 12px 0;">
+                    BONUS WALLET
+                </div>
+                <p class="card-text" style="font-size: 28px; line-height: 1.55;">
+                    Holds free community signup bonuses: <strong>$1.00 Self</strong> + <strong>$0.40/Level</strong> across 10 referral tiers.
+                </p>
+                <div style="margin-top: 20px; font-size: 24px; font-weight: 700; color: #FFD700;">
+                    ★ Utility: Funds up to 10% of any activation or compounding!
+                </div>
+            </div>
+
+            <div class="card card-emerald" style="padding: 40px 36px;">
+                <div class="pill-badge pill-emerald" style="font-size: 18px;">100% WITHDRAWABLE</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 900; color: #00FFA3; margin: 18px 0 12px 0;">
+                    ROI WALLET
+                </div>
+                <p class="card-text" style="font-size: 28px; line-height: 1.55;">
+                    Receives your automated <strong>4.00% daily returns</strong> (2% daily from 2X pool) whenever you select withdrawal mode.
+                </p>
+                <div style="margin-top: 20px; font-size: 24px; font-weight: 700; color: #00FFA3;">
+                    ★ Cashout: Direct to BEP-20 USDT with minimum $2.00!
+                </div>
+            </div>
+
+            <div class="card card-cyan" style="padding: 40px 36px;">
+                <div class="pill-badge pill-cyan" style="font-size: 18px;">100% WITHDRAWABLE</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 900; color: #00D2FF; margin: 18px 0 12px 0;">
+                    WORKING WALLET
+                </div>
+                <p class="card-text" style="font-size: 28px; line-height: 1.55;">
+                    Collects all network earnings: <strong>10% Direct Referral</strong>, <strong>10-Level Daily Team Royalty</strong>, and <strong>Milestone Rank Rewards</strong>.
+                </p>
+                <div style="margin-top: 20px; font-size: 24px; font-weight: 700; color: #00D2FF;">
+                    ★ Zero Lock: Instant withdrawal anytime with min $2.00!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        ISOLATED LIQUIDITY <span>•</span> MATHEMATICAL SOLVENCY <span>•</span> ZERO DEFICIT
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 05: FREE REGISTRATION REWARDS
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">05</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">FREE REGISTRATION REWARDS</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Zero barrier entry with instant welcome credits for every member and network builder.</div>
+    </div>
+
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 45px;">
+            <div class="card" style="padding: 50px 45px; text-align: center;">
+                <div class="pill-badge pill-gold" style="font-size: 20px;">WELCOME GIFT</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 38px; font-weight: 900; color: #FFF; margin: 16px 0 10px 0;">
+                    FREE SELF SIGNUP BONUS
+                </div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 96px; font-weight: 900; color: #FFD700; margin: 10px 0;">
+                    $1.00 <span style="font-size: 36px; color: #CBD5E1;">USDT</span>
+                </div>
+                <p class="card-text" style="font-size: 32px; line-height: 1.6;">
+                    Instant credit directly loaded into your <strong>Bonus Wallet</strong> upon verified registration.
+                </p>
+            </div>
+
+            <div class="card card-cyan" style="padding: 50px 45px; text-align: center;">
+                <div class="pill-badge pill-cyan" style="font-size: 20px;">VIRAL GROWTH</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 38px; font-weight: 900; color: #FFF; margin: 16px 0 10px 0;">
+                    10-LEVEL TEAM SIGNUP BONUS
+                </div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 96px; font-weight: 900; color: #00D2FF; margin: 10px 0;">
+                    $0.40 <span style="font-size: 36px; color: #CBD5E1;">/ LEVEL</span>
+                </div>
+                <p class="card-text" style="font-size: 32px; line-height: 1.6;">
+                    Earn <strong>$0.40 USDT</strong> in Bonus Wallet for every single registration down 10 complete tiers!
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        COMMUNITY INCENTIVES <span>•</span> ZERO ENTRY BARRIER <span>•</span> EXPONENTIAL GROWTH
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 06: 10% BONUS UTILITY RULE
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">06</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">10% BONUS UTILITY RULE</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Bonus Wallet funds up to 10% of any ID activation or compounding transaction.</div>
+    </div>
+
+    <div class="slide-body">
+        <div class="card" style="padding: 50px 56px;">
+            <div class="card-title" style="margin-bottom: 24px;">
+                <span style="font-size: 44px;">⚖️</span>
+                <span>HOW THE 10% UTILITY PROTOCOL OPERATES</span>
+            </div>
+            <p class="card-text" style="font-size: 34px; line-height: 1.65;">
+                Whenever an investor activates a new account or executes compounding, they can use up to <strong style="color: #FFD700;">10% from their Bonus Wallet</strong>.
+            </p>
+            <p class="card-text" style="font-size: 34px; line-height: 1.65; margin-top: 20px;">
+                The remaining <strong style="color: #00FFA3;">90% is funded in external USDT (BEP-20)</strong>. This transforms promotional community credits into real working capital while preserving liquidity!
+            </p>
+            <div style="background: #020614; border: 2px solid #00D2FF; border-radius: 16px; padding: 26px 36px; margin-top: 30px; font-family: 'Space Grotesk', sans-serif; font-size: 32px; color: #FFF; font-weight: 800;">
+                ★ Golden Liquidity Protection: <span style="color: #00D2FF;">Bonus Wallet is non-withdrawable</span>, guaranteeing zero company bank-runs!
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        TOKEN UTILITY <span>•</span> LIQUIDITY SAFEGUARD <span>•</span> SOLVENCY
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 07: ACTIVATION & COMPOUNDING EXAMPLES
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">07</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">ACTIVATION & COMPOUNDING EXAMPLES</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Exact mathematical breakdown illustrating the 10% Bonus + 90% USDT structure.</div>
+    </div>
+
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px;">
+            <div class="card" style="padding: 40px 36px; text-align: center;">
+                <div class="pill-badge pill-gold" style="font-size: 18px;">MIN ENTRY</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 72px; font-weight: 900; color: #FFD700; margin: 16px 0;">
+                    $2.00
+                </div>
+                <div style="background: #020614; border-radius: 12px; padding: 18px; margin-top: 10px;">
+                    <div style="font-size: 26px; color: #94A3B8;">Bonus Wallet (10%)</div>
+                    <div style="font-size: 32px; font-weight: 900; color: #FFD700; margin: 4px 0;">$0.20</div>
+                    <div style="font-size: 26px; color: #94A3B8; margin-top: 10px;">External USDT (90%)</div>
+                    <div style="font-size: 32px; font-weight: 900; color: #00FFA3; margin-top: 4px;">$1.80</div>
+                </div>
+            </div>
+
+            <div class="card card-cyan" style="padding: 40px 36px; text-align: center;">
+                <div class="pill-badge pill-cyan" style="font-size: 18px;">GROWTH ENTRY</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 72px; font-weight: 900; color: #00D2FF; margin: 16px 0;">
+                    $20.00
+                </div>
+                <div style="background: #020614; border-radius: 12px; padding: 18px; margin-top: 10px;">
+                    <div style="font-size: 26px; color: #94A3B8;">Bonus Wallet (10%)</div>
+                    <div style="font-size: 32px; font-weight: 900; color: #FFD700; margin: 4px 0;">$2.00</div>
+                    <div style="font-size: 26px; color: #94A3B8; margin-top: 10px;">External USDT (90%)</div>
+                    <div style="font-size: 32px; font-weight: 900; color: #00FFA3; margin-top: 4px;">$18.00</div>
+                </div>
+            </div>
+
+            <div class="card card-emerald" style="padding: 40px 36px; text-align: center;">
+                <div class="pill-badge pill-emerald" style="font-size: 18px;">CORE ENTRY</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 72px; font-weight: 900; color: #00FFA3; margin: 16px 0;">
+                    $100.00
+                </div>
+                <div style="background: #020614; border-radius: 12px; padding: 18px; margin-top: 10px;">
+                    <div style="font-size: 26px; color: #94A3B8;">Bonus Wallet (10%)</div>
+                    <div style="font-size: 32px; font-weight: 900; color: #FFD700; margin: 4px 0;">$10.00</div>
+                    <div style="font-size: 26px; color: #94A3B8; margin-top: 10px;">External USDT (90%)</div>
+                    <div style="font-size: 32px; font-weight: 900; color: #00FFA3; margin-top: 4px;">$90.00</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        FAIR UTILITY <span>•</span> SUBSTANTIAL SAVINGS <span>•</span> ZERO PACKAGES
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 08: WITHDRAWABLE WALLETS & FREEDOM
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">08</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">WITHDRAWABLE WALLETS & FREEDOM</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">100% financial control with automated Web3 payouts and zero-fee P2P transfers.</div>
+    </div>
+
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 45px;">
+            <div class="card card-emerald" style="padding: 48px;">
+                <div class="card-title" style="color: #00FFA3; margin-bottom: 20px;">
+                    <span style="font-size: 40px;">⚡</span>
+                    <span>ROI WALLET RULES</span>
+                </div>
+                <p class="card-text" style="font-size: 32px; line-height: 1.6;">
+                    Directly receives your daily <strong>4.00% returns (2% daily decaying from 2X pool)</strong> whenever you select Withdrawal.
+                </p>
+                <div style="background: #020614; border-radius: 14px; padding: 22px; margin-top: 24px; border-left: 5px solid #00FFA3;">
+                    <div style="font-size: 28px; font-weight: 800; color: #FFF;">Minimum Cashout: <span style="color: #00FFA3;">$2.00 USDT</span></div>
+                    <div style="font-size: 28px; font-weight: 800; color: #FFF; margin-top: 10px;">Flat 10% System Liquidity Fee</div>
+                </div>
+            </div>
+
+            <div class="card card-cyan" style="padding: 48px;">
+                <div class="card-title" style="color: #00D2FF; margin-bottom: 20px;">
+                    <span style="font-size: 40px;">💼</span>
+                    <span>WORKING WALLET RULES</span>
+                </div>
+                <p class="card-text" style="font-size: 32px; line-height: 1.6;">
+                    Accumulates all <strong>Direct Bonuses</strong>, <strong>Team Royalties</strong>, and <strong>Rank Rewards</strong>.
+                </p>
+                <div style="background: #020614; border-radius: 14px; padding: 22px; margin-top: 24px; border-left: 5px solid #00D2FF;">
+                    <div style="font-size: 28px; font-weight: 800; color: #FFF;">Minimum Cashout: <span style="color: #00D2FF;">$2.00 USDT</span></div>
+                    <div style="font-size: 28px; font-weight: 800; color: #FFF; margin-top: 10px;">Free Instant Internal P2P Transfers</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        AUTONOMOUS PAYOUTS <span>•</span> REAL-TIME WITHDRAWALS <span>•</span> ZERO LOCKUPS
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 09: STAKE ALLOCATION STRUCTURE
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">09</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">STAKE ALLOCATION STRUCTURE</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Disciplined capital deployment balancing high-yield arbitrage with automated liquidity buffers.</div>
+    </div>
+
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 35px;">
+            <div class="card" style="padding: 44px 36px; text-align: center;">
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 88px; font-weight: 900; color: #FFD700;">60%</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 900; color: #FFF; margin: 12px 0 16px 0;">QUANT ARBITRAGE</div>
+                <p class="card-text" style="font-size: 30px; line-height: 1.55;">Deployed across multi-exchange AI arbitrage bots and triangular liquidity spreads.</p>
+                <div class="pill-badge pill-gold" style="margin-top: 24px; font-size: 19px;">PROVEN REVENUE</div>
+            </div>
+
+            <div class="card card-cyan" style="padding: 44px 36px; text-align: center;">
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 88px; font-weight: 900; color: #00D2FF;">35%</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 900; color: #FFF; margin: 12px 0 16px 0;">LIQUIDITY RESERVE</div>
+                <p class="card-text" style="font-size: 30px; line-height: 1.55;">Locked in smart contracts to guarantee instant 24/7 user cashouts and solvency.</p>
+                <div class="pill-badge pill-cyan" style="margin-top: 24px; font-size: 19px;">INSTANT CASHOUTS</div>
+            </div>
+
+            <div class="card card-emerald" style="padding: 44px 36px; text-align: center;">
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 88px; font-weight: 900; color: #00FFA3;">5%</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 900; color: #FFF; margin: 12px 0 16px 0;">DEV & SECURITY</div>
+                <p class="card-text" style="font-size: 30px; line-height: 1.55;">Dedicated to smart contract audits, Swiss compliance, and 24/7 tech maintenance.</p>
+                <div class="pill-badge pill-emerald" style="margin-top: 24px; font-size: 19px;">SWISS COMPLIANCE</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        CAPITAL PRESERVATION <span>•</span> AUDITED ALLOCATION <span>•</span> SOLVENCY
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 10: DYNAMIC 4% DAILY ROI FORMULA
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">10</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">DYNAMIC 4% DAILY ROI FORMULA</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Capital converts into a 2X Contract Allocation Pool, releasing 2.00% daily decaying returns until 200% is claimed.</div>
+    </div>
+
+    <div class="slide-body">
+        <div class="card" style="padding: 48px 56px;">
+            <div class="card-title" style="margin-bottom: 24px;">
+                <span style="font-size: 44px;">📐</span>
+                <span>THE MATHEMATICAL 2X POOL & DECAYING FORMULA</span>
+            </div>
+
+            <div style="background: #020614; border: 2px solid #00FFA3; border-radius: 16px; padding: 26px 36px; font-family: 'JetBrains Mono', monospace; font-size: 32px; color: #00FFA3; line-height: 1.6; margin-bottom: 26px;">
+                <div>1. Capital Stake creates an instant 2X Contract Pool ($100 Stake ➔ $200 Pool)</div>
+                <div style="color: #FFD700; margin-top: 8px;">2. Daily Payout = 2.00% × Remaining 2X Pool Balance</div>
+                <div style="color: #FFF; margin-top: 8px;">★ Day 1 Return: $200 × 2.00% = $4.00 (Exact 4.00% Daily on your Stake!)</div>
+                <div style="color: #94A3B8; font-size: 26px; margin-top: 8px;">Remaining Balance = Balance(t-1) − Daily Payout</div>
+            </div>
+
+            <p class="card-text" style="font-size: 34px; line-height: 1.65;">
+                Unlike legacy systems that promise flat rates until sudden bankruptcy, <strong style="color: #FFD700;">Crypto Finance</strong> allocates a 2X contract pool and pays 2% on the decaying balance pool.
+            </p>
+            <p class="card-text" style="font-size: 34px; line-height: 1.65; margin-top: 18px;">
+                This delivers an initial <strong style="color: #00FFA3;">4.00% Daily Return on Capital</strong> and mathematically ensures hundreds of days of stability while systematically paying out exactly <strong style="color: #00FFA3;">200% (2X)</strong> of your stake!
+            </p>
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        MATHEMATICAL RIGOR <span>•</span> NON-EXPONENTIAL <span>•</span> AUDITED CERTAINTY
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 11: $100 STAKE LIVE WALKTHROUGH
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">11</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">$100 STAKE LIVE WALKTHROUGH</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Dual Return Math: 4.00% Daily on Main Capital equals 2.00% Daily on the 2X Contract Pool.</div>
+    </div>
+
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: stretch;">
+            <!-- Left Card: Dual Perspective ROI -->
+            <div class="card" style="padding: 38px 40px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div class="card-title" style="color: #FFD700; margin-bottom: 20px;">
+                        <span style="font-size: 38px;">⚖️</span>
+                        <span>DUAL PERSPECTIVE ROI MATH</span>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 16px;">
+                        <div style="background: #020614; border: 2px solid #00FFA3; border-radius: 14px; padding: 20px 24px;">
+                            <div style="font-size: 20px; font-weight: 800; color: #00FFA3; text-transform: uppercase;">1. MAIN CAPITAL PERSPECTIVE</div>
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 900; color: #FFF; margin-top: 6px;">
+                                4.00% Daily Yield
+                            </div>
+                            <div style="font-size: 24px; color: #CBD5E1; margin-top: 6px; line-height: 1.45;">
+                                On your <strong>$100.00 Main Capital</strong>, your daily payout starts at <strong>$4.00 USDT / day</strong> (representing an exact <strong>4% daily ROI</strong>).
+                            </div>
+                        </div>
+
+                        <div style="background: #020614; border: 2px solid #00D2FF; border-radius: 14px; padding: 20px 24px;">
+                            <div style="font-size: 20px; font-weight: 800; color: #00D2FF; text-transform: uppercase;">2. 2X CONTRACT POOL PERSPECTIVE</div>
+                            <div style="font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 900; color: #FFF; margin-top: 6px;">
+                                2.00% Daily Release
+                            </div>
+                            <div style="font-size: 24px; color: #CBD5E1; margin-top: 6px; line-height: 1.45;">
+                                Your $100 stake unlocks a <strong>$200.00 (2X) Pool</strong>. The smart contract releases <strong>2.00% daily</strong>: $200.00 × 2% = <strong>$4.00 USDT</strong>.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: rgba(255, 215, 0, 0.08); border: 1.5px solid #FFD700; border-radius: 12px; padding: 14px 20px; margin-top: 14px; font-size: 22px; font-weight: 800; color: #FFD700; text-align: center;">
+                    ★ Mathematically Equivalent: 4% of Principal = 2% of 2X Contract Allocation Pool
+                </div>
+            </div>
+
+            <!-- Right Card: Step-by-Step Daily Payout -->
+            <div class="card card-cyan" style="padding: 38px 40px; display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <div class="card-title" style="color: #00D2FF; margin-bottom: 20px;">
+                        <span style="font-size: 38px;">📊</span>
+                        <span>STEP-BY-STEP DAILY CASHOUT</span>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 14px;">
+                        <div style="background: #020614; border-radius: 14px; padding: 16px 22px; border-left: 6px solid #00FFA3; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 26px; font-weight: 800; color: #FFF;">Day 1: $200.00 × 2%</span>
+                            <span style="font-size: 28px; font-weight: 900; color: #00FFA3;">= $4.00 <span style="font-size: 20px; color: #94A3B8;">(After Cashout: $196.00)</span></span>
+                        </div>
+                        <div style="background: #020614; border-radius: 14px; padding: 16px 22px; border-left: 6px solid #00D2FF; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 26px; font-weight: 800; color: #FFF;">Day 2: $196.00 × 2%</span>
+                            <span style="font-size: 28px; font-weight: 900; color: #00D2FF;">= $3.92 <span style="font-size: 20px; color: #94A3B8;">(After Cashout: $192.08)</span></span>
+                        </div>
+                        <div style="background: #020614; border-radius: 14px; padding: 16px 22px; border-left: 6px solid #FFD700; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 26px; font-weight: 800; color: #FFF;">Day 3: $192.08 × 2%</span>
+                            <span style="font-size: 28px; font-weight: 900; color: #FFD700;">= $3.84 <span style="font-size: 20px; color: #94A3B8;">(After Cashout: $188.24)</span></span>
+                        </div>
+                        <div style="background: #020614; border-radius: 14px; padding: 16px 22px; border-left: 6px solid #FFF; display: flex; justify-content: space-between; align-items: center;">
+                            <span style="font-size: 26px; font-weight: 800; color: #FFF;">Day 4: $188.24 × 2%</span>
+                            <span style="font-size: 28px; font-weight: 900; color: #FFF;">= $3.76 <span style="font-size: 20px; color: #94A3B8;">(After Cashout: $184.47)</span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 14px; padding: 14px 20px; background: #020614; border: 1.5px solid #00FFA3; border-radius: 12px; font-size: 22px; color: #00FFA3; font-weight: 800; text-align: center;">
+                    ➔ Continues daily until full $200.00 is extracted over 525 Days!
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        PREDICTABLE RETURNS <span>•</span> TOTAL SOLVENCY <span>•</span> 200% POOL
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 12: AUDITED DURATION TABLE
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">12</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">CAPITAL VS. DURATION (AUDITED)</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Payouts run until remaining balance reaches half a cent ($0.005).</div>
+    </div>
+
+    <div class="slide-body">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>STAKE</th>
+                    <th>2X POOL</th>
+                    <th>ACTIVE DURATION</th>
+                    <th>TOTAL EXTRACTED</th>
+                    <th>STATUS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="color: #FFF;">$2.00 (Min)</td>
+                    <td style="color: #FFD700;">$4.00</td>
+                    <td style="color: #00FFA3; font-size: 34px;">331 Days</td>
+                    <td style="color: #00FFA3;">$3.999 (100%)</td>
+                    <td><span class="pill-badge pill-emerald" style="font-size: 18px;">AUDITED ✓</span></td>
+                </tr>
+                <tr>
+                    <td style="color: #FFF;">$20.00</td>
+                    <td style="color: #FFD700;">$40.00</td>
+                    <td style="color: #00FFA3; font-size: 34px;">445 Days</td>
+                    <td style="color: #00FFA3;">$39.995 (100%)</td>
+                    <td><span class="pill-badge pill-emerald" style="font-size: 18px;">AUDITED ✓</span></td>
+                </tr>
+                <tr style="background: rgba(0, 210, 255, 0.1);">
+                    <td style="color: #00D2FF; font-size: 34px;">$100.00</td>
+                    <td style="color: #FFD700; font-size: 34px;">$200.00</td>
+                    <td style="color: #00FFA3; font-size: 38px; font-weight: 900;">525 Days</td>
+                    <td style="color: #00FFA3; font-size: 34px;">$199.995 (100%)</td>
+                    <td><span class="pill-badge pill-cyan" style="font-size: 18px;">CORE</span></td>
+                </tr>
+                <tr>
+                    <td style="color: #FFF;">$1,000.00</td>
+                    <td style="color: #FFD700;">$2,000.00</td>
+                    <td style="color: #00FFA3; font-size: 34px;">639 Days</td>
+                    <td style="color: #00FFA3;">$1,999.995 (100%)</td>
+                    <td><span class="pill-badge pill-gold" style="font-size: 18px;">VIP TIER</span></td>
+                </tr>
+                <tr>
+                    <td style="color: #FFF;">$5,000.00</td>
+                    <td style="color: #FFD700;">$10,000.00</td>
+                    <td style="color: #00FFA3; font-size: 34px;">720 Days</td>
+                    <td style="color: #00FFA3;">$9,999.995 (100%)</td>
+                    <td><span class="pill-badge pill-gold" style="font-size: 18px;">WHALE TIER</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer-ticker">
+        MATHEMATICALLY PROVEN <span>•</span> ZERO DEFICIT <span>•</span> 100% CAPITAL RETURN
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 13: 35-DAY COMPOUNDING STRATEGY
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">13</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">THE 35-DAY COMPOUNDING ENGINE</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Reinvesting 2% daily pool returns compounds your capital to 2X (100% growth) in exactly 35 days.</div>
+    </div>
+
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 45px;">
+            <div class="card" style="padding: 46px 48px; text-align: center;">
+                <div class="pill-badge pill-gold" style="font-size: 20px;">MATHEMATICAL CERTAINTY</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 92px; font-weight: 900; color: #FFD700; margin: 18px 0;">
+                    35 DAYS
+                </div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 800; color: #FFF;">
+                    TO DOUBLE YOUR PRINCIPAL
+                </div>
+                
+                <div style="background: #020614; border: 2px solid #FFD700; border-radius: 14px; padding: 22px; margin-top: 26px;">
+                    <div style="font-family: 'JetBrains Mono', monospace; font-size: 32px; color: #00FFA3; font-weight: 900;">(1.02)^35 ≈ 2.000</div>
+                    <div style="font-size: 20px; color: #94A3B8; margin-top: 6px; font-weight: 700;">2% Daily Exponential Compounding Formula</div>
+                </div>
+            </div>
+
+            <div class="card card-cyan" style="padding: 46px 48px;">
+                <div class="card-title" style="color: #00D2FF; margin-bottom: 22px;">
+                    <span style="font-size: 40px;">📈</span>
+                    <span>$2,000 COMPOUNDING TIMELINE</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 14px;">
+                    <div style="background: #020614; border-radius: 12px; padding: 18px 24px; border-left: 5px solid #94A3B8; display: flex; justify-content: space-between;">
+                        <span style="font-size: 28px; font-weight: 700; color: #FFF;">Day 01: Initial Reinvest</span>
+                        <span style="font-size: 30px; font-weight: 800; color: #94A3B8;">$2,040.00</span>
+                    </div>
+                    <div style="background: #020614; border-radius: 12px; padding: 18px 24px; border-left: 5px solid #00D2FF; display: flex; justify-content: space-between;">
+                        <span style="font-size: 28px; font-weight: 700; color: #FFF;">Day 15: Acceleration</span>
+                        <span style="font-size: 30px; font-weight: 800; color: #00D2FF;">$2,691.75</span>
+                    </div>
+                    <div style="background: #020614; border-radius: 12px; padding: 18px 24px; border-left: 5px solid #FFD700; display: flex; justify-content: space-between;">
+                        <span style="font-size: 28px; font-weight: 700; color: #FFF;">Day 25: Massive Surge</span>
+                        <span style="font-size: 30px; font-weight: 800; color: #FFD700;">$3,281.21</span>
+                    </div>
+                    <div style="background: #020614; border-radius: 12px; padding: 18px 24px; border-left: 5px solid #00FFA3; display: flex; justify-content: space-between;">
+                        <span style="font-size: 28px; font-weight: 900; color: #00FFA3;">Day 35: 2X DOUBLING!</span>
+                        <span style="font-size: 32px; font-weight: 900; color: #00FFA3;">$3,999.78</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        EXPONENTIAL WEALTH <span>•</span> CAPITAL ACCELERATION <span>•</span> 35-DAY CYCLE
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 14: 2X CAP LOCK & 4X EXTRACTION
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">14</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">2X CAP LOCK RULE & 4X PROFIT</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Institutional safeguard preventing infinite compounding runaway, unlocking 400% extraction.</div>
+    </div>
+
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 45px;">
+            <div class="card" style="padding: 46px 50px;">
+                <div class="card-title" style="color: #FFD700; margin-bottom: 22px;">
+                    <span style="font-size: 40px;">🔒</span>
+                    <span>THE 2X CAP LOCK RULE</span>
+                </div>
+                <p class="card-text" style="font-size: 32px; line-height: 1.6;">
+                    When compounding increases balance to near <strong style="color: #FFD700;">2X of initial stake ($3,999.78 on $2,000)</strong>, compounding enters an automated safety freeze.
+                </p>
+                <div style="background: #020614; border: 2px solid #FFD700; border-radius: 14px; padding: 22px 26px; margin-top: 24px;">
+                    <div style="font-size: 20px; font-weight: 800; color: #FFD700; text-transform: uppercase;">MANDATORY REQUIREMENT</div>
+                    <div style="font-size: 30px; font-weight: 900; color: #FFF; margin-top: 6px;">
+                        The investor MUST take at least 1 withdrawal before compounding can resume!
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-emerald" style="padding: 46px 50px;">
+                <div class="card-title" style="color: #00FFA3; margin-bottom: 22px;">
+                    <span style="font-size: 40px;">🚀</span>
+                    <span>400% (4X) MAX EXTRACTION</span>
+                </div>
+                <p class="card-text" style="font-size: 32px; line-height: 1.6;">
+                    By doubling your principal in 35 days and then switching to daily cashouts, withdrawals are paid from the doubled pool!
+                </p>
+                <div style="background: #020614; border: 2px solid #00FFA3; border-radius: 14px; padding: 22px 26px; margin-top: 24px; text-align: center;">
+                    <div style="font-size: 20px; font-weight: 800; color: #00FFA3; text-transform: uppercase;">TOTAL PROFIT POWER</div>
+                    <div style="font-family: 'Space Grotesk', sans-serif; font-size: 68px; font-weight: 900; color: #00FFA3; margin: 6px 0;">
+                        ~400% (4X)
+                    </div>
+                    <div style="font-size: 28px; font-weight: 800; color: #FFF;">
+                        $1,000 Stake ➔ Compounded ➔ Extracts ~$4,000 Total Cash!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        DISCIPLINED PROTOCOL <span>•</span> CAPITAL INTEGRITY <span>•</span> 4X MAX EXTRACTION
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 15: DIRECT REFERRAL COMMISSION
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">15</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">DIRECT REFERRAL REWARD</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Generous instant commission rewarding network creators for expanding the ecosystem.</div>
+    </div>
+
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 45px; align-items: center;">
+            <div class="card" style="padding: 50px 48px; text-align: center;">
+                <div class="pill-badge pill-gold" style="font-size: 20px;">FLAT INSTANT CASH CREDIT</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 120px; font-weight: 900; color: #FFD700; margin: 10px 0;">
+                    10%
+                </div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 900; color: #FFF;">
+                    ON EVERY DIRECT ACTIVATION
+                </div>
+                <p class="card-text" style="font-size: 32px; line-height: 1.6; margin-top: 18px;">
+                    Credited immediately to your <strong>Working Wallet</strong> the second your direct referral activates their stake or executes compounding!
+                </p>
+            </div>
+
+            <div class="card card-cyan" style="padding: 46px 48px;">
+                <div class="card-title" style="color: #00D2FF; margin-bottom: 24px;">
+                    <span style="font-size: 40px;">💎</span>
+                    <span>KEY AFFILIATE ADVANTAGES</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 18px;">
+                    <div style="background: #020614; border: 1.5px solid #00D2FF; border-radius: 14px; padding: 20px 24px;">
+                        <div style="font-size: 28px; font-weight: 800; color: #00D2FF;">Instant Working Wallet Credit</div>
+                        <div style="font-size: 24px; color: #CBD5E1; margin-top: 4px;">Zero lockups — withdrawable immediately with min $2.00!</div>
+                    </div>
+                    <div style="background: #020614; border: 1.5px solid #00FFA3; border-radius: 14px; padding: 20px 24px;">
+                        <div style="font-size: 28px; font-weight: 800; color: #00FFA3;">Repeat Top-Up Commissions</div>
+                        <div style="font-size: 24px; color: #CBD5E1; margin-top: 4px;">Earn 10% on every repeat compounding and top-up!</div>
+                    </div>
+                    <div style="background: #020614; border: 1.5px solid #FFD700; border-radius: 14px; padding: 20px 24px;">
+                        <div style="font-size: 28px; font-weight: 800; color: #FFD700;">Unlimited Horizontal Scaling</div>
+                        <div style="font-size: 24px; color: #CBD5E1; margin-top: 4px;">Refer as many direct members as you wish — zero limits!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        INSTANT COMMISSIONS <span>•</span> REAL CASHFLOW <span>•</span> UNLIMITED SCALE
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 16: 10-LEVEL TEAM ROYALTY (PART 1)
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">16</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">10-LEVEL TEAM ROYALTY (PART 1)</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Earn daily passive royalties calculated on the daily ROI generation of downline team members.</div>
+    </div>
+
+    <div class="slide-body">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>TIER LEVEL</th>
+                    <th>DAILY ROYALTY %</th>
+                    <th>EARNING BASE</th>
+                    <th>UNLOCK CRITERIA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="background: rgba(255, 215, 0, 0.1);">
+                    <td style="color: #FFD700; font-size: 34px;">LEVEL 1</td>
+                    <td style="color: #FFD700; font-size: 38px; font-weight: 900;">10% Daily</td>
+                    <td style="color: #CBD5E1;">Daily ROI of Directs</td>
+                    <td style="color: #00FFA3; font-size: 32px;">1 Active Direct</td>
+                </tr>
+                <tr>
+                    <td style="color: #00D2FF; font-size: 34px;">LEVEL 2</td>
+                    <td style="color: #00D2FF; font-size: 38px; font-weight: 900;">5% Daily</td>
+                    <td style="color: #CBD5E1;">Daily ROI of Level 2</td>
+                    <td style="color: #00FFA3; font-size: 32px;">2 Active Directs</td>
+                </tr>
+                <tr>
+                    <td style="color: #FFF; font-size: 34px;">LEVEL 3</td>
+                    <td style="color: #00FFA3; font-size: 38px; font-weight: 900;">2% Daily</td>
+                    <td style="color: #CBD5E1;">Daily ROI of Level 3</td>
+                    <td style="color: #00FFA3; font-size: 32px;">3 Active Directs</td>
+                </tr>
+                <tr>
+                    <td style="color: #FFF; font-size: 34px;">LEVEL 4</td>
+                    <td style="color: #00FFA3; font-size: 38px; font-weight: 900;">2% Daily</td>
+                    <td style="color: #CBD5E1;">Daily ROI of Level 4</td>
+                    <td style="color: #00FFA3; font-size: 32px;">4 Active Directs</td>
+                </tr>
+                <tr>
+                    <td style="color: #FFF; font-size: 34px;">LEVEL 5</td>
+                    <td style="color: #00FFA3; font-size: 38px; font-weight: 900;">2% Daily</td>
+                    <td style="color: #CBD5E1;">Daily ROI of Level 5</td>
+                    <td style="color: #00FFA3; font-size: 32px;">5 Active Directs</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer-ticker">
+        DAILY RESIDUALS <span>•</span> EXPONENTIAL LEVERAGE <span>•</span> PASSIVE CASHFLOW
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 17: 10-LEVEL TEAM ROYALTY (PART 2)
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">17</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">10-LEVEL TEAM ROYALTY (PART 2)</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Deep-tier royalties unlocking compounding passive earnings across thousands of accounts.</div>
+    </div>
+
+    <div class="slide-body">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>TIER LEVEL</th>
+                    <th>DAILY ROYALTY %</th>
+                    <th>EARNING BASE</th>
+                    <th>UNLOCK CRITERIA</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="color: #FFF; font-size: 34px;">LEVEL 6</td>
+                    <td style="color: #00D2FF; font-size: 38px; font-weight: 900;">1% Daily</td>
+                    <td style="color: #CBD5E1;">Daily ROI of Level 6</td>
+                    <td style="color: #00FFA3; font-size: 32px;">6 Active Directs</td>
+                </tr>
+                <tr>
+                    <td style="color: #FFF; font-size: 34px;">LEVEL 7</td>
+                    <td style="color: #00D2FF; font-size: 38px; font-weight: 900;">1% Daily</td>
+                    <td style="color: #CBD5E1;">Daily ROI of Level 7</td>
+                    <td style="color: #00FFA3; font-size: 32px;">7 Active Directs</td>
+                </tr>
+                <tr>
+                    <td style="color: #FFF; font-size: 34px;">LEVEL 8</td>
+                    <td style="color: #00D2FF; font-size: 38px; font-weight: 900;">1% Daily</td>
+                    <td style="color: #CBD5E1;">Daily ROI of Level 8</td>
+                    <td style="color: #00FFA3; font-size: 32px;">8 Active Directs</td>
+                </tr>
+                <tr>
+                    <td style="color: #FFF; font-size: 34px;">LEVEL 9</td>
+                    <td style="color: #00D2FF; font-size: 38px; font-weight: 900;">1% Daily</td>
+                    <td style="color: #CBD5E1;">Daily ROI of Level 9</td>
+                    <td style="color: #00FFA3; font-size: 32px;">9 Active Directs</td>
+                </tr>
+                <tr style="background: rgba(255, 215, 0, 0.1);">
+                    <td style="color: #FFD700; font-size: 34px;">LEVEL 10</td>
+                    <td style="color: #FFD700; font-size: 38px; font-weight: 900;">1% Daily</td>
+                    <td style="color: #CBD5E1;">Daily ROI of Level 10</td>
+                    <td style="color: #FFD700; font-size: 34px;">10 Active Directs (Full Unlock)</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer-ticker">
+        10 TIERS UNLOCKED <span>•</span> INFINITE REACH <span>•</span> DAILY CASHFLOW
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 18: MILESTONE RANK REWARDS (RANKS 1 - 5)
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">18</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">MILESTONE RANK REWARDS (RANKS 1 - 5)</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Cumulative team turnover milestones unlocking guaranteed instant cash and rewards with no expiry.</div>
+    </div>
+
+    <div class="slide-body">
+        <!-- Prominent 50:50 Strong & Weak Leg Note Banner -->
+        <div style="background: rgba(255, 215, 0, 0.08); border: 2px solid #FFD700; border-radius: 14px; padding: 16px 28px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;">
+            <div style="font-size: 26px; font-weight: 900; color: #FFD700; letter-spacing: 1px;">★ 50:50 RATIO CRITERIA:</div>
+            <div style="font-size: 26px; font-weight: 800; color: #FFF;">Strong aur Weak leg 50-50% team business volume hone par reward milega.</div>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>MILESTONE RANK</th>
+                    <th>TEAM VOLUME</th>
+                    <th>OPTION A: CASH BONUS</th>
+                    <th>OPTION B: REWARD GIFT</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="color: #FFF; font-weight: 800;">⭐ RANK 1 (STARTER)</td>
+                    <td style="color: #FFD700; font-weight: 800;">$100</td>
+                    <td style="color: #00FFA3; font-size: 34px; font-weight: 900;">$5.00 USDT</td>
+                    <td style="color: #FFD700; font-weight: 800;">🎁 Official Welcome Kit</td>
+                </tr>
+                <tr>
+                    <td style="color: #FFF; font-weight: 800;">⭐⭐ RANK 2 (BRONZE)</td>
+                    <td style="color: #FFD700; font-weight: 800;">$250</td>
+                    <td style="color: #00FFA3; font-size: 34px; font-weight: 900;">$12.50 USDT</td>
+                    <td style="color: #FFD700; font-weight: 800;">👕 Branded Polo / Merchandise</td>
+                </tr>
+                <tr>
+                    <td style="color: #FFF; font-weight: 800;">⭐⭐⭐ RANK 3 (SILVER)</td>
+                    <td style="color: #FFD700; font-weight: 800;">$500</td>
+                    <td style="color: #00FFA3; font-size: 34px; font-weight: 900;">$25.00 USDT</td>
+                    <td style="color: #FFD700; font-weight: 800;">🎧 Wireless Bluetooth Earbuds</td>
+                </tr>
+                <tr>
+                    <td style="color: #FFF; font-weight: 800;">🥇 RANK 4 (GOLD)</td>
+                    <td style="color: #FFD700; font-weight: 800;">$1,000</td>
+                    <td style="color: #00FFA3; font-size: 34px; font-weight: 900;">$50.00 USDT</td>
+                    <td style="color: #FFD700; font-weight: 800;">⌚ Smart Fitness Tracker Band</td>
+                </tr>
+                <tr style="background: rgba(255, 215, 0, 0.1);">
+                    <td style="color: #FFD700; font-size: 34px; font-weight: 900;">💎 RANK 5 (PLATINUM)</td>
+                    <td style="color: #FFD700; font-size: 34px; font-weight: 900;">$2,500</td>
+                    <td style="color: #00FFA3; font-size: 38px; font-weight: 900;">$125.00 USDT</td>
+                    <td style="color: #FFD700; font-size: 32px; font-weight: 900;">📱 Smart Android Tablet</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 18px; text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 800; color: #FFD700;">
+            ★ Qualifying leaders can choose EITHER the Instant Cash Bonus OR the Reward Gift. All turnover accumulates permanently!
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        LEADERSHIP MILESTONES <span>•</span> CUMULATIVE TURNOVER <span>•</span> PERMANENT PROGRESSION
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 19: EXECUTIVE MILESTONE REWARDS (RANKS 6 - 10)
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">19</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">EXECUTIVE MILESTONE REWARDS (RANKS 6 - 10)</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Elite executive leadership tiers. Qualifying members may select EITHER the Cash Bonus OR the Luxury Asset.</div>
+    </div>
+
+    <div class="slide-body">
+        <!-- Prominent 50:50 Strong & Weak Leg Note Banner -->
+        <div style="background: rgba(255, 215, 0, 0.08); border: 2px solid #FFD700; border-radius: 14px; padding: 16px 28px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between;">
+            <div style="font-size: 26px; font-weight: 900; color: #FFD700; letter-spacing: 1px;">★ 50:50 RATIO CRITERIA:</div>
+            <div style="font-size: 26px; font-weight: 800; color: #FFF;">Strong aur Weak leg 50-50% team business volume hone par reward milega.</div>
+        </div>
+
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>EXECUTIVE RANK</th>
+                    <th>TEAM VOLUME</th>
+                    <th>OPTION A: CASH BONUS</th>
+                    <th>OPTION B: LUXURY ASSET</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="color: #00D2FF; font-weight: 800;">🔷 RANK 6 (SAPPHIRE)</td>
+                    <td style="color: #FFF; font-weight: 800;">$10,000</td>
+                    <td style="color: #00FFA3; font-size: 34px; font-weight: 900;">$500 USDT</td>
+                    <td style="color: #FFD700; font-weight: 800;">📱 Latest Flagship Smartphone</td>
+                </tr>
+                <tr>
+                    <td style="color: #FF4081; font-weight: 800;">♦️ RANK 7 (RUBY)</td>
+                    <td style="color: #FFF; font-weight: 800;">$25,000</td>
+                    <td style="color: #00FFA3; font-size: 34px; font-weight: 900;">$1,250 USDT</td>
+                    <td style="color: #FFD700; font-weight: 800;">💻 Apple MacBook Pro</td>
+                </tr>
+                <tr>
+                    <td style="color: #00FFA3; font-weight: 800;">🟢 RANK 8 (EMERALD)</td>
+                    <td style="color: #FFF; font-weight: 800;">$50,000</td>
+                    <td style="color: #00FFA3; font-size: 34px; font-weight: 900;">$2,500 USDT</td>
+                    <td style="color: #FFD700; font-weight: 800;">✈️ Dubai 5-Star VIP Tour</td>
+                </tr>
+                <tr>
+                    <td style="color: #00D2FF; font-weight: 800;">💎 RANK 9 (DIAMOND)</td>
+                    <td style="color: #FFF; font-weight: 800;">$100,000</td>
+                    <td style="color: #00FFA3; font-size: 34px; font-weight: 900;">$5,000 USDT</td>
+                    <td style="color: #FFD700; font-weight: 800;">⌚ Rolex Luxury Timepiece</td>
+                </tr>
+                <tr style="background: rgba(255, 215, 0, 0.12);">
+                    <td style="color: #FFD700; font-size: 34px; font-weight: 900;">👑 RANK 10 (CROWN)</td>
+                    <td style="color: #FFD700; font-size: 34px; font-weight: 900;">$10,000,000</td>
+                    <td style="color: #00FFA3; font-size: 38px; font-weight: 900;">$500,000 USDT</td>
+                    <td style="color: #FFD700; font-size: 32px; font-weight: 900;">🏰 Luxury Waterfront Villa (Dubai)</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 18px; text-align: center; font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 800; color: #FFD700;">
+            ★ Qualifying leaders can choose EITHER the Cash Bonus OR the Luxury Asset. Settleable directly in USDT!
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        EXECUTIVE LUXURY <span>•</span> GLOBAL PRESTIGE <span>•</span> FREEDOM OF CHOICE
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 20: OFFICIAL RULES & REGULATIONS
+=============================================== -->
+<div class="slide">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">20</div>
+    
+    <div class="slide-header">
+        <div class="slide-title">OFFICIAL RULES & REGULATIONS</div>
+        <div class="title-line"><span class="diamonds">◇ ◆ ◇</span><div class="bar"></div></div>
+        <div class="slide-desc">Immutable on-chain rules ensuring system sustainability, fairness, and solvency.</div>
+    </div>
+
+    <div class="slide-body">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 35px;">
+            <div class="card" style="padding: 38px 42px;">
+                <div class="card-title" style="margin-bottom: 16px;">
+                    <span>💳</span>
+                    <span>ACTIVATION & ENTRY</span>
+                </div>
+                <div style="font-size: 28px; color: #CBD5E1; line-height: 1.6;">
+                    • <strong>Minimum Entry:</strong> $2.00 USDT (No packages, unlimited max).<br>
+                    • <strong>Network:</strong> Binance Smart Chain (BEP-20 USDT).<br>
+                    • <strong>2X Allocation Pool:</strong> Every stake allocates a 200% payout pool releasing 2% daily decaying returns (starts at 4% daily on capital).
+                </div>
+            </div>
+
+            <div class="card card-cyan" style="padding: 38px 42px;">
+                <div class="card-title" style="color: #00D2FF; margin-bottom: 16px;">
+                    <span>🎁</span>
+                    <span>BONUS WALLET USAGE</span>
+                </div>
+                <div style="font-size: 28px; color: #CBD5E1; line-height: 1.6;">
+                    • <strong>Max 10% per Tx:</strong> Subsidizes any activation or compounding.<br>
+                    • <strong>Non-Withdrawable:</strong> Preserves company liquidity pool.<br>
+                    • <strong>Community Sharing:</strong> Earn $0.40/level across 10 referral tiers.
+                </div>
+            </div>
+
+            <div class="card card-emerald" style="padding: 38px 42px;">
+                <div class="card-title" style="color: #00FFA3; margin-bottom: 16px;">
+                    <span>⚡</span>
+                    <span>CASHOUT PROTOCOL</span>
+                </div>
+                <div style="font-size: 28px; color: #CBD5E1; line-height: 1.6;">
+                    • <strong>Minimum:</strong> $2.00 USDT | <strong>Max per Tx:</strong> $5,000 USDT.<br>
+                    • <strong>Liquidity Fee:</strong> 10% flat liquidity & admin fee.<br>
+                    • <strong>P2P Transfers:</strong> Zero-fee internal transfers between members.
+                </div>
+            </div>
+
+            <div class="card" style="padding: 38px 42px; border-color: #FFD700;">
+                <div class="card-title" style="color: #FFD700; margin-bottom: 16px;">
+                    <span>🔒</span>
+                    <span>35-DAY & 2X CAP LOCK</span>
+                </div>
+                <div style="font-size: 28px; color: #CBD5E1; line-height: 1.6;">
+                    • <strong>35 Days:</strong> Reinvesting daily doubles balance to 2X.<br>
+                    • <strong>Safety Lock:</strong> At 2X, must take at least 1 withdrawal to resume!<br>
+                    • <strong>50:50 Leg Ratio:</strong> Rank rewards require 50-50% Strong & Weak leg team volume.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        TRANSPARENT RULES <span>•</span> EQUAL OPPORTUNITY <span>•</span> CODE IS LAW
+    </div>
+</div>
+
+<!-- ==========================================
+     SLIDE 21: THANK YOU & CORPORATE CLOSE
+=============================================== -->
+<div class="slide" style="justify-content: center; align-items: center; text-align: center; padding: 60px;">
+    <div class="frame"></div>
+    <div class="bg-grid"></div>
+    <div class="slide-num">21</div>
+
+    <div style="position: relative; z-index: 5; max-width: 1400px;">
+        <img src="file:///c:/Users/user/Desktop/CryptoFinance/pdf_content/assets/crypto_finance_coin_3d_light.jpg" style="width: 240px; height: 240px; object-fit: contain; margin-bottom: 20px; border-radius: 28px; border: 2px solid rgba(255, 215, 0, 0.5);" alt="Crypto Finance Coin">
+
+        <h1 style="font-family: 'Cinzel', serif; font-size: 88px; font-weight: 900; color: #FFD700; letter-spacing: 4px;">
+            THANK YOU !
+        </h1>
+
+        <div style="font-family: 'Space Grotesk', sans-serif; font-size: 40px; font-weight: 800; color: #00D2FF; margin: 16px 0 36px 0; letter-spacing: 2px;">
+            WELCOME TO THE FUTURE OF QUANTITATIVE WEALTH
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-bottom: 40px; text-align: left;">
+            <div class="card" style="padding: 24px 28px;">
+                <div style="font-size: 18px; color: #FFD700; font-weight: 800;">MANAGING LEADERSHIP</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 900; color: #FFF; margin-top: 6px;">Mr. Alex Rivera</div>
+                <div style="font-size: 20px; color: #94A3B8;">Chairman & MD</div>
+            </div>
+
+            <div class="card" style="padding: 24px 28px;">
+                <div style="font-size: 18px; color: #00D2FF; font-weight: 800;">CORPORATE HQ</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 900; color: #FFF; margin-top: 6px;">Crypto Valley Tower</div>
+                <div style="font-size: 20px; color: #94A3B8;">Zug, Switzerland</div>
+            </div>
+
+            <div class="card" style="padding: 24px 28px;">
+                <div style="font-size: 18px; color: #00FFA3; font-weight: 800;">OFFICIAL PORTAL</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 900; color: #00FFA3; margin-top: 6px;">cryptofinance.online</div>
+                <div style="font-size: 20px; color: #94A3B8;">support@cryptofinance.online</div>
+            </div>
+
+            <div class="card" style="padding: 24px 28px;">
+                <div style="font-size: 18px; color: #FFD700; font-weight: 800;">WITHDRAWAL LIMITS</div>
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 900; color: #FFF; margin-top: 6px;">Min $2 | Max $5,000</div>
+                <div style="font-size: 20px; color: #94A3B8;">10% Fee | Instant Web3</div>
+            </div>
+        </div>
+
+        <div style="display: inline-block; padding: 22px 75px; border-radius: 999px; background: linear-gradient(135deg, #00FFA3, #00D2FF); color: #020614; font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 900; letter-spacing: 2px; text-transform: uppercase;">
+            REGISTER ON CRYPTOFINANCE.ONLINE
+        </div>
+
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-size: 42px; color: #FFD700; font-weight: 900; margin-top: 24px;">
+            GOOD LUCK ✌️
+        </div>
+    </div>
+
+    <div class="footer-ticker">
+        CRYPTO FINANCE <span>•</span> SWISS QUANTITATIVE ECOSYSTEM
+    </div>
+</div>
+
+</body>
+</html>

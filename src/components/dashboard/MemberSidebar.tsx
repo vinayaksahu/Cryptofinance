@@ -108,8 +108,8 @@ export function MemberSidebar({
             <div className="w-9 h-9 rounded-xl overflow-hidden bg-gradient-to-br from-amber-400 to-amber-600 p-0.5 shadow-md shadow-amber-500/20 shrink-0">
               <div className="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center overflow-hidden">
                 <Image
-                  src="/dubaiLogo.png"
-                  alt="Dubai Finance Logo"
+                  src="/crypto_coin_hero.png"
+                  alt="Crypto Finance Logo"
                   width={32}
                   height={32}
                   className="object-contain"
@@ -118,11 +118,11 @@ export function MemberSidebar({
               </div>
             </div>
             <div className={`flex flex-col ${isCollapsed ? "lg:hidden" : "block"}`}>
-              <span className="text-amber-600 dark:text-amber-400 font-display font-black tracking-wider text-sm uppercase leading-tight whitespace-nowrap">
-                DUBAI FINANCE
+              <span className="text-cyan-400 font-display font-black tracking-wider text-sm uppercase leading-tight whitespace-nowrap">
+                CRYPTO FINANCE
               </span>
-              <span className="text-[9px] text-amber-600/80 dark:text-amber-500/70 font-semibold tracking-wide uppercase whitespace-nowrap">
-                MEMBER PORTAL
+              <span className="text-[9px] text-cyan-400/80 font-semibold tracking-wide uppercase whitespace-nowrap font-mono">
+                QUANTITATIVE PORTAL
               </span>
             </div>
           </div>
