@@ -7,16 +7,17 @@ export interface WalletBalances {
   roiBalance: number;
   workingBalance: number;
   p2pBalance: number;
+  secondaryBalance?: number;
   mainBalance: number;
   totalWithdrawn: number;
 }
 
 /**
- * Calculates accurate real-time balances for all 5 ledgers in the Crypto Finance ecosystem:
+ * Calculates accurate real-time balances for all ledgers in the Crypto Finance ecosystem:
  * 1. Bonus Wallet (Non-withdrawable, max 10% utility for ID activations)
- * 2. ROI Wallet (Daily 4% returns from 2X pool, can transfer to Main or P2P)
- * 3. Working Wallet (Direct + 10-Level Royalty + Milestones, can transfer to Main or P2P)
- * 4. P2P Wallet (Can send to another member or activate any ID with 10% bonus utility)
+ * 2. ROI Wallet (Daily 4% returns from 2X pool, can transfer to Main or Secondary)
+ * 3. Working Wallet (Direct + 10-Level Royalty + Milestones, can transfer to Main or Secondary)
+ * 4. Secondary Wallet (Credited by deposit requests, used for self/peer ID activations with 10% bonus, P2P transfers)
  * 5. Main Wallet (Withdrawable wallet, cashout to BEP-20 USDT)
  */
 export async function getUserWalletBalances(userId: string): Promise<WalletBalances> {
@@ -136,7 +137,7 @@ export async function getUserWalletBalances(userId: string): Promise<WalletBalan
     mainBalance = Math.max(0, +(currentIncome - bonusBalance).toFixed(2));
   }
 
-  // 5. P2P Wallet (Fund Balance):
+  // 5. Secondary Wallet (Fund Balance - Deposits & Activations):
   const p2pBalance = Math.max(0, Number(user.fundBalance?.toString() ?? "0"));
 
   return {
@@ -144,13 +145,14 @@ export async function getUserWalletBalances(userId: string): Promise<WalletBalan
     roiBalance,
     workingBalance,
     p2pBalance,
+    secondaryBalance: p2pBalance,
     mainBalance,
     totalWithdrawn,
   };
 }
 
 /**
- * Transfers funds from ROI or Working Wallet to Main (Withdrawal) Wallet or P2P Wallet
+ * Transfers funds from ROI or Working Wallet to Main (Withdrawal) Wallet or Secondary Wallet
  */
 export async function executeWalletTransfer({
   userId,
@@ -181,7 +183,7 @@ export async function executeWalletTransfer({
   const refKey = `${sourceWallet}_TO_${targetWallet}_${userId}_${timestamp}`;
 
   if (targetWallet === "P2P") {
-    // Move from Income/Source ledger to Fund ledger (P2P)
+    // Move from Income/Source ledger to Fund ledger (Secondary Wallet)
     // 1. Debit from Income with specialized reference key
     await executeLedgerTransaction({
       userId,
@@ -189,17 +191,17 @@ export async function executeWalletTransfer({
       wallet: "INCOME",
       amount: amountDec.negated(),
       referenceKey: `${refKey}_DEBIT`,
-      description: `Transferred $${amountDec.toFixed(2)} USDT from ${sourceWallet} Wallet to P2P Wallet`,
+      description: `Transferred $${amountDec.toFixed(2)} USDT from ${sourceWallet} Wallet to Secondary Wallet`,
     });
 
-    // 2. Credit Fund (P2P Wallet)
+    // 2. Credit Fund (Secondary Wallet)
     await executeLedgerTransaction({
       userId,
       type: "SWIPE_INCOME_TO_FUND",
       wallet: "FUND",
       amount: amountDec,
       referenceKey: `${refKey}_CREDIT`,
-      description: `Received $${amountDec.toFixed(2)} USDT into P2P Wallet from ${sourceWallet} Wallet`,
+      description: `Received $${amountDec.toFixed(2)} USDT into Secondary Wallet from ${sourceWallet} Wallet`,
     });
   } else {
     // Move to Main Wallet (Withdrawal Wallet)

@@ -89,7 +89,7 @@ export async function POST(req: NextRequest) {
 
     const senderFund = new Decimal(sender.fundBalance.toString());
     if (senderFund.lessThan(amountUsdtDec)) {
-      return NextResponse.json({ error: "Insufficient Fund Wallet balance." }, { status: 400 });
+      return NextResponse.json({ error: "Insufficient Secondary Wallet balance." }, { status: 400 });
     }
 
     const refBase = `P2P_${sender.id}_TO_${recipient.id}_${Date.now()}`;
@@ -101,7 +101,7 @@ export async function POST(req: NextRequest) {
       wallet: "FUND",
       amount: amountUsdtDec.negated(),
       referenceKey: `${refBase}_DEBIT`,
-      description: `P2P Transfer of $${amountUsdtDec.toFixed(2)} USDT to ${recipient.customId} (${recipient.fullName})`,
+      description: `Secondary Wallet P2P Transfer of $${amountUsdtDec.toFixed(2)} USDT to ${recipient.customId} (${recipient.fullName})`,
       sourceUserId: recipient.id,
     });
 
@@ -112,7 +112,7 @@ export async function POST(req: NextRequest) {
       wallet: "FUND",
       amount: amountUsdtDec,
       referenceKey: `${refBase}_CREDIT`,
-      description: `P2P Received $${amountUsdtDec.toFixed(2)} USDT from ${sender.customId}`,
+      description: `Secondary Wallet P2P Received $${amountUsdtDec.toFixed(2)} USDT from ${sender.customId}`,
       sourceUserId: sender.id,
     });
 
@@ -120,14 +120,14 @@ export async function POST(req: NextRequest) {
       userId: sender.id,
       action: "P2P_TRANSFER_SENT",
       category: "FINANCIAL",
-      description: `Sent $${amountUsdtDec.toFixed(2)} USDT via P2P to ${recipient.customId} (${recipient.fullName})`,
+      description: `Sent $${amountUsdtDec.toFixed(2)} USDT via Secondary Wallet P2P to ${recipient.customId} (${recipient.fullName})`,
       req,
       metadata: { recipientCustomId: recipient.customId, amount: amountUsdtDec.toNumber() },
     });
 
     return NextResponse.json({
       success: true,
-      message: `P2P Transfer of $${amountUsdtDec.toFixed(2)} USDT to ${recipient.fullName} (${recipient.customId}) completed!`,
+      message: `Secondary Wallet P2P Transfer of $${amountUsdtDec.toFixed(2)} USDT to ${recipient.fullName} (${recipient.customId}) completed!`,
     });
   } catch (error: any) {
     console.error("P2P error:", error);

@@ -106,7 +106,7 @@ export default function MemberDashboardPage() {
           )}
 
           {(activeTab === "package-base" || activeTab === "stake-activate" || activeTab === "package-fd") && (
-            <StakeActivationView user={user} onRefresh={fetchUser} onRefreshUser={fetchUser} />
+            <StakeActivationView user={user} onRefresh={fetchUser} onRefreshUser={fetchUser} onNavigateTab={setActiveTab} />
           )}
 
           {(activeTab === "wallets" || activeTab === "wallets-internal") && (

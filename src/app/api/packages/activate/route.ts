@@ -119,11 +119,11 @@ export async function POST(req: NextRequest) {
     const bonusUsedDec = new Decimal(bonusUsed.toString());
     const fundRequiredDec = amountUsdtDec.minus(bonusUsedDec);
 
-    // Check caller P2P/Fund balance
+    // Check caller Secondary Wallet (Fund balance)
     const callerFundDec = new Decimal(caller.fundBalance.toString());
     if (callerFundDec.lessThan(fundRequiredDec)) {
       return NextResponse.json({
-        error: `Insufficient P2P Wallet balance. Required: $${fundRequiredDec.toFixed(2)} USDT (${bonusUsed > 0 ? `$${bonusUsed.toFixed(2)} funded from Bonus Wallet` : "no bonus"}), but you have $${callerFundDec.toFixed(2)} USDT in P2P Wallet.`,
+        error: `Insufficient Secondary Wallet balance. Required: $${fundRequiredDec.toFixed(2)} USDT (${bonusUsed > 0 ? `$${bonusUsed.toFixed(2)} funded from Bonus Wallet` : "no bonus"}), but you have $${callerFundDec.toFixed(2)} USDT in Secondary Wallet.`,
       }, { status: 400 });
     }
 
@@ -168,7 +168,7 @@ export async function POST(req: NextRequest) {
       wallet: "FUND",
       amount: fundRequiredDec.negated(),
       referenceKey: `PKG_PURCHASE_${contract.id}_${caller.id}`,
-      description: `Activated Stake ($${amountUsdtDec.toFixed(2)} USDT) for ${beneficiary.customId} [P2P: $${fundRequiredDec.toFixed(2)}, Bonus: $${bonusUsed.toFixed(2)}]`,
+      description: `Activated Stake ($${amountUsdtDec.toFixed(2)} USDT) for ${beneficiary.customId} [Secondary: $${fundRequiredDec.toFixed(2)}, Bonus: $${bonusUsed.toFixed(2)}]`,
       sourceUserId: beneficiary.id,
     });
 
@@ -187,7 +187,7 @@ export async function POST(req: NextRequest) {
       userId: caller.id,
       action: "PACKAGE_ACTIVATION",
       category: "FINANCIAL",
-      description: `Activated Stake of $${amountUsdtDec.toFixed(2)} USDT for ${beneficiary.customId} (Bonus: $${bonusUsed.toFixed(2)}, P2P: $${fundRequiredDec.toFixed(2)})`,
+      description: `Activated Stake of $${amountUsdtDec.toFixed(2)} USDT for ${beneficiary.customId} (Bonus: $${bonusUsed.toFixed(2)}, Secondary: $${fundRequiredDec.toFixed(2)})`,
       req,
       metadata: {
         contractId: contract.id,

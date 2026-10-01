@@ -158,7 +158,7 @@ export function WalletsHubView({
 
       setInternalSuccess(
         data.message ||
-          `Successfully transferred $${numAmt.toFixed(2)} USDT from ${transferSource} to ${transferTarget === "MAIN" ? "Main" : "P2P"} Wallet!`
+          `Successfully transferred $${numAmt.toFixed(2)} USDT from ${transferSource} to ${transferTarget === "MAIN" ? "Main" : "Secondary"} Wallet!`
       );
       setTransferAmount("");
       setTransactionPin("");
@@ -194,7 +194,7 @@ export function WalletsHubView({
     }
 
     if (numAmt > p2pBalance) {
-      setP2pError(`Insufficient P2P Wallet balance ($${p2pBalance.toFixed(2)} USDT available).`);
+      setP2pError(`Insufficient Secondary Wallet balance ($${p2pBalance.toFixed(2)} USDT available).`);
       return;
     }
 
@@ -268,7 +268,7 @@ export function WalletsHubView({
             { id: "bonus", label: "Bonus Wallet" },
             { id: "roi", label: "ROI Wallet" },
             { id: "working", label: "Working Wallet" },
-            { id: "p2p", label: "P2P Wallet" },
+            { id: "p2p", label: "Secondary Wallet" },
             { id: "main", label: "Main Wallet" },
           ].map((tab) => (
             <button
@@ -364,11 +364,11 @@ export function WalletsHubView({
                 </div>
                 <div className="flex items-start gap-1.5">
                   <span className="text-[#00FFA3] font-bold">&bull;</span>
-                  <span><strong>Options:</strong> Transfer to Main (Withdrawal) OR P2P Wallet.</span>
+                  <span><strong>Options:</strong> Transfer to Main (Withdrawal) OR Secondary Wallet.</span>
                 </div>
                 <div className="flex items-start gap-1.5">
                   <span className="text-[#00FFA3] font-bold">&bull;</span>
-                  <span><strong>Internal Transfer:</strong> Direct credit to Main or P2P Wallet.</span>
+                  <span><strong>Internal Transfer:</strong> Direct credit to Main or Secondary Wallet.</span>
                 </div>
               </div>
             </div>
@@ -400,7 +400,7 @@ export function WalletsHubView({
                 }}
                 className="py-2.5 px-3 rounded-xl bg-[#00FFA3]/20 hover:bg-[#00FFA3] text-[#00FFA3] hover:text-slate-950 font-bold text-xs font-mono transition-all text-center border border-[#00FFA3]/30"
               >
-                &rarr; P2P Wallet
+                &rarr; Secondary Wallet
               </button>
             </div>
           </div>
@@ -432,7 +432,7 @@ export function WalletsHubView({
                 </div>
                 <div className="flex items-start gap-1.5">
                   <span className="text-[#00D2FF] font-bold">&bull;</span>
-                  <span><strong>Options:</strong> Transfer to Main (Withdrawal) OR P2P Wallet.</span>
+                  <span><strong>Options:</strong> Transfer to Main (Withdrawal) OR Secondary Wallet.</span>
                 </div>
                 <div className="flex items-start gap-1.5">
                   <span className="text-[#00D2FF] font-bold">&bull;</span>
@@ -468,25 +468,25 @@ export function WalletsHubView({
                 }}
                 className="py-2.5 px-3 rounded-xl bg-[#00D2FF]/20 hover:bg-[#00D2FF] text-[#00D2FF] hover:text-slate-950 font-bold text-xs font-mono transition-all text-center border border-[#00D2FF]/30"
               >
-                &rarr; P2P Wallet
+                &rarr; Secondary Wallet
               </button>
             </div>
           </div>
         )}
 
-        {/* 4. P2P WALLET */}
-        {(selectedWalletTab === "all" || selectedWalletTab === "p2p") && (
+        {/* 4. SECONDARY WALLET */}
+        {(selectedWalletTab === "all" || selectedWalletTab === "p2p" || selectedWalletTab === "secondary") && (
           <div className="glass-card-elevated glass-glow-top p-6 flex flex-col justify-between border-t-2 border-t-purple-400 relative overflow-hidden group">
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[10px] font-black uppercase tracking-wider text-purple-400 bg-purple-400/10 px-2.5 py-0.5 rounded-full border border-purple-400/30 font-mono">
-                  P2P TRANSFER &bull; ACTIVATION
+                  DEPOSIT &bull; ID ACTIVATION &bull; P2P
                 </span>
                 <Repeat className="w-5 h-5 text-purple-400" />
               </div>
 
               <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono">
-                P2P WALLET
+                SECONDARY WALLET
               </h3>
 
               <div className="text-3xl sm:text-4xl font-black text-purple-400 font-mono my-2">
@@ -496,20 +496,42 @@ export function WalletsHubView({
               <div className="p-3 rounded-xl bg-slate-900/60 border border-white/10 text-xs text-slate-700 dark:text-slate-300 space-y-2 mt-3 font-mono">
                 <div className="flex items-start gap-1.5">
                   <span className="text-purple-400 font-bold">&bull;</span>
-                  <span><strong>P2P Transfer:</strong> Send to another member's P2P wallet.</span>
+                  <span><strong>Deposit Request:</strong> Submit USDT BEP-20 deposit proof to credit this wallet directly.</span>
                 </div>
                 <div className="flex items-start gap-1.5">
                   <span className="text-purple-400 font-bold">&bull;</span>
-                  <span><strong>ID Activation:</strong> Activate any member ID using 10% Bonus Wallet utility.</span>
+                  <span><strong>ID Activation:</strong> Activate your own stake or any member's ID (up to 10% Bonus Wallet utility).</span>
                 </div>
                 <div className="flex items-start gap-1.5">
                   <span className="text-purple-400 font-bold">&bull;</span>
-                  <span><strong>Funded By:</strong> BEP-20 USDT deposits, ROI transfers, Working transfers.</span>
+                  <span><strong>P2P Transfer:</strong> Send funds instantly to another member's Secondary Wallet.</span>
+                </div>
+                <div className="flex items-start gap-1.5">
+                  <span className="text-purple-400 font-bold">&bull;</span>
+                  <span><strong>Funding Sources:</strong> Deposits, ROI transfers, Working transfers, P2P transfers.</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-5 pt-4 border-t border-white/10 grid grid-cols-2 gap-2">
+            <div className="mt-5 pt-4 border-t border-white/10 flex flex-col gap-2">
+              <div className="grid grid-cols-2 gap-2">
+                <button
+                  type="button"
+                  onClick={() => onNavigateTab && onNavigateTab("recharge")}
+                  className="py-2 px-3 rounded-xl bg-sky-500/20 hover:bg-sky-500 text-sky-300 hover:text-slate-950 border border-sky-500/30 font-bold text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5"
+                >
+                  <Wallet className="w-3.5 h-3.5" />
+                  <span>Deposit USDT</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onNavigateTab && onNavigateTab("stake-activate")}
+                  className="py-2 px-3 rounded-xl bg-[#00FFA3]/20 hover:bg-[#00FFA3] text-[#00FFA3] hover:text-slate-950 border border-[#00FFA3]/30 font-bold text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5"
+                >
+                  <Zap className="w-3.5 h-3.5" />
+                  <span>Activate Any ID</span>
+                </button>
+              </div>
               <button
                 type="button"
                 onClick={() => {
@@ -517,16 +539,10 @@ export function WalletsHubView({
                   const element = document.getElementById("transfer-engine-section");
                   if (element) element.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="py-2.5 px-3 rounded-xl bg-purple-500/15 hover:bg-purple-500 text-purple-300 hover:text-slate-950 border border-purple-500/30 font-bold text-xs font-mono transition-all text-center"
+                className="w-full py-2 px-3 rounded-xl bg-purple-500/15 hover:bg-purple-500 text-purple-300 hover:text-slate-950 border border-purple-500/30 font-bold text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5"
               >
-                Send P2P Transfer
-              </button>
-              <button
-                type="button"
-                onClick={() => onNavigateTab && onNavigateTab("stake-activate")}
-                className="py-2.5 px-3 rounded-xl bg-[#00FFA3]/20 hover:bg-[#00FFA3] text-[#00FFA3] hover:text-slate-950 border border-[#00FFA3]/30 font-bold text-xs font-mono transition-all text-center"
-              >
-                Activate Member ID
+                <Repeat className="w-3.5 h-3.5" />
+                <span>Send P2P Transfer &rarr;</span>
               </button>
             </div>
           </div>
@@ -610,7 +626,7 @@ export function WalletsHubView({
               }`}
             >
               <Repeat className="w-4 h-4" />
-              <span>External Wallet Transfer Engine (P2P)</span>
+              <span>External Wallet Transfer Engine (Secondary Wallet P2P)</span>
             </button>
           </div>
 
@@ -620,7 +636,7 @@ export function WalletsHubView({
         </div>
 
         {/* -------------------------------------------------------------
-            ENGINE 1: INTERNAL WALLET TRANSFER (ROI & Working -> Main/P2P)
+            ENGINE 1: INTERNAL WALLET TRANSFER (ROI & Working -> Main/Secondary)
             ------------------------------------------------------------- */}
         {activeEngine === "internal" && (
           <div className="space-y-5 animate-in fade-in duration-200">
@@ -630,7 +646,7 @@ export function WalletsHubView({
                 <span>Internal Wallet Transfer Engine</span>
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-mono">
-                Convert your ROI or Working Wallet earnings to Main (Withdrawal) Wallet or P2P Wallet.
+                Convert your ROI or Working Wallet earnings to Main (Withdrawal) Wallet or Secondary Wallet.
               </p>
             </div>
 
@@ -722,11 +738,11 @@ export function WalletsHubView({
                           : "bg-slate-900/60 border-white/10 text-slate-500 dark:text-slate-400 hover:text-white"
                       }`}
                     >
-                      <span className="text-[10px] uppercase font-bold block text-slate-500 dark:text-slate-400">P2P WALLET</span>
+                      <span className="text-[10px] uppercase font-bold block text-slate-500 dark:text-slate-400">SECONDARY WALLET</span>
                       <span className="text-lg font-extrabold text-purple-400 block mt-0.5">
-                        P2P / Stake
+                        Deposit / Activation
                       </span>
-                      <span className="text-[10px] text-slate-500 block">Transfer to members or activate ID</span>
+                      <span className="text-[10px] text-slate-500 block">Activate any ID or send P2P</span>
                     </button>
                   </div>
                 </div>
@@ -807,7 +823,7 @@ export function WalletsHubView({
                   <>
                     <ArrowRightLeft className="w-4 h-4" />
                     <span>
-                      Transfer ${Number(transferAmount || 0).toFixed(2)} USDT from {transferSource} to {transferTarget === "MAIN" ? "Main" : "P2P"} Wallet
+                      Transfer ${Number(transferAmount || 0).toFixed(2)} USDT from {transferSource} to {transferTarget === "MAIN" ? "Main" : "Secondary"} Wallet
                     </span>
                   </>
                 )}
@@ -817,17 +833,17 @@ export function WalletsHubView({
         )}
 
         {/* -------------------------------------------------------------
-            ENGINE 2: EXTERNAL WALLET TRANSFER (P2P to P2P Between Members)
+            ENGINE 2: EXTERNAL WALLET TRANSFER (Secondary Wallet P2P Between Members)
             ------------------------------------------------------------- */}
         {activeEngine === "external" && (
           <div className="space-y-5 animate-in fade-in duration-200">
             <div>
               <h3 className="text-base sm:text-lg font-bold text-white tracking-tight font-mono flex items-center gap-2">
                 <Repeat className="w-5 h-5 text-purple-400" />
-                <span>External Wallet Transfer Engine (P2P)</span>
+                <span>External Wallet Transfer Engine (Secondary Wallet P2P)</span>
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-mono">
-                Transfer P2P Wallet funds directly to any member&apos;s P2P Wallet for peer activations and team coordination.
+                Transfer Secondary Wallet funds directly to any member&apos;s Secondary Wallet for peer activations and team coordination.
               </p>
             </div>
 
@@ -855,7 +871,7 @@ export function WalletsHubView({
                   </label>
                   <div className="p-4 rounded-2xl bg-purple-500/10 border border-purple-500/30 font-mono">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] uppercase font-bold text-purple-300">P2P WALLET</span>
+                      <span className="text-[10px] uppercase font-bold text-purple-300">SECONDARY WALLET</span>
                       <span className="text-[10px] px-2 py-0.5 rounded bg-purple-500/20 text-purple-200 font-extrabold">
                         SOURCE
                       </span>
@@ -864,7 +880,7 @@ export function WalletsHubView({
                       ${p2pBalance.toFixed(2)} <span className="text-xs font-sans text-slate-500 dark:text-slate-400">USDT</span>
                     </div>
                     <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
-                      Available balance for peer transfers and member activations.
+                      Available balance for deposit recharges, peer transfers, and member activations.
                     </p>
                   </div>
                 </div>
@@ -916,7 +932,7 @@ export function WalletsHubView({
                     3. Transfer Amount ($ USDT)
                   </label>
                   <span className="text-slate-500 dark:text-slate-400">
-                    Available in P2P Wallet: <strong className="text-white">${p2pBalance.toFixed(2)}</strong>
+                    Available in Secondary Wallet: <strong className="text-white">${p2pBalance.toFixed(2)}</strong>
                   </span>
                 </div>
 
@@ -984,7 +1000,7 @@ export function WalletsHubView({
                 {p2pLoading ? (
                   <>
                     <RefreshCw className="w-4 h-4 animate-spin" />
-                    <span>Executing P2P Transfer...</span>
+                    <span>Executing Secondary Wallet Transfer...</span>
                   </>
                 ) : (
                   <>

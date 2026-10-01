@@ -78,17 +78,17 @@ export async function POST(req: NextRequest) {
       data: { status: "APPROVED", adminNote: cleanedAdminNote, reviewedAt: new Date() },
     });
 
-    // Credit user's Fund Wallet
+    // Credit user's Secondary Wallet
     await executeLedgerTransaction({
       userId: deposit.userId,
       type: "DEPOSIT",
       wallet: "FUND",
       amount: amountUsdtDec,
       referenceKey: `DEPOSIT_APPROVED_${deposit.id}`,
-      description: `Approved USDT BEP-20 Deposit (Tx: ${deposit.txHash})`,
+      description: `Approved USDT BEP-20 Deposit into Secondary Wallet (Tx: ${deposit.txHash})`,
     });
 
-    return NextResponse.json({ success: true, message: "Deposit approved and Fund Wallet credited." });
+    return NextResponse.json({ success: true, message: "Deposit approved and Secondary Wallet credited." });
   } else if (action === "REJECT") {
     await db.depositRequest.update({
       where: { id: depositId },

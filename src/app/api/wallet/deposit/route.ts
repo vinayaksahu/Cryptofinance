@@ -60,7 +60,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: "Deposit submitted! Funds will be credited to your Fund Wallet upon admin blockchain verification.",
+      message: "Deposit submitted! Funds will be credited to your Secondary Wallet upon admin blockchain verification.",
       depositId: deposit.id,
     });
   } catch (error: any) {

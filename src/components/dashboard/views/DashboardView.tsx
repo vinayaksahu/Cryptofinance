@@ -360,20 +360,20 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
       </div>
 
       {/* =========================================================================
-          SLIDE 04: THE 3-WALLET ENGINE SECTION (Core Architecture)
+          MULTI-WALLET ENGINE SECTION (Core Architecture)
           ========================================================================= */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <Layers className="w-4 h-4 text-sky-500 dark:text-[#00D2FF]" />
             <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white tracking-tight uppercase font-mono">
-              The 3-Wallet Engine (Triple-Isolated Liquidity)
+              The Protocol Wallet Engine (Multi-Wallet Ecosystem)
             </h3>
           </div>
           <span className="text-xs text-slate-600 dark:text-slate-400 font-mono">Slide 04 - 08 Protocol</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {/* Card 1: Bonus Wallet */}
           <div className="glass-card-elevated p-5 flex flex-col justify-between border-t-2 border-t-indigo-500 relative overflow-hidden group">
             <div>
@@ -384,7 +384,7 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
                 <Gift className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
               </div>
 
-              <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1 font-mono">
                 BONUS WALLET
               </div>
 
@@ -393,7 +393,7 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
               </div>
 
               <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
-                Holds $1.00 Self + $0.40/Level bonuses. Subsidizes up to <strong>10% of any activation or compounding</strong>!
+                Holds $1.00 Self + $0.40/Level bonuses. Subsidizes up to <strong>10% of any ID activation or reinvestment</strong>!
               </p>
             </div>
 
@@ -419,7 +419,7 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
                 <Zap className="w-4 h-4 text-emerald-500 dark:text-[#00FFA3]" />
               </div>
 
-              <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1 font-mono">
                 ROI WALLET
               </div>
 
@@ -428,7 +428,7 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
               </div>
 
               <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
-                Automated 4% daily returns from 2X pool. Transfer directly to <strong>Main Wallet</strong> or <strong>P2P Wallet</strong>.
+                Automated 4% daily returns from 2X pool. Transfer directly to <strong>Main Wallet</strong> or <strong>Secondary Wallet</strong>.
               </p>
             </div>
 
@@ -438,7 +438,7 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
                 onClick={() => setActiveTab("wallet-roi")}
                 className="text-emerald-600 dark:text-[#00FFA3] hover:text-emerald-700 dark:hover:text-white font-bold font-mono flex items-center gap-1 transition"
               >
-                <span>Transfer &rarr; Main / P2P</span>
+                <span>Transfer &rarr; Main / Secondary</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -454,7 +454,7 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
                 <Wallet className="w-4 h-4 text-sky-500 dark:text-[#00D2FF]" />
               </div>
 
-              <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">
+              <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1 font-mono">
                 WORKING WALLET
               </div>
 
@@ -463,7 +463,7 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
               </div>
 
               <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
-                Direct referrals &amp; royalties. Transfer directly to <strong>Main Wallet</strong> or <strong>P2P Wallet</strong>.
+                Direct referrals &amp; royalties. Transfer directly to <strong>Main Wallet</strong> or <strong>Secondary Wallet</strong>.
               </p>
             </div>
 
@@ -473,8 +473,47 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
                 onClick={() => setActiveTab("wallet-working")}
                 className="text-sky-600 dark:text-[#00D2FF] hover:text-sky-700 dark:hover:text-white font-bold font-mono flex items-center gap-1 transition"
               >
-                <span>Transfer &rarr; Main / P2P</span>
+                <span>Transfer &rarr; Main / Secondary</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Card 4: Secondary Wallet */}
+          <div className="glass-card-elevated p-5 flex flex-col justify-between border-t-2 border-t-purple-400 relative overflow-hidden group">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <span className="text-[10px] font-black uppercase tracking-wider text-purple-400 bg-purple-400/10 px-2.5 py-0.5 rounded-full border border-purple-400/30 font-mono">
+                  DEPOSIT &bull; ACTIVATION &bull; P2P
+                </span>
+                <Wallet className="w-4 h-4 text-purple-400" />
+              </div>
+
+              <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1 font-mono">
+                SECONDARY WALLET
+              </div>
+
+              <div className="text-2xl sm:text-3xl font-black text-purple-400 font-mono my-1">
+                {currency} {p2pWalletBalance.toFixed(2)}
+              </div>
+
+              <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+                Deposit request funds credit here. Use to activate your own stake, activate any member ID, or send P2P transfers.
+              </p>
+            </div>
+
+            <div className="mt-4 pt-3 border-t border-slate-200/80 dark:border-white/10 flex items-center justify-between text-xs">
+              <button
+                onClick={() => setActiveTab("recharge")}
+                className="text-sky-400 hover:text-sky-300 font-bold font-mono flex items-center gap-1 transition"
+              >
+                <span>+ Deposit</span>
+              </button>
+              <button
+                onClick={() => setActiveTab("stake-activate")}
+                className="text-emerald-400 hover:text-emerald-300 font-bold font-mono flex items-center gap-1 transition"
+              >
+                <span>Activate ID &rarr;</span>
               </button>
             </div>
           </div>

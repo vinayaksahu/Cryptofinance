@@ -135,23 +135,23 @@ export function RechargeView({ user, onRefresh }: RechargeViewProps) {
               </span>
             )}
           </h1>
-          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">
-            Deposit USDT on BNB Smart Chain (BEP-20) to credit your wallet.
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 font-mono">
+            Deposit USDT on BNB Smart Chain (BEP-20) to credit your <strong>Secondary Wallet</strong> for ID activations &amp; P2P transfers.
           </p>
         </div>
-        <div className="text-xs text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1.5">
+        <div className="text-xs text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1.5 font-mono">
           <span>🏠 Package</span>
           <span>/</span>
-          <span className="text-slate-800 dark:text-slate-200 font-semibold">Recharge</span>
+          <span className="text-slate-800 dark:text-slate-200 font-semibold">Deposit to Secondary Wallet</span>
         </div>
       </div>
 
-      {/* Safety Warning Banner */}
-      <div className="bg-amber-500/10 border border-amber-500/30 rounded-2xl p-4 flex items-start gap-3">
-        <ShieldAlert className="w-5 h-5 text-amber-400 shrink-0 mt-0.5" />
-        <div className="text-xs text-amber-200/90 leading-relaxed">
-          <strong className="text-amber-300 font-bold block mb-0.5">Network Safety Notice:</strong>
-          Send only <span className="font-semibold text-white">USDT</span> on the <span className="font-semibold text-white">BNB Smart Chain (BEP-20)</span> network to this address. Sending assets through another network or sending any other token may result in permanent loss.
+      {/* Safety Warning & Wallet Utility Banner */}
+      <div className="bg-sky-500/10 border border-sky-500/30 rounded-2xl p-4 flex items-start gap-3">
+        <ShieldAlert className="w-5 h-5 text-sky-400 shrink-0 mt-0.5" />
+        <div className="text-xs text-sky-200/90 leading-relaxed font-mono">
+          <strong className="text-sky-300 font-bold block mb-0.5">Secondary Wallet Deposit Information:</strong>
+          Approved USDT deposits will directly credit your <span className="font-bold text-white">Secondary Wallet</span>. Use your Secondary Wallet balance to activate your own ID, activate any member's ID (with up to 10% Bonus Wallet utility), or transfer to peers via P2P.
         </div>
       </div>
 

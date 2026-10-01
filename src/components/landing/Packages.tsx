@@ -257,8 +257,8 @@ export function Packages() {
             <span className="text-slate-500 dark:text-slate-400">ROI and Working Wallets are 100% withdrawable with minimum $2.00 cashout.</span>
           </div>
           <div className="glass-panel p-5">
-            <span className="font-bold text-sky-600 dark:text-sky-400 block mb-1">Internal P2P Transfers</span>
-            <span className="text-slate-500 dark:text-slate-400">Instant peer-to-peer transfers from P2P Wallet to any member.</span>
+            <span className="font-bold text-sky-600 dark:text-sky-400 block mb-1">Internal Secondary Transfers</span>
+            <span className="text-slate-500 dark:text-slate-400">Instant peer transfers from Secondary Wallet to any member for ID activations.</span>
           </div>
           <div className="glass-panel p-5">
             <span className="font-bold text-sky-600 dark:text-sky-400 block mb-1">Triple-Isolated Solvency</span>

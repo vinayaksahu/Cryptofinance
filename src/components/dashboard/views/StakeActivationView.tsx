@@ -21,11 +21,12 @@ interface StakeActivationViewProps {
   user: any;
   onRefresh?: () => void;
   onRefreshUser?: () => void;
+  onNavigateTab?: (tab: string) => void;
 }
 
 const PRESET_AMOUNTS = [2, 20, 50, 100, 250, 500, 1000, 2500, 5000];
 
-export function StakeActivationView({ user, onRefresh, onRefreshUser }: StakeActivationViewProps) {
+export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigateTab }: StakeActivationViewProps) {
   // Amount & Slider state
   const [amount, setAmount] = useState<number>(100);
   const [useBonus, setUseBonus] = useState<boolean>(true);
@@ -113,7 +114,7 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser }: StakeAct
 
     if (p2pBalance < p2pToPay) {
       setError(
-        `Insufficient P2P Wallet balance ($${p2pBalance.toFixed(2)} USDT available). You need $${p2pToPay.toFixed(2)} USDT.`
+        `Insufficient Secondary Wallet balance ($${p2pBalance.toFixed(2)} USDT available). You need $${p2pToPay.toFixed(2)} USDT.`
       );
       return;
     }
@@ -149,7 +150,7 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser }: StakeAct
 
       setSuccess(
         data.message ||
-          `Successfully activated $${validAmount.toFixed(2)} USDT stake! ($${bonusUsed.toFixed(2)} from Bonus Wallet, $${p2pToPay.toFixed(2)} from P2P Wallet).`
+          `Successfully activated $${validAmount.toFixed(2)} USDT stake! ($${bonusUsed.toFixed(2)} from Bonus Wallet, $${p2pToPay.toFixed(2)} from Secondary Wallet).`
       );
       setTransactionPin("");
       if (beneficiaryType === "other") {
@@ -182,7 +183,7 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser }: StakeAct
         {/* Live Wallet Balances Pill */}
         <div className="flex items-center gap-2.5">
           <div className="glass-panel px-3.5 py-1.5 flex items-center gap-2">
-            <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 font-mono">P2P WALLET:</span>
+            <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 font-mono">SECONDARY WALLET:</span>
             <span className="text-sm font-extrabold text-[#00D2FF] font-mono">${p2pBalance.toFixed(2)}</span>
           </div>
           <div className="glass-panel px-3.5 py-1.5 flex items-center gap-2">
@@ -392,7 +393,7 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser }: StakeAct
                 </span>
               </div>
               <div>
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 block">From P2P Wallet</span>
+                <span className="text-[10px] text-slate-500 dark:text-slate-400 block">From Secondary Wallet</span>
                 <span className="font-extrabold text-[#00D2FF]">${p2pToPay.toFixed(2)}</span>
               </div>
             </div>
@@ -494,21 +495,33 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser }: StakeAct
               <div className="flex items-start gap-2">
                 <Check className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
                 <span>
-                  <strong>P2P Funded:</strong> Balance deducted instantly from your P2P/Fund Wallet (0% transfer fee).
+                  <strong>Secondary Wallet Funded:</strong> Balance deducted instantly from your Secondary Wallet (deposit request, transfer, or P2P).
                 </span>
               </div>
             </div>
           </div>
 
           {/* Quick Help Card */}
-          <div className="p-5 rounded-2xl bg-slate-900/50 border border-white/10 space-y-2">
-            <h4 className="text-xs font-bold text-white uppercase font-mono flex items-center gap-1.5">
-              <Wallet className="w-4 h-4 text-[#00D2FF]" />
-              Need P2P Wallet Funds?
-            </h4>
+          <div className="p-5 rounded-2xl bg-slate-900/50 border border-white/10 space-y-3">
+            <div className="flex items-center justify-between">
+              <h4 className="text-xs font-bold text-white uppercase font-mono flex items-center gap-1.5">
+                <Wallet className="w-4 h-4 text-[#00D2FF]" />
+                Need Secondary Wallet Funds?
+              </h4>
+            </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-              If your P2P Wallet balance is low, you can recharge using BEP-20 USDT deposit, or receive P2P funds from another member with 0% fee.
+              If your Secondary Wallet balance is low, submit a Deposit Request using BEP-20 USDT, transfer from ROI/Working Wallet, or receive funds from another member via P2P.
             </p>
+            {onNavigateTab && (
+              <button
+                type="button"
+                onClick={() => onNavigateTab("recharge")}
+                className="w-full py-2.5 px-4 rounded-xl bg-sky-500/20 hover:bg-sky-500 text-sky-300 hover:text-slate-950 border border-sky-500/30 font-bold text-xs font-mono transition-all flex items-center justify-center gap-2"
+              >
+                <Wallet className="w-4 h-4" />
+                <span>Deposit USDT (Recharge Secondary Wallet)</span>
+              </button>
+            )}
           </div>
         </div>
       </div>

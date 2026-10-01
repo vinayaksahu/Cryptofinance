@@ -45,7 +45,7 @@ export async function POST(req: NextRequest) {
 
     if (targetWallet !== "MAIN" && targetWallet !== "P2P") {
       return NextResponse.json(
-        { error: "Invalid target wallet. You can only transfer to Main Wallet or P2P Wallet." },
+        { error: "Invalid target wallet. You can only transfer to Main Wallet or Secondary Wallet." },
         { status: 400 }
       );
     }
@@ -103,7 +103,7 @@ export async function POST(req: NextRequest) {
       userId: user.id,
       action: "WALLET_TRANSFER",
       category: "FINANCIAL",
-      description: `Transferred $${numAmount.toFixed(2)} USDT from ${sourceWallet} Wallet to ${targetWallet} Wallet`,
+      description: `Transferred $${numAmount.toFixed(2)} USDT from ${sourceWallet} Wallet to ${targetWallet === "P2P" ? "Secondary" : "Main"} Wallet`,
       req,
       metadata: {
         sourceWallet,
@@ -116,7 +116,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({
       success: true,
-      message: `Successfully transferred $${numAmount.toFixed(2)} USDT from ${sourceWallet} Wallet to ${targetWallet === "MAIN" ? "Main (Withdrawal)" : "P2P"} Wallet!`,
+      message: `Successfully transferred $${numAmount.toFixed(2)} USDT from ${sourceWallet} Wallet to ${targetWallet === "MAIN" ? "Main (Withdrawal)" : "Secondary"} Wallet!`,
       transferredAmount: numAmount,
       balances: updatedBalances,
     });
