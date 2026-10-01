@@ -74,7 +74,20 @@ export async function GET(req: NextRequest) {
     // Determine how many days have elapsed since contract activation in Dubai days
     const contractCreatedDubai = getDubaiTimeInfo(contract.createdAt);
     const msSinceStart = Math.max(0, dubaiInfo.startOfDayMs - contractCreatedDubai.startOfDayMs);
-    const calendarDaysElapsed = Math.floor(msSinceStart / (24 * 60 * 60 * 1000));
+    const isLaunchDateContract = contractCreatedDubai.dateStr <= "2026-09-21";
+    const calendarDaysElapsed = isLaunchDateContract
+      ? Math.floor(msSinceStart / (24 * 60 * 60 * 1000)) + 1
+      : Math.floor(msSinceStart / (24 * 60 * 60 * 1000));
+
+    // Activation Day Rule: New contracts have zero ROI on investment day (Day 0)
+    // Day 1 starts only after activation day closes at 00:00 GST
+    const isActivationDay = calendarDaysElapsed === 0;
+
+    // Adjust target closing timestamp:
+    // If it's activation day, countdown is to 00:00:00 GST tomorrow (Day 1 start)
+    if (isActivationDay) {
+      targetClosingTimestamp = dubaiInfo.endOfDayMs;
+    }
 
     // Days completed are at least contract.daysPaid
     const completedDaysCount = contract.daysPaid;
@@ -97,8 +110,8 @@ export async function GET(req: NextRequest) {
 
     // Build the Day-by-Day Ledger Rows strictly containing:
     // 1. Completed Days
-    // 2. Today's Row (Active / Ready for Action)
-    // 3. Upcoming Row (Next scheduled day)
+    // 2. Today's Row (Active / Ready for Action - only if elapsed >= 1)
+    // 3. Upcoming Row(s)
     const rows: Array<{
       day: number;
       balance: number;
@@ -143,8 +156,39 @@ export async function GET(req: NextRequest) {
       currentBalance = afterBalance;
     }
 
-    // 2. Today's Row (if contract is still active and not matured)
-    if (!isMatured) {
+    // 2. Active / Upcoming Rows
+    if (isActivationDay) {
+      // Contract was activated TODAY: Day 1 begins tomorrow at 00:00 GST
+      // No ROI is active or claimable today.
+      const day1Roi = dailyRoiAmount;
+      rows.push({
+        day: 1,
+        balance: currentBalance,
+        roi: day1Roi,
+        action: "UPCOMING",
+        after: +(currentBalance - day1Roi).toFixed(4),
+        cumPayout: +(runningCumPayout + day1Roi).toFixed(4),
+        date: "Starts Tomorrow (00:00 GST)",
+        isToday: false,
+        canAction: false,
+      });
+
+      if (contract.tenureDays >= 2) {
+        const day2Balance = +(currentBalance - day1Roi).toFixed(4);
+        rows.push({
+          day: 2,
+          balance: day2Balance,
+          roi: day1Roi,
+          action: "UPCOMING",
+          after: +(day2Balance - day1Roi).toFixed(4),
+          cumPayout: +(runningCumPayout + 2 * day1Roi).toFixed(4),
+          date: "Upcoming (00:00 GST)",
+          isToday: false,
+          canAction: false,
+        });
+      }
+    } else if (!isMatured) {
+      // Calendar day >= 1: contract is eligible for active daily cycle
       const todayDayNum = completedDaysCount + 1;
 
       if (isTodayProcessed) {
@@ -160,7 +204,6 @@ export async function GET(req: NextRequest) {
           afterBalance = +(currentBalance - roiAmount).toFixed(4);
         }
 
-        // Update the last row if it was today, or push
         if (rows.length < todayDayNum) {
           rows.push({
             day: todayDayNum,
@@ -176,7 +219,7 @@ export async function GET(req: NextRequest) {
           currentBalance = afterBalance;
         }
       } else {
-        // Today is active and pending user action (or will auto-claim at closing)
+        // Today is active and pending user action (or will auto-claim at 23:59 GST)
         rows.push({
           day: todayDayNum,
           balance: currentBalance,
@@ -193,7 +236,7 @@ export async function GET(req: NextRequest) {
         runningCumPayout = +(runningCumPayout + dailyRoiAmount).toFixed(4);
       }
 
-      // 3. Upcoming Row (Tomorrow's ROI)
+      // Upcoming Row (Tomorrow's ROI)
       const upcomingDayNum = rows.length + 1;
       if (upcomingDayNum <= contract.tenureDays) {
         rows.push({
@@ -220,8 +263,10 @@ export async function GET(req: NextRequest) {
       tenureDays: contract.tenureDays,
       daysPaid: contract.daysPaid,
       closingTimestamp: targetClosingTimestamp,
-      closingGstFormatted: "23:59:59 GST",
+      closingGstFormatted: isActivationDay ? "Tomorrow 00:00 GST" : "23:59:59 GST",
       currentGstFormatted: dubaiInfo.currentDubaiFormatted,
+      isActivationDay,
+      calendarDaysElapsed,
       isTodayProcessed,
       rows,
     });
@@ -264,6 +309,29 @@ export async function POST(req: NextRequest) {
 
     if (contract.daysPaid >= contract.tenureDays) {
       return NextResponse.json({ error: "Contract has already completed full tenure." }, { status: 400 });
+    }
+
+    // Calculate calendar days elapsed since contract activation in Dubai days
+    const contractCreatedDubai = getDubaiTimeInfo(contract.createdAt);
+    const msSinceStart = Math.max(0, dubaiInfo.startOfDayMs - contractCreatedDubai.startOfDayMs);
+    const isLaunchDateContract = contractCreatedDubai.dateStr <= "2026-09-21";
+    const calendarDaysElapsed = isLaunchDateContract
+      ? Math.floor(msSinceStart / (24 * 60 * 60 * 1000)) + 1
+      : Math.floor(msSinceStart / (24 * 60 * 60 * 1000));
+
+    const maxEligibleDays = Math.min(calendarDaysElapsed, contract.tenureDays);
+
+    if (contract.daysPaid >= maxEligibleDays) {
+      if (calendarDaysElapsed === 0) {
+        return NextResponse.json(
+          { error: "Daily ROI begins on the next day (00:00 GST) following your stake activation. No yield is available today." },
+          { status: 400 }
+        );
+      }
+      return NextResponse.json(
+        { error: "Today's daily ROI has already been claimed or reinvested. Next cycle begins at 00:00 GST." },
+        { status: 400 }
+      );
     }
 
     // Check if today's ROI has already been claimed or reinvested

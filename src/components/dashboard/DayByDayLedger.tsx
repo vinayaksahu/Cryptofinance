@@ -44,6 +44,8 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
     closingTimestamp?: number;
     closingGstFormatted?: string;
     currentGstFormatted?: string;
+    isActivationDay?: boolean;
+    calendarDaysElapsed?: number;
     isTodayProcessed?: boolean;
     rows?: LedgerRow[];
   } | null>(null);
@@ -223,39 +225,60 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
       </div>
 
       {/* Auto-Claim Closing Countdown Banner (GST Time) */}
-      <div className="rounded-2xl p-4 bg-gradient-to-r from-slate-900 via-[#0B132B] to-slate-900 border border-[#00FFA3]/30 flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs font-mono">
+      <div className={`rounded-2xl p-4 bg-gradient-to-r ${
+        data?.isActivationDay
+          ? "from-slate-900 via-[#0B1E3B] to-slate-900 border-[#00D2FF]/40"
+          : "from-slate-900 via-[#0B132B] to-slate-900 border-[#00FFA3]/30"
+      } border flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs font-mono`}>
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-[#00FFA3]/15 border border-[#00FFA3]/30 flex items-center justify-center shrink-0">
-            <Clock className="w-5 h-5 text-[#00FFA3] animate-pulse" />
+          <div className={`w-9 h-9 rounded-xl ${
+            data?.isActivationDay
+              ? "bg-[#00D2FF]/15 border-[#00D2FF]/30"
+              : "bg-[#00FFA3]/15 border-[#00FFA3]/30"
+          } border flex items-center justify-center shrink-0`}>
+            {data?.isActivationDay ? (
+              <Sparkles className="w-5 h-5 text-[#00D2FF] animate-pulse" />
+            ) : (
+              <Clock className="w-5 h-5 text-[#00FFA3] animate-pulse" />
+            )}
           </div>
           <div>
             <div className="flex items-center gap-2">
               <span className="font-bold text-white uppercase tracking-wider text-[11px]">
-                Auto-Claim Closing Countdown (GST)
+                {data?.isActivationDay
+                  ? "Stake Activation Period (Day 0) • 0% ROI Today"
+                  : "Auto-Claim Closing Countdown (GST)"}
               </span>
-              <span className="w-2 h-2 rounded-full bg-[#00FFA3] animate-ping" />
+              <span className={`w-2 h-2 rounded-full ${data?.isActivationDay ? "bg-[#00D2FF]" : "bg-[#00FFA3]"} animate-ping`} />
             </div>
             <p className="text-[11px] text-slate-400 mt-0.5">
-              Daily closing occurs at <strong>23:59:59 GST (Dubai Midnight)</strong>. Unclaimed returns automatically auto-claim to your <strong>ROI Wallet</strong>!
+              {data?.isActivationDay
+                ? "Your stake is active! Day 1 yield cycle begins tomorrow at 00:00 GST (Dubai Midnight). Today is the activation period, so zero ROI is deducted or claimed today."
+                : "Daily closing occurs at 23:59:59 GST (Dubai Midnight). Unclaimed returns automatically auto-claim to your ROI Wallet!"}
             </p>
           </div>
         </div>
 
-        {/* Big Neon Countdown Pill */}
-        <div className="flex items-center gap-1 self-start md:self-auto bg-slate-950/80 px-4 py-2 rounded-2xl border border-white/10 shadow-inner">
-          <div className="text-center px-1">
-            <span className="text-base sm:text-lg font-black text-[#00FFA3]">{countdown.hours}</span>
-            <span className="text-[9px] block text-slate-500 font-sans">HRS</span>
-          </div>
-          <span className="text-slate-600 font-bold text-base pb-3">:</span>
-          <div className="text-center px-1">
-            <span className="text-base sm:text-lg font-black text-[#00FFA3]">{countdown.minutes}</span>
-            <span className="text-[9px] block text-slate-500 font-sans">MIN</span>
-          </div>
-          <span className="text-slate-600 font-bold text-base pb-3">:</span>
-          <div className="text-center px-1">
-            <span className="text-base sm:text-lg font-black text-[#00FFA3]">{countdown.seconds}</span>
-            <span className="text-[9px] block text-slate-500 font-sans">SEC</span>
+        {/* Big Countdown Pill */}
+        <div className="flex flex-col items-start md:items-end gap-1">
+          <span className="text-[9px] text-slate-400 uppercase tracking-widest font-mono">
+            {data?.isActivationDay ? "Day 1 Starts In" : "Auto-Claim In"}
+          </span>
+          <div className="flex items-center gap-1 self-start md:self-auto bg-slate-950/80 px-4 py-2 rounded-2xl border border-white/10 shadow-inner">
+            <div className="text-center px-1">
+              <span className={`text-base sm:text-lg font-black ${data?.isActivationDay ? "text-[#00D2FF]" : "text-[#00FFA3]"}`}>{countdown.hours}</span>
+              <span className="text-[9px] block text-slate-500 font-sans">HRS</span>
+            </div>
+            <span className="text-slate-600 font-bold text-base pb-3">:</span>
+            <div className="text-center px-1">
+              <span className={`text-base sm:text-lg font-black ${data?.isActivationDay ? "text-[#00D2FF]" : "text-[#00FFA3]"}`}>{countdown.minutes}</span>
+              <span className="text-[9px] block text-slate-500 font-sans">MIN</span>
+            </div>
+            <span className="text-slate-600 font-bold text-base pb-3">:</span>
+            <div className="text-center px-1">
+              <span className={`text-base sm:text-lg font-black ${data?.isActivationDay ? "text-[#00D2FF]" : "text-[#00FFA3]"}`}>{countdown.seconds}</span>
+              <span className="text-[9px] block text-slate-500 font-sans">SEC</span>
+            </div>
           </div>
         </div>
       </div>
@@ -384,9 +407,13 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
                       )}
 
                       {row.action === "UPCOMING" && (
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800/40 border border-dashed border-slate-600/50 text-slate-400 text-xs font-mono">
+                        <div className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-mono ${
+                          row.date.includes("Tomorrow") || (row.day === 1 && data?.isActivationDay)
+                            ? "bg-sky-500/15 border border-[#00D2FF]/40 text-[#00D2FF] font-bold"
+                            : "bg-slate-800/40 border border-dashed border-slate-600/50 text-slate-400"
+                        }`}>
                           <span>⏳</span>
-                          <span>Upcoming (00:00 GST)</span>
+                          <span>{row.date.includes("Tomorrow") ? "Starts Tomorrow (00:00 GST)" : "Upcoming (00:00 GST)"}</span>
                         </div>
                       )}
                     </td>
@@ -412,7 +439,11 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
       <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-slate-500 dark:text-slate-400 font-mono border-t border-slate-200/80 dark:border-white/10">
         <div className="flex items-center gap-1.5">
           <HelpCircle className="w-3.5 h-3.5 text-[#00D2FF]" />
-          <span>If not manually reinvested, today&apos;s return will auto-credit to ROI Wallet at 23:59 GST.</span>
+          <span>
+            {data?.isActivationDay
+              ? "Stake activated today. Daily 2% yield and Reinvest/Claim actions will unlock starting tomorrow at 00:00 GST."
+              : "If not manually reinvested, today's return will auto-credit to ROI Wallet at 23:59 GST."}
+          </span>
         </div>
         <span className="text-slate-500">2X Contract Allocation Engine &bull; Slide 10-12</span>
       </div>
