@@ -20,6 +20,8 @@ import {
   ShieldAlert,
   Sparkles,
   Zap,
+  Layers,
+  Wallet,
 } from "lucide-react";
 
 interface MemberSidebarProps {
@@ -43,11 +45,11 @@ export function MemberSidebar({
 }: MemberSidebarProps) {
   const router = useRouter();
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({
+    wallets: false,
     downline: false,
     income: false,
     transactional: false,
     reports: false,
-    packages: false,
   });
 
   const toggleMenu = (key: string) => {
@@ -56,8 +58,8 @@ export function MemberSidebar({
 
   const handleSelectTab = (tab: string) => {
     setActiveTab(tab);
-    const parentKey = tab.startsWith("package-")
-      ? "packages"
+    const parentKey = tab.startsWith("wallet")
+      ? "wallets"
       : tab.startsWith("downline-")
       ? "downline"
       : tab.startsWith("income-")
@@ -68,11 +70,11 @@ export function MemberSidebar({
       ? "reports"
       : null;
     setOpenMenus({
+      wallets: parentKey === "wallets",
       downline: parentKey === "downline",
       income: parentKey === "income",
       transactional: parentKey === "transactional",
       reports: parentKey === "reports",
-      packages: parentKey === "packages",
     });
     if (typeof window !== "undefined" && window.innerWidth < 1024) {
       setIsOpen(false);
@@ -179,55 +181,116 @@ export function MemberSidebar({
             <span className={isCollapsed ? "lg:hidden" : "inline"}>Deposit USDT</span>
           </button>
 
-          {/* Package Activation Accordion */}
+          {/* Activate Stake (Single Unified Entry Point) */}
+          <button
+            type="button"
+            onClick={() => handleSelectTab("stake-activate")}
+            title={isCollapsed ? "Activate Stake" : undefined}
+            className={`w-full flex items-center ${
+              isCollapsed ? "lg:justify-center lg:px-2" : "gap-3.5 px-3.5"
+            } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
+              activeTab === "stake-activate" || activeTab === "package-base" || activeTab === "package-fd"
+                ? "bg-gradient-to-r from-[#00FFA3]/25 via-[#00FFA3]/10 to-transparent text-white border border-[#00FFA3]/40 shadow-lg shadow-[#00FFA3]/15"
+                : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
+            }`}
+          >
+            <Zap className="w-4 h-4 text-[#00FFA3] shrink-0" />
+            <span className={isCollapsed ? "lg:hidden" : "inline"}>Activate Stake</span>
+          </button>
+
+          {/* Dedicated Wallet System Accordion */}
           <div>
             <button
               type="button"
-              onClick={() => toggleMenu("packages")}
-              title={isCollapsed ? "Yield Contracts" : undefined}
+              onClick={() => toggleMenu("wallets")}
+              title={isCollapsed ? "Wallet System" : undefined}
               className={`w-full flex items-center ${
                 isCollapsed ? "lg:justify-center lg:px-2" : "justify-between px-3.5"
               } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
-                activeTab.startsWith("package-")
+                activeTab.startsWith("wallet")
                   ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-white border border-sky-400/40 shadow-lg shadow-sky-500/15"
                   : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
               }`}
             >
               <div className="flex items-center gap-3.5">
-                <Package className="w-4 h-4 text-sky-400 shrink-0" />
-                <span className={isCollapsed ? "lg:hidden" : "inline"}>Yield Contracts</span>
+                <Layers className="w-4 h-4 text-sky-400 shrink-0" />
+                <span className={isCollapsed ? "lg:hidden" : "inline"}>Wallet System</span>
               </div>
               <span className={isCollapsed ? "lg:hidden" : "inline"}>
-                {openMenus.packages ? (
+                {openMenus.wallets ? (
                   <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
                 ) : (
                   <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
                 )}
               </span>
             </button>
-            {openMenus.packages && (
+            {openMenus.wallets && (
               <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-10 pr-2 py-1 space-y-1`}>
                 <button
                   type="button"
-                  onClick={() => handleSelectTab("package-base")}
+                  onClick={() => handleSelectTab("wallets")}
                   className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "package-base"
+                    activeTab === "wallets"
                       ? "text-sky-300 bg-sky-500/20 border-l-2 border-sky-400"
                       : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • Basic Saving (4% Daily)
+                  • Wallets Overview
                 </button>
                 <button
                   type="button"
-                  onClick={() => handleSelectTab("package-fd")}
+                  onClick={() => handleSelectTab("wallet-bonus")}
                   className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "package-fd"
-                      ? "text-indigo-300 bg-indigo-500/20 border-l-2 border-indigo-400"
+                    activeTab === "wallet-bonus"
+                      ? "text-[#FFB800] bg-[#FFB800]/20 border-l-2 border-[#FFB800]"
                       : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
                   }`}
                 >
-                  • FD Vault (2X Maturity)
+                  • Bonus Wallet (10% Use)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSelectTab("wallet-roi")}
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
+                    activeTab === "wallet-roi"
+                      ? "text-[#00FFA3] bg-[#00FFA3]/20 border-l-2 border-[#00FFA3]"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
+                  }`}
+                >
+                  • ROI Wallet (4% Daily)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSelectTab("wallet-working")}
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
+                    activeTab === "wallet-working"
+                      ? "text-[#00D2FF] bg-[#00D2FF]/20 border-l-2 border-[#00D2FF]"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
+                  }`}
+                >
+                  • Working Wallet (Direct/Royalty)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSelectTab("wallet-p2p")}
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
+                    activeTab === "wallet-p2p"
+                      ? "text-purple-300 bg-purple-500/20 border-l-2 border-purple-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
+                  }`}
+                >
+                  • P2P Wallet (0% Transfer)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSelectTab("wallet-main")}
+                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
+                    activeTab === "wallet-main"
+                      ? "text-emerald-300 bg-emerald-500/20 border-l-2 border-emerald-400"
+                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
+                  }`}
+                >
+                  • Main Wallet (Withdrawal)
                 </button>
               </div>
             )}

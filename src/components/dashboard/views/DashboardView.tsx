@@ -85,18 +85,13 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
   const day1Payout = +(allocationPoolTotal * 0.02).toFixed(2); // 2.00% daily from 2X pool = 4% on capital
 
   // 3-Wallet Balances strictly from Slide 04:
-  // 1. Bonus Wallet (Non-Withdrawable): Signup $1.00 + $0.40/level (funds up to 10% of stake)
+  const wallets = user?.wallets || {};
   const b = user?.incomeBreakdown || {};
-  const bonusWalletBalance = Number(user?.lockedBonus ?? b.joiningBonus ?? 1.0);
-  
-  // 2. ROI Wallet (100% Withdrawable): Daily 4% returns (2% from 2X pool)
-  const roiTotalEarned = Number(b.basicTotalRoi ?? 0);
-  const roiWalletBalance = Math.max(0, Number(b.basicTodayRoi ?? (roiTotalEarned > 0 ? roiTotalEarned * 0.4 : 0)));
-
-  // 3. Working Wallet (100% Withdrawable): 10% Direct + 10-Level Royalty + Milestones
-  const directIncome = Number(b.basicReferralIncome ?? 0);
-  const levelIncome = Number(b.basicTotalLevel ?? 0);
-  const workingWalletBalance = Math.max(0, Number(user?.incomeBalance ?? (directIncome + levelIncome)));
+  const bonusWalletBalance = Number(wallets.bonusBalance ?? user?.bonusBalance ?? user?.lockedBonus ?? b.joiningBonus ?? 1.0);
+  const roiWalletBalance = Number(wallets.roiBalance ?? user?.roiBalance ?? b.basicTodayRoi ?? 0);
+  const workingWalletBalance = Number(wallets.workingBalance ?? user?.workingBalance ?? user?.incomeBalance ?? 0);
+  const p2pWalletBalance = Number(wallets.p2pBalance ?? user?.p2pBalance ?? user?.fundBalance ?? 0);
+  const mainWalletBalance = Number(wallets.mainBalance ?? user?.mainBalance ?? 0);
 
   // Total Withdrawn
   const processedWithdrawnFromList = (user?.withdrawals || [])
@@ -406,10 +401,10 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
             <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
               <span className="text-slate-400 font-mono">10% Utility Rate</span>
               <button
-                onClick={() => setActiveTab("income-bonus")}
+                onClick={() => setActiveTab("stake-activate")}
                 className="text-[#FFB800] hover:text-white font-bold font-mono flex items-center gap-1 transition"
               >
-                <span>Bonus Details</span>
+                <span>Use for Stake (10%)</span>
                 <ChevronRight className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -420,7 +415,7 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[10px] font-black uppercase tracking-wider text-[#00FFA3] bg-[#00FFA3]/10 px-2.5 py-0.5 rounded-full border border-[#00FFA3]/30 font-mono">
-                  100% WITHDRAWABLE
+                  DAILY 4% YIELD
                 </span>
                 <Zap className="w-4 h-4 text-[#00FFA3]" />
               </div>
@@ -434,17 +429,17 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
               </div>
 
               <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
-                Receives automated 4.00% daily returns (2% daily release from 2X pool). Cashout min $2.00 USDT.
+                Automated 4% daily returns from 2X pool. Transfer directly to <strong>Main Wallet</strong> or <strong>P2P Wallet</strong>.
               </p>
             </div>
 
             <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
-              <span className="text-slate-400 font-mono">10% Liquidity Fee</span>
+              <span className="text-slate-400 font-mono">0% Transfer Fee</span>
               <button
-                onClick={() => setActiveTab("tx-withdraw")}
+                onClick={() => setActiveTab("wallet-roi")}
                 className="text-[#00FFA3] hover:text-white font-bold font-mono flex items-center gap-1 transition"
               >
-                <span>Cashout ROI</span>
+                <span>Transfer &rarr; Main / P2P</span>
                 <ArrowUpRight className="w-3.5 h-3.5" />
               </button>
             </div>
@@ -455,7 +450,7 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
             <div>
               <div className="flex items-center justify-between mb-3">
                 <span className="text-[10px] font-black uppercase tracking-wider text-[#00D2FF] bg-[#00D2FF]/10 px-2.5 py-0.5 rounded-full border border-[#00D2FF]/30 font-mono">
-                  100% WITHDRAWABLE
+                  DIRECT + ROYALTY + REWARDS
                 </span>
                 <Wallet className="w-4 h-4 text-[#00D2FF]" />
               </div>
@@ -469,27 +464,19 @@ export function DashboardView({ user, setActiveTab }: DashboardViewProps) {
               </div>
 
               <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
-                Collects 10% Direct Referrals, 10-Level Daily Royalties, and Milestone Rank Rewards. Free internal P2P transfers!
+                Direct referrals &amp; royalties. Transfer directly to <strong>Main Wallet</strong> or <strong>P2P Wallet</strong>.
               </p>
             </div>
 
             <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs">
-              <span className="text-slate-400 font-mono">0% Fee P2P</span>
-              <div className="flex items-center gap-2">
-                <button
-                  onClick={() => setActiveTab("tx-transfer")}
-                  className="text-slate-300 hover:text-white font-bold font-mono text-[11px]"
-                >
-                  P2P
-                </button>
-                <button
-                  onClick={() => setActiveTab("tx-withdraw")}
-                  className="text-[#00D2FF] hover:text-white font-bold font-mono flex items-center gap-1 transition"
-                >
-                  <span>Cashout</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </button>
-              </div>
+              <span className="text-slate-400 font-mono">0% Transfer Fee</span>
+              <button
+                onClick={() => setActiveTab("wallet-working")}
+                className="text-[#00D2FF] hover:text-white font-bold font-mono flex items-center gap-1 transition"
+              >
+                <span>Transfer &rarr; Main / P2P</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </button>
             </div>
           </div>
         </div>

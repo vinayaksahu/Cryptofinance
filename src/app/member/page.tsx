@@ -6,8 +6,8 @@ import { MemberSidebar } from "@/components/dashboard/MemberSidebar";
 import { MemberTopNavbar } from "@/components/dashboard/MemberTopNavbar";
 import { DashboardView } from "@/components/dashboard/views/DashboardView";
 import { RechargeView } from "@/components/dashboard/views/RechargeView";
-import { BasicPackageView } from "@/components/dashboard/views/BasicPackageView";
-import { FdPackageView } from "@/components/dashboard/views/FdPackageView";
+import { StakeActivationView } from "@/components/dashboard/views/StakeActivationView";
+import { WalletsHubView } from "@/components/dashboard/views/WalletsHubView";
 import { DownlineView } from "@/components/dashboard/views/DownlineView";
 import { GenealogyTreeView } from "@/components/dashboard/views/GenealogyTreeView";
 import { TransactionalView } from "@/components/dashboard/views/TransactionalView";
@@ -106,12 +106,32 @@ export default function MemberDashboardPage() {
             <RechargeView user={user} onRefresh={fetchUser} />
           )}
 
-          {activeTab === "package-base" && (
-            <BasicPackageView user={user} onRefresh={fetchUser} />
+          {(activeTab === "package-base" || activeTab === "stake-activate" || activeTab === "package-fd") && (
+            <StakeActivationView user={user} onRefresh={fetchUser} onRefreshUser={fetchUser} />
           )}
 
-          {activeTab === "package-fd" && (
-            <FdPackageView user={user} onRefresh={fetchUser} />
+          {activeTab === "wallets" && (
+            <WalletsHubView user={user} initialWallet="all" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
+          )}
+
+          {activeTab === "wallet-bonus" && (
+            <WalletsHubView user={user} initialWallet="bonus" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
+          )}
+
+          {activeTab === "wallet-roi" && (
+            <WalletsHubView user={user} initialWallet="roi" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
+          )}
+
+          {activeTab === "wallet-working" && (
+            <WalletsHubView user={user} initialWallet="working" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
+          )}
+
+          {activeTab === "wallet-p2p" && (
+            <WalletsHubView user={user} initialWallet="p2p" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
+          )}
+
+          {activeTab === "wallet-main" && (
+            <WalletsHubView user={user} initialWallet="main" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
           )}
 
           {activeTab === "downline-direct" && (

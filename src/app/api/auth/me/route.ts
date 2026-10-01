@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { getAllSystemConfigs, getSystemConfigValue } from "@/lib/configService";
 import { executeDailyRoiDistribution, getDubaiTimeInfo } from "@/lib/services/roiService";
 import { getUserBonusAndWithdrawableStatus } from "@/lib/services/bonusService";
+import { getUserWalletBalances } from "@/lib/services/walletService";
 import Decimal from "decimal.js";
 
 let lastAutoRoiCheck = 0;
@@ -392,6 +393,7 @@ export async function GET() {
 
   // Get bonus lock and withdrawable balance ($20+ Active ID criteria) from single source of truth
   const bonusStatus = await getUserBonusAndWithdrawableStatus(user.id);
+  const walletBalances = await getUserWalletBalances(user.id);
   const isBonusLocked = bonusStatus.isBonusLocked;
   const lockedBonusAmount = bonusStatus.lockedBonus;
   const withdrawableBalance = bonusStatus.withdrawableBalance;
@@ -420,6 +422,13 @@ export async function GET() {
       lockedBonus: lockedBonusAmount,
       isBonusLocked,
       minActiveBonusRequired,
+      // 5-Wallet System Ecosystem Balances
+      wallets: walletBalances,
+      bonusBalance: walletBalances.bonusBalance,
+      roiBalance: walletBalances.roiBalance,
+      workingBalance: walletBalances.workingBalance,
+      p2pBalance: walletBalances.p2pBalance,
+      mainBalance: walletBalances.mainBalance,
       directBusiness: directBusiness,
       sponsor: user.sponsor,
       createdAt: user.createdAt,
