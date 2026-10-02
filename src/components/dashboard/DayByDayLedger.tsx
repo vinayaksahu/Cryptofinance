@@ -366,9 +366,23 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
                     {/* Action Column (Exact 1 Button ReInvest / Claim as requested) */}
                     <td className="py-3 px-4 text-center">
                       {row.action === "REINVESTED" && (
-                        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-[#00FFA3]/40 text-[#00FFA3] text-xs font-bold font-mono">
-                          <span>🔄</span>
-                          <span>Reinvested</span>
+                        <div className="inline-flex items-center gap-2">
+                          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/15 border border-[#00FFA3]/40 text-[#00FFA3] text-xs font-bold font-mono">
+                            <span>🔄</span>
+                            <span>Reinvested</span>
+                          </div>
+                          {row.isToday && (
+                            <button
+                              type="button"
+                              disabled={actionLoading}
+                              onClick={() => handleExecuteAction("CLAIM")}
+                              className="px-2.5 py-1 rounded-full bg-sky-500/20 hover:bg-sky-500 text-sky-300 hover:text-slate-950 border border-sky-400/40 text-[11px] font-bold font-mono transition-all flex items-center gap-1 active:scale-95 disabled:opacity-50"
+                              title="Claim into ROI Wallet instead"
+                            >
+                              <ArrowUpRight className="w-3 h-3" />
+                              <span>Claim to ROI Wallet</span>
+                            </button>
+                          )}
                         </div>
                       )}
 
