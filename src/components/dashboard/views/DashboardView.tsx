@@ -25,6 +25,11 @@ import {
   DollarSign,
   PieChart,
   CheckCircle2,
+  Bell,
+  Ticket,
+  FileText,
+  Crown,
+  History,
 } from "lucide-react";
 import { APP_CONFIG } from "@/lib/constants";
 import { DayByDayLedger } from "@/components/dashboard/DayByDayLedger";
@@ -152,9 +157,271 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
   return (
     <div className="space-y-6 pb-20 animate-in fade-in duration-300">
       {/* =========================================================================
-          SUPERWARRIOR30 STYLE WELCOME HEADER
+          MOBILE-SPECIFIC HERO HEADER & WALLET DASHBOARD (Matching Uploaded Images)
+          Image 1 (Dark Mode): Charcoal card + Golden Amber active accents
+          Image 2 (Light Mode): Vibrant Coral/Rose Red gradient + White cards
           ========================================================================= */}
-      <div>
+      <div className="block lg:hidden space-y-4">
+        {/* User Profile Bar */}
+        <div className="rounded-3xl p-5 bg-gradient-to-r from-amber-500/20 via-amber-400/10 to-transparent dark:from-amber-500/20 dark:via-[#1e1f23] dark:to-[#17181c] light:from-rose-500 light:to-red-400 border border-amber-500/30 dark:border-[#2a2b30] shadow-sm">
+          <div className="flex items-center gap-3.5">
+            {/* Avatar Circle */}
+            <div className="relative w-14 h-14 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 dark:from-amber-600 dark:to-yellow-400 p-0.5 shadow-md shrink-0 flex items-center justify-center">
+              <div className="w-full h-full rounded-full bg-slate-900 dark:bg-black flex items-center justify-center text-amber-300 font-black text-xl">
+                {(user?.fullName || "M")[0]}
+              </div>
+              <span className="absolute -bottom-1 -right-1 px-1.5 py-0.2 rounded-full bg-amber-500 text-black text-[9px] font-black tracking-tight uppercase shadow">
+                VIP 1
+              </span>
+            </div>
+
+            {/* User Info */}
+            <div className="flex-1 min-w-0">
+              <h2 className="text-base font-extrabold text-foreground truncate tracking-tight">
+                {user?.fullName || "MEMBER"}
+              </h2>
+              <div className="flex items-center gap-1.5 mt-0.5 text-xs text-muted-foreground font-mono">
+                <span>UID | {customId}</span>
+                <button
+                  type="button"
+                  onClick={copyReferral}
+                  className="text-amber-500 dark:text-amber-400 hover:text-amber-300"
+                  title="Copy UID / Referral"
+                >
+                  {copied ? <Check className="w-3.5 h-3.5 text-emerald-500" /> : <Copy className="w-3.5 h-3.5" />}
+                </button>
+              </div>
+              <p className="text-[10px] text-muted-foreground font-mono mt-0.5">
+                Last login: {joinDateStr}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Total Balance Card with Enter Wallet & 4 Quick Actions */}
+        <div className="rounded-3xl border border-border bg-card p-5 shadow-sm space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <span className="text-xs font-semibold text-muted-foreground block">
+                Total balance
+              </span>
+              <div className="flex items-center gap-2 mt-0.5">
+                <span className="text-2xl sm:text-3xl font-black text-foreground font-mono tracking-tight">
+                  {currency} {(mainWalletBalance + p2pWalletBalance).toFixed(2)}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => onRefresh?.()}
+                  className="text-muted-foreground hover:text-foreground transition-transform active:rotate-180"
+                  title="Refresh Balance"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            {/* Enter Wallet Pill Button */}
+            <button
+              type="button"
+              onClick={() => setActiveTab("wallets-hub")}
+              className="px-4 py-2 rounded-full font-bold text-xs shadow-sm transition-all cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90"
+            >
+              Enter wallet
+            </button>
+          </div>
+
+          {/* 4 Quick Actions (ARWallet, Deposit, Withdraw, VIP) */}
+          <div className="grid grid-cols-4 gap-2 pt-2 border-t border-border">
+            {/* 1. ARWallet / P2P */}
+            <button
+              type="button"
+              onClick={() => setActiveTab("wallets-p2p")}
+              className="flex flex-col items-center gap-1.5 p-2 rounded-2xl hover:bg-muted/60 transition-colors text-center cursor-pointer"
+            >
+              <div className="w-11 h-11 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-500 flex items-center justify-center shadow-sm">
+                <Wallet className="w-5 h-5" />
+              </div>
+              <span className="text-[11px] font-semibold text-foreground tracking-tight">
+                P2P Wallet
+              </span>
+            </button>
+
+            {/* 2. Deposit */}
+            <button
+              type="button"
+              onClick={() => setActiveTab("recharge")}
+              className="flex flex-col items-center gap-1.5 p-2 rounded-2xl hover:bg-muted/60 transition-colors text-center cursor-pointer"
+            >
+              <div className="w-11 h-11 rounded-2xl bg-amber-500/10 border border-amber-500/20 text-amber-500 flex items-center justify-center shadow-sm">
+                <ArrowDownLeft className="w-5 h-5" />
+              </div>
+              <span className="text-[11px] font-semibold text-foreground tracking-tight">
+                Deposit
+              </span>
+            </button>
+
+            {/* 3. Withdraw */}
+            <button
+              type="button"
+              onClick={() => setActiveTab("wallets-withdraw")}
+              className="flex flex-col items-center gap-1.5 p-2 rounded-2xl hover:bg-muted/60 transition-colors text-center cursor-pointer"
+            >
+              <div className="w-11 h-11 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-500 flex items-center justify-center shadow-sm">
+                <ArrowUpRight className="w-5 h-5" />
+              </div>
+              <span className="text-[11px] font-semibold text-foreground tracking-tight">
+                Withdraw
+              </span>
+            </button>
+
+            {/* 4. VIP / Stake */}
+            <button
+              type="button"
+              onClick={() => setActiveTab("activation")}
+              className="flex flex-col items-center gap-1.5 p-2 rounded-2xl hover:bg-muted/60 transition-colors text-center cursor-pointer"
+            >
+              <div className="w-11 h-11 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center shadow-sm">
+                <Crown className="w-5 h-5" />
+              </div>
+              <span className="text-[11px] font-semibold text-foreground tracking-tight">
+                VIP Stake
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* 2x2 Grid: History & Ledger Cards matching screenshot */}
+        <div className="grid grid-cols-2 gap-3">
+          <button
+            type="button"
+            onClick={() => setActiveTab("activation")}
+            className="flex items-center gap-3 p-3.5 rounded-2xl bg-card border border-border hover:bg-muted/60 text-left transition-all shadow-sm cursor-pointer"
+          >
+            <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center shrink-0">
+              <FileText className="w-5 h-5" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-xs font-bold text-foreground leading-tight truncate">Yield History</p>
+              <p className="text-[10px] text-muted-foreground mt-0.5 truncate">My daily contracts</p>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab("report-statement")}
+            className="flex items-center gap-3 p-3.5 rounded-2xl bg-card border border-border hover:bg-muted/60 text-left transition-all shadow-sm cursor-pointer"
+          >
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-500 flex items-center justify-center shrink-0">
+              <History className="w-5 h-5" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-xs font-bold text-foreground leading-tight truncate">Transactions</p>
+              <p className="text-[10px] text-muted-foreground mt-0.5 truncate">Account ledger</p>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab("report-fund-wallet")}
+            className="flex items-center gap-3 p-3.5 rounded-2xl bg-card border border-border hover:bg-muted/60 text-left transition-all shadow-sm cursor-pointer"
+          >
+            <div className="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-500 flex items-center justify-center shrink-0">
+              <ArrowDownLeft className="w-5 h-5" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-xs font-bold text-foreground leading-tight truncate">Deposit Log</p>
+              <p className="text-[10px] text-muted-foreground mt-0.5 truncate">My deposit history</p>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setActiveTab("report-income-wallet")}
+            className="flex items-center gap-3 p-3.5 rounded-2xl bg-card border border-border hover:bg-muted/60 text-left transition-all shadow-sm cursor-pointer"
+          >
+            <div className="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-500 flex items-center justify-center shrink-0">
+              <ArrowUpRight className="w-5 h-5" />
+            </div>
+            <div className="min-w-0">
+              <p className="text-xs font-bold text-foreground leading-tight truncate">Withdraw Log</p>
+              <p className="text-[10px] text-muted-foreground mt-0.5 truncate">My payout history</p>
+            </div>
+          </button>
+        </div>
+
+        {/* List Menu from Screenshot (Notification, Gifts, Coupons, Statistics) */}
+        <div className="rounded-3xl border border-border bg-card divide-y divide-border overflow-hidden shadow-sm">
+          {/* Notification item */}
+          <button
+            type="button"
+            onClick={() => setActiveTab("support")}
+            className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors text-left cursor-pointer"
+          >
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-xl bg-amber-500/10 text-amber-500">
+                <Bell className="w-4 h-4" />
+              </div>
+              <span className="text-xs font-bold text-foreground">Notification</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="px-2 py-0.5 rounded-full bg-rose-500 text-white font-bold text-[10px]">
+                30
+              </span>
+              <ChevronRight className="w-4 h-4 text-muted-foreground" />
+            </div>
+          </button>
+
+          {/* Gifts item */}
+          <button
+            type="button"
+            onClick={() => setActiveTab("joining-bonus")}
+            className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors text-left cursor-pointer"
+          >
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-xl bg-yellow-500/10 text-yellow-500">
+                <Gift className="w-4 h-4" />
+              </div>
+              <span className="text-xs font-bold text-foreground">Gifts &amp; Welcome Bonus</span>
+            </div>
+            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+          </button>
+
+          {/* Coupons item */}
+          <button
+            type="button"
+            onClick={() => setActiveTab("recharge")}
+            className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors text-left cursor-pointer"
+          >
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-xl bg-emerald-500/10 text-emerald-500">
+                <Ticket className="w-4 h-4" />
+              </div>
+              <span className="text-xs font-bold text-foreground">My Top-Up Coupons</span>
+            </div>
+            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+          </button>
+
+          {/* Statistics item */}
+          <button
+            type="button"
+            onClick={() => setActiveTab("milestones")}
+            className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors text-left cursor-pointer"
+          >
+            <div className="flex items-center gap-3">
+              <div className="p-2 rounded-xl bg-sky-500/10 text-sky-500">
+                <Activity className="w-4 h-4" />
+              </div>
+              <span className="text-xs font-bold text-foreground">Yield &amp; Community Statistics</span>
+            </div>
+            <ChevronRight className="w-4 h-4 text-muted-foreground" />
+          </button>
+        </div>
+      </div>
+
+      {/* =========================================================================
+          DESKTOP WELCOME HEADER (Shown on lg: screens)
+          ========================================================================= */}
+      <div className="hidden lg:block">
         <div className="flex items-center gap-2.5">
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
             Welcome back, {user?.fullName || "Member"}!

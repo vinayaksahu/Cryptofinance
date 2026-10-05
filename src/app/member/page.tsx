@@ -15,6 +15,7 @@ import { JoiningBonusView } from "@/components/dashboard/views/JoiningBonusView"
 import { MilestoneRewardsView } from "@/components/dashboard/views/MilestoneRewardsView";
 import { ReportsView } from "@/components/dashboard/views/ReportsView";
 import { SupportTicketView } from "@/components/dashboard/views/SupportTicketView";
+import { MemberBottomNav } from "@/components/dashboard/MemberBottomNav";
 import { ImpersonationBanner } from "@/components/common/ImpersonationBanner";
 
 export default function MemberDashboardPage() {
@@ -96,7 +97,7 @@ export default function MemberDashboardPage() {
         />
 
         {/* Dynamic View Body */}
-        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto pb-24 lg:pb-8">
           {activeTab === "dashboard" && (
             <DashboardView user={user} setActiveTab={setActiveTab} onRefresh={fetchUser} />
           )}
@@ -211,6 +212,13 @@ export default function MemberDashboardPage() {
             <SupportTicketView />
           )}
         </main>
+
+        {/* Mobile Floating Bottom Menu (Matching Uploaded Screenshots) */}
+        <MemberBottomNav
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          user={user}
+        />
       </div>
     </div>
   );
