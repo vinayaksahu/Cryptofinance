@@ -16,9 +16,20 @@ export function MemberBottomNav({ activeTab, setActiveTab, user }: MemberBottomN
 
   // Check which tab group is currently active
   const isHome = activeTab === "dashboard";
-  const isActivity = activeTab === "joining-bonus" || activeTab === "milestones";
-  const isPromotion = activeTab.startsWith("downline-");
-  const isAccount = activeTab.startsWith("wallet") || activeTab === "wallets-hub";
+  const isActivity =
+    activeTab === "income-bonus" ||
+    activeTab === "joining-bonus" ||
+    activeTab === "income-rewards" ||
+    activeTab === "milestones" ||
+    activeTab.startsWith("income-");
+  const isPromotion =
+    activeTab.startsWith("downline-") ||
+    activeTab === "promotion" ||
+    activeTab === "referral";
+  const isAccount =
+    activeTab.startsWith("wallet") ||
+    activeTab === "wallets-hub" ||
+    activeTab === "account";
 
   const handleCenterAction = () => {
     setSpinModalOpen(true);
@@ -80,7 +91,7 @@ export function MemberBottomNav({ activeTab, setActiveTab, user }: MemberBottomN
           {/* 2. ACTIVITY TAB (With red notification dot badge) */}
           <button
             type="button"
-            onClick={() => setActiveTab("joining-bonus")}
+            onClick={() => setActiveTab("income-bonus")}
             className={`flex-1 flex flex-col items-center justify-center py-1 transition-all duration-150 cursor-pointer ${
               isActivity
                 ? "text-rose-500 dark:text-[#d4a359] font-bold"
@@ -184,7 +195,7 @@ export function MemberBottomNav({ activeTab, setActiveTab, user }: MemberBottomN
           {/* 5. ACCOUNT TAB (Active in screenshot with smile circle) */}
           <button
             type="button"
-            onClick={() => setActiveTab("wallets-hub")}
+            onClick={() => setActiveTab("wallets-internal")}
             className={`flex-1 flex flex-col items-center justify-center py-1 transition-all duration-150 cursor-pointer ${
               isAccount
                 ? "text-rose-500 dark:text-[#d4a359] font-bold"
@@ -288,7 +299,7 @@ export function MemberBottomNav({ activeTab, setActiveTab, user }: MemberBottomN
                 <button
                   onClick={() => {
                     setSpinModalOpen(false);
-                    setActiveTab("activation");
+                    setActiveTab("stake-activate");
                   }}
                   className="mt-3 w-full py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs shadow-sm hover:bg-primary/90 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
@@ -312,7 +323,7 @@ export function MemberBottomNav({ activeTab, setActiveTab, user }: MemberBottomN
                   type="button"
                   onClick={() => {
                     setSpinModalOpen(false);
-                    setActiveTab("activation");
+                    setActiveTab("stake-activate");
                   }}
                   className="flex-1 py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs shadow-sm hover:bg-primary/90 transition-all"
                 >

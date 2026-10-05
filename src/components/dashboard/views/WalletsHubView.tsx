@@ -586,8 +586,13 @@ export function WalletsHubView({
             <div className="mt-5 pt-4 border-t border-border">
               <button
                 type="button"
-                onClick={() => onNavigateTab && onNavigateTab("tx-withdraw")}
-                className="w-full py-2.5 px-4 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-sm"
+                onClick={() => {
+                  setActiveEngine("external");
+                  const el = document.getElementById("transfer-engine-section");
+                  if (el) el.scrollIntoView({ behavior: "smooth" });
+                  if (onNavigateTab) onNavigateTab("wallets-external");
+                }}
+                className="w-full py-2.5 px-4 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
               >
                 <ArrowUpRight className="w-4 h-4" />
                 <span>Request BEP-20 Withdrawal ($2 Min)</span>

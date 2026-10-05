@@ -223,7 +223,7 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
             {/* Enter Wallet Pill Button */}
             <button
               type="button"
-              onClick={() => setActiveTab("wallets-hub")}
+              onClick={() => setActiveTab("wallets-internal")}
               className="px-4 py-2 rounded-full font-bold text-xs shadow-sm transition-all cursor-pointer bg-primary text-primary-foreground hover:bg-primary/90"
             >
               Enter wallet
@@ -235,7 +235,7 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
             {/* 1. ARWallet / P2P */}
             <button
               type="button"
-              onClick={() => setActiveTab("wallets-p2p")}
+              onClick={() => setActiveTab("wallet-p2p")}
               className="flex flex-col items-center gap-1.5 p-2 rounded-2xl hover:bg-muted/60 transition-colors text-center cursor-pointer"
             >
               <div className="w-11 h-11 rounded-2xl bg-rose-500/10 border border-rose-500/20 text-rose-500 flex items-center justify-center shadow-sm">
@@ -263,7 +263,7 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
             {/* 3. Withdraw */}
             <button
               type="button"
-              onClick={() => setActiveTab("wallets-withdraw")}
+              onClick={() => setActiveTab("wallets-external")}
               className="flex flex-col items-center gap-1.5 p-2 rounded-2xl hover:bg-muted/60 transition-colors text-center cursor-pointer"
             >
               <div className="w-11 h-11 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-500 flex items-center justify-center shadow-sm">
@@ -277,7 +277,7 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
             {/* 4. VIP / Stake */}
             <button
               type="button"
-              onClick={() => setActiveTab("activation")}
+              onClick={() => setActiveTab("stake-activate")}
               className="flex flex-col items-center gap-1.5 p-2 rounded-2xl hover:bg-muted/60 transition-colors text-center cursor-pointer"
             >
               <div className="w-11 h-11 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center justify-center shadow-sm">
@@ -294,7 +294,7 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
         <div className="grid grid-cols-2 gap-3">
           <button
             type="button"
-            onClick={() => setActiveTab("activation")}
+            onClick={() => setActiveTab("stake-activate")}
             className="flex items-center gap-3 p-3.5 rounded-2xl bg-card border border-border hover:bg-muted/60 text-left transition-all shadow-sm cursor-pointer"
           >
             <div className="w-10 h-10 rounded-xl bg-blue-500/10 text-blue-500 flex items-center justify-center shrink-0">
@@ -374,7 +374,7 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
           {/* Gifts item */}
           <button
             type="button"
-            onClick={() => setActiveTab("joining-bonus")}
+            onClick={() => setActiveTab("income-bonus")}
             className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors text-left cursor-pointer"
           >
             <div className="flex items-center gap-3">
@@ -404,7 +404,7 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
           {/* Statistics item */}
           <button
             type="button"
-            onClick={() => setActiveTab("milestones")}
+            onClick={() => setActiveTab("income-rewards")}
             className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors text-left cursor-pointer"
           >
             <div className="flex items-center gap-3">

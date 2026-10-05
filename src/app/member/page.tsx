@@ -54,6 +54,34 @@ export default function MemberDashboardPage() {
     fetchUser();
   }, []);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [activeTab]);
+
+  const isKnownTab = Boolean(
+    activeTab === "dashboard" ||
+    activeTab === "recharge" || activeTab === "deposit" || activeTab === "coupons" ||
+    activeTab === "package-base" || activeTab === "stake-activate" || activeTab === "package-fd" || activeTab === "activation" || activeTab === "activate-stake" || activeTab === "vip-stake" || activeTab === "yield-history" ||
+    activeTab === "wallets" || activeTab === "wallets-internal" || activeTab === "wallets-hub" || activeTab === "account" || activeTab === "enter-wallet" ||
+    activeTab === "wallets-external" || activeTab === "wallets-withdraw" || activeTab === "withdraw" || activeTab === "tx-withdraw" ||
+    activeTab === "wallet-bonus" || activeTab === "wallet-roi" || activeTab === "wallet-working" || activeTab === "wallet-p2p" || activeTab === "wallets-p2p" || activeTab === "p2p" || activeTab === "wallet-main" ||
+    activeTab === "downline-direct" || activeTab === "downline" || activeTab === "promotion" || activeTab === "referral" || activeTab === "referrals" ||
+    activeTab === "downline-team" || activeTab === "team" ||
+    activeTab === "downline-tree" || activeTab === "tree" || activeTab === "genealogy" ||
+    activeTab === "income-bonus" || activeTab === "joining-bonus" || activeTab === "gifts" || activeTab === "activity" || activeTab === "bonus" ||
+    activeTab === "income-roi" || activeTab === "roi" ||
+    activeTab === "income-fd" || activeTab === "income-referral" || activeTab === "income-level" || activeTab === "income-fd-referral" || activeTab === "income-fd-level" ||
+    activeTab === "income-rewards" || activeTab === "milestones" || activeTab === "rewards" || activeTab === "statistics" ||
+    activeTab === "report-daily" || activeTab === "report-monthly" ||
+    activeTab === "report-fund-wallet" || activeTab === "deposit-log" ||
+    activeTab === "report-income-wallet" || activeTab === "withdraw-log" ||
+    activeTab === "report-statement" || activeTab === "transactions" || activeTab === "statement" || activeTab === "history" ||
+    activeTab === "report-packages" ||
+    activeTab === "support" || activeTab === "support-desk" || activeTab === "notification" || activeTab === "notifications" || activeTab === "tickets"
+  );
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
@@ -98,23 +126,36 @@ export default function MemberDashboardPage() {
 
         {/* Dynamic View Body */}
         <main className="flex-1 p-4 sm:p-6 lg:p-8 max-w-7xl w-full mx-auto pb-24 lg:pb-8">
-          {activeTab === "dashboard" && (
+          {(activeTab === "dashboard" || !isKnownTab) && (
             <DashboardView user={user} setActiveTab={setActiveTab} onRefresh={fetchUser} />
           )}
 
-          {activeTab === "recharge" && (
+          {(activeTab === "recharge" || activeTab === "deposit" || activeTab === "coupons") && (
             <RechargeView user={user} onRefresh={fetchUser} />
           )}
 
-          {(activeTab === "package-base" || activeTab === "stake-activate" || activeTab === "package-fd") && (
+          {(activeTab === "package-base" ||
+            activeTab === "stake-activate" ||
+            activeTab === "package-fd" ||
+            activeTab === "activation" ||
+            activeTab === "activate-stake" ||
+            activeTab === "vip-stake" ||
+            activeTab === "yield-history") && (
             <StakeActivationView user={user} onRefresh={fetchUser} onRefreshUser={fetchUser} onNavigateTab={setActiveTab} />
           )}
 
-          {(activeTab === "wallets" || activeTab === "wallets-internal") && (
+          {(activeTab === "wallets" ||
+            activeTab === "wallets-internal" ||
+            activeTab === "wallets-hub" ||
+            activeTab === "account" ||
+            activeTab === "enter-wallet") && (
             <WalletsHubView user={user} initialWallet="all" initialEngine="internal" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
           )}
 
-          {activeTab === "wallets-external" && (
+          {(activeTab === "wallets-external" ||
+            activeTab === "wallets-withdraw" ||
+            activeTab === "withdraw" ||
+            activeTab === "tx-withdraw") && (
             <WalletsHubView user={user} initialWallet="all" initialEngine="external" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
           )}
 
@@ -130,7 +171,7 @@ export default function MemberDashboardPage() {
             <WalletsHubView user={user} initialWallet="working" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
           )}
 
-          {activeTab === "wallet-p2p" && (
+          {(activeTab === "wallet-p2p" || activeTab === "wallets-p2p" || activeTab === "p2p") && (
             <WalletsHubView user={user} initialWallet="p2p" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
           )}
 
@@ -138,23 +179,31 @@ export default function MemberDashboardPage() {
             <WalletsHubView user={user} initialWallet="main" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
           )}
 
-          {activeTab === "downline-direct" && (
+          {(activeTab === "downline-direct" ||
+            activeTab === "downline" ||
+            activeTab === "promotion" ||
+            activeTab === "referral" ||
+            activeTab === "referrals") && (
             <DownlineView user={user} mode="direct" onNavigateTab={setActiveTab} />
           )}
 
-          {activeTab === "downline-team" && (
+          {(activeTab === "downline-team" || activeTab === "team") && (
             <DownlineView user={user} mode="team" onNavigateTab={setActiveTab} />
           )}
 
-          {activeTab === "downline-tree" && (
+          {(activeTab === "downline-tree" || activeTab === "tree" || activeTab === "genealogy") && (
             <GenealogyTreeView user={user} onNavigateTab={setActiveTab} />
           )}
 
-          {activeTab === "income-bonus" && (
+          {(activeTab === "income-bonus" ||
+            activeTab === "joining-bonus" ||
+            activeTab === "gifts" ||
+            activeTab === "activity" ||
+            activeTab === "bonus") && (
             <JoiningBonusView user={user} onRefresh={fetchUser} />
           )}
 
-          {activeTab === "income-roi" && (
+          {(activeTab === "income-roi" || activeTab === "roi") && (
             <IncomeView user={user} incomeType="roi" onRefresh={fetchUser} />
           )}
 
@@ -178,11 +227,12 @@ export default function MemberDashboardPage() {
             <IncomeView user={user} incomeType="fd-level" onRefresh={fetchUser} />
           )}
 
-          {activeTab === "income-rewards" && (
+          {(activeTab === "income-rewards" ||
+            activeTab === "milestones" ||
+            activeTab === "rewards" ||
+            activeTab === "statistics") && (
             <MilestoneRewardsView user={user} onRefresh={fetchUser} />
           )}
-
-
 
           {activeTab === "report-daily" && (
             <ReportsView user={user} reportType="daily" onRefresh={fetchUser} />
@@ -192,15 +242,18 @@ export default function MemberDashboardPage() {
             <ReportsView user={user} reportType="monthly" onRefresh={fetchUser} />
           )}
 
-          {activeTab === "report-fund-wallet" && (
+          {(activeTab === "report-fund-wallet" || activeTab === "deposit-log") && (
             <ReportsView user={user} reportType="fund-wallet" onRefresh={fetchUser} />
           )}
 
-          {activeTab === "report-income-wallet" && (
+          {(activeTab === "report-income-wallet" || activeTab === "withdraw-log") && (
             <ReportsView user={user} reportType="income-wallet" onRefresh={fetchUser} />
           )}
 
-          {activeTab === "report-statement" && (
+          {(activeTab === "report-statement" ||
+            activeTab === "transactions" ||
+            activeTab === "statement" ||
+            activeTab === "history") && (
             <ReportsView user={user} reportType="statement" onRefresh={fetchUser} />
           )}
 
@@ -208,7 +261,11 @@ export default function MemberDashboardPage() {
             <ReportsView user={user} reportType="packages" onRefresh={fetchUser} />
           )}
 
-          {activeTab === "support" && (
+          {(activeTab === "support" ||
+            activeTab === "support-desk" ||
+            activeTab === "notification" ||
+            activeTab === "notifications" ||
+            activeTab === "tickets") && (
             <SupportTicketView />
           )}
         </main>
