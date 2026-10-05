@@ -10,8 +10,13 @@ export function MemberHeader({ user }: { user: any }) {
   const [copied, setCopied] = useState(false);
 
   const handleLogout = async () => {
-    await fetch("/api/auth/logout", { method: "POST" });
-    router.push("/login");
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } catch {
+      // ignore
+    } finally {
+      window.location.replace("/login");
+    }
   };
 
   const origin =

@@ -98,12 +98,22 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Find by customId or email
+    // Find by customId, email, or phone number
+    const cleanDigits = trimmed.replace(/\D/g, "");
     const user = await db.user.findFirst({
       where: {
         OR: [
           { customId: { equals: trimmed, mode: "insensitive" } },
           { email: { equals: trimmed, mode: "insensitive" } },
+          { phone: { equals: trimmed } },
+          { phone: { equals: `+${trimmed}` } },
+          ...(cleanDigits.length >= 7
+            ? [
+                { phone: { equals: `+91${cleanDigits.slice(-10)}` } },
+                { phone: { equals: cleanDigits.slice(-10) } },
+                { phone: { contains: cleanDigits.slice(-10) } },
+              ]
+            : []),
         ],
       },
     });
