@@ -241,11 +241,11 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
       {/* Header Breadcrumb */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-2">
-            <Gift className="w-6 h-6 text-sky-500 dark:text-[#00D2FF]" />
+          <h1 className="text-xl sm:text-2xl font-black text-foreground tracking-tight flex items-center gap-2">
+            <Gift className="w-6 h-6 text-primary" />
             Joining Bonus Report
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-muted-foreground mt-1">
             Detailed breakdown of your Welcome Signup Bonus & 12-Level Downline Registration Bounties.
           </p>
         </div>
@@ -254,20 +254,20 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
         <div
           className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border text-xs font-semibold ${
             stats.isQualified
-              ? "bg-emerald-950/40 border-emerald-500/30 text-emerald-300"
-              : "bg-amber-950/40 border-amber-500/30 text-amber-300"
+              ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400"
+              : "bg-amber-500/10 border-amber-500/30 text-amber-600 dark:text-amber-400"
           }`}
         >
           {stats.isQualified ? (
-            <ShieldCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+            <ShieldCheck className="w-4 h-4 text-emerald-500 shrink-0" />
           ) : (
-            <AlertCircle className="w-4 h-4 text-amber-400 shrink-0" />
+            <AlertCircle className="w-4 h-4 text-amber-500 shrink-0" />
           )}
           <div>
             <div className="font-bold">
               {stats.isQualified ? "Bonus Status: Unlocked (100% Withdrawable)" : "Bonus Status: Locked ($20 Active ID Criteria)"}
             </div>
-            <div className="text-[10px] text-slate-400 font-normal">
+            <div className="text-[10px] text-muted-foreground font-normal">
               Active Package: ${stats.totalActivePkg.toFixed(2)} / $20.00 USDT
             </div>
           </div>
@@ -277,49 +277,49 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
       {/* 3 Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {/* Total Joining Bonus */}
-        <div className="glass-card-elevated rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-xl shadow-slate-200/50 dark:shadow-black/20">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-sky-500/10 dark:bg-[#00D2FF]/10 rounded-full blur-2xl pointer-events-none" />
-          <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-sky-500 dark:text-[#00D2FF]" />
+        <div className="bg-card border border-border rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-sm">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-primary/10 rounded-full blur-2xl pointer-events-none" />
+          <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1 flex items-center gap-1.5">
+            <Sparkles className="w-3.5 h-3.5 text-primary" />
             Total Joining Bonus
           </p>
-          <p className="text-2xl sm:text-3xl font-extrabold text-sky-500 dark:text-[#00D2FF] font-mono mt-1">
-            ${stats.totalJoiningBonus.toFixed(4)} <span className="text-xs text-slate-500 dark:text-slate-400 font-normal">USDT</span>
+          <p className="text-2xl sm:text-3xl font-extrabold text-primary font-mono mt-1">
+            ${stats.totalJoiningBonus.toFixed(4)} <span className="text-xs text-muted-foreground font-normal">USDT</span>
           </p>
-          <p className="text-[11px] text-slate-600 dark:text-slate-500 mt-2">Combined Self & Team Registration Earnings</p>
+          <p className="text-[11px] text-muted-foreground mt-2">Combined Self & Team Registration Earnings</p>
         </div>
 
         {/* Self Welcome Bonus */}
-        <div className="glass-card-elevated rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-xl shadow-slate-200/50 dark:shadow-black/20">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/10 rounded-full blur-2xl pointer-events-none" />
-          <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-            <Gift className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
+        <div className="bg-card border border-border rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-sm">
+          <div className="absolute top-0 right-0 w-24 h-24 bg-primary/5 rounded-full blur-2xl pointer-events-none" />
+          <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1 flex items-center gap-1.5">
+            <Gift className="w-3.5 h-3.5 text-primary" />
             Self Welcome Bonus
           </p>
-          <p className="text-2xl sm:text-3xl font-extrabold text-blue-500 dark:text-blue-400 font-mono mt-1">
-            ${stats.selfTotal.toFixed(4)} <span className="text-xs text-slate-500 dark:text-slate-400 font-normal">USDT</span>
+          <p className="text-2xl sm:text-3xl font-extrabold text-foreground font-mono mt-1">
+            ${stats.selfTotal.toFixed(4)} <span className="text-xs text-muted-foreground font-normal">USDT</span>
           </p>
-          <p className="text-[11px] text-slate-600 dark:text-slate-500 mt-2">Credited upon your account registration</p>
+          <p className="text-[11px] text-muted-foreground mt-2">Credited upon your account registration</p>
         </div>
 
         {/* Team 12-Level Bounties */}
-        <div className="glass-card-elevated rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-xl shadow-slate-200/50 dark:shadow-black/20">
+        <div className="bg-card border border-border rounded-2xl p-4 sm:p-5 relative overflow-hidden shadow-sm">
           <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl pointer-events-none" />
-          <p className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
-            <Users className="w-3.5 h-3.5 text-emerald-500 dark:text-emerald-400" />
+          <p className="text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1 flex items-center gap-1.5">
+            <Users className="w-3.5 h-3.5 text-emerald-500" />
             Team Downline Bounties
           </p>
-          <p className="text-2xl sm:text-3xl font-extrabold text-emerald-500 dark:text-emerald-400 font-mono mt-1">
-            ${stats.teamTotal.toFixed(4)} <span className="text-xs text-slate-500 dark:text-slate-400 font-normal">USDT</span>
+          <p className="text-2xl sm:text-3xl font-extrabold text-emerald-500 font-mono mt-1">
+            ${stats.teamTotal.toFixed(4)} <span className="text-xs text-muted-foreground font-normal">USDT</span>
           </p>
-          <p className="text-[11px] text-slate-600 dark:text-slate-500 mt-2">12-Level registration rewards from your team</p>
+          <p className="text-[11px] text-muted-foreground mt-2">12-Level registration rewards from your team</p>
         </div>
       </div>
 
       {/* Main Table Card */}
-      <div className="glass-card-elevated rounded-2xl p-4 sm:p-6 shadow-xl shadow-slate-200/50 dark:shadow-black/20 space-y-4">
+      <div className="bg-card border border-border rounded-2xl p-4 sm:p-6 shadow-sm space-y-4">
         {/* Category Filter Tabs */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200/80 dark:border-white/10 pb-4">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-4">
           <div className="flex items-center gap-2">
             <button
               onClick={() => {
@@ -328,8 +328,8 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
               }}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                 filterCategory === "all"
-                  ? "bg-sky-500 text-white shadow-md shadow-sky-500/20"
-                  : "bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
+                  ? "bg-primary text-primary-foreground shadow-sm"
+                  : "bg-muted/50 border border-border text-muted-foreground hover:text-foreground"
               }`}
             >
               All Bonuses ({allBonusEntries.length})
@@ -341,8 +341,8 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
               }}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                 filterCategory === "self"
-                  ? "bg-blue-600 text-white shadow-md shadow-blue-600/20"
-                  : "bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
+                  ? "bg-primary text-primary-foreground shadow-sm"
+                  : "bg-muted/50 border border-border text-muted-foreground hover:text-foreground"
               }`}
             >
               Self Welcome Bonus ({allBonusEntries.filter((e) => e.category === "SELF").length})
@@ -354,8 +354,8 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
               }}
               className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all ${
                 filterCategory === "team"
-                  ? "bg-emerald-600 text-white shadow-md shadow-emerald-600/20"
-                  : "bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
+                  ? "bg-emerald-600 text-white shadow-sm"
+                  : "bg-muted/50 border border-border text-muted-foreground hover:text-foreground"
               }`}
             >
               Team Bounties ({allBonusEntries.filter((e) => e.category === "TEAM").length})
@@ -392,21 +392,21 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
         />
 
         {/* Table Content */}
-        <div className="overflow-x-auto rounded-xl border border-[#17274a]">
+        <div className="overflow-x-auto rounded-xl border border-border">
           <table className="w-full text-left text-xs border-collapse">
-            <thead className="bg-[#0c162d] text-slate-400 border-b border-[#17274a] uppercase tracking-wider text-[10px] font-bold">
+            <thead className="bg-muted/50 text-muted-foreground border-b border-border uppercase tracking-wider text-[10px] font-bold">
               <tr>
                 <th className="py-3 px-3 w-12 text-center">SR</th>
                 <th
                   onClick={() => handleSort("date")}
-                  className="py-3 px-3 cursor-pointer hover:text-slate-200"
+                  className="py-3 px-3 cursor-pointer hover:text-foreground"
                 >
                   <div className="flex items-center gap-1">
                     Date & Time
                     {sortField === "date" ? (
-                      sortOrder === "asc" ? <ArrowUp className="w-3 h-3 text-amber-400" /> : <ArrowDown className="w-3 h-3 text-amber-400" />
+                      sortOrder === "asc" ? <ArrowUp className="w-3 h-3 text-primary" /> : <ArrowDown className="w-3 h-3 text-primary" />
                     ) : (
-                      <ArrowUpDown className="w-3 h-3 text-slate-600" />
+                      <ArrowUpDown className="w-3 h-3 text-muted-foreground" />
                     )}
                   </div>
                 </th>
@@ -416,23 +416,23 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
                 <th className="py-3 px-3">Description</th>
                 <th
                   onClick={() => handleSort("amount")}
-                  className="py-3 px-3 text-right cursor-pointer hover:text-slate-200"
+                  className="py-3 px-3 text-right cursor-pointer hover:text-foreground"
                 >
                   <div className="flex items-center justify-end gap-1">
                     Amount (USDT)
                     {sortField === "amount" ? (
-                      sortOrder === "asc" ? <ArrowUp className="w-3 h-3 text-amber-400" /> : <ArrowDown className="w-3 h-3 text-amber-400" />
+                      sortOrder === "asc" ? <ArrowUp className="w-3 h-3 text-primary" /> : <ArrowDown className="w-3 h-3 text-primary" />
                     ) : (
-                      <ArrowUpDown className="w-3 h-3 text-slate-600" />
+                      <ArrowUpDown className="w-3 h-3 text-muted-foreground" />
                     )}
                   </div>
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#17274a]/60 font-mono text-slate-200">
+            <tbody className="divide-y divide-border font-mono text-foreground">
               {paginatedEntries.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="py-8 text-center text-slate-500 font-sans text-xs">
+                  <td colSpan={7} className="py-8 text-center text-muted-foreground font-sans text-xs">
                     No joining bonus records found.
                   </td>
                 </tr>
@@ -442,39 +442,39 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
                   return (
                     <tr
                       key={item.id || idx}
-                      className="hover:bg-[#0c162d]/70 transition-colors"
+                      className="hover:bg-muted/40 transition-colors"
                     >
-                      <td className="py-2.5 px-3 text-center text-slate-400 font-sans">{srNum}</td>
-                      <td className="py-2.5 px-3 text-slate-300 font-sans">
+                      <td className="py-2.5 px-3 text-center text-muted-foreground font-sans">{srNum}</td>
+                      <td className="py-2.5 px-3 text-foreground font-sans">
                         {formatDateTime(item.createdAt)}
                       </td>
                       <td className="py-2.5 px-3 font-sans">
                         {item.category === "SELF" ? (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-500/15 text-blue-400 border border-blue-500/30">
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-primary/15 text-primary border border-primary/30">
                             Welcome Bonus
                           </span>
                         ) : (
-                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30">
+                          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/15 text-emerald-500 border border-emerald-500/30">
                             Team Bounty
                           </span>
                         )}
                       </td>
                       <td className="py-2.5 px-3 font-sans">
                         {item.levelNumber ? (
-                          <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/15 text-purple-300 border border-purple-500/30">
+                          <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-purple-500/15 text-purple-600 dark:text-purple-300 border border-purple-500/30">
                             Level {item.levelNumber}
                           </span>
                         ) : (
-                          <span className="text-slate-500 text-[11px]">-</span>
+                          <span className="text-muted-foreground text-[11px]">-</span>
                         )}
                       </td>
-                      <td className="py-2.5 px-3 font-mono font-bold text-amber-300">
+                      <td className="py-2.5 px-3 font-mono font-bold text-primary">
                         {item.memberCustomId !== "-" ? item.memberCustomId : "Self"}
                       </td>
-                      <td className="py-2.5 px-3 text-slate-300 font-sans max-w-xs truncate" title={item.description}>
+                      <td className="py-2.5 px-3 text-muted-foreground font-sans max-w-xs truncate" title={item.description}>
                         {item.description || "Registration Bonus"}
                       </td>
-                      <td className="py-2.5 px-3 text-right font-bold text-emerald-400">
+                      <td className="py-2.5 px-3 text-right font-bold text-emerald-500">
                         +${item.amountNum.toFixed(4)}
                       </td>
                     </tr>
@@ -486,34 +486,34 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
         </div>
 
         {/* Pagination Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 text-xs text-slate-400">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-2 text-xs text-muted-foreground">
           <div>
             Showing{" "}
-            <span className="font-bold text-slate-200">
+            <span className="font-bold text-foreground">
               {totalRecords === 0 ? 0 : (validCurrentPage - 1) * pageSize + 1}
             </span>{" "}
             to{" "}
-            <span className="font-bold text-slate-200">
+            <span className="font-bold text-foreground">
               {Math.min(validCurrentPage * pageSize, totalRecords)}
             </span>{" "}
-            of <span className="font-bold text-slate-200">{totalRecords}</span> entries
+            of <span className="font-bold text-foreground">{totalRecords}</span> entries
           </div>
 
           <div className="flex items-center gap-1">
             <button
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               disabled={validCurrentPage <= 1}
-              className="px-2.5 py-1 rounded-lg border border-[#1c2e54] bg-[#070e20] text-slate-300 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="px-2.5 py-1 rounded-lg border border-border bg-card text-foreground hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-all"
             >
               <ChevronLeft className="w-3.5 h-3.5" />
             </button>
-            <span className="px-3 py-1 font-bold text-slate-200">
+            <span className="px-3 py-1 font-bold text-foreground">
               Page {validCurrentPage} of {totalPages}
             </span>
             <button
               onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
               disabled={validCurrentPage >= totalPages}
-              className="px-2.5 py-1 rounded-lg border border-[#1c2e54] bg-[#070e20] text-slate-300 hover:text-white disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="px-2.5 py-1 rounded-lg border border-border bg-card text-foreground hover:bg-muted disabled:opacity-40 disabled:cursor-not-allowed transition-all"
             >
               <ChevronRight className="w-3.5 h-3.5" />
             </button>

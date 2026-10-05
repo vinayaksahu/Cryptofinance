@@ -252,17 +252,17 @@ export function WalletsHubView({
       {/* Header & Tabs */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2.5">
-            <Layers className="w-7 h-7 text-[#00D2FF]" />
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight flex items-center gap-2.5">
+            <Layers className="w-6 h-6 text-primary" />
             <span>Multi-Wallet Ecosystem</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 font-mono">
+          <p className="text-xs sm:text-sm text-muted-foreground mt-1">
             Triple-Isolated Liquidity &bull; Bonus Utility &bull; P2P Transfers &bull; External Cashouts
           </p>
         </div>
 
         {/* Wallet Navigation Pills */}
-        <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-900/80 border border-white/10 overflow-x-auto">
+        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-card border border-border overflow-x-auto shadow-sm">
           {[
             { id: "all", label: "All Wallets" },
             { id: "bonus", label: "Bonus Wallet" },
@@ -274,10 +274,10 @@ export function WalletsHubView({
             <button
               key={tab.id}
               onClick={() => setSelectedWalletTab(tab.id)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-bold font-mono transition-all whitespace-nowrap ${
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
                 selectedWalletTab === tab.id
-                  ? "bg-[#00D2FF] text-slate-950 shadow-md shadow-[#00D2FF]/20"
-                  : "text-slate-500 dark:text-slate-400 hover:text-white"
+                  ? "bg-primary text-primary-foreground shadow-sm"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
               }`}
             >
               {tab.label}
@@ -287,49 +287,49 @@ export function WalletsHubView({
       </div>
 
       {/* =========================================================================
-          WALLET CARDS GRID (EXACTLY AS IN 2ND IMAGE)
+          WALLET CARDS GRID
           ========================================================================= */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         {/* 1. BONUS WALLET */}
         {(selectedWalletTab === "all" || selectedWalletTab === "bonus") && (
-          <div className="glass-card-elevated glass-glow-top p-6 flex flex-col justify-between border-t-2 border-t-[#FFB800] relative overflow-hidden group">
+          <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-6 flex flex-col justify-between shadow-sm relative overflow-hidden group">
             <div>
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-black uppercase tracking-wider text-[#FFB800] bg-[#FFB800]/10 px-2.5 py-0.5 rounded-full border border-[#FFB800]/30 font-mono">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-500 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/30">
                   NON-WITHDRAWABLE &bull; 10% UTILITY
                 </span>
-                <Gift className="w-5 h-5 text-[#FFB800]" />
+                <Gift className="w-5 h-5 text-amber-500" />
               </div>
 
-              <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono">
+              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                 BONUS WALLET
               </h3>
 
-              <div className="text-3xl sm:text-4xl font-black text-[#FFB800] font-mono my-2">
-                ${bonusBalance.toFixed(2)} <span className="text-xs text-slate-500 dark:text-slate-400 font-sans">USDT</span>
+              <div className="text-3xl sm:text-4xl font-bold text-amber-500 font-mono my-2">
+                ${bonusBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-900/60 border border-white/10 text-xs text-slate-700 dark:text-slate-300 space-y-2 mt-3 font-mono">
+              <div className="p-3 rounded-xl bg-card border border-border text-xs text-foreground space-y-2 mt-3">
                 <div className="flex items-start gap-1.5">
-                  <span className="text-[#FFB800] font-bold">&bull;</span>
+                  <span className="text-amber-500 font-bold">&bull;</span>
                   <span><strong>Rule:</strong> Only usable for ID activation &amp; reinvestment.</span>
                 </div>
                 <div className="flex items-start gap-1.5">
-                  <span className="text-[#FFB800] font-bold">&bull;</span>
+                  <span className="text-amber-500 font-bold">&bull;</span>
                   <span><strong>Max Utility:</strong> Up to 10% of total investment amount per stake.</span>
                 </div>
                 <div className="flex items-start gap-1.5">
-                  <span className="text-[#FFB800] font-bold">&bull;</span>
+                  <span className="text-amber-500 font-bold">&bull;</span>
                   <span><strong>Sources:</strong> $1.00 Self Signup + $0.40/Level downline signups.</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-5 pt-4 border-t border-white/10">
+            <div className="mt-5 pt-4 border-t border-border">
               <button
                 type="button"
                 onClick={() => onNavigateTab && onNavigateTab("stake-activate")}
-                className="w-full py-2.5 px-4 rounded-xl bg-[#FFB800]/15 hover:bg-[#FFB800] text-[#FFB800] hover:text-slate-950 font-bold text-xs font-mono transition-all flex items-center justify-center gap-2 border border-[#FFB800]/30 shadow-md"
+                className="w-full py-2.5 px-4 rounded-xl bg-amber-500/10 hover:bg-amber-500 text-amber-500 hover:text-white font-bold text-xs transition-all flex items-center justify-center gap-2 border border-amber-500/30 shadow-sm"
               >
                 <Zap className="w-4 h-4" />
                 <span>Activate ID Using Bonus (10%)</span>
@@ -340,40 +340,40 @@ export function WalletsHubView({
 
         {/* 2. ROI WALLET */}
         {(selectedWalletTab === "all" || selectedWalletTab === "roi") && (
-          <div className="glass-card-elevated glass-glow-top p-6 flex flex-col justify-between border-t-2 border-t-[#00FFA3] relative overflow-hidden group">
+          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-6 flex flex-col justify-between shadow-sm relative overflow-hidden group">
             <div>
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-black uppercase tracking-wider text-[#00FFA3] bg-[#00FFA3]/10 px-2.5 py-0.5 rounded-full border border-[#00FFA3]/30 font-mono">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-500 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
                   DAILY 4% YIELD
                 </span>
-                <Zap className="w-5 h-5 text-[#00FFA3]" />
+                <Zap className="w-5 h-5 text-emerald-500" />
               </div>
 
-              <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono">
+              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                 ROI WALLET
               </h3>
 
-              <div className="text-3xl sm:text-4xl font-black text-[#00FFA3] font-mono my-2">
-                ${roiBalance.toFixed(2)} <span className="text-xs text-slate-500 dark:text-slate-400 font-sans">USDT</span>
+              <div className="text-3xl sm:text-4xl font-bold text-emerald-500 font-mono my-2">
+                ${roiBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-900/60 border border-white/10 text-xs text-slate-700 dark:text-slate-300 space-y-2 mt-3 font-mono">
+              <div className="p-3 rounded-xl bg-card border border-border text-xs text-foreground space-y-2 mt-3">
                 <div className="flex items-start gap-1.5">
-                  <span className="text-[#00FFA3] font-bold">&bull;</span>
+                  <span className="text-emerald-500 font-bold">&bull;</span>
                   <span><strong>Source:</strong> Automated 4.00% daily returns from 2X pool.</span>
                 </div>
                 <div className="flex items-start gap-1.5">
-                  <span className="text-[#00FFA3] font-bold">&bull;</span>
+                  <span className="text-emerald-500 font-bold">&bull;</span>
                   <span><strong>Options:</strong> Transfer to Main (Withdrawal) OR Secondary Wallet.</span>
                 </div>
                 <div className="flex items-start gap-1.5">
-                  <span className="text-[#00FFA3] font-bold">&bull;</span>
+                  <span className="text-emerald-500 font-bold">&bull;</span>
                   <span><strong>Internal Transfer:</strong> Direct credit to Main or Secondary Wallet.</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-5 pt-4 border-t border-white/10 grid grid-cols-2 gap-2">
+            <div className="mt-5 pt-4 border-t border-border grid grid-cols-2 gap-2">
               <button
                 type="button"
                 onClick={() => {
@@ -384,7 +384,7 @@ export function WalletsHubView({
                   const element = document.getElementById("transfer-engine-section");
                   if (element) element.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="py-2.5 px-3 rounded-xl bg-slate-900/70 hover:bg-white/10 border border-white/15 text-white font-bold text-xs font-mono transition-all text-center"
+                className="py-2.5 px-3 rounded-xl bg-card hover:bg-muted border border-border text-foreground font-bold text-xs transition-all text-center"
               >
                 &rarr; Main Wallet
               </button>
@@ -398,7 +398,7 @@ export function WalletsHubView({
                   const element = document.getElementById("transfer-engine-section");
                   if (element) element.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="py-2.5 px-3 rounded-xl bg-[#00FFA3]/20 hover:bg-[#00FFA3] text-[#00FFA3] hover:text-slate-950 font-bold text-xs font-mono transition-all text-center border border-[#00FFA3]/30"
+                className="py-2.5 px-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-xs transition-all text-center shadow-sm"
               >
                 &rarr; Secondary Wallet
               </button>
@@ -408,40 +408,40 @@ export function WalletsHubView({
 
         {/* 3. WORKING WALLET */}
         {(selectedWalletTab === "all" || selectedWalletTab === "working") && (
-          <div className="glass-card-elevated glass-glow-top p-6 flex flex-col justify-between border-t-2 border-t-[#00D2FF] relative overflow-hidden group">
+          <div className="rounded-2xl border border-sky-500/20 bg-sky-500/5 p-6 flex flex-col justify-between shadow-sm relative overflow-hidden group">
             <div>
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-black uppercase tracking-wider text-[#00D2FF] bg-[#00D2FF]/10 px-2.5 py-0.5 rounded-full border border-[#00D2FF]/30 font-mono">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-sky-500 bg-sky-500/10 px-2.5 py-0.5 rounded-full border border-sky-500/30">
                   DIRECT + ROYALTY + REWARDS
                 </span>
-                <Wallet className="w-5 h-5 text-[#00D2FF]" />
+                <Wallet className="w-5 h-5 text-sky-500" />
               </div>
 
-              <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono">
+              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                 WORKING WALLET
               </h3>
 
-              <div className="text-3xl sm:text-4xl font-black text-[#00D2FF] font-mono my-2">
-                ${workingBalance.toFixed(2)} <span className="text-xs text-slate-500 dark:text-slate-400 font-sans">USDT</span>
+              <div className="text-3xl sm:text-4xl font-bold text-sky-500 font-mono my-2">
+                ${workingBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-900/60 border border-white/10 text-xs text-slate-700 dark:text-slate-300 space-y-2 mt-3 font-mono">
+              <div className="p-3 rounded-xl bg-card border border-border text-xs text-foreground space-y-2 mt-3">
                 <div className="flex items-start gap-1.5">
-                  <span className="text-[#00D2FF] font-bold">&bull;</span>
+                  <span className="text-sky-500 font-bold">&bull;</span>
                   <span><strong>Sources:</strong> 10% Direct Referrals + 10-Level Downline Royalties.</span>
                 </div>
                 <div className="flex items-start gap-1.5">
-                  <span className="text-[#00D2FF] font-bold">&bull;</span>
+                  <span className="text-sky-500 font-bold">&bull;</span>
                   <span><strong>Options:</strong> Transfer to Main (Withdrawal) OR Secondary Wallet.</span>
                 </div>
                 <div className="flex items-start gap-1.5">
-                  <span className="text-[#00D2FF] font-bold">&bull;</span>
+                  <span className="text-sky-500 font-bold">&bull;</span>
                   <span><strong>Milestones:</strong> Cashout rank rewards directly here.</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-5 pt-4 border-t border-white/10 grid grid-cols-2 gap-2">
+            <div className="mt-5 pt-4 border-t border-border grid grid-cols-2 gap-2">
               <button
                 type="button"
                 onClick={() => {
@@ -452,7 +452,7 @@ export function WalletsHubView({
                   const element = document.getElementById("transfer-engine-section");
                   if (element) element.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="py-2.5 px-3 rounded-xl bg-slate-900/70 hover:bg-white/10 border border-white/15 text-white font-bold text-xs font-mono transition-all text-center"
+                className="py-2.5 px-3 rounded-xl bg-card hover:bg-muted border border-border text-foreground font-bold text-xs transition-all text-center"
               >
                 &rarr; Main Wallet
               </button>
@@ -466,7 +466,7 @@ export function WalletsHubView({
                   const element = document.getElementById("transfer-engine-section");
                   if (element) element.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="py-2.5 px-3 rounded-xl bg-[#00D2FF]/20 hover:bg-[#00D2FF] text-[#00D2FF] hover:text-slate-950 font-bold text-xs font-mono transition-all text-center border border-[#00D2FF]/30"
+                className="py-2.5 px-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-xs transition-all text-center shadow-sm"
               >
                 &rarr; Secondary Wallet
               </button>
@@ -476,49 +476,49 @@ export function WalletsHubView({
 
         {/* 4. SECONDARY WALLET */}
         {(selectedWalletTab === "all" || selectedWalletTab === "p2p" || selectedWalletTab === "secondary") && (
-          <div className="glass-card-elevated glass-glow-top p-6 flex flex-col justify-between border-t-2 border-t-purple-400 relative overflow-hidden group">
+          <div className="rounded-2xl border border-primary/30 bg-primary/5 p-6 flex flex-col justify-between shadow-sm relative overflow-hidden group">
             <div>
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-black uppercase tracking-wider text-purple-400 bg-purple-400/10 px-2.5 py-0.5 rounded-full border border-purple-400/30 font-mono">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-0.5 rounded-full border border-primary/30">
                   DEPOSIT &bull; ID ACTIVATION &bull; P2P
                 </span>
-                <Repeat className="w-5 h-5 text-purple-400" />
+                <Repeat className="w-5 h-5 text-primary" />
               </div>
 
-              <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono">
+              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                 SECONDARY WALLET
               </h3>
 
-              <div className="text-3xl sm:text-4xl font-black text-purple-400 font-mono my-2">
-                ${p2pBalance.toFixed(2)} <span className="text-xs text-slate-500 dark:text-slate-400 font-sans">USDT</span>
+              <div className="text-3xl sm:text-4xl font-bold text-foreground font-mono my-2">
+                ${p2pBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-900/60 border border-white/10 text-xs text-slate-700 dark:text-slate-300 space-y-2 mt-3 font-mono">
+              <div className="p-3 rounded-xl bg-card border border-border text-xs text-foreground space-y-2 mt-3">
                 <div className="flex items-start gap-1.5">
-                  <span className="text-purple-400 font-bold">&bull;</span>
+                  <span className="text-primary font-bold">&bull;</span>
                   <span><strong>Deposit Request:</strong> Submit USDT BEP-20 deposit proof to credit this wallet directly.</span>
                 </div>
                 <div className="flex items-start gap-1.5">
-                  <span className="text-purple-400 font-bold">&bull;</span>
+                  <span className="text-primary font-bold">&bull;</span>
                   <span><strong>ID Activation:</strong> Activate your own stake or any member's ID (up to 10% Bonus Wallet utility).</span>
                 </div>
                 <div className="flex items-start gap-1.5">
-                  <span className="text-purple-400 font-bold">&bull;</span>
+                  <span className="text-primary font-bold">&bull;</span>
                   <span><strong>P2P Transfer:</strong> Send funds instantly to another member's Secondary Wallet.</span>
                 </div>
                 <div className="flex items-start gap-1.5">
-                  <span className="text-purple-400 font-bold">&bull;</span>
+                  <span className="text-primary font-bold">&bull;</span>
                   <span><strong>Funding Sources:</strong> Deposits, ROI transfers, Working transfers, P2P transfers.</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-5 pt-4 border-t border-white/10 flex flex-col gap-2">
+            <div className="mt-5 pt-4 border-t border-border flex flex-col gap-2">
               <div className="grid grid-cols-2 gap-2">
                 <button
                   type="button"
                   onClick={() => onNavigateTab && onNavigateTab("recharge")}
-                  className="py-2 px-3 rounded-xl bg-sky-500/20 hover:bg-sky-500 text-sky-300 hover:text-slate-950 border border-sky-500/30 font-bold text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5"
+                  className="py-2 px-3 rounded-xl bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary border border-primary/20 font-bold text-xs transition-all text-center flex items-center justify-center gap-1.5"
                 >
                   <Wallet className="w-3.5 h-3.5" />
                   <span>Deposit USDT</span>
@@ -526,7 +526,7 @@ export function WalletsHubView({
                 <button
                   type="button"
                   onClick={() => onNavigateTab && onNavigateTab("stake-activate")}
-                  className="py-2 px-3 rounded-xl bg-[#00FFA3]/20 hover:bg-[#00FFA3] text-[#00FFA3] hover:text-slate-950 border border-[#00FFA3]/30 font-bold text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5"
+                  className="py-2 px-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-xs transition-all text-center flex items-center justify-center gap-1.5 shadow-sm"
                 >
                   <Zap className="w-3.5 h-3.5" />
                   <span>Activate Any ID</span>
@@ -539,7 +539,7 @@ export function WalletsHubView({
                   const element = document.getElementById("transfer-engine-section");
                   if (element) element.scrollIntoView({ behavior: "smooth" });
                 }}
-                className="w-full py-2 px-3 rounded-xl bg-purple-500/15 hover:bg-purple-500 text-purple-300 hover:text-slate-950 border border-purple-500/30 font-bold text-xs font-mono transition-all text-center flex items-center justify-center gap-1.5"
+                className="w-full py-2 px-3 rounded-xl bg-card hover:bg-muted border border-border text-foreground font-bold text-xs transition-all text-center flex items-center justify-center gap-1.5"
               >
                 <Repeat className="w-3.5 h-3.5" />
                 <span>Send P2P Transfer &rarr;</span>
@@ -550,44 +550,44 @@ export function WalletsHubView({
 
         {/* 5. MAIN WALLET (WITHDRAWAL WALLET) */}
         {(selectedWalletTab === "all" || selectedWalletTab === "main") && (
-          <div className="glass-card-elevated glass-glow-top p-6 flex flex-col justify-between border-t-2 border-t-emerald-400 relative overflow-hidden group">
+          <div className="rounded-2xl border border-border bg-card p-6 flex flex-col justify-between shadow-sm relative overflow-hidden group">
             <div>
               <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-black uppercase tracking-wider text-emerald-400 bg-emerald-400/10 px-2.5 py-0.5 rounded-full border border-emerald-400/30 font-mono">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-500 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
                   EXTERNAL CASHOUT WALLET
                 </span>
-                <ArrowUpRight className="w-5 h-5 text-emerald-400" />
+                <ArrowUpRight className="w-5 h-5 text-emerald-500" />
               </div>
 
-              <h3 className="text-sm font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono">
+              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
                 MAIN WALLET (WITHDRAWAL)
               </h3>
 
-              <div className="text-3xl sm:text-4xl font-black text-emerald-400 font-mono my-2">
-                ${mainBalance.toFixed(2)} <span className="text-xs text-slate-500 dark:text-slate-400 font-sans">USDT</span>
+              <div className="text-3xl sm:text-4xl font-bold text-foreground font-mono my-2">
+                ${mainBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
               </div>
 
-              <div className="p-3 rounded-xl bg-slate-900/60 border border-white/10 text-xs text-slate-700 dark:text-slate-300 space-y-2 mt-3 font-mono">
+              <div className="p-3 rounded-xl bg-muted/40 border border-border text-xs text-foreground space-y-2 mt-3">
                 <div className="flex items-start gap-1.5">
-                  <span className="text-emerald-400 font-bold">&bull;</span>
+                  <span className="text-emerald-500 font-bold">&bull;</span>
                   <span><strong>Cashout:</strong> Withdraw directly to your personal BEP-20 address.</span>
                 </div>
                 <div className="flex items-start gap-1.5">
-                  <span className="text-emerald-400 font-bold">&bull;</span>
+                  <span className="text-emerald-500 font-bold">&bull;</span>
                   <span><strong>Threshold:</strong> Minimum withdrawal is $2.00 USDT.</span>
                 </div>
                 <div className="flex items-start gap-1.5">
-                  <span className="text-emerald-400 font-bold">&bull;</span>
+                  <span className="text-emerald-500 font-bold">&bull;</span>
                   <span><strong>Protocol Fee:</strong> 10% liquidity fee on external cashouts.</span>
                 </div>
               </div>
             </div>
 
-            <div className="mt-5 pt-4 border-t border-white/10">
+            <div className="mt-5 pt-4 border-t border-border">
               <button
                 type="button"
                 onClick={() => onNavigateTab && onNavigateTab("tx-withdraw")}
-                className="w-full py-2.5 px-4 rounded-xl bg-emerald-500/20 hover:bg-emerald-500 text-emerald-300 hover:text-slate-950 border border-emerald-500/30 font-bold text-xs font-mono transition-all flex items-center justify-center gap-2 shadow-md"
+                className="w-full py-2.5 px-4 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-sm"
               >
                 <ArrowUpRight className="w-4 h-4" />
                 <span>Request BEP-20 Withdrawal ($2 Min)</span>
@@ -600,37 +600,37 @@ export function WalletsHubView({
       {/* =========================================================================
           TRANSFER ENGINES: INTERNAL & EXTERNAL (P2P)
           ========================================================================= */}
-      <div id="transfer-engine-section" className="glass-card-elevated glass-glow-top p-6 sm:p-8 space-y-6">
+      <div id="transfer-engine-section" className="rounded-2xl border border-border bg-card p-6 sm:p-8 space-y-6 shadow-sm">
         {/* Engine Switcher Tabs */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-white/10">
-          <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-slate-950/80 border border-white/10 w-fit">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-border">
+          <div className="flex items-center gap-1.5 p-1 rounded-xl bg-muted border border-border w-fit">
             <button
               type="button"
               onClick={() => setActiveEngine("internal")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-all flex items-center gap-2 ${
+              className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 ${
                 activeEngine === "internal"
-                  ? "bg-[#00FFA3] text-slate-950 shadow-md shadow-[#00FFA3]/20"
-                  : "text-slate-500 dark:text-slate-400 hover:text-white"
+                  ? "bg-primary text-primary-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               <ArrowRightLeft className="w-4 h-4" />
-              <span>Internal Wallet Transfer Engine</span>
+              <span>Internal Transfer Engine</span>
             </button>
             <button
               type="button"
               onClick={() => setActiveEngine("external")}
-              className={`px-4 py-2 rounded-xl text-xs font-bold font-mono transition-all flex items-center gap-2 ${
+              className={`px-4 py-2 rounded-lg text-xs font-semibold transition-all flex items-center gap-2 ${
                 activeEngine === "external"
-                  ? "bg-purple-500 text-white shadow-md shadow-purple-500/20"
-                  : "text-slate-500 dark:text-slate-400 hover:text-white"
+                  ? "bg-primary text-primary-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
               }`}
             >
               <Repeat className="w-4 h-4" />
-              <span>External Wallet Transfer Engine (Secondary Wallet P2P)</span>
+              <span>Secondary Wallet P2P Transfer</span>
             </button>
           </div>
 
-          <div className="glass-pill border-[#00FFA3]/30 bg-[#00FFA3]/10 text-[#00FFA3] text-xs font-bold font-mono self-start sm:self-auto">
+          <div className="text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded-full text-xs font-semibold self-start sm:self-auto">
             Instant Execution &bull; Direct Liquidity
           </div>
         </div>
@@ -641,25 +641,25 @@ export function WalletsHubView({
         {activeEngine === "internal" && (
           <div className="space-y-5 animate-in fade-in duration-200">
             <div>
-              <h3 className="text-base sm:text-lg font-bold text-white tracking-tight font-mono flex items-center gap-2">
-                <ArrowRightLeft className="w-5 h-5 text-[#00D2FF]" />
+              <h3 className="text-base sm:text-lg font-bold text-foreground tracking-tight flex items-center gap-2">
+                <ArrowRightLeft className="w-5 h-5 text-primary" />
                 <span>Internal Wallet Transfer Engine</span>
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-mono">
+              <p className="text-xs text-muted-foreground mt-0.5">
                 Convert your ROI or Working Wallet earnings to Main (Withdrawal) Wallet or Secondary Wallet.
               </p>
             </div>
 
             {/* Notifications */}
             {internalSuccess && (
-              <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-emerald-400 text-sm flex items-center gap-3">
+              <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-emerald-500 text-sm flex items-center gap-3">
                 <Check className="w-5 h-5 shrink-0" />
                 <span className="font-semibold">{internalSuccess}</span>
               </div>
             )}
 
             {internalError && (
-              <div className="p-4 bg-rose-500/10 border border-rose-500/30 rounded-2xl text-rose-400 text-sm flex items-center gap-3">
+              <div className="p-4 bg-rose-500/10 border border-rose-500/30 rounded-2xl text-rose-500 text-sm flex items-center gap-3">
                 <AlertCircle className="w-5 h-5 shrink-0" />
                 <span className="font-semibold">{internalError}</span>
               </div>
@@ -669,80 +669,80 @@ export function WalletsHubView({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* Source Wallet Selector */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono">
+                  <label className="text-xs font-bold text-foreground uppercase tracking-wider">
                     1. Select Source Wallet
                   </label>
                   <div className="grid grid-cols-2 gap-3">
                     <button
                       type="button"
                       onClick={() => setTransferSource("ROI")}
-                      className={`p-3.5 rounded-2xl border text-left font-mono transition-all ${
+                      className={`p-3.5 rounded-xl border text-left font-mono transition-all ${
                         transferSource === "ROI"
-                          ? "bg-[#00FFA3]/15 border-[#00FFA3] text-white shadow-lg shadow-[#00FFA3]/10"
-                          : "bg-slate-900/60 border-white/10 text-slate-500 dark:text-slate-400 hover:text-white"
+                          ? "bg-primary/10 border-primary text-foreground shadow-sm"
+                          : "bg-muted/40 border-border text-muted-foreground hover:text-foreground"
                       }`}
                     >
-                      <span className="text-[10px] uppercase font-bold block text-slate-500 dark:text-slate-400">ROI WALLET</span>
-                      <span className="text-lg font-extrabold text-[#00FFA3] block mt-0.5">
+                      <span className="text-[10px] uppercase font-bold block text-muted-foreground">ROI WALLET</span>
+                      <span className="text-lg font-bold text-emerald-500 block mt-0.5">
                         ${roiBalance.toFixed(2)}
                       </span>
-                      <span className="text-[10px] text-slate-500 block">Daily 4% Returns</span>
+                      <span className="text-[10px] text-muted-foreground block">Daily 4% Returns</span>
                     </button>
 
                     <button
                       type="button"
                       onClick={() => setTransferSource("WORKING")}
-                      className={`p-3.5 rounded-2xl border text-left font-mono transition-all ${
+                      className={`p-3.5 rounded-xl border text-left font-mono transition-all ${
                         transferSource === "WORKING"
-                          ? "bg-[#00D2FF]/15 border-[#00D2FF] text-white shadow-lg shadow-[#00D2FF]/10"
-                          : "bg-slate-900/60 border-white/10 text-slate-500 dark:text-slate-400 hover:text-white"
+                          ? "bg-primary/10 border-primary text-foreground shadow-sm"
+                          : "bg-muted/40 border-border text-muted-foreground hover:text-foreground"
                       }`}
                     >
-                      <span className="text-[10px] uppercase font-bold block text-slate-500 dark:text-slate-400">WORKING WALLET</span>
-                      <span className="text-lg font-extrabold text-[#00D2FF] block mt-0.5">
+                      <span className="text-[10px] uppercase font-bold block text-muted-foreground">WORKING WALLET</span>
+                      <span className="text-lg font-bold text-primary block mt-0.5">
                         ${workingBalance.toFixed(2)}
                       </span>
-                      <span className="text-[10px] text-slate-500 block">Direct &amp; Royalties</span>
+                      <span className="text-[10px] text-muted-foreground block">Direct &amp; Royalties</span>
                     </button>
                   </div>
                 </div>
 
                 {/* Target Destination Wallet Selector */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono">
+                  <label className="text-xs font-bold text-foreground uppercase tracking-wider">
                     2. Select Destination Wallet
                   </label>
                   <div className="grid grid-cols-2 gap-3">
                     <button
                       type="button"
                       onClick={() => setTransferTarget("MAIN")}
-                      className={`p-3.5 rounded-2xl border text-left font-mono transition-all ${
+                      className={`p-3.5 rounded-xl border text-left font-mono transition-all ${
                         transferTarget === "MAIN"
-                          ? "bg-emerald-500/15 border-emerald-400 text-white shadow-lg shadow-emerald-500/10"
-                          : "bg-slate-900/60 border-white/10 text-slate-500 dark:text-slate-400 hover:text-white"
+                          ? "bg-primary/10 border-primary text-foreground shadow-sm"
+                          : "bg-muted/40 border-border text-muted-foreground hover:text-foreground"
                       }`}
                     >
-                      <span className="text-[10px] uppercase font-bold block text-slate-500 dark:text-slate-400">MAIN WALLET</span>
-                      <span className="text-lg font-extrabold text-emerald-400 block mt-0.5">
+                      <span className="text-[10px] uppercase font-bold block text-muted-foreground">MAIN WALLET</span>
+                      <span className="text-lg font-bold text-emerald-500 block mt-0.5">
                         Cashout USDT
                       </span>
-                      <span className="text-[10px] text-slate-500 block">BEP-20 External Withdrawal</span>
+                      <span className="text-[10px] text-muted-foreground block">BEP-20 External Withdrawal</span>
                     </button>
 
                     <button
                       type="button"
                       onClick={() => setTransferTarget("P2P")}
-                      className={`p-3.5 rounded-2xl border text-left font-mono transition-all ${
+                      className={`p-3.5 rounded-xl border text-left font-mono transition-all ${
                         transferTarget === "P2P"
-                          ? "bg-purple-500/15 border-purple-400 text-white shadow-lg shadow-purple-500/10"
-                          : "bg-slate-900/60 border-white/10 text-slate-500 dark:text-slate-400 hover:text-white"
+                          ? "bg-primary/10 border-primary text-foreground shadow-sm"
+                          : "bg-muted/40 border-border text-muted-foreground hover:text-foreground"
                       }`}
                     >
-                      <span className="text-[10px] uppercase font-bold block text-slate-500 dark:text-slate-400">SECONDARY WALLET</span>
-                      <span className="text-lg font-extrabold text-purple-400 block mt-0.5">
+                      <span className="text-[10px] uppercase font-bold block text-muted-foreground">SECONDARY WALLET</span>
+                      <span className="text-lg font-bold text-primary block mt-0.5">
                         Deposit / Activation
                       </span>
-                      <span className="text-[10px] text-slate-500 block">Activate any ID or send P2P</span>
+                      <span className="text-[10px] text-muted-foreground block">Activate any ID or send P2P</span>
                     </button>
                   </div>
                 </div>
@@ -750,13 +750,13 @@ export function WalletsHubView({
 
               {/* Transfer Amount Input & Presets */}
               <div className="space-y-3">
-                <div className="flex justify-between items-center text-xs font-mono">
-                  <label className="font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                <div className="flex justify-between items-center text-xs">
+                  <label className="font-bold text-foreground uppercase tracking-wider">
                     3. Transfer Amount ($ USDT)
                   </label>
-                  <span className="text-slate-500 dark:text-slate-400">
+                  <span className="text-muted-foreground font-mono">
                     Available in {transferSource} Wallet:{" "}
-                    <strong className="text-white">${availableSourceBalance.toFixed(2)}</strong>
+                    <strong className="text-foreground">${availableSourceBalance.toFixed(2)}</strong>
                   </span>
                 </div>
 
@@ -768,10 +768,10 @@ export function WalletsHubView({
                     value={transferAmount}
                     onChange={(e) => setTransferAmount(e.target.value)}
                     placeholder="0.00"
-                    className="w-full bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 focus:border-[#00D2FF] rounded-2xl px-4 py-3.5 text-xl font-black text-slate-900 dark:text-slate-100 placeholder-slate-600 focus:outline-none"
+                    className="w-full bg-background border border-input focus:border-primary rounded-xl px-4 py-3 text-xl font-bold text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                     required
                   />
-                  <span className="absolute right-4 inset-y-0 flex items-center text-xs font-extrabold text-slate-500 dark:text-slate-400 font-mono">
+                  <span className="absolute right-4 inset-y-0 flex items-center text-xs font-bold text-muted-foreground font-mono">
                     USDT
                   </span>
                 </div>
@@ -783,7 +783,7 @@ export function WalletsHubView({
                       key={pct}
                       type="button"
                       onClick={() => setInternalPercentAmount(pct)}
-                      className="px-3 py-1.5 rounded-xl bg-slate-900 border border-white/10 text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-white hover:border-[#00D2FF] transition font-mono"
+                      className="px-3 py-1.5 rounded-lg bg-card border border-border text-xs font-bold text-foreground hover:bg-muted transition font-mono"
                     >
                       {pct === 100 ? "MAX" : `${pct}%`}
                     </button>
@@ -793,7 +793,7 @@ export function WalletsHubView({
 
               {/* 6-Digit PIN */}
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono block">
+                <label className="text-xs font-bold text-foreground uppercase tracking-wider block">
                   4. 6-Digit Security Transaction PIN
                 </label>
                 <input
@@ -803,7 +803,7 @@ export function WalletsHubView({
                   value={transactionPin}
                   onChange={(e) => setTransactionPin(e.target.value.replace(/\D/g, ""))}
                   placeholder="Enter 6-digit PIN"
-                  className="w-full sm:w-80 bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 focus:border-[#00D2FF] rounded-xl px-4 py-2.5 text-center tracking-[0.3em] text-base font-mono text-white font-extrabold placeholder-slate-600 focus:outline-none"
+                  className="w-full sm:w-80 bg-background border border-input focus:border-primary rounded-xl px-4 py-2.5 text-center tracking-[0.3em] text-base font-mono text-foreground font-bold placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                   required
                 />
               </div>
@@ -812,7 +812,7 @@ export function WalletsHubView({
               <button
                 type="submit"
                 disabled={internalLoading || !transferAmount || Number(transferAmount) <= 0 || transactionPin.length !== 6}
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#00D2FF] to-indigo-600 hover:opacity-95 text-white font-black text-sm uppercase tracking-wider transition-all shadow-xl shadow-slate-200/50 dark:shadow-black/20 shadow-[#00D2FF]/20 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99] font-mono cursor-pointer"
+                className="w-full py-3.5 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-sm uppercase tracking-wider transition-all shadow-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99] font-mono cursor-pointer"
               >
                 {internalLoading ? (
                   <>
@@ -838,25 +838,25 @@ export function WalletsHubView({
         {activeEngine === "external" && (
           <div className="space-y-5 animate-in fade-in duration-200">
             <div>
-              <h3 className="text-base sm:text-lg font-bold text-white tracking-tight font-mono flex items-center gap-2">
-                <Repeat className="w-5 h-5 text-purple-400" />
-                <span>External Wallet Transfer Engine (Secondary Wallet P2P)</span>
+              <h3 className="text-base sm:text-lg font-bold text-foreground tracking-tight flex items-center gap-2">
+                <Repeat className="w-5 h-5 text-primary" />
+                <span>Secondary Wallet P2P Transfer Engine</span>
               </h3>
-              <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5 font-mono">
+              <p className="text-xs text-muted-foreground mt-0.5">
                 Transfer Secondary Wallet funds directly to any member&apos;s Secondary Wallet for peer activations and team coordination.
               </p>
             </div>
 
             {/* Notifications */}
             {p2pSuccess && (
-              <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-emerald-400 text-sm flex items-center gap-3">
+              <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-emerald-500 text-sm flex items-center gap-3">
                 <Check className="w-5 h-5 shrink-0" />
                 <span className="font-semibold">{p2pSuccess}</span>
               </div>
             )}
 
             {p2pError && (
-              <div className="p-4 bg-rose-500/10 border border-rose-500/30 rounded-2xl text-rose-400 text-sm flex items-center gap-3">
+              <div className="p-4 bg-rose-500/10 border border-rose-500/30 rounded-2xl text-rose-500 text-sm flex items-center gap-3">
                 <AlertCircle className="w-5 h-5 shrink-0" />
                 <span className="font-semibold">{p2pError}</span>
               </div>
@@ -866,20 +866,20 @@ export function WalletsHubView({
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* Source Wallet Summary */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono">
+                  <label className="text-xs font-bold text-foreground uppercase tracking-wider">
                     1. Source Wallet
                   </label>
-                  <div className="p-4 rounded-2xl bg-purple-500/10 border border-purple-500/30 font-mono">
+                  <div className="p-4 rounded-xl bg-primary/5 border border-primary/20 font-mono">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] uppercase font-bold text-purple-300">SECONDARY WALLET</span>
-                      <span className="text-[10px] px-2 py-0.5 rounded bg-purple-500/20 text-purple-200 font-extrabold">
+                      <span className="text-[10px] uppercase font-bold text-primary">SECONDARY WALLET</span>
+                      <span className="text-[10px] px-2 py-0.5 rounded bg-primary/20 text-primary font-bold">
                         SOURCE
                       </span>
                     </div>
-                    <div className="text-2xl font-black text-purple-400 mt-1">
-                      ${p2pBalance.toFixed(2)} <span className="text-xs font-sans text-slate-500 dark:text-slate-400">USDT</span>
+                    <div className="text-2xl font-bold text-foreground mt-1">
+                      ${p2pBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
                     </div>
-                    <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1">
+                    <p className="text-[11px] text-muted-foreground mt-1">
                       Available balance for deposit recharges, peer transfers, and member activations.
                     </p>
                   </div>
@@ -887,7 +887,7 @@ export function WalletsHubView({
 
                 {/* Recipient Member ID & Live Verification */}
                 <div className="space-y-2">
-                  <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono">
+                  <label className="text-xs font-bold text-foreground uppercase tracking-wider">
                     2. Recipient Member ID
                   </label>
                   <div className="relative">
@@ -896,11 +896,11 @@ export function WalletsHubView({
                       value={p2pRecipientId}
                       onChange={(e) => setP2pRecipientId(e.target.value.toUpperCase())}
                       placeholder="e.g. CF10001"
-                      className="w-full bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 focus:border-purple-400 rounded-2xl px-4 py-3.5 text-base font-bold text-slate-900 dark:text-slate-100 placeholder-slate-600 focus:outline-none"
+                      className="w-full bg-background border border-input focus:border-primary rounded-xl px-4 py-3 text-base font-bold text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                       required
                     />
                     {p2pLookupLoading && (
-                      <span className="absolute right-4 inset-y-0 flex items-center text-xs text-purple-400">
+                      <span className="absolute right-4 inset-y-0 flex items-center text-xs text-primary">
                         <RefreshCw className="w-4 h-4 animate-spin" />
                       </span>
                     )}
@@ -908,8 +908,8 @@ export function WalletsHubView({
 
                   {/* Recipient Verification Status */}
                   {p2pRecipientName && (
-                    <div className="p-2.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-mono flex items-center gap-2">
-                      <UserCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 text-xs font-mono flex items-center gap-2">
+                      <UserCheck className="w-4 h-4 text-emerald-500 shrink-0" />
                       <span>
                         Verified Member: <strong>{p2pRecipientName}</strong>
                       </span>
@@ -917,8 +917,8 @@ export function WalletsHubView({
                   )}
 
                   {p2pLookupError && (
-                    <div className="p-2.5 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs font-mono flex items-center gap-2">
-                      <UserX className="w-4 h-4 text-rose-400 shrink-0" />
+                    <div className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-500 text-xs font-mono flex items-center gap-2">
+                      <UserX className="w-4 h-4 text-rose-500 shrink-0" />
                       <span>{p2pLookupError}</span>
                     </div>
                   )}
@@ -927,12 +927,12 @@ export function WalletsHubView({
 
               {/* Transfer Amount Input & Presets */}
               <div className="space-y-3">
-                <div className="flex justify-between items-center text-xs font-mono">
-                  <label className="font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
+                <div className="flex justify-between items-center text-xs">
+                  <label className="font-bold text-foreground uppercase tracking-wider">
                     3. Transfer Amount ($ USDT)
                   </label>
-                  <span className="text-slate-500 dark:text-slate-400">
-                    Available in Secondary Wallet: <strong className="text-white">${p2pBalance.toFixed(2)}</strong>
+                  <span className="text-muted-foreground font-mono">
+                    Available in Secondary Wallet: <strong className="text-foreground">${p2pBalance.toFixed(2)}</strong>
                   </span>
                 </div>
 
@@ -944,10 +944,10 @@ export function WalletsHubView({
                     value={p2pAmount}
                     onChange={(e) => setP2pAmount(e.target.value)}
                     placeholder="0.00"
-                    className="w-full bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 focus:border-purple-400 rounded-2xl px-4 py-3.5 text-xl font-black text-slate-900 dark:text-slate-100 placeholder-slate-600 focus:outline-none"
+                    className="w-full bg-background border border-input focus:border-primary rounded-xl px-4 py-3 text-xl font-bold text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                     required
                   />
-                  <span className="absolute right-4 inset-y-0 flex items-center text-xs font-extrabold text-slate-500 dark:text-slate-400 font-mono">
+                  <span className="absolute right-4 inset-y-0 flex items-center text-xs font-bold text-muted-foreground font-mono">
                     USDT
                   </span>
                 </div>
@@ -959,7 +959,7 @@ export function WalletsHubView({
                       key={pct}
                       type="button"
                       onClick={() => setP2pPercentAmount(pct)}
-                      className="px-3 py-1.5 rounded-xl bg-slate-900 border border-white/10 text-xs font-bold text-slate-700 dark:text-slate-300 hover:text-white hover:border-purple-400 transition font-mono"
+                      className="px-3 py-1.5 rounded-lg bg-card border border-border text-xs font-bold text-foreground hover:bg-muted transition font-mono"
                     >
                       {pct === 100 ? "MAX" : `${pct}%`}
                     </button>
@@ -969,7 +969,7 @@ export function WalletsHubView({
 
               {/* 6-Digit PIN */}
               <div className="space-y-1.5">
-                <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono block">
+                <label className="text-xs font-bold text-foreground uppercase tracking-wider block">
                   4. 6-Digit Security Transaction PIN
                 </label>
                 <input
@@ -979,7 +979,7 @@ export function WalletsHubView({
                   value={p2pPin}
                   onChange={(e) => setP2pPin(e.target.value.replace(/\D/g, ""))}
                   placeholder="Enter 6-digit PIN"
-                  className="w-full sm:w-80 bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 focus:border-purple-400 rounded-xl px-4 py-2.5 text-center tracking-[0.3em] text-base font-mono text-white font-extrabold placeholder-slate-600 focus:outline-none"
+                  className="w-full sm:w-80 bg-background border border-input focus:border-primary rounded-xl px-4 py-2.5 text-center tracking-[0.3em] text-base font-mono text-foreground font-bold placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                   required
                 />
               </div>
@@ -995,7 +995,7 @@ export function WalletsHubView({
                   p2pPin.length !== 6 ||
                   Boolean(p2pLookupError)
                 }
-                className="w-full py-4 rounded-2xl bg-gradient-to-r from-purple-500 to-indigo-600 hover:opacity-95 text-white font-black text-sm uppercase tracking-wider transition-all shadow-xl shadow-slate-200/50 dark:shadow-black/20 shadow-purple-500/20 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99] font-mono cursor-pointer"
+                className="w-full py-3.5 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-sm uppercase tracking-wider transition-all shadow-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99] font-mono cursor-pointer"
               >
                 {p2pLoading ? (
                   <>

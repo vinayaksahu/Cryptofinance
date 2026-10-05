@@ -196,30 +196,30 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
 
   return (
     <>
-      <header className="sticky top-0 z-30 flex h-16 items-center justify-between bg-white/80 dark:bg-[#090e1a]/80 backdrop-blur-2xl px-4 sm:px-6 border-b border-slate-200/80 dark:border-white/10 transition-colors duration-200 shadow-sm dark:shadow-none">
+      <header className="sticky top-0 z-30 flex h-16 items-center justify-between bg-card/85 backdrop-blur-2xl px-4 sm:px-6 border-b border-border transition-colors duration-200 shadow-sm">
         {/* Left: Sidebar Toggle & Console Badge */}
         <div className="flex items-center gap-3">
           <button
             type="button"
             onClick={onToggleSidebar}
-            className="p-2 rounded-2xl border border-slate-200 dark:border-white/10 text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition-colors shrink-0"
+            className="p-2 rounded-xl border border-border text-foreground hover:bg-muted transition-colors shrink-0"
             title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
             aria-label="Toggle Side Panel"
           >
             {isCollapsed ? (
-              <PanelLeft className="h-5 w-5 text-sky-500 dark:text-sky-400" />
+              <PanelLeft className="h-5 w-5 text-primary" />
             ) : (
-              <PanelLeftClose className="h-5 w-5 text-sky-500 dark:text-sky-400" />
+              <PanelLeftClose className="h-5 w-5 text-primary" />
             )}
           </button>
 
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-sky-500/10 border border-sky-500/25 rounded-2xl">
-            <Crown className="h-4 w-4 text-sky-500 dark:text-sky-400 shrink-0" />
-            <span className="text-xs font-bold text-sky-600 dark:text-sky-300 tracking-wide uppercase whitespace-nowrap">
+          <div className="flex items-center gap-2 px-3 py-1.5 bg-primary/10 border border-primary/25 rounded-xl">
+            <Crown className="h-4 w-4 text-primary shrink-0" />
+            <span className="text-xs font-bold text-primary tracking-wide uppercase whitespace-nowrap">
               Admin Console
             </span>
-            <span className="hidden sm:inline-flex items-center gap-1 text-[10px] text-emerald-600 dark:text-emerald-400 font-bold border-l border-slate-200 dark:border-white/10 pl-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-pulse" />
+            <span className="hidden sm:inline-flex items-center gap-1 text-[10px] text-emerald-500 font-bold border-l border-border pl-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
               BEP-20 LIVE
             </span>
           </div>
@@ -231,10 +231,10 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
 
           <Link 
             href="/member"
-            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-white/80 dark:bg-white/[0.06] hover:bg-slate-100 dark:hover:bg-white/[0.12] text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white rounded-full transition-all border border-slate-200 dark:border-white/15 whitespace-nowrap"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-muted/60 hover:bg-muted text-foreground rounded-full transition-all border border-border whitespace-nowrap"
           >
             Member View
-            <ArrowRight className="h-3 w-3 text-sky-500 dark:text-sky-400" />
+            <ArrowRight className="h-3 w-3 text-primary" />
           </Link>
           
           {/* Admin Profile Dropdown Menu */}
@@ -242,37 +242,37 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
             <button
               type="button"
               onClick={() => setDropdownOpen((prev) => !prev)}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/70 dark:bg-white/[0.06] hover:bg-white dark:hover:bg-white/[0.12] border border-slate-200 dark:border-white/15 backdrop-blur-xl transition-all cursor-pointer shadow-sm"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-card hover:bg-muted border border-border transition-all cursor-pointer shadow-sm"
               title="Admin Profile Menu"
             >
-              <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-sky-400 to-indigo-500 flex items-center justify-center shrink-0 shadow-sm text-white font-black text-xs">
+              <div className="w-7 h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center shrink-0 shadow-sm font-black text-xs">
                 {(user?.fullName || "A")[0]}
               </div>
-              <span className="text-xs font-bold text-slate-900 dark:text-white hidden md:inline truncate max-w-[140px]">
+              <span className="text-xs font-bold text-foreground hidden md:inline truncate max-w-[140px]">
                 {user?.fullName || user?.name || "Admin"}
               </span>
-              <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-sky-500/20 text-sky-600 dark:text-sky-300 font-black border border-sky-500/30 uppercase">
+              <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-primary/20 text-primary font-black border border-primary/30 uppercase">
                 {user?.role === "SUPER_ADMIN" ? "SUPER" : "ADMIN"}
               </span>
-              <ChevronDown className={`w-3.5 h-3.5 text-slate-500 dark:text-slate-400 transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`} />
+              <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground transition-transform duration-200 ${dropdownOpen ? "rotate-180" : ""}`} />
             </button>
 
             {/* Dropdown Menu */}
             {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-64 glass-card-elevated p-2 text-slate-700 dark:text-slate-200 z-50 animate-in fade-in zoom-in-95 duration-100 shadow-xl">
-                <div className="px-3 py-2 border-b border-slate-200 dark:border-white/10">
-                  <p className="text-xs font-bold text-slate-900 dark:text-white tracking-wide font-mono flex items-center justify-between">
+              <div className="absolute right-0 mt-2 w-64 bg-card border border-border rounded-2xl p-2 text-foreground z-50 animate-in fade-in zoom-in-95 duration-100 shadow-xl">
+                <div className="px-3 py-2 border-b border-border">
+                  <p className="text-xs font-bold text-foreground tracking-wide font-mono flex items-center justify-between">
                     <span>ID: {user?.customId}</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-600 dark:text-sky-300 border border-sky-500/40">
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/40 font-bold">
                       {user?.role || "ADMIN"}
                     </span>
                   </p>
-                  <p className="text-xs font-semibold text-slate-700 dark:text-slate-300 mt-0.5 truncate">
+                  <p className="text-xs font-semibold text-foreground mt-0.5 truncate">
                     {user?.fullName}
                   </p>
                   {user?.teamPrefix && (
-                    <p className="text-[10px] text-sky-600 dark:text-sky-400 font-mono mt-1 flex items-center gap-1">
-                      <Tag className="w-3 h-3 text-sky-500 dark:text-sky-400" />
+                    <p className="text-[10px] text-primary font-mono mt-1 flex items-center gap-1 font-semibold">
+                      <Tag className="w-3 h-3 text-primary" />
                       Branch Prefix: CF{user.teamPrefix}xxxxx
                     </p>
                   )}
@@ -287,9 +287,9 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                       setOtpMsg(null);
                       setActiveModal("profile");
                     }}
-                    className="w-full text-left px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.08] rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer"
+                    className="w-full text-left px-3 py-2 text-xs font-semibold text-foreground hover:bg-muted rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer"
                   >
-                    <User className="w-4 h-4 text-sky-500 dark:text-sky-400 shrink-0" />
+                    <User className="w-4 h-4 text-primary shrink-0" />
                     <span>Edit Admin Profile</span>
                   </button>
 
@@ -300,18 +300,18 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                       setPwdMsg(null);
                       setActiveModal("password");
                     }}
-                    className="w-full text-left px-3 py-2 text-xs font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/[0.08] rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer"
+                    className="w-full text-left px-3 py-2 text-xs font-semibold text-foreground hover:bg-muted rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer"
                   >
-                    <Key className="w-4 h-4 text-indigo-500 dark:text-indigo-400 shrink-0" />
+                    <Key className="w-4 h-4 text-primary shrink-0" />
                     <span>Change Password</span>
                   </button>
                 </div>
 
-                <div className="border-t border-slate-200 dark:border-white/10 pt-1 mt-1">
+                <div className="border-t border-border pt-1 mt-1">
                   <button
                     type="button"
                     onClick={handleLogout}
-                    className="w-full text-left px-3 py-2 text-xs font-bold text-rose-500 hover:text-rose-600 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer"
+                    className="w-full text-left px-3 py-2 text-xs font-bold text-rose-500 hover:bg-rose-500/10 rounded-xl flex items-center gap-2.5 transition-colors cursor-pointer"
                   >
                     <LogOut className="w-4 h-4 text-rose-500 shrink-0" />
                     <span>Sign Out</span>
@@ -324,7 +324,7 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
           <button 
             type="button"
             onClick={handleLogout}
-            className="p-2 text-slate-500 dark:text-slate-400 hover:text-rose-500 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-500/10 rounded-2xl transition-colors"
+            className="p-2 text-muted-foreground hover:text-rose-500 hover:bg-rose-500/10 rounded-xl transition-colors"
             title="Logout"
             aria-label="Logout"
           >
@@ -336,28 +336,28 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
       {/* MODAL 1: EDIT ADMIN PROFILE */}
       {activeModal === "profile" && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
           onClick={() => setActiveModal(null)}
         >
           <div
-            className="relative w-full max-w-md glass-card-elevated p-6 sm:p-7 shadow-2xl animate-in zoom-in-95 duration-150 max-h-[92vh] overflow-y-auto"
+            className="relative w-full max-w-md bg-card border border-border rounded-3xl p-6 sm:p-7 shadow-2xl animate-in zoom-in-95 duration-150 max-h-[92vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={() => setActiveModal(null)}
-              className="absolute top-5 right-5 p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition"
+              className="absolute top-5 right-5 p-1.5 rounded-full border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-2xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center text-sky-400">
+              <div className="w-10 h-10 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary">
                 <Edit className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white">Edit Admin Profile</h3>
-                <p className="text-xs text-slate-400">Update admin details with security verification</p>
+                <h3 className="text-lg font-bold text-foreground">Edit Admin Profile</h3>
+                <p className="text-xs text-muted-foreground">Update admin details with security verification</p>
               </div>
             </div>
 
@@ -365,8 +365,8 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
               <div
                 className={`p-3 rounded-2xl text-xs font-semibold mb-4 flex items-center gap-2 ${
                   profileMsg.error
-                    ? "bg-rose-950/60 text-rose-300 border border-rose-500/40"
-                    : "bg-emerald-950/60 text-emerald-300 border border-emerald-500/40"
+                    ? "bg-rose-500/10 text-rose-500 border border-rose-500/30"
+                    : "bg-emerald-500/10 text-emerald-500 border border-emerald-500/30"
                 }`}
               >
                 {profileMsg.error ? (
@@ -380,76 +380,76 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
 
             <form onSubmit={handleUpdateProfile} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5 font-mono uppercase">Admin ID</label>
+                <label className="block text-xs font-semibold text-muted-foreground mb-1.5 font-mono uppercase">Admin ID</label>
                 <input
                   type="text"
                   value={user?.customId || ""}
                   disabled
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-400 font-mono opacity-80 cursor-not-allowed"
+                  className="w-full bg-muted/60 border border-border rounded-xl px-3.5 py-2.5 text-sm text-muted-foreground font-mono cursor-not-allowed"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                  Full Name <span className="text-sky-400">*</span>
+                <label className="block text-xs font-semibold text-foreground mb-1.5">
+                  Full Name <span className="text-primary">*</span>
                 </label>
                 <input
                   type="text"
                   value={profileName}
                   onChange={(e) => setProfileName(e.target.value)}
                   placeholder="Enter full name"
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-white placeholder-slate-500"
+                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                  Email Address <span className="text-sky-400">*</span>
+                <label className="block text-xs font-semibold text-foreground mb-1.5">
+                  Email Address <span className="text-primary">*</span>
                 </label>
                 <input
                   type="email"
                   value={profileEmail}
                   onChange={(e) => setProfileEmail(e.target.value)}
                   placeholder="admin@cryptofinance.online"
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-white placeholder-slate-500 font-mono"
+                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground font-mono focus:outline-none focus:border-primary"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">Phone / Contact Number</label>
+                <label className="block text-xs font-semibold text-foreground mb-1.5">Phone / Contact Number</label>
                 <input
                   type="tel"
                   value={profilePhone}
                   onChange={(e) => setProfilePhone(e.target.value)}
                   placeholder="e.g. +971 50 123 4567"
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-white placeholder-slate-500 font-mono"
+                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground font-mono focus:outline-none focus:border-primary"
                 />
               </div>
 
               {/* Security OTP Verification */}
-              <div className="p-4 rounded-2xl bg-sky-500/10 border border-sky-500/25 space-y-2.5 mt-3">
+              <div className="p-4 rounded-2xl bg-primary/10 border border-primary/25 space-y-2.5 mt-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5">
-                    <ShieldAlert className="w-3.5 h-3.5 text-sky-400" />
-                    <span className="font-bold text-sky-300 uppercase tracking-wider font-mono text-[10px]">
+                    <ShieldAlert className="w-3.5 h-3.5 text-primary" />
+                    <span className="font-bold text-primary uppercase tracking-wider font-mono text-[10px]">
                       Email OTP Verification
                     </span>
                   </div>
-                  <span className="text-[10px] text-slate-400 font-mono">Required</span>
+                  <span className="text-[10px] text-muted-foreground font-mono">Required</span>
                 </div>
 
-                <p className="text-[11px] text-slate-300 leading-relaxed">
-                  Verification OTP will be sent to registered email: <strong className="text-sky-400 font-mono">{user?.email}</strong>
+                <p className="text-[11px] text-foreground leading-relaxed">
+                  Verification OTP will be sent to registered email: <strong className="text-primary font-mono">{user?.email}</strong>
                 </p>
 
                 {otpMsg && (
                   <div
                     className={`p-2 rounded-xl text-[11px] flex items-center gap-1.5 ${
                       otpMsg.error
-                        ? "bg-rose-950/60 text-rose-300 border border-rose-500/40"
-                        : "bg-emerald-950/60 text-emerald-300 border border-emerald-500/40"
+                        ? "bg-rose-500/10 text-rose-500 border border-rose-500/30"
+                        : "bg-emerald-500/10 text-emerald-500 border border-emerald-500/30"
                     }`}
                   >
                     {otpMsg.error ? <AlertCircle className="w-3.5 h-3.5 shrink-0" /> : <CheckCircle className="w-3.5 h-3.5 shrink-0" />}
@@ -464,13 +464,13 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                     value={otp}
                     onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
                     placeholder="6-digit OTP"
-                    className="flex-1 px-3 py-2 rounded-xl glass-input text-white text-xs font-mono font-bold tracking-widest text-center"
+                    className="flex-1 px-3 py-2 rounded-xl bg-card border border-border text-foreground text-xs font-mono font-bold tracking-widest text-center focus:outline-none focus:border-primary"
                   />
                   <button
                     type="button"
                     onClick={handleSendOtp}
                     disabled={otpSending || otpCooldown > 0}
-                    className="px-3.5 py-2 rounded-xl crypto-btn font-bold text-xs transition disabled:opacity-50 shrink-0 flex items-center gap-1.5 shadow-sm"
+                    className="px-3.5 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-xs transition disabled:opacity-50 shrink-0 flex items-center gap-1.5 shadow-sm"
                   >
                     {otpSending ? (
                       <>
@@ -493,14 +493,14 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                 <button
                   type="button"
                   onClick={() => setActiveModal(null)}
-                  className="w-1/2 py-2.5 rounded-2xl glass-btn-secondary font-semibold text-xs transition"
+                  className="w-1/2 py-2.5 rounded-xl bg-muted border border-border font-semibold text-xs text-foreground hover:bg-muted/80 transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={profileLoading}
-                  className="w-1/2 py-2.5 rounded-2xl crypto-btn font-bold text-xs transition disabled:opacity-50"
+                  className="w-1/2 py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs transition disabled:opacity-50 shadow-sm"
                 >
                   {profileLoading ? "Verifying..." : "Verify & Save"}
                 </button>
@@ -513,28 +513,28 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
       {/* MODAL 2: CHANGE ADMIN PASSWORD */}
       {activeModal === "password" && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/75 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200"
           onClick={() => setActiveModal(null)}
         >
           <div
-            className="relative w-full max-w-md glass-card-elevated p-6 sm:p-7 shadow-2xl animate-in zoom-in-95 duration-150"
+            className="relative w-full max-w-md bg-card border border-border rounded-3xl p-6 sm:p-7 shadow-2xl animate-in zoom-in-95 duration-150"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               type="button"
               onClick={() => setActiveModal(null)}
-              className="absolute top-5 right-5 p-1.5 rounded-full text-slate-400 hover:text-white hover:bg-white/10 transition"
+              className="absolute top-5 right-5 p-1.5 rounded-full border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition"
             >
               <X className="w-5 h-5" />
             </button>
 
             <div className="flex items-center gap-3 mb-5">
-              <div className="w-10 h-10 rounded-2xl bg-indigo-500/15 border border-indigo-400/30 flex items-center justify-center text-indigo-400">
+              <div className="w-10 h-10 rounded-2xl bg-primary/10 border border-primary/30 flex items-center justify-center text-primary">
                 <Key className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white">Change Password</h3>
-                <p className="text-xs text-slate-400">Update admin security credentials</p>
+                <h3 className="text-lg font-bold text-foreground">Change Password</h3>
+                <p className="text-xs text-muted-foreground">Update admin security credentials</p>
               </div>
             </div>
 
@@ -542,8 +542,8 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
               <div
                 className={`p-3 rounded-2xl text-xs font-semibold mb-4 flex items-center gap-2 ${
                   pwdMsg.error
-                    ? "bg-rose-950/60 text-rose-300 border border-rose-500/40"
-                    : "bg-emerald-950/60 text-emerald-300 border border-emerald-500/40"
+                    ? "bg-rose-500/10 text-rose-500 border border-rose-500/30"
+                    : "bg-emerald-500/10 text-emerald-500 border border-emerald-500/30"
                 }`}
               >
                 {pwdMsg.error ? (
@@ -557,43 +557,43 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
 
             <form onSubmit={handleChangePassword} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                  Current Password <span className="text-sky-400">*</span>
+                <label className="block text-xs font-semibold text-foreground mb-1.5">
+                  Current Password <span className="text-primary">*</span>
                 </label>
                 <input
                   type="password"
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   placeholder="Enter current password"
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-white placeholder-slate-500 font-mono"
+                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground font-mono focus:outline-none focus:border-primary"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                  New Password <span className="text-sky-400">*</span>
+                <label className="block text-xs font-semibold text-foreground mb-1.5">
+                  New Password <span className="text-primary">*</span>
                 </label>
                 <input
                   type="password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="Min 6 characters"
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-white placeholder-slate-500 font-mono"
+                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground font-mono focus:outline-none focus:border-primary"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-300 mb-1.5">
-                  Confirm New Password <span className="text-sky-400">*</span>
+                <label className="block text-xs font-semibold text-foreground mb-1.5">
+                  Confirm New Password <span className="text-primary">*</span>
                 </label>
                 <input
                   type="password"
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Re-enter new password"
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-white placeholder-slate-500 font-mono"
+                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground font-mono focus:outline-none focus:border-primary"
                   required
                 />
               </div>
@@ -602,14 +602,14 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                 <button
                   type="button"
                   onClick={() => setActiveModal(null)}
-                  className="w-1/2 py-2.5 rounded-2xl glass-btn-secondary font-semibold text-xs transition"
+                  className="w-1/2 py-2.5 rounded-xl bg-muted border border-border font-semibold text-xs text-foreground hover:bg-muted/80 transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={pwdLoading}
-                  className="w-1/2 py-2.5 rounded-2xl crypto-btn font-bold text-xs transition disabled:opacity-50"
+                  className="w-1/2 py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs transition disabled:opacity-50 shadow-sm"
                 >
                   {pwdLoading ? "Updating..." : "Update Password"}
                 </button>

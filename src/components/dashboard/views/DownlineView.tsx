@@ -28,25 +28,25 @@ export function DownlineView({ user, mode, onNavigateTab }: DownlineViewProps) {
       {/* Header & Breadcrumb / Tab Switcher */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight">
             {title}
           </h1>
-          <div className="text-xs text-slate-500 dark:text-slate-400 font-medium flex items-center gap-1.5 mt-1">
-            <span>🏠 Downline</span>
+          <div className="text-xs text-muted-foreground font-medium flex items-center gap-1.5 mt-1">
+            <span>Downline</span>
             <span>/</span>
-            <span className="text-slate-800 dark:text-slate-200 font-semibold">{title}</span>
+            <span className="text-foreground font-semibold">{title}</span>
           </div>
         </div>
 
         {/* Tab Pills */}
-        <div className="flex items-center gap-2 glass-card-elevated p-1.5 rounded-xl">
+        <div className="flex items-center gap-1.5 border border-border bg-card p-1 rounded-xl shadow-sm">
           <button
             type="button"
             onClick={() => onNavigateTab && onNavigateTab("downline-direct")}
-            className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors ${
+            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
               mode === "direct"
-                ? "bg-blue-600 text-white font-bold shadow-md shadow-sky-500/25"
-                : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-200"
+                ? "bg-primary text-primary-foreground shadow-sm"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground"
             }`}
           >
             Direct Team
@@ -54,10 +54,10 @@ export function DownlineView({ user, mode, onNavigateTab }: DownlineViewProps) {
           <button
             type="button"
             onClick={() => onNavigateTab && onNavigateTab("downline-team")}
-            className={`px-3 py-1 text-xs font-medium rounded-lg transition-colors ${
+            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors ${
               mode === "team"
-                ? "bg-blue-600 text-white font-bold shadow-md shadow-sky-500/25"
-                : "text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-200"
+                ? "bg-primary text-primary-foreground shadow-sm"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground"
             }`}
           >
             Team List
@@ -65,7 +65,7 @@ export function DownlineView({ user, mode, onNavigateTab }: DownlineViewProps) {
           <button
             type="button"
             onClick={() => onNavigateTab && onNavigateTab("downline-tree")}
-            className="px-3 py-1 text-xs font-medium rounded-lg text-slate-500 dark:text-slate-400 hover:text-slate-800 dark:text-slate-200 transition-colors"
+            className="px-3 py-1.5 text-xs font-semibold rounded-lg text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
           >
             Tree View
           </button>
@@ -73,16 +73,16 @@ export function DownlineView({ user, mode, onNavigateTab }: DownlineViewProps) {
       </div>
 
       {/* Table Card */}
-      <div className="glass-card-elevated rounded-3xl p-5 sm:p-6 shadow-xl shadow-slate-200/50 dark:shadow-black/20">
+      <div className="rounded-2xl border border-border bg-card p-5 sm:p-6 shadow-sm">
         <div className="flex items-center gap-2 mb-5">
-          <div className="w-2.5 h-6 bg-gradient-to-b from-sky-400 to-[#00D2FF] rounded-sm" />
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white">{title}</h2>
+          <div className="w-2 h-5 bg-primary rounded-full" />
+          <h2 className="text-lg font-bold text-foreground">{title}</h2>
         </div>
 
         {/* Controls: Per-Page, Search, Export Buttons */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
-          <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-            <select className="bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 rounded-lg px-2.5 py-1 text-slate-800 dark:text-slate-200 text-xs focus:outline-none">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <select className="bg-background border border-input rounded-lg px-2.5 py-1 text-foreground text-xs focus:outline-none">
               <option>25</option>
               <option>50</option>
               <option>100</option>
@@ -98,9 +98,9 @@ export function DownlineView({ user, mode, onNavigateTab }: DownlineViewProps) {
                 placeholder="Search..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 rounded-lg pl-8 pr-3 py-1 text-xs text-slate-800 dark:text-slate-200 placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-sky-500 dark:focus:border-[#00D2FF] w-44"
+                className="bg-background border border-input rounded-lg pl-8 pr-3 py-1.5 text-xs text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary w-48"
               />
-              <Search className="w-3.5 h-3.5 text-slate-500 absolute left-2.5 top-2" />
+              <Search className="w-3.5 h-3.5 text-muted-foreground absolute left-2.5 top-2" />
             </div>
 
             {/* Export Buttons */}
@@ -109,7 +109,7 @@ export function DownlineView({ user, mode, onNavigateTab }: DownlineViewProps) {
                 <button
                   key={btn}
                   onClick={() => alert(`${btn} export feature triggered.`)}
-                  className="px-3 py-1 rounded-lg bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 text-xs font-medium hover:bg-slate-100 dark:hover:bg-slate-800 hover:text-white transition-colors"
+                  className="px-3 py-1.5 rounded-lg bg-card border border-border text-foreground text-xs font-medium hover:bg-muted transition-colors"
                 >
                   {btn}
                 </button>
@@ -119,9 +119,9 @@ export function DownlineView({ user, mode, onNavigateTab }: DownlineViewProps) {
         </div>
 
         {/* Data Table */}
-        <div className="overflow-x-auto rounded-xl border border-slate-200 dark:border-white/10">
-          <table className="w-full text-left text-xs text-slate-700 dark:text-slate-300">
-            <thead className="bg-slate-100/80 dark:bg-slate-950/60 text-slate-500 dark:text-slate-500 dark:text-slate-400 text-[11px] uppercase tracking-wider font-semibold border-b border-slate-200 dark:border-white/10">
+        <div className="overflow-x-auto rounded-xl border border-border">
+          <table className="w-full text-left text-xs text-foreground">
+            <thead className="bg-muted/60 text-muted-foreground text-[11px] uppercase tracking-wider font-semibold border-b border-border">
               <tr>
                 <th className="py-3 px-4">SR</th>
                 <th className="py-3 px-4">DATE</th>
@@ -133,28 +133,28 @@ export function DownlineView({ user, mode, onNavigateTab }: DownlineViewProps) {
                 <th className="py-3 px-4">ACTIVATION</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-200/80 dark:divide-white/10">
+            <tbody className="divide-y divide-border">
               {filteredList.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="py-8 text-center text-slate-500 dark:text-slate-400 font-medium">
+                  <td colSpan={8} className="py-8 text-center text-muted-foreground font-medium">
                     No data available in table
                   </td>
                 </tr>
               ) : (
                 filteredList.map((row: any, idx: number) => (
-                  <tr key={idx} className="hover:bg-slate-100/60 dark:hover:bg-slate-900/40 transition-colors">
+                  <tr key={idx} className="hover:bg-muted/40 transition-colors">
                     <td className="py-3 px-4 font-mono">{idx + 1}</td>
                     <td className="py-3 px-4">{row.date}</td>
-                    <td className="py-3 px-4 font-mono font-bold text-blue-400">{row.id}</td>
-                    <td className="py-3 px-4 font-semibold text-slate-800 dark:text-slate-200 capitalize">{row.name}</td>
-                    <td className="py-3 px-4 font-mono text-slate-500 dark:text-slate-400">{row.referralId}</td>
-                    <td className="py-3 px-4 font-bold text-sky-600 dark:text-[#00D2FF]">L{row.level}</td>
-                    <td className="py-3 px-4 text-slate-500 dark:text-slate-400">{row.doa}</td>
+                    <td className="py-3 px-4 font-mono font-bold text-primary">{row.id}</td>
+                    <td className="py-3 px-4 font-semibold text-foreground capitalize">{row.name}</td>
+                    <td className="py-3 px-4 font-mono text-muted-foreground">{row.referralId}</td>
+                    <td className="py-3 px-4 font-bold text-primary">L{row.level}</td>
+                    <td className="py-3 px-4 text-muted-foreground">{row.doa}</td>
                     <td className="py-3 px-4">
                       <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
                         row.activation === "Active"
-                          ? "bg-emerald-950/60 text-emerald-400 border border-emerald-500/40"
-                          : "bg-rose-950/60 text-rose-400 border border-rose-500/40"
+                          ? "bg-emerald-500/10 text-emerald-500 border border-emerald-500/30"
+                          : "bg-rose-500/10 text-rose-500 border border-rose-500/30"
                       }`}>
                         {row.activation}
                       </span>
@@ -167,14 +167,14 @@ export function DownlineView({ user, mode, onNavigateTab }: DownlineViewProps) {
         </div>
 
         {/* Footer info */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4 text-xs text-slate-500 dark:text-slate-400">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-4 text-xs text-muted-foreground">
           <p>Showing {filteredList.length > 0 ? 1 : 0} to {filteredList.length} of {filteredList.length} entries</p>
           <div className="flex items-center gap-1">
-            <button className="p-1 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:text-white disabled:opacity-40" disabled>«</button>
-            <button className="p-1 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:text-white disabled:opacity-40" disabled>‹</button>
-            <span className="px-2.5 py-1 rounded bg-blue-600 text-white font-bold">1</span>
-            <button className="p-1 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:text-white disabled:opacity-40" disabled>›</button>
-            <button className="p-1 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 hover:text-white disabled:opacity-40" disabled>»</button>
+            <button className="p-1.5 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground disabled:opacity-40" disabled>«</button>
+            <button className="p-1.5 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground disabled:opacity-40" disabled>‹</button>
+            <span className="px-2.5 py-1 rounded-lg bg-primary text-primary-foreground font-bold">1</span>
+            <button className="p-1.5 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground disabled:opacity-40" disabled>›</button>
+            <button className="p-1.5 rounded-lg bg-card border border-border text-muted-foreground hover:text-foreground disabled:opacity-40" disabled>»</button>
           </div>
         </div>
       </div>

@@ -371,125 +371,125 @@ export function MilestoneRewardsView({
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
           <div className="flex items-center gap-2">
-            <span className="text-sky-600 dark:text-[#00D2FF] font-black text-xs tracking-wider uppercase bg-sky-500/10 border border-sky-500/30 px-3 py-1 rounded-full">
+            <span className="text-primary font-black text-xs tracking-wider uppercase bg-primary/10 border border-primary/30 px-3 py-1 rounded-full">
               INCOME STREAM #5 &bull; SLIDES 18 &amp; 19
             </span>
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight font-display mt-2 flex items-center gap-2.5">
-            <Trophy className="w-7 h-7 text-sky-500 dark:text-[#00D2FF]" />
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight font-display mt-2 flex items-center gap-2.5">
+            <Trophy className="w-7 h-7 text-primary" />
             Milestone Rewards &amp; Leadership Ranks
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1">
+          <p className="text-xs sm:text-sm text-muted-foreground mt-1">
             Turnover Milestones based on 50% Strong Leg &amp; 50% Weak Leg distribution. Permanent rank advancement with no volume expiration.
           </p>
         </div>
 
-        <div className="text-xs text-slate-400 font-medium flex items-center gap-1.5 bg-slate-900/60 px-3.5 py-2 rounded-xl border border-slate-800 self-start sm:self-auto shrink-0">
+        <div className="text-xs text-muted-foreground font-medium flex items-center gap-1.5 bg-muted/60 px-3.5 py-2 rounded-xl border border-border self-start sm:self-auto shrink-0">
           <span>🏠 Income</span>
-          <span className="text-slate-600">/</span>
-          <span className="text-amber-400 font-semibold">Milestone Rewards</span>
+          <span className="text-muted-foreground/60">/</span>
+          <span className="text-primary font-semibold">Milestone Rewards</span>
         </div>
       </div>
 
       {/* 2. Top Metric KPI Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
         {/* Card 1: Current Rank */}
-        <div className="bg-[#091124] border border-[#17274a] rounded-2xl p-4 sm:p-5 shadow-lg relative overflow-hidden group hover:border-amber-500/40 transition-all">
+        <div className="bg-card border border-border rounded-2xl p-4 sm:p-5 shadow-sm relative overflow-hidden group hover:border-primary/40 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Current Rank
             </span>
-            <div className="p-2 rounded-xl bg-amber-500/10 border border-amber-500/20 text-amber-400">
+            <div className="p-2 rounded-xl bg-primary/10 border border-primary/20 text-primary">
               <Crown className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-2.5">
-            <div className="text-xl sm:text-2xl font-black text-slate-100 flex items-center gap-2">
+            <div className="text-xl sm:text-2xl font-black text-foreground flex items-center gap-2">
               <span>{rankAnalysis.currentRank ? rankAnalysis.currentRank.icon : "🌱"}</span>
               <span>{rankAnalysis.currentRank ? rankAnalysis.currentRank.title : "Starter Affiliate"}</span>
             </div>
-            <p className="text-xs text-amber-500/90 font-medium mt-1">
+            <p className="text-xs text-primary font-medium mt-1">
               {rankAnalysis.currentRank ? "Official Leadership Status" : "Begin qualification journey"}
             </p>
           </div>
         </div>
 
         {/* Card 2: Next Target Rank */}
-        <div className="bg-[#091124] border border-[#17274a] rounded-2xl p-4 sm:p-5 shadow-lg relative overflow-hidden group hover:border-cyan-500/40 transition-all">
+        <div className="bg-card border border-border rounded-2xl p-4 sm:p-5 shadow-sm relative overflow-hidden group hover:border-primary/40 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Next Target Rank
             </span>
-            <div className="p-2 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-cyan-400">
+            <div className="p-2 rounded-xl bg-primary/10 border border-primary/20 text-primary">
               <Sparkles className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-2.5">
-            <div className="text-xl sm:text-2xl font-black text-cyan-300 flex items-center gap-2">
+            <div className="text-xl sm:text-2xl font-black text-foreground flex items-center gap-2">
               <span>{rankAnalysis.targetRank ? rankAnalysis.targetRank.icon : "👑"}</span>
               <span>{rankAnalysis.targetRank ? rankAnalysis.targetRank.title : "Crown King Achieved!"}</span>
             </div>
-            <p className="text-xs text-slate-400 font-medium mt-1">
+            <p className="text-xs text-muted-foreground font-medium mt-1">
               {rankAnalysis.targetRank ? `Bonus: $${rankAnalysis.targetRank.cash} USDT + ${rankAnalysis.targetRank.reward}` : "Highest Rank Reached"}
             </p>
           </div>
         </div>
 
         {/* Card 3: Strong Leg Business */}
-        <div className="bg-[#091124] border border-[#17274a] rounded-2xl p-4 sm:p-5 shadow-lg relative overflow-hidden group hover:border-emerald-500/40 transition-all">
+        <div className="bg-card border border-border rounded-2xl p-4 sm:p-5 shadow-sm relative overflow-hidden group hover:border-emerald-500/40 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Strong Leg (50%)
             </span>
-            <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400">
+            <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500">
               <Zap className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-2.5">
-            <div className="text-xl sm:text-2xl font-black text-emerald-400">
+            <div className="text-xl sm:text-2xl font-black text-emerald-500">
               ${strongLeg.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </div>
-            <p className="text-xs text-slate-400 font-medium mt-1">
+            <p className="text-xs text-muted-foreground font-medium mt-1">
               {rankAnalysis.targetRank ? `Target: $${rankAnalysis.targetRank.strong.toLocaleString()} USDT` : "Maximum achieved"}
             </p>
           </div>
         </div>
 
         {/* Card 4: Weak Leg Business */}
-        <div className="bg-[#091124] border border-[#17274a] rounded-2xl p-4 sm:p-5 shadow-lg relative overflow-hidden group hover:border-purple-500/40 transition-all">
+        <div className="bg-card border border-border rounded-2xl p-4 sm:p-5 shadow-sm relative overflow-hidden group hover:border-primary/40 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Other Legs (50%)
             </span>
-            <div className="p-2 rounded-xl bg-purple-500/10 border border-purple-500/20 text-purple-400">
+            <div className="p-2 rounded-xl bg-primary/10 border border-primary/20 text-primary">
               <Users className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-2.5">
-            <div className="text-xl sm:text-2xl font-black text-purple-300">
+            <div className="text-xl sm:text-2xl font-black text-foreground">
               ${weakLeg.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </div>
-            <p className="text-xs text-slate-400 font-medium mt-1">
+            <p className="text-xs text-muted-foreground font-medium mt-1">
               {rankAnalysis.targetRank ? `Target: $${rankAnalysis.targetRank.weak.toLocaleString()} USDT` : "Maximum achieved"}
             </p>
           </div>
         </div>
 
         {/* Card 5: Total Rewards Unlocked */}
-        <div className="bg-[#091124] border border-[#17274a] rounded-2xl p-4 sm:p-5 shadow-lg relative overflow-hidden group hover:border-rose-500/40 transition-all">
+        <div className="bg-card border border-border rounded-2xl p-4 sm:p-5 shadow-sm relative overflow-hidden group hover:border-primary/40 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+            <span className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
               Rewards Unlocked
             </span>
-            <div className="p-2 rounded-xl bg-rose-500/10 border border-rose-500/20 text-rose-400">
+            <div className="p-2 rounded-xl bg-primary/10 border border-primary/20 text-primary">
               <Gift className="w-5 h-5" />
             </div>
           </div>
           <div className="mt-2.5">
-            <div className="text-xl sm:text-2xl font-black text-rose-400">
+            <div className="text-xl sm:text-2xl font-black text-primary">
               ${rankAnalysis.totalUnlockedCash.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </div>
-            <p className="text-xs text-slate-400 font-medium mt-1">
+            <p className="text-xs text-muted-foreground font-medium mt-1">
               {rankAnalysis.currentRank ? `Earned through ${rankAnalysis.currentRank.title}` : "Unlock on first rank"}
             </p>
           </div>
@@ -498,37 +498,33 @@ export function MilestoneRewardsView({
 
       {/* 3. Next Rank Progress Tracking Card (Deep Interactive Visualizer) */}
       {rankAnalysis.targetRank && (
-        <div className="bg-gradient-to-br from-[#0c1630] via-[#091124] to-[#050b18] border border-amber-500/30 rounded-3xl p-5 sm:p-7 shadow-2xl relative overflow-hidden">
-          {/* Subtle decorative glow */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-cyan-500/5 rounded-full blur-3xl pointer-events-none" />
-
+        <div className="bg-card border border-border rounded-3xl p-5 sm:p-7 shadow-sm relative overflow-hidden">
           <div className="relative z-10 space-y-6">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#1b2b4e] pb-5">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-border pb-5">
               <div className="flex items-center gap-3.5">
-                <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center text-2xl shadow-lg shadow-amber-500/20 shrink-0">
+                <div className="w-12 h-12 rounded-2xl bg-primary text-primary-foreground flex items-center justify-center text-2xl shadow-sm shrink-0">
                   {rankAnalysis.targetRank.icon}
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <h2 className="text-lg sm:text-xl font-black text-slate-100">
+                    <h2 className="text-lg sm:text-xl font-black text-foreground">
                       Next Rank Target: {rankAnalysis.targetRank.title}
                     </h2>
-                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-amber-500/20 text-amber-300 border border-amber-500/30 whitespace-nowrap shrink-0">
+                    <span className="px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase bg-primary/20 text-primary border border-primary/30 whitespace-nowrap shrink-0">
                       IN PROGRESS &bull; {rankAnalysis.targetRank.overallPct}%
                     </span>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
-                    Unlocks <span className="text-amber-300 font-bold">${rankAnalysis.targetRank.cash} USDT Cash</span> + <span className="text-slate-200 font-semibold">{rankAnalysis.targetRank.reward}</span>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-0.5">
+                    Unlocks <span className="text-primary font-bold">${rankAnalysis.targetRank.cash} USDT Cash</span> + <span className="text-foreground font-semibold">{rankAnalysis.targetRank.reward}</span>
                   </p>
                 </div>
               </div>
 
               {/* Requirement pill */}
-              <div className="flex items-center gap-3 self-start md:self-auto bg-slate-950/70 border border-slate-800 px-4 py-2 rounded-2xl">
+              <div className="flex items-center gap-3 self-start md:self-auto bg-muted/60 border border-border px-4 py-2 rounded-2xl">
                 <div className="text-right">
-                  <div className="text-[10px] text-slate-400 uppercase font-semibold">Requirement (50:50)</div>
-                  <div className="text-xs sm:text-sm font-black text-slate-100">
+                  <div className="text-[10px] text-muted-foreground uppercase font-semibold">Requirement (50:50)</div>
+                  <div className="text-xs sm:text-sm font-black text-foreground">
                     Total Volume: ${rankAnalysis.targetRank.total.toLocaleString()} USDT
                   </div>
                 </div>
@@ -538,41 +534,41 @@ export function MilestoneRewardsView({
             {/* Dual Progress Bars: Strong Leg vs Weak Leg */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {/* Strong Leg Progress */}
-              <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 space-y-2.5">
+              <div className="bg-muted/30 border border-border rounded-2xl p-4 space-y-2.5">
                 <div className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-emerald-400" />
-                    <span className="font-bold text-slate-200">Strong Leg (50% Required)</span>
+                    <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                    <span className="font-bold text-foreground">Strong Leg (50% Required)</span>
                   </div>
-                  <span className={`font-extrabold ${rankAnalysis.targetRank.strongPct >= 100 ? "text-emerald-400" : "text-amber-400"}`}>
+                  <span className={`font-extrabold ${rankAnalysis.targetRank.strongPct >= 100 ? "text-emerald-500" : "text-primary"}`}>
                     {rankAnalysis.targetRank.strongPct}% Completed
                   </span>
                 </div>
 
-                <div className="w-full bg-slate-900 h-3 rounded-full overflow-hidden p-0.5 border border-slate-800">
+                <div className="w-full bg-muted h-3 rounded-full overflow-hidden p-0.5 border border-border">
                   <div
                     className={`h-full rounded-full transition-all duration-500 ${
                       rankAnalysis.targetRank.strongPct >= 100
-                        ? "bg-gradient-to-r from-emerald-500 to-teal-400"
-                        : "bg-gradient-to-r from-amber-500 to-emerald-400"
+                        ? "bg-emerald-500"
+                        : "bg-primary"
                     }`}
                     style={{ width: `${Math.min(100, rankAnalysis.targetRank.strongPct)}%` }}
                   />
                 </div>
 
-                <div className="flex items-center justify-between text-[11px] text-slate-400">
-                  <span>Current: <strong className="text-slate-200">${strongLeg.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USDT</strong></span>
-                  <span>Target: <strong className="text-slate-200">${rankAnalysis.targetRank.strong.toLocaleString()} USDT</strong></span>
+                <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+                  <span>Current: <strong className="text-foreground">${strongLeg.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USDT</strong></span>
+                  <span>Target: <strong className="text-foreground">${rankAnalysis.targetRank.strong.toLocaleString()} USDT</strong></span>
                 </div>
 
-                <div className="text-[11px] pt-1 border-t border-slate-800/60 flex items-center justify-between">
-                  <span className="text-slate-400">Leg Status:</span>
+                <div className="text-[11px] pt-1 border-t border-border flex items-center justify-between">
+                  <span className="text-muted-foreground">Leg Status:</span>
                   {strongLeg >= rankAnalysis.targetRank.strong ? (
-                    <span className="text-emerald-400 font-bold flex items-center gap-1">
+                    <span className="text-emerald-500 font-bold flex items-center gap-1">
                       <CheckCircle2 className="w-3.5 h-3.5" /> Target Achieved
                     </span>
                   ) : (
-                    <span className="text-amber-400 font-semibold">
+                    <span className="text-primary font-semibold">
                       Needs ${(rankAnalysis.targetRank.strong - strongLeg).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USDT more
                     </span>
                   )}
@@ -580,41 +576,41 @@ export function MilestoneRewardsView({
               </div>
 
               {/* Weak Leg Progress */}
-              <div className="bg-slate-950/60 border border-slate-800/80 rounded-2xl p-4 space-y-2.5">
+              <div className="bg-muted/30 border border-border rounded-2xl p-4 space-y-2.5">
                 <div className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-purple-400" />
-                    <span className="font-bold text-slate-200">Other/Weaker Legs (50% Required)</span>
+                    <div className="w-2 h-2 rounded-full bg-primary" />
+                    <span className="font-bold text-foreground">Other/Weaker Legs (50% Required)</span>
                   </div>
-                  <span className={`font-extrabold ${rankAnalysis.targetRank.weakPct >= 100 ? "text-emerald-400" : "text-amber-400"}`}>
+                  <span className={`font-extrabold ${rankAnalysis.targetRank.weakPct >= 100 ? "text-emerald-500" : "text-primary"}`}>
                     {rankAnalysis.targetRank.weakPct}% Completed
                   </span>
                 </div>
 
-                <div className="w-full bg-slate-900 h-3 rounded-full overflow-hidden p-0.5 border border-slate-800">
+                <div className="w-full bg-muted h-3 rounded-full overflow-hidden p-0.5 border border-border">
                   <div
                     className={`h-full rounded-full transition-all duration-500 ${
                       rankAnalysis.targetRank.weakPct >= 100
-                        ? "bg-gradient-to-r from-emerald-500 to-purple-400"
-                        : "bg-gradient-to-r from-purple-500 to-indigo-400"
+                        ? "bg-emerald-500"
+                        : "bg-primary"
                     }`}
                     style={{ width: `${Math.min(100, rankAnalysis.targetRank.weakPct)}%` }}
                   />
                 </div>
 
-                <div className="flex items-center justify-between text-[11px] text-slate-400">
-                  <span>Current: <strong className="text-slate-200">${weakLeg.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USDT</strong></span>
-                  <span>Target: <strong className="text-slate-200">${rankAnalysis.targetRank.weak.toLocaleString()} USDT</strong></span>
+                <div className="flex items-center justify-between text-[11px] text-muted-foreground">
+                  <span>Current: <strong className="text-foreground">${weakLeg.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USDT</strong></span>
+                  <span>Target: <strong className="text-foreground">${rankAnalysis.targetRank.weak.toLocaleString()} USDT</strong></span>
                 </div>
 
-                <div className="text-[11px] pt-1 border-t border-slate-800/60 flex items-center justify-between">
-                  <span className="text-slate-400">Leg Status:</span>
+                <div className="text-[11px] pt-1 border-t border-border flex items-center justify-between">
+                  <span className="text-muted-foreground">Leg Status:</span>
                   {weakLeg >= rankAnalysis.targetRank.weak ? (
-                    <span className="text-emerald-400 font-bold flex items-center gap-1">
+                    <span className="text-emerald-500 font-bold flex items-center gap-1">
                       <CheckCircle2 className="w-3.5 h-3.5" /> Target Achieved
                     </span>
                   ) : (
-                    <span className="text-purple-400 font-semibold">
+                    <span className="text-primary font-semibold">
                       Needs ${(rankAnalysis.targetRank.weak - weakLeg).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USDT more
                     </span>
                   )}
@@ -624,13 +620,13 @@ export function MilestoneRewardsView({
 
             {/* Direct Branches Breakdown Mini Table */}
             {branches.length > 0 && (
-              <div className="bg-slate-950/40 rounded-2xl p-3.5 border border-slate-800/60">
+              <div className="bg-muted/20 rounded-2xl p-3.5 border border-border">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-xs font-bold text-slate-300 flex items-center gap-1.5">
-                    <Users className="w-3.5 h-3.5 text-cyan-400" />
+                  <span className="text-xs font-bold text-foreground flex items-center gap-1.5">
+                    <Users className="w-3.5 h-3.5 text-primary" />
                     Direct Team Legs Breakdown ({branches.length} Active Branches)
                   </span>
-                  <span className="text-[10px] text-slate-500">
+                  <span className="text-[10px] text-muted-foreground">
                     Highest Leg = Strong Leg (50%), Remaining Legs = Weak Leg pool (50%)
                   </span>
                 </div>
@@ -640,17 +636,17 @@ export function MilestoneRewardsView({
                       key={b.directId}
                       className={`p-2.5 rounded-xl border text-xs ${
                         idx === 0
-                          ? "bg-emerald-950/20 border-emerald-500/30 text-emerald-300"
-                          : "bg-slate-900/40 border-slate-800 text-slate-300"
+                          ? "bg-emerald-500/10 border-emerald-500/30 text-emerald-600 dark:text-emerald-400"
+                          : "bg-muted/50 border-border text-foreground"
                       }`}
                     >
                       <div className="flex items-center justify-between font-bold">
                         <span className="truncate">{b.directName}</span>
-                        <span className="text-[10px] uppercase px-1.5 py-0.5 rounded bg-slate-800 text-slate-400">
+                        <span className="text-[10px] uppercase px-1.5 py-0.5 rounded bg-muted text-muted-foreground">
                           {idx === 0 ? "Strong Leg" : `Leg #${idx + 1}`}
                         </span>
                       </div>
-                      <div className="mt-1 text-sm font-black text-slate-100">
+                      <div className="mt-1 text-sm font-black text-foreground">
                         ${b.volume.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })} USDT
                       </div>
                     </div>
@@ -666,12 +662,12 @@ export function MilestoneRewardsView({
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2.5">
-            <div className="w-2.5 h-6 bg-amber-500 rounded-sm" />
-            <h2 className="text-lg sm:text-xl font-bold text-slate-100">
+            <div className="w-2.5 h-6 bg-primary rounded-sm" />
+            <h2 className="text-lg sm:text-xl font-bold text-foreground">
               Leadership Ranks &amp; Guaranteed Rewards Matrix
             </h2>
           </div>
-          <span className="text-xs text-slate-400">8 Progressive Tiers</span>
+          <span className="text-xs text-muted-foreground">8 Progressive Tiers</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -685,10 +681,10 @@ export function MilestoneRewardsView({
                 onClick={() => setSelectedRankId(selectedRankId === rank.id ? null : rank.id)}
                 className={`rounded-3xl p-5 border transition-all duration-200 cursor-pointer relative overflow-hidden flex flex-col justify-between ${
                   isAchieved
-                    ? "bg-gradient-to-b from-[#092318] to-[#07130f] border-emerald-500/40 shadow-lg shadow-emerald-500/10 hover:border-emerald-400"
+                    ? "bg-emerald-500/10 border-emerald-500/40 shadow-sm hover:border-emerald-500"
                     : isInProgress
-                    ? "bg-gradient-to-b from-[#1b1709] to-[#0e0d06] border-amber-500/50 shadow-xl shadow-amber-500/10 ring-1 ring-amber-500/30 hover:border-amber-400"
-                    : "bg-[#091124] border-[#17274a] hover:border-slate-700 opacity-80 hover:opacity-100"
+                    ? "bg-primary/10 border-primary/50 shadow-sm ring-1 ring-primary/30 hover:border-primary"
+                    : "bg-card border-border hover:border-primary/50 opacity-90 hover:opacity-100"
                 }`}
               >
                 {/* Header: Icon + Rank + Status Badge */}
@@ -697,10 +693,10 @@ export function MilestoneRewardsView({
                     <div className="flex items-center gap-2.5">
                       <span className="text-2xl">{rank.icon}</span>
                       <div>
-                        <h3 className="font-bold text-slate-100 text-base leading-tight">
+                        <h3 className="font-bold text-foreground text-base leading-tight">
                           {rank.title}
                         </h3>
-                        <span className="text-[10px] text-slate-400 font-medium">
+                        <span className="text-[10px] text-muted-foreground font-medium">
                           Tier #{rank.id}
                         </span>
                       </div>
@@ -709,10 +705,10 @@ export function MilestoneRewardsView({
                     <span
                       className={`px-2.5 py-0.5 rounded-full text-[10px] font-extrabold uppercase shrink-0 whitespace-nowrap ${
                         isAchieved
-                          ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
+                          ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/40"
                           : isInProgress
-                          ? "bg-amber-500/20 text-amber-300 border border-amber-500/40 animate-pulse"
-                          : "bg-slate-800 text-slate-400 border border-slate-700"
+                          ? "bg-primary/20 text-primary border border-primary/40 animate-pulse"
+                          : "bg-muted text-muted-foreground border border-border"
                       }`}
                     >
                       {rank.status}
@@ -720,57 +716,57 @@ export function MilestoneRewardsView({
                   </div>
 
                   {/* Guaranteed Physical Reward */}
-                  <div className="mt-4 bg-slate-950/60 rounded-2xl p-3 border border-slate-800/80 space-y-1">
-                    <div className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1">
-                      <Gift className="w-3 h-3 text-amber-400" />
+                  <div className="mt-4 bg-muted/40 rounded-2xl p-3 border border-border space-y-1">
+                    <div className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wider flex items-center gap-1">
+                      <Gift className="w-3 h-3 text-primary" />
                       Guaranteed Reward
                     </div>
-                    <div className="text-xs font-bold text-slate-200">
+                    <div className="text-xs font-bold text-foreground">
                       {rank.reward}
                     </div>
                   </div>
 
                   {/* Cash Bonus Highlight */}
                   <div className="mt-3 flex items-baseline justify-between">
-                    <span className="text-xs text-slate-400">Cash Equivalent:</span>
-                    <span className="text-lg font-black text-amber-400">
+                    <span className="text-xs text-muted-foreground">Cash Equivalent:</span>
+                    <span className="text-lg font-black text-primary">
                       ${rank.cash.toLocaleString()} USDT
                     </span>
                   </div>
 
                   {/* Volume Targets */}
-                  <div className="mt-3 pt-3 border-t border-slate-800/60 space-y-1 text-xs">
-                    <div className="flex justify-between text-slate-400">
+                  <div className="mt-3 pt-3 border-t border-border space-y-1 text-xs">
+                    <div className="flex justify-between text-muted-foreground">
                       <span>Strong Leg (50%):</span>
-                      <strong className="text-slate-200">${rank.strong.toLocaleString()}</strong>
+                      <strong className="text-foreground">${rank.strong.toLocaleString()}</strong>
                     </div>
-                    <div className="flex justify-between text-slate-400">
+                    <div className="flex justify-between text-muted-foreground">
                       <span>Weak Leg (50%):</span>
-                      <strong className="text-slate-200">${rank.weak.toLocaleString()}</strong>
+                      <strong className="text-foreground">${rank.weak.toLocaleString()}</strong>
                     </div>
-                    <div className="flex justify-between text-slate-300 font-bold pt-1 border-t border-slate-800/40">
+                    <div className="flex justify-between text-muted-foreground font-bold pt-1 border-t border-border">
                       <span>Total Volume:</span>
-                      <span className="text-slate-100">${rank.total.toLocaleString()} USDT</span>
+                      <span className="text-foreground">${rank.total.toLocaleString()} USDT</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Progress Mini Bar */}
-                <div className="mt-4 pt-3 border-t border-slate-800/60">
+                <div className="mt-4 pt-3 border-t border-border">
                   <div className="flex items-center justify-between text-[11px] mb-1.5">
-                    <span className="text-slate-400">Progress</span>
-                    <span className={`font-bold ${isAchieved ? "text-emerald-400" : isInProgress ? "text-amber-400" : "text-slate-400"}`}>
+                    <span className="text-muted-foreground">Progress</span>
+                    <span className={`font-bold ${isAchieved ? "text-emerald-500" : isInProgress ? "text-primary" : "text-muted-foreground"}`}>
                       {rank.overallPct}%
                     </span>
                   </div>
-                  <div className="w-full bg-slate-900 h-2 rounded-full overflow-hidden border border-slate-800">
+                  <div className="w-full bg-muted h-2 rounded-full overflow-hidden border border-border">
                     <div
                       className={`h-full rounded-full ${
                         isAchieved
-                          ? "bg-emerald-400"
+                          ? "bg-emerald-500"
                           : isInProgress
-                          ? "bg-gradient-to-r from-amber-500 to-amber-400"
-                          : "bg-slate-700"
+                          ? "bg-primary"
+                          : "bg-muted-foreground/30"
                       }`}
                       style={{ width: `${Math.min(100, rank.overallPct)}%` }}
                     />
@@ -783,34 +779,34 @@ export function MilestoneRewardsView({
       </div>
 
       {/* 5. Complete Milestone Rewards Schedule Table */}
-      <div className="bg-[#091124] border border-[#17274a] rounded-3xl p-5 sm:p-6 shadow-xl space-y-5">
+      <div className="bg-card border border-border rounded-3xl p-5 sm:p-6 shadow-sm space-y-5">
         {/* Card Header with Title & Red Pill Total Badge */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#152342] pb-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border pb-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-2.5 h-6 bg-blue-500 rounded-sm" />
-            <h2 className="text-lg sm:text-xl font-bold text-slate-100">
+            <div className="w-2.5 h-6 bg-primary rounded-sm" />
+            <h2 className="text-lg sm:text-xl font-bold text-foreground">
               Milestone Rewards Matrix &amp; Payout Schedule
             </h2>
           </div>
 
-          {/* Red/Rose Total Badge */}
-          <span className="px-4 py-1.5 rounded-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold text-xs sm:text-sm tracking-wide shadow-md shadow-rose-500/20 transition-all self-start sm:self-auto">
+          {/* Primary / Red Total Badge */}
+          <span className="px-4 py-1.5 rounded-full bg-primary text-primary-foreground font-extrabold text-xs sm:text-sm tracking-wide shadow-sm transition-all self-start sm:self-auto">
             Total Unlocked : ${rankAnalysis.totalUnlockedCash.toLocaleString()} USDT
           </span>
         </div>
 
         {/* Toolbar: Search input + Date Pickers + Entries dropdown + Copy/Excel/PDF/Print */}
         <div className="space-y-4">
-          <div className="bg-[#070e20] border border-[#152342] rounded-2xl p-3.5 sm:p-4 flex flex-wrap items-center gap-3">
+          <div className="bg-muted/40 border border-border rounded-2xl p-3.5 sm:p-4 flex flex-wrap items-center gap-3">
             {/* Quick Search */}
             <div className="relative flex-1 min-w-[200px]">
-              <Search className="w-4 h-4 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-muted-foreground absolute left-3 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 placeholder="Search rank title, reward, or bonus..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-9 pr-3 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500/50"
+                className="w-full pl-9 pr-3 py-2 rounded-xl bg-card border border-border text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
               />
             </div>
 
@@ -820,28 +816,28 @@ export function MilestoneRewardsView({
                 type="date"
                 value={fromDate}
                 onChange={(e) => setFromDate(e.target.value)}
-                className="pl-3 pr-2 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-200 [color-scheme:dark]"
+                className="pl-3 pr-2 py-2 rounded-xl bg-card border border-border text-xs text-foreground"
               />
-              <span className="text-slate-500 text-xs">to</span>
+              <span className="text-muted-foreground text-xs">to</span>
               <input
                 type="date"
                 value={toDate}
                 onChange={(e) => setToDate(e.target.value)}
-                className="pl-3 pr-2 py-2 rounded-xl bg-slate-950 border border-slate-800 text-xs text-slate-200 [color-scheme:dark]"
+                className="pl-3 pr-2 py-2 rounded-xl bg-card border border-border text-xs text-foreground"
               />
             </div>
 
             <button
               type="button"
               onClick={handleFilterSearch}
-              className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-xs shadow-md shadow-blue-600/20 transition-all"
+              className="px-4 py-2 rounded-xl bg-primary text-primary-foreground font-bold text-xs shadow-sm hover:bg-primary/90 transition-all"
             >
               Search
             </button>
             <button
               type="button"
               onClick={handleFilterReset}
-              className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold text-xs border border-slate-700 transition-all"
+              className="px-4 py-2 rounded-xl bg-muted hover:bg-muted/80 text-foreground font-bold text-xs border border-border transition-all"
             >
               Reset
             </button>
@@ -849,7 +845,7 @@ export function MilestoneRewardsView({
 
           {/* Action Row: Entries Per Page + Export Buttons (Copy, Excel, PDF, Print) */}
           <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-            <div className="flex items-center gap-2 text-xs text-slate-400">
+            <div className="flex items-center gap-2 text-xs text-muted-foreground">
               <span>Show</span>
               <select
                 value={pageSize}
@@ -857,7 +853,7 @@ export function MilestoneRewardsView({
                   setPageSize(Number(e.target.value));
                   setCurrentPage(1);
                 }}
-                className="bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5 text-xs text-slate-200 focus:outline-none focus:border-amber-500/50"
+                className="bg-card border border-border rounded-lg px-2.5 py-1.5 text-xs text-foreground focus:outline-none focus:border-primary"
               >
                 <option value={10}>10</option>
                 <option value={25}>25</option>
@@ -871,28 +867,28 @@ export function MilestoneRewardsView({
               <button
                 type="button"
                 onClick={handleCopy}
-                className="px-3 py-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-200 text-xs font-semibold flex items-center gap-1.5 transition-all"
+                className="px-3 py-1.5 rounded-lg bg-card hover:bg-muted border border-border text-foreground text-xs font-semibold flex items-center gap-1.5 transition-all"
               >
                 {isCopied ? "✓ Copied" : "Copy"}
               </button>
               <button
                 type="button"
                 onClick={handleExcel}
-                className="px-3 py-1.5 rounded-lg bg-emerald-950/40 hover:bg-emerald-900/50 border border-emerald-700/50 text-emerald-300 text-xs font-semibold flex items-center gap-1.5 transition-all"
+                className="px-3 py-1.5 rounded-lg bg-card hover:bg-muted border border-border text-emerald-600 dark:text-emerald-400 text-xs font-semibold flex items-center gap-1.5 transition-all"
               >
                 Excel
               </button>
               <button
                 type="button"
                 onClick={handlePdf}
-                className="px-3 py-1.5 rounded-lg bg-rose-950/40 hover:bg-rose-900/50 border border-rose-700/50 text-rose-300 text-xs font-semibold flex items-center gap-1.5 transition-all"
+                className="px-3 py-1.5 rounded-lg bg-card hover:bg-muted border border-border text-rose-600 dark:text-rose-400 text-xs font-semibold flex items-center gap-1.5 transition-all"
               >
                 PDF
               </button>
               <button
                 type="button"
                 onClick={handlePrint}
-                className="px-3 py-1.5 rounded-lg bg-blue-950/40 hover:bg-blue-900/50 border border-blue-700/50 text-blue-300 text-xs font-semibold flex items-center gap-1.5 transition-all"
+                className="px-3 py-1.5 rounded-lg bg-card hover:bg-muted border border-border text-primary text-xs font-semibold flex items-center gap-1.5 transition-all"
               >
                 Print
               </button>
@@ -901,9 +897,9 @@ export function MilestoneRewardsView({
         </div>
 
         {/* Table View */}
-        <div className="overflow-x-auto rounded-2xl border border-slate-800/80 bg-slate-950/40">
-          <table className="w-full text-left text-xs text-slate-300">
-            <thead className="bg-[#070e20] text-slate-400 font-bold uppercase text-[10px] tracking-wider border-b border-slate-800">
+        <div className="overflow-x-auto rounded-2xl border border-border bg-card">
+          <table className="w-full text-left text-xs text-foreground">
+            <thead className="bg-muted/50 text-muted-foreground font-bold uppercase text-[10px] tracking-wider border-b border-border">
               <tr>
                 <th className="py-3 px-4 text-center">SR</th>
                 <th className="py-3 px-4">RANK TITLE</th>
@@ -916,10 +912,10 @@ export function MilestoneRewardsView({
                 <th className="py-3 px-4 text-center whitespace-nowrap min-w-[130px]">STATUS</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-slate-800/60">
+            <tbody className="divide-y divide-border">
               {pageItems.length === 0 ? (
                 <tr>
-                  <td colSpan={9} className="py-8 text-center text-slate-500">
+                  <td colSpan={9} className="py-8 text-center text-muted-foreground">
                     No milestone ranks match your filter criteria.
                   </td>
                 </tr>
@@ -931,53 +927,53 @@ export function MilestoneRewardsView({
                   return (
                     <tr
                       key={rank.id}
-                      className={`hover:bg-slate-900/50 transition-colors ${
+                      className={`hover:bg-muted/40 transition-colors ${
                         isAchieved
-                          ? "bg-emerald-950/10"
+                          ? "bg-emerald-500/5"
                           : isInProgress
-                          ? "bg-amber-950/10"
+                          ? "bg-primary/5"
                           : ""
                       }`}
                     >
-                      <td className="py-3.5 px-4 text-center font-semibold text-slate-400">
+                      <td className="py-3.5 px-4 text-center font-semibold text-muted-foreground">
                         {startIndex + idx + 1}
                       </td>
                       <td className="py-3.5 px-4">
-                        <div className="flex items-center gap-2 font-bold text-slate-100">
+                        <div className="flex items-center gap-2 font-bold text-foreground">
                           <span className="text-base">{rank.icon}</span>
                           <span>{rank.title}</span>
                         </div>
                       </td>
-                      <td className="py-3.5 px-4 text-right font-medium text-emerald-400">
+                      <td className="py-3.5 px-4 text-right font-medium text-emerald-500">
                         ${rank.strong.toLocaleString()} USDT
                       </td>
-                      <td className="py-3.5 px-4 text-right font-medium text-purple-300">
+                      <td className="py-3.5 px-4 text-right font-medium text-foreground">
                         ${rank.weak.toLocaleString()} USDT
                       </td>
-                      <td className="py-3.5 px-4 text-right font-bold text-slate-100">
+                      <td className="py-3.5 px-4 text-right font-bold text-foreground">
                         ${rank.total.toLocaleString()} USDT
                       </td>
-                      <td className="py-3.5 px-4 font-semibold text-slate-200">
+                      <td className="py-3.5 px-4 font-semibold text-foreground">
                         {rank.reward}
                       </td>
-                      <td className="py-3.5 px-4 text-right font-black text-amber-400">
+                      <td className="py-3.5 px-4 text-right font-black text-primary">
                         ${rank.cash.toLocaleString()} USDT
                       </td>
                       <td className="py-3.5 px-4 text-center">
                         <div className="flex items-center justify-center gap-2">
-                          <div className="w-16 bg-slate-900 h-1.5 rounded-full overflow-hidden border border-slate-800">
+                          <div className="w-16 bg-muted h-1.5 rounded-full overflow-hidden border border-border">
                             <div
                               className={`h-full rounded-full ${
                                 isAchieved
-                                  ? "bg-emerald-400"
+                                  ? "bg-emerald-500"
                                   : isInProgress
-                                  ? "bg-amber-400"
-                                  : "bg-slate-700"
+                                  ? "bg-primary"
+                                  : "bg-muted-foreground/30"
                               }`}
                               style={{ width: `${Math.min(100, rank.overallPct)}%` }}
                             />
                           </div>
-                          <span className="text-[10px] font-bold text-slate-400">
+                          <span className="text-[10px] font-bold text-muted-foreground">
                             {rank.overallPct}%
                           </span>
                         </div>
@@ -986,17 +982,17 @@ export function MilestoneRewardsView({
                         <span
                           className={`inline-flex items-center justify-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-extrabold uppercase tracking-wide whitespace-nowrap ${
                             isAchieved
-                              ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm shadow-emerald-500/10"
+                              ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border border-emerald-500/40"
                               : isInProgress
-                              ? "bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm shadow-amber-500/10"
-                              : "bg-slate-800 text-slate-400 border border-slate-700"
+                              ? "bg-primary/20 text-primary border border-primary/40"
+                              : "bg-muted text-muted-foreground border border-border"
                           }`}
                         >
                           {isInProgress && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse shrink-0" />
                           )}
                           {isAchieved && (
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shrink-0" />
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shrink-0" />
                           )}
                           {rank.status}
                         </span>
@@ -1010,7 +1006,7 @@ export function MilestoneRewardsView({
         </div>
 
         {/* Pagination Controls */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-slate-400 pt-2 border-t border-slate-800/60">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs text-muted-foreground pt-2 border-t border-border">
           <div>
             Showing {filteredRanks.length > 0 ? startIndex + 1 : 0} to{" "}
             {Math.min(startIndex + pageSize, filteredRanks.length)} of {filteredRanks.length} entries
@@ -1021,18 +1017,18 @@ export function MilestoneRewardsView({
               type="button"
               disabled={currentPage <= 1}
               onClick={() => setCurrentPage((prev) => Math.max(1, prev - 1))}
-              className="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 disabled:opacity-40 disabled:cursor-not-allowed font-medium text-slate-300"
+              className="px-3 py-1.5 rounded-lg bg-card hover:bg-muted border border-border disabled:opacity-40 disabled:cursor-not-allowed font-medium text-foreground"
             >
               Previous
             </button>
-            <div className="px-3 py-1.5 rounded-lg bg-blue-600 text-white font-bold">
+            <div className="px-3 py-1.5 rounded-lg bg-primary text-primary-foreground font-bold">
               {currentPage}
             </div>
             <button
               type="button"
               disabled={currentPage >= totalPages}
               onClick={() => setCurrentPage((prev) => Math.min(totalPages, prev + 1))}
-              className="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 border border-slate-800 disabled:opacity-40 disabled:cursor-not-allowed font-medium text-slate-300"
+              className="px-3 py-1.5 rounded-lg bg-card hover:bg-muted border border-border disabled:opacity-40 disabled:cursor-not-allowed font-medium text-foreground"
             >
               Next
             </button>

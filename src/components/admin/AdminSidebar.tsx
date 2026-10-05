@@ -78,17 +78,17 @@ export default function AdminSidebar({
 
       {/* Frosted Glass Sidebar Container */}
       <aside
-        className={`fixed top-0 left-0 bottom-0 z-50 bg-white/85 dark:bg-[#090e1a]/85 backdrop-blur-2xl border-r border-slate-200/80 dark:border-white/10 flex flex-col transition-all duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 bottom-0 z-50 bg-card border-r border-border flex flex-col transition-all duration-300 ease-in-out ${
           isCollapsed ? "lg:w-20" : "lg:w-64"
         } ${
           isOpen ? "translate-x-0 w-72" : "-translate-x-full lg:translate-x-0"
-        } shadow-[0_20px_50px_rgba(2,132,199,0.08)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]`}
+        } shadow-lg`}
       >
         {/* Brand Header */}
-        <div className="h-16 bg-slate-50/50 dark:bg-white/[0.02] border-b border-slate-200/80 dark:border-white/10 flex items-center justify-between px-4 shrink-0 relative overflow-hidden">
+        <div className="h-16 bg-card border-b border-border flex items-center justify-between px-4 shrink-0 relative overflow-hidden">
           <div className="flex items-center gap-3 relative z-10 overflow-hidden">
-            <div className="relative w-9 h-9 rounded-2xl overflow-hidden bg-gradient-to-br from-sky-400 via-indigo-500 to-purple-600 p-0.5 shadow-md shadow-sky-500/25 shrink-0">
-              <div className="w-full h-full rounded-[14px] bg-slate-950 flex items-center justify-center overflow-hidden">
+            <div className="relative w-9 h-9 rounded-2xl overflow-hidden bg-primary/20 border border-primary/40 p-0.5 shrink-0">
+              <div className="w-full h-full rounded-[14px] bg-card flex items-center justify-center overflow-hidden">
                 <Image
                   src="/crypto_coin_hero.png"
                   alt="Crypto Finance Logo"
@@ -103,11 +103,11 @@ export default function AdminSidebar({
             <div className={`flex flex-col transition-opacity duration-200 ${
               isCollapsed ? "lg:hidden" : "block"
             }`}>
-              <div className="font-bold text-sm tracking-wider text-slate-900 dark:text-white uppercase whitespace-nowrap leading-none">
+              <div className="font-bold text-sm tracking-wider text-foreground uppercase whitespace-nowrap leading-none">
                 CRYPTO FINANCE
               </div>
-              <div className="text-[9px] font-bold tracking-widest text-sky-600 dark:text-sky-400 uppercase mt-1 whitespace-nowrap flex items-center gap-1 leading-none font-mono">
-                <ShieldCheck className="w-3 h-3 text-emerald-500 dark:text-emerald-400" />
+              <div className="text-[9px] font-bold tracking-widest text-primary uppercase mt-1 whitespace-nowrap flex items-center gap-1 leading-none font-mono">
+                <ShieldCheck className="w-3 h-3 text-emerald-500" />
                 ADMIN CONSOLE
               </div>
             </div>
@@ -116,7 +116,7 @@ export default function AdminSidebar({
           <button
             type="button"
             onClick={() => setIsOpen(false)}
-            className="lg:hidden p-1.5 rounded-xl border border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition"
+            className="lg:hidden p-1.5 rounded-xl border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition"
             aria-label="Close Sidebar"
           >
             <X className="w-4 h-4" />
@@ -126,15 +126,15 @@ export default function AdminSidebar({
         {/* Super Root Admin Floating Badge */}
         {isSuper && (
           <div className={`px-3 pt-3 ${isCollapsed ? "lg:hidden" : "block"}`}>
-            <div className="glass-pill w-full py-1.5 px-3 bg-gradient-to-r from-purple-500/15 to-sky-500/15 border-purple-500/30 text-[10px] font-black text-purple-600 dark:text-purple-300 uppercase tracking-widest flex items-center justify-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 dark:bg-emerald-400 animate-ping" />
+            <div className="w-full py-1.5 px-3 bg-primary/10 border border-primary/30 rounded-xl text-[10px] font-black text-primary uppercase tracking-widest flex items-center justify-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
               SUPER ROOT PRIVILEGES
             </div>
           </div>
         )}
 
         {/* Navigation Items */}
-        <div className="flex-1 overflow-y-auto py-3 px-2.5 space-y-1 scrollbar-thin scrollbar-thumb-white/10">
+        <div className="flex-1 overflow-y-auto py-3 px-2.5 space-y-1 scrollbar-thin">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeTab === item.id;
@@ -151,21 +151,25 @@ export default function AdminSidebar({
                 title={isCollapsed ? item.label : undefined}
                 className={`w-full flex items-center ${
                   isCollapsed ? "lg:justify-center lg:px-2" : "justify-between px-3.5"
-                } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
+                } py-2.5 rounded-xl font-semibold text-xs transition-all text-left ${
                   isActive
-                    ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-slate-900 dark:text-white border border-sky-400/50 shadow-lg shadow-sky-500/15"
-                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-sky-50/80 dark:hover:bg-white/[0.06]"
+                    ? "bg-primary text-primary-foreground font-bold shadow-sm"
+                    : "text-muted-foreground hover:text-foreground hover:bg-muted"
                 }`}
               >
                 <div className={`flex items-center ${isCollapsed ? "gap-0" : "gap-3"}`}>
-                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-sky-600 dark:text-sky-400" : "text-slate-500 dark:text-slate-400"}`} />
+                  <Icon className={`w-4 h-4 shrink-0 ${isActive ? "text-primary-foreground" : "text-muted-foreground"}`} />
                   <span className={isCollapsed ? "lg:hidden" : "inline"}>
                     {item.label}
                   </span>
                 </div>
 
                 {item.badge && (
-                  <span className={`${isCollapsed ? "lg:hidden" : "inline"} px-2 py-0.5 rounded-full text-[10px] font-black border ${item.badgeColor || "bg-sky-500/20 text-sky-300 border-sky-500/30"}`}>
+                  <span className={`${isCollapsed ? "lg:hidden" : "inline"} px-2 py-0.5 rounded-full text-[10px] font-black border ${
+                    isActive 
+                      ? "bg-black/20 text-primary-foreground border-black/30" 
+                      : item.badgeColor || "bg-primary/20 text-primary border-primary/30"
+                  }`}>
                     {item.badge}
                   </span>
                 )}
@@ -175,11 +179,11 @@ export default function AdminSidebar({
         </div>
 
         {/* Footer Actions */}
-        <div className="p-3 border-t border-slate-200/80 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.02] flex items-center justify-between gap-2 shrink-0">
+        <div className="p-3 border-t border-border bg-card flex items-center justify-between gap-2 shrink-0">
           <button
             type="button"
             onClick={handleLogout}
-            className={`flex items-center gap-2 py-2 px-3 rounded-xl text-rose-500 dark:text-rose-400 hover:text-rose-600 dark:hover:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-all font-semibold text-xs ${
+            className={`flex items-center gap-2 py-2 px-3 rounded-xl text-rose-500 hover:text-rose-600 hover:bg-rose-500/10 transition-all font-semibold text-xs ${
               isCollapsed ? "lg:hidden" : "flex-1"
             }`}
           >
@@ -190,7 +194,7 @@ export default function AdminSidebar({
           <button
             type="button"
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="hidden lg:flex p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition shrink-0"
+            className="hidden lg:flex p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition shrink-0"
             title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
           >
             {isCollapsed ? (

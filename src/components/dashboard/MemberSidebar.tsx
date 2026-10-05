@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import {
   Gauge,
   Briefcase,
-  Package,
   Users,
   Banknote,
   BarChart3,
@@ -16,11 +15,8 @@ import {
   ChevronRight,
   ChevronLeft,
   X,
-  ShieldAlert,
-  Sparkles,
   Zap,
   Layers,
-  Wallet,
 } from "lucide-react";
 
 interface MemberSidebarProps {
@@ -40,7 +36,6 @@ export function MemberSidebar({
   setIsOpen,
   isCollapsed = false,
   setIsCollapsed,
-  userRole,
 }: MemberSidebarProps) {
   const router = useRouter();
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({
@@ -86,44 +81,60 @@ export function MemberSidebar({
     }
   };
 
+  const getNavItemClass = (isActive: boolean) => {
+    return `w-full flex items-center ${
+      isCollapsed ? "lg:justify-center lg:px-2" : "gap-3.5 px-3.5"
+    } py-2.5 rounded-xl font-semibold text-xs transition-all text-left cursor-pointer ${
+      isActive
+        ? "bg-primary text-primary-foreground font-bold shadow-sm shadow-primary/20"
+        : "text-muted-foreground hover:bg-muted hover:text-foreground"
+    }`;
+  };
+
+  const getSubItemClass = (isActive: boolean) => {
+    return `w-full text-left py-2 px-3 rounded-lg text-xs font-semibold transition-all cursor-pointer ${
+      isActive
+        ? "text-primary bg-primary/10 border-l-2 border-primary font-bold"
+        : "text-muted-foreground hover:text-foreground hover:bg-muted/60"
+    }`;
+  };
+
   return (
     <>
       {/* Mobile Backdrop */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/80 backdrop-blur-md z-40 lg:hidden animate-in fade-in duration-200"
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm z-40 lg:hidden animate-in fade-in duration-200"
           onClick={() => setIsOpen(false)}
         />
       )}
 
-      {/* Frosted Glass Sidebar Container */}
+      {/* SuperWarrior30 Style Sidebar Container */}
       <aside
-        className={`fixed top-0 left-0 bottom-0 z-50 bg-white/85 dark:bg-[#090e1a]/85 backdrop-blur-2xl border-r border-slate-200/80 dark:border-white/10 flex flex-col transition-all duration-300 ease-in-out ${
+        className={`fixed top-0 left-0 bottom-0 z-50 bg-card border-r border-border flex flex-col transition-all duration-300 ease-in-out ${
           isCollapsed ? "lg:w-20" : "lg:w-64"
         } ${
           isOpen ? "translate-x-0 w-72" : "-translate-x-full lg:translate-x-0"
-        } shadow-[0_20px_50px_rgba(2,132,199,0.08)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.5)]`}
+        } shadow-sm`}
       >
         {/* Brand Logo Header */}
-        <div className="h-16 flex items-center justify-between px-4 border-b border-slate-200/80 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.02] shrink-0">
+        <div className="h-16 flex items-center justify-between px-4 border-b border-border bg-card shrink-0">
           <div className="flex items-center gap-3 overflow-hidden">
-            <div className="w-9 h-9 rounded-2xl overflow-hidden bg-gradient-to-br from-sky-400 to-indigo-600 p-0.5 shadow-md shadow-sky-500/20 shrink-0">
-              <div className="w-full h-full rounded-[14px] bg-slate-950 flex items-center justify-center overflow-hidden">
-                <Image
-                  src="/crypto_coin_hero.png"
-                  alt="Crypto Finance Logo"
-                  width={32}
-                  height={32}
-                  className="object-contain"
-                  priority
-                />
-              </div>
+            <div className="w-9 h-9 rounded-full overflow-hidden border border-amber-500/40 bg-black p-0.5 shadow-sm shrink-0 flex items-center justify-center">
+              <Image
+                src="/crypto_coin_hero.png"
+                alt="Crypto Finance Logo"
+                width={28}
+                height={28}
+                className="object-contain"
+                priority
+              />
             </div>
-            <div className={`flex flex-col ${isCollapsed ? "lg:hidden" : "block"}`}>
-              <span className="text-slate-900 dark:text-white font-bold tracking-wider text-sm uppercase leading-tight whitespace-nowrap">
-                CRYPTO FINANCE
+            <div className={`flex flex-col leading-none ${isCollapsed ? "lg:hidden" : "block"}`}>
+              <span className="text-sm font-black tracking-tight text-foreground uppercase whitespace-nowrap">
+                CRYPTO <span className="text-amber-500 dark:text-amber-400">FINANCE</span>
               </span>
-              <span className="text-[9px] text-sky-600 dark:text-sky-400 font-bold tracking-widest uppercase whitespace-nowrap font-mono">
+              <span className="text-[9px] font-extrabold text-muted-foreground uppercase tracking-widest whitespace-nowrap mt-0.5">
                 QUANTITATIVE PROTOCOL
               </span>
             </div>
@@ -133,7 +144,7 @@ export function MemberSidebar({
           <button
             type="button"
             onClick={() => setIsOpen(false)}
-            className="lg:hidden p-1.5 rounded-xl border border-slate-200 dark:border-white/10 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition"
+            className="lg:hidden p-1.5 rounded-xl border border-border text-muted-foreground hover:text-foreground hover:bg-muted transition"
             aria-label="Close Sidebar"
           >
             <X className="w-4 h-4" />
@@ -141,21 +152,15 @@ export function MemberSidebar({
         </div>
 
         {/* Navigation Menu Links */}
-        <div className="flex-1 overflow-y-auto py-4 px-2.5 space-y-1.5 scrollbar-thin scrollbar-thumb-white/10">
+        <div className="flex-1 overflow-y-auto py-4 px-2.5 space-y-1.5">
           {/* Dashboard */}
           <button
             type="button"
             onClick={() => handleSelectTab("dashboard")}
             title={isCollapsed ? "Dashboard" : undefined}
-            className={`w-full flex items-center ${
-              isCollapsed ? "lg:justify-center lg:px-2" : "gap-3.5 px-3.5"
-            } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
-              activeTab === "dashboard"
-                ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-white border border-sky-400/40 shadow-lg shadow-sky-500/15"
-                : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
-            }`}
+            className={getNavItemClass(activeTab === "dashboard")}
           >
-            <Gauge className="w-4 h-4 text-sky-400 shrink-0" />
+            <Gauge className={`w-4 h-4 shrink-0 ${activeTab === "dashboard" ? "text-primary-foreground" : "text-muted-foreground"}`} />
             <span className={isCollapsed ? "lg:hidden" : "inline"}>Dashboard</span>
           </button>
 
@@ -164,32 +169,26 @@ export function MemberSidebar({
             type="button"
             onClick={() => handleSelectTab("recharge")}
             title={isCollapsed ? "Deposit USDT" : undefined}
-            className={`w-full flex items-center ${
-              isCollapsed ? "lg:justify-center lg:px-2" : "gap-3.5 px-3.5"
-            } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
-              activeTab === "recharge"
-                ? "bg-gradient-to-r from-emerald-500/25 via-emerald-500/10 to-transparent text-white border border-emerald-400/40 shadow-lg shadow-emerald-500/15"
-                : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
-            }`}
+            className={getNavItemClass(activeTab === "recharge")}
           >
-            <Briefcase className="w-4 h-4 text-emerald-400 shrink-0" />
+            <Briefcase className={`w-4 h-4 shrink-0 ${activeTab === "recharge" ? "text-primary-foreground" : "text-muted-foreground"}`} />
             <span className={isCollapsed ? "lg:hidden" : "inline"}>Deposit USDT</span>
           </button>
 
-          {/* Activate Stake (Single Unified Entry Point) */}
+          {/* Activate Stake */}
           <button
             type="button"
             onClick={() => handleSelectTab("stake-activate")}
             title={isCollapsed ? "Activate Stake" : undefined}
-            className={`w-full flex items-center ${
-              isCollapsed ? "lg:justify-center lg:px-2" : "gap-3.5 px-3.5"
-            } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
+            className={getNavItemClass(
               activeTab === "stake-activate" || activeTab === "package-base" || activeTab === "package-fd"
-                ? "bg-gradient-to-r from-[#00FFA3]/25 via-[#00FFA3]/10 to-transparent text-white border border-[#00FFA3]/40 shadow-lg shadow-[#00FFA3]/15"
-                : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
-            }`}
+            )}
           >
-            <Zap className="w-4 h-4 text-[#00FFA3] shrink-0" />
+            <Zap className={`w-4 h-4 shrink-0 ${
+              activeTab === "stake-activate" || activeTab === "package-base" || activeTab === "package-fd"
+                ? "text-primary-foreground"
+                : "text-muted-foreground"
+            }`} />
             <span className={isCollapsed ? "lg:hidden" : "inline"}>Activate Stake</span>
           </button>
 
@@ -201,47 +200,39 @@ export function MemberSidebar({
               title={isCollapsed ? "Wallet System" : undefined}
               className={`w-full flex items-center ${
                 isCollapsed ? "lg:justify-center lg:px-2" : "justify-between px-3.5"
-              } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
+              } py-2.5 rounded-xl font-semibold text-xs transition-all text-left cursor-pointer ${
                 activeTab.startsWith("wallet")
-                  ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-white border border-sky-400/40 shadow-lg shadow-sky-500/15"
-                  : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
+                  ? "bg-primary text-primary-foreground font-bold shadow-sm shadow-primary/20"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
               }`}
             >
               <div className="flex items-center gap-3.5">
-                <Layers className="w-4 h-4 text-sky-400 shrink-0" />
+                <Layers className={`w-4 h-4 shrink-0 ${activeTab.startsWith("wallet") ? "text-primary-foreground" : "text-muted-foreground"}`} />
                 <span className={isCollapsed ? "lg:hidden" : "inline"}>Wallet System</span>
               </div>
               <span className={isCollapsed ? "lg:hidden" : "inline"}>
                 {openMenus.wallets ? (
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                  <ChevronDown className="w-3.5 h-3.5" />
                 ) : (
-                  <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                  <ChevronRight className="w-3.5 h-3.5" />
                 )}
               </span>
             </button>
             {openMenus.wallets && (
-              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-10 pr-2 py-1 space-y-1`}>
+              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-9 pr-2 py-1 space-y-1`}>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("wallets-internal")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "wallets-internal" || activeTab === "wallets"
-                      ? "text-[#00FFA3] bg-[#00FFA3]/20 border-l-2 border-[#00FFA3]"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
+                  className={getSubItemClass(activeTab === "wallets-internal" || activeTab === "wallets")}
                 >
-                  • Internal Wallet Transfer Engine
+                  • Internal Wallet Transfer
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("wallets-external")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "wallets-external"
-                      ? "text-purple-300 bg-purple-500/20 border-l-2 border-purple-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
+                  className={getSubItemClass(activeTab === "wallets-external")}
                 >
-                  • External Wallet Transfer Engine
+                  • External Wallet Transfer
                 </button>
               </div>
             )}
@@ -252,59 +243,47 @@ export function MemberSidebar({
             <button
               type="button"
               onClick={() => toggleMenu("downline")}
-              title={isCollapsed ? "Downline & Team" : undefined}
+              title={isCollapsed ? "Downline Team" : undefined}
               className={`w-full flex items-center ${
                 isCollapsed ? "lg:justify-center lg:px-2" : "justify-between px-3.5"
-              } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
+              } py-2.5 rounded-xl font-semibold text-xs transition-all text-left cursor-pointer ${
                 activeTab.startsWith("downline-")
-                  ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-white border border-sky-400/40 shadow-lg shadow-sky-500/15"
-                  : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
+                  ? "bg-primary text-primary-foreground font-bold shadow-sm shadow-primary/20"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
               }`}
             >
               <div className="flex items-center gap-3.5">
-                <Users className="w-4 h-4 text-cyan-400 shrink-0" />
+                <Users className={`w-4 h-4 shrink-0 ${activeTab.startsWith("downline-") ? "text-primary-foreground" : "text-muted-foreground"}`} />
                 <span className={isCollapsed ? "lg:hidden" : "inline"}>Downline Team</span>
               </div>
               <span className={isCollapsed ? "lg:hidden" : "inline"}>
                 {openMenus.downline ? (
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                  <ChevronDown className="w-3.5 h-3.5" />
                 ) : (
-                  <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                  <ChevronRight className="w-3.5 h-3.5" />
                 )}
               </span>
             </button>
             {openMenus.downline && (
-              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-10 pr-2 py-1 space-y-1`}>
+              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-9 pr-2 py-1 space-y-1`}>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("downline-direct")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "downline-direct"
-                      ? "text-sky-300 bg-sky-500/20 border-l-2 border-sky-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
+                  className={getSubItemClass(activeTab === "downline-direct")}
                 >
                   • Direct Referral List
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("downline-team")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "downline-team"
-                      ? "text-sky-300 bg-sky-500/20 border-l-2 border-sky-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
+                  className={getSubItemClass(activeTab === "downline-team")}
                 >
                   • 10-Level Team View
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("downline-tree")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "downline-tree"
-                      ? "text-sky-300 bg-sky-500/20 border-l-2 border-sky-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
+                  className={getSubItemClass(activeTab === "downline-tree")}
                 >
                   • Visual Tree Genealogy
                 </button>
@@ -320,86 +299,64 @@ export function MemberSidebar({
               title={isCollapsed ? "Income Streams" : undefined}
               className={`w-full flex items-center ${
                 isCollapsed ? "lg:justify-center lg:px-2" : "justify-between px-3.5"
-              } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
+              } py-2.5 rounded-xl font-semibold text-xs transition-all text-left cursor-pointer ${
                 activeTab.startsWith("income-")
-                  ? "bg-gradient-to-r from-emerald-500/25 via-emerald-500/10 to-transparent text-white border border-emerald-400/40 shadow-lg shadow-emerald-500/15"
-                  : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
+                  ? "bg-primary text-primary-foreground font-bold shadow-sm shadow-primary/20"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
               }`}
             >
               <div className="flex items-center gap-3.5">
-                <Banknote className="w-4 h-4 text-emerald-400 shrink-0" />
+                <Banknote className={`w-4 h-4 shrink-0 ${activeTab.startsWith("income-") ? "text-primary-foreground" : "text-muted-foreground"}`} />
                 <span className={isCollapsed ? "lg:hidden" : "inline"}>Income Streams</span>
               </div>
               <span className={isCollapsed ? "lg:hidden" : "inline"}>
                 {openMenus.income ? (
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                  <ChevronDown className="w-3.5 h-3.5" />
                 ) : (
-                  <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                  <ChevronRight className="w-3.5 h-3.5" />
                 )}
               </span>
             </button>
             {openMenus.income && (
-              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-10 pr-2 py-1 space-y-1`}>
+              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-9 pr-2 py-1 space-y-1`}>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("income-bonus")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "income-bonus"
-                      ? "text-emerald-300 bg-emerald-500/20 border-l-2 border-emerald-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
+                  className={getSubItemClass(activeTab === "income-bonus")}
                 >
                   • $50 Joining Bonus
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("income-roi")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "income-roi"
-                      ? "text-emerald-300 bg-emerald-500/20 border-l-2 border-emerald-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
+                  className={getSubItemClass(activeTab === "income-roi")}
                 >
                   • Daily ROI Income
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("income-referral")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "income-referral"
-                      ? "text-emerald-300 bg-emerald-500/20 border-l-2 border-emerald-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
+                  className={getSubItemClass(activeTab === "income-referral")}
                 >
                   • Direct Referral Bonus
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("income-level")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "income-level"
-                      ? "text-emerald-300 bg-emerald-500/20 border-l-2 border-emerald-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
+                  className={getSubItemClass(activeTab === "income-level")}
                 >
                   • 10-Level Daily Royalty
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("income-rewards")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "income-rewards"
-                      ? "text-purple-300 bg-purple-500/20 border-l-2 border-purple-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
+                  className={getSubItemClass(activeTab === "income-rewards")}
                 >
                   • Milestone Rewards
                 </button>
               </div>
             )}
           </div>
-
-
 
           {/* Audit Reports Accordion */}
           <div>
@@ -409,45 +366,37 @@ export function MemberSidebar({
               title={isCollapsed ? "Audit Reports" : undefined}
               className={`w-full flex items-center ${
                 isCollapsed ? "lg:justify-center lg:px-2" : "justify-between px-3.5"
-              } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
+              } py-2.5 rounded-xl font-semibold text-xs transition-all text-left cursor-pointer ${
                 activeTab.startsWith("report-")
-                  ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-white border border-sky-400/40 shadow-lg shadow-sky-500/15"
-                  : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
+                  ? "bg-primary text-primary-foreground font-bold shadow-sm shadow-primary/20"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
               }`}
             >
               <div className="flex items-center gap-3.5">
-                <BarChart3 className="w-4 h-4 text-sky-400 shrink-0" />
+                <BarChart3 className={`w-4 h-4 shrink-0 ${activeTab.startsWith("report-") ? "text-primary-foreground" : "text-muted-foreground"}`} />
                 <span className={isCollapsed ? "lg:hidden" : "inline"}>Audit Reports</span>
               </div>
               <span className={isCollapsed ? "lg:hidden" : "inline"}>
                 {openMenus.reports ? (
-                  <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                  <ChevronDown className="w-3.5 h-3.5" />
                 ) : (
-                  <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+                  <ChevronRight className="w-3.5 h-3.5" />
                 )}
               </span>
             </button>
             {openMenus.reports && (
-              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-10 pr-2 py-1 space-y-1`}>
+              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-9 pr-2 py-1 space-y-1`}>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("report-daily")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "report-daily"
-                      ? "text-sky-300 bg-sky-500/20 border-l-2 border-sky-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
+                  className={getSubItemClass(activeTab === "report-daily")}
                 >
                   • Daily Ledger
                 </button>
                 <button
                   type="button"
                   onClick={() => handleSelectTab("report-statement")}
-                  className={`w-full text-left py-2 px-3 rounded-xl text-xs font-semibold transition-all ${
-                    activeTab === "report-statement"
-                      ? "text-sky-300 bg-sky-500/20 border-l-2 border-sky-400"
-                      : "text-slate-400 hover:text-white hover:bg-white/[0.05]"
-                  }`}
+                  className={getSubItemClass(activeTab === "report-statement")}
                 >
                   • Complete Statement
                 </button>
@@ -460,25 +409,19 @@ export function MemberSidebar({
             type="button"
             onClick={() => handleSelectTab("support")}
             title={isCollapsed ? "Support Desk" : undefined}
-            className={`w-full flex items-center ${
-              isCollapsed ? "lg:justify-center lg:px-2" : "gap-3.5 px-3.5"
-            } py-2.5 rounded-2xl font-semibold text-xs transition-all text-left ${
-              activeTab === "support"
-                ? "bg-gradient-to-r from-sky-500/25 via-sky-500/10 to-transparent text-white border border-sky-400/40 shadow-lg shadow-sky-500/15"
-                : "text-slate-400 hover:text-white hover:bg-white/[0.06]"
-            }`}
+            className={getNavItemClass(activeTab === "support")}
           >
-            <Headphones className="w-4 h-4 text-indigo-400 shrink-0" />
+            <Headphones className={`w-4 h-4 shrink-0 ${activeTab === "support" ? "text-primary-foreground" : "text-muted-foreground"}`} />
             <span className={isCollapsed ? "lg:hidden" : "inline"}>Support Desk</span>
           </button>
         </div>
 
         {/* Sidebar Footer: Sign Out & Collapse Button */}
-        <div className="p-3 border-t border-slate-200/80 dark:border-white/10 bg-slate-50/50 dark:bg-white/[0.02] flex items-center justify-between gap-2 shrink-0">
+        <div className="p-3 border-t border-border bg-card flex items-center justify-between gap-2 shrink-0">
           <button
             type="button"
             onClick={handleLogout}
-            className={`flex items-center gap-2 py-2 px-3 rounded-xl text-rose-500 dark:text-rose-400 hover:text-rose-600 dark:hover:text-rose-300 hover:bg-rose-50 dark:hover:bg-rose-500/10 transition-all font-semibold text-xs ${
+            className={`flex items-center gap-2 py-2 px-3 rounded-xl text-destructive hover:bg-destructive/10 transition-all font-semibold text-xs cursor-pointer ${
               isCollapsed ? "lg:hidden" : "flex-1"
             }`}
           >
@@ -490,7 +433,7 @@ export function MemberSidebar({
             <button
               type="button"
               onClick={() => setIsCollapsed(!isCollapsed)}
-              className="hidden lg:flex p-2 rounded-xl text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-white/10 transition shrink-0"
+              className="hidden lg:flex p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition shrink-0 cursor-pointer"
               title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
             >
               {isCollapsed ? (

@@ -86,33 +86,33 @@ export function AdminIncomeView({ onRefresh }: AdminIncomeViewProps) {
   return (
     <div className="space-y-6">
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-purple-500/5 dark:from-amber-950/40 dark:via-slate-900 dark:to-purple-950/30 border border-amber-500/30 rounded-3xl p-6 sm:p-8 backdrop-blur shadow-2xl relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
+      <div className="bg-card border border-primary/20 rounded-2xl p-6 sm:p-8 shadow-sm relative overflow-hidden">
+        <div className="absolute top-0 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl pointer-events-none -mr-20 -mt-20" />
         
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <div className="flex items-center gap-2.5 text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-widest mb-1.5">
-              <Landmark className="w-4 h-4 text-amber-500 dark:text-amber-400" />
+            <div className="flex items-center gap-2.5 text-primary text-xs font-bold uppercase tracking-widest mb-1.5">
+              <Landmark className="w-4 h-4 text-primary" />
               <span>Platform Revenue Accounting</span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight flex items-center gap-3">
+            <h1 className="text-2xl sm:text-3xl font-black text-foreground tracking-tight flex items-center gap-3">
               <span>Admin Income &amp; Fee Revenue</span>
-              <span className="text-xs font-extrabold px-3 py-1 rounded-full bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/40">
+              <span className="text-xs font-extrabold px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
                 10% Flat Deduction
               </span>
             </h1>
-            <p className="text-slate-600 dark:text-slate-400 text-sm mt-1 max-w-2xl">
+            <p className="text-muted-foreground text-sm mt-1 max-w-2xl">
               Track platform revenue generated from member withdrawals. Every withdrawal automatically applies a 10% admin charge ($50 per $500) credited as pure platform profit, while $450 is dispatched to the member.
             </p>
           </div>
 
-          <div className="flex items-center gap-3 bg-white dark:bg-[#070e20] border border-amber-500/30 px-4 py-3 rounded-2xl shadow-sm">
-            <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-600 dark:text-amber-400 flex items-center justify-center font-bold">
+          <div className="flex items-center gap-3 bg-muted border border-border px-4 py-3 rounded-xl shadow-sm">
+            <div className="w-10 h-10 rounded-xl bg-primary/10 text-primary flex items-center justify-center font-bold">
               <Percent className="w-5 h-5" />
             </div>
             <div>
-              <div className="text-[11px] uppercase tracking-wider text-slate-500 dark:text-slate-400 font-bold">Configured Admin Fee</div>
-              <div className="text-lg font-black text-amber-600 dark:text-amber-400">10.0% Flat</div>
+              <div className="text-[11px] uppercase tracking-wider text-muted-foreground font-bold">Configured Admin Fee</div>
+              <div className="text-lg font-black text-primary">10.0% Flat</div>
             </div>
           </div>
         </div>
@@ -121,112 +121,108 @@ export function AdminIncomeView({ onRefresh }: AdminIncomeViewProps) {
       {/* Revenue Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Total Admin Income Collected */}
-        <div className="bg-white dark:bg-slate-900/60 backdrop-blur border border-amber-500/30 rounded-2xl p-5 shadow-lg relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/10 rounded-full blur-xl pointer-events-none" />
-          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-amber-600 dark:text-amber-400">Total Admin Income</span>
-            <Landmark className="w-4 h-4 text-amber-500 dark:text-amber-400 group-hover:scale-110 transition-transform" />
+        <div className="bg-card border border-border rounded-xl p-5 shadow-sm relative overflow-hidden group">
+          <div className="flex items-center justify-between text-muted-foreground mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-primary">Total Admin Income</span>
+            <Landmark className="w-4 h-4 text-primary group-hover:scale-110 transition-transform" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-amber-600 dark:text-amber-300 mb-1">
+          <h3 className="text-2xl sm:text-3xl font-black text-primary mb-1">
             {formatUsdt(summary.totalProcessedFee || 0)}
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            Retained 10% fee from <strong className="text-slate-800 dark:text-slate-200">{processedCount}</strong> processed payout{processedCount === 1 ? "" : "s"}
+          <p className="text-xs text-muted-foreground">
+            Retained 10% fee from <strong className="text-foreground">{processedCount}</strong> processed payout{processedCount === 1 ? "" : "s"}
           </p>
         </div>
 
         {/* Pending Fee Receivable */}
-        <div className="bg-white dark:bg-slate-900/60 backdrop-blur border border-rose-500/30 rounded-2xl p-5 shadow-lg relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-rose-500/10 rounded-full blur-xl pointer-events-none" />
-          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400">Pending Fee Income</span>
-            <Clock className="w-4 h-4 text-rose-500 dark:text-rose-400 group-hover:scale-110 transition-transform" />
+        <div className="bg-card border border-border rounded-xl p-5 shadow-sm relative overflow-hidden group">
+          <div className="flex items-center justify-between text-muted-foreground mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-rose-500">Pending Fee Income</span>
+            <Clock className="w-4 h-4 text-rose-500 group-hover:scale-110 transition-transform" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-rose-600 dark:text-rose-300 mb-1">
+          <h3 className="text-2xl sm:text-3xl font-black text-rose-500 mb-1">
             {formatUsdt(summary.pendingFee || 0)}
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
-            Awaiting approval from <strong className="text-slate-800 dark:text-slate-200">{pendingCount}</strong> pending request{pendingCount === 1 ? "" : "s"}
+          <p className="text-xs text-muted-foreground">
+            Awaiting approval from <strong className="text-foreground">{pendingCount}</strong> pending request{pendingCount === 1 ? "" : "s"}
           </p>
         </div>
 
         {/* Total Net Payouts Dispatched */}
-        <div className="bg-white dark:bg-slate-900/60 backdrop-blur border border-emerald-500/30 rounded-2xl p-5 shadow-lg relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/10 rounded-full blur-xl pointer-events-none" />
-          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 dark:text-emerald-400">Net Member Dispatches</span>
-            <Wallet className="w-4 h-4 text-emerald-500 dark:text-emerald-400 group-hover:scale-110 transition-transform" />
+        <div className="bg-card border border-border rounded-xl p-5 shadow-sm relative overflow-hidden group">
+          <div className="flex items-center justify-between text-muted-foreground mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-emerald-500">Net Member Dispatches</span>
+            <Wallet className="w-4 h-4 text-emerald-500 group-hover:scale-110 transition-transform" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-300 mb-1">
+          <h3 className="text-2xl sm:text-3xl font-black text-emerald-500 mb-1">
             {formatUsdt(summary.totalProcessedNet || 0)}
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-muted-foreground">
             Actual 90% funds transferred to member wallets ($450 base)
           </p>
         </div>
 
         {/* Total Gross Withdrawals Requested */}
-        <div className="bg-white dark:bg-slate-900/60 backdrop-blur border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-lg relative overflow-hidden group">
-          <div className="absolute top-0 right-0 w-24 h-24 bg-slate-500/10 rounded-full blur-xl pointer-events-none" />
-          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-            <span className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">Gross Withdrawals</span>
-            <TrendingUp className="w-4 h-4 text-slate-600 dark:text-slate-300 group-hover:scale-110 transition-transform" />
+        <div className="bg-card border border-border rounded-xl p-5 shadow-sm relative overflow-hidden group">
+          <div className="flex items-center justify-between text-muted-foreground mb-2">
+            <span className="text-xs font-bold uppercase tracking-wider text-foreground">Gross Withdrawals</span>
+            <TrendingUp className="w-4 h-4 text-muted-foreground group-hover:scale-110 transition-transform" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-slate-100 mb-1">
+          <h3 className="text-2xl sm:text-3xl font-black text-foreground mb-1">
             {formatUsdt(summary.totalProcessedGross || 0)}
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400">
+          <p className="text-xs text-muted-foreground">
             Total income deducted from user accounts ($500 base)
           </p>
         </div>
       </div>
 
       {/* Visual Revenue Distribution Bar */}
-      <div className="bg-white dark:bg-slate-900/50 backdrop-blur border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-md">
+      <div className="bg-card border border-border rounded-xl p-5 shadow-sm">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
-          <span className="text-xs font-bold uppercase tracking-wider text-slate-700 dark:text-slate-300">
+          <span className="text-xs font-bold uppercase tracking-wider text-foreground">
             Platform Payout vs Admin Revenue Split
           </span>
-          <span className="text-xs text-slate-500 dark:text-slate-400">
+          <span className="text-xs text-muted-foreground">
             90% Member Net Payout &bull; 10% Retained Admin Revenue
           </span>
         </div>
-        <div className="w-full h-4 rounded-full bg-slate-100 dark:bg-slate-800 overflow-hidden flex shadow-inner">
+        <div className="w-full h-4 rounded-full bg-muted overflow-hidden flex shadow-inner">
           <div 
-            className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 transition-all duration-500" 
+            className="h-full bg-emerald-500 transition-all duration-500" 
             style={{ width: "90%" }}
             title="90% Member Net Payout"
           />
           <div 
-            className="h-full bg-gradient-to-r from-amber-400 to-amber-600 transition-all duration-500" 
+            className="h-full bg-primary transition-all duration-500" 
             style={{ width: "10%" }}
             title="10% Admin Revenue"
           />
         </div>
-        <div className="flex justify-between items-center text-[11px] text-slate-500 dark:text-slate-400 mt-2">
+        <div className="flex justify-between items-center text-[11px] text-muted-foreground mt-2">
           <span className="flex items-center gap-1.5 font-semibold text-emerald-600 dark:text-emerald-400">
             <span className="w-2 h-2 rounded-full bg-emerald-500" />
             Member Payout (90%): {formatUsdt(summary.totalProcessedNet || 0)}
           </span>
-          <span className="flex items-center gap-1.5 font-semibold text-amber-600 dark:text-amber-400">
-            <span className="w-2 h-2 rounded-full bg-amber-500" />
+          <span className="flex items-center gap-1.5 font-semibold text-primary">
+            <span className="w-2 h-2 rounded-full bg-primary" />
             Admin Income (10%): {formatUsdt(summary.totalProcessedFee || 0)}
           </span>
         </div>
       </div>
 
       {/* Fee Breakdown Transaction Table */}
-      <div className="bg-white dark:bg-slate-900/50 backdrop-blur border border-slate-200 dark:border-slate-800/60 rounded-3xl p-6 shadow-xl">
+      <div className="bg-card border border-border rounded-2xl p-6 shadow-sm">
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
-          <div className="flex items-center gap-2 bg-slate-100 dark:bg-[#050b18] p-1 rounded-xl border border-slate-200 dark:border-[#152238]">
+          <div className="flex items-center gap-1.5 bg-muted p-1 rounded-xl border border-border">
             {(["ALL", "PROCESSED", "PENDING"] as const).map((f) => (
               <button
                 key={f}
                 onClick={() => { setFilter(f); setPage(1); }}
                 className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
                   filter === f
-                    ? "bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/40 shadow-sm"
-                    : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {f === "ALL" ? "All Requests" : f === "PROCESSED" ? "Processed (Completed)" : "Pending Payouts"}
@@ -235,13 +231,13 @@ export function AdminIncomeView({ onRefresh }: AdminIncomeViewProps) {
           </div>
 
           <div className="relative w-full sm:w-72">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <input
               type="text"
               placeholder="Search user, ID or address..."
               value={search}
               onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-              className="w-full bg-slate-50 dark:bg-[#050b18] border border-slate-200 dark:border-[#152238] rounded-xl pl-9 pr-4 py-2 text-xs text-slate-900 dark:text-slate-200 focus:outline-none focus:border-amber-500 placeholder-slate-400 dark:placeholder-slate-500"
+              className="w-full bg-background border border-border rounded-xl pl-9 pr-4 py-2 text-xs text-foreground focus:outline-none focus:border-primary placeholder:text-muted-foreground transition-colors"
             />
           </div>
         </div>
@@ -249,28 +245,28 @@ export function AdminIncomeView({ onRefresh }: AdminIncomeViewProps) {
         <div className="overflow-x-auto">
           {loading ? (
             <div className="flex flex-col items-center justify-center py-16">
-              <Loader2 className="w-8 h-8 text-amber-500 animate-spin mb-3" />
-              <p className="text-slate-500 dark:text-slate-400 text-sm">Loading fee revenue ledger...</p>
+              <Loader2 className="w-8 h-8 text-primary animate-spin mb-3" />
+              <p className="text-muted-foreground text-sm">Loading fee revenue ledger...</p>
             </div>
           ) : paginatedItems.length === 0 ? (
-            <div className="text-center py-16 text-slate-500 dark:text-slate-400 text-sm">
+            <div className="text-center py-16 text-muted-foreground text-sm">
               No withdrawal fee transactions match your criteria.
             </div>
           ) : (
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="text-slate-500 dark:text-slate-400 text-xs uppercase tracking-wider border-b border-slate-200 dark:border-slate-800 pb-3">
+                <tr className="text-muted-foreground text-xs uppercase tracking-wider border-b border-border pb-3">
                   <th className="pb-3 font-semibold">SR</th>
                   <th className="pb-3 font-semibold">Member</th>
                   <th className="pb-3 font-semibold">Gross Requested</th>
-                  <th className="pb-3 font-semibold text-amber-600 dark:text-amber-400">10% Admin Fee</th>
+                  <th className="pb-3 font-semibold text-primary">10% Admin Fee</th>
                   <th className="pb-3 font-semibold text-emerald-600 dark:text-emerald-400">Net Payout (90%)</th>
                   <th className="pb-3 font-semibold">Receiving Address</th>
                   <th className="pb-3 font-semibold">Status</th>
                   <th className="pb-3 font-semibold">Date</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 dark:divide-slate-800/60 text-xs">
+              <tbody className="divide-y divide-border text-xs">
                 {paginatedItems.map((w, index) => {
                   const gross = w.grossAmount ?? w.amountGross ?? w.amountInUsdt ?? 0;
                   const fee = w.feeAmount ?? (gross * 0.1);
@@ -278,39 +274,39 @@ export function AdminIncomeView({ onRefresh }: AdminIncomeViewProps) {
                   const address = w.payoutAddress || w.toAddress || "";
 
                   return (
-                    <tr key={w.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/20 transition-colors">
-                      <td className="py-4 text-slate-400">
+                    <tr key={w.id} className="hover:bg-muted/40 transition-colors">
+                      <td className="py-4 text-muted-foreground">
                         {(page - 1) * itemsPerPage + index + 1}
                       </td>
                       <td className="py-4">
                         <div className="flex flex-col">
-                          <span className="text-slate-900 dark:text-slate-200 font-semibold">{w.user?.fullName || w.user?.name || "Member"}</span>
-                          <span className="text-[11px] text-slate-500 font-mono">{w.user?.customId || "N/A"}</span>
+                          <span className="text-foreground font-semibold">{w.user?.fullName || w.user?.name || "Member"}</span>
+                          <span className="text-[11px] text-muted-foreground font-mono">{w.user?.customId || "N/A"}</span>
                         </div>
                       </td>
-                      <td className="py-4 text-slate-700 dark:text-slate-300 font-semibold">
+                      <td className="py-4 text-foreground font-semibold">
                         {formatUsdt(gross)}
                       </td>
                       <td className="py-4">
-                        <span className="font-extrabold text-amber-700 dark:text-amber-400 bg-amber-500/10 dark:bg-amber-950/40 border border-amber-500/30 px-2 py-0.5 rounded-lg">
+                        <span className="font-extrabold text-primary bg-primary/10 border border-primary/20 px-2 py-0.5 rounded-lg">
                           +{formatUsdt(fee)}
                         </span>
                       </td>
                       <td className="py-4">
-                        <span className="font-extrabold text-emerald-700 dark:text-emerald-400 bg-emerald-500/10 dark:bg-emerald-950/40 border border-emerald-500/30 px-2 py-0.5 rounded-lg">
+                        <span className="font-extrabold text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2 py-0.5 rounded-lg">
                           {formatUsdt(net)}
                         </span>
                       </td>
                       <td className="py-4">
                         {address ? (
                           <div className="flex items-center gap-1.5">
-                            <span className="font-mono text-slate-600 dark:text-slate-400 text-[11px]">
+                            <span className="font-mono text-muted-foreground text-[11px]">
                               {address.length > 14 ? `${address.slice(0, 8)}...${address.slice(-6)}` : address}
                             </span>
                             <button
                               type="button"
                               onClick={() => copyToClipboard(address, w.id)}
-                              className="text-slate-400 hover:text-slate-600 dark:hover:text-slate-300 transition"
+                              className="text-muted-foreground hover:text-foreground transition"
                               title="Copy address"
                             >
                               {copiedId === w.id ? (
@@ -321,21 +317,21 @@ export function AdminIncomeView({ onRefresh }: AdminIncomeViewProps) {
                             </button>
                           </div>
                         ) : (
-                          <span className="text-slate-400">N/A</span>
+                          <span className="text-muted-foreground">N/A</span>
                         )}
                       </td>
                       <td className="py-4">
                         <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase border ${
                           w.status === "PROCESSED"
-                            ? "bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border-emerald-500/40"
+                            ? "bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 border-emerald-500/30"
                             : w.status === "PENDING"
-                            ? "bg-amber-500/20 text-amber-700 dark:text-amber-300 border-amber-500/40"
-                            : "bg-rose-500/20 text-rose-700 dark:text-rose-300 border-rose-500/40"
+                            ? "bg-amber-500/20 text-amber-600 dark:text-amber-400 border-amber-500/30"
+                            : "bg-destructive/20 text-destructive border-destructive/30"
                         }`}>
                           {w.status}
                         </span>
                       </td>
-                      <td className="py-4 text-slate-500 dark:text-slate-400 whitespace-nowrap">
+                      <td className="py-4 text-muted-foreground whitespace-nowrap">
                         {new Date(w.createdAt).toLocaleDateString()}
                       </td>
                     </tr>
@@ -348,7 +344,7 @@ export function AdminIncomeView({ onRefresh }: AdminIncomeViewProps) {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between mt-6 pt-4 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-500 dark:text-slate-400">
+          <div className="flex items-center justify-between mt-6 pt-4 border-t border-border text-xs text-muted-foreground">
             <span>
               Showing {(page - 1) * itemsPerPage + 1} to {Math.min(page * itemsPerPage, filteredItems.length)} of {filteredItems.length} transactions
             </span>
@@ -357,18 +353,18 @@ export function AdminIncomeView({ onRefresh }: AdminIncomeViewProps) {
                 type="button"
                 onClick={() => setPage((p) => Math.max(1, p - 1))}
                 disabled={page === 1}
-                className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 disabled:opacity-40"
+                className="p-1.5 rounded-lg border border-border bg-secondary text-foreground hover:bg-secondary/80 disabled:opacity-40"
               >
                 <ChevronLeft className="w-4 h-4" />
               </button>
-              <span className="px-2 font-bold text-slate-800 dark:text-slate-200">
+              <span className="px-2 font-bold text-foreground">
                 Page {page} of {totalPages}
               </span>
               <button
                 type="button"
                 onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
                 disabled={page === totalPages}
-                className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 disabled:opacity-40"
+                className="p-1.5 rounded-lg border border-border bg-secondary text-foreground hover:bg-secondary/80 disabled:opacity-40"
               >
                 <ChevronRight className="w-4 h-4" />
               </button>

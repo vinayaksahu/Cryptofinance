@@ -171,38 +171,38 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight flex items-center gap-2.5">
-            <Zap className="w-7 h-7 text-[#00FFA3]" />
+          <h1 className="text-2xl sm:text-3xl font-bold text-foreground tracking-tight flex items-center gap-2.5">
+            <Zap className="w-6 h-6 text-primary" />
             <span>Stake Activation Engine</span>
           </h1>
-          <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400 mt-1 font-mono">
+          <p className="text-xs sm:text-sm text-muted-foreground mt-1">
             Direct Quantitative Stake &bull; 4.00% Daily Yield &bull; 2X Contract Allocation Pool &bull; Up to 10% Bonus Utility
           </p>
         </div>
 
         {/* Live Wallet Balances Pill */}
         <div className="flex items-center gap-2.5">
-          <div className="glass-panel px-3.5 py-1.5 flex items-center gap-2">
-            <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 font-mono">SECONDARY WALLET:</span>
-            <span className="text-sm font-extrabold text-[#00D2FF] font-mono">${p2pBalance.toFixed(2)}</span>
+          <div className="rounded-xl border border-border bg-card px-3.5 py-1.5 flex items-center gap-2 shadow-sm">
+            <span className="text-[10px] uppercase font-bold text-muted-foreground">SECONDARY:</span>
+            <span className="text-sm font-bold text-foreground font-mono">${p2pBalance.toFixed(2)}</span>
           </div>
-          <div className="glass-panel px-3.5 py-1.5 flex items-center gap-2">
-            <span className="text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 font-mono">BONUS:</span>
-            <span className="text-sm font-extrabold text-[#FFB800] font-mono">${bonusBalance.toFixed(2)}</span>
+          <div className="rounded-xl border border-border bg-card px-3.5 py-1.5 flex items-center gap-2 shadow-sm">
+            <span className="text-[10px] uppercase font-bold text-muted-foreground">BONUS:</span>
+            <span className="text-sm font-bold text-primary font-mono">${bonusBalance.toFixed(2)}</span>
           </div>
         </div>
       </div>
 
       {/* Notifications */}
       {success && (
-        <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-emerald-400 text-sm flex items-center gap-3 animate-in fade-in">
+        <div className="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl text-emerald-500 text-sm flex items-center gap-3 animate-in fade-in">
           <Check className="w-5 h-5 shrink-0" />
           <span className="font-semibold">{success}</span>
         </div>
       )}
 
       {error && (
-        <div className="p-4 bg-rose-500/10 border border-rose-500/30 rounded-2xl text-rose-400 text-sm flex items-center gap-3 animate-in fade-in">
+        <div className="p-4 bg-rose-500/10 border border-rose-500/30 rounded-2xl text-rose-500 text-sm flex items-center gap-3 animate-in fade-in">
           <AlertCircle className="w-5 h-5 shrink-0" />
           <span className="font-semibold">{error}</span>
         </div>
@@ -211,10 +211,10 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
       {/* Main Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Column: Stake Input & Activation Form */}
-        <div className="lg:col-span-7 glass-card-elevated glass-glow-top p-6 sm:p-7 space-y-6">
+        <div className="lg:col-span-7 rounded-2xl border border-border bg-card p-6 sm:p-7 space-y-6 shadow-sm">
           {/* Section 1: Beneficiary Selector */}
           <div>
-            <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono block mb-2.5">
+            <label className="text-xs font-bold text-foreground uppercase tracking-wider block mb-2.5">
               Select Beneficiary Account
             </label>
             <div className="grid grid-cols-2 gap-3">
@@ -224,10 +224,10 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
                   setBeneficiaryType("self");
                   setBeneficiaryError(null);
                 }}
-                className={`py-3 px-4 rounded-xl font-bold text-xs font-mono transition-all flex items-center justify-center gap-2 ${
+                className={`py-3 px-4 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-2 ${
                   beneficiaryType === "self"
-                    ? "bg-[#00FFA3] text-slate-950 shadow-lg shadow-[#00FFA3]/20"
-                    : "bg-slate-900/60 border border-white/10 text-slate-500 dark:text-slate-400 hover:text-white"
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "bg-muted/40 border border-border text-muted-foreground hover:text-foreground"
                 }`}
               >
                 <Sparkles className="w-4 h-4" />
@@ -237,10 +237,10 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
               <button
                 type="button"
                 onClick={() => setBeneficiaryType("other")}
-                className={`py-3 px-4 rounded-xl font-bold text-xs font-mono transition-all flex items-center justify-center gap-2 ${
+                className={`py-3 px-4 rounded-xl font-bold text-xs transition-all flex items-center justify-center gap-2 ${
                   beneficiaryType === "other"
-                    ? "bg-[#00D2FF] text-slate-950 shadow-lg shadow-[#00D2FF]/20"
-                    : "bg-slate-900/60 border border-white/10 text-slate-500 dark:text-slate-400 hover:text-white"
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "bg-muted/40 border border-border text-muted-foreground hover:text-foreground"
                 }`}
               >
                 <UserCheck className="w-4 h-4" />
@@ -257,22 +257,22 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
                     value={targetCustomId}
                     onChange={(e) => setTargetCustomId(e.target.value)}
                     placeholder="Enter Member ID (e.g. CF478752)"
-                    className="w-full bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 focus:border-[#00D2FF] rounded-xl px-4 py-2.5 text-slate-900 dark:text-slate-100 text-sm uppercase placeholder-slate-500 focus:outline-none"
+                    className="w-full bg-background border border-input rounded-xl px-4 py-2.5 text-foreground text-sm uppercase placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                   />
                   {verifyingId && (
-                    <span className="absolute right-3.5 top-3 text-[11px] text-slate-500 dark:text-slate-400 font-mono animate-pulse">
+                    <span className="absolute right-3.5 top-3 text-[11px] text-muted-foreground animate-pulse">
                       Verifying...
                     </span>
                   )}
                 </div>
                 {beneficiaryName && (
-                  <p className="text-xs text-emerald-400 font-mono flex items-center gap-1.5">
+                  <p className="text-xs text-emerald-500 font-mono flex items-center gap-1.5">
                     <Check className="w-3.5 h-3.5" />
                     <span>Member: <strong>{beneficiaryName}</strong></span>
                   </p>
                 )}
                 {beneficiaryError && (
-                  <p className="text-xs text-rose-400 font-mono flex items-center gap-1.5">
+                  <p className="text-xs text-rose-500 font-mono flex items-center gap-1.5">
                     <UserX className="w-3.5 h-3.5" />
                     <span>{beneficiaryError}</span>
                   </p>
@@ -282,17 +282,17 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
           </div>
 
           {/* Section 2: Manual Input & Slider */}
-          <div className="space-y-4 pt-4 border-t border-white/10">
+          <div className="space-y-4 pt-4 border-t border-border">
             <div className="flex items-center justify-between">
-              <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono">
+              <label className="text-xs font-bold text-foreground uppercase tracking-wider">
                 Investment Stake Amount ($ USDT)
               </label>
-              <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">Min $2.00 USDT</span>
+              <span className="text-xs text-muted-foreground font-mono">Min $2.00 USDT</span>
             </div>
 
             {/* Big Numeric Input */}
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-[#00FFA3] font-bold text-xl font-mono">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-primary font-bold text-xl font-mono">
                 $
               </div>
               <input
@@ -303,9 +303,9 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
                 value={amount}
                 onChange={(e) => setAmount(Number(e.target.value))}
                 placeholder="Enter amount (min $2)"
-                className="w-full bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 focus:border-[#00FFA3] rounded-2xl pl-10 pr-20 py-3.5 text-2xl font-black text-slate-900 dark:text-slate-100 placeholder-slate-600 focus:outline-none"
+                className="w-full bg-background border border-input focus:border-primary rounded-2xl pl-10 pr-20 py-3.5 text-2xl font-black text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
               />
-              <span className="absolute right-4 inset-y-0 flex items-center text-xs font-extrabold text-slate-500 dark:text-slate-400 font-mono">
+              <span className="absolute right-4 inset-y-0 flex items-center text-xs font-bold text-muted-foreground font-mono">
                 USDT
               </span>
             </div>
@@ -319,9 +319,9 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
                 step="2"
                 value={amount}
                 onChange={(e) => setAmount(Number(e.target.value))}
-                className="w-full h-2.5 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-[#00FFA3]"
+                className="w-full h-2.5 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
               />
-              <div className="flex justify-between text-[11px] text-slate-500 font-mono">
+              <div className="flex justify-between text-[11px] text-muted-foreground font-mono">
                 <span>$2 (Min)</span>
                 <span>$1,000</span>
                 <span>$2,500</span>
@@ -331,7 +331,7 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
 
             {/* Quick Presets Underneath */}
             <div>
-              <p className="text-[11px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono mb-2">
+              <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-mono mb-2">
                 Quick Presets
               </p>
               <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
@@ -342,8 +342,8 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
                     onClick={() => setAmount(preset)}
                     className={`py-2 px-2 rounded-xl text-xs font-mono font-bold transition-all border ${
                       amount === preset
-                        ? "bg-[#00FFA3] text-slate-950 border-[#00FFA3] shadow-md shadow-[#00FFA3]/20 font-black"
-                        : "bg-slate-900/60 border-white/10 text-slate-700 dark:text-slate-300 hover:text-white hover:border-white/20"
+                        ? "bg-primary text-primary-foreground border-primary shadow-sm font-black"
+                        : "bg-muted/40 border-border text-foreground hover:bg-muted"
                     }`}
                   >
                     ${preset}
@@ -354,15 +354,15 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
           </div>
 
           {/* Section 3: 10% Bonus Wallet Utility Toggle */}
-          <div className="p-4 rounded-2xl bg-[#FFB800]/10 border border-[#FFB800]/30 space-y-3">
+          <div className="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/20 space-y-3">
             <div className="flex items-start justify-between gap-3">
               <div className="flex items-center gap-2.5">
-                <Gift className="w-5 h-5 text-[#FFB800] shrink-0" />
+                <Gift className="w-5 h-5 text-amber-500 shrink-0" />
                 <div>
-                  <h4 className="text-xs font-black uppercase text-[#FFB800] tracking-wider font-mono">
+                  <h4 className="text-xs font-black uppercase text-amber-500 tracking-wider font-mono">
                     10% Bonus Wallet Utility
                   </h4>
-                  <p className="text-[11px] text-slate-700 dark:text-slate-300 mt-0.5">
+                  <p className="text-[11px] text-foreground/90 mt-0.5">
                     Subsidize up to 10% of this stake using your Non-Withdrawable Bonus balance!
                   </p>
                 </div>
@@ -374,35 +374,35 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
                   type="checkbox"
                   checked={useBonus}
                   onChange={(e) => setUseBonus(e.target.checked)}
-                  className="w-4 h-4 rounded text-[#FFB800] accent-[#FFB800] focus:ring-0 cursor-pointer"
+                  className="w-4 h-4 rounded text-primary accent-primary focus:ring-0 cursor-pointer"
                 />
-                <span className="text-xs font-bold text-slate-900 dark:text-slate-100">Apply 10%</span>
+                <span className="text-xs font-bold text-foreground">Apply 10%</span>
               </label>
             </div>
 
             {/* Deduction breakdown */}
-            <div className="grid grid-cols-3 gap-2 pt-2 border-t border-[#FFB800]/20 text-xs font-mono">
+            <div className="grid grid-cols-3 gap-2 pt-2 border-t border-amber-500/20 text-xs font-mono">
               <div>
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 block">Total Investment</span>
-                <span className="font-extrabold text-white">${validAmount.toFixed(2)}</span>
+                <span className="text-[10px] text-muted-foreground block">Total Investment</span>
+                <span className="font-extrabold text-foreground">${validAmount.toFixed(2)}</span>
               </div>
               <div>
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 block">From Bonus Wallet</span>
-                <span className="font-extrabold text-[#FFB800]">
+                <span className="text-[10px] text-muted-foreground block">From Bonus Wallet</span>
+                <span className="font-extrabold text-amber-500">
                   {bonusUsed > 0 ? `-$${bonusUsed.toFixed(2)}` : "$0.00"}
                 </span>
               </div>
               <div>
-                <span className="text-[10px] text-slate-500 dark:text-slate-400 block">From Secondary Wallet</span>
-                <span className="font-extrabold text-[#00D2FF]">${p2pToPay.toFixed(2)}</span>
+                <span className="text-[10px] text-muted-foreground block">From Secondary Wallet</span>
+                <span className="font-extrabold text-primary">${p2pToPay.toFixed(2)}</span>
               </div>
             </div>
           </div>
 
           {/* Section 4: 6-Digit PIN & Action Form */}
-          <form onSubmit={handleActivate} className="space-y-4 pt-3 border-t border-white/10">
+          <form onSubmit={handleActivate} className="space-y-4 pt-3 border-t border-border">
             <div>
-              <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider font-mono block mb-1.5">
+              <label className="text-xs font-bold text-foreground uppercase tracking-wider block mb-1.5">
                 6-Digit Security Transaction PIN
               </label>
               <input
@@ -412,7 +412,7 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
                 value={transactionPin}
                 onChange={(e) => setTransactionPin(e.target.value.replace(/\D/g, ""))}
                 placeholder="Enter 6-digit PIN"
-                className="w-full bg-white/80 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 focus:border-[#00FFA3] rounded-xl px-4 py-3 text-center tracking-[0.3em] text-lg font-mono text-white font-extrabold placeholder-slate-600 focus:outline-none"
+                className="w-full bg-background border border-input focus:border-primary rounded-xl px-4 py-3 text-center tracking-[0.3em] text-lg font-mono text-foreground font-extrabold placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                 required
               />
             </div>
@@ -420,7 +420,7 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
             <button
               type="submit"
               disabled={loading || transactionPin.length !== 6 || p2pBalance < p2pToPay}
-              className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#00FFA3] to-[#00D2FF] hover:opacity-95 text-slate-950 font-black text-sm uppercase tracking-wider transition-all shadow-xl shadow-slate-200/50 dark:shadow-black/20 shadow-[#00FFA3]/20 disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99]"
+              className="w-full py-4 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-sm uppercase tracking-wider transition-all shadow-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99]"
             >
               {loading ? (
                 <>
@@ -441,59 +441,59 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
 
         {/* Right Column: 2X Contract Allocation Pool Showcase */}
         <div className="lg:col-span-5 space-y-5">
-          <div className="glass-card-elevated glass-glow-top p-6 space-y-5">
+          <div className="rounded-2xl border border-border bg-card p-6 space-y-5 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 font-mono">
+              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground font-mono">
                 2X ALLOCATION POOL PREVIEW
               </span>
-              <span className="glass-pill text-[10px] font-bold text-[#00FFA3] border-[#00FFA3]/30 bg-[#00FFA3]/10 font-mono">
+              <span className="text-[10px] font-bold text-primary border border-primary/20 bg-primary/10 px-2 py-0.5 rounded-full font-mono">
                 Slide 10-12
               </span>
             </div>
 
-            <div className="p-4 rounded-2xl bg-slate-950/60 border border-white/10 space-y-3">
+            <div className="p-4 rounded-2xl bg-muted/40 border border-border space-y-3">
               <div className="flex justify-between items-baseline">
-                <span className="text-xs text-slate-500 dark:text-slate-400">Total 2X Target Pool:</span>
-                <span className="text-2xl font-black text-slate-900 dark:text-slate-100">
+                <span className="text-xs text-muted-foreground">Total 2X Target Pool:</span>
+                <span className="text-2xl font-bold text-foreground">
                   ${allocationPool} USDT
                 </span>
               </div>
               <div className="flex justify-between items-baseline text-xs">
-                <span className="text-slate-500 dark:text-slate-400">Daily Return (4%):</span>
-                <span className="font-extrabold text-[#00FFA3] font-mono">
+                <span className="text-muted-foreground">Daily Return (4%):</span>
+                <span className="font-bold text-emerald-500 font-mono">
                   +${dailyRoi} USDT / day
                 </span>
               </div>
               <div className="flex justify-between items-baseline text-xs">
-                <span className="text-slate-500 dark:text-slate-400">Tenure Horizon:</span>
-                <span className="font-semibold text-slate-200 font-mono">
+                <span className="text-muted-foreground">Tenure Horizon:</span>
+                <span className="font-semibold text-foreground font-mono">
                   50 Days (or ~35 Days with Compounding)
                 </span>
               </div>
             </div>
 
             {/* Protocol Rules Checklist */}
-            <div className="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
+            <div className="space-y-2.5 text-xs text-foreground">
               <div className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-[#00FFA3] shrink-0 mt-0.5" />
+                <Check className="w-4 h-4 text-emerald-500 shrink-0 mt-0.5" />
                 <span>
                   <strong>4.00% Daily Returns:</strong> Released everyday until 200% pool cap is reached.
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-[#00D2FF] shrink-0 mt-0.5" />
+                <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>
                   <strong>10% Direct Commission:</strong> Instantly credited to the beneficiary sponsor's Working Wallet.
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-[#FFB800] shrink-0 mt-0.5" />
+                <Check className="w-4 h-4 text-amber-500 shrink-0 mt-0.5" />
                 <span>
                   <strong>Bonus Wallet Integration:</strong> Use up to 10% from Bonus Wallet for any activation or reinvestment.
                 </span>
               </div>
               <div className="flex items-start gap-2">
-                <Check className="w-4 h-4 text-purple-400 shrink-0 mt-0.5" />
+                <Check className="w-4 h-4 text-primary shrink-0 mt-0.5" />
                 <span>
                   <strong>Secondary Wallet Funded:</strong> Balance deducted instantly from your Secondary Wallet (deposit request, transfer, or P2P).
                 </span>
@@ -502,21 +502,21 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
           </div>
 
           {/* Quick Help Card */}
-          <div className="p-5 rounded-2xl bg-slate-900/50 border border-white/10 space-y-3">
+          <div className="p-5 rounded-2xl border border-border bg-card space-y-3 shadow-sm">
             <div className="flex items-center justify-between">
-              <h4 className="text-xs font-bold text-white uppercase font-mono flex items-center gap-1.5">
-                <Wallet className="w-4 h-4 text-[#00D2FF]" />
+              <h4 className="text-xs font-bold text-foreground uppercase flex items-center gap-1.5">
+                <Wallet className="w-4 h-4 text-primary" />
                 Need Secondary Wallet Funds?
               </h4>
             </div>
-            <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
+            <p className="text-xs text-muted-foreground leading-relaxed">
               If your Secondary Wallet balance is low, submit a Deposit Request using BEP-20 USDT, transfer from ROI/Working Wallet, or receive funds from another member via P2P.
             </p>
             {onNavigateTab && (
               <button
                 type="button"
                 onClick={() => onNavigateTab("recharge")}
-                className="w-full py-2.5 px-4 rounded-xl bg-sky-500/20 hover:bg-sky-500 text-sky-300 hover:text-slate-950 border border-sky-500/30 font-bold text-xs font-mono transition-all flex items-center justify-center gap-2"
+                className="w-full py-2.5 px-4 rounded-xl bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary border border-primary/20 font-bold text-xs transition-all flex items-center justify-center gap-2"
               >
                 <Wallet className="w-4 h-4" />
                 <span>Deposit USDT (Recharge Secondary Wallet)</span>

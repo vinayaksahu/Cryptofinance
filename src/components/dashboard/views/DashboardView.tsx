@@ -24,6 +24,7 @@ import {
   Sliders,
   DollarSign,
   PieChart,
+  CheckCircle2,
 } from "lucide-react";
 import { APP_CONFIG } from "@/lib/constants";
 import { DayByDayLedger } from "@/components/dashboard/DayByDayLedger";
@@ -83,6 +84,7 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
 
   // 2X Contract Allocation Pool
   const allocationPoolTotal = activeStake * 2.0;
+  const totalCapLimit = allocationPoolTotal;
   const day1Payout = +(allocationPoolTotal * 0.02).toFixed(2); // 2.00% daily from 2X pool = 4% on capital
 
   // 3-Wallet Balances strictly from Slide 04:
@@ -93,6 +95,9 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
   const workingWalletBalance = Number(wallets.workingBalance ?? user?.workingBalance ?? user?.incomeBalance ?? 0);
   const p2pWalletBalance = Number(wallets.p2pBalance ?? user?.p2pBalance ?? user?.fundBalance ?? 0);
   const mainWalletBalance = Number(wallets.mainBalance ?? user?.mainBalance ?? 0);
+
+  const totalRoiEarnings = Number(b.basicTotalRoi ?? b.totalRoi ?? roiWalletBalance);
+  const totalReferralIncome = Number(b.directReferral ?? b.referralBonus ?? 0) + Number(b.basicLevelIncome ?? b.levelIncome ?? 0);
 
   // Total Withdrawn
   const processedWithdrawnFromList = (user?.withdrawals || [])
@@ -147,373 +152,262 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
   return (
     <div className="space-y-6 pb-20 animate-in fade-in duration-300">
       {/* =========================================================================
-          TOP SECTION: User Glass ID Card & Live Telemetry
+          SUPERWARRIOR30 STYLE WELCOME HEADER
           ========================================================================= */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
-        {/* Left Column: Glass User Identity & Referral Station */}
-        <div className="lg:col-span-6 glass-card-elevated glass-glow-top p-6 flex flex-col justify-between relative overflow-hidden">
-          {/* Subtle Ambient Orb */}
-          <div className="absolute -top-16 -left-16 w-44 h-44 bg-[#00D2FF]/15 rounded-full blur-3xl pointer-events-none" />
+      <div>
+        <div className="flex items-center gap-2.5">
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
+            Welcome back, {user?.fullName || "Member"}!
+          </h1>
+          <span className="rounded-full bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-0.5 text-[11px] font-bold text-emerald-500 font-mono">
+            {user?.status === "ACTIVE" || activeStake > 0 ? "Active Protocol ID" : "Pending Stake"}
+          </span>
+        </div>
+        <p className="text-xs sm:text-sm text-muted-foreground mt-1">
+          Continue your quantitative yield journey, review daily ROI returns, and track affiliate earnings.
+        </p>
+      </div>
 
-          <div>
-            {/* Header with Avatar & Live Status Pill */}
-            <div className="flex items-center justify-between gap-4 mb-5">
-              <div className="flex items-center gap-3.5">
-                <div className="relative">
-                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#00FFA3] via-[#00D2FF] to-indigo-600 p-0.5 shadow-lg shadow-[#00FFA3]/20">
-                    <div className="w-full h-full rounded-[14px] bg-slate-950 flex items-center justify-center text-white font-extrabold text-xl font-mono">
-                      {(user?.fullName || "M")[0]}
-                    </div>
-                  </div>
-                  <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-[#00FFA3] border-2 border-slate-950 flex items-center justify-center">
-                    <span className="w-1.5 h-1.5 rounded-full bg-white animate-ping" />
-                  </span>
-                </div>
-
-                <div>
-                  <h2 className="text-lg sm:text-xl font-bold text-slate-900 dark:text-white tracking-tight">
-                    {user?.fullName || "Crypto Finance Member"}
-                  </h2>
-                  <div className="flex items-center gap-2 mt-0.5">
-                    <span className="font-mono text-xs font-semibold text-[#00D2FF] bg-[#00D2FF]/10 px-2 py-0.5 rounded-md border border-[#00D2FF]/20">
-                      {customId}
-                    </span>
-                    <span className="text-[11px] text-slate-600 dark:text-slate-400 font-medium">
-                      Member since {joinDateStr}
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-              {/* Status Pill */}
-              <div className="glass-pill border-[#00FFA3]/30 bg-[#00FFA3]/10 text-emerald-600 dark:text-[#00FFA3] text-xs font-bold font-mono">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 dark:bg-[#00FFA3] animate-pulse" />
-                <span>{user?.status === "ACTIVE" || activeStake > 0 ? "Active Protocol ID" : "Pending Stake"}</span>
-              </div>
-            </div>
-
-            {/* Quick Metrics Bar in Frosted Glass */}
-            <div className="grid grid-cols-2 gap-3 mb-5">
-              <div className="glass-panel p-3 text-center">
-                <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1 font-mono">
-                  DIRECT VOLUME
-                </p>
-                <p className="text-base sm:text-lg font-extrabold text-slate-900 dark:text-white font-mono">
-                  {currency} {directBusiness.toFixed(2)}
-                </p>
-              </div>
-
-              <div className="glass-panel p-3 text-center">
-                <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-widest mb-1 font-mono">
-                  DOWNLINE COMMUNITY
-                </p>
-                <p className="text-base sm:text-lg font-extrabold text-sky-600 dark:text-[#00D2FF] font-mono">
-                  {activeTeamCount} / {totalTeamCount} Members
-                </p>
-              </div>
-            </div>
+      {/* =========================================================================
+          4-CARD QUICK STATS GRID (Matching SuperWarrior30 Images 3 & 4)
+          ========================================================================= */}
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {/* Card 1: Active Stake */}
+        <div className="rounded-2xl border border-border bg-card p-5 shadow-sm space-y-2">
+          <div className="flex items-center justify-between text-muted-foreground">
+            <span className="text-xs font-semibold uppercase tracking-wider">ACTIVE STAKE</span>
+            <ShieldCheck className="h-4 w-4 text-primary" />
           </div>
-
-          {/* Referral Link Sharing Station */}
-          <div className="space-y-3 pt-3 border-t border-slate-200/80 dark:border-white/10">
-            <div className="flex items-center justify-between text-xs">
-              <span className="font-semibold text-slate-700 dark:text-slate-300">Invite & Earn 10% Direct + 10-Level Royalty</span>
-              <span className="text-sky-600 dark:text-[#00D2FF] text-[11px] font-medium font-mono">Slide 15-17</span>
-            </div>
-
-            <div className="flex items-center gap-2 p-1.5 rounded-2xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-white/15 backdrop-blur-xl">
-              <span className="text-sky-500 dark:text-[#00D2FF] text-xs pl-2.5 font-mono">🔗</span>
-              <input
-                type="text"
-                readOnly
-                value={referralUrl}
-                className="bg-transparent text-slate-800 dark:text-slate-200 text-xs flex-1 font-mono outline-none px-1 select-all"
-              />
-              <button
-                onClick={copyReferral}
-                className="px-3.5 py-1.5 rounded-xl bg-[#00D2FF] hover:bg-[#00D2FF]/80 text-slate-950 text-xs font-bold flex items-center gap-1.5 transition-all shadow-md shadow-[#00D2FF]/25 active:scale-95 shrink-0"
-              >
-                {copied ? <Check className="w-3.5 h-3.5 text-slate-950" /> : <Copy className="w-3.5 h-3.5" />}
-                <span>{copied ? "Copied" : "Copy"}</span>
-              </button>
-            </div>
-
-            {/* Social Share Pills */}
-            <div className="flex items-center justify-between pt-1">
-              <div className="flex items-center gap-2">
-                <a
-                  href={`https://wa.me/?text=${encodeURIComponent(`Join Crypto Finance quantitative protocol: ${referralUrl}`)}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="glass-pill px-3 py-1 text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:border-emerald-500/40 transition-colors"
-                >
-                  <MessageCircle className="w-3.5 h-3.5 text-emerald-500 dark:text-[#00FFA3]" />
-                  <span>WhatsApp</span>
-                </a>
-                <a
-                  href={`https://t.me/share/url?url=${encodeURIComponent(referralUrl)}&text=${encodeURIComponent("Crypto Finance 4% Daily Yield Protocol")}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="glass-pill px-3 py-1 text-[11px] font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:border-sky-500/40 transition-colors"
-                >
-                  <Send className="w-3.5 h-3.5 text-sky-500 dark:text-[#00D2FF]" />
-                  <span>Telegram</span>
-                </a>
-              </div>
-
-              <button
-                onClick={() => setActiveTab("downline-direct")}
-                className="text-xs font-semibold text-sky-600 dark:text-[#00D2FF] hover:text-sky-500 flex items-center gap-1 transition-colors font-mono"
-              >
-                <span>Directs ({directTeamCount})</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </button>
-            </div>
-          </div>
+          <p className="text-2xl sm:text-3xl font-extrabold text-foreground font-mono">
+            {currency} {activeStake.toFixed(2)}
+          </p>
+          <p className="text-[11px] text-muted-foreground">
+            2X Pool Cap: {currency} {totalCapLimit.toFixed(2)}
+          </p>
         </div>
 
-        {/* Right Column: Protocol Telemetry & 2X Contract Allocation Pool Showcase */}
-        <div className="lg:col-span-6 glass-card-elevated glass-glow-top p-6 sm:p-7 flex flex-col justify-between relative overflow-hidden">
-          <div>
-            <div className="flex items-center justify-between gap-3 mb-3">
-              <span className="text-xs font-bold tracking-widest text-slate-500 dark:text-slate-400 uppercase font-mono flex items-center gap-1.5">
-                <Activity className="w-4 h-4 text-emerald-500 dark:text-[#00FFA3]" />
-                2X CONTRACT ALLOCATION POOL &bull; SLIDE 10
-              </span>
-              <span className="glass-pill text-[10px] font-bold text-emerald-600 dark:text-[#00FFA3] border-emerald-400/30 bg-emerald-500/10 font-mono">
-                2.00% Daily Release
-              </span>
+        {/* Card 2: Available Balance */}
+        <div className="rounded-2xl border border-border bg-card p-5 shadow-sm space-y-2">
+          <div className="flex items-center justify-between text-muted-foreground">
+            <span className="text-xs font-semibold uppercase tracking-wider">AVAILABLE BALANCE</span>
+            <Wallet className="h-4 w-4 text-emerald-500" />
+          </div>
+          <p className="text-2xl sm:text-3xl font-extrabold text-foreground font-mono">
+            {currency} {p2pWalletBalance.toFixed(2)}
+          </p>
+          <p className="text-[11px] text-muted-foreground">
+            Secondary Deposit & Activation Wallet
+          </p>
+        </div>
+
+        {/* Card 3: Total Earned */}
+        <div className="rounded-2xl border border-border bg-card p-5 shadow-sm space-y-2">
+          <div className="flex items-center justify-between text-muted-foreground">
+            <span className="text-xs font-semibold uppercase tracking-wider">TOTAL EARNED</span>
+            <Activity className="h-4 w-4 text-sky-500" />
+          </div>
+          <p className="text-2xl sm:text-3xl font-extrabold text-foreground font-mono">
+            {currency} {(totalRoiEarnings + totalReferralIncome).toFixed(2)}
+          </p>
+          <p className="text-[11px] text-muted-foreground">
+            ROI: {currency} {totalRoiEarnings.toFixed(2)} &bull; Royalties: {currency} {totalReferralIncome.toFixed(2)}
+          </p>
+        </div>
+
+        {/* Card 4: Total Community */}
+        <div className="rounded-2xl border border-border bg-card p-5 shadow-sm space-y-2">
+          <div className="flex items-center justify-between text-muted-foreground">
+            <span className="text-xs font-semibold uppercase tracking-wider">TOTAL COMMUNITY</span>
+            <Users className="h-4 w-4 text-primary" />
+          </div>
+          <p className="text-2xl sm:text-3xl font-extrabold text-foreground font-mono">
+            {totalTeamCount}
+          </p>
+          <p className="text-[11px] text-muted-foreground">
+            {activeTeamCount} Active Staked Members
+          </p>
+        </div>
+      </div>
+
+      {/* =========================================================================
+          REFERRAL WELCOME BONUS COUPON SECTION (Matching SuperWarrior30 Images 1 & 2)
+          ========================================================================= */}
+      <div className="rounded-2xl border border-primary/40 bg-gradient-to-br from-primary/10 via-card to-card p-6 shadow-sm space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-border/80 pb-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/20 text-primary border border-primary/30 shadow-inner">
+              <Gift className="h-6 w-6" />
             </div>
-
-            {/* Big Bold Pool Balance Display */}
-            <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 my-2">
-              <div>
-                <div className="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white flex items-baseline gap-1 font-mono">
-                  <span>${allocationPoolTotal > 0 ? allocationPoolTotal.toFixed(2) : "0.00"}</span>
-                  <span className="text-xs text-slate-500 dark:text-slate-400 font-sans ml-1 font-normal">2X Pool Target</span>
-                </div>
-                <div className="flex items-center gap-2 mt-1 text-xs text-slate-600 dark:text-slate-400 font-mono">
-                  <span>Principal Stake: <strong className="text-slate-900 dark:text-white">${activeStake.toFixed(2)}</strong></span>
-                  <span>•</span>
-                  <span className="text-emerald-600 dark:text-[#00FFA3] font-bold">Day 1 Release: ${day1Payout.toFixed(2)} (4% ROI)</span>
-                </div>
-              </div>
-
-              <div className="text-right">
-                <span className="text-[11px] text-slate-500 dark:text-slate-400 font-mono block">Total Extracted:</span>
-                <span className="text-lg font-black text-sky-600 dark:text-[#00D2FF] font-mono">
-                  ${totalWithdrawn.toFixed(2)}
+            <div>
+              <div className="flex items-center gap-2">
+                <h3 className="text-base sm:text-lg font-bold text-foreground">
+                  Referral Welcome Bonus & Invite Station
+                </h3>
+                <span className="rounded-full bg-amber-500/10 border border-amber-500/30 px-2.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-amber-500">
+                  10% Direct
                 </span>
               </div>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                Share your referral link with new members to earn 10% direct sponsor bonus + 10-level daily passive royalties.
+              </p>
             </div>
           </div>
+          <span className="inline-flex items-center gap-1.5 self-start sm:self-auto rounded-full bg-emerald-500/10 border border-emerald-500/20 px-3 py-1 text-[11px] font-bold text-emerald-500">
+            <CheckCircle2 className="h-3.5 w-3.5" />
+            UID: {customId}
+          </span>
+        </div>
 
-          {/* Smooth Vector Wave Simulation Lines */}
-          <div className="relative my-4 py-2 flex items-center justify-center">
-            <div className="w-full h-24 rounded-2xl bg-white/70 dark:bg-slate-950/60 border border-slate-200 dark:border-white/10 relative overflow-hidden flex items-center justify-center">
-              <div className="absolute inset-0 flex flex-col justify-between py-2 px-4 opacity-20 pointer-events-none">
-                <div className="w-full border-b border-dashed border-slate-400 dark:border-white/40" />
-                <div className="w-full border-b border-dashed border-slate-400 dark:border-white/40" />
-                <div className="w-full border-b border-dashed border-slate-400 dark:border-white/40" />
-              </div>
-
-              <svg viewBox="0 0 400 90" className="w-full h-full absolute inset-0" fill="none">
-                <defs>
-                  <filter id="glow-mint" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#00FFA3" floodOpacity="0.5" />
-                  </filter>
-                  <filter id="glow-sky" x="-20%" y="-20%" width="140%" height="140%">
-                    <feDropShadow dx="0" dy="2" stdDeviation="3" floodColor="#00D2FF" floodOpacity="0.5" />
-                  </filter>
-                </defs>
-                <path
-                  d="M 10 70 Q 100 80, 180 50 T 300 35 T 390 15"
-                  stroke="#0284C7"
-                  strokeWidth="3.5"
-                  strokeLinecap="round"
-                  filter="url(#glow-sky)"
-                />
-                <path
-                  d="M 10 60 Q 110 85, 200 45 T 310 25 T 390 10"
-                  stroke="#10B981"
-                  strokeWidth="4"
-                  strokeLinecap="round"
-                  filter="url(#glow-mint)"
-                />
-              </svg>
-            </div>
-          </div>
-
-          {/* 35-Day Compounding Engine & 2X Cap Lock Alert */}
-          <div className="pt-3 border-t border-slate-200/80 dark:border-white/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 text-xs">
-            <div className="flex items-center gap-1.5 text-slate-700 dark:text-slate-300 font-mono">
-              <RefreshCw className="w-3.5 h-3.5 text-emerald-500 dark:text-[#00FFA3]" />
-              <span>35-Day Doubling Engine: <strong className="text-slate-900 dark:text-white">(1.02)^35 ≈ 2.000</strong></span>
+        <div>
+          <p className="text-xs font-semibold text-muted-foreground mb-2">
+            Your Referral Coupon Code / Invitation Link:
+          </p>
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+            <div className="border border-dashed border-primary/50 bg-primary/10 rounded-xl px-4 py-2.5 font-mono text-xs sm:text-sm font-bold text-primary flex items-center justify-between gap-3 flex-1 overflow-hidden">
+              <span className="truncate">{referralUrl}</span>
             </div>
             <button
-              onClick={() => setActiveTab("package-base")}
-              className="text-xs font-bold text-emerald-600 dark:text-[#00FFA3] hover:text-emerald-700 dark:hover:text-white flex items-center gap-1 font-mono transition"
+              onClick={copyReferral}
+              className="px-5 py-2.5 rounded-xl bg-primary hover:bg-primary/90 text-primary-foreground font-bold text-xs flex items-center justify-center gap-2 shadow-sm transition-all cursor-pointer shrink-0"
             >
-              <span>Stake / Compound</span>
-              <ArrowUpRight className="w-3.5 h-3.5" />
+              {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
+              <span>{copied ? "Copied" : "Copy Link"}</span>
             </button>
+            <a
+              href={`https://wa.me/?text=${encodeURIComponent(`Join Crypto Finance quantitative protocol: ${referralUrl}`)}`}
+              target="_blank"
+              rel="noreferrer"
+              className="px-4 py-2.5 rounded-xl border border-border bg-card hover:bg-muted text-foreground text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0"
+            >
+              <MessageCircle className="w-4 h-4 text-emerald-500" />
+              <span>WhatsApp</span>
+            </a>
           </div>
         </div>
       </div>
 
       {/* =========================================================================
-          MULTI-WALLET ENGINE SECTION (Core Architecture)
+          MULTI-WALLET ENGINE SECTION (Colored Cards matching SuperWarrior30 Images 1 & 2)
           ========================================================================= */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Layers className="w-4 h-4 text-sky-500 dark:text-[#00D2FF]" />
-            <h3 className="text-sm sm:text-base font-bold text-slate-900 dark:text-white tracking-tight uppercase font-mono">
-              The Protocol Wallet Engine (Multi-Wallet Ecosystem)
+            <Layers className="w-4 h-4 text-primary" />
+            <h3 className="text-sm sm:text-base font-bold text-foreground tracking-tight uppercase font-mono">
+              The Protocol Wallet Engine
             </h3>
           </div>
-          <span className="text-xs text-slate-600 dark:text-slate-400 font-mono">Slide 04 - 08 Protocol</span>
+          <span className="text-xs text-muted-foreground font-mono">Multi-Wallet Isolation</span>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {/* Card 1: Bonus Wallet */}
-          <div className="glass-card-elevated p-5 flex flex-col justify-between border-t-2 border-t-indigo-500 relative overflow-hidden group">
+          {/* Card 1: Bonus Wallet (Amber) */}
+          <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5 flex flex-col justify-between space-y-2">
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-black uppercase tracking-wider text-indigo-600 dark:text-indigo-400 bg-indigo-500/10 px-2.5 py-0.5 rounded-full border border-indigo-400/30 font-mono">
-                  NON-WITHDRAWABLE
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-500">
+                  Bonus Wallet
                 </span>
-                <Gift className="w-4 h-4 text-indigo-500 dark:text-indigo-400" />
+                <Gift className="h-4 w-4 text-amber-500" />
               </div>
-
-              <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1 font-mono">
-                BONUS WALLET
-              </div>
-
-              <div className="text-2xl sm:text-3xl font-black text-indigo-600 dark:text-indigo-400 font-mono my-1">
+              <p className="text-2xl sm:text-3xl font-black text-amber-500 font-mono">
                 {currency} {bonusWalletBalance.toFixed(2)}
-              </div>
-
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
-                Holds $1.00 Self + $0.40/Level bonuses. Subsidizes up to <strong>10% of any ID activation or reinvestment</strong>!
+              </p>
+              <p className="text-[11px] text-muted-foreground mt-1 leading-relaxed">
+                Holds $1.00 Self + $0.40/Level bonuses. Subsidizes up to <strong>10% of any ID activation or compounding</strong>!
               </p>
             </div>
-
-            <div className="mt-4 pt-3 border-t border-slate-200/80 dark:border-white/10 flex items-center justify-between text-xs">
-              <span className="text-slate-500 dark:text-slate-400 font-mono">10% Utility Rate</span>
+            <div className="pt-2 border-t border-amber-500/20 flex items-center justify-between text-xs">
+              <span className="text-[11px] text-muted-foreground font-mono">10% Subsidy</span>
               <button
                 onClick={() => setActiveTab("stake-activate")}
-                className="text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-white font-bold font-mono flex items-center gap-1 transition"
+                className="text-amber-500 hover:text-amber-400 font-bold font-mono flex items-center gap-1 transition cursor-pointer"
               >
-                <span>Use for Stake (10%)</span>
-                <ChevronRight className="w-3.5 h-3.5" />
+                <span>Use for Stake &rarr;</span>
               </button>
             </div>
           </div>
 
-          {/* Card 2: ROI Wallet */}
-          <div className="glass-card-elevated p-5 flex flex-col justify-between border-t-2 border-t-emerald-500 relative overflow-hidden group">
+          {/* Card 2: ROI Wallet (Emerald) */}
+          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5 flex flex-col justify-between space-y-2">
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-black uppercase tracking-wider text-emerald-600 dark:text-[#00FFA3] bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-400/30 font-mono">
-                  DAILY 4% YIELD
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-500">
+                  ROI Wallet
                 </span>
-                <Zap className="w-4 h-4 text-emerald-500 dark:text-[#00FFA3]" />
+                <Zap className="h-4 w-4 text-emerald-500" />
               </div>
-
-              <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1 font-mono">
-                ROI WALLET
-              </div>
-
-              <div className="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-[#00FFA3] font-mono my-1">
+              <p className="text-2xl sm:text-3xl font-black text-emerald-500 font-mono">
                 {currency} {roiWalletBalance.toFixed(2)}
-              </div>
-
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+              </p>
+              <p className="text-[11px] text-muted-foreground mt-1 leading-relaxed">
                 Automated 4% daily returns from 2X pool. Transfer directly to <strong>Main Wallet</strong> or <strong>Secondary Wallet</strong>.
               </p>
             </div>
-
-            <div className="mt-4 pt-3 border-t border-slate-200/80 dark:border-white/10 flex items-center justify-between text-xs">
-              <span className="text-slate-500 dark:text-slate-400 font-mono">0% Transfer Fee</span>
+            <div className="pt-2 border-t border-emerald-500/20 flex items-center justify-between text-xs">
+              <span className="text-[11px] text-muted-foreground font-mono">0% Fee</span>
               <button
                 onClick={() => setActiveTab("wallet-roi")}
-                className="text-emerald-600 dark:text-[#00FFA3] hover:text-emerald-700 dark:hover:text-white font-bold font-mono flex items-center gap-1 transition"
+                className="text-emerald-500 hover:text-emerald-400 font-bold font-mono flex items-center gap-1 transition cursor-pointer"
               >
-                <span>Transfer &rarr; Main / Secondary</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
+                <span>Transfer &rarr;</span>
               </button>
             </div>
           </div>
 
-          {/* Card 3: Working Wallet */}
-          <div className="glass-card-elevated p-5 flex flex-col justify-between border-t-2 border-t-sky-500 relative overflow-hidden group">
+          {/* Card 3: Working Wallet (Sky) */}
+          <div className="rounded-2xl border border-sky-500/20 bg-sky-500/5 p-5 flex flex-col justify-between space-y-2">
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-black uppercase tracking-wider text-sky-600 dark:text-[#00D2FF] bg-sky-500/10 px-2.5 py-0.5 rounded-full border border-sky-400/30 font-mono">
-                  DIRECT + ROYALTY + REWARDS
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-sky-500">
+                  Working Wallet
                 </span>
-                <Wallet className="w-4 h-4 text-sky-500 dark:text-[#00D2FF]" />
+                <Wallet className="h-4 w-4 text-sky-500" />
               </div>
-
-              <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1 font-mono">
-                WORKING WALLET
-              </div>
-
-              <div className="text-2xl sm:text-3xl font-black text-sky-600 dark:text-[#00D2FF] font-mono my-1">
+              <p className="text-2xl sm:text-3xl font-black text-sky-500 font-mono">
                 {currency} {workingWalletBalance.toFixed(2)}
-              </div>
-
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+              </p>
+              <p className="text-[11px] text-muted-foreground mt-1 leading-relaxed">
                 Direct referrals &amp; royalties. Transfer directly to <strong>Main Wallet</strong> or <strong>Secondary Wallet</strong>.
               </p>
             </div>
-
-            <div className="mt-4 pt-3 border-t border-slate-200/80 dark:border-white/10 flex items-center justify-between text-xs">
-              <span className="text-slate-500 dark:text-slate-400 font-mono">0% Transfer Fee</span>
+            <div className="pt-2 border-t border-sky-500/20 flex items-center justify-between text-xs">
+              <span className="text-[11px] text-muted-foreground font-mono">0% Fee</span>
               <button
                 onClick={() => setActiveTab("wallet-working")}
-                className="text-sky-600 dark:text-[#00D2FF] hover:text-sky-700 dark:hover:text-white font-bold font-mono flex items-center gap-1 transition"
+                className="text-sky-500 hover:text-sky-400 font-bold font-mono flex items-center gap-1 transition cursor-pointer"
               >
-                <span>Transfer &rarr; Main / Secondary</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
+                <span>Transfer &rarr;</span>
               </button>
             </div>
           </div>
 
-          {/* Card 4: Secondary Wallet */}
-          <div className="glass-card-elevated p-5 flex flex-col justify-between border-t-2 border-t-purple-400 relative overflow-hidden group">
+          {/* Card 4: Secondary Wallet (Neutral Card) */}
+          <div className="rounded-2xl border border-border bg-card p-5 flex flex-col justify-between space-y-2 shadow-sm">
             <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-black uppercase tracking-wider text-purple-400 bg-purple-400/10 px-2.5 py-0.5 rounded-full border border-purple-400/30 font-mono">
-                  DEPOSIT &bull; ACTIVATION &bull; P2P
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-[10px] font-extrabold uppercase tracking-wider text-muted-foreground">
+                  Secondary Wallet
                 </span>
-                <Wallet className="w-4 h-4 text-purple-400" />
+                <Wallet className="h-4 w-4 text-primary" />
               </div>
-
-              <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1 font-mono">
-                SECONDARY WALLET
-              </div>
-
-              <div className="text-2xl sm:text-3xl font-black text-purple-400 font-mono my-1">
+              <p className="text-2xl sm:text-3xl font-black text-foreground font-mono">
                 {currency} {p2pWalletBalance.toFixed(2)}
-              </div>
-
-              <p className="text-[11px] text-slate-600 dark:text-slate-400 mt-1 leading-relaxed">
+              </p>
+              <p className="text-[11px] text-muted-foreground mt-1 leading-relaxed">
                 Deposit request funds credit here. Use to activate your own stake, activate any member ID, or send P2P transfers.
               </p>
             </div>
-
-            <div className="mt-4 pt-3 border-t border-slate-200/80 dark:border-white/10 flex items-center justify-between text-xs">
+            <div className="pt-2 border-t border-border flex items-center justify-between text-xs">
               <button
                 onClick={() => setActiveTab("recharge")}
-                className="text-sky-400 hover:text-sky-300 font-bold font-mono flex items-center gap-1 transition"
+                className="text-primary hover:underline font-bold font-mono flex items-center gap-1 transition cursor-pointer"
               >
                 <span>+ Deposit</span>
               </button>
               <button
                 onClick={() => setActiveTab("stake-activate")}
-                className="text-emerald-400 hover:text-emerald-300 font-bold font-mono flex items-center gap-1 transition"
+                className="text-emerald-500 hover:underline font-bold font-mono flex items-center gap-1 transition cursor-pointer"
               >
                 <span>Activate ID &rarr;</span>
               </button>
@@ -523,13 +417,13 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
       </div>
 
       {/* =========================================================================
-          FLOATING QUICK-ACTIONS DOCK (Frosted Glass Capsule)
+          FLOATING QUICK-ACTIONS DOCK
           ========================================================================= */}
       <div className="flex items-center justify-center">
-        <div className="glass-dock py-2 px-3 sm:px-6 flex items-center gap-2 sm:gap-4 overflow-x-auto max-w-full shadow-2xl">
+        <div className="rounded-full bg-card border border-border py-2 px-4 sm:px-6 flex items-center gap-3 sm:gap-4 overflow-x-auto max-w-full shadow-sm">
           <button
             onClick={() => setActiveTab("recharge")}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-sky-500/15 hover:bg-sky-500 text-sky-600 hover:text-white dark:text-[#00D2FF] dark:hover:text-slate-950 text-xs font-bold transition-all shadow-sm active:scale-95 shrink-0 font-mono"
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-primary-foreground text-xs font-bold transition-all shadow-sm active:scale-95 shrink-0 cursor-pointer"
           >
             <Wallet className="w-4 h-4" />
             <span>Deposit USDT</span>
@@ -537,19 +431,17 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
 
           <button
             onClick={() => setActiveTab("package-base")}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-800 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white text-xs font-bold transition-all active:scale-95 shrink-0 font-mono"
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-muted hover:bg-muted/80 text-foreground text-xs font-bold transition-all active:scale-95 shrink-0 cursor-pointer"
           >
-            <Zap className="w-4 h-4 text-emerald-500 dark:text-[#00FFA3]" />
+            <Zap className="w-4 h-4 text-amber-500" />
             <span>Activate Stake</span>
           </button>
 
-
-
           <button
             onClick={() => setActiveTab("downline-tree")}
-            className="flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 hover:bg-slate-200 dark:bg-white/10 dark:hover:bg-white/20 text-slate-800 dark:text-slate-200 hover:text-slate-950 dark:hover:text-white text-xs font-bold transition-all active:scale-95 shrink-0 font-mono"
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-muted hover:bg-muted/80 text-foreground text-xs font-bold transition-all active:scale-95 shrink-0 cursor-pointer"
           >
-            <Users className="w-4 h-4 text-sky-500 dark:text-sky-400" />
+            <Users className="w-4 h-4 text-muted-foreground" />
             <span>Genealogy Tree</span>
           </button>
         </div>
@@ -676,42 +568,42 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
 
         {/* Current vs Next Rank Display */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-5">
-          <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10">
-            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">
+          <div className="p-4 rounded-2xl bg-muted/40 border border-border">
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">
               CURRENT RANK
             </span>
-            <div className="text-xl font-black text-slate-900 dark:text-white font-mono mt-1 flex items-center gap-2">
+            <div className="text-xl font-black text-foreground font-mono mt-1 flex items-center gap-2">
               <span>{currentRank.icon}</span>
               <span>{currentRank.title}</span>
             </div>
-            <p className="text-xs text-emerald-600 dark:text-[#00FFA3] font-mono mt-1">
+            <p className="text-xs text-primary font-mono mt-1 font-bold">
               Active Leadership Tier
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10">
-            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">
+          <div className="p-4 rounded-2xl bg-muted/40 border border-border">
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">
               NEXT MILESTONE: {nextRank.title}
             </span>
-            <div className="text-xl font-black text-sky-600 dark:text-[#00D2FF] font-mono mt-1">
+            <div className="text-xl font-black text-foreground font-mono mt-1">
               ${nextRank.teamVolume.toLocaleString()} Turnover
             </div>
-            <p className="text-xs text-slate-600 dark:text-slate-400 font-mono mt-1">
-              Option A: <strong className="text-emerald-600 dark:text-[#00FFA3]">${nextRank.cashBonus} USDT</strong> | Option B: {nextRank.rewardGift}
+            <p className="text-xs text-muted-foreground font-mono mt-1">
+              Option A: <strong className="text-primary font-bold">${nextRank.cashBonus} USDT</strong> | Option B: {nextRank.rewardGift}
             </p>
           </div>
 
-          <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10">
-            <span className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider font-mono">
+          <div className="p-4 rounded-2xl bg-muted/40 border border-border">
+            <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-wider font-mono">
               50:50 LEG VOLUME RATIO
             </span>
             <div className="flex justify-between items-baseline text-xs font-mono mt-1">
-              <span className="text-slate-700 dark:text-slate-300">Strong Leg: <strong>${strongLegVolume}</strong></span>
-              <span className="text-slate-700 dark:text-slate-300">Weak Leg: <strong>${weakLegVolume}</strong></span>
+              <span className="text-muted-foreground">Strong Leg: <strong className="text-foreground">${strongLegVolume}</strong></span>
+              <span className="text-muted-foreground">Weak Leg: <strong className="text-foreground">${weakLegVolume}</strong></span>
             </div>
-            <div className="h-1.5 rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden mt-2">
+            <div className="h-1.5 rounded-full bg-muted overflow-hidden mt-2">
               <div
-                className="h-full bg-gradient-to-r from-emerald-400 to-sky-400"
+                className="h-full bg-gradient-to-r from-amber-400 to-amber-500"
                 style={{ width: `${rankProgress}%` }}
               />
             </div>
@@ -722,48 +614,48 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
       {/* =========================================================================
           NETWORK ROYALTY MATRIX (10-Level Daily Downline ROI - Slide 16 & 17)
           ========================================================================= */}
-      <div className="glass-card-elevated p-6 border border-slate-200/80 dark:border-white/10">
+      <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2.5">
-            <Users className="w-5 h-5 text-sky-500 dark:text-[#00D2FF]" />
-            <h3 className="text-base font-bold text-slate-900 dark:text-white tracking-tight font-mono">
+            <Users className="w-5 h-5 text-primary" />
+            <h3 className="text-base font-bold text-foreground tracking-tight font-mono">
               10-Level Daily Team Royalty Status
             </h3>
           </div>
-          <span className="text-xs text-emerald-600 dark:text-[#00FFA3] font-mono font-bold">
+          <span className="text-xs text-primary font-mono font-bold">
             {activeDirectCount} Active Directs Unlocked
           </span>
         </div>
 
         <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 text-xs font-mono">
-          <div className="p-3 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 text-center">
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 block">LEVEL 1</span>
-            <span className="text-base font-bold text-emerald-600 dark:text-[#00FFA3]">10% Daily</span>
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">1 Direct Req.</span>
+          <div className="p-3 rounded-xl bg-muted/40 border border-border text-center">
+            <span className="text-[10px] text-muted-foreground block">LEVEL 1</span>
+            <span className="text-base font-bold text-primary">10% Daily</span>
+            <span className="text-[10px] text-muted-foreground block mt-1">1 Direct Req.</span>
           </div>
 
-          <div className="p-3 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 text-center">
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 block">LEVEL 2</span>
-            <span className="text-base font-bold text-sky-600 dark:text-[#00D2FF]">5% Daily</span>
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">2 Directs Req.</span>
+          <div className="p-3 rounded-xl bg-muted/40 border border-border text-center">
+            <span className="text-[10px] text-muted-foreground block">LEVEL 2</span>
+            <span className="text-base font-bold text-primary">5% Daily</span>
+            <span className="text-[10px] text-muted-foreground block mt-1">2 Directs Req.</span>
           </div>
 
-          <div className="p-3 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 text-center">
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 block">LEVELS 3 - 5</span>
-            <span className="text-base font-bold text-sky-500 dark:text-sky-400">2% Daily</span>
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">3 - 5 Directs</span>
+          <div className="p-3 rounded-xl bg-muted/40 border border-border text-center">
+            <span className="text-[10px] text-muted-foreground block">LEVELS 3 - 5</span>
+            <span className="text-base font-bold text-primary">2% Daily</span>
+            <span className="text-[10px] text-muted-foreground block mt-1">3 - 5 Directs</span>
           </div>
 
-          <div className="p-3 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 text-center">
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 block">LEVELS 6 - 9</span>
-            <span className="text-base font-bold text-indigo-500 dark:text-indigo-400">1% Daily</span>
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">6 - 9 Directs</span>
+          <div className="p-3 rounded-xl bg-muted/40 border border-border text-center">
+            <span className="text-[10px] text-muted-foreground block">LEVELS 6 - 9</span>
+            <span className="text-base font-bold text-primary">1% Daily</span>
+            <span className="text-[10px] text-muted-foreground block mt-1">6 - 9 Directs</span>
           </div>
 
-          <div className="p-3 rounded-xl bg-white/80 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 text-center col-span-2 sm:col-span-1">
-            <span className="text-[10px] text-indigo-600 dark:text-indigo-400 block font-bold">LEVEL 10</span>
-            <span className="text-base font-bold text-indigo-600 dark:text-indigo-400">1% Daily</span>
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 block mt-1">10 Directs (Full)</span>
+          <div className="p-3 rounded-xl bg-muted/40 border border-border text-center col-span-2 sm:col-span-1">
+            <span className="text-[10px] text-primary block font-bold">LEVEL 10</span>
+            <span className="text-base font-bold text-primary">1% Daily</span>
+            <span className="text-[10px] text-muted-foreground block mt-1">10 Directs (Full)</span>
           </div>
         </div>
       </div>

@@ -55,10 +55,10 @@ export default function MemberDashboardPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[var(--bg-main)] flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
-          <div className="w-12 h-12 rounded-full border-4 border-sky-500 dark:border-[#00D2FF] border-t-transparent animate-spin" />
-          <p className="text-sky-600 dark:text-[#00D2FF] font-extrabold tracking-widest text-sm uppercase">
+          <div className="w-12 h-12 rounded-full border-4 border-primary border-t-transparent animate-spin" />
+          <p className="text-primary font-extrabold tracking-widest text-sm uppercase">
             Loading Crypto Finance Portal...
           </p>
         </div>
@@ -69,7 +69,7 @@ export default function MemberDashboardPage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-[var(--bg-main)] text-[var(--text-main)] flex flex-col antialiased transition-colors duration-200">
+    <div className="min-h-screen bg-background text-foreground flex flex-col antialiased transition-colors duration-200">
       <ImpersonationBanner userCustomId={user?.customId} userFullName={user?.fullName} userRole={user?.role} />
 
       {/* Sidebar */}
