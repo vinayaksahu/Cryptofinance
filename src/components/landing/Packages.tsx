@@ -164,11 +164,11 @@ export function Packages() {
             <div className="flex items-center gap-3">
               <RefreshCw className="w-5 h-5 text-emerald-500 dark:text-emerald-400 shrink-0" />
               <span>
-                <strong>The 35-Day Compounding Engine:</strong> Reinvesting 2% daily pool returns doubles your principal in exactly 35 days: <code className="text-emerald-600 dark:text-emerald-400 font-bold">(1.02)^35 ≈ 2.000</code>. At 2X, the <strong>2X Cap Lock Rule</strong> engages: returns are capped at exact <strong>200% (2X) Total Extraction</strong> with the final ROI paying the exact remaining balance!
+                <strong>The 35-Day Compounding Engine:</strong> Reinvesting 2% daily pool returns doubles your starting pool in 35 days: <code className="text-emerald-600 dark:text-emerald-400 font-bold">(1.02)^35 ≈ 2.000</code>. Following with daily withdrawals, cumulative payout reaches exact <strong>200% (2X) Total Return at Day 69–70</strong>, with the final Day 70 ROI paying the exact remaining balance required!
               </span>
             </div>
             <span className="glass-pill px-3 py-1 text-emerald-600 dark:text-emerald-400 font-bold shrink-0">
-              2X Profit Potential
+              Day 69–70 2X Completion
             </span>
           </div>
         )}

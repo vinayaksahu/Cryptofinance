@@ -21,7 +21,7 @@ export function Faq() {
     },
     {
       q: "What is the 35-Day Compounding Engine and 2X Cap Lock Rule?",
-      a: "By choosing compounding instead of daily withdrawal, reinvesting your 2% daily pool returns doubles your principal in exactly 35 days: (1.02)^35 ≈ 2.000. When your total payout approaches 2X of initial stake, compounding reaches its cap and the final payout is capped to the exact balance needed to complete 2X (200%), ensuring exact doubling without exceeding protocol limits.",
+      a: "By choosing compounding, reinvesting your 2% daily pool returns doubles your starting pool in 35 days: (1.02)^35 ≈ 2.000. Subsequent daily withdrawals complete exact 2X total payout ($200 on $100 stake) around Day 69–70. On Day 70, the final ROI payout is automatically capped to the exact balance needed to complete 2X (200%), ensuring exact doubling without exceeding protocol limits.",
     },
     {
       q: "What are the cashout rules and limits?",

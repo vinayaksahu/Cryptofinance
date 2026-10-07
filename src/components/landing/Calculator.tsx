@@ -40,7 +40,8 @@ export function Calculator() {
 
   const safeCap = Math.max(2, Number(capital) || 2);
   const pool = safeCap * 2;
-  const capBal = pool; // Strict 2X Max Cap of original investment (200% maximum extraction)
+  const capBal = pool * 2; // Compounding Peak Balance Cap: 2X of starting pool ($400 on $100 stake)
+  const maxPayout = safeCap * 2; // Strict 2X Max Payout Cap of original investment (200% return = $200 on $100 stake)
 
   const maxBonusUsable = +(safeCap * 0.1).toFixed(2);
   const bonusUsed = Math.min(Number(bonusInput) || 0, maxBonusUsable);
@@ -58,27 +59,21 @@ export function Calculator() {
     setQuickDays(days);
     const newActions: Record<number, "W" | "R"> = {};
     let tempBal = pool;
-    let tempCumW = 0;
     for (let d = 0; d < 1200; d++) {
-      if (tempCumW >= capBal) break;
       let roi = +(tempBal * 0.02);
-      if (tempCumW + roi > capBal) {
-        roi = +(capBal - tempCumW);
-      }
-      if (d < days && tempBal + roi <= capBal) {
+      if (d < days && tempBal + roi < capBal) {
         newActions[d] = "R";
         tempBal += roi;
       } else {
         newActions[d] = "W";
         tempBal -= roi;
-        tempCumW += roi;
       }
-      if (tempBal <= 0.005 || tempCumW >= capBal) break;
+      if (tempBal <= 0.005) break;
     }
     setManualActions(newActions);
   };
 
-  // Run simulation engine with strict 2X cap & exact final ROI capping
+  // Run simulation engine with exact 2X payout capping matching index.html
   const simData: SimRow[] = useMemo(() => {
     const rows: SimRow[] = [];
     let bal = pool;
@@ -86,18 +81,8 @@ export function Calculator() {
     let cumR = 0;
 
     for (let d = 0; d < 1500; d++) {
-      if (bal <= 0.005 || cumW >= capBal) break;
+      if (bal <= 0.005 || cumW >= maxPayout) break;
       let roi = +(bal * 0.02);
-
-      // Strict 2X Cap rule: cumulative payout cannot exceed 2X of initial stake
-      const remainingTo2X = +(capBal - cumW);
-      if (remainingTo2X <= 0) break;
-
-      let isLastCappedRoi = false;
-      if (roi > remainingTo2X) {
-        roi = remainingTo2X;
-        isLastCappedRoi = true;
-      }
 
       let action: "W" | "R" = "W";
       let capLocked = false;
@@ -105,7 +90,7 @@ export function Calculator() {
       if (mode === "withdraw") {
         action = "W";
       } else if (mode === "reinvest") {
-        if (bal + roi >= capBal || isLastCappedRoi) {
+        if (bal + roi >= capBal) {
           action = "W";
           capLocked = true;
         } else {
@@ -113,11 +98,22 @@ export function Calculator() {
         }
       } else {
         const userAction = manualActions[d] || "W";
-        if (userAction === "R" && (bal + roi >= capBal || isLastCappedRoi)) {
+        if (userAction === "R" && bal + roi >= capBal) {
           action = "W";
           capLocked = true;
         } else {
           action = userAction;
+        }
+      }
+
+      let isLastCappedRoi = false;
+      if (action === "W") {
+        // Strict 2X Cap rule: cumulative payout cannot exceed 2X of initial stake
+        const remainingTo2X = +(maxPayout - cumW);
+        if (remainingTo2X <= 0) break;
+        if (roi > remainingTo2X) {
+          roi = remainingTo2X;
+          isLastCappedRoi = true;
         }
       }
 
@@ -127,7 +123,7 @@ export function Calculator() {
         cumR += roi;
       } else {
         after = Math.max(0, +(bal - roi));
-        cumW = Math.min(capBal, +(cumW + roi));
+        cumW = Math.min(maxPayout, +(cumW + roi));
       }
 
       rows.push({
@@ -143,13 +139,13 @@ export function Calculator() {
 
       bal = after;
       if (isLastCappedRoi && action === "W") {
-        // Exact 2X completed
+        // Exact 2X completed at Day 69-70!
         break;
       }
     }
 
     return rows;
-  }, [pool, capBal, mode, manualActions]);
+  }, [pool, capBal, maxPayout, mode, manualActions]);
 
   // Aggregate Metrics
   const totalDays = simData.length;

@@ -309,13 +309,13 @@ export function Hero() {
             <RefreshCw className="w-5 h-5" />
           </div>
           <div className="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 tracking-tight mb-1">
-            35 Days
+            Day 69–70
           </div>
           <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
-            2X Doubling Engine
+            2X Payout Completion
           </div>
           <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">
-            (1.02)^35 ≈ 2.000 &bull; 2X Max
+            35D Compound + 35D Cashout &bull; Exact 2X Max
           </div>
         </div>
 
