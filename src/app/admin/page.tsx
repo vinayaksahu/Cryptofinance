@@ -67,24 +67,29 @@ export default function AdminPage() {
     loadData();
   }, []);
 
-  const triggerCron = async () => {
+  const triggerCron = async (force: boolean = false) => {
     setCronLoading(true);
     setCronMsg(null);
     try {
-      const res = await fetch("/api/cron/daily-roi");
+      const url = force ? "/api/cron/daily-roi?mode=manual&force=true" : "/api/cron/daily-roi";
+      const res = await fetch(url);
       const data = await res.json();
       if (data.summary?.processedCount === 0) {
         setCronMsg(
-          "Closing is already complete for today! All active contracts are up to date ($0.00 distributed to prevent duplicate payouts)."
+          force
+            ? "No active contracts eligible for closing (contracts are either completed or reached 2X cap)."
+            : "Closing is already complete for today! Switch to Manual Closing Mode to execute cycles on demand."
         );
       } else {
         setCronMsg(
-          `ROI Cycle executed successfully! Distributed $${data.summary?.totalDistributedUsdt || 0} USDT across ${data.summary?.processedCount || 0} contracts.`
+          force
+            ? `⚡ Manual Closing Executed! Distributed $${data.summary?.totalDistributedUsdt || 0} USDT across ${data.summary?.processedCount || 0} contracts. ROI & 10-level Royalties credited immediately.`
+            : `✓ ROI Cycle executed successfully! Distributed $${data.summary?.totalDistributedUsdt || 0} USDT across ${data.summary?.processedCount || 0} contracts.`
         );
       }
       loadData();
     } catch (e: any) {
-      setCronMsg("Cron trigger failed: " + e.message);
+      setCronMsg("Cycle trigger failed: " + e.message);
     } finally {
       setCronLoading(false);
     }

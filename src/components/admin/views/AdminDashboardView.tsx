@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-import { Play, Users, Wallet, Banknote, Zap, Activity, Ticket, ArrowUpRight, ArrowDownLeft, TrendingUp, Coins, ShieldCheck, Sparkles, CheckCircle2, Landmark, Clock, Calendar, ChevronDown, ChevronUp, Search, Layers } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Play, Users, Wallet, Banknote, Zap, Activity, Ticket, ArrowUpRight, ArrowDownLeft, TrendingUp, Coins, ShieldCheck, Sparkles, CheckCircle2, Landmark, Clock, Calendar, ChevronDown, ChevronUp, Search, Layers, RefreshCw } from "lucide-react";
 import { formatUsdt } from "@/lib/utils";
 
 interface AdminDashboardViewProps {
   stats: any;
-  onTriggerCron: () => void;
+  onTriggerCron: (force?: boolean) => void;
   cronLoading: boolean;
   cronMsg: string | null;
   setActiveTab?: (tab: string) => void;
@@ -24,9 +24,44 @@ export function AdminDashboardView({
   const [contractSearch, setContractSearch] = useState("");
   const [cycleTz, setCycleTz] = useState<"UTC" | "IST">("UTC");
   const upcoming = safeStats.upcomingCycle || {};
+  
+  // Closing Mode: "AUTO" (scheduled midnight) vs "MANUAL" (instant on-demand, multiple times/day)
+  const [closingMode, setClosingMode] = useState<"AUTO" | "MANUAL">(
+    upcoming.closingMode === "MANUAL" ? "MANUAL" : "AUTO"
+  );
+  const [modeUpdating, setModeUpdating] = useState(false);
+
+  useEffect(() => {
+    if (upcoming.closingMode) {
+      setClosingMode(upcoming.closingMode === "MANUAL" ? "MANUAL" : "AUTO");
+    }
+  }, [upcoming.closingMode]);
+
+  const handleToggleClosingMode = async (targetMode?: "AUTO" | "MANUAL") => {
+    const nextMode = targetMode || (closingMode === "AUTO" ? "MANUAL" : "AUTO");
+    if (nextMode === closingMode) return;
+    setClosingMode(nextMode);
+    setModeUpdating(true);
+    try {
+      const res = await fetch("/api/admin/closing-mode", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mode: nextMode }),
+      });
+      if (!res.ok) {
+        console.error("Failed to switch closing mode:", await res.text());
+      }
+    } catch (err) {
+      console.error("Error updating closing mode:", err);
+    } finally {
+      setModeUpdating(false);
+    }
+  };
+
   const isClosingComplete = upcoming.isClosingCompleteToday !== false && (upcoming.pendingContractsToday === undefined || upcoming.pendingContractsToday === 0);
   const pendingContractsCount = upcoming.pendingContractsToday ?? 0;
   const queued = (upcoming.queuedContracts || []) as any[];
+  const activeContractsCount = upcoming.activeContractsCount ?? queued.length ?? 0;
 
   const filteredQueued = queued.filter((c: any) => {
     if (!contractSearch) return true;
@@ -289,41 +324,107 @@ export function AdminDashboardView({
               </div>
             </div>
 
-            <div className="flex flex-col items-start lg:items-end gap-1.5">
-              {isClosingComplete ? (
+            <div className="flex flex-col items-start lg:items-end gap-2 w-full lg:w-auto">
+              {/* Closing Mode Toggle Switcher */}
+              <div className="flex items-center gap-1.5 p-1 rounded-2xl bg-slate-100 dark:bg-slate-900/80 border border-slate-200 dark:border-white/10 text-xs shadow-inner">
+                <button
+                  type="button"
+                  onClick={() => handleToggleClosingMode("AUTO")}
+                  disabled={modeUpdating}
+                  className={`px-3 py-1.5 rounded-xl font-bold flex items-center gap-1.5 transition-all text-xs cursor-pointer ${
+                    closingMode === "AUTO"
+                      ? "bg-emerald-500 text-white shadow-md shadow-emerald-500/30"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white"
+                  }`}
+                  title="Auto Mode: Midnight schedule (12:01 AM UTC) executes daily closing once per day"
+                >
+                  <Clock className="w-3.5 h-3.5" />
+                  <span>Auto Mode</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleToggleClosingMode("MANUAL")}
+                  disabled={modeUpdating}
+                  className={`px-3 py-1.5 rounded-xl font-bold flex items-center gap-1.5 transition-all text-xs cursor-pointer ${
+                    closingMode === "MANUAL"
+                      ? "bg-amber-500 text-slate-950 shadow-md shadow-amber-500/30 font-black"
+                      : "text-slate-600 dark:text-slate-400 hover:text-slate-950 dark:hover:text-white"
+                  }`}
+                  title="Manual Mode: Admin can trigger closing multiple times anytime on demand"
+                >
+                  <Zap className="w-3.5 h-3.5 fill-current" />
+                  <span>Manual Mode</span>
+                </button>
+              </div>
+
+              {/* Action Buttons based on Closing Mode */}
+              {closingMode === "MANUAL" ? (
+                /* MANUAL CLOSING MODE: Instant, unlimited daily executions on demand */
                 <div className="flex flex-col items-start lg:items-end gap-1.5">
                   <button
                     type="button"
-                    disabled={true}
-                    className="px-6 py-3 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 shadow-lg shadow-emerald-950/30 whitespace-nowrap cursor-not-allowed opacity-90 transition-all select-none"
-                    title="Today's ROI & Royalty cycle is already complete. Next automated cycle runs at 12:01 AM UTC."
+                    onClick={() => onTriggerCron(true)}
+                    disabled={cronLoading}
+                    className="px-6 py-3 rounded-2xl font-black text-xs sm:text-sm flex items-center justify-center gap-2 bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 shadow-lg shadow-amber-500/25 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer transform active:scale-95"
+                    title="Execute manual closing now. Generates ROI & 10-level Royalties instantly across all active contracts."
                   >
-                    <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                    {cronLoading ? (
+                      <>
+                        <Activity className="h-4 w-4 animate-spin text-slate-950" />
+                        <span>Generating ROI &amp; Royalties...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Zap className="h-4 w-4 fill-slate-950 text-slate-950" />
+                        <span>Execute Manual Closing Now</span>
+                      </>
+                    )}
+                  </button>
+
+                  <div className="flex items-center gap-1.5 text-[11px] font-semibold text-amber-500 dark:text-amber-400 glass-pill px-2.5 py-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping" />
+                    <span>Manual Mode Active &bull; Run unlimited times per day ({activeContractsCount} contracts active)</span>
+                  </div>
+                </div>
+              ) : isClosingComplete ? (
+                /* AUTO CLOSING MODE: Already Complete for Today */
+                <div className="flex flex-col items-start lg:items-end gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => handleToggleClosingMode("MANUAL")}
+                    className="group px-6 py-3 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 shadow-lg shadow-emerald-950/30 whitespace-nowrap transition-all cursor-pointer select-none"
+                    title="Today's auto cycle is complete. Click to switch to Manual Mode and run closing again anytime!"
+                  >
+                    <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0 group-hover:scale-110 transition-transform" />
                     <span>Closing Already Complete</span>
+                    <span className="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 font-extrabold ml-1">
+                      Click for Manual
+                    </span>
                   </button>
 
                   <div className="flex items-center gap-1.5 text-[11px] font-semibold text-emerald-400/90 glass-pill px-2.5 py-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                    <span>Today&apos;s cycle credited &bull; Next: {upcoming.nextCycleDubaiTime ? upcoming.nextCycleDubaiTime.replace("GST", "UTC") : "12:01 AM UTC"}</span>
+                    <span>Auto Scheduled &bull; Next: {upcoming.nextCycleDubaiTime ? upcoming.nextCycleDubaiTime.replace("GST", "UTC") : "12:01 AM UTC"}</span>
                   </div>
                 </div>
               ) : (
+                /* AUTO CLOSING MODE: Cycle pending execution */
                 <div className="flex flex-col items-start lg:items-end gap-1.5">
                   <button
                     type="button"
-                    onClick={onTriggerCron}
+                    onClick={() => onTriggerCron(false)}
                     disabled={cronLoading}
                     className="crypto-btn px-6 py-3 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg shadow-sky-500/25 whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed transition-all cursor-pointer"
                   >
                     {cronLoading ? (
                       <>
                         <Activity className="h-4 w-4 animate-spin text-white" />
-                        <span>Executing Cycle...</span>
+                        <span>Executing Auto Cycle...</span>
                       </>
                     ) : (
                       <>
                         <Play className="h-4 w-4 text-white fill-white" />
-                        <span>Execute Cycle Now ({pendingContractsCount} Pending)</span>
+                        <span>Execute Auto Cycle Now ({pendingContractsCount} Pending)</span>
                       </>
                     )}
                   </button>

@@ -422,16 +422,17 @@ export default function SuperRootAdminPage() {
     }
   };
 
-  const triggerDailyRoi = async () => {
+  const triggerDailyRoi = async (force: boolean = false) => {
     setCronLoading(true);
     setCronMessage(null);
     try {
-      const res = await fetch("/api/cron/daily-roi");
+      const url = force ? "/api/cron/daily-roi?mode=manual&force=true" : "/api/cron/daily-roi";
+      const res = await fetch(url);
       const data = await res.json();
       if (data.summary?.processedCount === 0) {
         setCronMessage("Closing is already complete for today! All contracts up to date.");
       } else {
-        setCronMessage(`ROI Cycle executed! Distributed $${data.summary?.totalDistributedUsdt || 0} USDT across ${data.summary?.processedCount || 0} contracts.`);
+        setCronMessage(`Cycle executed! Distributed $${data.summary?.totalDistributedUsdt || 0} USDT across ${data.summary?.processedCount || 0} contracts.`);
       }
       loadAllData();
     } catch (err: any) {
@@ -821,7 +822,7 @@ export default function SuperRootAdminPage() {
         <div className="flex items-center gap-2 sm:gap-3">
           {/* Trigger Daily Closing Button */}
           <button
-            onClick={triggerDailyRoi}
+            onClick={() => triggerDailyRoi(false)}
             disabled={cronLoading}
             className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/30 text-amber-300 text-xs font-bold transition shadow-sm"
             title="Execute midnight daily ROI cycle across all contracts"

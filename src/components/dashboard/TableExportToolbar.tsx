@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   Search,
   RotateCcw,
@@ -11,6 +11,8 @@ import {
   FileText,
   Printer,
   Calendar,
+  ChevronDown,
+  Download,
 } from "lucide-react";
 
 interface TableExportToolbarProps {
@@ -46,6 +48,18 @@ export function TableExportToolbar({
   onPrint,
   isCopied = false,
 }: TableExportToolbarProps) {
+  const [exportMenuOpen, setExportMenuOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setExportMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
   return (
     <div className="space-y-4">
       {/* 1. Date Filter Controls Bar */}
@@ -120,70 +134,84 @@ export function TableExportToolbar({
           <span className="font-medium">entries per page</span>
         </div>
 
-        {/* Export action group */}
-        <div className="inline-flex rounded-xl shadow-sm border border-border bg-card p-0.5 overflow-hidden">
-          {/* Copy button */}
+        {/* Export dropdown menu */}
+        <div className="relative" ref={dropdownRef}>
           <button
             type="button"
-            onClick={onCopy}
-            title="Copy table data to clipboard"
-            className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-all flex items-center gap-1.5 ${
-              isCopied
-                ? "bg-emerald-500/10 text-emerald-500 font-bold"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted"
-            }`}
+            onClick={() => setExportMenuOpen(!exportMenuOpen)}
+            className="px-3.5 py-1.5 rounded-xl bg-card border border-border text-foreground text-xs font-semibold hover:bg-muted transition-all flex items-center gap-2 shadow-sm"
           >
-            {isCopied ? (
-              <>
-                <Check className="w-3.5 h-3.5 text-emerald-500" />
-                Copied!
-              </>
-            ) : (
-              <>
-                <Copy className="w-3.5 h-3.5 text-muted-foreground" />
-                Copy
-              </>
-            )}
+            <Download className="w-3.5 h-3.5 text-primary" />
+            <span>Export</span>
+            <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground transition-transform duration-200 ${exportMenuOpen ? "rotate-180" : ""}`} />
           </button>
 
-          <div className="w-[1px] bg-border my-1" />
+          {exportMenuOpen && (
+            <div className="absolute right-0 mt-1.5 w-36 rounded-xl bg-card border border-border shadow-xl py-1.5 z-50 text-xs animate-in fade-in zoom-in-95 duration-150">
+              {/* Copy button */}
+              <button
+                type="button"
+                onClick={() => {
+                  onCopy();
+                  setExportMenuOpen(false);
+                }}
+                className="w-full px-3 py-2 text-left hover:bg-muted text-foreground flex items-center gap-2 transition-colors font-medium"
+              >
+                {isCopied ? (
+                  <>
+                    <Check className="w-3.5 h-3.5 text-emerald-500" />
+                    <span className="text-emerald-500 font-bold">Copied!</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3.5 h-3.5 text-muted-foreground" />
+                    <span>Copy</span>
+                  </>
+                )}
+              </button>
 
-          {/* Excel button */}
-          <button
-            type="button"
-            onClick={onExcel}
-            title="Export as Excel / CSV spreadsheet"
-            className="px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-all flex items-center gap-1.5"
-          >
-            <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-500" />
-            Excel
-          </button>
+              {/* Excel button */}
+              <button
+                type="button"
+                onClick={() => {
+                  onExcel();
+                  setExportMenuOpen(false);
+                }}
+                className="w-full px-3 py-2 text-left hover:bg-muted text-foreground flex items-center gap-2 transition-colors font-medium"
+              >
+                <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-500" />
+                <span>Excel</span>
+              </button>
 
-          <div className="w-[1px] bg-border my-1" />
+              {/* PDF button */}
+              <button
+                type="button"
+                onClick={() => {
+                  onPdf();
+                  setExportMenuOpen(false);
+                }}
+                className="w-full px-3 py-2 text-left hover:bg-muted text-foreground flex items-center gap-2 transition-colors font-medium"
+              >
+                <FileText className="w-3.5 h-3.5 text-rose-500" />
+                <span>PDF</span>
+              </button>
 
-          {/* PDF button */}
-          <button
-            type="button"
-            onClick={onPdf}
-            title="Export or Save as PDF"
-            className="px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-all flex items-center gap-1.5"
-          >
-            <FileText className="w-3.5 h-3.5 text-rose-500" />
-            PDF
-          </button>
+              <div className="my-1 border-t border-border" />
 
-          <div className="w-[1px] bg-border my-1" />
-
-          {/* Print button */}
-          <button
-            type="button"
-            onClick={onPrint}
-            title="Print Report"
-            className="px-3 py-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-all flex items-center gap-1.5"
-          >
-            <Printer className="w-3.5 h-3.5 text-primary" />
-            Print
-          </button>
+              {/* Print button */}
+              <button
+                type="button"
+                onClick={() => {
+                  onPrint();
+                  setExportMenuOpen(false);
+                }}
+                className="w-full px-3 py-2 text-left hover:bg-muted text-foreground flex items-center gap-2 transition-colors font-medium"
+              >
+                <Printer className="w-3.5 h-3.5 text-primary" />
+                <span>Print</span>
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

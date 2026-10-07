@@ -1,7 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
-import { Users, Search } from "lucide-react";
+import React, { useState, useRef, useEffect } from "react";
+import { Users, Search, Download, ChevronDown, Copy, Check, FileSpreadsheet, FileText, Printer } from "lucide-react";
+import { copyTableToClipboard, exportToExcel, printOrExportPdf, ExportColumn } from "@/lib/exportUtils";
 
 interface DownlineViewProps {
   user: any;
@@ -11,6 +12,10 @@ interface DownlineViewProps {
 
 export function DownlineView({ user, mode, onNavigateTab }: DownlineViewProps) {
   const [searchTerm, setSearchTerm] = useState("");
+  const [exportMenuOpen, setExportMenuOpen] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
+  const exportDropdownRef = useRef<HTMLDivElement>(null);
+
   const title = mode === "direct" ? "Direct Team" : "Team List";
   const rawList = mode === "direct" ? (user.directs || []) : (user.teamList || []);
 
@@ -22,6 +27,52 @@ export function DownlineView({ user, mode, onNavigateTab }: DownlineViewProps) {
       item.referralId?.toLowerCase().includes(q)
     );
   });
+
+  // Close export dropdown when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (exportDropdownRef.current && !exportDropdownRef.current.contains(event.target as Node)) {
+        setExportMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const exportColumns: ExportColumn[] = [
+    { header: "SR", key: "sr", format: (_, idx) => (idx !== undefined ? idx + 1 : 1) },
+    { header: "DATE", key: "date" },
+    { header: "ID", key: "id" },
+    { header: "NAME", key: "name" },
+    { header: "REFERRAL ID", key: "referralId" },
+    { header: "LEVEL", key: "level", format: (r) => `L${r.level || 1}` },
+    { header: "DOA", key: "doa" },
+    { header: "ACTIVATION", key: "activation" },
+  ];
+
+  const handleCopy = async () => {
+    const ok = await copyTableToClipboard(exportColumns, filteredList);
+    if (ok) {
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+      setExportMenuOpen(false);
+    }
+  };
+
+  const handleExcel = () => {
+    exportToExcel(mode === "direct" ? "direct_team" : "team_list", exportColumns, filteredList);
+    setExportMenuOpen(false);
+  };
+
+  const handlePdf = () => {
+    printOrExportPdf(title, exportColumns, filteredList, `Total Members: ${filteredList.length}`, user?.fullName || user?.username);
+    setExportMenuOpen(false);
+  };
+
+  const handlePrint = () => {
+    printOrExportPdf(title, exportColumns, filteredList, `Total Members: ${filteredList.length}`, user?.fullName || user?.username);
+    setExportMenuOpen(false);
+  };
 
   return (
     <div className="space-y-6">
@@ -98,22 +149,77 @@ export function DownlineView({ user, mode, onNavigateTab }: DownlineViewProps) {
                 placeholder="Search..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="bg-background border border-input rounded-lg pl-8 pr-3 py-1.5 text-xs text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary w-48"
+                className="bg-background border border-input rounded-lg pl-8 pr-3 py-1.5 text-xs text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary w-40 sm:w-48"
               />
               <Search className="w-3.5 h-3.5 text-muted-foreground absolute left-2.5 top-2" />
             </div>
 
-            {/* Export Buttons */}
-            <div className="flex items-center gap-1.5 flex-wrap">
-              {["Copy", "Excel", "PDF", "Print"].map((btn) => (
-                <button
-                  key={btn}
-                  onClick={() => alert(`${btn} export feature triggered.`)}
-                  className="px-3 py-1.5 rounded-lg bg-card border border-border text-foreground text-xs font-medium hover:bg-muted transition-colors"
-                >
-                  {btn}
-                </button>
-              ))}
+            {/* Export Dropdown Menu */}
+            <div className="relative" ref={exportDropdownRef}>
+              <button
+                type="button"
+                onClick={() => setExportMenuOpen(!exportMenuOpen)}
+                className="px-3 py-1.5 rounded-lg bg-card border border-border text-foreground text-xs font-semibold hover:bg-muted transition-all flex items-center gap-1.5 shadow-sm"
+              >
+                <Download className="w-3.5 h-3.5 text-primary" />
+                <span>Export</span>
+                <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground transition-transform duration-200 ${exportMenuOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {exportMenuOpen && (
+                <div className="absolute right-0 mt-1.5 w-36 rounded-xl bg-card border border-border shadow-xl py-1.5 z-50 text-xs animate-in fade-in zoom-in-95 duration-150">
+                  {/* Copy option */}
+                  <button
+                    type="button"
+                    onClick={handleCopy}
+                    className="w-full px-3 py-2 text-left hover:bg-muted text-foreground flex items-center gap-2 transition-colors font-medium"
+                  >
+                    {isCopied ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-500" />
+                        <span className="text-emerald-500 font-bold">Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5 text-muted-foreground" />
+                        <span>Copy</span>
+                      </>
+                    )}
+                  </button>
+
+                  {/* Excel option */}
+                  <button
+                    type="button"
+                    onClick={handleExcel}
+                    className="w-full px-3 py-2 text-left hover:bg-muted text-foreground flex items-center gap-2 transition-colors font-medium"
+                  >
+                    <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-500" />
+                    <span>Excel</span>
+                  </button>
+
+                  {/* PDF option */}
+                  <button
+                    type="button"
+                    onClick={handlePdf}
+                    className="w-full px-3 py-2 text-left hover:bg-muted text-foreground flex items-center gap-2 transition-colors font-medium"
+                  >
+                    <FileText className="w-3.5 h-3.5 text-rose-500" />
+                    <span>PDF</span>
+                  </button>
+
+                  <div className="my-1 border-t border-border" />
+
+                  {/* Print option */}
+                  <button
+                    type="button"
+                    onClick={handlePrint}
+                    className="w-full px-3 py-2 text-left hover:bg-muted text-foreground flex items-center gap-2 transition-colors font-medium"
+                  >
+                    <Printer className="w-3.5 h-3.5 text-primary" />
+                    <span>Print</span>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import {
   Trophy,
   Award,
@@ -18,6 +18,13 @@ import {
   Flame,
   Users,
   Eye,
+  Download,
+  ChevronDown,
+  Copy,
+  Check,
+  FileSpreadsheet,
+  FileText,
+  Printer,
 } from "lucide-react";
 import { TableExportToolbar } from "@/components/dashboard/TableExportToolbar";
 import {
@@ -145,6 +152,18 @@ export function MilestoneRewardsView({
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [isCopied, setIsCopied] = useState(false);
   const [selectedRankId, setSelectedRankId] = useState<number | null>(null);
+  const [exportMenuOpen, setExportMenuOpen] = useState(false);
+  const exportDropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (exportDropdownRef.current && !exportDropdownRef.current.contains(event.target as Node)) {
+        setExportMenuOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   // 1. Calculate Leg Volumes from direct referrals and team list
   const { branches, strongLeg, weakLeg, totalTurnover } = useMemo(() => {
@@ -863,35 +882,84 @@ export function MilestoneRewardsView({
               <span>entries</span>
             </div>
 
-            <div className="flex items-center gap-1.5">
+            {/* Export Dropdown Menu */}
+            <div className="relative" ref={exportDropdownRef}>
               <button
                 type="button"
-                onClick={handleCopy}
-                className="px-3 py-1.5 rounded-lg bg-card hover:bg-muted border border-border text-foreground text-xs font-semibold flex items-center gap-1.5 transition-all"
+                onClick={() => setExportMenuOpen(!exportMenuOpen)}
+                className="px-3.5 py-1.5 rounded-xl bg-card border border-border text-foreground text-xs font-semibold hover:bg-muted transition-all flex items-center gap-2 shadow-sm"
               >
-                {isCopied ? "✓ Copied" : "Copy"}
+                <Download className="w-3.5 h-3.5 text-primary" />
+                <span>Export</span>
+                <ChevronDown className={`w-3.5 h-3.5 text-muted-foreground transition-transform duration-200 ${exportMenuOpen ? "rotate-180" : ""}`} />
               </button>
-              <button
-                type="button"
-                onClick={handleExcel}
-                className="px-3 py-1.5 rounded-lg bg-card hover:bg-muted border border-border text-emerald-600 dark:text-emerald-400 text-xs font-semibold flex items-center gap-1.5 transition-all"
-              >
-                Excel
-              </button>
-              <button
-                type="button"
-                onClick={handlePdf}
-                className="px-3 py-1.5 rounded-lg bg-card hover:bg-muted border border-border text-rose-600 dark:text-rose-400 text-xs font-semibold flex items-center gap-1.5 transition-all"
-              >
-                PDF
-              </button>
-              <button
-                type="button"
-                onClick={handlePrint}
-                className="px-3 py-1.5 rounded-lg bg-card hover:bg-muted border border-border text-primary text-xs font-semibold flex items-center gap-1.5 transition-all"
-              >
-                Print
-              </button>
+
+              {exportMenuOpen && (
+                <div className="absolute right-0 mt-1.5 w-36 rounded-xl bg-card border border-border shadow-xl py-1.5 z-50 text-xs animate-in fade-in zoom-in-95 duration-150">
+                  {/* Copy option */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleCopy();
+                      setExportMenuOpen(false);
+                    }}
+                    className="w-full px-3 py-2 text-left hover:bg-muted text-foreground flex items-center gap-2 transition-colors font-medium"
+                  >
+                    {isCopied ? (
+                      <>
+                        <Check className="w-3.5 h-3.5 text-emerald-500" />
+                        <span className="text-emerald-500 font-bold">Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5 text-muted-foreground" />
+                        <span>Copy</span>
+                      </>
+                    )}
+                  </button>
+
+                  {/* Excel option */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handleExcel();
+                      setExportMenuOpen(false);
+                    }}
+                    className="w-full px-3 py-2 text-left hover:bg-muted text-foreground flex items-center gap-2 transition-colors font-medium"
+                  >
+                    <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-500" />
+                    <span>Excel</span>
+                  </button>
+
+                  {/* PDF option */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handlePdf();
+                      setExportMenuOpen(false);
+                    }}
+                    className="w-full px-3 py-2 text-left hover:bg-muted text-foreground flex items-center gap-2 transition-colors font-medium"
+                  >
+                    <FileText className="w-3.5 h-3.5 text-rose-500" />
+                    <span>PDF</span>
+                  </button>
+
+                  <div className="my-1 border-t border-border" />
+
+                  {/* Print option */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      handlePrint();
+                      setExportMenuOpen(false);
+                    }}
+                    className="w-full px-3 py-2 text-left hover:bg-muted text-foreground flex items-center gap-2 transition-colors font-medium"
+                  >
+                    <Printer className="w-3.5 h-3.5 text-primary" />
+                    <span>Print</span>
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

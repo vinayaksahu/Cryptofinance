@@ -35,6 +35,11 @@ export const DEFAULT_SYSTEM_CONFIGS: Record<string, { value: string; description
     description: "Maximum package stake amount in USDT ($10,000.00)",
     category: "plan",
   },
+  CLOSING_MODE: {
+    value: "AUTO",
+    description: "Daily protocol closing execution mode ('AUTO' for scheduled midnight automated cycle, 'MANUAL' for manual on-demand execution)",
+    category: "plan",
+  },
 
   // 3. Bonus Wallet Utility & Registration Bounties (Slides 05 & 06)
   BONUS_UTILITY_PERCENT: {

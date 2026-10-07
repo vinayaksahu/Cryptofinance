@@ -17,7 +17,8 @@ export async function processLevelIncomeForRoi(
   contractId: string,
   packageType: "BASIC_SAVING" | "FIX_DEPOSIT",
   dailyRoiUsdt: Decimal,
-  dateStr: string
+  dateStr: string,
+  manualRunId?: string
 ) {
   let currentUserId = sourceUserId;
   const targetWallet: WalletType = "INCOME";
@@ -69,7 +70,9 @@ export async function processLevelIncomeForRoi(
       const levelIncomeUsdt = dailyRoiUsdt.times(ratePercent / 100);
 
       if (levelIncomeUsdt.isPositive() && !levelIncomeUsdt.isZero()) {
-        const referenceKey = `LEVEL_${contractId}_${sponsor.id}_L${level}_${dateStr}`;
+        const referenceKey = manualRunId
+          ? `LEVEL_${contractId}_${sponsor.id}_L${level}_${dateStr}_${manualRunId}`
+          : `LEVEL_${contractId}_${sponsor.id}_L${level}_${dateStr}`;
 
         await executeLedgerTransaction({
           userId: sponsor.id,
@@ -77,7 +80,9 @@ export async function processLevelIncomeForRoi(
           wallet: targetWallet,
           amount: levelIncomeUsdt,
           referenceKey,
-          description: `Level ${level} Team Royalty (${ratePercent}%) from ${sourceUserId}`,
+          description: manualRunId
+            ? `Level ${level} Team Royalty (${ratePercent}%) from ${sourceUserId} [Manual Closing]`
+            : `Level ${level} Team Royalty (${ratePercent}%) from ${sourceUserId}`,
           sourceUserId,
           levelNumber: level,
         });

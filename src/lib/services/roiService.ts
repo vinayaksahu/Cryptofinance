@@ -1,6 +1,7 @@
 import { db } from "../db";
 import { executeLedgerTransaction } from "../ledger";
 import { processLevelIncomeForRoi } from "./levelIncomeService";
+import { getSystemConfigValue } from "../configService";
 import Decimal from "decimal.js";
 
 /**
@@ -75,7 +76,7 @@ export function getDubaiTimeInfo(date: Date = new Date()) {
  * Distributes daily ROI for all eligible active contracts based on Dubai midnight cycle (12:01 AM GST).
  * New contracts activated today do NOT receive Day 1 ROI immediately; Day 1 is credited at the first 12:01 AM cycle.
  */
-export async function executeDailyRoiDistribution(adminId?: string) {
+export async function executeDailyRoiDistribution(adminId?: string, forceManual: boolean = false) {
   const now = new Date();
   const nowInfo = getDubaiTimeInfo(now);
 
@@ -122,7 +123,17 @@ export async function executeDailyRoiDistribution(adminId?: string) {
     const eligibleDaysTotal = Math.min(calendarDaysElapsed, contract.tenureDays);
     const daysToPay = Math.max(0, eligibleDaysTotal - contract.daysPaid);
 
-    if (daysToPay <= 0) {
+    // In forceManual mode, if daysToPay <= 0, we still grant 1 manual cycle (if contract is active and not matured)
+    let cyclesToPay = daysToPay;
+    if (forceManual && cyclesToPay <= 0) {
+      if (contract.daysPaid < contract.tenureDays) {
+        cyclesToPay = 1;
+      }
+    }
+    // Strict cap at remaining tenure
+    cyclesToPay = Math.min(cyclesToPay, contract.tenureDays - contract.daysPaid);
+
+    if (cyclesToPay <= 0) {
       continue;
     }
 
@@ -142,8 +153,8 @@ export async function executeDailyRoiDistribution(adminId?: string) {
     let contractTotalEarned = new Decimal(contract.totalEarned.toString());
     let hit2xCap = false;
 
-    // Process each unpaid cycle
-    for (let i = 0; i < daysToPay; i++) {
+    // Process each cycle
+    for (let i = 0; i < cyclesToPay; i++) {
       const remainingTo2X = max2xCapDec.minus(contractTotalEarned);
       if (remainingTo2X.lessThanOrEqualTo(0)) {
         hit2xCap = true;
@@ -164,7 +175,11 @@ export async function executeDailyRoiDistribution(adminId?: string) {
         : currentDayNumber * 24 * 60 * 60 * 1000;
       const targetDate = new Date(createdInfo.startOfDayMs + dayOffsetMs + 4 * 60 * 60 * 1000);
       const targetDateStr = `${targetDate.getUTCFullYear()}-${String(targetDate.getUTCMonth() + 1).padStart(2, "0")}-${String(targetDate.getUTCDate()).padStart(2, "0")}`;
-      const referenceKey = `ROI_${contract.id}_${targetDateStr}`;
+
+      const manualRunId = forceManual ? `${Date.now()}_${Math.random().toString(36).substring(2, 7)}` : undefined;
+      const referenceKey = manualRunId
+        ? `ROI_${contract.id}_M_${targetDateStr}_${manualRunId}`
+        : `ROI_${contract.id}_${targetDateStr}`;
 
       const ledgerResult = await executeLedgerTransaction({
         userId: contract.userId,
@@ -174,6 +189,8 @@ export async function executeDailyRoiDistribution(adminId?: string) {
         referenceKey,
         description: isFinalExactCapped
           ? `${isBasic ? "Basic" : "FD"} Final 2X Capped Daily ROI on Contract ${contract.id} (Exact $${actualRoiToPay.toFixed(4)} USDT to complete 2X)`
+          : forceManual
+          ? `${isBasic ? "Basic" : "FD"} Manual Closing Daily ROI (${rateDec}%) on Contract ${contract.id} (Day ${currentDayNumber}/${contract.tenureDays})`
           : `${isBasic ? "Basic" : "FD"} Daily ROI (${rateDec}%) on Contract ${contract.id} (Day ${currentDayNumber}/${contract.tenureDays})`,
       });
 
@@ -181,14 +198,15 @@ export async function executeDailyRoiDistribution(adminId?: string) {
         contractDaysPaid = currentDayNumber;
         contractTotalEarned = contractTotalEarned.plus(actualRoiToPay);
 
-        // Distribute 12-level royalties for this daily ROI
+        // Distribute 10-level royalties for this daily ROI
         try {
           await processLevelIncomeForRoi(
             contract.userId,
             contract.id,
             contract.packageType,
             actualRoiToPay,
-            targetDateStr
+            targetDateStr,
+            manualRunId
           );
         } catch (levelErr) {
           console.error("Level income distribution error:", levelErr);
@@ -388,8 +406,11 @@ export async function getUpcomingCycleForecast(adminId?: string) {
   });
 
   const isClosingCompleteToday = pendingContractsToday === 0;
+  const closingMode = await getSystemConfigValue("CLOSING_MODE", "AUTO");
 
   return {
+    closingMode,
+    activeContractsCount: activeContracts.length,
     currentDubaiTime: nowInfo.currentDubaiFormatted,
     currentIstTime: nowInfo.currentIstFormatted,
     currentUtcTime: nowInfo.currentUtcFormatted,
