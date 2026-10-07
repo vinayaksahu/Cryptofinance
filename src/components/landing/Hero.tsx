@@ -278,7 +278,7 @@ export function Hero() {
           <div className="w-11 h-11 rounded-2xl bg-sky-500/15 border border-sky-400/30 flex items-center justify-center text-sky-500 dark:text-sky-400 mx-auto mb-3 shadow-md shadow-sky-500/20">
             <TrendingUp className="w-5 h-5" />
           </div>
-          <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-1 font-mono">
+          <div className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-1">
             4.00% Daily
           </div>
           <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
@@ -293,7 +293,7 @@ export function Hero() {
           <div className="w-11 h-11 rounded-2xl bg-indigo-500/15 border border-indigo-400/30 flex items-center justify-center text-indigo-500 dark:text-indigo-400 mx-auto mb-3 shadow-md shadow-indigo-500/20">
             <Layers className="w-5 h-5" />
           </div>
-          <div className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 tracking-tight mb-1 font-mono">
+          <div className="text-2xl sm:text-3xl font-extrabold text-indigo-600 dark:text-indigo-400 tracking-tight mb-1">
             3-Wallet Engine
           </div>
           <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
@@ -308,14 +308,14 @@ export function Hero() {
           <div className="w-11 h-11 rounded-2xl bg-emerald-500/15 border border-emerald-400/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mx-auto mb-3 shadow-md shadow-emerald-500/20">
             <RefreshCw className="w-5 h-5" />
           </div>
-          <div className="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 tracking-tight mb-1 font-mono">
+          <div className="text-2xl sm:text-3xl font-extrabold text-emerald-600 dark:text-emerald-400 tracking-tight mb-1">
             35 Days
           </div>
           <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
             2X Doubling Engine
           </div>
           <div className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 font-medium">
-            (1.02)^35 ≈ 2.000 &bull; 4X Max
+            (1.02)^35 ≈ 2.000 &bull; 2X Max
           </div>
         </div>
 
@@ -323,7 +323,7 @@ export function Hero() {
           <div className="w-11 h-11 rounded-2xl bg-purple-500/15 border border-purple-400/30 flex items-center justify-center text-purple-600 dark:text-purple-400 mx-auto mb-3 shadow-md shadow-purple-500/20">
             <Zap className="w-5 h-5" />
           </div>
-          <div className="text-2xl sm:text-3xl font-extrabold text-purple-600 dark:text-purple-400 tracking-tight mb-1 font-mono">
+          <div className="text-2xl sm:text-3xl font-extrabold text-purple-600 dark:text-purple-400 tracking-tight mb-1">
             10 Tiers
           </div>
           <div className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">

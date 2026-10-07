@@ -175,7 +175,7 @@ export function RechargeView({ user, onRefresh }: RechargeViewProps) {
             <div className="bg-muted/40 border border-border rounded-xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="flex-1 min-w-0 text-center sm:text-left">
                 <span className="text-[11px] text-muted-foreground block font-semibold mb-1">BEP-20 (BNB Smart Chain)</span>
-                <p className="font-mono text-sm sm:text-base font-bold text-foreground break-all select-all">
+                <p className="text-sm sm:text-base font-bold text-foreground break-all select-all">
                   {depositAddress}
                 </p>
               </div>
@@ -244,7 +244,7 @@ export function RechargeView({ user, onRefresh }: RechargeViewProps) {
                 {isAutomatic && (
                   <div className="flex items-center justify-between text-xs">
                     <span className="text-muted-foreground font-medium">Confirmations:</span>
-                    <span className="font-mono text-foreground">
+                    <span className="text-foreground">
                       {latestPending.confirmations || 0} / {cryptoData?.requiredConfirmations || 3}
                     </span>
                   </div>
@@ -256,7 +256,7 @@ export function RechargeView({ user, onRefresh }: RechargeViewProps) {
                       href={`https://bscscan.com/tx/${latestPending.txHash}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-primary hover:underline flex items-center gap-1 font-mono"
+                      className="text-primary hover:underline flex items-center gap-1"
                     >
                       <span>{latestPending.txHash.slice(0, 6)}...{latestPending.txHash.slice(-4)}</span>
                       <ExternalLink className="w-3 h-3" />
@@ -323,12 +323,12 @@ export function RechargeView({ user, onRefresh }: RechargeViewProps) {
               ) : (
                 deposits.map((dep: any, index: number) => (
                   <tr key={dep.id || index} className="hover:bg-muted/40 transition-colors">
-                    <td className="py-3 px-4 font-mono">{index + 1}</td>
+                    <td className="py-3 px-4">{index + 1}</td>
                     <td className="py-3 px-4">{new Date(dep.createdAt).toLocaleDateString()}</td>
                     <td className="py-3 px-4 font-bold text-emerald-500">
                       ${Number(dep.amountInUsdt ?? dep.amountUsdt ?? 0).toFixed(2)} USDT
                     </td>
-                    <td className="py-3 px-4 font-mono">
+                    <td className="py-3 px-4">
                       {dep.txHash ? (
                         <a
                           href={`https://bscscan.com/tx/${dep.txHash}`}
@@ -344,7 +344,7 @@ export function RechargeView({ user, onRefresh }: RechargeViewProps) {
                       )}
                     </td>
                     {isAutomatic && (
-                      <td className="py-3 px-4 font-mono text-muted-foreground">
+                      <td className="py-3 px-4 text-muted-foreground">
                         {dep.confirmations || 0} / {cryptoData?.requiredConfirmations || 3}
                       </td>
                     )}
@@ -397,7 +397,7 @@ export function RechargeView({ user, onRefresh }: RechargeViewProps) {
               <div className="flex items-center gap-1.5 mt-3 text-[10px] text-primary font-bold uppercase tracking-wider bg-primary/10 px-2.5 py-0.5 rounded-full border border-primary/20">
                 <span>BEP-20 Network Only</span>
               </div>
-              <p className="text-[11px] font-mono text-foreground mt-3 break-all text-center px-2 select-all">
+              <p className="text-[11px] text-foreground mt-3 break-all text-center px-2 select-all">
                 {depositAddress}
               </p>
               <button
@@ -503,7 +503,7 @@ export function RechargeView({ user, onRefresh }: RechargeViewProps) {
                           value={txHash}
                           onChange={(e) => setTxHash(e.target.value)}
                           placeholder="Paste 0x... BSC TxHash"
-                          className="w-full bg-background border border-input rounded-xl px-3.5 py-2 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary font-mono"
+                          className="w-full bg-background border border-input rounded-xl px-3.5 py-2 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                         />
                         <span className="text-[10px] text-muted-foreground block mt-1">
                           Skip this — your deposit will still be auto-credited. Use only for instant verification.
@@ -542,7 +542,7 @@ export function RechargeView({ user, onRefresh }: RechargeViewProps) {
                       value={txHash}
                       onChange={(e) => setTxHash(e.target.value)}
                       placeholder="Paste 0x... BSC TxHash"
-                      className="w-full bg-background border border-input rounded-xl px-3.5 py-2 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary font-mono"
+                      className="w-full bg-background border border-input rounded-xl px-3.5 py-2 text-sm text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                       required
                     />
                     <span className="text-[10px] text-muted-foreground block mt-1">

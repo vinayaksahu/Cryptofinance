@@ -279,13 +279,13 @@ export default function AdminWithdrawalsView({ onRefresh }: AdminWithdrawalsView
 
                   return (
                     <tr key={withdrawal.id} className="hover:bg-muted/40 transition-colors">
-                      <td className="py-3.5 px-2 text-muted-foreground font-mono">
+                      <td className="py-3.5 px-2 text-muted-foreground">
                         {(page - 1) * itemsPerPage + index + 1}
                       </td>
                       <td className="py-3.5 px-2">
                         <div className="flex flex-col">
                           <span className="text-foreground font-semibold">{withdrawal.user?.fullName || withdrawal.user?.name || "Member"}</span>
-                          <span className="text-[11px] text-muted-foreground font-mono">{withdrawal.user?.customId || "N/A"}</span>
+                          <span className="text-[11px] text-muted-foreground">{withdrawal.user?.customId || "N/A"}</span>
                         </div>
                       </td>
                       <td className="py-3.5 px-2 text-foreground font-semibold">
@@ -304,7 +304,7 @@ export default function AdminWithdrawalsView({ onRefresh }: AdminWithdrawalsView
                       <td className="py-3.5 px-2">
                         {address ? (
                           <div className="flex items-center gap-1.5">
-                            <span className="text-muted-foreground font-mono text-[11px]">
+                            <span className="text-muted-foreground text-[11px]">
                               {address.length > 14 ? `${address.slice(0, 8)}...${address.slice(-6)}` : address}
                             </span>
                             <button 

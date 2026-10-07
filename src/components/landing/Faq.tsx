@@ -21,7 +21,7 @@ export function Faq() {
     },
     {
       q: "What is the 35-Day Compounding Engine and 2X Cap Lock Rule?",
-      a: "By choosing compounding instead of daily withdrawal, reinvesting your 2% daily pool returns doubles your principal in exactly 35 days: (1.02)^35 ≈ 2.000. When your balance reaches 2X of initial stake, compounding automatically pauses (2X Cap Lock Rule) and requires taking at least 1 withdrawal to resume. This safety mechanism unlocks up to ~400% (4X) total profit power!",
+      a: "By choosing compounding instead of daily withdrawal, reinvesting your 2% daily pool returns doubles your principal in exactly 35 days: (1.02)^35 ≈ 2.000. When your total payout approaches 2X of initial stake, compounding reaches its cap and the final payout is capped to the exact balance needed to complete 2X (200%), ensuring exact doubling without exceeding protocol limits.",
     },
     {
       q: "What are the cashout rules and limits?",
@@ -38,7 +38,7 @@ export function Faq() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <span className="text-sky-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25 font-mono">
+          <span className="text-sky-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25">
             FREQUENTLY ASKED QUESTIONS &bull; PROTOCOL DECK
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-black text-[var(--text-main)] mt-3">

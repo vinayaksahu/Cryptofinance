@@ -328,14 +328,14 @@ export function AdminConfigView() {
         
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <div className="flex items-center gap-2.5 text-[#00D2FF] text-xs font-bold uppercase tracking-widest font-mono mb-1.5">
+            <div className="flex items-center gap-2.5 text-[#00D2FF] text-xs font-bold uppercase tracking-widest mb-1.5">
               <Settings className="w-4 h-4 animate-spin-slow" />
               <span>Real-Time Protocol Governance</span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight">
               Protocol Configuration &amp; Governance
             </h1>
-            <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-xl font-mono">
+            <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-xl">
               Configure parameters strictly matching the Crypto Finance Protocol plan: 4% Daily Yield, 2X Allocation Pool, 10% Bonus Wallet utility, 10-Level Royalties, and 10% Liquidity Fee.
             </p>
           </div>
@@ -345,7 +345,7 @@ export function AdminConfigView() {
               type="button"
               onClick={handleReset}
               disabled={saving || !hasUnsavedChanges}
-              className="px-4 py-2.5 rounded-xl border border-white/10 bg-slate-900/60 hover:bg-white/10 text-slate-300 text-xs font-semibold flex items-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed font-mono"
+              className="px-4 py-2.5 rounded-xl border border-white/10 bg-slate-900/60 hover:bg-white/10 text-slate-300 text-xs font-semibold flex items-center gap-2 transition-all disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <RotateCcw className="w-4 h-4" />
               <span>Discard</span>
@@ -355,7 +355,7 @@ export function AdminConfigView() {
               type="button"
               onClick={() => handleSave()}
               disabled={saving || !hasUnsavedChanges}
-              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#00FFA3] to-[#00D2FF] hover:opacity-95 text-slate-950 font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg shadow-[#00FFA3]/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed font-mono"
+              className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-[#00FFA3] to-[#00D2FF] hover:opacity-95 text-slate-950 font-black text-xs uppercase tracking-wider flex items-center gap-2 shadow-lg shadow-[#00FFA3]/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {saving ? (
                 <>
@@ -391,7 +391,7 @@ export function AdminConfigView() {
         )}
 
         {hasUnsavedChanges && !statusMessage && (
-          <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold font-mono">
+          <div className="mt-4 inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-400 text-xs font-semibold">
             <AlertCircle className="w-3.5 h-3.5" />
             <span>Unsaved modifications detected. Click &quot;Save Changes&quot; to apply immediately.</span>
           </div>
@@ -409,7 +409,7 @@ export function AdminConfigView() {
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold font-mono flex items-center gap-1.5 transition-all whitespace-nowrap ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-bold flex items-center gap-1.5 transition-all whitespace-nowrap ${
                   isActive
                     ? "bg-[#00D2FF] text-slate-950 shadow-md shadow-[#00D2FF]/20"
                     : "text-slate-400 hover:text-white"
@@ -430,7 +430,7 @@ export function AdminConfigView() {
             placeholder="Search configuration..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full bg-slate-900/80 border border-white/10 rounded-xl pl-9 pr-4 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-[#00D2FF] transition-colors font-mono"
+            className="w-full bg-slate-900/80 border border-white/10 rounded-xl pl-9 pr-4 py-1.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-[#00D2FF] transition-colors"
           />
         </div>
       </div>
@@ -440,13 +440,13 @@ export function AdminConfigView() {
         <div className="glass-card-elevated glass-glow-top p-6 sm:p-7 relative overflow-hidden">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/10">
             <div>
-              <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-widest font-mono mb-1.5">
+              <div className="flex items-center gap-2 text-amber-400 text-xs font-bold uppercase tracking-widest mb-1.5">
                 <Power className="w-4 h-4" />
                 <span>Platform Operational Access Mode</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-black text-white flex flex-wrap items-center gap-3">
                 <span>System Access Controller</span>
-                <span className={`text-xs px-3 py-1 rounded-full font-bold uppercase border flex items-center gap-1.5 font-mono ${
+                <span className={`text-xs px-3 py-1 rounded-full font-bold uppercase border flex items-center gap-1.5 ${
                   !isMaintenanceActive
                     ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
                     : "bg-rose-500/20 text-rose-300 border-rose-500/40"
@@ -463,7 +463,7 @@ export function AdminConfigView() {
             {/* Direct Admin Link Security Guarantee Callout */}
             <div className="bg-slate-950/80 border border-amber-500/30 p-4 rounded-2xl max-w-sm shrink-0">
               <div className="flex items-center justify-between gap-2 mb-1.5">
-                <span className="text-xs font-bold text-amber-400 flex items-center gap-1.5 font-mono">
+                <span className="text-xs font-bold text-amber-400 flex items-center gap-1.5">
                   <ShieldAlert className="w-3.5 h-3.5" /> Direct Admin Login Link
                 </span>
                 <button
@@ -476,13 +476,13 @@ export function AdminConfigView() {
                       setTimeout(() => setCopiedAdminLink(false), 2500);
                     }
                   }}
-                  className="text-[11px] font-bold px-2 py-0.5 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 flex items-center gap-1 transition font-mono"
+                  className="text-[11px] font-bold px-2 py-0.5 rounded bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 flex items-center gap-1 transition"
                 >
                   {copiedAdminLink ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
                   <span>{copiedAdminLink ? "Copied" : "Copy"}</span>
                 </button>
               </div>
-              <p className="text-[11px] text-slate-300 font-mono bg-black/40 px-2.5 py-1.5 rounded-lg border border-slate-800 break-all select-all">
+              <p className="text-[11px] text-slate-300 bg-black/40 px-2.5 py-1.5 rounded-lg border border-slate-800 break-all select-all">
                 /adminlogin
               </p>
             </div>
@@ -495,7 +495,7 @@ export function AdminConfigView() {
                 : "bg-slate-900/40 border-white/10"
             }`}>
               <div>
-                <span className="text-xs font-black uppercase text-emerald-400 font-mono flex items-center gap-1.5 mb-1">
+                <span className="text-xs font-black uppercase text-emerald-400 flex items-center gap-1.5 mb-1">
                   <Activity className="w-3.5 h-3.5" /> Normal Live Status
                 </span>
                 <p className="text-xs text-slate-400 mb-4">
@@ -506,7 +506,7 @@ export function AdminConfigView() {
                 type="button"
                 onClick={() => handleSetPlatformMode(false)}
                 disabled={saving || !isMaintenanceActive}
-                className={`w-full py-2.5 rounded-xl text-xs font-bold font-mono transition ${
+                className={`w-full py-2.5 rounded-xl text-xs font-bold transition ${
                   !isMaintenanceActive
                     ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 cursor-default"
                     : "bg-emerald-600 hover:bg-emerald-500 text-white"
@@ -522,7 +522,7 @@ export function AdminConfigView() {
                 : "bg-slate-900/40 border-white/10"
             }`}>
               <div>
-                <span className="text-xs font-black uppercase text-rose-400 font-mono flex items-center gap-1.5 mb-1">
+                <span className="text-xs font-black uppercase text-rose-400 flex items-center gap-1.5 mb-1">
                   <ShieldAlert className="w-3.5 h-3.5" /> System Maintenance
                 </span>
                 <p className="text-xs text-slate-400 mb-4">
@@ -533,7 +533,7 @@ export function AdminConfigView() {
                 type="button"
                 onClick={() => handleSetPlatformMode(true)}
                 disabled={saving || isMaintenanceActive}
-                className={`w-full py-2.5 rounded-xl text-xs font-bold font-mono transition ${
+                className={`w-full py-2.5 rounded-xl text-xs font-bold transition ${
                   isMaintenanceActive
                     ? "bg-rose-500/20 text-rose-300 border border-rose-500/40 cursor-default"
                     : "bg-rose-600 hover:bg-rose-500 text-white"
@@ -551,13 +551,13 @@ export function AdminConfigView() {
         <div className="glass-card-elevated glass-glow-top p-6 sm:p-7 relative overflow-hidden">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-white/10">
             <div>
-              <div className="flex items-center gap-2 text-[#00FFA3] text-xs font-bold uppercase tracking-widest font-mono mb-1.5">
+              <div className="flex items-center gap-2 text-[#00FFA3] text-xs font-bold uppercase tracking-widest mb-1.5">
                 <Clock className="w-4 h-4" />
                 <span>Withdrawal Timing &amp; Liquidity Schedule</span>
               </div>
               <h2 className="text-xl sm:text-2xl font-black text-white flex items-center gap-3">
                 <span>Withdrawal Hours &amp; 24/7 Operations</span>
-                <span className={`text-xs px-2.5 py-1 rounded-full font-bold uppercase border font-mono ${
+                <span className={`text-xs px-2.5 py-1 rounded-full font-bold uppercase border ${
                   previewStatus.isOpen
                     ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/40"
                     : "bg-rose-500/20 text-rose-300 border-rose-500/40"
@@ -565,7 +565,7 @@ export function AdminConfigView() {
                   {previewStatus.isOpen ? "● Open Now" : "● Closed"}
                 </span>
               </h2>
-              <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-xl font-mono">
+              <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-xl">
                 Set custom withdrawal window or toggle 24/7 mode. Minimum withdrawal is $2.00 USDT, with 10% Protocol Liquidity fee retained.
               </p>
             </div>
@@ -573,11 +573,11 @@ export function AdminConfigView() {
             {/* 24/7 Mode Switch */}
             <div className="flex items-center gap-4 bg-slate-950/80 border border-white/10 p-4 rounded-2xl shadow-lg">
               <div className="text-left sm:text-right">
-                <div className="text-xs font-bold text-white flex items-center gap-1.5 sm:justify-end font-mono">
+                <div className="text-xs font-bold text-white flex items-center gap-1.5 sm:justify-end">
                   <Sparkles className="w-3.5 h-3.5 text-[#00FFA3]" />
                   <span>24/7 Mode (Always Open)</span>
                 </div>
-                <div className="text-[11px] text-slate-400 font-mono">
+                <div className="text-[11px] text-slate-400">
                   {is24hActive ? "Members can withdraw anytime 24h" : "Strict daily window active"}
                 </div>
               </div>
@@ -603,7 +603,7 @@ export function AdminConfigView() {
           {/* Timing Pickers & Live Preview */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mt-6">
             <div className="p-4 rounded-2xl bg-slate-950/60 border border-white/10">
-              <label className="text-xs font-bold text-slate-200 block mb-1 font-mono">
+              <label className="text-xs font-bold text-slate-200 block mb-1">
                 Daily Window Start Time (HH:MM)
               </label>
               <input
@@ -611,12 +611,12 @@ export function AdminConfigView() {
                 value={currentStartTime}
                 disabled={is24hActive}
                 onChange={(e) => updateStartTime(e.target.value)}
-                className="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-white font-mono text-sm focus:outline-none focus:border-[#00D2FF] disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:outline-none focus:border-[#00D2FF] disabled:opacity-40 disabled:cursor-not-allowed"
               />
             </div>
 
             <div className="p-4 rounded-2xl bg-slate-950/60 border border-white/10">
-              <label className="text-xs font-bold text-slate-200 block mb-1 font-mono">
+              <label className="text-xs font-bold text-slate-200 block mb-1">
                 Daily Window Close Time (HH:MM)
               </label>
               <input
@@ -624,7 +624,7 @@ export function AdminConfigView() {
                 value={currentEndTime}
                 disabled={is24hActive}
                 onChange={(e) => updateEndTime(e.target.value)}
-                className="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-white font-mono text-sm focus:outline-none focus:border-[#00D2FF] disabled:opacity-40 disabled:cursor-not-allowed"
+                className="w-full bg-slate-900 border border-white/15 rounded-xl px-3 py-2 text-white text-sm focus:outline-none focus:border-[#00D2FF] disabled:opacity-40 disabled:cursor-not-allowed"
               />
             </div>
           </div>
@@ -635,10 +635,10 @@ export function AdminConfigView() {
       {loading ? (
         <div className="flex flex-col items-center justify-center py-20 bg-slate-900/30 rounded-3xl border border-white/10">
           <Loader2 className="w-8 h-8 text-[#00D2FF] animate-spin mb-3" />
-          <p className="text-slate-400 text-sm font-medium font-mono">Loading protocol configurations...</p>
+          <p className="text-slate-400 text-sm font-medium">Loading protocol configurations...</p>
         </div>
       ) : filteredKeys.length === 0 ? (
-        <div className="text-center py-16 bg-slate-900/30 rounded-3xl border border-white/10 text-slate-400 text-sm font-mono">
+        <div className="text-center py-16 bg-slate-900/30 rounded-3xl border border-white/10 text-slate-400 text-sm">
           No configurations match your search or filter.
         </div>
       ) : (
@@ -661,25 +661,25 @@ export function AdminConfigView() {
                 >
                   <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4 pb-5 border-b border-white/10">
                     <div>
-                      <div className="flex items-center gap-2 text-[#00D2FF] text-xs font-bold uppercase tracking-widest font-mono mb-1">
+                      <div className="flex items-center gap-2 text-[#00D2FF] text-xs font-bold uppercase tracking-widest mb-1">
                         <Wallet className="w-4 h-4" />
                         <span>Official Protocol Receiving Vault</span>
                       </div>
                       <h2 className="text-xl sm:text-2xl font-black text-white">
                         USDT (BEP-20) Receiving Wallet &amp; QR Code
                       </h2>
-                      <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl font-mono">
+                      <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-2xl">
                         This receiving address and QR code are displayed to members when making USDT deposits.
                       </p>
                     </div>
 
                     <div className="flex items-center gap-2 self-start md:self-auto">
                       {(isAddressModified || isQrModified) && (
-                        <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider bg-amber-950/80 px-2.5 py-1 rounded-lg border border-amber-500/40 font-mono">
+                        <span className="text-[11px] font-bold text-amber-400 uppercase tracking-wider bg-amber-950/80 px-2.5 py-1 rounded-lg border border-amber-500/40">
                           Unsaved Edits
                         </span>
                       )}
-                      <span className="font-mono text-xs px-3 py-1 rounded-lg bg-sky-950/80 text-sky-300 border border-sky-500/30">
+                      <span className="text-xs px-3 py-1 rounded-lg bg-sky-950/80 text-sky-300 border border-sky-500/30">
                         BEP-20 Network
                       </span>
                     </div>
@@ -688,7 +688,7 @@ export function AdminConfigView() {
                   <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6 items-start">
                     <div className="lg:col-span-7 space-y-4">
                       <div>
-                        <div className="text-xs font-bold text-slate-200 mb-1.5 flex items-center justify-between font-mono">
+                        <div className="text-xs font-bold text-slate-200 mb-1.5 flex items-center justify-between">
                           <span>Deposit Wallet Address (BSC BEP-20)</span>
                           {currentAddress && (
                             <button
@@ -698,7 +698,7 @@ export function AdminConfigView() {
                                 setCopiedAddress(true);
                                 setTimeout(() => setCopiedAddress(false), 2000);
                               }}
-                              className="text-[11px] text-[#00D2FF] hover:text-white flex items-center gap-1 font-semibold font-mono"
+                              className="text-[11px] text-[#00D2FF] hover:text-white flex items-center gap-1 font-semibold"
                             >
                               {copiedAddress ? (
                                 <>
@@ -718,18 +718,18 @@ export function AdminConfigView() {
                           type="text"
                           value={currentAddress}
                           onChange={(e) => handleInputChange("COMPANY_USDT_ADDRESS", e.target.value.trim())}
-                          className="w-full bg-slate-950/70 border border-white/15 focus:border-[#00D2FF] rounded-xl px-4 py-3 text-xs sm:text-sm text-white font-mono focus:outline-none"
+                          className="w-full bg-slate-950/70 border border-white/15 focus:border-[#00D2FF] rounded-xl px-4 py-3 text-xs sm:text-sm text-white focus:outline-none"
                           placeholder="e.g. 0x1234567890abcdef..."
                           required
                         />
                       </div>
 
                       <div className="pt-2">
-                        <div className="text-xs font-bold text-slate-200 mb-2 font-mono">
+                        <div className="text-xs font-bold text-slate-200 mb-2">
                           Manage Deposit QR Code
                         </div>
                         <div className="flex flex-wrap items-center gap-3">
-                          <label className="cursor-pointer px-4 py-2.5 rounded-xl bg-[#00D2FF] hover:bg-[#00D2FF]/80 text-slate-950 text-xs font-bold flex items-center gap-2 shadow-lg transition-all font-mono">
+                          <label className="cursor-pointer px-4 py-2.5 rounded-xl bg-[#00D2FF] hover:bg-[#00D2FF]/80 text-slate-950 text-xs font-bold flex items-center gap-2 shadow-lg transition-all">
                             <Upload className="w-4 h-4" />
                             <span>Upload Custom QR Image</span>
                             <input
@@ -747,7 +747,7 @@ export function AdminConfigView() {
                             <button
                               type="button"
                               onClick={() => handleInputChange("COMPANY_USDT_QR", "")}
-                              className="px-4 py-2.5 rounded-xl bg-rose-950/60 hover:bg-rose-900/60 text-rose-300 border border-rose-500/30 text-xs font-bold flex items-center gap-1.5 transition-all font-mono"
+                              className="px-4 py-2.5 rounded-xl bg-rose-950/60 hover:bg-rose-900/60 text-rose-300 border border-rose-500/30 text-xs font-bold flex items-center gap-1.5 transition-all"
                             >
                               <Trash2 className="w-3.5 h-3.5" />
                               <span>Reset to Auto QR</span>
@@ -773,7 +773,7 @@ export function AdminConfigView() {
                           </div>
                         )}
                       </div>
-                      <span className="text-[11px] font-bold text-slate-400 font-mono">
+                      <span className="text-[11px] font-bold text-slate-400">
                         {customQr ? "Custom Uploaded QR Active" : "Auto-Generated from Address"}
                       </span>
                     </div>
@@ -807,17 +807,17 @@ export function AdminConfigView() {
                     <label className="text-sm font-bold text-white tracking-tight block">
                       {FRIENDLY_NAMES[key] || key}
                     </label>
-                    <span className="font-mono text-[10px] px-2 py-0.5 rounded-md bg-sky-950/60 text-sky-300 border border-sky-500/30 shrink-0">
+                    <span className="text-[10px] px-2 py-0.5 rounded-md bg-sky-950/60 text-sky-300 border border-sky-500/30 shrink-0">
                       {key}
                     </span>
                   </div>
 
-                  <p className="text-xs text-slate-400 mb-3 leading-relaxed font-mono">
+                  <p className="text-xs text-slate-400 mb-3 leading-relaxed">
                     {item.description}
                   </p>
 
                   {isRoyaltyLevel && (
-                    <div className="flex items-center gap-1.5 mb-2 text-[11px] font-semibold text-[#00FFA3] bg-[#00FFA3]/10 border border-[#00FFA3]/30 rounded-lg px-2.5 py-1 font-mono">
+                    <div className="flex items-center gap-1.5 mb-2 text-[11px] font-semibold text-[#00FFA3] bg-[#00FFA3]/10 border border-[#00FFA3]/30 rounded-lg px-2.5 py-1">
                       <Users className="w-3.5 h-3.5" />
                       <span>Unlock: Requires {levelNum} Active Direct Member{Number(levelNum) > 1 ? "s" : ""}</span>
                     </div>
@@ -830,7 +830,7 @@ export function AdminConfigView() {
                       <select
                         value={formValues[key] ?? item.value}
                         onChange={(e) => handleInputChange(key, e.target.value)}
-                        className="w-full bg-slate-950/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#00D2FF] font-semibold font-mono"
+                        className="w-full bg-slate-950/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#00D2FF] font-semibold"
                       >
                         <option value="true">24/7 Open (Always Accessible)</option>
                         <option value="false">Scheduled Daily Window</option>
@@ -840,7 +840,7 @@ export function AdminConfigView() {
                         type="time"
                         value={formValues[key] ?? item.value}
                         onChange={(e) => handleInputChange(key, e.target.value)}
-                        className="w-full bg-slate-950/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#00D2FF] font-mono font-semibold"
+                        className="w-full bg-slate-950/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#00D2FF] font-semibold"
                         required
                       />
                     ) : (
@@ -849,14 +849,14 @@ export function AdminConfigView() {
                         step={key.includes("PERCENT") || key.includes("ROI") ? "any" : "1"}
                         value={formValues[key] ?? item.value}
                         onChange={(e) => handleInputChange(key, e.target.value)}
-                        className="w-full bg-slate-950/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#00D2FF] font-mono font-semibold"
+                        className="w-full bg-slate-950/70 border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-[#00D2FF] font-semibold"
                         placeholder={`Enter ${FRIENDLY_NAMES[key] || key}`}
                         required
                       />
                     )}
 
                     {formValues[key] !== item.value && (
-                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-amber-400 uppercase tracking-wider bg-amber-950/80 px-1.5 py-0.5 rounded border border-amber-500/40 pointer-events-none font-mono">
+                      <span className="absolute right-3 top-1/2 -translate-y-1/2 text-[10px] font-bold text-amber-400 uppercase tracking-wider bg-amber-950/80 px-1.5 py-0.5 rounded border border-amber-500/40 pointer-events-none">
                         Modified
                       </span>
                     )}
@@ -872,11 +872,11 @@ export function AdminConfigView() {
       {hasUnsavedChanges && (
         <div className="fixed bottom-6 right-6 sm:right-10 z-40 animate-in slide-in-from-bottom-5">
           <div className="bg-[#090e1a]/95 border border-[#00FFA3]/50 rounded-2xl px-5 py-3 shadow-2xl flex items-center gap-4 backdrop-blur-md">
-            <div className="flex items-center gap-2 text-xs text-slate-300 font-semibold font-mono">
+            <div className="flex items-center gap-2 text-xs text-slate-300 font-semibold">
               <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
               <span>Unsaved changes detected</span>
             </div>
-            <div className="flex items-center gap-2 font-mono">
+            <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={handleReset}

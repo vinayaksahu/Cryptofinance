@@ -5,7 +5,7 @@
 <title>Dubai Finance - Business Presentation (DARK)</title>
 <style>
 
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Space+Grotesk:wght@700;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
     @page {
         size: 1920px 1080px;
@@ -19,7 +19,7 @@
     }
 
     body {
-        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-family: 'Inter', sans-serif;
         background-color: #070B12;
         color: #FFFFFF;
         -webkit-print-color-adjust: exact;
@@ -64,7 +64,7 @@
     }
 
     .logo-text {
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 28px;
         font-weight: 900;
         letter-spacing: 2px;
@@ -75,7 +75,7 @@
         background: rgba(245, 158, 11, 0.15);
         border: 1.5px solid #F59E0B;
         color: #FDE68A;
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 16px;
         font-weight: 800;
         text-transform: uppercase;
@@ -103,7 +103,7 @@
     }
 
     .footer-right {
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 16px;
         font-weight: 800;
         color: #F59E0B;
@@ -132,7 +132,7 @@
     }
 
     .main-title {
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 48px;
         font-weight: 900;
         color: #FFFFFF;

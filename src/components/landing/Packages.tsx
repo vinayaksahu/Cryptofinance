@@ -110,7 +110,7 @@ export function Packages() {
               }`}
             >
               <RefreshCw className="w-4 h-4" />
-              35-Day Compounding Engine (2X Doubling &bull; 4X Max)
+              35-Day Compounding Engine (2X Doubling &bull; 2X Max)
             </button>
           </div>
         </div>
@@ -124,7 +124,7 @@ export function Packages() {
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400 font-mono">
+                  <span className="text-xs font-bold uppercase tracking-wider text-sky-600 dark:text-sky-400">
                     Protocol Utility Rule
                   </span>
                   <span className="glass-pill px-2 py-0.5 text-[10px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-500/20 border-emerald-500/30">
@@ -140,8 +140,8 @@ export function Packages() {
               </div>
             </div>
             <div className="flex sm:flex-col gap-2 shrink-0 text-center sm:text-right">
-              <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">Minimum Entry</span>
-              <span className="text-2xl font-black text-sky-600 dark:text-sky-400 font-mono">$2.00 USDT</span>
+              <span className="text-xs text-slate-500 dark:text-slate-400">Minimum Entry</span>
+              <span className="text-2xl font-black text-sky-600 dark:text-sky-400">$2.00 USDT</span>
             </div>
           </div>
         </div>
@@ -155,7 +155,7 @@ export function Packages() {
                 <strong>Dynamic 4% Daily Formula:</strong> Capital Stake unlocks an instant 2X Contract Allocation Pool. Daily payout releases 2.00% of remaining pool balance ($100 stake ➔ Day 1 pays $4.00, exact 4.00% daily ROI). Continues until 100% of the 2X pool ($200.00) is extracted!
               </span>
             </div>
-            <span className="glass-pill px-3 py-1 text-sky-600 dark:text-sky-400 font-mono font-bold shrink-0">
+            <span className="glass-pill px-3 py-1 text-sky-600 dark:text-sky-400 font-bold shrink-0">
               Dual Perspective Math
             </span>
           </div>
@@ -164,11 +164,11 @@ export function Packages() {
             <div className="flex items-center gap-3">
               <RefreshCw className="w-5 h-5 text-emerald-500 dark:text-emerald-400 shrink-0" />
               <span>
-                <strong>The 35-Day Compounding Engine:</strong> Reinvesting 2% daily pool returns doubles your principal in exactly 35 days: <code className="text-emerald-600 dark:text-emerald-400 font-bold">(1.02)^35 ≈ 2.000</code>. At 2X, the <strong>2X Cap Lock Rule</strong> engages: execute 1 withdrawal to resume and unlock up to <strong>~400% (4X) Total Extraction</strong>!
+                <strong>The 35-Day Compounding Engine:</strong> Reinvesting 2% daily pool returns doubles your principal in exactly 35 days: <code className="text-emerald-600 dark:text-emerald-400 font-bold">(1.02)^35 ≈ 2.000</code>. At 2X, the <strong>2X Cap Lock Rule</strong> engages: returns are capped at exact <strong>200% (2X) Total Extraction</strong> with the final ROI paying the exact remaining balance!
               </span>
             </div>
-            <span className="glass-pill px-3 py-1 text-emerald-600 dark:text-emerald-400 font-mono font-bold shrink-0">
-              4X Profit Potential
+            <span className="glass-pill px-3 py-1 text-emerald-600 dark:text-emerald-400 font-bold shrink-0">
+              2X Profit Potential
             </span>
           </div>
         )}
@@ -190,11 +190,11 @@ export function Packages() {
 
               <div>
                 <div className="flex justify-between items-center mb-3">
-                  <span className="text-[11px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest font-mono">
+                  <span className="text-[11px] font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest">
                     {b.tier}
                   </span>
                   {!b.featured && (
-                    <span className="glass-pill text-[9px] px-2 py-0.5 text-slate-500 dark:text-slate-400 font-mono font-semibold">
+                    <span className="glass-pill text-[9px] px-2 py-0.5 text-slate-500 dark:text-slate-400 font-semibold">
                       {b.tag}
                     </span>
                   )}
@@ -202,36 +202,36 @@ export function Packages() {
 
                 <div className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-2">
                   ${b.stake.toLocaleString()}
-                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 font-mono ml-1">USDT</span>
+                  <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 ml-1">USDT</span>
                 </div>
 
                 <div className="p-3 rounded-2xl bg-slate-50/80 dark:bg-slate-900/40 border border-slate-200/70 dark:border-white/10 mb-4 text-xs space-y-1.5">
                   <div className="flex justify-between">
                     <span className="text-slate-500 dark:text-slate-400">Bonus (10%):</span>
-                    <span className="font-mono font-bold text-indigo-600 dark:text-indigo-300">-${b.bonusUtility.toFixed(2)}</span>
+                    <span className="font-bold text-indigo-600 dark:text-indigo-300">-${b.bonusUtility.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500 dark:text-slate-400">External USDT:</span>
-                    <span className="font-mono font-bold text-sky-600 dark:text-sky-400">${b.usdtRequired.toFixed(2)}</span>
+                    <span className="font-bold text-sky-600 dark:text-sky-400">${b.usdtRequired.toFixed(2)}</span>
                   </div>
                 </div>
 
                 <div className="space-y-2 text-xs border-t border-slate-200/80 dark:border-white/10 pt-3 mb-5">
                   <div className="flex justify-between">
                     <span className="text-slate-500 dark:text-slate-400">2X Pool:</span>
-                    <span className="font-mono font-bold text-slate-900 dark:text-white">${b.pool.toFixed(2)}</span>
+                    <span className="font-bold text-slate-900 dark:text-white">${b.pool.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500 dark:text-slate-400">Day 1 Payout:</span>
-                    <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">${b.day1Roi.toFixed(2)}/day</span>
+                    <span className="font-bold text-emerald-600 dark:text-emerald-400">${b.day1Roi.toFixed(2)}/day</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500 dark:text-slate-400">Tenure:</span>
-                    <span className="font-mono font-bold text-slate-700 dark:text-slate-300">{b.duration}</span>
+                    <span className="font-bold text-slate-700 dark:text-slate-300">{b.duration}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500 dark:text-slate-400">Total Yield:</span>
-                    <span className="font-mono font-bold text-sky-600 dark:text-sky-300">${b.totalExtracted.toFixed(2)}</span>
+                    <span className="font-bold text-sky-600 dark:text-sky-300">${b.totalExtracted.toFixed(2)}</span>
                   </div>
                 </div>
               </div>

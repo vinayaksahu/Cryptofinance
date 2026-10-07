@@ -8,7 +8,7 @@ export function About() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 font-mono">
+          <span className="text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25">
             SWISS JURISDICTION &bull; QUANTITATIVE ARCHITECTURE &bull; SLIDES 02-03
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-black text-[var(--text-main)] mt-3">
@@ -36,7 +36,7 @@ export function About() {
                   Operates high-frequency algorithmic arbitrage across major blockchain liquidity venues, capturing risk-neutral price differentials 24/7.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-cyan-400 font-semibold flex items-center gap-1.5 font-mono">
+              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-cyan-400 font-semibold flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4" /> Zero Emotional Trading
               </div>
             </div>
@@ -54,7 +54,7 @@ export function About() {
                   Disciplined 60% Quant Arbitrage deployment, 35% Smart Contract Liquidity Reserve for instant user cashouts, and 5% Security maintenance.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-emerald-400 font-semibold flex items-center gap-1.5 font-mono">
+              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-emerald-400 font-semibold flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4" /> 35% Instant Cashout Reserve
               </div>
             </div>
@@ -72,7 +72,7 @@ export function About() {
                   Triple-isolated ledgers completely eliminate bank-run risks. Promotional community credits are isolated from withdrawable yield reserves.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-indigo-600 dark:text-indigo-400 font-semibold flex items-center gap-1.5 font-mono">
+              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-indigo-600 dark:text-indigo-400 font-semibold flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4" /> 10% Utility &bull; Zero Deficit
               </div>
             </div>
@@ -90,7 +90,7 @@ export function About() {
                   Binance Smart Chain (BEP-20 USDT) native architecture. Zero fiat delays, automated instant Web3 payouts, and 100% verifiable mathematical logic.
                 </p>
               </div>
-              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-sky-600 dark:text-sky-400 font-semibold flex items-center gap-1.5 font-mono">
+              <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-xs text-sky-600 dark:text-sky-400 font-semibold flex items-center gap-1.5">
                 <CheckCircle2 className="w-4 h-4" /> Code Is Law &bull; Min $2 Payout
               </div>
             </div>
@@ -100,14 +100,14 @@ export function About() {
           <div className="lg:col-span-5 glass-card-elevated p-8 rounded-3xl flex flex-col justify-between relative overflow-hidden">
             {/* Header Badge */}
             <div className="relative z-10">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/15 border border-sky-500/30 text-sky-600 dark:text-sky-400 text-xs font-bold uppercase tracking-wider mb-6 font-mono">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-500/15 border border-sky-500/30 text-sky-600 dark:text-sky-400 text-xs font-bold uppercase tracking-wider mb-6">
                 <Building className="w-3.5 h-3.5" />
                 <span>CORPORATE LEADERSHIP &bull; SWISS JURISDICTION</span>
               </div>
 
               {/* Managing Leadership Details */}
               <div className="mb-6">
-                <span className="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest block font-mono">
+                <span className="text-xs font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest block">
                   MANAGING LEADERSHIP
                 </span>
                 <h3 className="font-display text-2xl sm:text-3xl font-black text-[var(--text-main)] mt-1">
@@ -141,13 +141,13 @@ export function About() {
 
               {/* Stake Allocation Breakdown (Slide 09) */}
               <div className="space-y-3 pt-2">
-                <span className="text-xs font-bold text-[var(--text-subtle)] uppercase tracking-wider block font-mono">
+                <span className="text-xs font-bold text-[var(--text-subtle)] uppercase tracking-wider block">
                   Audited Stake Deployment (Slide 09)
                 </span>
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-xs">
                     <span className="font-semibold text-[var(--text-main)]">Quant Arbitrage AI Bots</span>
-                    <span className="font-mono font-bold text-sky-600 dark:text-cyan-400">60%</span>
+                    <span className="font-bold text-sky-600 dark:text-cyan-400">60%</span>
                   </div>
                   <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                     <div className="h-full bg-sky-500 dark:bg-cyan-400 rounded-full w-[60%]" />
@@ -155,7 +155,7 @@ export function About() {
 
                   <div className="flex justify-between items-center text-xs pt-1">
                     <span className="font-semibold text-[var(--text-main)]">Smart Contract Liquidity Reserve</span>
-                    <span className="font-mono font-bold text-emerald-600 dark:text-emerald-400">35%</span>
+                    <span className="font-bold text-emerald-600 dark:text-emerald-400">35%</span>
                   </div>
                   <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                     <div className="h-full bg-emerald-500 dark:bg-emerald-400 rounded-full w-[35%]" />
@@ -163,7 +163,7 @@ export function About() {
 
                   <div className="flex justify-between items-center text-xs pt-1">
                     <span className="font-semibold text-[var(--text-main)]">Compliance &amp; Dev Security</span>
-                    <span className="font-mono font-bold text-indigo-600 dark:text-indigo-400">5%</span>
+                    <span className="font-bold text-indigo-600 dark:text-indigo-400">5%</span>
                   </div>
                   <div className="w-full h-1.5 bg-slate-200 dark:bg-slate-800 rounded-full overflow-hidden">
                     <div className="h-full bg-indigo-500 dark:bg-indigo-400 rounded-full w-[5%]" />
@@ -174,11 +174,11 @@ export function About() {
 
             {/* Official Support Footer */}
             <div className="mt-8 pt-4 border-t border-slate-200/80 dark:border-cyan-500/20 flex flex-wrap items-center justify-between gap-3 text-xs text-[var(--text-subtle)]">
-              <span className="flex items-center gap-1.5 font-mono">
+              <span className="flex items-center gap-1.5">
                 <Mail className="w-3.5 h-3.5 text-sky-500 dark:text-sky-400" />
                 support@cryptofinance.online
               </span>
-              <span className="font-mono font-bold text-sky-600 dark:text-sky-400">
+              <span className="font-bold text-sky-600 dark:text-sky-400">
                 cryptofinance.online
               </span>
             </div>

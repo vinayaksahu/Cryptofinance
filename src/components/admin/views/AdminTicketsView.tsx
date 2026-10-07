@@ -169,14 +169,14 @@ export function AdminTicketsView({}: AdminTicketsViewProps) {
                           <ChevronDown className="w-4 h-4 text-muted-foreground hover:text-foreground" />
                         )}
                       </td>
-                      <td className="px-6 py-4 text-muted-foreground font-mono">{index + 1}</td>
-                      <td className="px-6 py-4 font-mono text-xs text-muted-foreground" title={ticket.id}>
+                      <td className="px-6 py-4 text-muted-foreground">{index + 1}</td>
+                      <td className="px-6 py-4 text-xs text-muted-foreground" title={ticket.id}>
                         {ticket.id.substring(0, 8)}...
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex flex-col">
                           <span className="text-foreground font-semibold">{ticket.user.fullName}</span>
-                          <span className="text-xs text-primary font-mono">{ticket.user.customId}</span>
+                          <span className="text-xs text-primary">{ticket.user.customId}</span>
                         </div>
                       </td>
                       <td className="px-6 py-4 text-foreground max-w-[200px] truncate" title={ticket.subject}>

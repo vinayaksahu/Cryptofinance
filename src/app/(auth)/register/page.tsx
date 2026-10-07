@@ -331,7 +331,7 @@ export default function RegisterPage() {
                 value={transactionPin}
                 onChange={(e) => setTransactionPin(e.target.value.replace(/\D/g, ""))}
                 placeholder="e.g. 123456"
-                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-black/50 border border-slate-700 focus:border-amber-400 text-white text-sm font-mono tracking-widest outline-none"
+                className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-black/50 border border-slate-700 focus:border-amber-400 text-white text-sm tracking-widest outline-none"
               />
             </div>
           </div>
@@ -384,7 +384,7 @@ export default function RegisterPage() {
                   Your Member User ID (Login ID)
                 </span>
                 <div className="flex items-center justify-between bg-black/60 border border-amber-500/20 rounded-xl px-3.5 py-2.5">
-                  <span className="font-mono text-lg font-extrabold text-white tracking-wide">
+                  <span className="text-lg font-extrabold text-white tracking-wide">
                     {registeredCreds.customId}
                   </span>
                   <button
@@ -417,7 +417,7 @@ export default function RegisterPage() {
                   Your 6-Digit Transaction PIN
                 </span>
                 <div className="flex items-center justify-between bg-black/60 border border-amber-500/20 rounded-xl px-3.5 py-2.5">
-                  <span className="font-mono text-lg font-extrabold text-amber-300 tracking-widest">
+                  <span className="text-lg font-extrabold text-amber-300 tracking-widest">
                     {registeredCreds.pin}
                   </span>
                   <button

@@ -306,7 +306,7 @@ export function AdminUsersView({ onRefresh }: AdminUsersViewProps) {
                           {user.fullName}
                         </span>
                         <div className="flex items-center gap-2">
-                          <span className="text-xs text-primary font-mono font-bold">
+                          <span className="text-xs text-primary font-bold">
                             {user.customId}
                           </span>
                           <button
@@ -480,7 +480,7 @@ export function AdminUsersView({ onRefresh }: AdminUsersViewProps) {
                     Edit User Profile
                   </h3>
                   <div className="flex items-center gap-2 mt-0.5">
-                    <span className="text-xs text-primary font-mono font-bold">
+                    <span className="text-xs text-primary font-bold">
                       {editingUser.customId}
                     </span>
                     <span className="text-muted-foreground text-xs">&bull;</span>
@@ -521,7 +521,7 @@ export function AdminUsersView({ onRefresh }: AdminUsersViewProps) {
                 <label className="block text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-1.5">
                   Member ID (System Fixed)
                 </label>
-                <div className="px-3.5 py-2.5 rounded-xl bg-muted border border-border text-sm font-mono text-primary font-bold">
+                <div className="px-3.5 py-2.5 rounded-xl bg-muted border border-border text-sm text-primary font-bold">
                   {editingUser.customId}
                 </div>
               </div>
@@ -597,7 +597,7 @@ export function AdminUsersView({ onRefresh }: AdminUsersViewProps) {
                     value={editUsdtAddress}
                     onChange={(e) => setEditUsdtAddress(e.target.value)}
                     placeholder="0x..."
-                    className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-background border border-border text-sm font-mono text-foreground focus:outline-none focus:border-primary transition-colors"
+                    className="w-full pl-10 pr-3.5 py-2.5 rounded-xl bg-background border border-border text-sm text-foreground focus:outline-none focus:border-primary transition-colors"
                   />
                 </div>
               </div>

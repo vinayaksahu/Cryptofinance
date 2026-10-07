@@ -305,7 +305,7 @@ export function WalletsHubView({
                 BONUS WALLET
               </h3>
 
-              <div className="text-3xl sm:text-4xl font-bold text-amber-500 font-mono my-2">
+              <div className="text-3xl sm:text-4xl font-bold text-amber-500 my-2">
                 ${bonusBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
               </div>
 
@@ -353,7 +353,7 @@ export function WalletsHubView({
                 ROI WALLET
               </h3>
 
-              <div className="text-3xl sm:text-4xl font-bold text-emerald-500 font-mono my-2">
+              <div className="text-3xl sm:text-4xl font-bold text-emerald-500 my-2">
                 ${roiBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
               </div>
 
@@ -421,7 +421,7 @@ export function WalletsHubView({
                 WORKING WALLET
               </h3>
 
-              <div className="text-3xl sm:text-4xl font-bold text-sky-500 font-mono my-2">
+              <div className="text-3xl sm:text-4xl font-bold text-sky-500 my-2">
                 ${workingBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
               </div>
 
@@ -489,7 +489,7 @@ export function WalletsHubView({
                 SECONDARY WALLET
               </h3>
 
-              <div className="text-3xl sm:text-4xl font-bold text-foreground font-mono my-2">
+              <div className="text-3xl sm:text-4xl font-bold text-foreground my-2">
                 ${p2pBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
               </div>
 
@@ -563,7 +563,7 @@ export function WalletsHubView({
                 MAIN WALLET (WITHDRAWAL)
               </h3>
 
-              <div className="text-3xl sm:text-4xl font-bold text-foreground font-mono my-2">
+              <div className="text-3xl sm:text-4xl font-bold text-foreground my-2">
                 ${mainBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
               </div>
 
@@ -681,7 +681,7 @@ export function WalletsHubView({
                     <button
                       type="button"
                       onClick={() => setTransferSource("ROI")}
-                      className={`p-3.5 rounded-xl border text-left font-mono transition-all ${
+                      className={`p-3.5 rounded-xl border text-left transition-all ${
                         transferSource === "ROI"
                           ? "bg-primary/10 border-primary text-foreground shadow-sm"
                           : "bg-muted/40 border-border text-muted-foreground hover:text-foreground"
@@ -697,7 +697,7 @@ export function WalletsHubView({
                     <button
                       type="button"
                       onClick={() => setTransferSource("WORKING")}
-                      className={`p-3.5 rounded-xl border text-left font-mono transition-all ${
+                      className={`p-3.5 rounded-xl border text-left transition-all ${
                         transferSource === "WORKING"
                           ? "bg-primary/10 border-primary text-foreground shadow-sm"
                           : "bg-muted/40 border-border text-muted-foreground hover:text-foreground"
@@ -721,7 +721,7 @@ export function WalletsHubView({
                     <button
                       type="button"
                       onClick={() => setTransferTarget("MAIN")}
-                      className={`p-3.5 rounded-xl border text-left font-mono transition-all ${
+                      className={`p-3.5 rounded-xl border text-left transition-all ${
                         transferTarget === "MAIN"
                           ? "bg-primary/10 border-primary text-foreground shadow-sm"
                           : "bg-muted/40 border-border text-muted-foreground hover:text-foreground"
@@ -737,7 +737,7 @@ export function WalletsHubView({
                     <button
                       type="button"
                       onClick={() => setTransferTarget("P2P")}
-                      className={`p-3.5 rounded-xl border text-left font-mono transition-all ${
+                      className={`p-3.5 rounded-xl border text-left transition-all ${
                         transferTarget === "P2P"
                           ? "bg-primary/10 border-primary text-foreground shadow-sm"
                           : "bg-muted/40 border-border text-muted-foreground hover:text-foreground"
@@ -759,7 +759,7 @@ export function WalletsHubView({
                   <label className="font-bold text-foreground uppercase tracking-wider">
                     3. Transfer Amount ($ USDT)
                   </label>
-                  <span className="text-muted-foreground font-mono">
+                  <span className="text-muted-foreground">
                     Available in {transferSource} Wallet:{" "}
                     <strong className="text-foreground">${availableSourceBalance.toFixed(2)}</strong>
                   </span>
@@ -776,7 +776,7 @@ export function WalletsHubView({
                     className="w-full bg-background border border-input focus:border-primary rounded-xl px-4 py-3 text-xl font-bold text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                     required
                   />
-                  <span className="absolute right-4 inset-y-0 flex items-center text-xs font-bold text-muted-foreground font-mono">
+                  <span className="absolute right-4 inset-y-0 flex items-center text-xs font-bold text-muted-foreground">
                     USDT
                   </span>
                 </div>
@@ -788,7 +788,7 @@ export function WalletsHubView({
                       key={pct}
                       type="button"
                       onClick={() => setInternalPercentAmount(pct)}
-                      className="px-3 py-1.5 rounded-lg bg-card border border-border text-xs font-bold text-foreground hover:bg-muted transition font-mono"
+                      className="px-3 py-1.5 rounded-lg bg-card border border-border text-xs font-bold text-foreground hover:bg-muted transition"
                     >
                       {pct === 100 ? "MAX" : `${pct}%`}
                     </button>
@@ -808,7 +808,7 @@ export function WalletsHubView({
                   value={transactionPin}
                   onChange={(e) => setTransactionPin(e.target.value.replace(/\D/g, ""))}
                   placeholder="Enter 6-digit PIN"
-                  className="w-full sm:w-80 bg-background border border-input focus:border-primary rounded-xl px-4 py-2.5 text-center tracking-[0.3em] text-base font-mono text-foreground font-bold placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="w-full sm:w-80 bg-background border border-input focus:border-primary rounded-xl px-4 py-2.5 text-center tracking-[0.3em] text-base text-foreground font-bold placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                   required
                 />
               </div>
@@ -817,7 +817,7 @@ export function WalletsHubView({
               <button
                 type="submit"
                 disabled={internalLoading || !transferAmount || Number(transferAmount) <= 0 || transactionPin.length !== 6}
-                className="w-full py-3.5 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-sm uppercase tracking-wider transition-all shadow-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99] font-mono cursor-pointer"
+                className="w-full py-3.5 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-sm uppercase tracking-wider transition-all shadow-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer"
               >
                 {internalLoading ? (
                   <>
@@ -874,7 +874,7 @@ export function WalletsHubView({
                   <label className="text-xs font-bold text-foreground uppercase tracking-wider">
                     1. Source Wallet
                   </label>
-                  <div className="p-4 rounded-xl bg-primary/5 border border-primary/20 font-mono">
+                  <div className="p-4 rounded-xl bg-primary/5 border border-primary/20">
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] uppercase font-bold text-primary">SECONDARY WALLET</span>
                       <span className="text-[10px] px-2 py-0.5 rounded bg-primary/20 text-primary font-bold">
@@ -913,7 +913,7 @@ export function WalletsHubView({
 
                   {/* Recipient Verification Status */}
                   {p2pRecipientName && (
-                    <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 text-xs font-mono flex items-center gap-2">
+                    <div className="p-2.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-500 text-xs flex items-center gap-2">
                       <UserCheck className="w-4 h-4 text-emerald-500 shrink-0" />
                       <span>
                         Verified Member: <strong>{p2pRecipientName}</strong>
@@ -922,7 +922,7 @@ export function WalletsHubView({
                   )}
 
                   {p2pLookupError && (
-                    <div className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-500 text-xs font-mono flex items-center gap-2">
+                    <div className="p-2.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-500 text-xs flex items-center gap-2">
                       <UserX className="w-4 h-4 text-rose-500 shrink-0" />
                       <span>{p2pLookupError}</span>
                     </div>
@@ -936,7 +936,7 @@ export function WalletsHubView({
                   <label className="font-bold text-foreground uppercase tracking-wider">
                     3. Transfer Amount ($ USDT)
                   </label>
-                  <span className="text-muted-foreground font-mono">
+                  <span className="text-muted-foreground">
                     Available in Secondary Wallet: <strong className="text-foreground">${p2pBalance.toFixed(2)}</strong>
                   </span>
                 </div>
@@ -952,7 +952,7 @@ export function WalletsHubView({
                     className="w-full bg-background border border-input focus:border-primary rounded-xl px-4 py-3 text-xl font-bold text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                     required
                   />
-                  <span className="absolute right-4 inset-y-0 flex items-center text-xs font-bold text-muted-foreground font-mono">
+                  <span className="absolute right-4 inset-y-0 flex items-center text-xs font-bold text-muted-foreground">
                     USDT
                   </span>
                 </div>
@@ -964,7 +964,7 @@ export function WalletsHubView({
                       key={pct}
                       type="button"
                       onClick={() => setP2pPercentAmount(pct)}
-                      className="px-3 py-1.5 rounded-lg bg-card border border-border text-xs font-bold text-foreground hover:bg-muted transition font-mono"
+                      className="px-3 py-1.5 rounded-lg bg-card border border-border text-xs font-bold text-foreground hover:bg-muted transition"
                     >
                       {pct === 100 ? "MAX" : `${pct}%`}
                     </button>
@@ -984,7 +984,7 @@ export function WalletsHubView({
                   value={p2pPin}
                   onChange={(e) => setP2pPin(e.target.value.replace(/\D/g, ""))}
                   placeholder="Enter 6-digit PIN"
-                  className="w-full sm:w-80 bg-background border border-input focus:border-primary rounded-xl px-4 py-2.5 text-center tracking-[0.3em] text-base font-mono text-foreground font-bold placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="w-full sm:w-80 bg-background border border-input focus:border-primary rounded-xl px-4 py-2.5 text-center tracking-[0.3em] text-base text-foreground font-bold placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                   required
                 />
               </div>
@@ -1000,7 +1000,7 @@ export function WalletsHubView({
                   p2pPin.length !== 6 ||
                   Boolean(p2pLookupError)
                 }
-                className="w-full py-3.5 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-sm uppercase tracking-wider transition-all shadow-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99] font-mono cursor-pointer"
+                className="w-full py-3.5 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-sm uppercase tracking-wider transition-all shadow-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer"
               >
                 {p2pLoading ? (
                   <>

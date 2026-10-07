@@ -128,7 +128,11 @@ export async function executeDailyRoiDistribution(adminId?: string) {
 
     const amountUsdtDec = new Decimal(contract.amountInUsdt.toString());
     const rateDec = new Decimal(contract.dailyRoiRate.toString());
-    const dailyRoiUsdt = amountUsdtDec.times(rateDec.dividedBy(100));
+    const standardDailyRoiUsdt = amountUsdtDec.times(rateDec.dividedBy(100));
+
+    // Strict 2X Cap rule: Maximum lifetime earnings cannot exceed 2X of initial principal stake
+    const initialStakeDec = amountUsdtDec; // or initial stake
+    const max2xCapDec = initialStakeDec.times(2.0);
 
     const isBasic = contract.packageType === "BASIC_SAVING";
     const targetWallet = isBasic ? "INCOME" : "FD_LOCKED";
@@ -136,9 +140,24 @@ export async function executeDailyRoiDistribution(adminId?: string) {
 
     let contractDaysPaid = contract.daysPaid;
     let contractTotalEarned = new Decimal(contract.totalEarned.toString());
+    let hit2xCap = false;
 
     // Process each unpaid cycle
     for (let i = 0; i < daysToPay; i++) {
+      const remainingTo2X = max2xCapDec.minus(contractTotalEarned);
+      if (remainingTo2X.lessThanOrEqualTo(0)) {
+        hit2xCap = true;
+        break;
+      }
+
+      // If standard daily ROI exceeds the remaining distance to 2X, pay EXACT remaining difference
+      let actualRoiToPay = standardDailyRoiUsdt;
+      let isFinalExactCapped = false;
+      if (actualRoiToPay.greaterThan(remainingTo2X)) {
+        actualRoiToPay = remainingTo2X;
+        isFinalExactCapped = true;
+      }
+
       const currentDayNumber = contractDaysPaid + 1;
       const dayOffsetMs = isLaunchDateContract
         ? (currentDayNumber - 1) * 24 * 60 * 60 * 1000
@@ -151,14 +170,16 @@ export async function executeDailyRoiDistribution(adminId?: string) {
         userId: contract.userId,
         type: transactionType,
         wallet: targetWallet,
-        amount: dailyRoiUsdt,
+        amount: actualRoiToPay,
         referenceKey,
-        description: `${isBasic ? "Basic" : "FD"} Daily ROI (${rateDec}%) on Contract ${contract.id} (Day ${currentDayNumber}/${contract.tenureDays})`,
+        description: isFinalExactCapped
+          ? `${isBasic ? "Basic" : "FD"} Final 2X Capped Daily ROI on Contract ${contract.id} (Exact $${actualRoiToPay.toFixed(4)} USDT to complete 2X)`
+          : `${isBasic ? "Basic" : "FD"} Daily ROI (${rateDec}%) on Contract ${contract.id} (Day ${currentDayNumber}/${contract.tenureDays})`,
       });
 
       if (ledgerResult.success) {
         contractDaysPaid = currentDayNumber;
-        contractTotalEarned = contractTotalEarned.plus(dailyRoiUsdt);
+        contractTotalEarned = contractTotalEarned.plus(actualRoiToPay);
 
         // Distribute 12-level royalties for this daily ROI
         try {
@@ -166,20 +187,25 @@ export async function executeDailyRoiDistribution(adminId?: string) {
             contract.userId,
             contract.id,
             contract.packageType,
-            dailyRoiUsdt,
+            actualRoiToPay,
             targetDateStr
           );
         } catch (levelErr) {
           console.error("Level income distribution error:", levelErr);
         }
 
-        totalDistributedUsdt = totalDistributedUsdt.plus(dailyRoiUsdt);
+        totalDistributedUsdt = totalDistributedUsdt.plus(actualRoiToPay);
       } else if (ledgerResult.alreadyProcessed) {
         contractDaysPaid = currentDayNumber;
       }
+
+      if (isFinalExactCapped || contractTotalEarned.greaterThanOrEqualTo(max2xCapDec)) {
+        hit2xCap = true;
+        break;
+      }
     }
 
-    const isMatured = contractDaysPaid >= contract.tenureDays;
+    const isMatured = hit2xCap || contractDaysPaid >= contract.tenureDays;
 
     await db.investmentContract.update({
       where: { id: contract.id },
@@ -276,8 +302,21 @@ export async function getUpcomingCycleForecast(adminId?: string) {
 
     if (nextEligibleDays > contract.daysPaid) {
       const amountUsdtDec = new Decimal(contract.amountInUsdt.toString());
+      const max2xCapDec = amountUsdtDec.times(2.0);
+      const earnedSoFarDec = new Decimal(contract.totalEarned.toString());
+      const remainingTo2X = max2xCapDec.minus(earnedSoFarDec);
+
+      if (remainingTo2X.lessThanOrEqualTo(0)) {
+        continue;
+      }
+
       const rateDec = new Decimal(contract.dailyRoiRate.toString());
-      const dailyRoiUsdt = amountUsdtDec.times(rateDec.dividedBy(100));
+      let dailyRoiUsdt = amountUsdtDec.times(rateDec.dividedBy(100));
+      let isFinalCapped2x = false;
+      if (dailyRoiUsdt.greaterThan(remainingTo2X)) {
+        dailyRoiUsdt = remainingTo2X;
+        isFinalCapped2x = true;
+      }
 
       const isBasic = contract.packageType === "BASIC_SAVING";
       if (isBasic) {
@@ -289,7 +328,7 @@ export async function getUpcomingCycleForecast(adminId?: string) {
       scheduledContractsCount++;
       const nextCycleNumber = contract.daysPaid + 1;
       const isFirstCycle = contract.daysPaid === 0;
-      const isFinalCycle = nextCycleNumber >= contract.tenureDays;
+      const isFinalCycle = isFinalCapped2x || nextCycleNumber >= contract.tenureDays;
 
       queuedContracts.push({
         contractId: contract.id,

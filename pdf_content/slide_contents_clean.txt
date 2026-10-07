@@ -90,7 +90,7 @@
                         <div style="width: 76px; height: 76px; border-radius: 18px; background: linear-gradient(135deg, #F59E0B, #B45309); display: flex; align-items: center; justify-content: center; font-size: 38px; flex-shrink: 0;">👨‍💼</div>
                         <div>
                             <div style="color: #94A3B8; font-size: 15px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;">Chairman & Managing Director</div>
-                            <div style="color: #F59E0B; font-size: 36px; font-weight: 900; font-family: 'Space Grotesk', sans-serif;">Mr. Sheikh Tariq Al Mansoori</div>
+                            <div style="color: #F59E0B; font-size: 36px; font-weight: 900; font-family: 'Inter', sans-serif;">Mr. Sheikh Tariq Al Mansoori</div>
                         </div>
                     </div>
                     <p style="font-size: 20px; color: #94A3B8; line-height: 1.5;">
@@ -306,7 +306,7 @@
             <!-- Card $5 -->
             <div class="card card-gold" style="padding: 36px 30px; text-align: center;">
                 <div style="background: rgba(56, 189, 248, 0.15); border: 1px solid #38BDF8; color: #38BDF8; display: inline-block; padding: 6px 20px; border-radius: 999px; font-size: 15px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">MICRO STARTER</div>
-                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif;">$5</div>
+                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Inter', sans-serif;">$5</div>
                 <div style="font-size: 18px; color: #94A3B8; font-weight: 700; margin-bottom: 24px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.35); border-radius: 16px; padding: 20px; text-align: left; display: flex; flex-direction: column; gap: 12px; font-size: 19px;">
@@ -320,7 +320,7 @@
             <!-- Card $10 -->
             <div class="card card-gold" style="padding: 36px 30px; text-align: center;">
                 <div style="background: rgba(56, 189, 248, 0.15); border: 1px solid #38BDF8; color: #38BDF8; display: inline-block; padding: 6px 20px; border-radius: 999px; font-size: 15px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">BASIC STARTER</div>
-                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif;">$10</div>
+                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Inter', sans-serif;">$10</div>
                 <div style="font-size: 18px; color: #94A3B8; font-weight: 700; margin-bottom: 24px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.35); border-radius: 16px; padding: 20px; text-align: left; display: flex; flex-direction: column; gap: 12px; font-size: 19px;">
@@ -334,7 +334,7 @@
             <!-- Card $20 -->
             <div class="card card-gold" style="padding: 36px 30px; text-align: center;">
                 <div style="background: rgba(56, 189, 248, 0.15); border: 1px solid #38BDF8; color: #38BDF8; display: inline-block; padding: 6px 20px; border-radius: 999px; font-size: 15px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">ADVANCED STARTER</div>
-                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif;">$20</div>
+                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Inter', sans-serif;">$20</div>
                 <div style="font-size: 18px; color: #94A3B8; font-weight: 700; margin-bottom: 24px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.35); border-radius: 16px; padding: 20px; text-align: left; display: flex; flex-direction: column; gap: 12px; font-size: 19px;">
@@ -382,7 +382,7 @@
             <!-- Card $50 -->
             <div class="card card-gold" style="padding: 36px 20px; text-align: center;">
                 <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid #F59E0B; color: #F59E0B; display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">GROWTH PRO • QUALIFIER</div>
-                <div style="font-size: 64px; font-weight: 900; color: #F59E0B; font-family: 'Space Grotesk', sans-serif;">$50</div>
+                <div style="font-size: 64px; font-weight: 900; color: #F59E0B; font-family: 'Inter', sans-serif;">$50</div>
                 <div style="font-size: 16px; color: #94A3B8; font-weight: 700; margin-bottom: 20px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.35); border-radius: 16px; padding: 18px 14px; text-align: left; display: flex; flex-direction: column; gap: 10px; font-size: 16px;">
@@ -396,7 +396,7 @@
             <!-- Card $100 -->
             <div class="card card-gold" style="padding: 36px 20px; text-align: center; border: 2px solid #F59E0B;">
                 <div style="background: linear-gradient(135deg, #F59E0B, #D97706); color: #030712; display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 900; letter-spacing: 1px; margin-bottom: 16px;">MOST POPULAR</div>
-                <div style="font-size: 64px; font-weight: 900; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif;">$100</div>
+                <div style="font-size: 64px; font-weight: 900; color: #FFFFFF; font-family: 'Inter', sans-serif;">$100</div>
                 <div style="font-size: 16px; color: #F59E0B; font-weight: 700; margin-bottom: 20px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.35); border-radius: 16px; padding: 18px 14px; text-align: left; display: flex; flex-direction: column; gap: 10px; font-size: 16px;">
@@ -410,7 +410,7 @@
             <!-- Card $200 -->
             <div class="card card-gold" style="padding: 36px 20px; text-align: center;">
                 <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid #F59E0B; color: #F59E0B; display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">GROWTH RUBY</div>
-                <div style="font-size: 64px; font-weight: 900; color: #F59E0B; font-family: 'Space Grotesk', sans-serif;">$200</div>
+                <div style="font-size: 64px; font-weight: 900; color: #F59E0B; font-family: 'Inter', sans-serif;">$200</div>
                 <div style="font-size: 16px; color: #94A3B8; font-weight: 700; margin-bottom: 20px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.35); border-radius: 16px; padding: 18px 14px; text-align: left; display: flex; flex-direction: column; gap: 10px; font-size: 16px;">
@@ -424,7 +424,7 @@
             <!-- Card $500 -->
             <div class="card card-gold" style="padding: 36px 20px; text-align: center;">
                 <div style="background: rgba(245, 158, 11, 0.15); border: 1px solid #F59E0B; color: #F59E0B; display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">GROWTH ELITE</div>
-                <div style="font-size: 64px; font-weight: 900; color: #F59E0B; font-family: 'Space Grotesk', sans-serif;">$500</div>
+                <div style="font-size: 64px; font-weight: 900; color: #F59E0B; font-family: 'Inter', sans-serif;">$500</div>
                 <div style="font-size: 16px; color: #94A3B8; font-weight: 700; margin-bottom: 20px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.35); border-radius: 16px; padding: 18px 14px; text-align: left; display: flex; flex-direction: column; gap: 10px; font-size: 16px;">
@@ -472,7 +472,7 @@
             <!-- Card $1,000 -->
             <div class="card card-vip" style="padding: 36px 30px; text-align: center;">
                 <div style="background: rgba(244, 63, 94, 0.15); border: 1px solid #F43F5E; color: #F43F5E; display: inline-block; padding: 6px 20px; border-radius: 999px; font-size: 15px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">VIP PLATINUM</div>
-                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif;">$1,000</div>
+                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Inter', sans-serif;">$1,000</div>
                 <div style="font-size: 18px; color: #F59E0B; font-weight: 700; margin-bottom: 24px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.4); border-radius: 16px; padding: 20px; text-align: left; display: flex; flex-direction: column; gap: 12px; font-size: 19px;">
@@ -486,7 +486,7 @@
             <!-- Card $2,000 -->
             <div class="card card-vip" style="padding: 36px 30px; text-align: center;">
                 <div style="background: rgba(168, 85, 247, 0.15); border: 1px solid #A855F7; color: #A855F7; display: inline-block; padding: 6px 20px; border-radius: 999px; font-size: 15px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">VIP DIAMOND</div>
-                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif;">$2,000</div>
+                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Inter', sans-serif;">$2,000</div>
                 <div style="font-size: 18px; color: #F59E0B; font-weight: 700; margin-bottom: 24px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.4); border-radius: 16px; padding: 20px; text-align: left; display: flex; flex-direction: column; gap: 12px; font-size: 19px;">
@@ -500,7 +500,7 @@
             <!-- Card $5,000 -->
             <div class="card card-vip" style="padding: 36px 30px; text-align: center; border: 2px solid #10B981;">
                 <div style="background: rgba(16, 185, 129, 0.2); border: 1px solid #10B981; color: #10B981; display: inline-block; padding: 6px 20px; border-radius: 999px; font-size: 15px; font-weight: 900; letter-spacing: 1px; margin-bottom: 16px;">ROYAL CROWN VIP</div>
-                <div style="font-size: 72px; font-weight: 900; color: #10B981; font-family: 'Space Grotesk', sans-serif;">$5,000</div>
+                <div style="font-size: 72px; font-weight: 900; color: #10B981; font-family: 'Inter', sans-serif;">$5,000</div>
                 <div style="font-size: 18px; color: #FFFFFF; font-weight: 700; margin-bottom: 24px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.4); border-radius: 16px; padding: 20px; text-align: left; display: flex; flex-direction: column; gap: 12px; font-size: 19px;">
@@ -815,7 +815,7 @@
             <!-- FD Option 1 -->
             <div class="card card-gold" style="padding: 44px; border: 2px solid #38BDF8;">
                 <div style="background: rgba(56, 189, 248, 0.15); color: #38BDF8; display: inline-block; padding: 8px 24px; border-radius: 999px; font-size: 16px; font-weight: 800; letter-spacing: 2px; margin-bottom: 20px;">FD PLAN A</div>
-                <div style="font-size: 76px; font-weight: 900; color: #38BDF8; font-family: 'Space Grotesk', sans-serif; line-height: 1; margin-bottom: 10px;">10% <span style="font-size: 28px; color: #FFFFFF;">DAILY</span></div>
+                <div style="font-size: 76px; font-weight: 900; color: #38BDF8; font-family: 'Inter', sans-serif; line-height: 1; margin-bottom: 10px;">10% <span style="font-size: 28px; color: #FFFFFF;">DAILY</span></div>
                 <div style="font-size: 22px; color: #94A3B8; font-weight: 700; margin-bottom: 26px;">Contract Duration: 180 Days</div>
 
                 <div style="background: rgba(3, 7, 18, 0.35); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 14px; font-size: 20px;">
@@ -829,7 +829,7 @@
             <!-- FD Option 2 -->
             <div class="card card-vip" style="padding: 44px; border: 2px solid #F59E0B;">
                 <div style="background: rgba(245, 158, 11, 0.2); color: #F59E0B; display: inline-block; padding: 8px 24px; border-radius: 999px; font-size: 16px; font-weight: 900; letter-spacing: 2px; margin-bottom: 20px;">FD PLAN B (VIP)</div>
-                <div style="font-size: 76px; font-weight: 900; color: #F59E0B; font-family: 'Space Grotesk', sans-serif; line-height: 1; margin-bottom: 10px;">15% <span style="font-size: 28px; color: #FFFFFF;">DAILY</span></div>
+                <div style="font-size: 76px; font-weight: 900; color: #F59E0B; font-family: 'Inter', sans-serif; line-height: 1; margin-bottom: 10px;">15% <span style="font-size: 28px; color: #FFFFFF;">DAILY</span></div>
                 <div style="font-size: 22px; color: #94A3B8; font-weight: 700; margin-bottom: 26px;">Contract Duration: 210 Days</div>
 
                 <div style="background: rgba(3, 7, 18, 0.35); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 14px; font-size: 20px;">
@@ -1670,7 +1670,7 @@
             <div style="display: flex; flex-direction: column; gap: 20px;">
                 <div class="card card-gold" style="padding: 30px;">
                     <div style="font-size: 16px; color: #94A3B8; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Managing Leadership</div>
-                    <div style="font-size: 34px; font-weight: 900; color: #F59E0B; font-family: 'Space Grotesk', sans-serif; margin-top: 6px;">Mr. Sheikh Tariq Al Mansoori</div>
+                    <div style="font-size: 34px; font-weight: 900; color: #F59E0B; font-family: 'Inter', sans-serif; margin-top: 6px;">Mr. Sheikh Tariq Al Mansoori</div>
                 </div>
 
                 <div class="card" style="padding: 30px;">
@@ -1717,7 +1717,7 @@
         <img src="[BASE64_IMAGE]" style="height: 110px; width: auto;" alt="Dubai Finance">
     </div>
 
-    <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: 80px; font-weight: 900; color: #FFFFFF; line-height: 1.1; margin-bottom: 20px;">
+    <h1 style="font-family: 'Inter', sans-serif; font-size: 80px; font-weight: 900; color: #FFFFFF; line-height: 1.1; margin-bottom: 20px;">
         Thank You & Welcome to <br><span style="color: #F59E0B;">Dubai Finance</span>
     </h1>
 

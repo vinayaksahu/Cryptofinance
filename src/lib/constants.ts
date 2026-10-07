@@ -35,8 +35,8 @@ export const APP_CONFIG = {
   poolAllocationMultiplier: 2.0, // Stake converts to 2X Contract Pool ($100 -> $200)
   poolDailyReleasePercent: 2.0, // 2.00% daily released from remaining pool balance
   compoundingDoublingDays: 35, // Slide 13: (1.02)^35 ≈ 2.000 doubles capital in 35 days
-  compoundingCapMultiplier: 2.0, // Slide 14: 2X Cap Lock Rule (must take >= 1 withdrawal)
-  maxExtractionMultiplier: 4.0, // Slide 14: ~400% (4X) Total Extraction Power
+  compoundingCapMultiplier: 2.0, // Slide 14: 2X Cap Lock Rule (Maximum 200% return)
+  maxExtractionMultiplier: 2.0, // Maximum 2X (200%) Total Extraction Power
 
   minStakeUsdt: 2.0, // Slide 07 & 20: Minimum entry $2.00 USDT (Zero fixed packages)
   

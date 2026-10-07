@@ -847,7 +847,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                     return (
                       <React.Fragment key={row.date}>
                         <tr className="hover:bg-muted/40 transition-colors">
-                          <td className="py-3.5 px-4 font-mono text-muted-foreground">{absoluteIndex}</td>
+                          <td className="py-3.5 px-4 text-muted-foreground">{absoluteIndex}</td>
                           <td className="py-3.5 px-4 font-semibold text-foreground flex items-center gap-2">
                             <Calendar className="w-3.5 h-3.5 text-primary" />
                             {row.date}
@@ -909,7 +909,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                                       className="flex items-center justify-between text-xs py-1.5 px-3 rounded-lg bg-muted/40 border border-border"
                                     >
                                       <div className="flex items-center gap-2">
-                                        <span className="text-[10px] font-mono text-muted-foreground">
+                                        <span className="text-[10px] text-muted-foreground">
                                           {formatDateTime(item.createdAt).slice(11)}
                                         </span>
                                         <span className="font-semibold text-foreground">
@@ -937,7 +937,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                   if (reportType === "monthly") {
                     return (
                       <tr key={row.key} className="hover:bg-muted/40 transition-colors">
-                        <td className="py-3.5 px-4 font-mono text-muted-foreground">{absoluteIndex}</td>
+                        <td className="py-3.5 px-4 text-muted-foreground">{absoluteIndex}</td>
                         <td className="py-3.5 px-4 font-bold text-foreground text-sm flex items-center gap-2">
                           <Calendar className="w-4 h-4 text-primary" />
                           {row.label}
@@ -973,8 +973,8 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                     const isCredit = num(row.amount) >= 0;
                     return (
                       <tr key={row.id || idx} className="hover:bg-muted/40 transition-colors">
-                        <td className="py-3.5 px-4 font-mono text-muted-foreground">{absoluteIndex}</td>
-                        <td className="py-3.5 px-4 font-mono text-foreground">
+                        <td className="py-3.5 px-4 text-muted-foreground">{absoluteIndex}</td>
+                        <td className="py-3.5 px-4 text-foreground">
                           {formatDateTime(row.createdAt)}
                         </td>
                         <td className="py-3.5 px-4 font-semibold text-foreground">
@@ -998,7 +998,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                         >
                           {isCredit ? "+" : ""}${Number(row.amount).toFixed(2)}
                         </td>
-                        <td className="py-3.5 px-4 text-right font-mono text-foreground">
+                        <td className="py-3.5 px-4 text-right text-foreground">
                           ${Number(row.balanceAfter || 0).toFixed(2)}
                         </td>
                         <td className="py-3.5 px-4 text-muted-foreground max-w-[240px] truncate">
@@ -1017,7 +1017,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                   if (reportType === "statement") {
                     return (
                       <tr key={row.id || idx} className="hover:bg-muted/40 transition-colors">
-                        <td className="py-3 px-4 font-mono text-muted-foreground">{absoluteIndex}</td>
+                        <td className="py-3 px-4 text-muted-foreground">{absoluteIndex}</td>
                         <td className="py-3 px-4">{formatDate(row.createdAt)}</td>
                         <td className="py-3 px-4">
                           <span
@@ -1043,7 +1043,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                         >
                           {Number(row.amount) >= 0 ? "+" : ""}${Number(row.amount).toFixed(2)} USDT
                         </td>
-                        <td className="py-3 px-4 text-right font-mono text-foreground">
+                        <td className="py-3 px-4 text-right text-foreground">
                           ${Number(row.balanceAfter).toFixed(2)} USDT
                         </td>
                       </tr>
@@ -1060,7 +1060,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                         : Number(row.amountInInr || 0);
                     return (
                       <tr key={row.id || idx} className="hover:bg-muted/40 transition-colors">
-                        <td className="py-3 px-4 font-mono text-muted-foreground">{absoluteIndex}</td>
+                        <td className="py-3 px-4 text-muted-foreground">{absoluteIndex}</td>
                         <td className="py-3 px-4">{formatDate(row.createdAt)}</td>
                         <td className="py-3 px-4 font-bold text-foreground">
                           {row.packageType === "BASIC_SAVING"
@@ -1073,7 +1073,7 @@ export function ReportsView({ user, reportType, onRefresh }: ReportsViewProps) {
                         <td className="py-3 px-4 text-center font-semibold text-emerald-500">
                           {Number(row.dailyRoiRate)}% Daily
                         </td>
-                        <td className="py-3 px-4 text-center text-foreground font-mono">
+                        <td className="py-3 px-4 text-center text-foreground">
                           {row.daysPaid} / {row.tenureDays} Days
                         </td>
                         <td className="py-3 px-4 text-center">

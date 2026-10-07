@@ -123,7 +123,7 @@ export function BasicPackageView({ user, onRefresh, onRefreshUser }: BasicPackag
           </h1>
           <p className="text-sm font-semibold text-slate-300 mt-1">
             Available Fund Balance :{" "}
-            <span className="text-emerald-400 font-bold font-mono">
+            <span className="text-emerald-400 font-bold">
               ${fundBal.toFixed(2)} USDT
             </span>
           </p>
@@ -152,7 +152,7 @@ export function BasicPackageView({ user, onRefresh, onRefreshUser }: BasicPackag
           </div>
           <div>
             <p className="text-[11px] text-slate-400 font-medium">Recharge Wallet</p>
-            <p className="text-base font-extrabold text-emerald-400 font-mono">
+            <p className="text-base font-extrabold text-emerald-400">
               ${fundBal.toFixed(2)} USDT
             </p>
           </div>
@@ -195,10 +195,10 @@ export function BasicPackageView({ user, onRefresh, onRefreshUser }: BasicPackag
             {/* Price Header */}
             <div className="mb-4 pb-3 border-b border-[#17274a]">
               <div className="flex items-baseline gap-1">
-                <span className="text-2xl sm:text-3xl font-extrabold text-slate-100 font-mono">
+                <span className="text-2xl sm:text-3xl font-extrabold text-slate-100">
                   ${plan.amount.toLocaleString()}
                 </span>
-                <span className="text-xs font-bold text-amber-400 font-mono">USDT</span>
+                <span className="text-xs font-bold text-amber-400">USDT</span>
               </div>
             </div>
 
@@ -206,7 +206,7 @@ export function BasicPackageView({ user, onRefresh, onRefreshUser }: BasicPackag
             <div className="space-y-2 mb-5 text-xs">
               <div className="flex justify-between items-center py-1">
                 <span className="text-slate-400">Daily Return:</span>
-                <span className="text-emerald-400 font-bold font-mono">
+                <span className="text-emerald-400 font-bold">
                   +${plan.dailyRoi.toFixed(2)} USDT
                 </span>
               </div>
@@ -216,7 +216,7 @@ export function BasicPackageView({ user, onRefresh, onRefreshUser }: BasicPackag
               </div>
               <div className="flex justify-between items-center py-1">
                 <span className="text-slate-400">Total Return:</span>
-                <span className="text-cyan-400 font-bold font-mono">
+                <span className="text-cyan-400 font-bold">
                   ${plan.totalReturn.toFixed(2)} USDT
                 </span>
               </div>
@@ -270,19 +270,19 @@ export function BasicPackageView({ user, onRefresh, onRefreshUser }: BasicPackag
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-slate-400">Package Amount:</span>
-                  <span className="text-amber-400 font-bold font-mono">
+                  <span className="text-amber-400 font-bold">
                     ${selectedPlan.amount} USDT
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-slate-400">Daily Return:</span>
-                  <span className="text-emerald-400 font-bold font-mono">
+                  <span className="text-emerald-400 font-bold">
                     +${selectedPlan.dailyRoi.toFixed(2)} USDT / day
                   </span>
                 </div>
                 <div className="flex justify-between items-center pt-2 border-t border-[#17274a]">
                   <span className="text-slate-400">Total Return ({selectedPlan.days} Days):</span>
-                  <span className="text-cyan-400 font-bold font-mono">
+                  <span className="text-cyan-400 font-bold">
                     ${selectedPlan.totalReturn.toFixed(2)} USDT
                   </span>
                 </div>
@@ -306,7 +306,7 @@ export function BasicPackageView({ user, onRefresh, onRefreshUser }: BasicPackag
                   value={transactionPin}
                   onChange={(e) => setTransactionPin(e.target.value.replace(/\D/g, ""))}
                   placeholder="Enter 6-digit Transaction PIN"
-                  className="w-full bg-[#060c1c] border border-[#17274a] text-amber-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 text-sm font-mono tracking-widest text-center font-bold"
+                  className="w-full bg-[#060c1c] border border-[#17274a] text-amber-300 rounded-xl px-4 py-2.5 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 text-sm tracking-widest text-center font-bold"
                 />
               </div>
 

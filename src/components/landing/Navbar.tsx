@@ -98,7 +98,7 @@ export function Navbar() {
               <span className="font-bold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white uppercase whitespace-nowrap leading-none">
                 CRYPTO FINANCE
               </span>
-              <span className="text-[9px] text-sky-600 dark:text-sky-400 font-bold tracking-widest uppercase mt-0.5 whitespace-nowrap leading-none font-mono">
+              <span className="text-[9px] text-sky-600 dark:text-sky-400 font-bold tracking-widest uppercase mt-0.5 whitespace-nowrap leading-none">
                 QUANTITATIVE PROTOCOL
               </span>
             </div>

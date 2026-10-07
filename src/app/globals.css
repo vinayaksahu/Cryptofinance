@@ -284,3 +284,29 @@
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground) / 0.4);
 }
+
+/* =========================================================
+   STRICT GLOBAL FONT ENFORCEMENT
+   All text, numbers, letters and mono classes strictly render with 'Inter', sans-serif
+   ========================================================= */
+
+*,
+*::before,
+*::after,
+html,
+body,
+button,
+input,
+optgroup,
+select,
+textarea,
+code,
+kbd,
+samp,
+pre,
+.font-mono,
+.font-sans,
+.font-serif,
+[class*="font-mono"] {
+  font-family: 'Inter', sans-serif !important;
+}

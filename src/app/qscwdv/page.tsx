@@ -681,7 +681,7 @@ export default function SuperRootAdminPage() {
       <div className="min-h-screen bg-slate-950 flex items-center justify-center text-rose-400">
         <div className="flex flex-col items-center gap-3">
           <div className="w-10 h-10 border-4 border-rose-500 border-t-transparent rounded-full animate-spin" />
-          <p className="font-mono text-xs tracking-widest uppercase font-bold">Verifying Root Security Layer...</p>
+          <p className="text-xs tracking-widest uppercase font-bold">Verifying Root Security Layer...</p>
         </div>
       </div>
     );
@@ -700,7 +700,7 @@ export default function SuperRootAdminPage() {
             Crypto Finance Security
           </div>
           <div className="flex items-center gap-2">
-            <span className="inline-flex items-center gap-1.5 text-[11px] font-mono font-bold text-rose-400 px-3 py-1 rounded-lg bg-rose-500/10 border border-rose-500/30 tracking-wider">
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-bold text-rose-400 px-3 py-1 rounded-lg bg-rose-500/10 border border-rose-500/30 tracking-wider">
               <ShieldAlert className="w-3.5 h-3.5" /> ROOT ACCESS
             </span>
             <ThemeToggle variant="compact" />
@@ -718,7 +718,7 @@ export default function SuperRootAdminPage() {
             <h1 className="text-2xl font-black tracking-tight text-white flex items-center justify-center gap-2">
               Crypto Finance <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-amber-400">Root</span>
             </h1>
-            <p className="text-xs text-slate-400 mt-1.5 font-mono">
+            <p className="text-xs text-slate-400 mt-1.5">
               Master Super Root Administrative Terminal
             </p>
           </div>
@@ -732,7 +732,7 @@ export default function SuperRootAdminPage() {
 
           <form onSubmit={handleRootLogin} className="space-y-4">
             <div>
-              <label className="block text-[11px] font-mono font-bold text-slate-300 uppercase tracking-wider mb-2">
+              <label className="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-2">
                 Super Root Identifier
               </label>
               <div className="relative">
@@ -743,13 +743,13 @@ export default function SuperRootAdminPage() {
                   value={loginIdentifier}
                   onChange={(e) => setLoginIdentifier(e.target.value)}
                   placeholder="Root Identifier (e.g. qscwdv)"
-                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-700 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 text-white text-sm outline-none transition font-mono"
+                  className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-950 border border-slate-700 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 text-white text-sm outline-none transition"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[11px] font-mono font-bold text-slate-300 uppercase tracking-wider mb-1.5">
+              <label className="block text-[11px] font-bold text-slate-300 uppercase tracking-wider mb-1.5">
                 Root Master Password
               </label>
               <div className="relative">
@@ -762,7 +762,7 @@ export default function SuperRootAdminPage() {
                   value={loginPassword}
                   onChange={(e) => setLoginPassword(e.target.value)}
                   placeholder="Enter root master password"
-                  className="w-full pl-10 pr-10 py-3 rounded-xl bg-slate-950 border border-slate-700 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 text-white text-sm outline-none transition font-mono"
+                  className="w-full pl-10 pr-10 py-3 rounded-xl bg-slate-950 border border-slate-700 focus:border-rose-500 focus:ring-1 focus:ring-rose-500 text-white text-sm outline-none transition"
                 />
                 <button
                   type="button"
@@ -784,7 +784,7 @@ export default function SuperRootAdminPage() {
           </form>
 
           <div className="mt-8 pt-6 border-t border-slate-800/80 text-center">
-            <p className="text-[11px] text-slate-500 font-mono">
+            <p className="text-[11px] text-slate-500">
               CONFIDENTIAL &bull; AUTHORIZED PERSONNEL ONLY
             </p>
           </div>
@@ -806,13 +806,13 @@ export default function SuperRootAdminPage() {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-base font-black text-white tracking-wide">
-                Crypto Finance <span className="text-rose-400 font-mono">SUPER ROOT</span>
+                Crypto Finance <span className="text-rose-400">SUPER ROOT</span>
               </h1>
-              <span className="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
+              <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/30">
                 MASTER COMMANDER
               </span>
             </div>
-            <p className="text-[11px] text-slate-400 font-mono">
+            <p className="text-[11px] text-slate-400">
               Signed in as: <span className="text-amber-400 font-bold">qscwdv</span>
             </p>
           </div>
@@ -853,7 +853,7 @@ export default function SuperRootAdminPage() {
       {cronMessage && (
         <div className="max-w-7xl mx-auto px-4 sm:px-8 pt-4">
           <div className="p-3.5 rounded-2xl bg-amber-500/15 border border-amber-500/30 text-amber-200 text-xs font-bold flex items-center justify-between">
-            <span className="flex items-center gap-2 font-mono">
+            <span className="flex items-center gap-2">
               <Zap className="w-4 h-4 text-amber-400 shrink-0" />
               {cronMessage}
             </span>
@@ -870,46 +870,46 @@ export default function SuperRootAdminPage() {
         <section className="grid grid-cols-2 lg:grid-cols-4 gap-4">
           <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 backdrop-blur-sm relative overflow-hidden">
             <div className="absolute top-0 right-0 w-24 h-24 bg-rose-500/5 rounded-full blur-2xl pointer-events-none" />
-            <div className="flex items-center justify-between text-slate-400 text-xs font-medium mb-2 font-mono">
+            <div className="flex items-center justify-between text-slate-400 text-xs font-medium mb-2">
               <span>SUB-ADMIN BRANCHES</span>
               <Layers className="w-4 h-4 text-rose-400" />
             </div>
-            <p className="text-2xl sm:text-3xl font-black text-white font-mono">{stats?.totalAdmins || 0}</p>
-            <p className="text-[11px] text-slate-500 mt-1 font-mono">Isolated Parallel Networks</p>
+            <p className="text-2xl sm:text-3xl font-black text-white">{stats?.totalAdmins || 0}</p>
+            <p className="text-[11px] text-slate-500 mt-1">Isolated Parallel Networks</p>
           </div>
 
           <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 backdrop-blur-sm relative overflow-hidden">
             <div className="absolute top-0 right-0 w-24 h-24 bg-cyan-500/5 rounded-full blur-2xl pointer-events-none" />
-            <div className="flex items-center justify-between text-slate-400 text-xs font-medium mb-2 font-mono">
+            <div className="flex items-center justify-between text-slate-400 text-xs font-medium mb-2">
               <span>TOTAL MEMBERS</span>
               <Users className="w-4 h-4 text-cyan-400" />
             </div>
-            <p className="text-2xl sm:text-3xl font-black text-white font-mono">{stats?.totalUsers || 0}</p>
-            <p className="text-[11px] text-emerald-400 mt-1 font-mono">{stats?.activeUsers || 0} Active Investors</p>
+            <p className="text-2xl sm:text-3xl font-black text-white">{stats?.totalUsers || 0}</p>
+            <p className="text-[11px] text-emerald-400 mt-1">{stats?.activeUsers || 0} Active Investors</p>
           </div>
 
           <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 backdrop-blur-sm relative overflow-hidden">
             <div className="absolute top-0 right-0 w-24 h-24 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
-            <div className="flex items-center justify-between text-slate-400 text-xs font-medium mb-2 font-mono">
+            <div className="flex items-center justify-between text-slate-400 text-xs font-medium mb-2">
               <span>PLATFORM DEPOSITS</span>
               <Wallet className="w-4 h-4 text-emerald-400" />
             </div>
-            <p className="text-2xl sm:text-3xl font-black text-emerald-400 font-mono">
+            <p className="text-2xl sm:text-3xl font-black text-emerald-400">
               ${(stats?.totalApprovedDepositsUsdt || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
             </p>
-            <p className="text-[11px] text-slate-500 mt-1 font-mono">USDT Total Inflow</p>
+            <p className="text-[11px] text-slate-500 mt-1">USDT Total Inflow</p>
           </div>
 
           <div className="p-5 rounded-2xl bg-slate-900/80 border border-slate-800/80 backdrop-blur-sm relative overflow-hidden">
             <div className="absolute top-0 right-0 w-24 h-24 bg-amber-500/5 rounded-full blur-2xl pointer-events-none" />
-            <div className="flex items-center justify-between text-slate-400 text-xs font-medium mb-2 font-mono">
+            <div className="flex items-center justify-between text-slate-400 text-xs font-medium mb-2">
               <span>10% COMPANY FEE PROFIT</span>
               <TrendingUp className="w-4 h-4 text-amber-400" />
             </div>
-            <p className="text-2xl sm:text-3xl font-black text-amber-400 font-mono">
+            <p className="text-2xl sm:text-3xl font-black text-amber-400">
               ${(stats?.totalAdminFeeUsdt || 0).toLocaleString(undefined, { minimumFractionDigits: 2 })}
             </p>
-            <p className="text-[11px] text-slate-500 mt-1 font-mono">From Processed Withdrawals</p>
+            <p className="text-[11px] text-slate-500 mt-1">From Processed Withdrawals</p>
           </div>
         </section>
 
@@ -917,7 +917,7 @@ export default function SuperRootAdminPage() {
         <section className="flex flex-wrap items-center gap-2 border-b border-slate-800 pb-3">
           <button
             onClick={() => setActiveTab("admins")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition font-mono ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
               activeTab === "admins"
                 ? "bg-rose-500/20 text-rose-300 border border-rose-500/40 shadow-lg shadow-rose-500/10"
                 : "text-slate-400 hover:text-white hover:bg-slate-900"
@@ -935,7 +935,7 @@ export default function SuperRootAdminPage() {
                 setActiveTab("inspect");
               }
             }}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition font-mono ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
               activeTab === "inspect"
                 ? "bg-rose-500/20 text-rose-300 border border-rose-500/40 shadow-lg shadow-rose-500/10"
                 : "text-slate-400 hover:text-white hover:bg-slate-900"
@@ -950,7 +950,7 @@ export default function SuperRootAdminPage() {
               setActiveTab("audit");
               loadAuditLogs();
             }}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition font-mono ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
               activeTab === "audit"
                 ? "bg-rose-500/20 text-rose-300 border border-rose-500/40 shadow-lg shadow-rose-500/10"
                 : "text-slate-400 hover:text-white hover:bg-slate-900"
@@ -965,7 +965,7 @@ export default function SuperRootAdminPage() {
               setActiveTab("config");
               loadConfigs();
             }}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition font-mono ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
               activeTab === "config"
                 ? "bg-rose-500/20 text-rose-300 border border-rose-500/40 shadow-lg shadow-rose-500/10"
                 : "text-slate-400 hover:text-white hover:bg-slate-900"
@@ -977,7 +977,7 @@ export default function SuperRootAdminPage() {
 
           <button
             onClick={() => setActiveTab("wallet")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition font-mono ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
               activeTab === "wallet"
                 ? "bg-rose-500/20 text-rose-300 border border-rose-500/40 shadow-lg shadow-rose-500/10"
                 : "text-slate-400 hover:text-white hover:bg-slate-900"
@@ -989,7 +989,7 @@ export default function SuperRootAdminPage() {
 
           <button
             onClick={() => setActiveTab("crypto_deposits")}
-            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition font-mono ${
+            className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition ${
               activeTab === "crypto_deposits"
                 ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-lg shadow-emerald-500/10"
                 : "text-slate-400 hover:text-white hover:bg-slate-900"
@@ -1006,7 +1006,7 @@ export default function SuperRootAdminPage() {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div>
                 <h2 className="text-lg font-black text-white flex items-center gap-2">
-                  Sub-Admin Branches Management <span className="text-xs font-mono text-rose-400 font-normal">({admins.length} Active Teams)</span>
+                  Sub-Admin Branches Management <span className="text-xs text-rose-400 font-normal">({admins.length} Active Teams)</span>
                 </h2>
                 <p className="text-xs text-slate-400">
                   Each admin is 100% isolated and cannot see cross-admins or other parallel teams.
@@ -1021,7 +1021,7 @@ export default function SuperRootAdminPage() {
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search admin, prefix..."
-                    className="pl-9 pr-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-rose-500 transition w-56 font-mono"
+                    className="pl-9 pr-3.5 py-2 rounded-xl bg-slate-900 border border-slate-800 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-rose-500 transition w-56"
                   />
                 </div>
 
@@ -1053,7 +1053,7 @@ export default function SuperRootAdminPage() {
             <div className="bg-slate-900/80 border border-slate-800/80 rounded-2xl overflow-hidden shadow-xl">
               <div className="overflow-x-auto">
                 <table className="w-full text-left text-xs">
-                  <thead className="bg-slate-950/60 text-slate-400 uppercase font-mono tracking-wider border-b border-slate-800 text-[11px]">
+                  <thead className="bg-slate-950/60 text-slate-400 uppercase tracking-wider border-b border-slate-800 text-[11px]">
                     <tr>
                       <th className="py-3.5 px-4">Admin Name &amp; ID</th>
                       <th className="py-3.5 px-4">Team Prefix</th>
@@ -1067,7 +1067,7 @@ export default function SuperRootAdminPage() {
                   <tbody className="divide-y divide-slate-800/60 font-sans">
                     {filteredAdmins.length === 0 ? (
                       <tr>
-                        <td colSpan={7} className="text-center py-12 text-slate-500 font-mono">
+                        <td colSpan={7} className="text-center py-12 text-slate-500">
                           No sub-admins found. Click &quot;Create New Admin&quot; to initialize a new branch.
                         </td>
                       </tr>
@@ -1076,17 +1076,17 @@ export default function SuperRootAdminPage() {
                         <tr key={adm.id} className="hover:bg-slate-800/30 transition-colors">
                           <td className="py-3.5 px-4">
                             <div className="flex items-center gap-2.5">
-                              <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-amber-400 font-mono text-xs">
+                              <div className="w-8 h-8 rounded-lg bg-slate-800 border border-slate-700 flex items-center justify-center font-bold text-amber-400 text-xs">
                                 {adm.customId.slice(-2)}
                               </div>
                               <div>
                                 <p className="font-bold text-white text-sm">{adm.fullName}</p>
                                 <div className="flex items-center gap-2 mt-0.5">
-                                  <span className="text-slate-400 font-mono text-[11px]">{adm.customId}</span>
+                                  <span className="text-slate-400 text-[11px]">{adm.customId}</span>
                                   <button
                                     onClick={() => handleEnterPortal(adm.id, adm.fullName, "ADMIN")}
                                     disabled={portalEnteringId === adm.id}
-                                    className="px-2 py-0.5 rounded bg-cyan-500/20 hover:bg-cyan-500/35 text-cyan-300 border border-cyan-500/40 text-[10px] font-bold font-mono flex items-center gap-1 transition shadow-sm hover:scale-105 active:scale-95 disabled:opacity-50"
+                                    className="px-2 py-0.5 rounded bg-cyan-500/20 hover:bg-cyan-500/35 text-cyan-300 border border-cyan-500/40 text-[10px] font-bold flex items-center gap-1 transition shadow-sm hover:scale-105 active:scale-95 disabled:opacity-50"
                                     title={`Enter ${adm.fullName}'s Admin Portal`}
                                   >
                                     {portalEnteringId === adm.id ? (
@@ -1101,7 +1101,7 @@ export default function SuperRootAdminPage() {
                             </div>
                           </td>
 
-                          <td className="py-3.5 px-4 font-mono">
+                          <td className="py-3.5 px-4">
                             <div className="flex items-center gap-1.5">
                               <span className="px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/30 text-amber-300 font-bold text-xs flex items-center gap-1">
                                 <Tag className="w-3 h-3 text-amber-400" />
@@ -1123,31 +1123,31 @@ export default function SuperRootAdminPage() {
 
                           <td className="py-3.5 px-4">
                             <p className="text-slate-300">{adm.email}</p>
-                            <p className="text-slate-500 font-mono text-[11px]">{adm.phone || "No phone"}</p>
+                            <p className="text-slate-500 text-[11px]">{adm.phone || "No phone"}</p>
                             <div className="mt-1">
                               {adm.depositAddress ? (
-                                <span className="text-[10px] font-mono text-amber-400/90 bg-amber-950/40 px-1.5 py-0.5 rounded border border-amber-500/20" title={adm.depositAddress}>
+                                <span className="text-[10px] text-amber-400/90 bg-amber-950/40 px-1.5 py-0.5 rounded border border-amber-500/20" title={adm.depositAddress}>
                                   Vault: {adm.depositAddress.slice(0, 6)}...{adm.depositAddress.slice(-4)}
                                 </span>
                               ) : (
-                                <span className="text-[10px] font-mono text-slate-500">Vault: Global Default</span>
+                                <span className="text-[10px] text-slate-500">Vault: Global Default</span>
                               )}
                             </div>
                           </td>
 
-                          <td className="py-3.5 px-4 font-mono">
+                          <td className="py-3.5 px-4">
                             <p className="text-white font-bold">{adm.totalMembers} Members</p>
                             <p className="text-emerald-400 text-[11px]">{adm.activeMembers} Active</p>
                           </td>
 
-                          <td className="py-3.5 px-4 font-mono">
+                          <td className="py-3.5 px-4">
                             <p className="text-emerald-400 font-bold">${adm.totalDepositsUsdt.toFixed(2)}</p>
                             <p className="text-slate-400 text-[11px]">Payouts: ${adm.totalWithdrawalsUsdt.toFixed(2)}</p>
                           </td>
 
                           <td className="py-3.5 px-4">
                             <span
-                              className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold font-mono ${
+                              className={`inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
                                 adm.status === "ACTIVE"
                                   ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/30"
                                   : "bg-rose-500/10 text-rose-400 border border-rose-500/30"
@@ -1230,7 +1230,7 @@ export default function SuperRootAdminPage() {
                 </button>
                 <h2 className="text-xl font-black text-white flex items-center gap-2">
                   Branch Team Inspector:{" "}
-                  <span className="text-amber-400 font-mono">
+                  <span className="text-amber-400">
                     {inspectData?.admin?.customId || admins.find((a) => a.id === selectedAdminId)?.customId || ""}
                   </span>
                   {(inspectData?.admin?.fullName || admins.find((a) => a.id === selectedAdminId)?.fullName) && (
@@ -1243,11 +1243,11 @@ export default function SuperRootAdminPage() {
 
               {/* Branch Selector Dropdown */}
               <div className="flex items-center gap-2">
-                <span className="text-xs text-slate-400 font-mono">Switch Branch:</span>
+                <span className="text-xs text-slate-400">Switch Branch:</span>
                 <select
                   value={selectedAdminId || ""}
                   onChange={(e) => loadInspectData(e.target.value)}
-                  className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white font-mono outline-none"
+                  className="px-3 py-1.5 rounded-xl bg-slate-900 border border-slate-700 text-xs text-white outline-none"
                 >
                   {admins.map((a) => (
                     <option key={a.id} value={a.id}>
@@ -1259,7 +1259,7 @@ export default function SuperRootAdminPage() {
             </div>
 
             {inspectLoading ? (
-              <div className="text-center py-16 text-cyan-400 font-mono text-xs flex flex-col items-center justify-center gap-2">
+              <div className="text-center py-16 text-cyan-400 text-xs flex flex-col items-center justify-center gap-2">
                 <Loader2 className="w-5 h-5 animate-spin text-cyan-400" />
                 <span>Loading branch records...</span>
               </div>
@@ -1278,19 +1278,19 @@ export default function SuperRootAdminPage() {
               <div className="space-y-6">
                 {/* Branch KPI summary */}
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                  <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 font-mono">
+                  <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
                     <p className="text-[11px] text-slate-400">MEMBERS IN BRANCH</p>
                     <p className="text-2xl font-black text-white mt-1">{inspectData.members.length}</p>
                   </div>
-                  <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 font-mono">
+                  <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
                     <p className="text-[11px] text-slate-400">ACTIVE CONTRACTS</p>
                     <p className="text-2xl font-black text-amber-400 mt-1">{inspectData.activeContracts.length}</p>
                   </div>
-                  <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 font-mono">
+                  <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
                     <p className="text-[11px] text-slate-400">DEPOSITS HISTORY</p>
                     <p className="text-2xl font-black text-emerald-400 mt-1">{inspectData.deposits.length}</p>
                   </div>
-                  <div className="p-4 rounded-xl bg-slate-900 border border-slate-800 font-mono">
+                  <div className="p-4 rounded-xl bg-slate-900 border border-slate-800">
                     <p className="text-[11px] text-slate-400">WITHDRAWAL PAYOUTS</p>
                     <p className="text-2xl font-black text-rose-400 mt-1">{inspectData.withdrawals.length}</p>
                   </div>
@@ -1300,7 +1300,7 @@ export default function SuperRootAdminPage() {
                 <div className="flex flex-wrap items-center gap-2 border-b border-slate-800 pb-2">
                   <button
                     onClick={() => setInspectSubTab("members")}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition font-mono ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition ${
                       inspectSubTab === "members"
                         ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm"
                         : "text-slate-400 hover:text-white hover:bg-slate-900"
@@ -1312,7 +1312,7 @@ export default function SuperRootAdminPage() {
 
                   <button
                     onClick={() => setInspectSubTab("sessions")}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition font-mono ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition ${
                       inspectSubTab === "sessions"
                         ? "bg-rose-500/20 text-rose-300 border border-rose-500/40 shadow-sm"
                         : "text-slate-400 hover:text-white hover:bg-slate-900"
@@ -1324,7 +1324,7 @@ export default function SuperRootAdminPage() {
 
                   <button
                     onClick={() => setInspectSubTab("logs")}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition font-mono ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition ${
                       inspectSubTab === "logs"
                         ? "bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm"
                         : "text-slate-400 hover:text-white hover:bg-slate-900"
@@ -1336,7 +1336,7 @@ export default function SuperRootAdminPage() {
 
                   <button
                     onClick={() => setInspectSubTab("deposits")}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition font-mono ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition ${
                       inspectSubTab === "deposits"
                         ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm"
                         : "text-slate-400 hover:text-white hover:bg-slate-900"
@@ -1348,7 +1348,7 @@ export default function SuperRootAdminPage() {
 
                   <button
                     onClick={() => setInspectSubTab("withdrawals")}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition font-mono ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition ${
                       inspectSubTab === "withdrawals"
                         ? "bg-purple-500/20 text-purple-300 border border-purple-500/40 shadow-sm"
                         : "text-slate-400 hover:text-white hover:bg-slate-900"
@@ -1360,7 +1360,7 @@ export default function SuperRootAdminPage() {
 
                   <button
                     onClick={() => setInspectSubTab("contracts")}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition font-mono ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition ${
                       inspectSubTab === "contracts"
                         ? "bg-amber-500/20 text-amber-300 border border-amber-500/40 shadow-sm"
                         : "text-slate-400 hover:text-white hover:bg-slate-900"
@@ -1382,7 +1382,7 @@ export default function SuperRootAdminPage() {
                     </div>
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-950/60 text-slate-400 uppercase font-mono tracking-wider border-b border-slate-800 text-[11px]">
+                        <thead className="bg-slate-950/60 text-slate-400 uppercase tracking-wider border-b border-slate-800 text-[11px]">
                           <tr>
                             <th className="py-3 px-4">Member ID &amp; Name</th>
                             <th className="py-3 px-4">Sponsor</th>
@@ -1395,7 +1395,7 @@ export default function SuperRootAdminPage() {
                         <tbody className="divide-y divide-slate-800/60">
                           {inspectData.members.length === 0 ? (
                             <tr>
-                              <td colSpan={6} className="text-center py-10 text-slate-500 font-mono">
+                              <td colSpan={6} className="text-center py-10 text-slate-500">
                                 No members registered under this branch yet.
                               </td>
                             </tr>
@@ -1405,13 +1405,13 @@ export default function SuperRootAdminPage() {
                                 <td className="py-3 px-4">
                                   <div className="flex items-center justify-between gap-2">
                                     <div>
-                                      <p className="font-bold text-white font-mono">{m.customId}</p>
+                                      <p className="font-bold text-white">{m.customId}</p>
                                       <p className="text-slate-400">{m.fullName}</p>
                                     </div>
                                     <button
                                       onClick={() => handleEnterPortal(m.id, m.fullName, "USER")}
                                       disabled={portalEnteringId === m.id}
-                                      className="px-2 py-1 rounded bg-emerald-500/20 hover:bg-emerald-500/35 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold font-mono flex items-center gap-1 transition shadow-sm hover:scale-105 active:scale-95 disabled:opacity-50"
+                                      className="px-2 py-1 rounded bg-emerald-500/20 hover:bg-emerald-500/35 text-emerald-300 border border-emerald-500/40 text-[10px] font-bold flex items-center gap-1 transition shadow-sm hover:scale-105 active:scale-95 disabled:opacity-50"
                                       title={`Enter ${m.fullName}'s Member Portal`}
                                     >
                                       {portalEnteringId === m.id ? (
@@ -1423,23 +1423,23 @@ export default function SuperRootAdminPage() {
                                     </button>
                                   </div>
                                 </td>
-                                <td className="py-3 px-4 font-mono text-slate-300">
+                                <td className="py-3 px-4 text-slate-300">
                                   {m.sponsor ? `${m.sponsor.customId} (${m.sponsor.fullName})` : "Direct/Root"}
                                 </td>
-                                <td className="py-3 px-4 font-mono text-cyan-400 font-bold">
+                                <td className="py-3 px-4 text-cyan-400 font-bold">
                                   ${Number(m.fundBalance).toFixed(2)}
                                 </td>
-                                <td className="py-3 px-4 font-mono text-emerald-400 font-bold">
+                                <td className="py-3 px-4 text-emerald-400 font-bold">
                                   ${Number(m.incomeBalance).toFixed(2)}
                                 </td>
                                 <td className="py-3 px-4">
-                                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold font-mono ${
+                                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                                     m.status === "ACTIVE" ? "bg-emerald-500/10 text-emerald-400" : "bg-slate-800 text-slate-400"
                                   }`}>
                                     {m.status}
                                   </span>
                                 </td>
-                                <td className="py-3 px-4 text-slate-400 font-mono">
+                                <td className="py-3 px-4 text-slate-400">
                                   {new Date(m.createdAt).toISOString().split("T")[0]}
                                 </td>
                               </tr>
@@ -1459,13 +1459,13 @@ export default function SuperRootAdminPage() {
                         <ShieldAlert className="w-4 h-4 text-rose-400" />
                         Login Sessions &amp; Device Telemetry ({inspectData.loginSessions?.length || 0} Recent Sessions)
                       </h3>
-                      <span className="text-[11px] text-slate-400 font-mono">
+                      <span className="text-[11px] text-slate-400">
                         Includes Admin {inspectData.admin.customId} &amp; their downline members
                       </span>
                     </div>
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-950/60 text-slate-400 uppercase font-mono tracking-wider border-b border-slate-800 text-[11px]">
+                        <thead className="bg-slate-950/60 text-slate-400 uppercase tracking-wider border-b border-slate-800 text-[11px]">
                           <tr>
                             <th className="py-3 px-4">User</th>
                             <th className="py-3 px-4">Portal &amp; Status</th>
@@ -1477,7 +1477,7 @@ export default function SuperRootAdminPage() {
                         <tbody className="divide-y divide-slate-800/60">
                           {(!inspectData.loginSessions || inspectData.loginSessions.length === 0) ? (
                             <tr>
-                              <td colSpan={5} className="text-center py-10 text-slate-500 font-mono">
+                              <td colSpan={5} className="text-center py-10 text-slate-500">
                                 No login sessions recorded for this branch yet.
                               </td>
                             </tr>
@@ -1487,10 +1487,10 @@ export default function SuperRootAdminPage() {
                                 <td className="py-3 px-4">
                                   <div className="flex items-center gap-2">
                                     <div>
-                                      <p className="font-bold text-white font-mono">{s.user?.customId || "Unknown"}</p>
+                                      <p className="font-bold text-white">{s.user?.customId || "Unknown"}</p>
                                       <p className="text-slate-400 text-[11px]">{s.user?.fullName}</p>
                                     </div>
-                                    <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold font-mono ${
+                                    <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${
                                       s.user?.role === "ADMIN" || s.user?.role === "SUPER_ADMIN"
                                         ? "bg-rose-500/20 text-rose-300 border border-rose-500/30"
                                         : "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
@@ -1501,25 +1501,25 @@ export default function SuperRootAdminPage() {
                                 </td>
                                 <td className="py-3 px-4">
                                   <div className="flex items-center gap-1.5">
-                                    <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-mono font-bold">
+                                    <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-bold">
                                       {s.portal}
                                     </span>
                                     {s.status === "SUCCESS" ? (
-                                      <span className="flex items-center gap-1 text-emerald-400 font-bold font-mono text-[10px]">
+                                      <span className="flex items-center gap-1 text-emerald-400 font-bold text-[10px]">
                                         <CheckCircle className="w-3 h-3 text-emerald-400" /> SUCCESS
                                       </span>
                                     ) : (
-                                      <span className="flex items-center gap-1 text-rose-400 font-bold font-mono text-[10px]" title={s.failureReason || "Failed"}>
+                                      <span className="flex items-center gap-1 text-rose-400 font-bold text-[10px]" title={s.failureReason || "Failed"}>
                                         <XCircle className="w-3 h-3 text-rose-400" /> FAILED
                                       </span>
                                     )}
                                   </div>
                                   {s.failureReason && (
-                                    <p className="text-[10px] text-rose-400/80 font-mono mt-0.5">{s.failureReason}</p>
+                                    <p className="text-[10px] text-rose-400/80 mt-0.5">{s.failureReason}</p>
                                   )}
                                 </td>
                                 <td className="py-3 px-4">
-                                  <p className="font-mono text-white font-bold">{s.ipAddress}</p>
+                                  <p className="text-white font-bold">{s.ipAddress}</p>
                                   <p className="text-slate-400 text-[11px] flex items-center gap-1 mt-0.5">
                                     <MapPin className="w-3 h-3 text-rose-400 shrink-0" />
                                     {s.city}, {s.country}
@@ -1540,7 +1540,7 @@ export default function SuperRootAdminPage() {
                                   </div>
                                   <p className="text-[11px] text-slate-500 mt-0.5">{s.browser}</p>
                                 </td>
-                                <td className="py-3 px-4 text-slate-400 font-mono text-[11px]">
+                                <td className="py-3 px-4 text-slate-400 text-[11px]">
                                   {new Date(s.createdAt).toLocaleString()}
                                 </td>
                               </tr>
@@ -1560,13 +1560,13 @@ export default function SuperRootAdminPage() {
                         <Activity className="w-4 h-4 text-amber-400" />
                         Function Usage &amp; Action Logs ({inspectData.activityLogs?.length || 0} Records)
                       </h3>
-                      <span className="text-[11px] text-slate-400 font-mono">
+                      <span className="text-[11px] text-slate-400">
                         Audited function calls by {inspectData.admin.customId} &amp; team
                       </span>
                     </div>
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-950/60 text-slate-400 uppercase font-mono tracking-wider border-b border-slate-800 text-[11px]">
+                        <thead className="bg-slate-950/60 text-slate-400 uppercase tracking-wider border-b border-slate-800 text-[11px]">
                           <tr>
                             <th className="py-3 px-4">User</th>
                             <th className="py-3 px-4">Function / Action</th>
@@ -1578,7 +1578,7 @@ export default function SuperRootAdminPage() {
                         <tbody className="divide-y divide-slate-800/60">
                           {(!inspectData.activityLogs || inspectData.activityLogs.length === 0) ? (
                             <tr>
-                              <td colSpan={5} className="text-center py-10 text-slate-500 font-mono">
+                              <td colSpan={5} className="text-center py-10 text-slate-500">
                                 No activity logs recorded for this branch yet.
                               </td>
                             </tr>
@@ -1588,10 +1588,10 @@ export default function SuperRootAdminPage() {
                                 <td className="py-3 px-4">
                                   <div className="flex items-center gap-2">
                                     <div>
-                                      <p className="font-bold text-white font-mono">{l.user?.customId || "Unknown"}</p>
+                                      <p className="font-bold text-white">{l.user?.customId || "Unknown"}</p>
                                       <p className="text-slate-400 text-[11px]">{l.user?.fullName}</p>
                                     </div>
-                                    <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold font-mono ${
+                                    <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${
                                       l.user?.role === "ADMIN" || l.user?.role === "SUPER_ADMIN"
                                         ? "bg-rose-500/20 text-rose-300 border border-rose-500/30"
                                         : "bg-cyan-500/20 text-cyan-300 border border-cyan-500/30"
@@ -1601,7 +1601,7 @@ export default function SuperRootAdminPage() {
                                   </div>
                                 </td>
                                 <td className="py-3 px-4">
-                                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold font-mono ${
+                                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                                     l.category === "FINANCIAL"
                                       ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
                                       : l.category === "SECURITY"
@@ -1614,16 +1614,16 @@ export default function SuperRootAdminPage() {
                                   }`}>
                                     {l.action}
                                   </span>
-                                  <p className="text-[10px] text-slate-500 font-mono mt-1">{l.category}</p>
+                                  <p className="text-[10px] text-slate-500 mt-1">{l.category}</p>
                                 </td>
                                 <td className="py-3 px-4">
                                   <p className="text-white font-medium text-xs max-w-md">{l.description}</p>
                                 </td>
-                                <td className="py-3 px-4 font-mono text-[11px]">
+                                <td className="py-3 px-4 text-[11px]">
                                   <p className="text-slate-300">{l.ipAddress}</p>
                                   <p className="text-slate-500">{l.device} · {l.city}, {l.country}</p>
                                 </td>
-                                <td className="py-3 px-4 text-slate-400 font-mono text-[11px]">
+                                <td className="py-3 px-4 text-slate-400 text-[11px]">
                                   {new Date(l.createdAt).toLocaleString()}
                                 </td>
                               </tr>
@@ -1646,7 +1646,7 @@ export default function SuperRootAdminPage() {
                     </div>
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-950/60 text-slate-400 uppercase font-mono tracking-wider border-b border-slate-800 text-[11px]">
+                        <thead className="bg-slate-950/60 text-slate-400 uppercase tracking-wider border-b border-slate-800 text-[11px]">
                           <tr>
                             <th className="py-3 px-4">Member</th>
                             <th className="py-3 px-4">Amount</th>
@@ -1658,7 +1658,7 @@ export default function SuperRootAdminPage() {
                         <tbody className="divide-y divide-slate-800/60">
                           {inspectData.deposits.length === 0 ? (
                             <tr>
-                              <td colSpan={5} className="text-center py-10 text-slate-500 font-mono">
+                              <td colSpan={5} className="text-center py-10 text-slate-500">
                                 No deposits found for this branch.
                               </td>
                             </tr>
@@ -1666,17 +1666,17 @@ export default function SuperRootAdminPage() {
                             inspectData.deposits.map((d: any) => (
                               <tr key={d.id} className="hover:bg-slate-800/30">
                                 <td className="py-3 px-4">
-                                  <p className="font-bold text-white font-mono">{d.user?.customId}</p>
+                                  <p className="font-bold text-white">{d.user?.customId}</p>
                                   <p className="text-slate-400">{d.user?.fullName}</p>
                                 </td>
-                                <td className="py-3 px-4 font-mono text-emerald-400 font-bold">
+                                <td className="py-3 px-4 text-emerald-400 font-bold">
                                   ${Number(d.amountInUsdt).toFixed(2)} USDT
                                 </td>
-                                <td className="py-3 px-4 font-mono text-slate-400 text-[11px]">
+                                <td className="py-3 px-4 text-slate-400 text-[11px]">
                                   {d.txHash ? `${d.txHash.slice(0, 14)}...` : "Manual"}
                                 </td>
                                 <td className="py-3 px-4">
-                                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold font-mono ${
+                                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                                     d.status === "APPROVED"
                                       ? "bg-emerald-500/15 text-emerald-400"
                                       : d.status === "PENDING"
@@ -1686,7 +1686,7 @@ export default function SuperRootAdminPage() {
                                     {d.status}
                                   </span>
                                 </td>
-                                <td className="py-3 px-4 text-slate-400 font-mono">
+                                <td className="py-3 px-4 text-slate-400">
                                   {new Date(d.createdAt).toISOString().split("T")[0]}
                                 </td>
                               </tr>
@@ -1709,7 +1709,7 @@ export default function SuperRootAdminPage() {
                     </div>
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-950/60 text-slate-400 uppercase font-mono tracking-wider border-b border-slate-800 text-[11px]">
+                        <thead className="bg-slate-950/60 text-slate-400 uppercase tracking-wider border-b border-slate-800 text-[11px]">
                           <tr>
                             <th className="py-3 px-4">Member</th>
                             <th className="py-3 px-4">Gross Amount</th>
@@ -1723,7 +1723,7 @@ export default function SuperRootAdminPage() {
                         <tbody className="divide-y divide-slate-800/60">
                           {inspectData.withdrawals.length === 0 ? (
                             <tr>
-                              <td colSpan={7} className="text-center py-10 text-slate-500 font-mono">
+                              <td colSpan={7} className="text-center py-10 text-slate-500">
                                 No withdrawal requests found for this branch.
                               </td>
                             </tr>
@@ -1731,23 +1731,23 @@ export default function SuperRootAdminPage() {
                             inspectData.withdrawals.map((w: any) => (
                               <tr key={w.id} className="hover:bg-slate-800/30">
                                 <td className="py-3 px-4">
-                                  <p className="font-bold text-white font-mono">{w.user?.customId}</p>
+                                  <p className="font-bold text-white">{w.user?.customId}</p>
                                   <p className="text-slate-400">{w.user?.fullName}</p>
                                 </td>
-                                <td className="py-3 px-4 font-mono text-white font-bold">
+                                <td className="py-3 px-4 text-white font-bold">
                                   ${Number(w.amountInUsdt).toFixed(2)}
                                 </td>
-                                <td className="py-3 px-4 font-mono text-amber-400 font-bold">
+                                <td className="py-3 px-4 text-amber-400 font-bold">
                                   ${Number(w.feeAmount || 0).toFixed(2)}
                                 </td>
-                                <td className="py-3 px-4 font-mono text-emerald-400 font-bold">
+                                <td className="py-3 px-4 text-emerald-400 font-bold">
                                   ${Number(w.netAmount || w.amountInUsdt).toFixed(2)}
                                 </td>
-                                <td className="py-3 px-4 font-mono text-slate-400 text-[11px]">
+                                <td className="py-3 px-4 text-slate-400 text-[11px]">
                                   {w.toAddress ? `${w.toAddress.slice(0, 10)}...` : "—"}
                                 </td>
                                 <td className="py-3 px-4">
-                                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold font-mono ${
+                                  <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                                     w.status === "PROCESSED"
                                       ? "bg-emerald-500/15 text-emerald-400"
                                       : w.status === "PENDING"
@@ -1757,7 +1757,7 @@ export default function SuperRootAdminPage() {
                                     {w.status}
                                   </span>
                                 </td>
-                                <td className="py-3 px-4 text-slate-400 font-mono">
+                                <td className="py-3 px-4 text-slate-400">
                                   {new Date(w.createdAt).toISOString().split("T")[0]}
                                 </td>
                               </tr>
@@ -1780,7 +1780,7 @@ export default function SuperRootAdminPage() {
                     </div>
                     <div className="overflow-x-auto">
                       <table className="w-full text-left text-xs">
-                        <thead className="bg-slate-950/60 text-slate-400 uppercase font-mono tracking-wider border-b border-slate-800 text-[11px]">
+                        <thead className="bg-slate-950/60 text-slate-400 uppercase tracking-wider border-b border-slate-800 text-[11px]">
                           <tr>
                             <th className="py-3 px-4">Member</th>
                             <th className="py-3 px-4">Package</th>
@@ -1793,7 +1793,7 @@ export default function SuperRootAdminPage() {
                         <tbody className="divide-y divide-slate-800/60">
                           {inspectData.activeContracts.length === 0 ? (
                             <tr>
-                              <td colSpan={6} className="text-center py-10 text-slate-500 font-mono">
+                              <td colSpan={6} className="text-center py-10 text-slate-500">
                                 No active investment contracts for this branch.
                               </td>
                             </tr>
@@ -1801,22 +1801,22 @@ export default function SuperRootAdminPage() {
                             inspectData.activeContracts.map((c: any) => (
                               <tr key={c.id} className="hover:bg-slate-800/30">
                                 <td className="py-3 px-4">
-                                  <p className="font-bold text-white font-mono">{c.user?.customId}</p>
+                                  <p className="font-bold text-white">{c.user?.customId}</p>
                                   <p className="text-slate-400">{c.user?.fullName}</p>
                                 </td>
-                                <td className="py-3 px-4 font-mono font-bold text-amber-300">
+                                <td className="py-3 px-4 font-bold text-amber-300">
                                   {c.packageType === "BASIC_SAVING" ? "Basic Saving" : "Fix Deposit"}
                                 </td>
-                                <td className="py-3 px-4 font-mono text-emerald-400 font-bold">
+                                <td className="py-3 px-4 text-emerald-400 font-bold">
                                   ${Number(c.amountInUsdt).toFixed(2)} USDT
                                 </td>
-                                <td className="py-3 px-4 font-mono text-cyan-400">
+                                <td className="py-3 px-4 text-cyan-400">
                                   {Number(c.dailyRoiRate)}% / day
                                 </td>
-                                <td className="py-3 px-4 font-mono text-slate-300">
+                                <td className="py-3 px-4 text-slate-300">
                                   {c.daysPaid} / {c.tenureDays} Days
                                 </td>
-                                <td className="py-3 px-4 text-slate-400 font-mono">
+                                <td className="py-3 px-4 text-slate-400">
                                   {c.maturityDate ? new Date(c.maturityDate).toISOString().split("T")[0] : "—"}
                                 </td>
                               </tr>
@@ -1829,7 +1829,7 @@ export default function SuperRootAdminPage() {
                 )}
               </div>
             ) : (
-              <div className="text-center py-16 text-slate-500 font-mono text-xs">
+              <div className="text-center py-16 text-slate-500 text-xs">
                 Select an admin branch above to inspect team members, transactions, and logs.
               </div>
             )}
@@ -1855,7 +1855,7 @@ export default function SuperRootAdminPage() {
                 <button
                   onClick={loadAuditLogs}
                   disabled={auditLoading}
-                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border border-slate-700 bg-slate-900 hover:border-slate-600 text-xs font-semibold text-white transition font-mono"
+                  className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl border border-slate-700 bg-slate-900 hover:border-slate-600 text-xs font-semibold text-white transition"
                 >
                   <RefreshCw className={`w-3.5 h-3.5 ${auditLoading ? "animate-spin text-rose-400" : ""}`} />
                   Refresh Telemetry
@@ -1865,7 +1865,7 @@ export default function SuperRootAdminPage() {
 
             {/* Telemetry KPI Cards */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-              <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 font-mono relative overflow-hidden">
+              <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 relative overflow-hidden">
                 <div className="flex items-center justify-between text-slate-400 text-xs mb-1">
                   <span>SESSIONS LOGGED</span>
                   <ShieldCheck className="w-4 h-4 text-emerald-400" />
@@ -1874,7 +1874,7 @@ export default function SuperRootAdminPage() {
                 <p className="text-[11px] text-emerald-400 mt-1">Monitored In Real-Time</p>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 font-mono relative overflow-hidden">
+              <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 relative overflow-hidden">
                 <div className="flex items-center justify-between text-slate-400 text-xs mb-1">
                   <span>FUNCTION LOGS</span>
                   <Activity className="w-4 h-4 text-amber-400" />
@@ -1883,7 +1883,7 @@ export default function SuperRootAdminPage() {
                 <p className="text-[11px] text-slate-400 mt-1">Actions &amp; Calls Audited</p>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 font-mono relative overflow-hidden">
+              <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 relative overflow-hidden">
                 <div className="flex items-center justify-between text-slate-400 text-xs mb-1">
                   <span>DESKTOP SESSIONS</span>
                   <Laptop className="w-4 h-4 text-cyan-400" />
@@ -1892,7 +1892,7 @@ export default function SuperRootAdminPage() {
                 <p className="text-[11px] text-slate-400 mt-1">Workstation Terminals</p>
               </div>
 
-              <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 font-mono relative overflow-hidden">
+              <div className="p-4 rounded-xl bg-slate-900/80 border border-slate-800 relative overflow-hidden">
                 <div className="flex items-center justify-between text-slate-400 text-xs mb-1">
                   <span>MOBILE &amp; TABLET</span>
                   <Smartphone className="w-4 h-4 text-purple-400" />
@@ -1909,11 +1909,11 @@ export default function SuperRootAdminPage() {
               <div className="flex flex-wrap items-center gap-3">
                 {/* Admin Filter Dropdown */}
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-slate-400 font-mono">Branch:</span>
+                  <span className="text-xs text-slate-400">Branch:</span>
                   <select
                     value={auditAdminFilter}
                     onChange={(e) => setAuditAdminFilter(e.target.value)}
-                    className="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white font-mono outline-none focus:border-rose-500"
+                    className="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white outline-none focus:border-rose-500"
                   >
                     <option value="all">All Admins &amp; Teams</option>
                     {admins.map((a) => (
@@ -1926,11 +1926,11 @@ export default function SuperRootAdminPage() {
 
                 {/* Role Filter */}
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-slate-400 font-mono">Role:</span>
+                  <span className="text-xs text-slate-400">Role:</span>
                   <select
                     value={auditRoleFilter}
                     onChange={(e) => setAuditRoleFilter(e.target.value)}
-                    className="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white font-mono outline-none focus:border-rose-500"
+                    className="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white outline-none focus:border-rose-500"
                   >
                     <option value="all">All Roles</option>
                     <option value="ADMIN">Admins Only</option>
@@ -1940,11 +1940,11 @@ export default function SuperRootAdminPage() {
 
                 {/* Category Filter */}
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-slate-400 font-mono">Category:</span>
+                  <span className="text-xs text-slate-400">Category:</span>
                   <select
                     value={auditCategoryFilter}
                     onChange={(e) => setAuditCategoryFilter(e.target.value)}
-                    className="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white font-mono outline-none focus:border-rose-500"
+                    className="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white outline-none focus:border-rose-500"
                   >
                     <option value="all">All Categories</option>
                     <option value="AUTH">AUTH</option>
@@ -1957,11 +1957,11 @@ export default function SuperRootAdminPage() {
 
                 {/* Timeframe Filter */}
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-slate-400 font-mono">Time:</span>
+                  <span className="text-xs text-slate-400">Time:</span>
                   <select
                     value={auditTimeframe}
                     onChange={(e) => setAuditTimeframe(e.target.value)}
-                    className="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white font-mono outline-none focus:border-rose-500"
+                    className="px-3 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white outline-none focus:border-rose-500"
                   >
                     <option value="all">All Time</option>
                     <option value="today">Today</option>
@@ -1981,13 +1981,13 @@ export default function SuperRootAdminPage() {
                       if (e.key === "Enter") loadAuditLogs();
                     }}
                     placeholder="Search ID, Name, IP, Location, Device..."
-                    className="w-full pl-9 pr-3.5 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white placeholder-slate-500 font-mono outline-none focus:border-rose-500 transition"
+                    className="w-full pl-9 pr-3.5 py-1.5 rounded-xl bg-slate-950 border border-slate-700 text-xs text-white placeholder-slate-500 outline-none focus:border-rose-500 transition"
                   />
                 </div>
 
                 <button
                   onClick={loadAuditLogs}
-                  className="px-3 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold font-mono transition shadow"
+                  className="px-3 py-1.5 rounded-xl bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold transition shadow"
                 >
                   Apply
                 </button>
@@ -1997,7 +1997,7 @@ export default function SuperRootAdminPage() {
               <div className="flex items-center gap-2 pt-2 border-t border-slate-800">
                 <button
                   onClick={() => setAuditSubTab("sessions")}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold font-mono transition ${
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition ${
                     auditSubTab === "sessions"
                       ? "bg-rose-500/20 text-rose-300 border border-rose-500/40"
                       : "text-slate-400 hover:text-white"
@@ -2009,7 +2009,7 @@ export default function SuperRootAdminPage() {
 
                 <button
                   onClick={() => setAuditSubTab("activities")}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold font-mono transition ${
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-bold transition ${
                     auditSubTab === "activities"
                       ? "bg-rose-500/20 text-rose-300 border border-rose-500/40"
                       : "text-slate-400 hover:text-white"
@@ -2023,7 +2023,7 @@ export default function SuperRootAdminPage() {
 
             {/* Audit Logs Content */}
             {auditLoading ? (
-              <div className="text-center py-16 text-rose-400 font-mono text-xs">
+              <div className="text-center py-16 text-rose-400 text-xs">
                 Analyzing and fetching audit logs...
               </div>
             ) : auditSubTab === "sessions" ? (
@@ -2031,18 +2031,18 @@ export default function SuperRootAdminPage() {
               <div className="bg-slate-900/90 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
                 <div className="p-4 border-b border-slate-800 flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h3 className="text-sm font-bold text-white flex items-center gap-2 font-mono">
+                    <h3 className="text-sm font-bold text-white flex items-center gap-2">
                       <ShieldAlert className="w-4 h-4 text-rose-400" />
                       Active Devices &amp; Authentication Telemetry ({auditData?.sessions.length || 0} Listed)
                     </h3>
-                    <p className="text-[11px] text-slate-400 font-mono mt-0.5">
+                    <p className="text-[11px] text-slate-400 mt-0.5">
                       Live active sessions can be remotely terminated at any time to secure accounts.
                     </p>
                   </div>
                   <button
                     onClick={handleTerminateAllOtherSessions}
                     disabled={terminatingSessionId === "all_others"}
-                    className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/30 text-rose-300 text-xs font-bold font-mono transition shadow-sm disabled:opacity-50"
+                    className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-xl bg-rose-500/15 hover:bg-rose-500/25 border border-rose-500/30 text-rose-300 text-xs font-bold transition shadow-sm disabled:opacity-50"
                   >
                     <LogOut className="w-3.5 h-3.5" />
                     {terminatingSessionId === "all_others" ? "Terminating..." : "Logout All Other Devices"}
@@ -2050,7 +2050,7 @@ export default function SuperRootAdminPage() {
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs">
-                    <thead className="bg-slate-950/60 text-slate-400 uppercase font-mono tracking-wider border-b border-slate-800 text-[11px]">
+                    <thead className="bg-slate-950/60 text-slate-400 uppercase tracking-wider border-b border-slate-800 text-[11px]">
                       <tr>
                         <th className="py-3 px-4">Account / User</th>
                         <th className="py-3 px-4">Assigned Admin Branch</th>
@@ -2064,7 +2064,7 @@ export default function SuperRootAdminPage() {
                     <tbody className="divide-y divide-slate-800/60">
                       {(!auditData?.sessions || auditData.sessions.length === 0) ? (
                         <tr>
-                          <td colSpan={7} className="text-center py-12 text-slate-500 font-mono">
+                          <td colSpan={7} className="text-center py-12 text-slate-500">
                             No login session records found matching the current filters.
                           </td>
                         </tr>
@@ -2074,10 +2074,10 @@ export default function SuperRootAdminPage() {
                             <td className="py-3 px-4">
                               <div className="flex items-center gap-2">
                                 <div>
-                                  <p className="font-bold text-white font-mono">{s.user?.customId || "Unknown"}</p>
+                                  <p className="font-bold text-white">{s.user?.customId || "Unknown"}</p>
                                   <p className="text-slate-400 text-[11px]">{s.user?.fullName}</p>
                                 </div>
-                                <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold font-mono ${
+                                <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${
                                   s.user?.role === "SUPER_ROOT_ADMIN"
                                     ? "bg-purple-500/20 text-purple-300 border border-purple-500/30"
                                     : s.user?.role === "ADMIN" || s.user?.role === "SUPER_ADMIN"
@@ -2088,7 +2088,7 @@ export default function SuperRootAdminPage() {
                                 </span>
                               </div>
                             </td>
-                            <td className="py-3 px-4 font-mono text-[11px]">
+                            <td className="py-3 px-4 text-[11px]">
                               {s.user?.role === "SUPER_ROOT_ADMIN" ? (
                                 <span className="text-purple-400 font-bold">Direct Super Root</span>
                               ) : s.user?.role === "ADMIN" || s.user?.role === "SUPER_ADMIN" ? (
@@ -2103,25 +2103,25 @@ export default function SuperRootAdminPage() {
                             </td>
                             <td className="py-3 px-4">
                               <div className="flex items-center gap-1.5">
-                                <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-mono font-bold">
+                                <span className="px-2 py-0.5 rounded bg-slate-800 text-slate-300 text-[10px] font-bold">
                                   {s.portal}
                                 </span>
                                 {s.status === "SUCCESS" ? (
-                                  <span className="flex items-center gap-1 text-emerald-400 font-bold font-mono text-[10px]">
+                                  <span className="flex items-center gap-1 text-emerald-400 font-bold text-[10px]">
                                     <CheckCircle className="w-3 h-3 text-emerald-400" /> SUCCESS
                                   </span>
                                 ) : (
-                                  <span className="flex items-center gap-1 text-rose-400 font-bold font-mono text-[10px]" title={s.failureReason || "Failed"}>
+                                  <span className="flex items-center gap-1 text-rose-400 font-bold text-[10px]" title={s.failureReason || "Failed"}>
                                     <XCircle className="w-3 h-3 text-rose-400" /> FAILED
                                   </span>
                                 )}
                               </div>
                               {s.failureReason && (
-                                <p className="text-[10px] text-rose-400/80 font-mono mt-0.5">{s.failureReason}</p>
+                                <p className="text-[10px] text-rose-400/80 mt-0.5">{s.failureReason}</p>
                               )}
                             </td>
                             <td className="py-3 px-4">
-                              <p className="font-mono text-white font-bold">{s.ipAddress}</p>
+                              <p className="text-white font-bold">{s.ipAddress}</p>
                               <p className="text-slate-400 text-[11px] flex items-center gap-1 mt-0.5">
                                 <MapPin className="w-3 h-3 text-rose-400 shrink-0" />
                                 {s.city}, {s.country}
@@ -2142,27 +2142,27 @@ export default function SuperRootAdminPage() {
                               </div>
                               <p className="text-[11px] text-slate-500 mt-0.5">{s.browser}</p>
                             </td>
-                            <td className="py-3 px-4 text-slate-400 font-mono text-[11px]">
+                            <td className="py-3 px-4 text-slate-400 text-[11px]">
                               {new Date(s.createdAt).toLocaleString()}
                             </td>
                             <td className="py-3 px-4 text-right">
                               {s.isActive ? (
                                 <div className="flex items-center justify-end gap-2">
                                   {s.id === auditData?.currentSessionId ? (
-                                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
+                                    <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 flex items-center gap-1">
                                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                                       This Device
                                     </span>
                                   ) : (
                                     <>
-                                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
+                                      <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
                                         Active
                                       </span>
                                       <button
                                         type="button"
                                         onClick={() => handleTerminateSession(s.id)}
                                         disabled={terminatingSessionId === s.id}
-                                        className="px-2 py-0.5 rounded bg-rose-500/20 hover:bg-rose-500/35 text-rose-300 border border-rose-500/40 text-[10px] font-bold font-mono transition shadow-sm hover:scale-105 active:scale-95 disabled:opacity-50"
+                                        className="px-2 py-0.5 rounded bg-rose-500/20 hover:bg-rose-500/35 text-rose-300 border border-rose-500/40 text-[10px] font-bold transition shadow-sm hover:scale-105 active:scale-95 disabled:opacity-50"
                                         title="Terminate session and disconnect this device"
                                       >
                                         {terminatingSessionId === s.id ? "..." : "Terminate"}
@@ -2171,7 +2171,7 @@ export default function SuperRootAdminPage() {
                                   )}
                                 </div>
                               ) : (
-                                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold font-mono bg-slate-800 text-slate-500 border border-slate-700/40">
+                                <span className="px-2 py-0.5 rounded-full text-[10px] font-bold bg-slate-800 text-slate-500 border border-slate-700/40">
                                   Terminated
                                 </span>
                               )}
@@ -2187,14 +2187,14 @@ export default function SuperRootAdminPage() {
               /* Global Function & Action Usage Logs Table */
               <div className="bg-slate-900/90 border border-slate-800 rounded-2xl overflow-hidden shadow-xl">
                 <div className="p-4 border-b border-slate-800 flex items-center justify-between">
-                  <h3 className="text-sm font-bold text-white flex items-center gap-2 font-mono">
+                  <h3 className="text-sm font-bold text-white flex items-center gap-2">
                     <Activity className="w-4 h-4 text-amber-400" />
                     Function Usage &amp; Operational Audit Trail ({auditData?.activities.length || 0} Listed)
                   </h3>
                 </div>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left text-xs">
-                    <thead className="bg-slate-950/60 text-slate-400 uppercase font-mono tracking-wider border-b border-slate-800 text-[11px]">
+                    <thead className="bg-slate-950/60 text-slate-400 uppercase tracking-wider border-b border-slate-800 text-[11px]">
                       <tr>
                         <th className="py-3 px-4">User / Actor</th>
                         <th className="py-3 px-4">Branch</th>
@@ -2207,7 +2207,7 @@ export default function SuperRootAdminPage() {
                     <tbody className="divide-y divide-slate-800/60">
                       {(!auditData?.activities || auditData.activities.length === 0) ? (
                         <tr>
-                          <td colSpan={6} className="text-center py-12 text-slate-500 font-mono">
+                          <td colSpan={6} className="text-center py-12 text-slate-500">
                             No function activity records found matching the current filters.
                           </td>
                         </tr>
@@ -2217,10 +2217,10 @@ export default function SuperRootAdminPage() {
                             <td className="py-3 px-4">
                               <div className="flex items-center gap-2">
                                 <div>
-                                  <p className="font-bold text-white font-mono">{l.user?.customId || "Unknown"}</p>
+                                  <p className="font-bold text-white">{l.user?.customId || "Unknown"}</p>
                                   <p className="text-slate-400 text-[11px]">{l.user?.fullName}</p>
                                 </div>
-                                <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold font-mono ${
+                                <span className={`px-1.5 py-0.5 rounded text-[9px] font-bold ${
                                   l.user?.role === "SUPER_ROOT_ADMIN"
                                     ? "bg-purple-500/20 text-purple-300 border border-purple-500/30"
                                     : l.user?.role === "ADMIN" || l.user?.role === "SUPER_ADMIN"
@@ -2231,7 +2231,7 @@ export default function SuperRootAdminPage() {
                                 </span>
                               </div>
                             </td>
-                            <td className="py-3 px-4 font-mono text-[11px]">
+                            <td className="py-3 px-4 text-[11px]">
                               {l.user?.role === "SUPER_ROOT_ADMIN" ? (
                                 <span className="text-purple-400 font-bold">Direct Super Root</span>
                               ) : l.user?.role === "ADMIN" || l.user?.role === "SUPER_ADMIN" ? (
@@ -2245,7 +2245,7 @@ export default function SuperRootAdminPage() {
                               )}
                             </td>
                             <td className="py-3 px-4">
-                              <span className={`px-2 py-0.5 rounded text-[10px] font-bold font-mono ${
+                              <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${
                                 l.category === "FINANCIAL"
                                   ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/30"
                                   : l.category === "SECURITY"
@@ -2258,16 +2258,16 @@ export default function SuperRootAdminPage() {
                               }`}>
                                 {l.action}
                               </span>
-                              <p className="text-[10px] text-slate-500 font-mono mt-1">{l.category}</p>
+                              <p className="text-[10px] text-slate-500 mt-1">{l.category}</p>
                             </td>
                             <td className="py-3 px-4">
                               <p className="text-white font-medium text-xs max-w-md">{l.description}</p>
                             </td>
-                            <td className="py-3 px-4 font-mono text-[11px]">
+                            <td className="py-3 px-4 text-[11px]">
                               <p className="text-slate-300">{l.ipAddress}</p>
                               <p className="text-slate-500">{l.device} · {l.city}, {l.country}</p>
                             </td>
-                            <td className="py-3 px-4 text-slate-400 font-mono text-[11px]">
+                            <td className="py-3 px-4 text-slate-400 text-[11px]">
                               {new Date(l.createdAt).toLocaleString()}
                             </td>
                           </tr>
@@ -2295,7 +2295,7 @@ export default function SuperRootAdminPage() {
             </div>
 
             {configMsg && (
-              <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-bold font-mono flex items-center justify-between">
+              <div className="p-3.5 rounded-xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-xs font-bold flex items-center justify-between">
                 <span>{configMsg}</span>
                 <button onClick={() => setConfigMsg(null)} className="text-emerald-400 hover:text-white">
                   <X className="w-4 h-4" />
@@ -2304,7 +2304,7 @@ export default function SuperRootAdminPage() {
             )}
 
             {configLoading ? (
-              <div className="text-center py-16 text-rose-400 font-mono text-xs">
+              <div className="text-center py-16 text-rose-400 text-xs">
                 Loading configurations...
               </div>
             ) : (
@@ -2312,7 +2312,7 @@ export default function SuperRootAdminPage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {Object.entries(configs).map(([key, item]: [string, any]) => (
                     <div key={key} className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80">
-                      <label className="block text-[11px] font-mono font-bold text-amber-400 uppercase tracking-wider mb-1">
+                      <label className="block text-[11px] font-bold text-amber-400 uppercase tracking-wider mb-1">
                         {key.replace(/_/g, " ")}
                       </label>
                       <p className="text-[11px] text-slate-500 mb-2">{item.description}</p>
@@ -2323,7 +2323,7 @@ export default function SuperRootAdminPage() {
                           const updated = { ...configs, [key]: { ...item, value: e.target.value } };
                           setConfigs(updated);
                         }}
-                        className="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs font-mono outline-none focus:border-rose-500 transition"
+                        className="w-full px-3.5 py-2 rounded-xl bg-slate-900 border border-slate-700 text-white text-xs outline-none focus:border-rose-500 transition"
                       />
                     </div>
                   ))}
@@ -2333,7 +2333,7 @@ export default function SuperRootAdminPage() {
                   <button
                     type="submit"
                     disabled={configSaving}
-                    className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-bold text-xs font-mono shadow-lg shadow-rose-600/20 transition disabled:opacity-50"
+                    className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-rose-600 to-rose-700 hover:from-rose-500 hover:to-rose-600 text-white font-bold text-xs shadow-lg shadow-rose-600/20 transition disabled:opacity-50"
                   >
                     {configSaving ? "Saving Live Changes..." : "Save Global Configurations"}
                   </button>
@@ -2357,7 +2357,7 @@ export default function SuperRootAdminPage() {
             </div>
 
             {adjustResult && (
-              <div className={`p-4 rounded-xl border text-xs font-mono font-bold flex items-center justify-between ${
+              <div className={`p-4 rounded-xl border text-xs font-bold flex items-center justify-between ${
                 adjustResult.success
                   ? "bg-emerald-500/15 border-emerald-500/30 text-emerald-300"
                   : "bg-rose-500/15 border-rose-500/30 text-rose-300"
@@ -2371,7 +2371,7 @@ export default function SuperRootAdminPage() {
 
             <form onSubmit={handleWalletAdjustment} className="space-y-4 bg-slate-900/80 border border-slate-800 p-6 sm:p-8 rounded-2xl shadow-xl text-xs">
               <div>
-                <label className="block text-slate-300 font-bold uppercase font-mono mb-1.5">
+                <label className="block text-slate-300 font-bold uppercase mb-1.5">
                   Target User ID or Custom ID
                 </label>
                 <input
@@ -2380,17 +2380,17 @@ export default function SuperRootAdminPage() {
                   value={adjustTargetId}
                   onChange={(e) => setAdjustTargetId(e.target.value)}
                   placeholder="e.g. DF836419 or DF000001"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-emerald-500 font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-emerald-500"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-300 font-bold uppercase font-mono mb-1.5">Action</label>
+                  <label className="block text-slate-300 font-bold uppercase mb-1.5">Action</label>
                   <select
                     value={adjustAction}
                     onChange={(e: any) => setAdjustAction(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none font-mono"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none"
                   >
                     <option value="CREDIT">CREDIT (+)</option>
                     <option value="DEBIT">DEBIT (-)</option>
@@ -2398,11 +2398,11 @@ export default function SuperRootAdminPage() {
                 </div>
 
                 <div>
-                  <label className="block text-slate-300 font-bold uppercase font-mono mb-1.5">Wallet Type</label>
+                  <label className="block text-slate-300 font-bold uppercase mb-1.5">Wallet Type</label>
                   <select
                     value={adjustWallet}
                     onChange={(e: any) => setAdjustWallet(e.target.value)}
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none font-mono"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none"
                   >
                     <option value="FUND">Fund Wallet</option>
                     <option value="INCOME">Income Wallet</option>
@@ -2411,7 +2411,7 @@ export default function SuperRootAdminPage() {
               </div>
 
               <div>
-                <label className="block text-slate-300 font-bold uppercase font-mono mb-1.5">Amount in USDT</label>
+                <label className="block text-slate-300 font-bold uppercase mb-1.5">Amount in USDT</label>
                 <input
                   type="number"
                   step="0.01"
@@ -2420,12 +2420,12 @@ export default function SuperRootAdminPage() {
                   value={adjustAmount}
                   onChange={(e) => setAdjustAmount(e.target.value)}
                   placeholder="e.g. 50.00"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-emerald-400 font-bold font-mono text-sm outline-none focus:border-emerald-500"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-emerald-400 font-bold text-sm outline-none focus:border-emerald-500"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-300 font-bold uppercase font-mono mb-1.5">Adjustment Note / Reason</label>
+                <label className="block text-slate-300 font-bold uppercase mb-1.5">Adjustment Note / Reason</label>
                 <input
                   type="text"
                   value={adjustNote}
@@ -2438,7 +2438,7 @@ export default function SuperRootAdminPage() {
               <button
                 type="submit"
                 disabled={adjustLoading}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-black text-xs font-mono transition shadow-lg shadow-emerald-600/20 disabled:opacity-50 mt-4"
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-500 hover:to-emerald-600 text-white font-black text-xs transition shadow-lg shadow-emerald-600/20 disabled:opacity-50 mt-4"
               >
                 {adjustLoading ? "Processing Adjustment..." : "Execute Master Wallet Adjustment"}
               </button>
@@ -2476,7 +2476,7 @@ export default function SuperRootAdminPage() {
             </div>
 
             {createError && (
-              <div className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs mb-4 font-mono">
+              <div className="p-3 rounded-xl bg-rose-500/15 border border-rose-500/30 text-rose-300 text-xs mb-4">
                 {createError}
               </div>
             )}
@@ -2484,7 +2484,7 @@ export default function SuperRootAdminPage() {
             <form onSubmit={handleCreateAdmin} className="space-y-4 text-xs">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-300 font-bold mb-1.5 uppercase font-mono">Admin Full Name</label>
+                  <label className="block text-slate-300 font-bold mb-1.5 uppercase">Admin Full Name</label>
                   <input
                     type="text"
                     required
@@ -2495,21 +2495,21 @@ export default function SuperRootAdminPage() {
                   />
                 </div>
                 <div>
-                  <label className="block text-slate-300 font-bold mb-1.5 uppercase font-mono">Admin ID</label>
+                  <label className="block text-slate-300 font-bold mb-1.5 uppercase">Admin ID</label>
                   <input
                     type="text"
                     required
                     value={createForm.customId}
                     onChange={(e) => setCreateForm({ ...createForm, customId: e.target.value })}
                     placeholder="e.g. DF000002"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-rose-500 font-mono"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-rose-500"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-300 font-bold mb-1.5 uppercase font-mono">
+                  <label className="block text-slate-300 font-bold mb-1.5 uppercase">
                     Team Digit Prefix <span className="text-amber-400">*</span>
                   </label>
                   <input
@@ -2518,26 +2518,26 @@ export default function SuperRootAdminPage() {
                     value={createForm.teamPrefix}
                     onChange={(e) => setCreateForm({ ...createForm, teamPrefix: e.target.value })}
                     placeholder="e.g. 2 for DF2xxxxx"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-amber-500/40 text-amber-300 font-mono font-bold outline-none focus:border-amber-400"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-amber-500/40 text-amber-300 font-bold outline-none focus:border-amber-400"
                   />
-                  <p className="text-[10px] text-slate-400 mt-1 font-mono">
+                  <p className="text-[10px] text-slate-400 mt-1">
                     Members get IDs like: DF{createForm.teamPrefix || "X"}12345
                   </p>
                 </div>
                 <div>
-                  <label className="block text-slate-300 font-bold mb-1.5 uppercase font-mono">Phone Number</label>
+                  <label className="block text-slate-300 font-bold mb-1.5 uppercase">Phone Number</label>
                   <input
                     type="text"
                     value={createForm.phone}
                     onChange={(e) => setCreateForm({ ...createForm, phone: e.target.value })}
                     placeholder="+91..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-rose-500 font-mono"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-rose-500"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-slate-300 font-bold mb-1.5 uppercase font-mono">Email Address</label>
+                <label className="block text-slate-300 font-bold mb-1.5 uppercase">Email Address</label>
                 <input
                   type="email"
                   required
@@ -2549,11 +2549,11 @@ export default function SuperRootAdminPage() {
               </div>
 
               <div>
-                <label className="block text-slate-300 font-bold mb-1.5 uppercase font-mono">Admin Authority Level</label>
+                <label className="block text-slate-300 font-bold mb-1.5 uppercase">Admin Authority Level</label>
                 <select
                   value={createForm.role}
                   onChange={(e) => setCreateForm({ ...createForm, role: e.target.value as any })}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-amber-300 font-bold outline-none focus:border-rose-500 font-mono text-xs"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-amber-300 font-bold outline-none focus:border-rose-500 text-xs"
                 >
                   <option value="SUPER_ADMIN">SUPER_ADMIN (Full Platform Authority &amp; System Settings)</option>
                   <option value="ADMIN">ADMIN (Branch Administrator)</option>
@@ -2561,7 +2561,7 @@ export default function SuperRootAdminPage() {
               </div>
 
               <div>
-                <label className="block text-slate-300 font-bold mb-1.5 uppercase font-mono flex items-center justify-between">
+                <label className="block text-slate-300 font-bold mb-1.5 uppercase flex items-center justify-between">
                   <span>Branch USDT Receiving Address (Optional)</span>
                   <span className="text-[10px] text-slate-500 font-normal lowercase">(BEP20 BSC)</span>
                 </label>
@@ -2570,19 +2570,19 @@ export default function SuperRootAdminPage() {
                   value={createForm.usdtAddress}
                   onChange={(e) => setCreateForm({ ...createForm, usdtAddress: e.target.value.trim() })}
                   placeholder="0x... (Can be configured later in System Config)"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-amber-300 outline-none focus:border-rose-500 font-mono text-xs"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-amber-300 outline-none focus:border-rose-500 text-xs"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-300 font-bold mb-1.5 uppercase font-mono">Login Password</label>
+                <label className="block text-slate-300 font-bold mb-1.5 uppercase">Login Password</label>
                 <input
                   type="password"
                   required
                   value={createForm.password}
                   onChange={(e) => setCreateForm({ ...createForm, password: e.target.value })}
                   placeholder="Set initial password (min 6 chars)"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-rose-500 font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-rose-500"
                 />
               </div>
 
@@ -2619,7 +2619,7 @@ export default function SuperRootAdminPage() {
             </button>
 
             <h3 className="text-base font-bold text-white mb-1">Reset Password</h3>
-            <p className="text-xs text-slate-400 mb-4 font-mono">Admin: {passwordModalAdmin.customId} ({passwordModalAdmin.fullName})</p>
+            <p className="text-xs text-slate-400 mb-4">Admin: {passwordModalAdmin.customId} ({passwordModalAdmin.fullName})</p>
 
             {passwordMsg && (
               <div className="p-3 rounded-xl bg-slate-800 border border-slate-700 text-xs mb-3 text-white">
@@ -2629,14 +2629,14 @@ export default function SuperRootAdminPage() {
 
             <form onSubmit={handleResetPassword} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-300 font-bold mb-1.5 uppercase font-mono">New Password</label>
+                <label className="block text-slate-300 font-bold mb-1.5 uppercase">New Password</label>
                 <input
                   type="text"
                   required
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="Enter new password"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-rose-500 font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-rose-500"
                 />
               </div>
 
@@ -2664,26 +2664,26 @@ export default function SuperRootAdminPage() {
             </button>
 
             <h3 className="text-base font-bold text-white mb-1">Edit Team Digit Prefix</h3>
-            <p className="text-xs text-slate-400 mb-4 font-mono">Admin: {prefixModalAdmin.customId} ({prefixModalAdmin.fullName})</p>
+            <p className="text-xs text-slate-400 mb-4">Admin: {prefixModalAdmin.customId} ({prefixModalAdmin.fullName})</p>
 
             {prefixMsg && (
-              <div className="p-3 rounded-xl bg-slate-800 border border-slate-700 text-xs mb-3 text-white font-mono">
+              <div className="p-3 rounded-xl bg-slate-800 border border-slate-700 text-xs mb-3 text-white">
                 {prefixMsg}
               </div>
             )}
 
             <form onSubmit={handleUpdatePrefix} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-300 font-bold mb-1.5 uppercase font-mono">Team Prefix (e.g. 1, 2, 3)</label>
+                <label className="block text-slate-300 font-bold mb-1.5 uppercase">Team Prefix (e.g. 1, 2, 3)</label>
                 <input
                   type="text"
                   required
                   value={newPrefix}
                   onChange={(e) => setNewPrefix(e.target.value)}
                   placeholder="e.g. 1, 2, 3"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-amber-500/40 text-amber-300 font-mono font-bold outline-none focus:border-amber-400"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-amber-500/40 text-amber-300 font-bold outline-none focus:border-amber-400"
                 />
-                <p className="text-[10px] text-slate-400 mt-1 font-mono">
+                <p className="text-[10px] text-slate-400 mt-1">
                   Future members get IDs: DF{newPrefix || "X"}xxxxx
                 </p>
               </div>
@@ -2717,7 +2717,7 @@ export default function SuperRootAdminPage() {
               </div>
               <div>
                 <h3 className="text-base font-bold text-white">Edit Admin Account</h3>
-                <p className="text-[11px] text-slate-400 font-mono">
+                <p className="text-[11px] text-slate-400">
                   Branch ID: <span className="text-amber-400 font-bold">{editModalAdmin.customId}</span> &bull; Current Role: <span className="text-slate-300">{editModalAdmin.role}</span>
                 </p>
               </div>
@@ -2739,7 +2739,7 @@ export default function SuperRootAdminPage() {
             <form onSubmit={handleUpdateAdminDetails} className="space-y-4 text-xs mt-4">
               {/* Full Name */}
               <div>
-                <label className="block text-slate-300 font-bold mb-1.5 uppercase font-mono">
+                <label className="block text-slate-300 font-bold mb-1.5 uppercase">
                   Full Name <span className="text-rose-400">*</span>
                 </label>
                 <input
@@ -2754,7 +2754,7 @@ export default function SuperRootAdminPage() {
 
               {/* Email */}
               <div>
-                <label className="block text-slate-300 font-bold mb-1.5 uppercase font-mono">
+                <label className="block text-slate-300 font-bold mb-1.5 uppercase">
                   Email Address <span className="text-rose-400">*</span>
                 </label>
                 <input
@@ -2763,14 +2763,14 @@ export default function SuperRootAdminPage() {
                   value={editForm.email}
                   onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
                   placeholder="admin@cryptofinance.online"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-amber-400 text-xs font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-amber-400 text-xs"
                 />
               </div>
 
               {/* Phone & Prefix Grid */}
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-slate-300 font-bold mb-1.5 uppercase font-mono">
+                  <label className="block text-slate-300 font-bold mb-1.5 uppercase">
                     Contact / Phone
                   </label>
                   <input
@@ -2778,12 +2778,12 @@ export default function SuperRootAdminPage() {
                     value={editForm.phone}
                     onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
                     placeholder="+971... or +91..."
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-amber-400 text-xs font-mono"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-amber-400 text-xs"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-slate-300 font-bold mb-1.5 uppercase font-mono">
+                  <label className="block text-slate-300 font-bold mb-1.5 uppercase">
                     Team Prefix Digit
                   </label>
                   <input
@@ -2791,32 +2791,32 @@ export default function SuperRootAdminPage() {
                     value={editForm.teamPrefix}
                     onChange={(e) => setEditForm({ ...editForm, teamPrefix: e.target.value })}
                     placeholder="e.g. 1, 2"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-amber-300 font-bold outline-none focus:border-amber-400 text-xs font-mono"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-amber-300 font-bold outline-none focus:border-amber-400 text-xs"
                   />
                 </div>
               </div>
 
               {/* Role Selector */}
               <div>
-                <label className="block text-slate-300 font-bold mb-1.5 uppercase font-mono">
+                <label className="block text-slate-300 font-bold mb-1.5 uppercase">
                   Admin Authority / Role Level
                 </label>
                 <select
                   value={editForm.role}
                   onChange={(e) => setEditForm({ ...editForm, role: e.target.value as any })}
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-amber-300 font-bold outline-none focus:border-amber-400 text-xs font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-amber-300 font-bold outline-none focus:border-amber-400 text-xs"
                 >
                   <option value="SUPER_ADMIN">SUPER_ADMIN (Full Platform Authority &amp; System Settings)</option>
                   <option value="ADMIN">ADMIN (Branch Administrator)</option>
                 </select>
-                <p className="text-[10px] text-slate-400 mt-1 font-mono">
+                <p className="text-[10px] text-slate-400 mt-1">
                   SUPER_ADMIN grants full access to System Config and Database Backup in admin console.
                 </p>
               </div>
 
               {/* Branch Dedicated USDT Deposit Address */}
               <div className="pt-2 border-t border-slate-800">
-                <label className="block text-slate-300 font-bold mb-1 uppercase font-mono flex items-center justify-between">
+                <label className="block text-slate-300 font-bold mb-1 uppercase flex items-center justify-between">
                   <span className="text-amber-400">Branch USDT Deposit Address (BEP20)</span>
                   <span className="text-[10px] text-slate-400 font-normal lowercase">(isolated to this branch)</span>
                 </label>
@@ -2825,16 +2825,16 @@ export default function SuperRootAdminPage() {
                   value={editForm.usdtAddress}
                   onChange={(e) => setEditForm({ ...editForm, usdtAddress: e.target.value.trim() })}
                   placeholder="0x... (Dedicated receiving wallet for this admin's branch)"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-amber-500/40 text-amber-300 outline-none focus:border-amber-400 text-xs font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-amber-500/40 text-amber-300 outline-none focus:border-amber-400 text-xs"
                 />
-                <p className="text-[10px] text-slate-400 mt-1 font-mono">
+                <p className="text-[10px] text-slate-400 mt-1">
                   Members under this admin branch will deposit into and verify against this dedicated address.
                 </p>
               </div>
 
               {/* New Password */}
               <div className="pt-2 border-t border-slate-800">
-                <label className="block text-slate-300 font-bold mb-1 uppercase font-mono flex items-center justify-between">
+                <label className="block text-slate-300 font-bold mb-1 uppercase flex items-center justify-between">
                   <span>Change Password</span>
                   <span className="text-[10px] text-slate-500 font-normal lowercase">(leave blank to keep current)</span>
                 </label>
@@ -2843,9 +2843,9 @@ export default function SuperRootAdminPage() {
                   value={editForm.password}
                   onChange={(e) => setEditForm({ ...editForm, password: e.target.value })}
                   placeholder="Enter new password (min 6 chars)"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-amber-400 text-xs font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-amber-400 text-xs"
                 />
-                <p className="text-[10px] text-slate-500 mt-1 font-mono">
+                <p className="text-[10px] text-slate-500 mt-1">
                   Only fill this field if you want to overwrite this admin&apos;s login password.
                 </p>
               </div>

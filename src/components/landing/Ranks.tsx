@@ -121,7 +121,7 @@ export function Ranks() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-sky-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25 font-mono">
+          <span className="text-sky-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25">
             LEADERSHIP RECOGNITION &bull; SLIDES 18 &amp; 19
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-black text-[var(--text-main)] mt-3">
@@ -157,7 +157,7 @@ export function Ranks() {
                       <Icon className="w-5 h-5" />
                     </div>
                     {r.featured && (
-                      <span className="text-[9px] font-mono px-2 py-0.5 rounded-full bg-sky-500 text-white font-black uppercase">
+                      <span className="text-[9px] px-2 py-0.5 rounded-full bg-sky-500 text-white font-black uppercase">
                         Featured
                       </span>
                     )}
@@ -167,7 +167,7 @@ export function Ranks() {
                     {r.rank}
                   </h4>
 
-                  <div className="p-2.5 rounded-xl bg-slate-50/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-[var(--border-subtle)] text-[11px] font-mono space-y-1 mb-3">
+                  <div className="p-2.5 rounded-xl bg-slate-50/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-[var(--border-subtle)] text-[11px] space-y-1 mb-3">
                     <div className="flex justify-between text-[var(--text-subtle)]">
                       <span>Strong (50%):</span>
                       <span className="font-bold text-sky-600 dark:text-cyan-400">{r.strong}</span>
@@ -183,7 +183,7 @@ export function Ranks() {
                   </div>
                 </div>
 
-                <div className="pt-2 border-t border-slate-200/80 dark:border-[var(--border-subtle)] space-y-1.5 text-xs font-mono">
+                <div className="pt-2 border-t border-slate-200/80 dark:border-[var(--border-subtle)] space-y-1.5 text-xs">
                   <div className="text-[10px] text-[var(--text-subtle)] uppercase">Reward Option A:</div>
                   <div className="font-bold text-emerald-600 dark:text-emerald-400">{r.cash}</div>
                   <div className="text-[10px] text-[var(--text-subtle)] uppercase pt-1">Reward Option B:</div>

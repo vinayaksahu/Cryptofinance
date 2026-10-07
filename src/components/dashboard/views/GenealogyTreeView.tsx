@@ -201,7 +201,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
             </div>
 
             {/* Username / Handle */}
-            <p className="text-muted-foreground text-xs font-mono mb-3">
+            <p className="text-muted-foreground text-xs mb-3">
               {node.username}
             </p>
 
@@ -212,7 +212,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
             <div className="space-y-1.5 text-xs">
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Active Investment:</span>
-                <span className="text-emerald-500 font-bold font-mono">
+                <span className="text-emerald-500 font-bold">
                   ${node.activeInvestment.toFixed(2)}
                 </span>
               </div>
@@ -251,7 +251,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
             </div>
 
             {/* Username */}
-            <p className="text-muted-foreground text-[11px] font-mono mb-2">
+            <p className="text-muted-foreground text-[11px] mb-2">
               {node.username}
             </p>
 
@@ -261,7 +261,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
             {/* Investment Row */}
             <div className="flex items-center justify-between text-xs">
               <span className="text-muted-foreground">Investment:</span>
-              <span className="font-bold font-mono text-emerald-500">
+              <span className="font-bold text-emerald-500">
                 ${node.activeInvestment.toFixed(2)}
               </span>
             </div>
@@ -399,7 +399,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
             <span className="text-xs text-muted-foreground font-medium">Total Network</span>
             <Users className="w-4 h-4 text-primary" />
           </div>
-          <p className="text-xl sm:text-2xl font-black text-foreground font-mono">
+          <p className="text-xl sm:text-2xl font-black text-foreground">
             {stats?.totalMembers ?? (activeTree.children.length > 0 ? activeTree.totalTeamCount + 1 : 1)}
           </p>
         </div>
@@ -412,7 +412,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
             </span>
             <UserCheck className="w-4 h-4 text-emerald-500" />
           </div>
-          <p className="text-xl sm:text-2xl font-black text-emerald-500 font-mono">
+          <p className="text-xl sm:text-2xl font-black text-emerald-500">
             {stats?.activeMembers ?? (activeTree.status === "ACTIVE" ? 1 : 0)}
           </p>
         </div>
@@ -425,7 +425,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
             </span>
             <UserX className="w-4 h-4 text-rose-500" />
           </div>
-          <p className="text-xl sm:text-2xl font-black text-rose-500 font-mono">
+          <p className="text-xl sm:text-2xl font-black text-rose-500">
             {stats?.inactiveMembers ?? (activeTree.status === "INACTIVE" ? 1 : 0)}
           </p>
         </div>
@@ -435,7 +435,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
             <span className="text-xs text-primary font-medium">Direct Team</span>
             <Sparkles className="w-4 h-4 text-primary" />
           </div>
-          <p className="text-xl sm:text-2xl font-black text-primary font-mono">
+          <p className="text-xl sm:text-2xl font-black text-primary">
             {activeTree.directTeamCount}
           </p>
         </div>
@@ -549,7 +549,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
               >
                 <ZoomOut className="w-3.5 h-3.5" />
               </button>
-              <span className="px-2 text-[11px] font-mono text-foreground font-semibold select-none">
+              <span className="px-2 text-[11px] text-foreground font-semibold select-none">
                 {Math.round(zoomLevel * 100)}%
               </span>
               <button
@@ -657,7 +657,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
                     {selectedNode.status}
                   </span>
                 </div>
-                <p className="text-xs text-primary font-mono font-semibold">
+                <p className="text-xs text-primary font-semibold">
                   {selectedNode.username} • ID: {selectedNode.customId}
                 </p>
               </div>
@@ -667,11 +667,11 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
             <div className="bg-muted/40 border border-border rounded-2xl p-4 space-y-2.5 text-xs mb-6">
               <div className="flex items-center justify-between py-1 border-b border-border">
                 <span className="text-muted-foreground">Custom User ID</span>
-                <span className="font-mono font-bold text-foreground">{selectedNode.customId}</span>
+                <span className="font-bold text-foreground">{selectedNode.customId}</span>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-border">
                 <span className="text-muted-foreground">Active Investment</span>
-                <span className="font-mono font-bold text-emerald-500">
+                <span className="font-bold text-emerald-500">
                   ${selectedNode.activeInvestment.toFixed(2)} USDT
                 </span>
               </div>
@@ -693,7 +693,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
               </div>
               <div className="flex items-center justify-between py-1">
                 <span className="text-muted-foreground">Sponsor ID</span>
-                <span className="font-mono text-foreground">{selectedNode.sponsorCustomId || "-"}</span>
+                <span className="text-foreground">{selectedNode.sponsorCustomId || "-"}</span>
               </div>
             </div>
 

@@ -162,7 +162,7 @@ export function AdminProfileView({ user, onRefresh }: AdminProfileViewProps) {
       <div>
         <h1 className="text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2">
           Admin Profile Settings
-          <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold border border-amber-500/30 uppercase font-mono">
+          <span className="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/15 text-amber-600 dark:text-amber-400 font-bold border border-amber-500/30 uppercase">
             {user?.role || "ADMIN"}
           </span>
         </h1>
@@ -186,12 +186,12 @@ export function AdminProfileView({ user, onRefresh }: AdminProfileViewProps) {
             <div>
               <div className="flex items-center gap-2 flex-wrap">
                 <h2 className="text-xl font-black tracking-wide text-white">{user?.fullName || "Admin"}</h2>
-                <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-mono text-[10px] font-bold">
+                <span className="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold">
                   {user?.status || "ACTIVE"}
                 </span>
               </div>
-              <p className="text-xs text-amber-300/90 font-mono mt-0.5">Admin ID: {user?.customId}</p>
-              <div className="flex items-center gap-3 mt-2 text-[11px] text-slate-400 font-mono flex-wrap">
+              <p className="text-xs text-amber-300/90 mt-0.5">Admin ID: {user?.customId}</p>
+              <div className="flex items-center gap-3 mt-2 text-[11px] text-slate-400 flex-wrap">
                 {user?.teamPrefix && (
                   <span className="flex items-center gap-1 text-amber-400">
                     <Tag className="w-3 h-3" /> Branch: DF{user.teamPrefix}xxxxx
@@ -238,19 +238,19 @@ export function AdminProfileView({ user, onRefresh }: AdminProfileViewProps) {
 
             <form onSubmit={handleUpdateProfile} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1 font-mono uppercase">
+                <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1 uppercase">
                   Admin Custom ID
                 </label>
                 <input
                   type="text"
                   value={user?.customId || ""}
                   disabled
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 text-slate-500 dark:text-slate-400 font-mono opacity-80 cursor-not-allowed text-xs"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-slate-100 dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 text-slate-500 dark:text-slate-400 opacity-80 cursor-not-allowed text-xs"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1 font-mono uppercase">
+                <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1 uppercase">
                   Full Name <span className="text-amber-500">*</span>
                 </label>
                 <input
@@ -264,7 +264,7 @@ export function AdminProfileView({ user, onRefresh }: AdminProfileViewProps) {
               </div>
 
               <div>
-                <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1 font-mono uppercase">
+                <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1 uppercase">
                   Email Address <span className="text-amber-500">*</span>
                 </label>
                 <input
@@ -273,10 +273,10 @@ export function AdminProfileView({ user, onRefresh }: AdminProfileViewProps) {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="admin@cryptofinance.online"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[var(--bg-main)] border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-amber-400 text-xs font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[var(--bg-main)] border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-amber-400 text-xs"
                 />
                 {isChangingEmail && (
-                  <p className="text-[11px] text-amber-500 dark:text-amber-400 font-mono mt-1 flex items-center gap-1">
+                  <p className="text-[11px] text-amber-500 dark:text-amber-400 mt-1 flex items-center gap-1">
                     <ArrowRight className="w-3 h-3 shrink-0" />
                     Changing email from <span className="font-bold underline">{user?.email}</span> to <span className="font-bold underline">{email}</span>
                   </p>
@@ -284,7 +284,7 @@ export function AdminProfileView({ user, onRefresh }: AdminProfileViewProps) {
               </div>
 
               <div>
-                <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1 font-mono uppercase">
+                <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1 uppercase">
                   Contact / Phone Number
                 </label>
                 <input
@@ -292,7 +292,7 @@ export function AdminProfileView({ user, onRefresh }: AdminProfileViewProps) {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   placeholder="e.g. +971 50 123 4567 or +91..."
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[var(--bg-main)] border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-amber-400 text-xs font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[var(--bg-main)] border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-amber-400 text-xs"
                 />
               </div>
 
@@ -301,11 +301,11 @@ export function AdminProfileView({ user, onRefresh }: AdminProfileViewProps) {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <ShieldAlert className="w-4 h-4 text-amber-500" />
-                    <span className="font-bold text-slate-900 dark:text-amber-300 uppercase tracking-wider font-mono text-[11px]">
+                    <span className="font-bold text-slate-900 dark:text-amber-300 uppercase tracking-wider text-[11px]">
                       Account Security Verification
                     </span>
                   </div>
-                  <span className="text-[10px] text-amber-500 dark:text-amber-400 font-mono font-semibold">
+                  <span className="text-[10px] text-amber-500 dark:text-amber-400 font-semibold">
                     Mandatory
                   </span>
                 </div>
@@ -313,7 +313,7 @@ export function AdminProfileView({ user, onRefresh }: AdminProfileViewProps) {
                 <div className="text-[11px] text-slate-600 dark:text-slate-300 space-y-1">
                   <p>
                     Verification OTP will be sent to your registered email:{" "}
-                    <strong className="text-amber-600 dark:text-amber-400 font-mono font-bold">{user?.email}</strong>
+                    <strong className="text-amber-600 dark:text-amber-400 font-bold">{user?.email}</strong>
                   </p>
                   {isChangingEmail && (
                     <p className="text-[10px] text-slate-500 dark:text-slate-400 italic">
@@ -342,7 +342,7 @@ export function AdminProfileView({ user, onRefresh }: AdminProfileViewProps) {
                     value={otp}
                     onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
                     placeholder="Enter 6-digit OTP"
-                    className="flex-1 px-3.5 py-2.5 rounded-xl bg-[var(--bg-main)] border border-amber-500/40 text-slate-900 dark:text-white outline-none focus:border-amber-400 text-xs font-mono font-bold tracking-widest text-center"
+                    className="flex-1 px-3.5 py-2.5 rounded-xl bg-[var(--bg-main)] border border-amber-500/40 text-slate-900 dark:text-white outline-none focus:border-amber-400 text-xs font-bold tracking-widest text-center"
                   />
                   <button
                     type="button"
@@ -409,7 +409,7 @@ export function AdminProfileView({ user, onRefresh }: AdminProfileViewProps) {
 
             <form onSubmit={handleChangePassword} className="space-y-4 text-xs">
               <div>
-                <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1 font-mono uppercase">
+                <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1 uppercase">
                   Current Password <span className="text-amber-500">*</span>
                 </label>
                 <input
@@ -418,12 +418,12 @@ export function AdminProfileView({ user, onRefresh }: AdminProfileViewProps) {
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   placeholder="Enter current password"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[var(--bg-main)] border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-amber-400 text-xs font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[var(--bg-main)] border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-amber-400 text-xs"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1 font-mono uppercase">
+                <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1 uppercase">
                   New Password <span className="text-amber-500">*</span>
                 </label>
                 <input
@@ -432,12 +432,12 @@ export function AdminProfileView({ user, onRefresh }: AdminProfileViewProps) {
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="At least 6 characters"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[var(--bg-main)] border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-amber-400 text-xs font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[var(--bg-main)] border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-amber-400 text-xs"
                 />
               </div>
 
               <div>
-                <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1 font-mono uppercase">
+                <label className="block text-slate-700 dark:text-slate-300 font-bold mb-1 uppercase">
                   Confirm New Password <span className="text-amber-500">*</span>
                 </label>
                 <input
@@ -446,7 +446,7 @@ export function AdminProfileView({ user, onRefresh }: AdminProfileViewProps) {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Re-enter new password"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-[var(--bg-main)] border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-amber-400 text-xs font-mono"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-[var(--bg-main)] border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-amber-400 text-xs"
                 />
               </div>
 

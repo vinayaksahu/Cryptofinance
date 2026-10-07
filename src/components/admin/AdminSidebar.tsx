@@ -106,7 +106,7 @@ export default function AdminSidebar({
               <div className="font-bold text-sm tracking-wider text-foreground uppercase whitespace-nowrap leading-none">
                 CRYPTO FINANCE
               </div>
-              <div className="text-[9px] font-bold tracking-widest text-primary uppercase mt-1 whitespace-nowrap flex items-center gap-1 leading-none font-mono">
+              <div className="text-[9px] font-bold tracking-widest text-primary uppercase mt-1 whitespace-nowrap flex items-center gap-1 leading-none">
                 <ShieldCheck className="w-3 h-3 text-emerald-500" />
                 ADMIN CONSOLE
               </div>

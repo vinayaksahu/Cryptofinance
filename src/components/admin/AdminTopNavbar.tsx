@@ -261,7 +261,7 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
             {dropdownOpen && (
               <div className="absolute right-0 mt-2 w-64 bg-card border border-border rounded-2xl p-2 text-foreground z-50 animate-in fade-in zoom-in-95 duration-100 shadow-xl">
                 <div className="px-3 py-2 border-b border-border">
-                  <p className="text-xs font-bold text-foreground tracking-wide font-mono flex items-center justify-between">
+                  <p className="text-xs font-bold text-foreground tracking-wide flex items-center justify-between">
                     <span>ID: {user?.customId}</span>
                     <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary/20 text-primary border border-primary/40 font-bold">
                       {user?.role || "ADMIN"}
@@ -271,7 +271,7 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                     {user?.fullName}
                   </p>
                   {user?.teamPrefix && (
-                    <p className="text-[10px] text-primary font-mono mt-1 flex items-center gap-1 font-semibold">
+                    <p className="text-[10px] text-primary mt-1 flex items-center gap-1 font-semibold">
                       <Tag className="w-3 h-3 text-primary" />
                       Branch Prefix: CF{user.teamPrefix}xxxxx
                     </p>
@@ -380,12 +380,12 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
 
             <form onSubmit={handleUpdateProfile} className="space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-muted-foreground mb-1.5 font-mono uppercase">Admin ID</label>
+                <label className="block text-xs font-semibold text-muted-foreground mb-1.5 uppercase">Admin ID</label>
                 <input
                   type="text"
                   value={user?.customId || ""}
                   disabled
-                  className="w-full bg-muted/60 border border-border rounded-xl px-3.5 py-2.5 text-sm text-muted-foreground font-mono cursor-not-allowed"
+                  className="w-full bg-muted/60 border border-border rounded-xl px-3.5 py-2.5 text-sm text-muted-foreground cursor-not-allowed"
                 />
               </div>
 
@@ -412,7 +412,7 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                   value={profileEmail}
                   onChange={(e) => setProfileEmail(e.target.value)}
                   placeholder="admin@cryptofinance.online"
-                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground font-mono focus:outline-none focus:border-primary"
+                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
                   required
                 />
               </div>
@@ -424,7 +424,7 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                   value={profilePhone}
                   onChange={(e) => setProfilePhone(e.target.value)}
                   placeholder="e.g. +971 50 123 4567"
-                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground font-mono focus:outline-none focus:border-primary"
+                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
                 />
               </div>
 
@@ -433,15 +433,15 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5">
                     <ShieldAlert className="w-3.5 h-3.5 text-primary" />
-                    <span className="font-bold text-primary uppercase tracking-wider font-mono text-[10px]">
+                    <span className="font-bold text-primary uppercase tracking-wider text-[10px]">
                       Email OTP Verification
                     </span>
                   </div>
-                  <span className="text-[10px] text-muted-foreground font-mono">Required</span>
+                  <span className="text-[10px] text-muted-foreground">Required</span>
                 </div>
 
                 <p className="text-[11px] text-foreground leading-relaxed">
-                  Verification OTP will be sent to registered email: <strong className="text-primary font-mono">{user?.email}</strong>
+                  Verification OTP will be sent to registered email: <strong className="text-primary">{user?.email}</strong>
                 </p>
 
                 {otpMsg && (
@@ -464,7 +464,7 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                     value={otp}
                     onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
                     placeholder="6-digit OTP"
-                    className="flex-1 px-3 py-2 rounded-xl bg-card border border-border text-foreground text-xs font-mono font-bold tracking-widest text-center focus:outline-none focus:border-primary"
+                    className="flex-1 px-3 py-2 rounded-xl bg-card border border-border text-foreground text-xs font-bold tracking-widest text-center focus:outline-none focus:border-primary"
                   />
                   <button
                     type="button"
@@ -565,7 +565,7 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   placeholder="Enter current password"
-                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground font-mono focus:outline-none focus:border-primary"
+                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
                   required
                 />
               </div>
@@ -579,7 +579,7 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="Min 6 characters"
-                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground font-mono focus:outline-none focus:border-primary"
+                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
                   required
                 />
               </div>
@@ -593,7 +593,7 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Re-enter new password"
-                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground font-mono focus:outline-none focus:border-primary"
+                  className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
                   required
                 />
               </div>

@@ -20,7 +20,7 @@ export function PresentationDownload() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm font-mono">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-sm">
             <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
             <span>OFFICIAL PRESENTATION DECK &bull; 21 SLIDES (BEP-20)</span>
           </div>
@@ -40,10 +40,10 @@ export function PresentationDownload() {
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
             <div className="space-y-4">
               <div className="flex items-center gap-2">
-                <span className="px-3 py-1 rounded-full bg-cyan-400 text-slate-950 text-xs font-black uppercase tracking-wider font-mono">
+                <span className="px-3 py-1 rounded-full bg-cyan-400 text-slate-950 text-xs font-black uppercase tracking-wider">
                   Official Master Edition
                 </span>
-                <span className="text-xs font-mono font-bold text-cyan-400">
+                <span className="text-xs font-bold text-cyan-400">
                   21 Slides &bull; 1920x1080 Ultra-HD
                 </span>
               </div>

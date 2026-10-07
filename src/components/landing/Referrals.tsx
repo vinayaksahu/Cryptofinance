@@ -25,7 +25,7 @@ export function Referrals() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-sky-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25 font-mono">
+          <span className="text-sky-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25">
             NETWORK INCENTIVES &bull; SLIDES 05, 15, 16 &amp; 17
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-black text-[var(--text-main)] mt-3">
@@ -45,10 +45,10 @@ export function Referrals() {
               </div>
 
               <div className="flex items-center gap-2 mb-3">
-                <span className="px-3 py-1 rounded-full bg-sky-500 text-white text-xs font-black uppercase tracking-wider font-mono">
+                <span className="px-3 py-1 rounded-full bg-sky-500 text-white text-xs font-black uppercase tracking-wider">
                   Slide 15 Commission
                 </span>
-                <span className="text-xs text-indigo-600 dark:text-indigo-400 font-bold font-mono">
+                <span className="text-xs text-indigo-600 dark:text-indigo-400 font-bold">
                   Instant Working Wallet Credit
                 </span>
               </div>
@@ -63,16 +63,16 @@ export function Referrals() {
 
               {/* Free Registration Rewards Box (Slide 05) */}
               <div className="my-6 p-4 rounded-2xl bg-slate-50/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-cyan-500/20 text-xs sm:text-sm space-y-3">
-                <div className="font-bold text-sky-600 dark:text-cyan-400 uppercase tracking-wider text-xs flex items-center gap-1.5 font-mono">
+                <div className="font-bold text-sky-600 dark:text-cyan-400 uppercase tracking-wider text-xs flex items-center gap-1.5">
                   <Sparkles className="w-4 h-4 text-sky-500 dark:text-cyan-400" /> Free Community Signup Rewards (Slide 05)
                 </div>
                 <div className="flex justify-between items-center py-1.5 border-b border-[var(--border-subtle)]">
                   <span className="text-[var(--text-muted)]">Free Self Registration:</span>
-                  <span className="font-mono font-bold text-indigo-600 dark:text-indigo-400">$1.00 USDT Bonus</span>
+                  <span className="font-bold text-indigo-600 dark:text-indigo-400">$1.00 USDT Bonus</span>
                 </div>
                 <div className="flex justify-between items-center py-1.5 border-b border-[var(--border-subtle)]">
                   <span className="text-[var(--text-muted)]">10-Tier Team Signup Bounty:</span>
-                  <span className="font-mono font-bold text-sky-600 dark:text-cyan-400">$0.40 / Tier (10 Levels)</span>
+                  <span className="font-bold text-sky-600 dark:text-cyan-400">$0.40 / Tier (10 Levels)</span>
                 </div>
                 <div className="text-[11px] text-[var(--text-subtle)]">
                   ★ Stored in Bonus Wallet &bull; Funds up to 10% of any activation or compounding!
@@ -118,12 +118,12 @@ export function Referrals() {
                     <h4 className="font-display text-xl font-bold text-[var(--text-main)]">
                       10-Level Daily Team Royalty
                     </h4>
-                    <span className="text-xs text-[var(--text-subtle)] font-mono">
+                    <span className="text-xs text-[var(--text-subtle)]">
                       Calculated on Downline Members&apos; Daily ROI (Slides 16 &amp; 17)
                     </span>
                   </div>
                 </div>
-                <span className="hidden sm:inline-block px-3 py-1 rounded-full bg-sky-500/10 text-sky-600 dark:text-cyan-400 text-xs font-mono font-bold">
+                <span className="hidden sm:inline-block px-3 py-1 rounded-full bg-sky-500/10 text-sky-600 dark:text-cyan-400 text-xs font-bold">
                   10 Tiers
                 </span>
               </div>
@@ -131,7 +131,7 @@ export function Referrals() {
               {/* Levels Table */}
               <div className="overflow-x-auto rounded-2xl border border-[var(--border-subtle)]">
                 <table className="w-full text-left text-xs sm:text-sm">
-                  <thead className="bg-slate-100 dark:bg-[#0B132B] text-[var(--text-muted)] font-mono">
+                  <thead className="bg-slate-100 dark:bg-[#0B132B] text-[var(--text-muted)]">
                     <tr>
                       <th className="py-3 px-4 font-bold">Generation Tier</th>
                       <th className="py-3 px-4 font-bold text-center">Daily Royalty %</th>
@@ -142,16 +142,16 @@ export function Referrals() {
                   <tbody className="divide-y divide-[var(--border-subtle)]">
                     {levels.map((lvl) => (
                       <tr key={lvl.level} className="hover:bg-cyan-500/5 transition">
-                        <td className="py-2.5 px-4 font-bold text-[var(--text-main)] font-mono">
+                        <td className="py-2.5 px-4 font-bold text-[var(--text-main)]">
                           Tier {lvl.level}
                         </td>
-                        <td className={`py-2.5 px-4 text-center font-mono text-base ${lvl.color}`}>
+                        <td className={`py-2.5 px-4 text-center text-base ${lvl.color}`}>
                           {lvl.percent}%
                         </td>
                         <td className="py-2.5 px-4 text-[var(--text-muted)] text-xs">
                           Daily ROI of Tier {lvl.level}
                         </td>
-                        <td className="py-2.5 px-4 text-right text-xs font-semibold text-[var(--text-main)] font-mono">
+                        <td className="py-2.5 px-4 text-right text-xs font-semibold text-[var(--text-main)]">
                           {lvl.rule}
                         </td>
                       </tr>
@@ -162,7 +162,7 @@ export function Referrals() {
             </div>
 
             {/* Bottom Qualification Note */}
-            <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between text-xs text-[var(--text-subtle)] font-mono">
+            <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between text-xs text-[var(--text-subtle)]">
               <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
                 Paid 365 Days a Year &bull; 10 Active Directs unlocks all 10 Tiers

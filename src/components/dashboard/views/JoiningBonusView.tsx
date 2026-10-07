@@ -283,7 +283,7 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
             <Sparkles className="w-3.5 h-3.5 text-primary" />
             Total Joining Bonus
           </p>
-          <p className="text-2xl sm:text-3xl font-extrabold text-primary font-mono mt-1">
+          <p className="text-2xl sm:text-3xl font-extrabold text-primary mt-1">
             ${stats.totalJoiningBonus.toFixed(4)} <span className="text-xs text-muted-foreground font-normal">USDT</span>
           </p>
           <p className="text-[11px] text-muted-foreground mt-2">Combined Self & Team Registration Earnings</p>
@@ -296,7 +296,7 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
             <Gift className="w-3.5 h-3.5 text-primary" />
             Self Welcome Bonus
           </p>
-          <p className="text-2xl sm:text-3xl font-extrabold text-foreground font-mono mt-1">
+          <p className="text-2xl sm:text-3xl font-extrabold text-foreground mt-1">
             ${stats.selfTotal.toFixed(4)} <span className="text-xs text-muted-foreground font-normal">USDT</span>
           </p>
           <p className="text-[11px] text-muted-foreground mt-2">Credited upon your account registration</p>
@@ -309,7 +309,7 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
             <Users className="w-3.5 h-3.5 text-emerald-500" />
             Team Downline Bounties
           </p>
-          <p className="text-2xl sm:text-3xl font-extrabold text-emerald-500 font-mono mt-1">
+          <p className="text-2xl sm:text-3xl font-extrabold text-emerald-500 mt-1">
             ${stats.teamTotal.toFixed(4)} <span className="text-xs text-muted-foreground font-normal">USDT</span>
           </p>
           <p className="text-[11px] text-muted-foreground mt-2">12-Level registration rewards from your team</p>
@@ -429,7 +429,7 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-border font-mono text-foreground">
+            <tbody className="divide-y divide-border text-foreground">
               {paginatedEntries.length === 0 ? (
                 <tr>
                   <td colSpan={7} className="py-8 text-center text-muted-foreground font-sans text-xs">
@@ -468,7 +468,7 @@ export function JoiningBonusView({ user, onRefresh }: JoiningBonusViewProps) {
                           <span className="text-muted-foreground text-[11px]">-</span>
                         )}
                       </td>
-                      <td className="py-2.5 px-3 font-mono font-bold text-primary">
+                      <td className="py-2.5 px-3 font-bold text-primary">
                         {item.memberCustomId !== "-" ? item.memberCustomId : "Self"}
                       </td>
                       <td className="py-2.5 px-3 text-muted-foreground font-sans max-w-xs truncate" title={item.description}>

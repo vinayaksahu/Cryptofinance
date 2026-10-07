@@ -77,7 +77,7 @@ export function Footer() {
                 <span className="font-display font-black text-xl tracking-wider text-sky-600 dark:text-cyan-400 uppercase">
                   CRYPTO FINANCE
                 </span>
-                <span className="block text-[10px] text-[var(--text-subtle)] tracking-widest uppercase font-mono">
+                <span className="block text-[10px] text-[var(--text-subtle)] tracking-widest uppercase">
                   QUANTITATIVE ALGO PROTOCOL &bull; BEP-20
                 </span>
               </div>
@@ -101,7 +101,7 @@ export function Footer() {
 
           {/* Quick Links (3 Cols) */}
           <div className="lg:col-span-3 space-y-3">
-            <span className="text-xs font-bold text-sky-600 dark:text-cyan-400 uppercase tracking-widest block font-mono">
+            <span className="text-xs font-bold text-sky-600 dark:text-cyan-400 uppercase tracking-widest block">
               Ecosystem Navigation
             </span>
             <ul className="space-y-2 text-xs font-medium text-[var(--text-muted)]">
@@ -128,7 +128,7 @@ export function Footer() {
 
           {/* Official Deck & Controls (4 Cols) */}
           <div className="lg:col-span-4 space-y-4">
-            <span className="text-xs font-bold text-sky-600 dark:text-cyan-400 uppercase tracking-widest block font-mono">
+            <span className="text-xs font-bold text-sky-600 dark:text-cyan-400 uppercase tracking-widest block">
               Presentation &bull; Controls
             </span>
 
@@ -149,11 +149,11 @@ export function Footer() {
             </div>
 
             <div className="text-[11px] text-[var(--text-subtle)] space-y-1">
-              <span className="flex items-center gap-1.5 font-mono">
+              <span className="flex items-center gap-1.5">
                 <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                 Audited BEP-20 Smart Contract Standard
               </span>
-              <span className="block font-mono">
+              <span className="block">
                 Official Portal: cryptofinance.online
               </span>
             </div>
@@ -165,7 +165,7 @@ export function Footer() {
           <p>
             &copy; {new Date().getFullYear()} Crypto Finance Protocol. All Rights Reserved. Headquartered in Zug, Switzerland.
           </p>
-          <div className="flex items-center gap-4 text-[11px] font-mono">
+          <div className="flex items-center gap-4 text-[11px]">
             <span>Minimum Entry: $2 USDT</span>
             <span>&bull;</span>
             <span>Cashout Min: $2 USDT</span>

@@ -40,7 +40,7 @@ export function Calculator() {
 
   const safeCap = Math.max(2, Number(capital) || 2);
   const pool = safeCap * 2;
-  const capBal = pool * 2; // 2X of pool = 4X of original investment
+  const capBal = pool; // Strict 2X Max Cap of original investment (200% maximum extraction)
 
   const maxBonusUsable = +(safeCap * 0.1).toFixed(2);
   const bonusUsed = Math.min(Number(bonusInput) || 0, maxBonusUsable);
@@ -58,21 +58,27 @@ export function Calculator() {
     setQuickDays(days);
     const newActions: Record<number, "W" | "R"> = {};
     let tempBal = pool;
+    let tempCumW = 0;
     for (let d = 0; d < 1200; d++) {
-      const roi = +(tempBal * 0.02);
-      if (d < days && tempBal + roi < capBal) {
+      if (tempCumW >= capBal) break;
+      let roi = +(tempBal * 0.02);
+      if (tempCumW + roi > capBal) {
+        roi = +(capBal - tempCumW);
+      }
+      if (d < days && tempBal + roi <= capBal) {
         newActions[d] = "R";
         tempBal += roi;
       } else {
         newActions[d] = "W";
         tempBal -= roi;
+        tempCumW += roi;
       }
-      if (tempBal <= 0.005) break;
+      if (tempBal <= 0.005 || tempCumW >= capBal) break;
     }
     setManualActions(newActions);
   };
 
-  // Run simulation engine from index.html
+  // Run simulation engine with strict 2X cap & exact final ROI capping
   const simData: SimRow[] = useMemo(() => {
     const rows: SimRow[] = [];
     let bal = pool;
@@ -80,8 +86,18 @@ export function Calculator() {
     let cumR = 0;
 
     for (let d = 0; d < 1500; d++) {
-      if (bal <= 0.005) break;
-      const roi = +(bal * 0.02);
+      if (bal <= 0.005 || cumW >= capBal) break;
+      let roi = +(bal * 0.02);
+
+      // Strict 2X Cap rule: cumulative payout cannot exceed 2X of initial stake
+      const remainingTo2X = +(capBal - cumW);
+      if (remainingTo2X <= 0) break;
+
+      let isLastCappedRoi = false;
+      if (roi > remainingTo2X) {
+        roi = remainingTo2X;
+        isLastCappedRoi = true;
+      }
 
       let action: "W" | "R" = "W";
       let capLocked = false;
@@ -89,7 +105,7 @@ export function Calculator() {
       if (mode === "withdraw") {
         action = "W";
       } else if (mode === "reinvest") {
-        if (bal + roi >= capBal) {
+        if (bal + roi >= capBal || isLastCappedRoi) {
           action = "W";
           capLocked = true;
         } else {
@@ -97,7 +113,7 @@ export function Calculator() {
         }
       } else {
         const userAction = manualActions[d] || "W";
-        if (userAction === "R" && bal + roi >= capBal) {
+        if (userAction === "R" && (bal + roi >= capBal || isLastCappedRoi)) {
           action = "W";
           capLocked = true;
         } else {
@@ -110,8 +126,8 @@ export function Calculator() {
         after = +(bal + roi);
         cumR += roi;
       } else {
-        after = +(bal - roi);
-        cumW += roi;
+        after = Math.max(0, +(bal - roi));
+        cumW = Math.min(capBal, +(cumW + roi));
       }
 
       rows.push({
@@ -126,6 +142,10 @@ export function Calculator() {
       });
 
       bal = after;
+      if (isLastCappedRoi && action === "W") {
+        // Exact 2X completed
+        break;
+      }
     }
 
     return rows;
@@ -210,7 +230,7 @@ export function Calculator() {
 
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-12">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-[#00FFA3] text-xs font-bold uppercase tracking-wider font-mono mb-3">
+        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-600 dark:text-[#00FFA3] text-xs font-bold uppercase tracking-wider mb-3">
           <Sparkles className="w-3.5 h-3.5" />
           <span>OFFICIAL ROI PLAN SIMULATOR &bull; SLIDES 10 - 14</span>
         </div>
@@ -226,7 +246,7 @@ export function Calculator() {
       <div className="glass-card-elevated glass-glow-top p-6 sm:p-8 max-w-5xl mx-auto shadow-2xl">
         {/* Preset Amount Pills */}
         <div className="flex flex-wrap items-center justify-between gap-3 mb-8 pb-6 border-b border-slate-200/80 dark:border-white/10">
-          <span className="text-xs font-bold text-slate-600 dark:text-slate-400 font-mono flex items-center gap-1.5">
+          <span className="text-xs font-bold text-slate-600 dark:text-slate-400 flex items-center gap-1.5">
             <Zap className="w-4 h-4 text-sky-500 dark:text-[#00D2FF]" />
             Quick Preset Stakes:
           </span>
@@ -239,7 +259,7 @@ export function Calculator() {
                   setCapital(val);
                   setBonusInput(+(val * 0.1).toFixed(2));
                 }}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold font-mono transition-all ${
+                className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                   capital === val
                     ? "bg-emerald-500 dark:bg-[#00FFA3] text-white dark:text-slate-950 font-black shadow-lg shadow-emerald-500/25 scale-105"
                     : "bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 text-slate-700 dark:text-slate-300 hover:border-emerald-500/40 hover:text-slate-950 dark:hover:text-white"
@@ -259,10 +279,10 @@ export function Calculator() {
               <label className="text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                 Investment / Stake (USDT)
               </label>
-              <span className="text-xs font-bold text-emerald-600 dark:text-[#00FFA3] font-mono">Min $2.00</span>
+              <span className="text-xs font-bold text-emerald-600 dark:text-[#00FFA3]">Min $2.00</span>
             </div>
             <div className="relative flex items-center">
-              <span className="absolute left-3.5 text-lg font-bold text-emerald-600 dark:text-[#00FFA3] font-mono">$</span>
+              <span className="absolute left-3.5 text-lg font-bold text-emerald-600 dark:text-[#00FFA3]">$</span>
               <input
                 type="number"
                 min="2"
@@ -273,10 +293,10 @@ export function Calculator() {
                   setCapital(val);
                   setBonusInput(+(val * 0.1).toFixed(2));
                 }}
-                className="w-full bg-white dark:bg-slate-950/80 border border-slate-300 dark:border-white/15 focus:border-emerald-500 rounded-xl py-3 pl-8 pr-4 text-slate-900 dark:text-white font-mono text-xl font-bold outline-none transition-all shadow-inner"
+                className="w-full bg-white dark:bg-slate-950/80 border border-slate-300 dark:border-white/15 focus:border-emerald-500 rounded-xl py-3 pl-8 pr-4 text-slate-900 dark:text-white text-xl font-bold outline-none transition-all shadow-inner"
               />
             </div>
-            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2 font-mono">
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-2">
               Creates instant <strong className="text-slate-900 dark:text-white">${pool.toLocaleString()} (2X)</strong> Contract Pool
             </p>
           </div>
@@ -288,22 +308,22 @@ export function Calculator() {
                 <Layers className="w-3.5 h-3.5" />
                 Bonus Wallet (10% Usable)
               </label>
-              <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400 font-mono">
+              <span className="text-xs font-bold text-indigo-600 dark:text-indigo-400">
                 ${maxBonusUsable.toFixed(2)} Max
               </span>
             </div>
             <div className="relative flex items-center">
-              <span className="absolute left-3.5 text-lg font-bold text-indigo-600 dark:text-indigo-400 font-mono">$</span>
+              <span className="absolute left-3.5 text-lg font-bold text-indigo-600 dark:text-indigo-400">$</span>
               <input
                 type="number"
                 min="0"
                 step="0.1"
                 value={bonusInput}
                 onChange={(e) => setBonusInput(Number(e.target.value))}
-                className="w-full bg-white dark:bg-slate-950/80 border border-indigo-300 dark:border-indigo-500/30 focus:border-indigo-500 rounded-xl py-3 pl-8 pr-4 text-indigo-700 dark:text-indigo-300 font-mono text-xl font-bold outline-none transition-all shadow-inner"
+                className="w-full bg-white dark:bg-slate-950/80 border border-indigo-300 dark:border-indigo-500/30 focus:border-indigo-500 rounded-xl py-3 pl-8 pr-4 text-indigo-700 dark:text-indigo-300 text-xl font-bold outline-none transition-all shadow-inner"
               />
             </div>
-            <div className="flex justify-between text-[11px] text-slate-600 dark:text-slate-300 mt-2 font-mono">
+            <div className="flex justify-between text-[11px] text-slate-600 dark:text-slate-300 mt-2">
               <span>Bonus Used: <strong className="text-indigo-600 dark:text-indigo-400">${bonusUsed.toFixed(2)}</strong></span>
               <span>Net USDT: <strong className="text-emerald-600 dark:text-[#00FFA3]">${netUsdt.toFixed(2)}</strong></span>
             </div>
@@ -317,7 +337,7 @@ export function Calculator() {
               <Sliders className="w-4 h-4 text-sky-500 dark:text-[#00D2FF]" />
               Select Strategy Mode:
             </span>
-            <span className="text-xs text-slate-500 dark:text-slate-400 font-mono">
+            <span className="text-xs text-slate-500 dark:text-slate-400">
               {mode === "withdraw" && "Daily Payout • Starts 4% on Principal"}
               {mode === "reinvest" && "Exponential Compounding • 35-Day 2X Doubling"}
               {mode === "manual" && "Custom Strategy • Day-by-Day Control"}
@@ -383,7 +403,7 @@ export function Calculator() {
                   onChange={(e) => applyQuickSetDays(Number(e.target.value))}
                   className="w-full h-2 bg-slate-800 rounded-lg appearance-none cursor-pointer accent-[#00FFA3]"
                 />
-                <span className="font-mono text-xs font-bold text-[#00FFA3] min-w-16 text-right">
+                <span className="text-xs font-bold text-[#00FFA3] min-w-16 text-right">
                   {quickDays} Days
                 </span>
               </div>
@@ -392,7 +412,7 @@ export function Calculator() {
 
           {/* 2X Cap Progress Bar */}
           <div className="mt-5 pt-4 border-t border-slate-200/80 dark:border-white/10">
-            <div className="flex justify-between text-xs font-mono mb-1.5">
+            <div className="flex justify-between text-xs mb-1.5">
               <span className="text-slate-500 dark:text-slate-400">Peak Balance &rarr; 2X Cap Lock (${(capBal).toLocaleString()})</span>
               <span className="font-bold text-slate-900 dark:text-white">{capPct.toFixed(1)}%</span>
             </div>
@@ -415,10 +435,10 @@ export function Calculator() {
             <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">
               Investment
             </p>
-            <p className="text-lg sm:text-xl font-black text-slate-900 dark:text-white font-mono">
+            <p className="text-lg sm:text-xl font-black text-slate-900 dark:text-white">
               ${safeCap.toLocaleString()}
             </p>
-            <p className="text-[10px] text-emerald-600 dark:text-[#00FFA3] font-mono mt-0.5">
+            <p className="text-[10px] text-emerald-600 dark:text-[#00FFA3] mt-0.5">
               ${bonusUsed}B + ${netUsdt}U
             </p>
           </div>
@@ -427,10 +447,10 @@ export function Calculator() {
             <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">
               2X Contract Pool
             </p>
-            <p className="text-lg sm:text-xl font-black text-sky-600 dark:text-[#00D2FF] font-mono">
+            <p className="text-lg sm:text-xl font-black text-sky-600 dark:text-[#00D2FF]">
               ${pool.toLocaleString()}
             </p>
-            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
               Initial Release Base
             </p>
           </div>
@@ -439,10 +459,10 @@ export function Calculator() {
             <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">
               Total Withdrawn
             </p>
-            <p className="text-lg sm:text-xl font-black text-sky-600 dark:text-[#00D2FF] font-mono">
+            <p className="text-lg sm:text-xl font-black text-sky-600 dark:text-[#00D2FF]">
               ${totalWithdrawn.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </p>
-            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
               {((totalWithdrawn / pool) * 100).toFixed(1)}% of Pool
             </p>
           </div>
@@ -451,10 +471,10 @@ export function Calculator() {
             <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">
               Active Days
             </p>
-            <p className="text-lg sm:text-xl font-black text-emerald-600 dark:text-[#00FFA3] font-mono">
+            <p className="text-lg sm:text-xl font-black text-emerald-600 dark:text-[#00FFA3]">
               {totalDays}
             </p>
-            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
               Until $0.005 Bal
             </p>
           </div>
@@ -463,10 +483,10 @@ export function Calculator() {
             <p className="text-[10px] font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-1">
               Peak Balance
             </p>
-            <p className="text-lg sm:text-xl font-black text-indigo-600 dark:text-indigo-400 font-mono">
+            <p className="text-lg sm:text-xl font-black text-indigo-600 dark:text-indigo-400">
               ${peakBalance.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
             </p>
-            <p className="text-[10px] text-slate-500 dark:text-slate-400 font-mono mt-0.5">
+            <p className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5">
               ${totalReinvested.toFixed(0)} Reinvested
             </p>
           </div>
@@ -475,11 +495,11 @@ export function Calculator() {
         {/* Performance Chart */}
         <div className="p-5 rounded-2xl bg-white/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-white/10 mb-8 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
-            <span className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5 font-mono">
+            <span className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
               <TrendingUp className="w-4 h-4 text-emerald-500 dark:text-[#00FFA3]" />
               Simulation Curve: Balance vs Cumulative Cashout
             </span>
-            <div className="flex items-center gap-3 text-xs font-mono">
+            <div className="flex items-center gap-3 text-xs">
               <span className="flex items-center gap-1 text-emerald-600 dark:text-[#00FFA3]">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 dark:bg-[#00FFA3]" /> Pool Balance
               </span>
@@ -553,7 +573,7 @@ export function Calculator() {
         <div className="p-5 rounded-2xl bg-white/80 dark:bg-slate-900/60 border border-slate-200/80 dark:border-white/10 mb-8 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
             <div>
-              <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider font-mono">
+              <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider">
                 Day-by-Day Financial Ledger
               </h3>
               <p className="text-xs text-slate-500 dark:text-slate-400">
@@ -562,7 +582,7 @@ export function Calculator() {
             </div>
             <button
               onClick={handleDownloadCSV}
-              className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white flex items-center gap-1.5 transition font-mono"
+              className="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-xs font-bold text-slate-700 hover:text-slate-950 dark:text-slate-200 dark:hover:text-white flex items-center gap-1.5 transition"
             >
               <Download className="w-3.5 h-3.5 text-emerald-600 dark:text-[#00FFA3]" />
               Export CSV
@@ -570,7 +590,7 @@ export function Calculator() {
           </div>
 
           <div className="overflow-x-auto max-h-80 overflow-y-auto rounded-xl border border-slate-200 dark:border-white/10 bg-slate-50/60 dark:bg-slate-950/60">
-            <table className="w-full text-left text-xs font-mono">
+            <table className="w-full text-left text-xs">
               <thead className="sticky top-0 bg-slate-100 dark:bg-[#0B132B] text-slate-800 dark:text-[#00FFA3] border-b border-slate-200 dark:border-white/10 uppercase text-[10px] tracking-wider z-10">
                 <tr>
                   <th className="py-2.5 px-3 text-center">Day</th>
@@ -627,7 +647,7 @@ export function Calculator() {
               <button
                 type="button"
                 onClick={() => setVisibleRows((v) => Math.min(simData.length, v + 40))}
-                className="px-5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-xs font-bold text-emerald-600 dark:text-[#00FFA3] transition font-mono"
+                className="px-5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-white/5 dark:hover:bg-white/10 border border-slate-200 dark:border-white/10 text-xs font-bold text-emerald-600 dark:text-[#00FFA3] transition"
               >
                 Load More Days ({visibleRows} / {simData.length}) &darr;
               </button>
@@ -638,7 +658,7 @@ export function Calculator() {
         {/* 4 Info Explainer Cards from index.html & PDF */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10">
-            <h4 className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5 font-mono">
+            <h4 className="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
               <Layers className="w-4 h-4 text-indigo-500" />
               10% Bonus Utility Rule
             </h4>
@@ -648,7 +668,7 @@ export function Calculator() {
           </div>
 
           <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10">
-            <h4 className="text-xs font-bold text-sky-600 dark:text-[#00D2FF] uppercase tracking-wider mb-1.5 flex items-center gap-1.5 font-mono">
+            <h4 className="text-xs font-bold text-sky-600 dark:text-[#00D2FF] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
               <TrendingUp className="w-4 h-4 text-sky-500 dark:text-[#00D2FF]" />
               Decaying Pool Balance
             </h4>
@@ -658,7 +678,7 @@ export function Calculator() {
           </div>
 
           <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10">
-            <h4 className="text-xs font-bold text-emerald-600 dark:text-[#00FFA3] uppercase tracking-wider mb-1.5 flex items-center gap-1.5 font-mono">
+            <h4 className="text-xs font-bold text-emerald-600 dark:text-[#00FFA3] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
               <Zap className="w-4 h-4 text-emerald-500 dark:text-[#00FFA3]" />
               35-Day Doubling Engine
             </h4>
@@ -668,12 +688,12 @@ export function Calculator() {
           </div>
 
           <div className="p-4 rounded-2xl bg-white/80 dark:bg-slate-900/50 border border-slate-200/80 dark:border-white/10">
-            <h4 className="text-xs font-bold text-rose-600 dark:text-[#FF3366] uppercase tracking-wider mb-1.5 flex items-center gap-1.5 font-mono">
+            <h4 className="text-xs font-bold text-rose-600 dark:text-[#FF3366] uppercase tracking-wider mb-1.5 flex items-center gap-1.5">
               <Lock className="w-4 h-4 text-rose-500 dark:text-[#FF3366]" />
-              2X Cap Lock &amp; 4X Profit
+              2X Cap Lock &amp; 200% Payout
             </h4>
             <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              When compounding reaches 2X of initial stake, compounding enters an automated safety freeze. The investor MUST take at least 1 withdrawal, unlocking up to ~400% (4X) total extraction.
+              When compounding or payouts reach 2X of initial stake, returns are strictly capped. The final daily ROI pays only the exact remaining balance required to complete 2X (200%), preventing any over-extraction.
             </p>
           </div>
         </div>

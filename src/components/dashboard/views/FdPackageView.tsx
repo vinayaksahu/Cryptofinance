@@ -272,7 +272,7 @@ export function FdPackageView({ user, onRefresh }: FdPackageViewProps) {
                   value={pin}
                   onChange={(e) => setPin(e.target.value.replace(/\D/g, ""))}
                   placeholder="Enter 6-digit Transaction PIN"
-                  className="w-full bg-[#070e20] border border-[#1a2d52] focus:border-amber-400 rounded-xl px-3.5 py-2 text-center tracking-widest text-base font-mono text-amber-300 font-bold placeholder-slate-500 focus:outline-none"
+                  className="w-full bg-[#070e20] border border-[#1a2d52] focus:border-amber-400 rounded-xl px-3.5 py-2 text-center tracking-widest text-base text-amber-300 font-bold placeholder-slate-500 focus:outline-none"
                   required
                 />
               </div>

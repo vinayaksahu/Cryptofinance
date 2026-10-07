@@ -54,7 +54,7 @@ export function ImpersonationBanner({
   if (!isImpersonating) return null;
 
   return (
-    <div className="sticky top-0 z-[99999] w-full bg-gradient-to-r from-rose-950 via-amber-950 to-slate-950 border-b-2 border-amber-500/70 shadow-2xl px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
+    <div className="sticky top-0 z-[99999] w-full bg-gradient-to-r from-rose-950 via-amber-950 to-slate-950 border-b-2 border-amber-500/70 shadow-2xl px-4 py-2 flex flex-wrap items-center justify-between gap-2 text-xs">
       <div className="flex items-center gap-2.5 flex-wrap">
         <span className="flex h-2.5 w-2.5 relative">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>

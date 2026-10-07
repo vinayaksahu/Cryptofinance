@@ -219,7 +219,7 @@ export function MemberTopNavbar({
                 <span className="text-xs font-bold text-foreground tracking-tight leading-tight">
                   {user.fullName || "Member"}
                 </span>
-                <span className="text-[10px] text-muted-foreground font-mono font-medium">
+                <span className="text-[10px] text-muted-foreground font-medium">
                   {user.customId}
                 </span>
               </div>
@@ -232,7 +232,7 @@ export function MemberTopNavbar({
               <div className="absolute right-0 mt-2 w-64 bg-card border border-border rounded-2xl p-2 text-foreground z-50 animate-in fade-in zoom-in-95 duration-100 shadow-xl">
               {/* Header: UID & Level */}
               <div className="px-3 py-2 border-b border-border">
-                <p className="text-xs font-bold text-foreground tracking-wide font-mono">
+                <p className="text-xs font-bold text-foreground tracking-wide">
                   UID: {user.customId}
                 </p>
                 <div className="flex items-center gap-1.5 mt-0.5">
@@ -354,7 +354,7 @@ export function MemberTopNavbar({
                   type="text"
                   value={user.customId}
                   disabled
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-500 dark:text-slate-400 font-mono opacity-80 cursor-not-allowed"
+                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-500 dark:text-slate-400 opacity-80 cursor-not-allowed"
                 />
               </div>
 
@@ -465,7 +465,7 @@ export function MemberTopNavbar({
                   value={currentPassword}
                   onChange={(e) => setCurrentPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 font-mono"
+                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
                   required
                 />
               </div>
@@ -478,7 +478,7 @@ export function MemberTopNavbar({
                   onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="Min. 6 characters"
                   minLength={6}
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 font-mono"
+                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
                   required
                 />
               </div>
@@ -491,7 +491,7 @@ export function MemberTopNavbar({
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Re-enter new password"
                   minLength={6}
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 font-mono"
+                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
                   required
                 />
               </div>
@@ -565,7 +565,7 @@ export function MemberTopNavbar({
             <form onSubmit={handleUpdateWallet} className="space-y-4">
               <div className="p-3.5 rounded-2xl bg-slate-100 dark:bg-slate-900/60 border border-slate-200 dark:border-white/10 text-xs">
                 <span className="text-slate-600 dark:text-slate-400 block mb-1">Current Receiving Address:</span>
-                <span className="font-mono text-emerald-600 dark:text-emerald-400 break-all select-all font-semibold">
+                <span className="text-emerald-600 dark:text-emerald-400 break-all select-all font-semibold">
                   {user.usdtAddress || "No wallet address linked yet"}
                 </span>
               </div>
@@ -579,7 +579,7 @@ export function MemberTopNavbar({
                   value={walletAddress}
                   onChange={(e) => setWalletAddress(e.target.value)}
                   placeholder="0x... USDT BEP-20 Wallet Address"
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 font-mono"
+                  className="w-full glass-input px-3.5 py-2.5 text-sm text-slate-900 dark:text-white placeholder-slate-400 dark:placeholder-slate-500"
                   required
                 />
               </div>
@@ -604,7 +604,7 @@ export function MemberTopNavbar({
                   value={walletOtp}
                   onChange={(e) => setWalletOtp(e.target.value.replace(/\D/g, ""))}
                   placeholder="Enter 6-digit OTP code"
-                  className="w-full glass-input px-3.5 py-2.5 text-sm text-sky-300 placeholder-slate-500 font-mono text-center tracking-widest font-bold"
+                  className="w-full glass-input px-3.5 py-2.5 text-sm text-sky-300 placeholder-slate-500 text-center tracking-widest font-bold"
                   required
                 />
               </div>

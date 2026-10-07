@@ -217,7 +217,7 @@ export default function AdminDepositsView({ onRefresh }: AdminDepositsViewProps)
               placeholder="Search user, address, TxHash..."
               value={search}
               onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-              className="w-full bg-background border border-border rounded-xl pl-10 pr-4 py-2 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary font-mono transition-colors"
+              className="w-full bg-background border border-border rounded-xl pl-10 pr-4 py-2 text-xs text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors"
             />
           </div>
         </div>
@@ -257,19 +257,19 @@ export default function AdminDepositsView({ onRefresh }: AdminDepositsViewProps)
 
                 return (
                   <tr key={deposit.id} className="hover:bg-muted/40 transition-colors">
-                    <td className="py-3.5 px-2 text-muted-foreground font-mono">
+                    <td className="py-3.5 px-2 text-muted-foreground">
                       {(page - 1) * itemsPerPage + index + 1}
                     </td>
                     <td className="py-3.5 px-2">
                       <div className="flex flex-col">
                         <span className="text-foreground font-semibold">{deposit.user?.fullName || deposit.user?.name || "Member"}</span>
-                        <span className="text-[11px] text-muted-foreground font-mono">{deposit.user?.customId || "N/A"}</span>
+                        <span className="text-[11px] text-muted-foreground">{deposit.user?.customId || "N/A"}</span>
                       </div>
                     </td>
                     <td className="py-3.5 px-2 text-emerald-600 dark:text-emerald-400 font-bold">
                       {formatUsdt(amount)}
                     </td>
-                    <td className="py-3.5 px-2 font-mono">
+                    <td className="py-3.5 px-2">
                       {tx ? (
                         <div className="flex items-center gap-1.5">
                           <a
@@ -297,7 +297,7 @@ export default function AdminDepositsView({ onRefresh }: AdminDepositsViewProps)
                         <span className="text-muted-foreground">Direct</span>
                       )}
                     </td>
-                    <td className="py-3.5 px-2 font-mono text-foreground">
+                    <td className="py-3.5 px-2 text-foreground">
                       {deposit.confirmations || 0} / 3
                     </td>
                     <td className="py-3.5 px-2">

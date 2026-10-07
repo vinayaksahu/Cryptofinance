@@ -39,7 +39,7 @@ header_logo_svg = """
     </svg>
     <div style="display: flex; flex-direction: column;">
         <span class="logo-text">CRYPTO <span style="color: #00FFA3;">FINANCE</span></span>
-        <span style="font-size: 11px; font-weight: 800; letter-spacing: 3px; color: #38BDF8; font-family: 'Space Grotesk', sans-serif;">QUANTITATIVE ALGO ECOSYSTEM</span>
+        <span style="font-size: 11px; font-weight: 800; letter-spacing: 3px; color: #38BDF8; font-family: 'Inter', sans-serif;">QUANTITATIVE ALGO ECOSYSTEM</span>
     </div>
 </div>
 """
@@ -75,7 +75,7 @@ hero_logo_svg = """
         <div style="background: rgba(0, 255, 163, 0.12); border: 2px solid #00FFA3; padding: 6px 24px; border-radius: 999px; display: inline-block; margin-bottom: 8px; box-shadow: 0 0 20px rgba(0, 255, 163, 0.2);">
             <span style="color: #00FFA3; font-size: 16px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;">Official Business Presentation • Pre-Launching Phase</span>
         </div>
-        <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: 88px; font-weight: 900; color: #FFFFFF; line-height: 1; letter-spacing: 2px;">
+        <h1 style="font-family: 'Inter', sans-serif; font-size: 88px; font-weight: 900; color: #FFFFFF; line-height: 1; letter-spacing: 2px;">
             CRYPTO <span style="background: linear-gradient(135deg, #00FFA3 0%, #00D2FF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">FINANCE</span>
         </h1>
     </div>
@@ -104,7 +104,7 @@ html_content = f"""<!DOCTYPE html>
 <meta charset="UTF-8">
 <title>Crypto Finance - Official Business Presentation</title>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=Space+Grotesk:wght@600;700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
     @page {{
         size: 1920px 1080px;
@@ -118,7 +118,7 @@ html_content = f"""<!DOCTYPE html>
     }}
 
     body {{
-        font-family: 'Plus Jakarta Sans', sans-serif;
+        font-family: 'Inter', sans-serif;
         background-color: #040711;
         color: #FFFFFF;
         -webkit-print-color-adjust: exact;
@@ -180,7 +180,7 @@ html_content = f"""<!DOCTYPE html>
     }}
 
     .logo-text {{
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 26px;
         font-weight: 900;
         letter-spacing: 2px;
@@ -191,7 +191,7 @@ html_content = f"""<!DOCTYPE html>
         background: rgba(0, 210, 255, 0.12);
         border: 1.5px solid #00D2FF;
         color: #38BDF8;
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 15px;
         font-weight: 800;
         text-transform: uppercase;
@@ -220,7 +220,7 @@ html_content = f"""<!DOCTYPE html>
     }}
 
     .footer-right {{
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 15px;
         font-weight: 800;
         color: #00FFA3;
@@ -251,7 +251,7 @@ html_content = f"""<!DOCTYPE html>
     }}
 
     .main-title {{
-        font-family: 'Space Grotesk', sans-serif;
+        font-family: 'Inter', sans-serif;
         font-size: 46px;
         font-weight: 900;
         color: #FFFFFF;
@@ -497,7 +497,7 @@ html_content = f"""<!DOCTYPE html>
                         <div style="width: 76px; height: 76px; border-radius: 18px; background: linear-gradient(135deg, #00FFA3, #00D2FF); display: flex; align-items: center; justify-content: center; font-size: 38px; flex-shrink: 0; color: #040711;">👨‍💼</div>
                         <div>
                             <div style="color: #94A3B8; font-size: 15px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;">Chairman & Managing Director</div>
-                            <div style="color: #00FFA3; font-size: 36px; font-weight: 900; font-family: 'Space Grotesk', sans-serif;">Mr. Alex Rivera</div>
+                            <div style="color: #00FFA3; font-size: 36px; font-weight: 900; font-family: 'Inter', sans-serif;">Mr. Alex Rivera</div>
                         </div>
                     </div>
                     <p style="font-size: 20px; color: #94A3B8; line-height: 1.5;">
@@ -650,7 +650,7 @@ html_content = f"""<!DOCTYPE html>
             <!-- Card $5 -->
             <div class="card card-cyan" style="padding: 36px 30px; text-align: center;">
                 <div style="background: rgba(0, 210, 255, 0.15); border: 1px solid #00D2FF; color: #38BDF8; display: inline-block; padding: 6px 20px; border-radius: 999px; font-size: 15px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">MICRO STARTER</div>
-                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif;">$5</div>
+                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Inter', sans-serif;">$5</div>
                 <div style="font-size: 18px; color: #94A3B8; font-weight: 700; margin-bottom: 24px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.45); border-radius: 16px; padding: 20px; text-align: left; display: flex; flex-direction: column; gap: 12px; font-size: 19px;">
@@ -664,7 +664,7 @@ html_content = f"""<!DOCTYPE html>
             <!-- Card $10 -->
             <div class="card card-cyan" style="padding: 36px 30px; text-align: center;">
                 <div style="background: rgba(0, 210, 255, 0.15); border: 1px solid #00D2FF; color: #38BDF8; display: inline-block; padding: 6px 20px; border-radius: 999px; font-size: 15px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">BASIC STARTER</div>
-                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif;">$10</div>
+                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Inter', sans-serif;">$10</div>
                 <div style="font-size: 18px; color: #94A3B8; font-weight: 700; margin-bottom: 24px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.45); border-radius: 16px; padding: 20px; text-align: left; display: flex; flex-direction: column; gap: 12px; font-size: 19px;">
@@ -678,7 +678,7 @@ html_content = f"""<!DOCTYPE html>
             <!-- Card $20 -->
             <div class="card card-cyan" style="padding: 36px 30px; text-align: center;">
                 <div style="background: rgba(0, 210, 255, 0.15); border: 1px solid #00D2FF; color: #38BDF8; display: inline-block; padding: 6px 20px; border-radius: 999px; font-size: 15px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">ADVANCED STARTER</div>
-                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif;">$20</div>
+                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Inter', sans-serif;">$20</div>
                 <div style="font-size: 18px; color: #94A3B8; font-weight: 700; margin-bottom: 24px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.45); border-radius: 16px; padding: 20px; text-align: left; display: flex; flex-direction: column; gap: 12px; font-size: 19px;">
@@ -705,7 +705,7 @@ html_content = f"""<!DOCTYPE html>
             <!-- Card $50 -->
             <div class="card card-cyan" style="padding: 36px 20px; text-align: center;">
                 <div style="background: rgba(0, 210, 255, 0.15); border: 1px solid #00D2FF; color: #38BDF8; display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">GROWTH PRO • QUALIFIER</div>
-                <div style="font-size: 64px; font-weight: 900; color: #38BDF8; font-family: 'Space Grotesk', sans-serif;">$50</div>
+                <div style="font-size: 64px; font-weight: 900; color: #38BDF8; font-family: 'Inter', sans-serif;">$50</div>
                 <div style="font-size: 16px; color: #94A3B8; font-weight: 700; margin-bottom: 20px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.45); border-radius: 16px; padding: 18px 14px; text-align: left; display: flex; flex-direction: column; gap: 10px; font-size: 16px;">
@@ -719,7 +719,7 @@ html_content = f"""<!DOCTYPE html>
             <!-- Card $100 -->
             <div class="card card-emerald" style="padding: 36px 20px; text-align: center; border: 2px solid #00FFA3;">
                 <div style="background: linear-gradient(135deg, #00FFA3, #00D2FF); color: #040711; display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 900; letter-spacing: 1px; margin-bottom: 16px;">MOST POPULAR</div>
-                <div style="font-size: 64px; font-weight: 900; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif;">$100</div>
+                <div style="font-size: 64px; font-weight: 900; color: #FFFFFF; font-family: 'Inter', sans-serif;">$100</div>
                 <div style="font-size: 16px; color: #00FFA3; font-weight: 700; margin-bottom: 20px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.45); border-radius: 16px; padding: 18px 14px; text-align: left; display: flex; flex-direction: column; gap: 10px; font-size: 16px;">
@@ -733,7 +733,7 @@ html_content = f"""<!DOCTYPE html>
             <!-- Card $200 -->
             <div class="card card-cyan" style="padding: 36px 20px; text-align: center;">
                 <div style="background: rgba(0, 210, 255, 0.15); border: 1px solid #00D2FF; color: #38BDF8; display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">GROWTH RUBY</div>
-                <div style="font-size: 64px; font-weight: 900; color: #38BDF8; font-family: 'Space Grotesk', sans-serif;">$200</div>
+                <div style="font-size: 64px; font-weight: 900; color: #38BDF8; font-family: 'Inter', sans-serif;">$200</div>
                 <div style="font-size: 16px; color: #94A3B8; font-weight: 700; margin-bottom: 20px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.45); border-radius: 16px; padding: 18px 14px; text-align: left; display: flex; flex-direction: column; gap: 10px; font-size: 16px;">
@@ -747,7 +747,7 @@ html_content = f"""<!DOCTYPE html>
             <!-- Card $500 -->
             <div class="card card-emerald" style="padding: 36px 20px; text-align: center;">
                 <div style="background: rgba(0, 255, 163, 0.15); border: 1px solid #00FFA3; color: #00FFA3; display: inline-block; padding: 6px 16px; border-radius: 999px; font-size: 13px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">GROWTH ELITE</div>
-                <div style="font-size: 64px; font-weight: 900; color: #00FFA3; font-family: 'Space Grotesk', sans-serif;">$500</div>
+                <div style="font-size: 64px; font-weight: 900; color: #00FFA3; font-family: 'Inter', sans-serif;">$500</div>
                 <div style="font-size: 16px; color: #94A3B8; font-weight: 700; margin-bottom: 20px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.45); border-radius: 16px; padding: 18px 14px; text-align: left; display: flex; flex-direction: column; gap: 10px; font-size: 16px;">
@@ -774,7 +774,7 @@ html_content = f"""<!DOCTYPE html>
             <!-- Card $1,000 -->
             <div class="card card-vip" style="padding: 36px 30px; text-align: center;">
                 <div style="background: rgba(0, 210, 255, 0.15); border: 1px solid #00D2FF; color: #38BDF8; display: inline-block; padding: 6px 20px; border-radius: 999px; font-size: 15px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">VIP PLATINUM</div>
-                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif;">$1,000</div>
+                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Inter', sans-serif;">$1,000</div>
                 <div style="font-size: 18px; color: #38BDF8; font-weight: 700; margin-bottom: 24px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.5); border-radius: 16px; padding: 20px; text-align: left; display: flex; flex-direction: column; gap: 12px; font-size: 19px;">
@@ -788,7 +788,7 @@ html_content = f"""<!DOCTYPE html>
             <!-- Card $2,000 -->
             <div class="card card-vip" style="padding: 36px 30px; text-align: center;">
                 <div style="background: rgba(0, 255, 163, 0.15); border: 1px solid #00FFA3; color: #00FFA3; display: inline-block; padding: 6px 20px; border-radius: 999px; font-size: 15px; font-weight: 800; letter-spacing: 1px; margin-bottom: 16px;">VIP DIAMOND</div>
-                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Space Grotesk', sans-serif;">$2,000</div>
+                <div style="font-size: 72px; font-weight: 900; color: #FFFFFF; font-family: 'Inter', sans-serif;">$2,000</div>
                 <div style="font-size: 18px; color: #00FFA3; font-weight: 700; margin-bottom: 24px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.5); border-radius: 16px; padding: 20px; text-align: left; display: flex; flex-direction: column; gap: 12px; font-size: 19px;">
@@ -802,7 +802,7 @@ html_content = f"""<!DOCTYPE html>
             <!-- Card $5,000 -->
             <div class="card card-vip" style="padding: 36px 30px; text-align: center; border: 2px solid #00FFA3; box-shadow: 0 0 35px rgba(0, 255, 163, 0.3);">
                 <div style="background: rgba(0, 255, 163, 0.2); border: 1px solid #00FFA3; color: #00FFA3; display: inline-block; padding: 6px 20px; border-radius: 999px; font-size: 15px; font-weight: 900; letter-spacing: 1px; margin-bottom: 16px;">ROYAL CROWN VIP</div>
-                <div style="font-size: 72px; font-weight: 900; color: #00FFA3; font-family: 'Space Grotesk', sans-serif;">$5,000</div>
+                <div style="font-size: 72px; font-weight: 900; color: #00FFA3; font-family: 'Inter', sans-serif;">$5,000</div>
                 <div style="font-size: 18px; color: #FFFFFF; font-weight: 700; margin-bottom: 24px;">USDT BEP-20</div>
 
                 <div style="background: rgba(3, 7, 18, 0.5); border-radius: 16px; padding: 20px; text-align: left; display: flex; flex-direction: column; gap: 12px; font-size: 19px;">
@@ -1033,7 +1033,7 @@ html_content = f"""<!DOCTYPE html>
             <!-- FD Option 1 -->
             <div class="card card-cyan" style="padding: 44px; border: 2px solid #00D2FF;">
                 <div style="background: rgba(0, 210, 255, 0.15); color: #38BDF8; display: inline-block; padding: 8px 24px; border-radius: 999px; font-size: 16px; font-weight: 800; letter-spacing: 2px; margin-bottom: 20px;">FD PLAN A</div>
-                <div style="font-size: 76px; font-weight: 900; color: #38BDF8; font-family: 'Space Grotesk', sans-serif; line-height: 1; margin-bottom: 10px;">10% <span style="font-size: 28px; color: #FFFFFF;">DAILY</span></div>
+                <div style="font-size: 76px; font-weight: 900; color: #38BDF8; font-family: 'Inter', sans-serif; line-height: 1; margin-bottom: 10px;">10% <span style="font-size: 28px; color: #FFFFFF;">DAILY</span></div>
                 <div style="font-size: 22px; color: #94A3B8; font-weight: 700; margin-bottom: 26px;">Contract Duration: 180 Days</div>
 
                 <div style="background: rgba(3, 7, 18, 0.45); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 14px; font-size: 20px;">
@@ -1047,7 +1047,7 @@ html_content = f"""<!DOCTYPE html>
             <!-- FD Option 2 -->
             <div class="card card-emerald" style="padding: 44px; border: 2px solid #00FFA3;">
                 <div style="background: rgba(0, 255, 163, 0.2); color: #00FFA3; display: inline-block; padding: 8px 24px; border-radius: 999px; font-size: 16px; font-weight: 900; letter-spacing: 2px; margin-bottom: 20px;">FD PLAN B (VIP)</div>
-                <div style="font-size: 76px; font-weight: 900; color: #00FFA3; font-family: 'Space Grotesk', sans-serif; line-height: 1; margin-bottom: 10px;">15% <span style="font-size: 28px; color: #FFFFFF;">DAILY</span></div>
+                <div style="font-size: 76px; font-weight: 900; color: #00FFA3; font-family: 'Inter', sans-serif; line-height: 1; margin-bottom: 10px;">15% <span style="font-size: 28px; color: #FFFFFF;">DAILY</span></div>
                 <div style="font-size: 22px; color: #94A3B8; font-weight: 700; margin-bottom: 26px;">Contract Duration: 210 Days</div>
 
                 <div style="background: rgba(3, 7, 18, 0.45); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 14px; font-size: 20px;">
@@ -1678,7 +1678,7 @@ html_content = f"""<!DOCTYPE html>
             <div style="display: flex; flex-direction: column; gap: 20px;">
                 <div class="card card-emerald" style="padding: 30px;">
                     <div style="font-size: 16px; color: #94A3B8; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Managing Leadership</div>
-                    <div style="font-size: 34px; font-weight: 900; color: #00FFA3; font-family: 'Space Grotesk', sans-serif; margin-top: 6px;">Mr. Alex Rivera</div>
+                    <div style="font-size: 34px; font-weight: 900; color: #00FFA3; font-family: 'Inter', sans-serif; margin-top: 6px;">Mr. Alex Rivera</div>
                     <div style="font-size: 18px; color: #38BDF8; font-weight: 700; margin-top: 2px;">Chairman & Managing Director</div>
                 </div>
 
@@ -1728,7 +1728,7 @@ html_content = f"""<!DOCTYPE html>
         </svg>
     </div>
 
-    <h1 style="font-family: 'Space Grotesk', sans-serif; font-size: 80px; font-weight: 900; color: #FFFFFF; line-height: 1.1; margin-bottom: 20px;">
+    <h1 style="font-family: 'Inter', sans-serif; font-size: 80px; font-weight: 900; color: #FFFFFF; line-height: 1.1; margin-bottom: 20px;">
         Thank You & Welcome to <br><span style="background: linear-gradient(135deg, #00FFA3 0%, #00D2FF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Crypto Finance</span>
     </h1>
 

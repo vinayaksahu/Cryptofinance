@@ -281,7 +281,7 @@ export function AdminIncomeView({ onRefresh }: AdminIncomeViewProps) {
                       <td className="py-4">
                         <div className="flex flex-col">
                           <span className="text-foreground font-semibold">{w.user?.fullName || w.user?.name || "Member"}</span>
-                          <span className="text-[11px] text-muted-foreground font-mono">{w.user?.customId || "N/A"}</span>
+                          <span className="text-[11px] text-muted-foreground">{w.user?.customId || "N/A"}</span>
                         </div>
                       </td>
                       <td className="py-4 text-foreground font-semibold">
@@ -300,7 +300,7 @@ export function AdminIncomeView({ onRefresh }: AdminIncomeViewProps) {
                       <td className="py-4">
                         {address ? (
                           <div className="flex items-center gap-1.5">
-                            <span className="font-mono text-muted-foreground text-[11px]">
+                            <span className="text-muted-foreground text-[11px]">
                               {address.length > 14 ? `${address.slice(0, 8)}...${address.slice(-6)}` : address}
                             </span>
                             <button

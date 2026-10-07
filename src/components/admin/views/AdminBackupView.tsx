@@ -576,7 +576,7 @@ export function AdminBackupView() {
             )}
 
             {restoreResult.errors && restoreResult.errors.length > 0 && (
-              <div className="mt-3 p-3 rounded bg-black/50 text-[11px] font-mono text-rose-300">
+              <div className="mt-3 p-3 rounded bg-black/50 text-[11px] text-rose-300">
                 <div className="font-bold mb-1">Encountered Errors:</div>
                 <ul className="list-disc pl-4 space-y-0.5">
                   {restoreResult.errors.map((e, idx) => (
@@ -618,7 +618,7 @@ export function AdminBackupView() {
                   value={confirmReplaceText}
                   onChange={(e) => setConfirmReplaceText(e.target.value)}
                   placeholder="Type RESTORE"
-                  className="w-full bg-[#050b18] border border-rose-500/40 rounded-lg px-3 py-2 text-white font-mono text-xs focus:outline-none focus:border-rose-400 mt-1"
+                  className="w-full bg-[#050b18] border border-rose-500/40 rounded-lg px-3 py-2 text-white text-xs focus:outline-none focus:border-rose-400 mt-1"
                 />
               </div>
             ) : (

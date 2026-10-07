@@ -80,7 +80,7 @@ export function MemberHeader({ user }: { user: any }) {
       <div className="p-4 rounded-2xl glass-card-gold flex flex-col sm:flex-row items-center justify-between gap-3">
         <div className="text-xs text-slate-300">
           <span className="font-bold text-amber-300">Your Referral Link: </span>
-          <span className="text-white font-mono bg-black/40 px-2 py-1 rounded-md text-[11px] break-all">
+          <span className="text-white bg-black/40 px-2 py-1 rounded-md text-[11px] break-all">
             {referralUrl}
           </span>
         </div>

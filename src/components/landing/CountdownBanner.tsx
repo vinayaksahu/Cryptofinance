@@ -374,7 +374,7 @@ export function CountdownBanner({
                 <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-300 font-black">PRIMARY</span>
               </div>
               <div className="text-sm font-black text-white mt-1">08:00 PM GST</div>
-              <div className="text-[11px] text-slate-400 mt-1 font-mono">
+              <div className="text-[11px] text-slate-400 mt-1">
                 Live Clock: <span className="text-amber-300 font-bold">{clocks.gst || "..."}</span>
               </div>
             </div>
@@ -393,7 +393,7 @@ export function CountdownBanner({
                 <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-300 font-bold">IST</span>
               </div>
               <div className="text-sm font-black text-white mt-1">09:30 PM IST</div>
-              <div className="text-[11px] text-slate-400 mt-1 font-mono">
+              <div className="text-[11px] text-slate-400 mt-1">
                 Live Clock: <span className="text-blue-300 font-bold">{clocks.ist || "..."}</span>
               </div>
             </div>
@@ -412,7 +412,7 @@ export function CountdownBanner({
                 <span className="text-[9px] px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-300 font-bold">UTC</span>
               </div>
               <div className="text-sm font-black text-white mt-1">04:00 PM UTC</div>
-              <div className="text-[11px] text-slate-400 mt-1 font-mono">
+              <div className="text-[11px] text-slate-400 mt-1">
                 Live Clock: <span className="text-cyan-300 font-bold">{clocks.utc || "..."}</span>
               </div>
             </div>

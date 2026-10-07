@@ -66,7 +66,7 @@ export function Terms() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-sky-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25 font-mono">
+          <span className="text-sky-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full bg-sky-500/10 border border-sky-500/25">
             IMMUTABLE PROTOCOL STANDARDS &bull; SLIDE 20
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-black text-[var(--text-main)] mt-3">
@@ -91,7 +91,7 @@ export function Terms() {
                     <div className="w-12 h-12 rounded-2xl bg-sky-500/10 border border-sky-500/30 flex items-center justify-center text-sky-500 dark:text-cyan-400">
                       <Icon className="w-6 h-6" />
                     </div>
-                    <span className="text-[10px] font-mono font-bold px-2.5 py-1 rounded-full bg-slate-50 dark:bg-slate-900/60 text-sky-600 dark:text-cyan-400 border border-slate-200 dark:border-cyan-500/20 uppercase tracking-wider">
+                    <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-slate-50 dark:bg-slate-900/60 text-sky-600 dark:text-cyan-400 border border-slate-200 dark:border-cyan-500/20 uppercase tracking-wider">
                       {item.tag}
                     </span>
                   </div>
@@ -105,7 +105,7 @@ export function Terms() {
                   </p>
                 </div>
 
-                <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-[11px] text-[var(--text-subtle)] font-mono flex items-center gap-1.5">
+                <div className="mt-4 pt-3 border-t border-[var(--border-subtle)] text-[11px] text-[var(--text-subtle)] flex items-center gap-1.5">
                   <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" /> Audited Smart Protocol
                 </div>
               </div>

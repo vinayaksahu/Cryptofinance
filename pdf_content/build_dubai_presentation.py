@@ -24,7 +24,7 @@ html_content = f"""<!DOCTYPE html>
 <meta charset="UTF-8">
 <title>DUBAI FINANCE</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 @page {{
     size: 1920px 1080px;
@@ -40,7 +40,7 @@ html_content = f"""<!DOCTYPE html>
 body {{
     margin: 0;
     padding: 0;
-    font-family: 'Plus Jakarta Sans', 'Segoe UI', Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
     background-color: #030712;
     color: #f8fafc;
     -webkit-print-color-adjust: exact;

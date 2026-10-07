@@ -362,16 +362,16 @@ export function IncomeView({ user, incomeType, onRefresh }: IncomeViewProps) {
                       key={entry.id || idx}
                       className="hover:bg-muted/40 transition-colors"
                     >
-                      <td className="py-3.5 px-4 font-mono text-muted-foreground">
+                      <td className="py-3.5 px-4 text-muted-foreground">
                         {absoluteIndex}
                       </td>
-                      <td className="py-3.5 px-4 font-mono text-foreground">
+                      <td className="py-3.5 px-4 text-foreground">
                         {formatDateTime(entry.createdAt)}
                       </td>
                       <td className="py-3.5 px-4 text-foreground font-medium">
                         {entry.description || current.title}
                       </td>
-                      <td className="py-3.5 px-4 text-right font-bold text-primary font-mono text-sm">
+                      <td className="py-3.5 px-4 text-right font-bold text-primary text-sm">
                         {Number(entry.amount || 0).toFixed(2)} USDT
                       </td>
                     </tr>

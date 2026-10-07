@@ -143,11 +143,11 @@ export function DownlineView({ user, mode, onNavigateTab }: DownlineViewProps) {
               ) : (
                 filteredList.map((row: any, idx: number) => (
                   <tr key={idx} className="hover:bg-muted/40 transition-colors">
-                    <td className="py-3 px-4 font-mono">{idx + 1}</td>
+                    <td className="py-3 px-4">{idx + 1}</td>
                     <td className="py-3 px-4">{row.date}</td>
-                    <td className="py-3 px-4 font-mono font-bold text-primary">{row.id}</td>
+                    <td className="py-3 px-4 font-bold text-primary">{row.id}</td>
                     <td className="py-3 px-4 font-semibold text-foreground capitalize">{row.name}</td>
-                    <td className="py-3 px-4 font-mono text-muted-foreground">{row.referralId}</td>
+                    <td className="py-3 px-4 text-muted-foreground">{row.referralId}</td>
                     <td className="py-3 px-4 font-bold text-primary">L{row.level}</td>
                     <td className="py-3 px-4 text-muted-foreground">{row.doa}</td>
                     <td className="py-3 px-4">

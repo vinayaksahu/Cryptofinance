@@ -184,11 +184,11 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
         <div className="flex items-center gap-2.5">
           <div className="rounded-xl border border-border bg-card px-3.5 py-1.5 flex items-center gap-2 shadow-sm">
             <span className="text-[10px] uppercase font-bold text-muted-foreground">SECONDARY:</span>
-            <span className="text-sm font-bold text-foreground font-mono">${p2pBalance.toFixed(2)}</span>
+            <span className="text-sm font-bold text-foreground">${p2pBalance.toFixed(2)}</span>
           </div>
           <div className="rounded-xl border border-border bg-card px-3.5 py-1.5 flex items-center gap-2 shadow-sm">
             <span className="text-[10px] uppercase font-bold text-muted-foreground">BONUS:</span>
-            <span className="text-sm font-bold text-primary font-mono">${bonusBalance.toFixed(2)}</span>
+            <span className="text-sm font-bold text-primary">${bonusBalance.toFixed(2)}</span>
           </div>
         </div>
       </div>
@@ -266,13 +266,13 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
                   )}
                 </div>
                 {beneficiaryName && (
-                  <p className="text-xs text-emerald-500 font-mono flex items-center gap-1.5">
+                  <p className="text-xs text-emerald-500 flex items-center gap-1.5">
                     <Check className="w-3.5 h-3.5" />
                     <span>Member: <strong>{beneficiaryName}</strong></span>
                   </p>
                 )}
                 {beneficiaryError && (
-                  <p className="text-xs text-rose-500 font-mono flex items-center gap-1.5">
+                  <p className="text-xs text-rose-500 flex items-center gap-1.5">
                     <UserX className="w-3.5 h-3.5" />
                     <span>{beneficiaryError}</span>
                   </p>
@@ -287,12 +287,12 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
               <label className="text-xs font-bold text-foreground uppercase tracking-wider">
                 Investment Stake Amount ($ USDT)
               </label>
-              <span className="text-xs text-muted-foreground font-mono">Min $2.00 USDT</span>
+              <span className="text-xs text-muted-foreground">Min $2.00 USDT</span>
             </div>
 
             {/* Big Numeric Input */}
             <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-primary font-bold text-xl font-mono">
+              <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-primary font-bold text-xl">
                 $
               </div>
               <input
@@ -305,7 +305,7 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
                 placeholder="Enter amount (min $2)"
                 className="w-full bg-background border border-input focus:border-primary rounded-2xl pl-10 pr-20 py-3.5 text-2xl font-black text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
               />
-              <span className="absolute right-4 inset-y-0 flex items-center text-xs font-bold text-muted-foreground font-mono">
+              <span className="absolute right-4 inset-y-0 flex items-center text-xs font-bold text-muted-foreground">
                 USDT
               </span>
             </div>
@@ -321,7 +321,7 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
                 onChange={(e) => setAmount(Number(e.target.value))}
                 className="w-full h-2.5 bg-muted rounded-lg appearance-none cursor-pointer accent-primary"
               />
-              <div className="flex justify-between text-[11px] text-muted-foreground font-mono">
+              <div className="flex justify-between text-[11px] text-muted-foreground">
                 <span>$2 (Min)</span>
                 <span>$1,000</span>
                 <span>$2,500</span>
@@ -331,7 +331,7 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
 
             {/* Quick Presets Underneath */}
             <div>
-              <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider font-mono mb-2">
+              <p className="text-[11px] font-bold text-muted-foreground uppercase tracking-wider mb-2">
                 Quick Presets
               </p>
               <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
@@ -340,7 +340,7 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
                     key={preset}
                     type="button"
                     onClick={() => setAmount(preset)}
-                    className={`py-2 px-2 rounded-xl text-xs font-mono font-bold transition-all border ${
+                    className={`py-2 px-2 rounded-xl text-xs font-bold transition-all border ${
                       amount === preset
                         ? "bg-primary text-primary-foreground border-primary shadow-sm font-black"
                         : "bg-muted/40 border-border text-foreground hover:bg-muted"
@@ -359,7 +359,7 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
               <div className="flex items-center gap-2.5">
                 <Gift className="w-5 h-5 text-amber-500 shrink-0" />
                 <div>
-                  <h4 className="text-xs font-black uppercase text-amber-500 tracking-wider font-mono">
+                  <h4 className="text-xs font-black uppercase text-amber-500 tracking-wider">
                     10% Bonus Wallet Utility
                   </h4>
                   <p className="text-[11px] text-foreground/90 mt-0.5">
@@ -381,7 +381,7 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
             </div>
 
             {/* Deduction breakdown */}
-            <div className="grid grid-cols-3 gap-2 pt-2 border-t border-amber-500/20 text-xs font-mono">
+            <div className="grid grid-cols-3 gap-2 pt-2 border-t border-amber-500/20 text-xs">
               <div>
                 <span className="text-[10px] text-muted-foreground block">Total Investment</span>
                 <span className="font-extrabold text-foreground">${validAmount.toFixed(2)}</span>
@@ -412,7 +412,7 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
                 value={transactionPin}
                 onChange={(e) => setTransactionPin(e.target.value.replace(/\D/g, ""))}
                 placeholder="Enter 6-digit PIN"
-                className="w-full bg-background border border-input focus:border-primary rounded-xl px-4 py-3 text-center tracking-[0.3em] text-lg font-mono text-foreground font-extrabold placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                className="w-full bg-background border border-input focus:border-primary rounded-xl px-4 py-3 text-center tracking-[0.3em] text-lg text-foreground font-extrabold placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                 required
               />
             </div>
@@ -443,10 +443,10 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
         <div className="lg:col-span-5 space-y-5">
           <div className="rounded-2xl border border-border bg-card p-6 space-y-5 shadow-sm">
             <div className="flex items-center justify-between">
-              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground font-mono">
+              <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 2X ALLOCATION POOL PREVIEW
               </span>
-              <span className="text-[10px] font-bold text-primary border border-primary/20 bg-primary/10 px-2 py-0.5 rounded-full font-mono">
+              <span className="text-[10px] font-bold text-primary border border-primary/20 bg-primary/10 px-2 py-0.5 rounded-full">
                 Slide 10-12
               </span>
             </div>
@@ -460,13 +460,13 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
               </div>
               <div className="flex justify-between items-baseline text-xs">
                 <span className="text-muted-foreground">Daily Return (4%):</span>
-                <span className="font-bold text-emerald-500 font-mono">
+                <span className="font-bold text-emerald-500">
                   +${dailyRoi} USDT / day
                 </span>
               </div>
               <div className="flex justify-between items-baseline text-xs">
                 <span className="text-muted-foreground">Tenure Horizon:</span>
-                <span className="font-semibold text-foreground font-mono">
+                <span className="font-semibold text-foreground">
                   50 Days (or ~35 Days with Compounding)
                 </span>
               </div>

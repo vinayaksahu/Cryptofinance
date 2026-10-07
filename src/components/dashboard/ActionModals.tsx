@@ -338,7 +338,7 @@ export function ActionModals({ user, onRefresh }: { user: any; onRefresh: () => 
                   <span className="text-[10px] text-amber-300 font-bold uppercase block mb-1">
                     Official USDT BEP-20 Address
                   </span>
-                  <span className="font-mono text-xs text-white break-all select-all">
+                  <span className="text-xs text-white break-all select-all">
                     {APP_CONFIG.depositAddress}
                   </span>
                 </div>
@@ -446,7 +446,7 @@ export function ActionModals({ user, onRefresh }: { user: any; onRefresh: () => 
                       value={pin}
                       onChange={(e) => setPin(e.target.value.replace(/\D/g, ""))}
                       placeholder="Enter 6-digit Transaction PIN"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-black/50 border border-amber-500/40 focus:border-amber-400 text-amber-300 text-sm font-bold tracking-widest outline-none placeholder:font-normal placeholder:tracking-normal placeholder:text-slate-500 font-mono text-center"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-black/50 border border-amber-500/40 focus:border-amber-400 text-amber-300 text-sm font-bold tracking-widest outline-none placeholder:font-normal placeholder:tracking-normal placeholder:text-slate-500 text-center"
                     />
                   </div>
 
@@ -549,7 +549,7 @@ export function ActionModals({ user, onRefresh }: { user: any; onRefresh: () => 
                       value={pin}
                       onChange={(e) => setPin(e.target.value.replace(/\D/g, ""))}
                       placeholder="Enter 6-digit Transaction PIN"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-black/50 border border-amber-500/40 focus:border-amber-400 text-amber-300 text-sm font-bold tracking-widest outline-none placeholder:font-normal placeholder:tracking-normal placeholder:text-slate-500 font-mono text-center"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-black/50 border border-amber-500/40 focus:border-amber-400 text-amber-300 text-sm font-bold tracking-widest outline-none placeholder:font-normal placeholder:tracking-normal placeholder:text-slate-500 text-center"
                     />
                   </div>
 
@@ -613,7 +613,7 @@ export function ActionModals({ user, onRefresh }: { user: any; onRefresh: () => 
                       value={pin}
                       onChange={(e) => setPin(e.target.value.replace(/\D/g, ""))}
                       placeholder="Enter 6-digit Transaction PIN"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-black/50 border border-amber-500/40 focus:border-amber-400 text-amber-300 text-sm font-bold tracking-widest outline-none placeholder:font-normal placeholder:tracking-normal placeholder:text-slate-500 font-mono text-center"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-black/50 border border-amber-500/40 focus:border-amber-400 text-amber-300 text-sm font-bold tracking-widest outline-none placeholder:font-normal placeholder:tracking-normal placeholder:text-slate-500 text-center"
                     />
                   </div>
 
@@ -663,7 +663,7 @@ export function ActionModals({ user, onRefresh }: { user: any; onRefresh: () => 
                       value={pin}
                       onChange={(e) => setPin(e.target.value.replace(/\D/g, ""))}
                       placeholder="Enter 6-digit Transaction PIN"
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-black/50 border border-amber-500/40 focus:border-amber-400 text-amber-300 text-sm font-bold tracking-widest outline-none placeholder:font-normal placeholder:tracking-normal placeholder:text-slate-500 font-mono text-center"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-black/50 border border-amber-500/40 focus:border-amber-400 text-amber-300 text-sm font-bold tracking-widest outline-none placeholder:font-normal placeholder:tracking-normal placeholder:text-slate-500 text-center"
                     />
                   </div>
 
@@ -695,11 +695,11 @@ export function ActionModals({ user, onRefresh }: { user: any; onRefresh: () => 
                     <div className="pl-6 space-y-1 text-[11px]">
                       <div>
                         🌐 <strong className="text-amber-200">UTC (Universal):</strong> {windowStatus.gstLabel}{" "}
-                        <span className="text-slate-400 font-mono">(Live: {windowStatus.currentGstTime})</span>
+                        <span className="text-slate-400">(Live: {windowStatus.currentGstTime})</span>
                       </div>
                       <div>
                         🇮🇳 <strong className="text-blue-300">IST (India):</strong> {windowStatus.istLabel}{" "}
-                        <span className="text-slate-400 font-mono">(Live: {windowStatus.currentIstTime})</span>
+                        <span className="text-slate-400">(Live: {windowStatus.currentIstTime})</span>
                       </div>
                     </div>
                   </div>
@@ -734,7 +734,7 @@ export function ActionModals({ user, onRefresh }: { user: any; onRefresh: () => 
                       value={withdrawAddress}
                       onChange={(e) => setWithdrawAddress(e.target.value)}
                       placeholder="0x..."
-                      className="w-full px-3.5 py-2.5 rounded-xl bg-black/50 border border-slate-700 text-white text-xs outline-none font-mono"
+                      className="w-full px-3.5 py-2.5 rounded-xl bg-black/50 border border-slate-700 text-white text-xs outline-none"
                     />
                   </div>
 

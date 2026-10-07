@@ -468,7 +468,7 @@ export default function SuperRootCryptoDepositsView() {
           <div className="bg-muted/40 border border-border rounded-xl p-3.5">
             <span className="text-[10px] text-muted-foreground font-bold uppercase block mb-1">Network</span>
             <span className="text-xs font-bold text-foreground">BNB Smart Chain</span>
-            <span className="text-[10px] text-muted-foreground block font-mono">Chain ID: 56</span>
+            <span className="text-[10px] text-muted-foreground block">Chain ID: 56</span>
           </div>
 
           <div className="bg-muted/40 border border-border rounded-xl p-3.5">
@@ -479,22 +479,22 @@ export default function SuperRootCryptoDepositsView() {
               <span className={`w-2 h-2 rounded-full ${health.connected ? "bg-emerald-500 animate-pulse" : "bg-destructive"}`} />
               {health.connected ? "Connected" : "Error"}
             </span>
-            <span className="text-[9px] text-muted-foreground block truncate font-mono mt-0.5">{health.currentRpc}</span>
+            <span className="text-[9px] text-muted-foreground block truncate mt-0.5">{health.currentRpc}</span>
           </div>
 
           <div className="bg-muted/40 border border-border rounded-xl p-3.5">
             <span className="text-[10px] text-muted-foreground font-bold uppercase block mb-1">Latest BSC Block</span>
-            <span className="text-sm font-bold text-foreground font-mono">{health.latestBlock || "0"}</span>
+            <span className="text-sm font-bold text-foreground">{health.latestBlock || "0"}</span>
           </div>
 
           <div className="bg-muted/40 border border-border rounded-xl p-3.5">
             <span className="text-[10px] text-muted-foreground font-bold uppercase block mb-1">Last Processed</span>
-            <span className="text-sm font-bold text-foreground font-mono">{health.lastProcessedBlock || "0"}</span>
+            <span className="text-sm font-bold text-foreground">{health.lastProcessedBlock || "0"}</span>
           </div>
 
           <div className="bg-muted/40 border border-border rounded-xl p-3.5">
             <span className="text-[10px] text-muted-foreground font-bold uppercase block mb-1">Block Lag</span>
-            <span className={`text-sm font-bold font-mono ${
+            <span className={`text-sm font-bold ${
               health.blockLag <= 5 ? "text-emerald-600 dark:text-emerald-400" : health.blockLag <= 20 ? "text-amber-500" : "text-destructive"
             }`}>
               {health.blockLag} blocks
@@ -511,7 +511,7 @@ export default function SuperRootCryptoDepositsView() {
         <div className="bg-muted/40 border border-border rounded-xl p-3.5 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs">
           <div className="flex items-center gap-2">
             <span className="text-muted-foreground font-semibold">Configured USDT BEP-20 Contract:</span>
-            <span className="font-mono text-foreground font-bold select-all">{settingsData?.settings?.usdtContract}</span>
+            <span className="text-foreground font-bold select-all">{settingsData?.settings?.usdtContract}</span>
           </div>
           <a
             href={`https://bscscan.com/token/${settingsData?.settings?.usdtContract}`}
@@ -586,10 +586,10 @@ export default function SuperRootCryptoDepositsView() {
                         <td className="py-2.5 px-3">
                           <div className="flex flex-col">
                             <span className="font-semibold text-foreground">{adm.fullName}</span>
-                            <span className="text-[10px] text-muted-foreground font-mono">{adm.customId} ({adm.role})</span>
+                            <span className="text-[10px] text-muted-foreground">{adm.customId} ({adm.role})</span>
                           </div>
                         </td>
-                        <td className="py-2.5 px-3 text-foreground font-mono">
+                        <td className="py-2.5 px-3 text-foreground">
                           {adm.teamPrefix || "Default Branch"}
                         </td>
                         <td className="py-2.5 px-3">
@@ -775,7 +775,7 @@ export default function SuperRootCryptoDepositsView() {
                     <div className="flex-1 min-w-0">
                       <span className="text-xs font-bold text-foreground block">{perm.label}</span>
                       <span className="text-[10px] text-muted-foreground block leading-tight mt-0.5">{perm.description}</span>
-                      <code className="text-[9px] text-primary font-mono block mt-1">{perm.id}</code>
+                      <code className="text-[9px] text-primary block mt-1">{perm.id}</code>
                     </div>
                   </div>
                 );
@@ -827,17 +827,17 @@ export default function SuperRootCryptoDepositsView() {
                   const isPending = dep.status === "PENDING" || dep.status === "PENDING_REVIEW" || dep.status === "MANUAL_REVIEW";
                   return (
                     <tr key={dep.id} className="hover:bg-muted/40 transition-colors">
-                      <td className="py-3 px-3 text-muted-foreground font-mono">{index + 1}</td>
+                      <td className="py-3 px-3 text-muted-foreground">{index + 1}</td>
                       <td className="py-3 px-3">
                         <div className="flex flex-col">
                           <span className="text-foreground font-semibold">{dep.user?.fullName || "Member"}</span>
-                          <span className="text-[10px] text-muted-foreground font-mono">{dep.user?.customId}</span>
+                          <span className="text-[10px] text-muted-foreground">{dep.user?.customId}</span>
                         </div>
                       </td>
                       <td className="py-3 px-3 font-bold text-emerald-600 dark:text-emerald-400">
                         {formatUsdt(dep.amountInUsdt || dep.amountUsdt || 0)}
                       </td>
-                      <td className="py-3 px-3 font-mono">
+                      <td className="py-3 px-3">
                         {dep.txHash ? (
                           <a
                             href={`https://bscscan.com/tx/${dep.txHash}`}
@@ -852,7 +852,7 @@ export default function SuperRootCryptoDepositsView() {
                           <span className="text-muted-foreground">Manual</span>
                         )}
                       </td>
-                      <td className="py-3 px-3 font-mono text-foreground">
+                      <td className="py-3 px-3 text-foreground">
                         {dep.confirmations || 0} / {settingsData?.settings?.requiredConfirmations || 3}
                       </td>
                       <td className="py-3 px-3">
