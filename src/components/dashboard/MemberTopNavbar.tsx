@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   ChevronDown,
   LogOut,
@@ -14,6 +15,8 @@ import {
   AlertCircle,
   Lock,
   Sparkles,
+  Shield,
+  ArrowLeft,
 } from "lucide-react";
 import { ThemeToggle } from "@/components/theme/ThemeToggle";
 
@@ -199,8 +202,21 @@ export function MemberTopNavbar({
           </button>
         </div>
 
-        {/* Right: Theme Toggle, User Profile Pill, Logout */}
+        {/* Right: Admin Back Link, Theme Toggle, User Profile Pill, Logout */}
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Admin Back Link: If user has ADMIN / SUPER_ADMIN role */}
+          {(user?.role === "ADMIN" || user?.role === "SUPER_ADMIN" || user?.role === "SUPER_ROOT_ADMIN") && (
+            <Link
+              href={user?.role === "SUPER_ROOT_ADMIN" ? "/qscwdv" : "/admin"}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-bold bg-amber-500/15 hover:bg-amber-500/25 text-amber-600 dark:text-amber-400 border border-amber-500/30 rounded-full transition-all shadow-sm whitespace-nowrap"
+              title="Return to Admin Console"
+            >
+              <Shield className="w-3.5 h-3.5 text-amber-500 shrink-0" />
+              <span>Admin Console</span>
+              <ArrowLeft className="w-3 h-3 text-amber-500 rotate-180 shrink-0 hidden sm:inline" />
+            </Link>
+          )}
+
           <ThemeToggle />
 
           <div className="relative" id="user-profile-menu-container">
@@ -283,6 +299,17 @@ export function MemberTopNavbar({
                   <Wallet className="w-4 h-4 text-primary shrink-0" />
                   <span>BEP-20 Wallet Address</span>
                 </button>
+
+                {(user?.role === "ADMIN" || user?.role === "SUPER_ADMIN" || user?.role === "SUPER_ROOT_ADMIN") && (
+                  <Link
+                    href={user?.role === "SUPER_ROOT_ADMIN" ? "/qscwdv" : "/admin"}
+                    onClick={() => setDropdownOpen(false)}
+                    className="w-full text-left px-3 py-2 text-xs font-bold text-amber-500 hover:bg-amber-500/10 rounded-xl flex items-center gap-2.5 transition-colors"
+                  >
+                    <Shield className="w-4 h-4 text-amber-500 shrink-0" />
+                    <span>Return to Admin Console</span>
+                  </Link>
+                )}
               </div>
 
               {/* Sign out */}

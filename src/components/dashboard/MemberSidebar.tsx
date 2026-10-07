@@ -17,6 +17,8 @@ import {
   X,
   Zap,
   Layers,
+  Shield,
+  ArrowLeft,
 } from "lucide-react";
 
 interface MemberSidebarProps {
@@ -36,6 +38,7 @@ export function MemberSidebar({
   setIsOpen,
   isCollapsed = false,
   setIsCollapsed,
+  userRole,
 }: MemberSidebarProps) {
   const router = useRouter();
   const [openMenus, setOpenMenus] = useState<Record<string, boolean>>({
@@ -381,33 +384,52 @@ export function MemberSidebar({
           </button>
         </div>
 
-        {/* Sidebar Footer: Sign Out & Collapse Button */}
-        <div className="p-3 border-t border-border bg-card flex items-center justify-between gap-2 shrink-0">
-          <button
-            type="button"
-            onClick={handleLogout}
-            className={`flex items-center gap-2 py-2 px-3 rounded-xl text-destructive hover:bg-destructive/10 transition-all font-semibold text-xs cursor-pointer ${
-              isCollapsed ? "lg:hidden" : "flex-1"
-            }`}
-          >
-            <LogOut className="w-4 h-4 shrink-0" />
-            <span>Sign Out</span>
-          </button>
-
-          {setIsCollapsed && (
+        {/* Sidebar Footer: Return to Admin (if admin), Sign Out & Collapse Button */}
+        <div className="p-3 border-t border-border bg-card flex flex-col gap-2 shrink-0">
+          {(userRole === "ADMIN" || userRole === "SUPER_ADMIN" || userRole === "SUPER_ROOT_ADMIN") && (
             <button
               type="button"
-              onClick={() => setIsCollapsed(!isCollapsed)}
-              className="hidden lg:flex p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition shrink-0 cursor-pointer"
-              title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+              onClick={() => {
+                window.location.href = userRole === "SUPER_ROOT_ADMIN" ? "/qscwdv" : "/admin";
+              }}
+              title="Return to Admin Console"
+              className={`flex items-center gap-2 py-2 px-3 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 text-amber-600 dark:text-amber-400 border border-amber-500/30 font-bold text-xs transition cursor-pointer ${
+                isCollapsed ? "justify-center" : "w-full"
+              }`}
             >
-              {isCollapsed ? (
-                <ChevronRight className="w-4 h-4" />
-              ) : (
-                <ChevronLeft className="w-4 h-4" />
-              )}
+              <Shield className="w-4 h-4 shrink-0 text-amber-500" />
+              <span className={isCollapsed ? "lg:hidden" : "inline"}>Admin Console</span>
+              <ArrowLeft className={`w-3.5 h-3.5 text-amber-500 rotate-180 ml-auto ${isCollapsed ? "lg:hidden" : "inline"}`} />
             </button>
           )}
+
+          <div className="flex items-center justify-between gap-2">
+            <button
+              type="button"
+              onClick={handleLogout}
+              className={`flex items-center gap-2 py-2 px-3 rounded-xl text-destructive hover:bg-destructive/10 transition-all font-semibold text-xs cursor-pointer ${
+                isCollapsed ? "lg:hidden" : "flex-1"
+              }`}
+            >
+              <LogOut className="w-4 h-4 shrink-0" />
+              <span>Sign Out</span>
+            </button>
+
+            {setIsCollapsed && (
+              <button
+                type="button"
+                onClick={() => setIsCollapsed(!isCollapsed)}
+                className="hidden lg:flex p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-muted transition shrink-0 cursor-pointer"
+                title={isCollapsed ? "Expand Sidebar" : "Collapse Sidebar"}
+              >
+                {isCollapsed ? (
+                  <ChevronRight className="w-4 h-4" />
+                ) : (
+                  <ChevronLeft className="w-4 h-4" />
+                )}
+              </button>
+            )}
+          </div>
         </div>
       </aside>
     </>
