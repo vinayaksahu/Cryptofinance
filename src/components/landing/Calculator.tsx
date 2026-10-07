@@ -79,6 +79,7 @@ export function Calculator() {
     let bal = pool;
     let cumW = 0;
     let cumR = 0;
+    let hasHitCompCap = false;
 
     for (let d = 0; d < 1500; d++) {
       if (bal <= 0.005 || cumW >= maxPayout) break;
@@ -90,11 +91,17 @@ export function Calculator() {
       if (mode === "withdraw") {
         action = "W";
       } else if (mode === "reinvest") {
-        if (bal + roi >= capBal) {
-          action = "W";
-          capLocked = true;
+        // Compound until 2X pool cap is reached (Day 35), then switch to withdrawal cashout
+        if (!hasHitCompCap) {
+          if (bal + roi >= capBal) {
+            action = "W";
+            capLocked = true;
+            hasHitCompCap = true;
+          } else {
+            action = "R";
+          }
         } else {
-          action = "R";
+          action = "W";
         }
       } else {
         const userAction = manualActions[d] || "W";
