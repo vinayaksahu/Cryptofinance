@@ -264,7 +264,7 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
             {/* 3. Withdraw */}
             <button
               type="button"
-              onClick={() => setActiveTab("wallets-external")}
+              onClick={() => setActiveTab("withdraw")}
               className="flex flex-col items-center gap-1.5 p-2 rounded-2xl hover:bg-muted/60 transition-colors text-center cursor-pointer"
             >
               <div className="w-11 h-11 rounded-2xl bg-sky-500/10 border border-sky-500/20 text-sky-500 flex items-center justify-center shadow-sm">

@@ -8,6 +8,7 @@ import {
   RefreshCw,
   Layers,
   ArrowRightLeft,
+  ArrowUpRight,
   UserCheck,
   UserX,
 } from "lucide-react";
@@ -256,6 +257,17 @@ export function WalletsHubView({
             Triple-Isolated Liquidity &bull; Bonus Utility &bull; P2P Transfers &bull; External Cashouts
           </p>
         </div>
+
+        {onNavigateTab && (
+          <button
+            type="button"
+            onClick={() => onNavigateTab("withdraw")}
+            className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary text-primary-foreground font-bold text-xs hover:bg-primary/90 transition shadow-sm cursor-pointer self-start sm:self-auto"
+          >
+            <ArrowUpRight className="w-4 h-4" />
+            <span>Withdraw Main Wallet (${mainBalance.toFixed(2)}) &rarr;</span>
+          </button>
+        )}
       </div>
 
       {/* =========================================================================

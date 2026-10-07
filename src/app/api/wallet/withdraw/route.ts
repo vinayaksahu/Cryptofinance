@@ -7,6 +7,7 @@ import { APP_CONFIG, getWithdrawalWindowStatus } from "@/lib/constants";
 import { verifyOtp } from "@/lib/mail";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { validateBonusUsageEligibility } from "@/lib/services/bonusService";
+import { getUserWalletBalances } from "@/lib/services/walletService";
 import { recordActivity } from "@/lib/auditLogger";
 import Decimal from "decimal.js";
 
@@ -107,6 +108,14 @@ export async function POST(req: NextRequest) {
     if (amountUsdtDec.greaterThan(maxUsdt)) {
       return NextResponse.json({
         error: `Maximum withdrawal is $${maxUsdt} USDT.`,
+      }, { status: 400 });
+    }
+
+    const walletBalances = await getUserWalletBalances(user.id);
+    const mainBalDec = new Decimal(walletBalances.mainBalance);
+    if (mainBalDec.lessThan(amountUsdtDec)) {
+      return NextResponse.json({
+        error: `Insufficient Main Wallet balance. You have $${mainBalDec.toFixed(2)} USDT in your Main Wallet, required: $${amountUsdtDec.toFixed(2)} USDT.`,
       }, { status: 400 });
     }
 

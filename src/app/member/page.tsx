@@ -15,6 +15,7 @@ import { JoiningBonusView } from "@/components/dashboard/views/JoiningBonusView"
 import { MilestoneRewardsView } from "@/components/dashboard/views/MilestoneRewardsView";
 import { ReportsView } from "@/components/dashboard/views/ReportsView";
 import { SupportTicketView } from "@/components/dashboard/views/SupportTicketView";
+import { WithdrawalView } from "@/components/dashboard/views/WithdrawalView";
 import { MemberBottomNav } from "@/components/dashboard/MemberBottomNav";
 import { ImpersonationBanner } from "@/components/common/ImpersonationBanner";
 
@@ -152,10 +153,18 @@ export default function MemberDashboardPage() {
             <WalletsHubView user={user} initialWallet="all" initialEngine="internal" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
           )}
 
-          {(activeTab === "wallets-external" ||
+          {(activeTab === "withdraw" ||
             activeTab === "wallets-withdraw" ||
-            activeTab === "withdraw" ||
-            activeTab === "tx-withdraw") && (
+            activeTab === "tx-withdraw" ||
+            activeTab === "withdrawal") && (
+            <WithdrawalView user={user} onRefresh={fetchUser} onNavigateTab={setActiveTab} initialTab="request" />
+          )}
+
+          {activeTab === "withdraw-report" && (
+            <WithdrawalView user={user} onRefresh={fetchUser} onNavigateTab={setActiveTab} initialTab="history" />
+          )}
+
+          {activeTab === "wallets-external" && (
             <WalletsHubView user={user} initialWallet="all" initialEngine="external" onNavigateTab={setActiveTab} onRefresh={fetchUser} />
           )}
 

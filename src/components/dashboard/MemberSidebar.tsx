@@ -19,6 +19,7 @@ import {
   Layers,
   Shield,
   ArrowLeft,
+  ArrowUpRight,
 } from "lucide-react";
 
 interface MemberSidebarProps {
@@ -176,6 +177,31 @@ export function MemberSidebar({
           >
             <Briefcase className={`w-4 h-4 shrink-0 ${activeTab === "recharge" ? "text-primary-foreground" : "text-muted-foreground"}`} />
             <span className={isCollapsed ? "lg:hidden" : "inline"}>Deposit USDT</span>
+          </button>
+
+          {/* Withdrawal */}
+          <button
+            type="button"
+            onClick={() => handleSelectTab("withdraw")}
+            title={isCollapsed ? "Withdrawal" : undefined}
+            className={getNavItemClass(
+              activeTab === "withdraw" ||
+              activeTab === "wallets-withdraw" ||
+              activeTab === "tx-withdraw" ||
+              activeTab === "withdrawal" ||
+              activeTab === "withdraw-report"
+            )}
+          >
+            <ArrowUpRight className={`w-4 h-4 shrink-0 ${
+              activeTab === "withdraw" ||
+              activeTab === "wallets-withdraw" ||
+              activeTab === "tx-withdraw" ||
+              activeTab === "withdrawal" ||
+              activeTab === "withdraw-report"
+                ? "text-primary-foreground"
+                : "text-muted-foreground"
+            }`} />
+            <span className={isCollapsed ? "lg:hidden" : "inline"}>Withdrawal</span>
           </button>
 
           {/* Activate Stake */}
@@ -367,6 +393,13 @@ export function MemberSidebar({
                   className={getSubItemClass(activeTab === "report-statement")}
                 >
                   • Complete Statement
+                </button>
+                <button
+                  type="button"
+                  onClick={() => handleSelectTab("withdraw-report")}
+                  className={getSubItemClass(activeTab === "withdraw-report")}
+                >
+                  • Withdrawal History
                 </button>
               </div>
             )}
