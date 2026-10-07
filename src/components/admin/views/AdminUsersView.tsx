@@ -9,6 +9,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Pencil,
+  ExternalLink,
   X,
   Check,
   Mail,
@@ -51,6 +52,7 @@ export function AdminUsersView({ onRefresh }: AdminUsersViewProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [processingId, setProcessingId] = useState<string | null>(null);
+  const [impersonatingId, setImpersonatingId] = useState<string | null>(null);
 
   // Edit Modal State
   const [editingUser, setEditingUser] = useState<User | null>(null);
@@ -63,6 +65,27 @@ export function AdminUsersView({ onRefresh }: AdminUsersViewProps) {
   const [editSuccess, setEditSuccess] = useState<string | null>(null);
 
   const ITEMS_PER_PAGE = 15;
+
+  const handleOpenPortal = async (user: User) => {
+    try {
+      setImpersonatingId(user.id);
+      const res = await fetch("/api/superadmin/impersonate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ targetUserId: user.id }),
+      });
+      const data = await res.json();
+      if (res.ok && data.redirectUrl) {
+        window.location.href = data.redirectUrl;
+      } else {
+        alert(data.error || "Failed to enter user portal.");
+        setImpersonatingId(null);
+      }
+    } catch (err: any) {
+      alert("Error entering user portal: " + err.message);
+      setImpersonatingId(null);
+    }
+  };
 
   const fetchUsers = async () => {
     try {
@@ -250,20 +273,21 @@ export function AdminUsersView({ onRefresh }: AdminUsersViewProps) {
                 <th className="px-6 py-4 font-medium text-right">Direct Biz</th>
                 <th className="px-6 py-4 font-medium">Join Date</th>
                 <th className="px-4 py-4 font-medium text-center">Edit</th>
+                <th className="px-4 py-4 font-medium text-center">Portal</th>
                 <th className="px-6 py-4 font-medium text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
               {loading ? (
                 <tr>
-                  <td colSpan={8} className="px-6 py-12 text-center">
+                  <td colSpan={9} className="px-6 py-12 text-center">
                     <Loader2 className="w-8 h-8 text-purple-500 animate-spin mx-auto mb-4" />
                     <p className="text-gray-400">Loading users...</p>
                   </td>
                 </tr>
               ) : paginatedUsers.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="px-6 py-12 text-center text-gray-400">
+                  <td colSpan={9} className="px-6 py-12 text-center text-gray-400">
                     No users found matching your search.
                   </td>
                 </tr>
@@ -281,9 +305,21 @@ export function AdminUsersView({ onRefresh }: AdminUsersViewProps) {
                         <span className="font-semibold text-foreground">
                           {user.fullName}
                         </span>
-                        <span className="text-xs text-primary font-mono font-bold">
-                          {user.customId}
-                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-primary font-mono font-bold">
+                            {user.customId}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => handleOpenPortal(user)}
+                            disabled={impersonatingId === user.id}
+                            className="inline-flex items-center gap-1 text-[11px] text-emerald-400 hover:text-emerald-300 font-bold transition-colors cursor-pointer"
+                            title={`Open ${user.customId}'s portal`}
+                          >
+                            <ExternalLink className="w-3 h-3" />
+                            <span>Open</span>
+                          </button>
+                        </div>
                         <span className="text-xs text-muted-foreground truncate max-w-[220px]">
                           {user.email}
                         </span>
@@ -330,16 +366,34 @@ export function AdminUsersView({ onRefresh }: AdminUsersViewProps) {
                       {new Date(user.createdAt).toLocaleDateString()}
                     </td>
 
-                    {/* Edit Column (Placed right before Actions) */}
+                    {/* Edit Column */}
                     <td className="px-4 py-4 text-center">
                       <button
                         type="button"
                         onClick={() => handleOpenEdit(user)}
-                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 border border-primary/30 transition-all text-xs font-semibold shadow-sm"
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 border border-primary/30 transition-all text-xs font-semibold shadow-sm cursor-pointer"
                         title="Edit Email, Phone & Details"
                       >
                         <Pencil className="w-3.5 h-3.5" />
                         Edit
+                      </button>
+                    </td>
+
+                    {/* Portal Column */}
+                    <td className="px-4 py-4 text-center">
+                      <button
+                        type="button"
+                        onClick={() => handleOpenPortal(user)}
+                        disabled={impersonatingId === user.id}
+                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/30 hover:border-emerald-500/60 transition-all text-xs font-bold shadow-sm cursor-pointer disabled:opacity-50"
+                        title={`Open & inspect ${user.fullName}'s Member Portal`}
+                      >
+                        {impersonatingId === user.id ? (
+                          <Loader2 className="w-3.5 h-3.5 animate-spin text-emerald-400" />
+                        ) : (
+                          <ExternalLink className="w-3.5 h-3.5 text-emerald-400" />
+                        )}
+                        Portal
                       </button>
                     </td>
 
@@ -549,32 +603,47 @@ export function AdminUsersView({ onRefresh }: AdminUsersViewProps) {
               </div>
 
               {/* Modal Buttons */}
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-border">
+              <div className="flex items-center justify-between gap-3 pt-4 border-t border-border flex-wrap">
                 <button
                   type="button"
-                  disabled={editSaving}
-                  onClick={handleCloseEdit}
-                  className="px-4 py-2.5 rounded-xl bg-secondary hover:bg-secondary/80 text-secondary-foreground font-semibold text-xs border border-border transition-colors disabled:opacity-50"
+                  onClick={() => {
+                    handleCloseEdit();
+                    handleOpenPortal(editingUser);
+                  }}
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/30 font-bold text-xs transition-colors cursor-pointer"
+                  title="Open and inspect member portal"
                 >
-                  Cancel
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  Open Member Portal
                 </button>
-                <button
-                  type="submit"
-                  disabled={editSaving}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-xs shadow-sm transition-all disabled:opacity-50"
-                >
-                  {editSaving ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin text-primary-foreground" />
-                      Saving...
-                    </>
-                  ) : (
-                    <>
-                      <Check className="w-4 h-4" />
-                      Save Changes
-                    </>
-                  )}
-                </button>
+
+                <div className="flex items-center gap-2 ml-auto">
+                  <button
+                    type="button"
+                    disabled={editSaving}
+                    onClick={handleCloseEdit}
+                    className="px-4 py-2.5 rounded-xl bg-secondary hover:bg-secondary/80 text-secondary-foreground font-semibold text-xs border border-border transition-colors disabled:opacity-50 cursor-pointer"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={editSaving}
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-xs shadow-sm transition-all disabled:opacity-50 cursor-pointer"
+                  >
+                    {editSaving ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-primary-foreground" />
+                        Saving...
+                      </>
+                    ) : (
+                      <>
+                        <Check className="w-4 h-4" />
+                        Save Changes
+                      </>
+                    )}
+                  </button>
+                </div>
               </div>
             </form>
           </div>

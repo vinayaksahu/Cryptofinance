@@ -55,7 +55,7 @@ function getOtpHtmlTemplate(otp: string, purpose: string = "REGISTRATION"): stri
       margin: 0;
       padding: 0;
       background-color: #030712;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Inter', sans-serif;
       color: #f3f4f6;
     }
     .container {
@@ -115,7 +115,7 @@ function getOtpHtmlTemplate(otp: string, purpose: string = "REGISTRATION"): stri
       font-weight: 900;
       letter-spacing: 8px;
       color: #fbbf24;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: 'Inter', sans-serif;
       margin-left: 8px;
     }
     .expiry {
@@ -326,7 +326,7 @@ export async function sendWelcomeCredentialsEmail({
       margin: 0;
       padding: 0;
       background-color: #030712;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Inter', sans-serif;
       color: #f3f4f6;
     }
     .container {
@@ -417,7 +417,7 @@ export async function sendWelcomeCredentialsEmail({
       font-size: 18px;
       font-weight: 800;
       color: #fbbf24;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: 'Inter', sans-serif;
       letter-spacing: 1px;
     }
     .btn-container {

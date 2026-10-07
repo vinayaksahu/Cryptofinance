@@ -34,18 +34,27 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Target user not found." }, { status: 404 });
     }
 
-    // Role boundary checks: Only SUPER_ROOT_ADMIN can impersonate admins or other branches
-    if (session.role !== "SUPER_ROOT_ADMIN") {
-      // Normal admin can only impersonate members in their own branch
-      if (targetUser.role !== "USER" || targetUser.adminId !== session.userId) {
-        return NextResponse.json({ error: "Forbidden: You can only inspect members in your own branch." }, { status: 403 });
+    // Role boundary checks:
+    if (session.role === "SUPER_ROOT_ADMIN") {
+      // Super Root Admin can inspect any user or admin
+    } else if (session.role === "SUPER_ADMIN") {
+      // Super Admin (CMD) can inspect any regular USER and branch ADMIN
+      if (targetUser.role === "SUPER_ROOT_ADMIN") {
+        return NextResponse.json({ error: "Forbidden: Cannot inspect Super Root Administrator." }, { status: 403 });
       }
+    } else if (session.role === "ADMIN") {
+      // Branch Admin can inspect regular USERs
+      if (targetUser.role !== "USER") {
+        return NextResponse.json({ error: "Forbidden: You can only inspect regular member portals." }, { status: 403 });
+      }
+    } else {
+      return NextResponse.json({ error: "Forbidden: Insufficient privileges." }, { status: 403 });
     }
 
     const cookieStore = await cookies();
     const currentSessionToken = cookieStore.get("df_session")?.value;
 
-    // Check if backup super root token already exists
+    // Check if backup admin token already exists
     const existingBackup = cookieStore.get("df_superroot_backup")?.value;
     const backupToken = existingBackup || currentSessionToken;
 
@@ -63,11 +72,12 @@ export async function POST(req: NextRequest) {
       userId: session.userId,
       action: "IMPERSONATE_PORTAL_ENTER",
       category: "SECURITY",
-      description: `Super Root Admin (${session.customId}) entered portal of ${targetUser.role} ${targetUser.customId} (${targetUser.fullName})`,
+      description: `${session.role} (${session.customId}) entered portal of ${targetUser.role} ${targetUser.customId} (${targetUser.fullName})`,
       req,
       metadata: {
         impersonatorId: session.userId,
         impersonatorCustomId: session.customId,
+        impersonatorRole: session.role,
         targetUserId: targetUser.id,
         targetCustomId: targetUser.customId,
         targetRole: targetUser.role,

@@ -131,7 +131,7 @@ export function printOrExportPdf(
         <style>
           * { box-sizing: border-box; }
           body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 24px;
             color: #0f172a;

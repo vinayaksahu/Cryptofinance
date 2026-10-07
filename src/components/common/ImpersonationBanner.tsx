@@ -27,9 +27,12 @@ export function ImpersonationBanner({
     if (impCookie) {
       const val = decodeURIComponent(impCookie.split("=")[1] || "");
       setIsImpersonating(true);
-      setImpersonatorInfo(val.split("|")[0] || "SUPER_ROOT");
+      const parts = val.split("|");
+      setImpersonatorInfo(parts[1] || parts[0] || "ADMIN");
     }
   }, []);
+
+  const isSuperRoot = impersonatorInfo === "SUPER_ROOT_ADMIN" || impersonatorInfo === "SUPER_ROOT";
 
   const handleExit = async () => {
     setLoading(true);
@@ -41,10 +44,10 @@ export function ImpersonationBanner({
       if (res.ok && data.redirectUrl) {
         window.location.href = data.redirectUrl;
       } else {
-        window.location.href = "/qscwdv";
+        window.location.href = isSuperRoot ? "/qscwdv" : "/admin";
       }
     } catch {
-      window.location.href = "/qscwdv";
+      window.location.href = isSuperRoot ? "/qscwdv" : "/admin";
     }
   };
 
@@ -78,7 +81,7 @@ export function ImpersonationBanner({
       <button
         onClick={handleExit}
         disabled={loading}
-        className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow-lg hover:shadow-amber-500/20 active:scale-95 disabled:opacity-50"
+        className="flex items-center gap-1.5 px-3 py-1 rounded-lg bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-xs transition shadow-lg hover:shadow-amber-500/20 active:scale-95 disabled:opacity-50 cursor-pointer"
       >
         {loading ? (
           <>
@@ -88,7 +91,7 @@ export function ImpersonationBanner({
         ) : (
           <>
             <ArrowLeft className="w-3.5 h-3.5" />
-            Exit to Super Root Admin
+            {isSuperRoot ? "Exit to Super Root Admin" : "Exit to Admin Console"}
           </>
         )}
       </button>

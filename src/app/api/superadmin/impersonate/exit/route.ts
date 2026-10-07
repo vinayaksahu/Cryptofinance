@@ -9,19 +9,13 @@ export async function POST(req: NextRequest) {
     const backupToken = cookieStore.get("df_superroot_backup")?.value;
     const currentSession = await getSession();
 
-    if (currentSession) {
-      await recordActivity({
-        userId: currentSession.userId,
-        action: "IMPERSONATE_PORTAL_EXIT",
-        category: "SECURITY",
-        description: `Exited portal impersonation mode for ${currentSession.customId} and returned to Super Root Admin`,
-        req,
-      });
-    }
+    const impCookie = cookieStore.get("df_impersonator")?.value || "";
+    const isSuperRoot = impCookie.includes("SUPER_ROOT_ADMIN");
+    const redirectUrl = isSuperRoot ? "/qscwdv" : "/admin";
 
     const response = NextResponse.json({
       success: true,
-      redirectUrl: "/qscwdv",
+      redirectUrl,
     });
 
     if (backupToken) {
