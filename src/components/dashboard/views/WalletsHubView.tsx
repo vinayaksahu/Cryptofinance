@@ -464,7 +464,7 @@ export function WalletsHubView({
                   value={transactionPin}
                   onChange={(e) => setTransactionPin(e.target.value.replace(/\D/g, ""))}
                   placeholder="Enter 6-digit PIN"
-                  className="w-full sm:w-80 bg-background border border-input focus:border-primary rounded-xl px-4 py-2.5 text-center tracking-[0.3em] text-base text-foreground font-bold placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="w-full sm:w-72 bg-background border border-input focus:border-primary rounded-xl px-4 py-2 text-center text-sm font-semibold tracking-widest placeholder:text-xs placeholder:tracking-normal placeholder:font-normal placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-all"
                   required
                 />
               </div>
@@ -473,17 +473,17 @@ export function WalletsHubView({
               <button
                 type="submit"
                 disabled={internalLoading || !transferAmount || Number(transferAmount) <= 0 || transactionPin.length !== 6}
-                className="w-full py-3.5 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-sm uppercase tracking-wider transition-all shadow-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer"
+                className="w-full py-2.5 sm:py-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-xs transition-all shadow-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer"
               >
                 {internalLoading ? (
                   <>
-                    <RefreshCw className="w-4 h-4 animate-spin" />
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
                     <span>Executing Internal Transfer...</span>
                   </>
                 ) : (
                   <>
-                    <ArrowRightLeft className="w-4 h-4" />
-                    <span>
+                    <ArrowRightLeft className="w-3.5 h-3.5 shrink-0" />
+                    <span className="text-xs font-semibold">
                       Transfer ${Number(transferAmount || 0).toFixed(2)} USDT from {transferSource} to {transferTarget === "MAIN" ? "Main" : "Secondary"} Wallet
                     </span>
                   </>
@@ -640,7 +640,7 @@ export function WalletsHubView({
                   value={p2pPin}
                   onChange={(e) => setP2pPin(e.target.value.replace(/\D/g, ""))}
                   placeholder="Enter 6-digit PIN"
-                  className="w-full sm:w-80 bg-background border border-input focus:border-primary rounded-xl px-4 py-2.5 text-center tracking-[0.3em] text-base text-foreground font-bold placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
+                  className="w-full sm:w-72 bg-background border border-input focus:border-primary rounded-xl px-4 py-2 text-center text-sm font-semibold tracking-widest placeholder:text-xs placeholder:tracking-normal placeholder:font-normal placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary transition-all"
                   required
                 />
               </div>
@@ -656,17 +656,17 @@ export function WalletsHubView({
                   p2pPin.length !== 6 ||
                   Boolean(p2pLookupError)
                 }
-                className="w-full py-3.5 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-sm uppercase tracking-wider transition-all shadow-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer"
+                className="w-full py-2.5 sm:py-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-xs transition-all shadow-sm disabled:opacity-40 disabled:cursor-not-allowed flex items-center justify-center gap-2 active:scale-[0.99] cursor-pointer"
               >
                 {p2pLoading ? (
                   <>
-                    <RefreshCw className="w-4 h-4 animate-spin" />
+                    <RefreshCw className="w-3.5 h-3.5 animate-spin" />
                     <span>Executing Secondary Wallet Transfer...</span>
                   </>
                 ) : (
                   <>
-                    <Repeat className="w-4 h-4" />
-                    <span>
+                    <Repeat className="w-3.5 h-3.5 shrink-0" />
+                    <span className="text-xs font-semibold">
                       Transfer ${Number(p2pAmount || 0).toFixed(2)} USDT to {p2pRecipientName ? `${p2pRecipientName} (${p2pRecipientId})` : p2pRecipientId || "Member"}
                     </span>
                   </>

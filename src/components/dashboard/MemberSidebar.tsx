@@ -192,51 +192,16 @@ export function MemberSidebar({
             <span className={isCollapsed ? "lg:hidden" : "inline"}>Activate Stake</span>
           </button>
 
-          {/* Dedicated Wallet System Accordion */}
-          <div>
-            <button
-              type="button"
-              onClick={() => toggleMenu("wallets")}
-              title={isCollapsed ? "Wallet System" : undefined}
-              className={`w-full flex items-center ${
-                isCollapsed ? "lg:justify-center lg:px-2" : "justify-between px-3.5"
-              } py-2.5 rounded-xl font-semibold text-xs transition-all text-left cursor-pointer ${
-                activeTab.startsWith("wallet")
-                  ? "bg-primary text-primary-foreground font-bold shadow-sm shadow-primary/20"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
-              }`}
-            >
-              <div className="flex items-center gap-3.5">
-                <Layers className={`w-4 h-4 shrink-0 ${activeTab.startsWith("wallet") ? "text-primary-foreground" : "text-muted-foreground"}`} />
-                <span className={isCollapsed ? "lg:hidden" : "inline"}>Wallet System</span>
-              </div>
-              <span className={isCollapsed ? "lg:hidden" : "inline"}>
-                {openMenus.wallets ? (
-                  <ChevronDown className="w-3.5 h-3.5" />
-                ) : (
-                  <ChevronRight className="w-3.5 h-3.5" />
-                )}
-              </span>
-            </button>
-            {openMenus.wallets && (
-              <div className={`${isCollapsed ? "lg:hidden" : "block"} pl-9 pr-2 py-1 space-y-1`}>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("wallets-internal")}
-                  className={getSubItemClass(activeTab === "wallets-internal" || activeTab === "wallets")}
-                >
-                  • Internal Wallet Transfer
-                </button>
-                <button
-                  type="button"
-                  onClick={() => handleSelectTab("wallets-external")}
-                  className={getSubItemClass(activeTab === "wallets-external")}
-                >
-                  • External Wallet Transfer
-                </button>
-              </div>
-            )}
-          </div>
+          {/* Wallet System (Direct Link, No Submenus) */}
+          <button
+            type="button"
+            onClick={() => handleSelectTab("wallets")}
+            title={isCollapsed ? "Wallet System" : undefined}
+            className={getNavItemClass(activeTab.startsWith("wallet"))}
+          >
+            <Layers className={`w-4 h-4 shrink-0 ${activeTab.startsWith("wallet") ? "text-primary-foreground" : "text-muted-foreground"}`} />
+            <span className={isCollapsed ? "lg:hidden" : "inline"}>Wallet System</span>
+          </button>
 
           {/* Downline Accordion */}
           <div>

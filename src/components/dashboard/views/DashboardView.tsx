@@ -33,6 +33,7 @@ import {
 } from "lucide-react";
 import { APP_CONFIG } from "@/lib/constants";
 import { DayByDayLedger } from "@/components/dashboard/DayByDayLedger";
+import { InfoTooltipButton } from "@/components/common/InfoTooltipButton";
 
 interface DashboardViewProps {
   user: any;
@@ -572,16 +573,22 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
           <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-5 flex flex-col justify-between space-y-2">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-500">
-                  Bonus Wallet
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-amber-500">
+                    Bonus Wallet
+                  </span>
+                  <InfoTooltipButton
+                    content={
+                      <span>
+                        Holds $1.00 Self + $0.40/Level bonuses. Subsidizes up to <strong className="text-amber-400">10% of any ID activation or compounding</strong>!
+                      </span>
+                    }
+                  />
+                </div>
                 <Gift className="h-4 w-4 text-amber-500" />
               </div>
               <p className="text-2xl sm:text-3xl font-black text-amber-500">
                 {currency} {bonusWalletBalance.toFixed(2)}
-              </p>
-              <p className="text-[11px] text-muted-foreground mt-1 leading-relaxed">
-                Holds $1.00 Self + $0.40/Level bonuses. Subsidizes up to <strong>10% of any ID activation or compounding</strong>!
               </p>
             </div>
             <div className="pt-2 border-t border-amber-500/20 flex items-center justify-between text-xs">
@@ -599,16 +606,22 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
           <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-5 flex flex-col justify-between space-y-2">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-500">
-                  ROI Wallet
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-emerald-500">
+                    ROI Wallet
+                  </span>
+                  <InfoTooltipButton
+                    content={
+                      <span>
+                        Automated 4% daily returns from 2X pool. Transfer directly to <strong className="text-emerald-400">Main Wallet</strong> or <strong className="text-emerald-400">Secondary Wallet</strong>.
+                      </span>
+                    }
+                  />
+                </div>
                 <Zap className="h-4 w-4 text-emerald-500" />
               </div>
               <p className="text-2xl sm:text-3xl font-black text-emerald-500">
                 {currency} {roiWalletBalance.toFixed(2)}
-              </p>
-              <p className="text-[11px] text-muted-foreground mt-1 leading-relaxed">
-                Automated 4% daily returns from 2X pool. Transfer directly to <strong>Main Wallet</strong> or <strong>Secondary Wallet</strong>.
               </p>
             </div>
             <div className="pt-2 border-t border-emerald-500/20 flex items-center justify-between text-xs">
@@ -626,16 +639,22 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
           <div className="rounded-2xl border border-sky-500/20 bg-sky-500/5 p-5 flex flex-col justify-between space-y-2">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-sky-500">
-                  Working Wallet
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-sky-500">
+                    Working Wallet
+                  </span>
+                  <InfoTooltipButton
+                    content={
+                      <span>
+                        Direct referrals &amp; royalties. Transfer directly to <strong className="text-sky-400">Main Wallet</strong> or <strong className="text-sky-400">Secondary Wallet</strong>.
+                      </span>
+                    }
+                  />
+                </div>
                 <Wallet className="h-4 w-4 text-sky-500" />
               </div>
               <p className="text-2xl sm:text-3xl font-black text-sky-500">
                 {currency} {workingWalletBalance.toFixed(2)}
-              </p>
-              <p className="text-[11px] text-muted-foreground mt-1 leading-relaxed">
-                Direct referrals &amp; royalties. Transfer directly to <strong>Main Wallet</strong> or <strong>Secondary Wallet</strong>.
               </p>
             </div>
             <div className="pt-2 border-t border-sky-500/20 flex items-center justify-between text-xs">
@@ -653,16 +672,22 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
           <div className="rounded-2xl border border-border bg-card p-5 flex flex-col justify-between space-y-2 shadow-sm">
             <div>
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[10px] font-extrabold uppercase tracking-wider text-muted-foreground">
-                  Secondary Wallet
-                </span>
+                <div className="flex items-center gap-1.5">
+                  <span className="text-[10px] font-extrabold uppercase tracking-wider text-muted-foreground">
+                    Secondary Wallet
+                  </span>
+                  <InfoTooltipButton
+                    content={
+                      <span>
+                        Deposit request funds credit here. Use to activate your own stake, activate any member ID, or send P2P transfers.
+                      </span>
+                    }
+                  />
+                </div>
                 <Wallet className="h-4 w-4 text-primary" />
               </div>
               <p className="text-2xl sm:text-3xl font-black text-foreground">
                 {currency} {p2pWalletBalance.toFixed(2)}
-              </p>
-              <p className="text-[11px] text-muted-foreground mt-1 leading-relaxed">
-                Deposit request funds credit here. Use to activate your own stake, activate any member ID, or send P2P transfers.
               </p>
             </div>
             <div className="pt-2 border-t border-border flex items-center justify-between text-xs">
