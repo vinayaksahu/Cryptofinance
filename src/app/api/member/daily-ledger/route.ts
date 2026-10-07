@@ -71,12 +71,15 @@ export async function GET(req: NextRequest) {
       ? Math.floor(msSinceStart / (24 * 60 * 60 * 1000)) + 1
       : Math.floor(msSinceStart / (24 * 60 * 60 * 1000));
 
-    // Activation Day Rule: New contracts have zero ROI on investment day (Day 0)
-    // Day 1 starts only after activation day closes at 00:00 GST
-    const isActivationDay = calendarDaysElapsed === 0;
+    // Calculate total unlocked cycles (from admin manual closing or calendar elapsed days)
+    const contractDaysUnlocked = (contract as any).daysUnlocked ?? 0;
+    const totalUnlockedDays = Math.min(
+      contract.tenureDays,
+      Math.max(contractDaysUnlocked, contract.daysPaid, calendarDaysElapsed)
+    );
 
-    // Maximum cycle number that can be claimed or active by today
-    const maxEligibleDays = Math.min(calendarDaysElapsed, contract.tenureDays);
+    // Activation Day Rule: New contracts have zero ROI on investment day (Day 0) if not manually closed
+    const isActivationDay = calendarDaysElapsed === 0 && totalUnlockedDays === 0;
 
     // If it's activation day, countdown is to 00:00:00 GST tomorrow (Day 1 start)
     if (isActivationDay) {
@@ -84,21 +87,12 @@ export async function GET(req: NextRequest) {
     }
 
     const completedDaysCount = contract.daysPaid;
+    const max2xCap = +(principalUsdt * 2.0).toFixed(4); // Strict 2X maximum allowable payout
 
-    // Find any ledger entry created on today's Dubai date for this contract
-    const todayEntry = roiLedgers.find(
-      (l) =>
-        l.referenceKey.includes(`_${dubaiInfo.dateStr}`) ||
-        l.referenceKey.startsWith(`ROI_${contract.id}_${dubaiInfo.dateStr}`) ||
-        l.referenceKey.startsWith(`ROI_CLAIM_${contract.id}_${dubaiInfo.dateStr}`) ||
-        l.referenceKey.startsWith(`ROI_REINVEST_${contract.id}_${dubaiInfo.dateStr}`)
-    );
-    const isTodayProcessed = Boolean(todayEntry);
-
-    // Build the Day-by-Day Ledger Rows strictly containing:
-    // 1. Completed Days
-    // 2. Today's Row (Active / Ready for Action - only if elapsed >= 1)
-    // 3. Upcoming Row(s)
+    // Build the Day-by-Day Ledger Rows:
+    // 1. Completed Days (Claimed or Reinvested by member)
+    // 2. Pending Days (Unlocked upon closing, waiting for user to click Claim/Withdraw or Reinvest)
+    // 3. Upcoming Days (Scheduled future days)
     const rows: Array<{
       day: number;
       balance: number;
@@ -117,7 +111,7 @@ export async function GET(req: NextRequest) {
     // 1. Process all completed days (Day 1 to completedDaysCount)
     for (let dayNum = 1; dayNum <= completedDaysCount; dayNum++) {
       const dayLedger = roiLedgers[dayNum - 1];
-      const isReinvested = dayLedger?.referenceKey.includes("REINVEST");
+      const isReinvested = dayLedger?.referenceKey?.includes("REINVEST");
       const roiAmount =
         dayLedger && Number(dayLedger.amount) > 0
           ? Math.abs(Number(dayLedger.amount))
@@ -131,9 +125,6 @@ export async function GET(req: NextRequest) {
         afterBalance = +(currentBalance - roiAmount).toFixed(4);
       }
 
-      // Is this day the one completed today?
-      const isThisDayToday = isTodayProcessed && dayNum === completedDaysCount;
-
       rows.push({
         day: dayNum,
         balance: currentBalance,
@@ -144,96 +135,88 @@ export async function GET(req: NextRequest) {
         date: dayLedger?.createdAt
           ? new Date(dayLedger.createdAt).toISOString().split("T")[0]
           : `Day ${dayNum}`,
-        isToday: isThisDayToday,
+        isToday: false,
         canAction: false,
       });
 
       currentBalance = afterBalance;
     }
 
-    const max2xCap = +(principalUsdt * 2.0).toFixed(4); // Strict 2X maximum allowable payout
-    const isMatured =
-      contract.daysPaid >= contract.tenureDays ||
-      contract.status === "COMPLETED" ||
-      runningCumPayout >= max2xCap;
+    // 2. Process all unlocked UNCLAIMED days (Day completedDaysCount + 1 to totalUnlockedDays)
+    if (totalUnlockedDays > completedDaysCount) {
+      for (let dayNum = completedDaysCount + 1; dayNum <= totalUnlockedDays; dayNum++) {
+        const remainingTo2X = Math.max(0, +(max2xCap - runningCumPayout).toFixed(4));
+        if (remainingTo2X <= 0) break;
 
-    // 2. Active / Upcoming Rows
-    if (isActivationDay) {
-      // Contract was activated TODAY: Day 1 begins tomorrow at 00:00 GST
-      const remainingTo2X = Math.max(0, +(max2xCap - runningCumPayout).toFixed(4));
-      const day1Roi = Math.min(dailyRoiAmount, remainingTo2X);
-      if (day1Roi > 0) {
-        rows.push({
-          day: 1,
-          balance: currentBalance,
-          roi: day1Roi,
-          action: "UPCOMING",
-          after: Math.max(0, +(currentBalance - day1Roi).toFixed(4)),
-          cumPayout: +(runningCumPayout + day1Roi).toFixed(4),
-          date: "Starts Tomorrow (00:00 GST)",
-          isToday: false,
-          canAction: false,
-        });
-
-        if (contract.tenureDays >= 2 && runningCumPayout + day1Roi < max2xCap) {
-          const day2Balance = Math.max(0, +(currentBalance - day1Roi).toFixed(4));
-          const remForDay2 = Math.max(0, +(max2xCap - (runningCumPayout + day1Roi)).toFixed(4));
-          const day2Roi = Math.min(dailyRoiAmount, remForDay2);
-          if (day2Roi > 0) {
-            rows.push({
-              day: 2,
-              balance: day2Balance,
-              roi: day2Roi,
-              action: "UPCOMING",
-              after: Math.max(0, +(day2Balance - day2Roi).toFixed(4)),
-              cumPayout: +(runningCumPayout + day1Roi + day2Roi).toFixed(4),
-              date: "Upcoming (00:00 GST)",
-              isToday: false,
-              canAction: false,
-            });
-          }
-        }
-      }
-    } else if (!isMatured) {
-      // Calendar day >= 1: contract is eligible for active daily cycle
-      // If today has NOT been claimed or reinvested yet, and daysPaid < maxEligibleDays:
-      const remainingTo2X = Math.max(0, +(max2xCap - runningCumPayout).toFixed(4));
-      if (remainingTo2X > 0) {
         let activeRoi = dailyRoiAmount;
         if (activeRoi > remainingTo2X) {
           activeRoi = remainingTo2X;
         }
 
-        if (completedDaysCount < maxEligibleDays && !isTodayProcessed) {
-          const activeDayNum = completedDaysCount + 1;
-          rows.push({
-            day: activeDayNum,
-            balance: currentBalance,
-            roi: activeRoi,
-            action: "PENDING_ACTION",
-            after: Math.max(0, +(currentBalance - activeRoi).toFixed(4)),
-            cumPayout: +(runningCumPayout + activeRoi).toFixed(4),
-            date: `${dubaiInfo.dateStr} (Today)`,
-            isToday: true,
-            canAction: true,
-          });
+        const afterBalance = Math.max(0, +(currentBalance - activeRoi).toFixed(4));
+        const projectedCum = +(runningCumPayout + activeRoi).toFixed(4);
 
-          currentBalance = Math.max(0, +(currentBalance - activeRoi).toFixed(4));
-          runningCumPayout = +(runningCumPayout + activeRoi).toFixed(4);
-        }
+        rows.push({
+          day: dayNum,
+          balance: currentBalance,
+          roi: activeRoi,
+          action: "PENDING_ACTION",
+          after: afterBalance,
+          cumPayout: projectedCum,
+          date: `Day ${dayNum} (Ready to Claim)`,
+          isToday: dayNum === completedDaysCount + 1,
+          canAction: true,
+        });
 
-        // Next scheduled upcoming day (if tenure permits and 2X not reached)
-        const upcomingDayNum = rows.length + 1;
-        const remainingAfterActive = Math.max(0, +(max2xCap - runningCumPayout).toFixed(4));
-        if (upcomingDayNum <= contract.tenureDays && remainingAfterActive > 0) {
-          const upcomingRoi = Math.min(dailyRoiAmount, remainingAfterActive);
+        currentBalance = afterBalance;
+        runningCumPayout = projectedCum;
+      }
+    }
+
+    const isMatured =
+      contract.daysPaid >= contract.tenureDays ||
+      contract.status === "COMPLETED" ||
+      runningCumPayout >= max2xCap;
+
+    // 3. Process Upcoming Days
+    if (!isMatured) {
+      const startUpcomingDay = Math.max(totalUnlockedDays, completedDaysCount) + 1;
+      const remainingTo2X = Math.max(0, +(max2xCap - runningCumPayout).toFixed(4));
+
+      if (startUpcomingDay <= contract.tenureDays && remainingTo2X > 0) {
+        const up1Roi = Math.min(dailyRoiAmount, remainingTo2X);
+        const up1After = Math.max(0, +(currentBalance - up1Roi).toFixed(4));
+        const up1Cum = +(runningCumPayout + up1Roi).toFixed(4);
+
+        rows.push({
+          day: startUpcomingDay,
+          balance: currentBalance,
+          roi: up1Roi,
+          action: "UPCOMING",
+          after: up1After,
+          cumPayout: up1Cum,
+          date: isActivationDay ? "Starts Tomorrow (00:00 GST)" : "Upcoming (00:00 GST)",
+          isToday: false,
+          canAction: false,
+        });
+
+        currentBalance = up1After;
+        runningCumPayout = up1Cum;
+
+        const nextUpcomingDay = startUpcomingDay + 1;
+        const remForUp2 = Math.max(0, +(max2xCap - runningCumPayout).toFixed(4));
+        if (nextUpcomingDay <= contract.tenureDays && remForUp2 > 0) {
+          const up2Roi = Math.min(dailyRoiAmount, remForUp2);
+          const up2After = Math.max(0, +(currentBalance - up2Roi).toFixed(4));
+          const up2Cum = +(runningCumPayout + up2Roi).toFixed(4);
+
           rows.push({
-            day: upcomingDayNum,
+            day: nextUpcomingDay,
             balance: currentBalance,
-            roi: upcomingRoi,
+            roi: up2Roi,
             action: "UPCOMING",
-            after: Math.max(0, +(currentBalance - upcomingRoi).toFixed(4)),
-            cumPayout: +(runningCumPayout + upcomingRoi).toFixed(4),
+            after: up2After,
+            cumPayout: up2Cum,
             date: "Upcoming (00:00 GST)",
             isToday: false,
             canAction: false,
@@ -241,6 +224,8 @@ export async function GET(req: NextRequest) {
         }
       }
     }
+
+    const pendingDaysCount = Math.max(0, totalUnlockedDays - completedDaysCount);
 
     return NextResponse.json({
       hasActiveContract: true,
@@ -251,12 +236,13 @@ export async function GET(req: NextRequest) {
       dailyRoiAmount,
       tenureDays: contract.tenureDays,
       daysPaid: contract.daysPaid,
+      daysUnlocked: totalUnlockedDays,
+      pendingDaysCount,
       closingTimestamp: targetClosingTimestamp,
       closingGstFormatted: isActivationDay ? "Tomorrow 00:00 GST" : "23:59:59 GST",
       currentGstFormatted: dubaiInfo.currentDubaiFormatted,
       isActivationDay,
       calendarDaysElapsed,
-      isTodayProcessed,
       rows,
     });
   } catch (error: any) {
@@ -274,9 +260,9 @@ export async function POST(req: NextRequest) {
 
     const { contractId, action } = await req.json();
 
-    if (!contractId || !action || (action !== "REINVEST" && action !== "CLAIM")) {
+    if (!contractId || !action || (action !== "REINVEST" && action !== "CLAIM" && action !== "CLAIM_ALL")) {
       return NextResponse.json(
-        { error: "Valid contract ID and action (REINVEST or CLAIM) are required." },
+        { error: "Valid contract ID and action (CLAIM, REINVEST, or CLAIM_ALL) are required." },
         { status: 400 }
       );
     }
@@ -308,14 +294,19 @@ export async function POST(req: NextRequest) {
       ? Math.floor(msSinceStart / (24 * 60 * 60 * 1000)) + 1
       : Math.floor(msSinceStart / (24 * 60 * 60 * 1000));
 
-    if (calendarDaysElapsed === 0) {
+    // Calculate total unlocked days
+    const contractDaysUnlocked = (contract as any).daysUnlocked ?? 0;
+    const totalUnlockedDays = Math.min(
+      contract.tenureDays,
+      Math.max(contractDaysUnlocked, contract.daysPaid, calendarDaysElapsed)
+    );
+
+    if (contract.daysPaid >= totalUnlockedDays) {
       return NextResponse.json(
-        { error: "Daily ROI begins on the next day (00:00 GST) following your stake activation. No yield is available today." },
+        { error: "No pending unlocked cycles to claim or reinvest. Next yield cycle begins at 00:00 GST." },
         { status: 400 }
       );
     }
-
-    const maxEligibleDays = Math.min(calendarDaysElapsed, contract.tenureDays);
 
     const amountUsdtDec = new Decimal(contract.amountInUsdt.toString());
     const rateDec = new Decimal(contract.dailyRoiRate.toString());
@@ -338,7 +329,84 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Exact last ROI capping:
+    // CLAIM_ALL action: Claim all pending cycles at once
+    if (action === "CLAIM_ALL") {
+      const cyclesToClaim = totalUnlockedDays - contract.daysPaid;
+      let totalClaimed = new Decimal(0);
+      let currentEarned = earnedSoFarDec;
+      let currentDaysPaid = contract.daysPaid;
+
+      for (let i = 0; i < cyclesToClaim; i++) {
+        const rem = max2xCapDec.minus(currentEarned);
+        if (rem.lessThanOrEqualTo(0)) break;
+
+        let cycleRoi = standardDailyRoiUsdt;
+        if (cycleRoi.greaterThan(rem)) {
+          cycleRoi = rem;
+        }
+
+        const targetDay = currentDaysPaid + 1;
+        const claimRefKey = `ROI_CLAIM_${contract.id}_Day${targetDay}_${dubaiInfo.dateStr}`;
+
+        const ledgerRes = await executeLedgerTransaction({
+          userId: session.userId,
+          type: "BASIC_ROI",
+          wallet: "INCOME",
+          amount: cycleRoi,
+          referenceKey: claimRefKey,
+          description: `Member Claimed Daily ROI (${rateDec}%) on Contract ${contract.id} (Day ${targetDay}/${contract.tenureDays})`,
+        });
+
+        if (ledgerRes.success) {
+          totalClaimed = totalClaimed.plus(cycleRoi);
+          currentEarned = currentEarned.plus(cycleRoi);
+          currentDaysPaid = targetDay;
+
+          // Distribute 10-level royalties for this claimed daily ROI
+          try {
+            await processLevelIncomeForRoi(
+              session.userId,
+              contract.id,
+              contract.packageType,
+              cycleRoi,
+              `${dubaiInfo.dateStr}_D${targetDay}`
+            );
+          } catch (levelErr) {
+            console.error("Level income distribution error on claim:", levelErr);
+          }
+        }
+      }
+
+      const isMatured = currentDaysPaid >= contract.tenureDays || currentEarned.greaterThanOrEqualTo(max2xCapDec);
+      await db.investmentContract.update({
+        where: { id: contract.id },
+        data: {
+          daysPaid: currentDaysPaid,
+          totalEarned: currentEarned.toFixed(8),
+          lastRoiAt: now,
+          status: isMatured ? "COMPLETED" : "ACTIVE",
+        },
+      });
+
+      await recordActivity({
+        userId: session.userId,
+        action: "ROI_CLAIMED_ALL",
+        category: "FINANCIAL",
+        description: `Claimed all ${cyclesToClaim} pending cycles ($${totalClaimed.toFixed(4)} USDT) into ROI Wallet`,
+        req,
+      });
+
+      return NextResponse.json({
+        success: true,
+        action: "CLAIM_ALL",
+        message: `Successfully claimed $${totalClaimed.toFixed(2)} USDT across ${cyclesToClaim} cycles into your ROI Wallet!`,
+        claimedAmount: totalClaimed.toNumber(),
+        daysPaid: currentDaysPaid,
+      });
+    }
+
+    // Exact single cycle claim/reinvest: targetDay is next pending day
+    const nextDaysPaid = contract.daysPaid + 1;
     let dailyRoiUsdt = standardDailyRoiUsdt;
     let isFinalCapped2x = false;
     if (dailyRoiUsdt.greaterThan(remainingTo2XDec)) {
@@ -346,105 +414,10 @@ export async function POST(req: NextRequest) {
       isFinalCapped2x = true;
     }
 
-    // Check if an action was already taken today
-    const todayRefKey = `ROI_${contract.id}_${dubaiInfo.dateStr}`;
-    const claimRefKey = `ROI_CLAIM_${contract.id}_${dubaiInfo.dateStr}`;
-    const reinvestRefKey = `ROI_REINVEST_${contract.id}_${dubaiInfo.dateStr}`;
-
-    const existingClaim = await db.ledgerEntry.findFirst({
-      where: {
-        userId: session.userId,
-        OR: [{ referenceKey: claimRefKey }, { referenceKey: todayRefKey }],
-      },
-    });
-
-    const existingReinvest = await db.ledgerEntry.findFirst({
-      where: {
-        userId: session.userId,
-        referenceKey: reinvestRefKey,
-      },
-    });
+    const claimRefKey = `ROI_CLAIM_${contract.id}_Day${nextDaysPaid}_${dubaiInfo.dateStr}`;
+    const reinvestRefKey = `ROI_REINVEST_${contract.id}_Day${nextDaysPaid}_${dubaiInfo.dateStr}`;
 
     if (action === "CLAIM") {
-      if (existingClaim) {
-        return NextResponse.json(
-          { error: "Today's daily ROI has already been claimed into your ROI Wallet." },
-          { status: 400 }
-        );
-      }
-
-      // IF USER PREVIOUSLY REINVESTED TODAY, SWITCH FROM REINVEST TO CLAIM:
-      if (existingReinvest) {
-        // 1. Remove the reinvestment ledger entry
-        await db.ledgerEntry.delete({ where: { id: existingReinvest.id } });
-
-        // 2. Revert the principal compounding on the contract
-        const revertedPrincipal = amountUsdtDec.minus(dailyRoiUsdt);
-        await db.investmentContract.update({
-          where: { id: contract.id },
-          data: {
-            amountInUsdt: revertedPrincipal.toFixed(8),
-            amountInInr: revertedPrincipal.toFixed(2),
-          },
-        });
-
-        // 3. Credit dailyRoiUsdt directly to ROI Wallet
-        const ledgerRes = await executeLedgerTransaction({
-          userId: session.userId,
-          type: "BASIC_ROI",
-          wallet: "INCOME",
-          amount: dailyRoiUsdt,
-          referenceKey: claimRefKey,
-          description: isFinalCapped2x
-            ? `Member Claimed Final 2X Capped Daily ROI on Contract ${contract.id} (Exact $${dailyRoiUsdt.toFixed(4)} USDT to complete 2X)`
-            : `Member Claimed Daily ROI (${rateDec}%) on Contract ${contract.id} (Day ${contract.daysPaid}/${contract.tenureDays})`,
-        });
-
-        if (!ledgerRes.success) {
-          return NextResponse.json({ error: "Failed to credit ROI Wallet." }, { status: 500 });
-        }
-
-        // 4. Distribute Level Royalties for claimed ROI
-        try {
-          await processLevelIncomeForRoi(
-            session.userId,
-            contract.id,
-            contract.packageType,
-            dailyRoiUsdt,
-            dubaiInfo.dateStr
-          );
-        } catch (levelErr) {
-          console.error("Level income distribution error on claim switch:", levelErr);
-        }
-
-        await recordActivity({
-          userId: session.userId,
-          action: "ROI_CLAIMED",
-          category: "FINANCIAL",
-          description: `Switched today's ROI to Claim: Credited $${dailyRoiUsdt.toFixed(4)} USDT into ROI Wallet (Day ${contract.daysPaid})`,
-          req,
-        });
-
-        return NextResponse.json({
-          success: true,
-          action: "CLAIM",
-          message: `Successfully claimed $${dailyRoiUsdt.toFixed(2)} USDT into your ROI Wallet!`,
-          claimedAmount: dailyRoiUsdt.toNumber(),
-          daysPaid: contract.daysPaid,
-        });
-      }
-
-      // Normal first claim today:
-      if (contract.daysPaid >= maxEligibleDays) {
-        return NextResponse.json(
-          { error: "Today's daily ROI cycle has already been completed. Next cycle begins at 00:00 GST." },
-          { status: 400 }
-        );
-      }
-
-      const nextDaysPaid = contract.daysPaid + 1;
-      const isMatured = isFinalCapped2x || nextDaysPaid >= contract.tenureDays;
-
       // 1. Credit ROI directly to member's Available / ROI Wallet
       const ledgerRes = await executeLedgerTransaction({
         userId: session.userId,
@@ -458,28 +431,31 @@ export async function POST(req: NextRequest) {
       });
 
       if (!ledgerRes.success) {
-        return NextResponse.json({ error: "Failed to claim today's ROI." }, { status: 500 });
+        return NextResponse.json({ error: "Failed to claim today's ROI into your wallet." }, { status: 500 });
       }
+
+      const newEarned = earnedSoFarDec.plus(dailyRoiUsdt);
+      const isMatured = isFinalCapped2x || nextDaysPaid >= contract.tenureDays || newEarned.greaterThanOrEqualTo(max2xCapDec);
 
       // Update contract progress
       await db.investmentContract.update({
         where: { id: contract.id },
         data: {
           daysPaid: nextDaysPaid,
-          totalEarned: new Decimal(contract.totalEarned.toString()).plus(dailyRoiUsdt).toFixed(8),
+          totalEarned: newEarned.toFixed(8),
           lastRoiAt: now,
           status: isMatured ? "COMPLETED" : "ACTIVE",
         },
       });
 
-      // Distribute Level Royalties for claimed ROI
+      // 2. Distribute 10-level royalties for this claimed daily ROI
       try {
         await processLevelIncomeForRoi(
           session.userId,
           contract.id,
           contract.packageType,
           dailyRoiUsdt,
-          dubaiInfo.dateStr
+          `${dubaiInfo.dateStr}_D${nextDaysPaid}`
         );
       } catch (levelErr) {
         console.error("Level income processing error on manual claim:", levelErr);
@@ -502,30 +478,11 @@ export async function POST(req: NextRequest) {
       });
     } else {
       // action === "REINVEST"
-      if (existingReinvest) {
-        return NextResponse.json(
-          { error: "Today's daily ROI is already reinvested and compounded." },
-          { status: 400 }
-        );
-      }
-      if (existingClaim) {
-        return NextResponse.json(
-          { error: "Today's daily ROI was already claimed into your ROI Wallet." },
-          { status: 400 }
-        );
-      }
-      if (contract.daysPaid >= maxEligibleDays) {
-        return NextResponse.json(
-          { error: "Today's daily ROI cycle has already been completed. Next cycle begins at 00:00 GST." },
-          { status: 400 }
-        );
-      }
-
-      const nextDaysPaid = contract.daysPaid + 1;
       const newPrincipal = amountUsdtDec.plus(dailyRoiUsdt);
+      const newEarned = earnedSoFarDec.plus(dailyRoiUsdt);
       const isMatured = isFinalCapped2x || nextDaysPaid >= contract.tenureDays;
 
-      // Create tracking ledger entry for reinvestment with the exact ROI amount
+      // Create tracking ledger entry for reinvestment
       await db.ledgerEntry.create({
         data: {
           userId: session.userId,
@@ -546,7 +503,7 @@ export async function POST(req: NextRequest) {
           amountInUsdt: newPrincipal.toFixed(8),
           amountInInr: newPrincipal.toFixed(2),
           daysPaid: nextDaysPaid,
-          totalEarned: new Decimal(contract.totalEarned.toString()).plus(dailyRoiUsdt).toFixed(8),
+          totalEarned: newEarned.toFixed(8),
           lastRoiAt: now,
           status: isMatured ? "COMPLETED" : "ACTIVE",
         },

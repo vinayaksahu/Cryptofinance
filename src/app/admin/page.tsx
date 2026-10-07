@@ -83,8 +83,8 @@ export default function AdminPage() {
       } else {
         setCronMsg(
           force
-            ? `⚡ Manual Closing Executed! Distributed $${data.summary?.totalDistributedUsdt || 0} USDT across ${data.summary?.processedCount || 0} contracts. ROI & 10-level Royalties credited immediately.`
-            : `✓ ROI Cycle executed successfully! Distributed $${data.summary?.totalDistributedUsdt || 0} USDT across ${data.summary?.processedCount || 0} contracts.`
+            ? `⚡ Manual Closing Executed! Unlocked daily yield across ${data.summary?.processedCount || 0} contracts ($${data.summary?.totalDistributedUsdt || 0} USDT). Available for members to Claim / Withdraw or Reinvest.`
+            : `✓ ROI Cycle executed successfully! Unlocked yield across ${data.summary?.processedCount || 0} contracts ($${data.summary?.totalDistributedUsdt || 0} USDT).`
         );
       }
       loadData();

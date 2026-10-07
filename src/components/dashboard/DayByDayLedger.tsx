@@ -46,11 +46,13 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
     currentGstFormatted?: string;
     isActivationDay?: boolean;
     calendarDaysElapsed?: number;
+    daysUnlocked?: number;
+    pendingDaysCount?: number;
     isTodayProcessed?: boolean;
     rows?: LedgerRow[];
   } | null>(null);
 
-  const [selectedAction, setSelectedAction] = useState<"REINVEST" | "CLAIM">("REINVEST");
+  const [selectedAction, setSelectedAction] = useState<"REINVEST" | "CLAIM" | "CLAIM_ALL">("CLAIM");
   const [actionMessage, setActionMessage] = useState<{ text: string; error?: boolean } | null>(null);
 
   // Live Countdown State
@@ -117,7 +119,7 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
   }, [data?.closingTimestamp]);
 
   // Execute Reinvest or Claim
-  const handleExecuteAction = async (action: "REINVEST" | "CLAIM") => {
+  const handleExecuteAction = async (action: "REINVEST" | "CLAIM" | "CLAIM_ALL") => {
     if (!data?.contractId) return;
 
     setActionLoading(true);
@@ -204,6 +206,19 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
         </div>
 
         <div className="flex items-center gap-2 self-start sm:self-auto">
+          {data?.pendingDaysCount && data.pendingDaysCount > 1 ? (
+            <button
+              type="button"
+              disabled={actionLoading}
+              onClick={() => handleExecuteAction("CLAIM_ALL")}
+              className="px-3.5 py-1.5 rounded-xl bg-sky-500 hover:bg-sky-400 text-slate-950 text-xs font-black flex items-center gap-1.5 transition-all shadow-md shadow-sky-500/25 active:scale-95 cursor-pointer disabled:opacity-50"
+              title="Claim all pending unlocked cycles to ROI Wallet at once"
+            >
+              <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+              <span>Claim All ({data.pendingDaysCount} Cycles)</span>
+            </button>
+          ) : null}
+
           <button
             type="button"
             onClick={fetchLedger}
@@ -224,7 +239,7 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
         </div>
       </div>
 
-      {/* Auto-Claim Closing Countdown Banner (GST Time) */}
+      {/* Cycle Closing Countdown Banner (GST Time) */}
       <div className="rounded-2xl p-4 bg-muted/40 border border-border flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs">
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-xl bg-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
@@ -239,14 +254,14 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
               <span className="font-bold text-foreground uppercase tracking-wider text-[11px]">
                 {data?.isActivationDay
                   ? "Stake Activation Period (Day 0) • 0% ROI Today"
-                  : "Auto-Claim Closing Countdown (GST)"}
+                  : "Daily Yield Cycle Countdown (GST)"}
               </span>
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
             </div>
             <p className="text-[11px] text-muted-foreground mt-0.5">
               {data?.isActivationDay
                 ? "Your stake is active! Day 1 yield cycle begins tomorrow at 00:00 GST (Dubai Midnight). Today is the activation period, so zero ROI is deducted or claimed today."
-                : "Daily closing occurs at 23:59:59 GST (Dubai Midnight). Unclaimed returns automatically auto-claim to your ROI Wallet!"}
+                : "Daily yield cycles unlock at 00:00 GST upon closing. Click Claim / Withdraw to transfer into your ROI Wallet or Reinvest to compound into your active stake pool!"}
             </p>
           </div>
         </div>
@@ -254,7 +269,7 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
         {/* Big Countdown Pill */}
         <div className="flex flex-col items-start md:items-end gap-1">
           <span className="text-[9px] text-muted-foreground uppercase tracking-widest">
-            {data?.isActivationDay ? "Day 1 Starts In" : "Auto-Claim In"}
+            {data?.isActivationDay ? "Day 1 Starts In" : "Next Cycle In"}
           </span>
           <div className="flex items-center gap-1 self-start md:self-auto bg-card px-4 py-2 rounded-2xl border border-border shadow-sm">
             <div className="text-center px-1">
@@ -386,14 +401,14 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
                       )}
 
                       {row.action === "PENDING_ACTION" && (
-                        <div className="inline-flex items-center gap-1.5 p-1 rounded-full bg-muted/50 border border-border">
-                          {/* Segmented 1-button toggle interface */}
+                        <div className="inline-flex items-center gap-1.5 p-1 rounded-full bg-muted/60 border border-border">
+                          {/* Segmented Claim/Withdraw & Reinvest interface */}
                           <button
                             type="button"
                             disabled={actionLoading}
                             onClick={() => handleExecuteAction("REINVEST")}
-                            className="px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold transition-all flex items-center gap-1 active:scale-95 disabled:opacity-50 cursor-pointer shadow-sm"
-                            title="Compound today's returns into your active 2X stake pool"
+                            className="px-3 py-1 rounded-full bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 text-xs font-bold transition-all flex items-center gap-1 active:scale-95 disabled:opacity-50 cursor-pointer"
+                            title="Compound this cycle's yield into your active 2X stake pool"
                           >
                             <RefreshCw className={`w-3 h-3 ${actionLoading ? "animate-spin" : ""}`} />
                             <span>Reinvest</span>
@@ -403,11 +418,11 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
                             type="button"
                             disabled={actionLoading}
                             onClick={() => handleExecuteAction("CLAIM")}
-                            className="px-3 py-1 rounded-full bg-sky-500/10 hover:bg-sky-500/20 text-sky-500 border border-sky-500/30 text-xs font-bold transition-all flex items-center gap-1 active:scale-95 disabled:opacity-50 cursor-pointer"
-                            title="Instantly credit today's ROI to your ROI Wallet"
+                            className="px-3.5 py-1 rounded-full bg-sky-500 hover:bg-sky-400 text-slate-950 text-xs font-black transition-all flex items-center gap-1 active:scale-95 disabled:opacity-50 cursor-pointer shadow-md shadow-sky-500/25"
+                            title="Instantly claim & credit this cycle's yield into your ROI Wallet"
                           >
-                            <ArrowUpRight className="w-3 h-3" />
-                            <span>Claim</span>
+                            <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
+                            <span>Claim / Withdraw</span>
                           </button>
                         </div>
                       )}
@@ -441,14 +456,14 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
         </table>
       </div>
 
-      {/* Auto-Claim Rule Note */}
+      {/* Yield Allocation Engine Rule Note */}
       <div className="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-[11px] text-slate-500 dark:text-slate-400 border-t border-slate-200/80 dark:border-white/10">
         <div className="flex items-center gap-1.5">
           <HelpCircle className="w-3.5 h-3.5 text-[#00D2FF]" />
           <span>
             {data?.isActivationDay
-              ? "Stake activated today. Daily 2% yield and Reinvest/Claim actions will unlock starting tomorrow at 00:00 GST."
-              : "If not manually reinvested, today's return will auto-credit to ROI Wallet at 23:59 GST."}
+              ? "Stake activated today. Daily 2% yield cycles unlock upon daily closing."
+              : "Returns unlock upon daily protocol closing. Click 'Claim / Withdraw' to credit your ROI Wallet, or 'Reinvest' to compound."}
           </span>
         </div>
         <span className="text-slate-500">2X Contract Allocation Engine &bull; Slide 10-12</span>

@@ -112,6 +112,7 @@ model InvestmentContract {
   dailyRoiRate   Decimal        @db.Decimal(5, 2) // 5.0 for Basic, 10.0 or 15.0 for FD
   tenureDays     Int            // 25 for Basic, 180 or 210 for FD
   daysPaid       Int            @default(0)
+  daysUnlocked   Int            @default(0)
   totalEarned    Decimal        @default(0.0) @db.Decimal(20, 8)
   status         ContractStatus @default(ACTIVE)
   startDate      DateTime       @default(now())

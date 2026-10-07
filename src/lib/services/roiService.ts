@@ -109,9 +109,8 @@ export async function executeDailyRoiDistribution(adminId?: string, forceManual:
 
     // Dubai calendar day calculation:
     // 1. Launch Date Contracts (<= 2026-09-21): Started Day 1 on launch day.
-    //    Their 28-day schedule continues uninterrupted (Day 2 on 22/09, Day 3 on 23/09, etc.).
     // 2. New Contracts (>= 2026-09-22): Zero ROI on activation day.
-    //    Day 1 ROI is credited only AFTER activation day closes at 12:00 AM GST (next day).
+    //    Day 1 ROI unlocks only AFTER activation day closes at 12:00 AM GST (next day).
     const createdInfo = getDubaiTimeInfo(new Date(contract.createdAt));
     const msDiff = Math.max(0, nowInfo.startOfDayMs - createdInfo.startOfDayMs);
     const isLaunchDateContract = createdInfo.dateStr <= "2026-09-21";
@@ -119,145 +118,34 @@ export async function executeDailyRoiDistribution(adminId?: string, forceManual:
       ? Math.floor(msDiff / (1000 * 60 * 60 * 24)) + 1
       : Math.floor(msDiff / (1000 * 60 * 60 * 24));
 
-    // Eligible days strictly capped at tenureDays
-    const eligibleDaysTotal = Math.min(calendarDaysElapsed, contract.tenureDays);
-    const daysToPay = Math.max(0, eligibleDaysTotal - contract.daysPaid);
+    // Calculate how many cycles to unlock for this contract
+    const currentUnlocked = (contract as any).daysUnlocked ?? 0;
+    let newDaysUnlocked = currentUnlocked;
 
-    // In forceManual mode, if daysToPay <= 0, we still grant 1 manual cycle (if contract is active and not matured)
-    let cyclesToPay = daysToPay;
-    if (forceManual && cyclesToPay <= 0) {
-      if (contract.daysPaid < contract.tenureDays) {
-        cyclesToPay = 1;
-      }
-    }
-    // Strict cap at remaining tenure
-    cyclesToPay = Math.min(cyclesToPay, contract.tenureDays - contract.daysPaid);
-
-    if (cyclesToPay <= 0) {
-      continue;
+    if (forceManual) {
+      newDaysUnlocked = Math.min(contract.tenureDays, Math.max(currentUnlocked, contract.daysPaid) + 1);
+    } else {
+      const eligibleDaysTotal = Math.min(calendarDaysElapsed, contract.tenureDays);
+      newDaysUnlocked = Math.min(contract.tenureDays, Math.max(currentUnlocked, eligibleDaysTotal));
     }
 
-    const amountUsdtDec = new Decimal(contract.amountInUsdt.toString());
-    const rateDec = new Decimal(contract.dailyRoiRate.toString());
-    const standardDailyRoiUsdt = amountUsdtDec.times(rateDec.dividedBy(100));
+    if (newDaysUnlocked > currentUnlocked) {
+      const additionalCycles = newDaysUnlocked - currentUnlocked;
+      const amountUsdtDec = new Decimal(contract.amountInUsdt.toString());
+      const rateDec = new Decimal(contract.dailyRoiRate.toString());
+      const standardDailyRoiUsdt = amountUsdtDec.times(rateDec.dividedBy(100));
+      const unlockedRoiAmount = standardDailyRoiUsdt.times(additionalCycles);
 
-    // Strict 2X Cap rule: Maximum lifetime earnings cannot exceed 2X of initial principal stake
-    const initialStakeDec = amountUsdtDec; // or initial stake
-    const max2xCapDec = initialStakeDec.times(2.0);
-
-    const isBasic = contract.packageType === "BASIC_SAVING";
-    const targetWallet = isBasic ? "INCOME" : "FD_LOCKED";
-    const transactionType = isBasic ? "BASIC_ROI" : "FD_ROI";
-
-    let contractDaysPaid = contract.daysPaid;
-    let contractTotalEarned = new Decimal(contract.totalEarned.toString());
-    let hit2xCap = false;
-
-    // Process each cycle
-    for (let i = 0; i < cyclesToPay; i++) {
-      const remainingTo2X = max2xCapDec.minus(contractTotalEarned);
-      if (remainingTo2X.lessThanOrEqualTo(0)) {
-        hit2xCap = true;
-        break;
-      }
-
-      // If standard daily ROI exceeds the remaining distance to 2X, pay EXACT remaining difference
-      let actualRoiToPay = standardDailyRoiUsdt;
-      let isFinalExactCapped = false;
-      if (actualRoiToPay.greaterThan(remainingTo2X)) {
-        actualRoiToPay = remainingTo2X;
-        isFinalExactCapped = true;
-      }
-
-      const currentDayNumber = contractDaysPaid + 1;
-      const dayOffsetMs = isLaunchDateContract
-        ? (currentDayNumber - 1) * 24 * 60 * 60 * 1000
-        : currentDayNumber * 24 * 60 * 60 * 1000;
-      const targetDate = new Date(createdInfo.startOfDayMs + dayOffsetMs + 4 * 60 * 60 * 1000);
-      const targetDateStr = `${targetDate.getUTCFullYear()}-${String(targetDate.getUTCMonth() + 1).padStart(2, "0")}-${String(targetDate.getUTCDate()).padStart(2, "0")}`;
-
-      const manualRunId = forceManual ? `${Date.now()}_${Math.random().toString(36).substring(2, 7)}` : undefined;
-      const referenceKey = manualRunId
-        ? `ROI_${contract.id}_M_${targetDateStr}_${manualRunId}`
-        : `ROI_${contract.id}_${targetDateStr}`;
-
-      const ledgerResult = await executeLedgerTransaction({
-        userId: contract.userId,
-        type: transactionType,
-        wallet: targetWallet,
-        amount: actualRoiToPay,
-        referenceKey,
-        description: isFinalExactCapped
-          ? `${isBasic ? "Basic" : "FD"} Final 2X Capped Daily ROI on Contract ${contract.id} (Exact $${actualRoiToPay.toFixed(4)} USDT to complete 2X)`
-          : forceManual
-          ? `${isBasic ? "Basic" : "FD"} Manual Closing Daily ROI (${rateDec}%) on Contract ${contract.id} (Day ${currentDayNumber}/${contract.tenureDays})`
-          : `${isBasic ? "Basic" : "FD"} Daily ROI (${rateDec}%) on Contract ${contract.id} (Day ${currentDayNumber}/${contract.tenureDays})`,
+      await db.investmentContract.update({
+        where: { id: contract.id },
+        data: {
+          daysUnlocked: newDaysUnlocked,
+          lastRoiAt: now,
+        },
       });
 
-      if (ledgerResult.success) {
-        contractDaysPaid = currentDayNumber;
-        contractTotalEarned = contractTotalEarned.plus(actualRoiToPay);
-
-        // Distribute 10-level royalties for this daily ROI
-        try {
-          await processLevelIncomeForRoi(
-            contract.userId,
-            contract.id,
-            contract.packageType,
-            actualRoiToPay,
-            targetDateStr,
-            manualRunId
-          );
-        } catch (levelErr) {
-          console.error("Level income distribution error:", levelErr);
-        }
-
-        totalDistributedUsdt = totalDistributedUsdt.plus(actualRoiToPay);
-      } else if (ledgerResult.alreadyProcessed) {
-        contractDaysPaid = currentDayNumber;
-      }
-
-      if (isFinalExactCapped || contractTotalEarned.greaterThanOrEqualTo(max2xCapDec)) {
-        hit2xCap = true;
-        break;
-      }
-    }
-
-    const isMatured = hit2xCap || contractDaysPaid >= contract.tenureDays;
-
-    await db.investmentContract.update({
-      where: { id: contract.id },
-      data: {
-        daysPaid: contractDaysPaid,
-        totalEarned: contractTotalEarned.toFixed(8),
-        lastRoiAt: now,
-        status: isMatured ? "COMPLETED" : "ACTIVE",
-      },
-    });
-
-    // If FD contract matured, release locked funds into Available Income wallet
-    if (!isBasic && isMatured) {
-      const releaseRefKey = `FD_MATURITY_RELEASE_${contract.id}`;
-      await executeLedgerTransaction({
-        userId: contract.userId,
-        type: "FD_ROI",
-        wallet: "FD_LOCKED",
-        amount: contractTotalEarned.negated(),
-        referenceKey: `${releaseRefKey}_DEBIT`,
-        description: `Maturity release of FD Contract ${contract.id}`,
-      });
-      await executeLedgerTransaction({
-        userId: contract.userId,
-        type: "FD_ROI",
-        wallet: "INCOME",
-        amount: contractTotalEarned,
-        referenceKey: `${releaseRefKey}_CREDIT`,
-        description: `Matured FD Earnings Released to Available Balance (Contract ${contract.id})`,
-      });
-    }
-
-    if (contractDaysPaid > contract.daysPaid) {
       processedCount++;
+      totalDistributedUsdt = totalDistributedUsdt.plus(unlockedRoiAmount);
     }
   }
 
