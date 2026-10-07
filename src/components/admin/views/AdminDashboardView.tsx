@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Play, Users, Wallet, Banknote, Zap, Activity, Ticket, ArrowUpRight, ShieldCheck, Sparkles, CheckCircle2, Landmark, Clock, Calendar, ChevronDown, ChevronUp, Search, Layers } from "lucide-react";
+import { Play, Users, Wallet, Banknote, Zap, Activity, Ticket, ArrowUpRight, ArrowDownLeft, TrendingUp, Coins, ShieldCheck, Sparkles, CheckCircle2, Landmark, Clock, Calendar, ChevronDown, ChevronUp, Search, Layers } from "lucide-react";
 import { formatUsdt } from "@/lib/utils";
 
 interface AdminDashboardViewProps {
@@ -62,18 +62,107 @@ export function AdminDashboardView({
         </div>
       </div>
 
-      {/* Stats row - 6 High-Impact Glass Metric Cards */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
-        {/* Total Members */}
+      {/* Primary Financial Overview - 4 Big Executive Metric Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* 1. Total Business Volume / Turnover */}
+        <div className="glass-card-elevated p-5 relative overflow-hidden group hover:border-amber-400/50 transition-all">
+          <div className="flex items-center justify-between text-amber-500 mb-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider">Total Business Volume</span>
+            <div className="w-8 h-8 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-500 group-hover:scale-110 transition-transform">
+              <TrendingUp className="w-4 h-4" />
+            </div>
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-1 truncate" title={formatUsdt(safeStats.totalBusinessVolumeUsdt || 0)}>
+            {formatUsdt(safeStats.totalBusinessVolumeUsdt || 0)}
+          </h3>
+          <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200/60 dark:border-white/5 mt-2">
+            <span>Active Stakes: <strong className="text-emerald-500">{formatUsdt(safeStats.activeStakesVolumeUsdt || 0)}</strong></span>
+            <span className="text-[11px] text-slate-400">({safeStats.activeContracts || 0} active)</span>
+          </div>
+        </div>
+
+        {/* 2. Total Approved Deposits */}
+        <div 
+          onClick={() => setActiveTab?.("deposits")}
+          className="glass-card-elevated p-5 relative overflow-hidden group cursor-pointer hover:border-sky-400/50 transition-all"
+        >
+          <div className="flex items-center justify-between text-sky-500 mb-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider">Total Deposits</span>
+            <div className="w-8 h-8 rounded-xl bg-sky-500/10 border border-sky-400/20 flex items-center justify-center text-sky-500 group-hover:scale-110 transition-transform">
+              <ArrowDownLeft className="w-4 h-4" />
+            </div>
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-black text-sky-600 dark:text-sky-400 tracking-tight mb-1 truncate" title={formatUsdt(safeStats.totalApprovedDepositsUsdt || 0)}>
+            {formatUsdt(safeStats.totalApprovedDepositsUsdt || 0)}
+          </h3>
+          <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200/60 dark:border-white/5 mt-2">
+            <span>Approved: <strong className="text-sky-600 dark:text-sky-400">{safeStats.totalDepositsCount || 0} txns</strong></span>
+            {Number(safeStats.pendingDeposits || 0) > 0 ? (
+              <span className="px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-500 font-bold text-[10px] animate-pulse">
+                {safeStats.pendingDeposits} Pending &rarr;
+              </span>
+            ) : (
+              <span className="text-[11px] text-slate-400">Manage &rarr;</span>
+            )}
+          </div>
+        </div>
+
+        {/* 3. Total Processed Withdrawals */}
+        <div 
+          onClick={() => setActiveTab?.("withdrawals")}
+          className="glass-card-elevated p-5 relative overflow-hidden group cursor-pointer hover:border-rose-400/50 transition-all"
+        >
+          <div className="flex items-center justify-between text-rose-500 mb-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider">Total Withdrawals</span>
+            <div className="w-8 h-8 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-500 group-hover:scale-110 transition-transform">
+              <ArrowUpRight className="w-4 h-4" />
+            </div>
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-black text-rose-600 dark:text-rose-400 tracking-tight mb-1 truncate" title={formatUsdt(safeStats.totalProcessedWithdrawalsUsdt || 0)}>
+            {formatUsdt(safeStats.totalProcessedWithdrawalsUsdt || 0)}
+          </h3>
+          <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200/60 dark:border-white/5 mt-2">
+            <span>Net Dispatched: <strong className="text-emerald-500">{formatUsdt(safeStats.totalNetDispatchedUsdt || 0)}</strong></span>
+            {Number(safeStats.pendingWithdrawals || 0) > 0 ? (
+              <span className="px-2 py-0.5 rounded-full bg-rose-500/15 text-rose-500 font-bold text-[10px] animate-pulse">
+                {safeStats.pendingWithdrawals} Pending &rarr;
+              </span>
+            ) : (
+              <span className="text-[11px] text-slate-400">Manage &rarr;</span>
+            )}
+          </div>
+        </div>
+
+        {/* 4. Total Member Income Distributed */}
+        <div className="glass-card-elevated p-5 relative overflow-hidden group hover:border-emerald-400/50 transition-all">
+          <div className="flex items-center justify-between text-emerald-500 mb-2">
+            <span className="text-[11px] font-bold uppercase tracking-wider">Distributed Income</span>
+            <div className="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-500 group-hover:scale-110 transition-transform">
+              <Coins className="w-4 h-4" />
+            </div>
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight mb-1 truncate" title={formatUsdt(safeStats.totalMemberIncomeDistributedUsdt || 0)}>
+            {formatUsdt(safeStats.totalMemberIncomeDistributedUsdt || 0)}
+          </h3>
+          <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400 pt-2 border-t border-slate-200/60 dark:border-white/5 mt-2">
+            <span>ROI: <strong className="text-slate-700 dark:text-slate-200">{formatUsdt(safeStats.totalRoiIncomeDistributed || 0)}</strong></span>
+            <span>Ref+Team: <strong className="text-slate-700 dark:text-slate-200">{formatUsdt((safeStats.totalDirectReferralIncome || 0) + (safeStats.totalLevelIncomeDistributed || 0))}</strong></span>
+          </div>
+        </div>
+      </div>
+
+      {/* Secondary Quick Metrics Row - 4 Cards */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+        {/* Members */}
         <div 
           onClick={() => setActiveTab?.("users")}
-          className="glass-card-elevated p-4 sm:p-5 group cursor-pointer flex flex-col justify-between"
+          className="glass-card-elevated p-4 group cursor-pointer flex flex-col justify-between hover:border-sky-400/50 transition-all"
         >
           <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
             <span className="text-[10px] font-bold uppercase tracking-widest">MEMBERS</span>
-            <Users className="w-4 h-4 text-sky-500 dark:text-sky-400 group-hover:scale-110 transition-transform" />
+            <Users className="w-4 h-4 text-sky-500 group-hover:scale-110 transition-transform" />
           </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white tracking-tight mb-1">
+          <h3 className="text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-1">
             {safeStats.totalUsers || 0}
           </h3>
           <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400">
@@ -81,74 +170,53 @@ export function AdminDashboardView({
             <span><strong className="text-emerald-600 dark:text-emerald-400">{safeStats.activeUsers || 0}</strong> active</span>
           </div>
         </div>
-        
-        {/* Active Contracts */}
-        <div className="glass-card-elevated p-4 sm:p-5 flex flex-col justify-between">
-          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest">STAKES</span>
-            <ShieldCheck className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
-          </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight mb-1">
-            {safeStats.activeContracts || 0}
-          </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">2X Pool Target</p>
-        </div>
 
-        {/* Pending Deposits */}
-        <div 
-          onClick={() => setActiveTab?.("deposits")}
-          className="glass-card-elevated p-4 sm:p-5 group cursor-pointer flex flex-col justify-between hover:border-sky-400/50"
-        >
-          <div className="flex items-center justify-between text-sky-600 dark:text-sky-400 mb-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest">DEPOSITS</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-sky-600 dark:text-sky-400 tracking-tight mb-1">
-            {safeStats.pendingDeposits || 0}
-          </h3>
-          <p className="text-xs text-sky-600 dark:text-sky-400/80 font-semibold">Review &rarr;</p>
-        </div>
-
-        {/* Pending Withdrawals */}
-        <div 
-          onClick={() => setActiveTab?.("withdrawals")}
-          className="glass-card-elevated p-4 sm:p-5 group cursor-pointer flex flex-col justify-between hover:border-rose-400/50"
-        >
-          <div className="flex items-center justify-between text-rose-600 dark:text-rose-400 mb-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest">PAYOUTS</span>
-            <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-          </div>
-          <h3 className="text-2xl sm:text-3xl font-black text-rose-600 dark:text-rose-400 tracking-tight mb-1">
-            {safeStats.pendingWithdrawals || 0}
-          </h3>
-          <p className="text-xs text-rose-600 dark:text-rose-400/80 font-semibold">Process &rarr;</p>
-        </div>
-
-        {/* Admin Fee Income (10%) */}
+        {/* Protocol Fee (10% on Withdrawals) */}
         <div 
           onClick={() => setActiveTab?.("admin-income")}
-          className="glass-card-elevated p-4 sm:p-5 group cursor-pointer flex flex-col justify-between hover:border-indigo-400/50"
+          className="glass-card-elevated p-4 group cursor-pointer flex flex-col justify-between hover:border-indigo-400/50 transition-all"
         >
           <div className="flex items-center justify-between text-indigo-600 dark:text-indigo-400 mb-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest">PROTOCOL FEE</span>
+            <span className="text-[10px] font-bold uppercase tracking-widest">10% ADMIN FEE</span>
             <Landmark className="w-4 h-4 group-hover:scale-110 transition-transform" />
           </div>
           <h3 className="text-xl sm:text-2xl font-black text-slate-900 dark:text-white tracking-tight mb-1 truncate" title={formatUsdt(safeStats.adminFeeIncomeUsdt || 0)}>
             {formatUsdt(safeStats.adminFeeIncomeUsdt || 0)}
           </h3>
-          <p className="text-xs text-indigo-600 dark:text-indigo-300 font-semibold">10% Platform &rarr;</p>
+          <div className="flex items-center justify-between text-xs text-indigo-600 dark:text-indigo-300">
+            <span>Revenue</span>
+            <span>Ledger &rarr;</span>
+          </div>
         </div>
 
-        {/* Total Approved USDT */}
-        <div className="glass-card-elevated p-4 sm:p-5 flex flex-col justify-between hover:border-emerald-400/50">
-          <div className="flex items-center justify-between text-emerald-600 dark:text-emerald-400 mb-2">
-            <span className="text-[10px] font-bold uppercase tracking-widest">LIQUIDITY</span>
-            <Wallet className="w-4 h-4" />
+        {/* Active Stakes */}
+        <div className="glass-card-elevated p-4 flex flex-col justify-between">
+          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest">ACTIVE STAKES</span>
+            <ShieldCheck className="w-4 h-4 text-emerald-500" />
           </div>
-          <h3 className="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight mb-1 truncate" title={formatUsdt(safeStats.totalApprovedDepositsUsdt || 0)}>
-            {formatUsdt(safeStats.totalApprovedDepositsUsdt || 0)}
+          <h3 className="text-2xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight mb-1">
+            {safeStats.activeContracts || 0}
           </h3>
-          <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">Approved Pool</p>
+          <p className="text-xs text-slate-500 dark:text-slate-400 font-medium">{formatUsdt(safeStats.activeStakesVolumeUsdt || 0)} live pool</p>
+        </div>
+
+        {/* Net Dispatched Payouts */}
+        <div 
+          onClick={() => setActiveTab?.("withdrawals")}
+          className="glass-card-elevated p-4 group cursor-pointer flex flex-col justify-between hover:border-emerald-400/50 transition-all"
+        >
+          <div className="flex items-center justify-between text-emerald-600 dark:text-emerald-400 mb-2">
+            <span className="text-[10px] font-bold uppercase tracking-widest">DISPATCHED NET</span>
+            <Wallet className="w-4 h-4 group-hover:scale-110 transition-transform" />
+          </div>
+          <h3 className="text-xl sm:text-2xl font-black text-emerald-600 dark:text-emerald-400 tracking-tight mb-1 truncate" title={formatUsdt(safeStats.totalNetDispatchedUsdt || 0)}>
+            {formatUsdt(safeStats.totalNetDispatchedUsdt || 0)}
+          </h3>
+          <div className="flex items-center justify-between text-xs text-slate-500 dark:text-slate-400">
+            <span>Paid to members</span>
+            <span>View &rarr;</span>
+          </div>
         </div>
       </div>
 

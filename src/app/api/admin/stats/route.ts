@@ -18,17 +18,52 @@ export async function GET() {
     ],
   };
 
-  const [totalUsers, activeUsers, pendingDeposits, pendingWithdrawals, activeContracts] = await Promise.all([
+  const [
+    totalUsers,
+    activeUsers,
+    pendingDeposits,
+    pendingWithdrawals,
+    activeContracts,
+    totalContracts,
+    contractsAgg,
+    activeContractsAgg,
+    ledgerIncomeAgg,
+  ] = await Promise.all([
     db.user.count({ where: userFilter }),
     db.user.count({ where: { ...userFilter, status: "ACTIVE" } }),
     db.depositRequest.count({ where: { status: "PENDING", ...userRelationFilter } }),
     db.withdrawalRequest.count({ where: { status: "PENDING", ...userRelationFilter } }),
     db.investmentContract.count({ where: { status: "ACTIVE", ...userRelationFilter } }),
+    db.investmentContract.count({ where: userRelationFilter }),
+    db.investmentContract.aggregate({
+      where: userRelationFilter,
+      _sum: { amountInUsdt: true, totalEarned: true },
+    }),
+    db.investmentContract.aggregate({
+      where: { status: "ACTIVE", ...userRelationFilter },
+      _sum: { amountInUsdt: true },
+    }),
+    db.ledgerEntry.groupBy({
+      by: ["type"],
+      where: {
+        type: { in: ["BASIC_ROI", "FD_ROI", "DIRECT_REFERRAL", "BASIC_LEVEL_INCOME", "FD_LEVEL_INCOME", "SIGNUP_BONUS"] },
+        user: { adminId },
+      },
+      _sum: { amount: true },
+    }),
   ]);
 
   const depositsAgg = await db.depositRequest.aggregate({
     where: { status: "APPROVED", ...userRelationFilter },
     _sum: { amountInUsdt: true },
+  });
+
+  const totalDepositsCount = await db.depositRequest.count({
+    where: { status: "APPROVED", ...userRelationFilter },
+  });
+
+  const totalWithdrawalsCount = await db.withdrawalRequest.count({
+    where: { status: "PROCESSED", ...userRelationFilter },
   });
 
   // Calculate detailed withdrawal stats including 10% admin fee income
@@ -45,7 +80,7 @@ export async function GET() {
 
   let totalGrossWithdrawalsUsdt = 0;
   let adminFeeIncomeUsdt = 0; // Processed 10% fee income
-  let totalNetDispatchedUsdt = 0; // Processed net payouts ($450 base)
+  let totalNetDispatchedUsdt = 0; // Processed net payouts
   let pendingGrossWithdrawalsUsdt = 0;
   let pendingAdminFeeUsdt = 0;
   let pendingNetPayoutsUsdt = 0;
@@ -67,6 +102,26 @@ export async function GET() {
     }
   }
 
+  // Calculate breakdown of incomes distributed to members
+  let totalRoiIncomeDistributed = 0;
+  let totalDirectReferralIncome = 0;
+  let totalLevelIncomeDistributed = 0;
+
+  for (const g of ledgerIncomeAgg) {
+    const val = Math.abs(Number(g._sum.amount || 0));
+    if (g.type === "BASIC_ROI" || g.type === "FD_ROI") {
+      totalRoiIncomeDistributed += val;
+    } else if (g.type === "DIRECT_REFERRAL") {
+      totalDirectReferralIncome += val;
+    } else if (g.type === "BASIC_LEVEL_INCOME" || g.type === "FD_LEVEL_INCOME") {
+      totalLevelIncomeDistributed += val;
+    }
+  }
+
+  const totalBusinessVolumeUsdt = Number(contractsAgg._sum.amountInUsdt || 0);
+  const activeStakesVolumeUsdt = Number(activeContractsAgg._sum.amountInUsdt || 0);
+  const totalMemberIncomeDistributedUsdt = totalRoiIncomeDistributed + totalDirectReferralIncome + totalLevelIncomeDistributed;
+
   // Fetch upcoming cycle forecast for next 12:01 AM Dubai cycle scoped to this admin's team
   let upcomingCycle = null;
   try {
@@ -82,15 +137,27 @@ export async function GET() {
       pendingDeposits,
       pendingWithdrawals,
       activeContracts,
+      totalContracts,
+      // Deposits
       totalApprovedDepositsUsdt: Number(depositsAgg._sum.amountInUsdt || 0),
+      totalDepositsCount,
+      // Withdrawals
       totalProcessedWithdrawalsUsdt: totalGrossWithdrawalsUsdt,
-      // Admin Income / Revenue from 10% deduction
+      totalWithdrawalsCount,
+      totalNetDispatchedUsdt,
+      pendingGrossWithdrawalsUsdt,
+      pendingNetPayoutsUsdt,
+      // Admin Income / Revenue from 10% fee
       adminFeeIncomeUsdt,
       pendingAdminFeeUsdt,
-      // Net dispatched to users ($450 base)
-      totalNetDispatchedUsdt,
-      pendingNetPayoutsUsdt,
-      pendingGrossWithdrawalsUsdt,
+      // Business Turnovers & Staking Volumes
+      totalBusinessVolumeUsdt,
+      activeStakesVolumeUsdt,
+      // Member Income Distributions
+      totalMemberIncomeDistributedUsdt,
+      totalRoiIncomeDistributed,
+      totalDirectReferralIncome,
+      totalLevelIncomeDistributed,
       // Next upcoming Dubai 12:01 AM cycle forecast
       upcomingCycle,
     },
