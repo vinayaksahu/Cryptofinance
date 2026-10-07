@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import { Users, Search, Download, ChevronDown, Copy, Check, FileSpreadsheet, FileText, Printer } from "lucide-react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
+import { Users, Search, Download, ChevronDown, Copy, Check, FileSpreadsheet, FileText, Printer, UserCheck, UserX, Sparkles } from "lucide-react";
 import { copyTableToClipboard, exportToExcel, printOrExportPdf, ExportColumn } from "@/lib/exportUtils";
 
 interface DownlineViewProps {
@@ -27,6 +27,43 @@ export function DownlineView({ user, mode, onNavigateTab }: DownlineViewProps) {
       item.referralId?.toLowerCase().includes(q)
     );
   });
+
+  // Calculate Network Overview stats matching Genealogy Tree
+  const { totalNetwork, activeMembers, inactiveMembers, directTeamCount } = useMemo(() => {
+    const directs = (user?.directs || []) as any[];
+    const team = (user?.teamList || []) as any[];
+    
+    // Total Network count = team list length (or user.totalTeamCount)
+    // If user has teamList, use that, else fallback to user.totalTeamCount
+    const allMembers = team.length > 0 ? team : directs;
+    const totalCount = user?.totalTeamCount ?? (team.length > 0 ? team.length : directs.length);
+
+    let activeCount = 0;
+    let inactiveCount = 0;
+
+    allMembers.forEach((m) => {
+      if (m.activation === "Active" || Number(m.amount || 0) > 0) {
+        activeCount++;
+      } else {
+        inactiveCount++;
+      }
+    });
+
+    // If user.activeTeamCount is explicitly present, prefer it
+    if (user?.activeTeamCount !== undefined) {
+      activeCount = user.activeTeamCount;
+      inactiveCount = Math.max(0, totalCount - activeCount);
+    }
+
+    const dCount = user?.directTeamCount ?? directs.length;
+
+    return {
+      totalNetwork: totalCount,
+      activeMembers: activeCount,
+      inactiveMembers: Math.max(0, totalCount - activeCount),
+      directTeamCount: dCount,
+    };
+  }, [user]);
 
   // Close export dropdown when clicking outside
   useEffect(() => {
@@ -120,6 +157,59 @@ export function DownlineView({ user, mode, onNavigateTab }: DownlineViewProps) {
           >
             Tree View
           </button>
+        </div>
+      </div>
+
+      {/* Network Overview Stats Cards - Exactly matching Genealogy Tree */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
+        {/* Total Network */}
+        <div className="bg-card border border-border rounded-2xl p-4 shadow-sm hover:border-border/80 transition-all">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs text-muted-foreground font-medium">Total Network</span>
+            <Users className="w-4 h-4 text-primary" />
+          </div>
+          <p className="text-xl sm:text-2xl font-black text-foreground">
+            {totalNetwork}
+          </p>
+        </div>
+
+        {/* Active Members */}
+        <div className="bg-card border border-border rounded-2xl p-4 shadow-sm hover:border-emerald-500/30 transition-all">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs text-emerald-500 font-medium flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              Active Members
+            </span>
+            <UserCheck className="w-4 h-4 text-emerald-500" />
+          </div>
+          <p className="text-xl sm:text-2xl font-black text-emerald-500">
+            {activeMembers}
+          </p>
+        </div>
+
+        {/* Inactive Members */}
+        <div className="bg-card border border-border rounded-2xl p-4 shadow-sm hover:border-rose-500/30 transition-all">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs text-rose-500 font-medium flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-rose-500" />
+              Inactive Members
+            </span>
+            <UserX className="w-4 h-4 text-rose-500" />
+          </div>
+          <p className="text-xl sm:text-2xl font-black text-rose-500">
+            {inactiveMembers}
+          </p>
+        </div>
+
+        {/* Direct Team */}
+        <div className="bg-card border border-border rounded-2xl p-4 shadow-sm hover:border-primary/40 transition-all">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-xs text-primary font-medium">Direct Team</span>
+            <Sparkles className="w-4 h-4 text-primary" />
+          </div>
+          <p className="text-xl sm:text-2xl font-black text-primary">
+            {directTeamCount}
+          </p>
         </div>
       </div>
 

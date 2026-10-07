@@ -2,26 +2,19 @@
 
 import React, { useState, useEffect } from "react";
 import {
-  Wallet,
-  Zap,
-  Gift,
   Repeat,
-  ArrowUpRight,
-  ShieldCheck,
   Check,
   AlertCircle,
   RefreshCw,
   Layers,
   ArrowRightLeft,
-  ChevronRight,
-  Info,
   UserCheck,
   UserX,
 } from "lucide-react";
 
 interface WalletsHubViewProps {
   user: any;
-  initialWallet?: "all" | "bonus" | "roi" | "working" | "p2p" | "main";
+  initialWallet?: string;
   initialEngine?: "internal" | "external";
   onNavigateTab?: (tab: string) => void;
   onRefresh?: () => void;
@@ -34,15 +27,18 @@ export function WalletsHubView({
   onNavigateTab,
   onRefresh,
 }: WalletsHubViewProps) {
-  const [selectedWalletTab, setSelectedWalletTab] = useState<string>(initialWallet);
-  const [activeEngine, setActiveEngine] = useState<"internal" | "external">(initialEngine);
+  const [activeEngine, setActiveEngine] = useState<"internal" | "external">(
+    initialEngine === "external" || initialWallet === "p2p" ? "external" : "internal"
+  );
 
   // Sync initialEngine if passed differently
   useEffect(() => {
     if (initialEngine) {
       setActiveEngine(initialEngine);
+    } else if (initialWallet === "p2p") {
+      setActiveEngine("external");
     }
-  }, [initialEngine]);
+  }, [initialEngine, initialWallet]);
 
   // Internal Transfer state (ROI / Working to Main / P2P)
   const [transferSource, setTransferSource] = useState<"ROI" | "WORKING">("ROI");
@@ -260,346 +256,6 @@ export function WalletsHubView({
             Triple-Isolated Liquidity &bull; Bonus Utility &bull; P2P Transfers &bull; External Cashouts
           </p>
         </div>
-
-        {/* Wallet Navigation Pills */}
-        <div className="flex items-center gap-1.5 p-1 rounded-xl bg-card border border-border overflow-x-auto shadow-sm">
-          {[
-            { id: "all", label: "All Wallets" },
-            { id: "bonus", label: "Bonus Wallet" },
-            { id: "roi", label: "ROI Wallet" },
-            { id: "working", label: "Working Wallet" },
-            { id: "p2p", label: "Secondary Wallet" },
-            { id: "main", label: "Main Wallet" },
-          ].map((tab) => (
-            <button
-              key={tab.id}
-              onClick={() => setSelectedWalletTab(tab.id)}
-              className={`px-3 py-1.5 rounded-lg text-xs font-semibold transition-all whitespace-nowrap ${
-                selectedWalletTab === tab.id
-                  ? "bg-primary text-primary-foreground shadow-sm"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
-              }`}
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* =========================================================================
-          WALLET CARDS GRID
-          ========================================================================= */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-        {/* 1. BONUS WALLET */}
-        {(selectedWalletTab === "all" || selectedWalletTab === "bonus") && (
-          <div className="rounded-2xl border border-amber-500/20 bg-amber-500/5 p-6 flex flex-col justify-between shadow-sm relative overflow-hidden group">
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-amber-500 bg-amber-500/10 px-2.5 py-0.5 rounded-full border border-amber-500/30">
-                  NON-WITHDRAWABLE &bull; 10% UTILITY
-                </span>
-                <Gift className="w-5 h-5 text-amber-500" />
-              </div>
-
-              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                BONUS WALLET
-              </h3>
-
-              <div className="text-3xl sm:text-4xl font-bold text-amber-500 my-2">
-                ${bonusBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
-              </div>
-
-              <div className="p-3 rounded-xl bg-card border border-border text-xs text-foreground space-y-2 mt-3">
-                <div className="flex items-start gap-1.5">
-                  <span className="text-amber-500 font-bold">&bull;</span>
-                  <span><strong>Rule:</strong> Only usable for ID activation &amp; reinvestment.</span>
-                </div>
-                <div className="flex items-start gap-1.5">
-                  <span className="text-amber-500 font-bold">&bull;</span>
-                  <span><strong>Max Utility:</strong> Up to 10% of total investment amount per stake.</span>
-                </div>
-                <div className="flex items-start gap-1.5">
-                  <span className="text-amber-500 font-bold">&bull;</span>
-                  <span><strong>Sources:</strong> $1.00 Self Signup + $0.40/Level downline signups.</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-5 pt-4 border-t border-border">
-              <button
-                type="button"
-                onClick={() => onNavigateTab && onNavigateTab("stake-activate")}
-                className="w-full py-2.5 px-4 rounded-xl bg-amber-500/10 hover:bg-amber-500 text-amber-500 hover:text-white font-bold text-xs transition-all flex items-center justify-center gap-2 border border-amber-500/30 shadow-sm"
-              >
-                <Zap className="w-4 h-4" />
-                <span>Activate ID Using Bonus (10%)</span>
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* 2. ROI WALLET */}
-        {(selectedWalletTab === "all" || selectedWalletTab === "roi") && (
-          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-6 flex flex-col justify-between shadow-sm relative overflow-hidden group">
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-500 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
-                  DAILY 4% YIELD
-                </span>
-                <Zap className="w-5 h-5 text-emerald-500" />
-              </div>
-
-              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                ROI WALLET
-              </h3>
-
-              <div className="text-3xl sm:text-4xl font-bold text-emerald-500 my-2">
-                ${roiBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
-              </div>
-
-              <div className="p-3 rounded-xl bg-card border border-border text-xs text-foreground space-y-2 mt-3">
-                <div className="flex items-start gap-1.5">
-                  <span className="text-emerald-500 font-bold">&bull;</span>
-                  <span><strong>Source:</strong> Automated 4.00% daily returns from 2X pool.</span>
-                </div>
-                <div className="flex items-start gap-1.5">
-                  <span className="text-emerald-500 font-bold">&bull;</span>
-                  <span><strong>Options:</strong> Transfer to Main (Withdrawal) OR Secondary Wallet.</span>
-                </div>
-                <div className="flex items-start gap-1.5">
-                  <span className="text-emerald-500 font-bold">&bull;</span>
-                  <span><strong>Internal Transfer:</strong> Direct credit to Main or Secondary Wallet.</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-5 pt-4 border-t border-border grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setActiveEngine("internal");
-                  setTransferSource("ROI");
-                  setTransferTarget("MAIN");
-                  setTransferAmount(roiBalance.toString());
-                  const element = document.getElementById("transfer-engine-section");
-                  if (element) element.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="py-2.5 px-3 rounded-xl bg-card hover:bg-muted border border-border text-foreground font-bold text-xs transition-all text-center"
-              >
-                &rarr; Main Wallet
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setActiveEngine("internal");
-                  setTransferSource("ROI");
-                  setTransferTarget("P2P");
-                  setTransferAmount(roiBalance.toString());
-                  const element = document.getElementById("transfer-engine-section");
-                  if (element) element.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="py-2.5 px-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-xs transition-all text-center shadow-sm"
-              >
-                &rarr; Secondary Wallet
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* 3. WORKING WALLET */}
-        {(selectedWalletTab === "all" || selectedWalletTab === "working") && (
-          <div className="rounded-2xl border border-sky-500/20 bg-sky-500/5 p-6 flex flex-col justify-between shadow-sm relative overflow-hidden group">
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-sky-500 bg-sky-500/10 px-2.5 py-0.5 rounded-full border border-sky-500/30">
-                  DIRECT + ROYALTY + REWARDS
-                </span>
-                <Wallet className="w-5 h-5 text-sky-500" />
-              </div>
-
-              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                WORKING WALLET
-              </h3>
-
-              <div className="text-3xl sm:text-4xl font-bold text-sky-500 my-2">
-                ${workingBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
-              </div>
-
-              <div className="p-3 rounded-xl bg-card border border-border text-xs text-foreground space-y-2 mt-3">
-                <div className="flex items-start gap-1.5">
-                  <span className="text-sky-500 font-bold">&bull;</span>
-                  <span><strong>Sources:</strong> 10% Direct Referrals + 10-Level Downline Royalties.</span>
-                </div>
-                <div className="flex items-start gap-1.5">
-                  <span className="text-sky-500 font-bold">&bull;</span>
-                  <span><strong>Options:</strong> Transfer to Main (Withdrawal) OR Secondary Wallet.</span>
-                </div>
-                <div className="flex items-start gap-1.5">
-                  <span className="text-sky-500 font-bold">&bull;</span>
-                  <span><strong>Milestones:</strong> Cashout rank rewards directly here.</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-5 pt-4 border-t border-border grid grid-cols-2 gap-2">
-              <button
-                type="button"
-                onClick={() => {
-                  setActiveEngine("internal");
-                  setTransferSource("WORKING");
-                  setTransferTarget("MAIN");
-                  setTransferAmount(workingBalance.toString());
-                  const element = document.getElementById("transfer-engine-section");
-                  if (element) element.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="py-2.5 px-3 rounded-xl bg-card hover:bg-muted border border-border text-foreground font-bold text-xs transition-all text-center"
-              >
-                &rarr; Main Wallet
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  setActiveEngine("internal");
-                  setTransferSource("WORKING");
-                  setTransferTarget("P2P");
-                  setTransferAmount(workingBalance.toString());
-                  const element = document.getElementById("transfer-engine-section");
-                  if (element) element.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="py-2.5 px-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-xs transition-all text-center shadow-sm"
-              >
-                &rarr; Secondary Wallet
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* 4. SECONDARY WALLET */}
-        {(selectedWalletTab === "all" || selectedWalletTab === "p2p" || selectedWalletTab === "secondary") && (
-          <div className="rounded-2xl border border-primary/30 bg-primary/5 p-6 flex flex-col justify-between shadow-sm relative overflow-hidden group">
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-primary bg-primary/10 px-2.5 py-0.5 rounded-full border border-primary/30">
-                  DEPOSIT &bull; ID ACTIVATION &bull; P2P
-                </span>
-                <Repeat className="w-5 h-5 text-primary" />
-              </div>
-
-              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                SECONDARY WALLET
-              </h3>
-
-              <div className="text-3xl sm:text-4xl font-bold text-foreground my-2">
-                ${p2pBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
-              </div>
-
-              <div className="p-3 rounded-xl bg-card border border-border text-xs text-foreground space-y-2 mt-3">
-                <div className="flex items-start gap-1.5">
-                  <span className="text-primary font-bold">&bull;</span>
-                  <span><strong>Deposit Request:</strong> Submit USDT BEP-20 deposit proof to credit this wallet directly.</span>
-                </div>
-                <div className="flex items-start gap-1.5">
-                  <span className="text-primary font-bold">&bull;</span>
-                  <span><strong>ID Activation:</strong> Activate your own stake or any member's ID (up to 10% Bonus Wallet utility).</span>
-                </div>
-                <div className="flex items-start gap-1.5">
-                  <span className="text-primary font-bold">&bull;</span>
-                  <span><strong>P2P Transfer:</strong> Send funds instantly to another member's Secondary Wallet.</span>
-                </div>
-                <div className="flex items-start gap-1.5">
-                  <span className="text-primary font-bold">&bull;</span>
-                  <span><strong>Funding Sources:</strong> Deposits, ROI transfers, Working transfers, P2P transfers.</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-5 pt-4 border-t border-border flex flex-col gap-2">
-              <div className="grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  onClick={() => onNavigateTab && onNavigateTab("recharge")}
-                  className="py-2 px-3 rounded-xl bg-primary/10 hover:bg-primary hover:text-primary-foreground text-primary border border-primary/20 font-bold text-xs transition-all text-center flex items-center justify-center gap-1.5"
-                >
-                  <Wallet className="w-3.5 h-3.5" />
-                  <span>Deposit USDT</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => onNavigateTab && onNavigateTab("stake-activate")}
-                  className="py-2 px-3 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-xs transition-all text-center flex items-center justify-center gap-1.5 shadow-sm"
-                >
-                  <Zap className="w-3.5 h-3.5" />
-                  <span>Activate Any ID</span>
-                </button>
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setActiveEngine("external");
-                  const element = document.getElementById("transfer-engine-section");
-                  if (element) element.scrollIntoView({ behavior: "smooth" });
-                }}
-                className="w-full py-2 px-3 rounded-xl bg-card hover:bg-muted border border-border text-foreground font-bold text-xs transition-all text-center flex items-center justify-center gap-1.5"
-              >
-                <Repeat className="w-3.5 h-3.5" />
-                <span>Send P2P Transfer &rarr;</span>
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* 5. MAIN WALLET (WITHDRAWAL WALLET) */}
-        {(selectedWalletTab === "all" || selectedWalletTab === "main") && (
-          <div className="rounded-2xl border border-border bg-card p-6 flex flex-col justify-between shadow-sm relative overflow-hidden group">
-            <div>
-              <div className="flex items-center justify-between mb-3">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-500 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/30">
-                  EXTERNAL CASHOUT WALLET
-                </span>
-                <ArrowUpRight className="w-5 h-5 text-emerald-500" />
-              </div>
-
-              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-wider">
-                MAIN WALLET (WITHDRAWAL)
-              </h3>
-
-              <div className="text-3xl sm:text-4xl font-bold text-foreground my-2">
-                ${mainBalance.toFixed(2)} <span className="text-xs text-muted-foreground font-sans">USDT</span>
-              </div>
-
-              <div className="p-3 rounded-xl bg-muted/40 border border-border text-xs text-foreground space-y-2 mt-3">
-                <div className="flex items-start gap-1.5">
-                  <span className="text-emerald-500 font-bold">&bull;</span>
-                  <span><strong>Cashout:</strong> Withdraw directly to your personal BEP-20 address.</span>
-                </div>
-                <div className="flex items-start gap-1.5">
-                  <span className="text-emerald-500 font-bold">&bull;</span>
-                  <span><strong>Threshold:</strong> Minimum withdrawal is $2.00 USDT.</span>
-                </div>
-                <div className="flex items-start gap-1.5">
-                  <span className="text-emerald-500 font-bold">&bull;</span>
-                  <span><strong>Protocol Fee:</strong> 10% liquidity fee on external cashouts.</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-5 pt-4 border-t border-border">
-              <button
-                type="button"
-                onClick={() => {
-                  setActiveEngine("external");
-                  const el = document.getElementById("transfer-engine-section");
-                  if (el) el.scrollIntoView({ behavior: "smooth" });
-                  if (onNavigateTab) onNavigateTab("wallets-external");
-                }}
-                className="w-full py-2.5 px-4 rounded-xl bg-primary text-primary-foreground hover:bg-primary/90 font-bold text-xs transition-all flex items-center justify-center gap-2 shadow-sm cursor-pointer"
-              >
-                <ArrowUpRight className="w-4 h-4" />
-                <span>Request BEP-20 Withdrawal ($2 Min)</span>
-              </button>
-            </div>
-          </div>
-        )}
       </div>
 
       {/* =========================================================================
