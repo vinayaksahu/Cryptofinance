@@ -261,7 +261,7 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
             <p className="text-[11px] text-muted-foreground mt-0.5">
               {data?.isActivationDay
                 ? "Your stake is active! Day 1 yield cycle begins tomorrow at 00:00 GST (Dubai Midnight). Today is the activation period, so zero ROI is deducted or claimed today."
-                : "Daily yield cycles unlock at 00:00 GST upon closing. Click Claim / Withdraw to transfer into your ROI Wallet or Reinvest to compound into your active stake pool!"}
+                : "Daily yield cycles unlock at 00:00 GST upon closing. Click Claim to transfer into your ROI Wallet or Reinvest to compound into your active stake pool!"}
             </p>
           </div>
         </div>
@@ -422,7 +422,7 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
                             title="Instantly claim & credit this cycle's yield into your ROI Wallet"
                           >
                             <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
-                            <span>Claim / Withdraw</span>
+                            <span>Claim</span>
                           </button>
                         </div>
                       )}
@@ -463,7 +463,7 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
           <span>
             {data?.isActivationDay
               ? "Stake activated today. Daily 2% yield cycles unlock upon daily closing."
-              : "Returns unlock upon daily protocol closing. Click 'Claim / Withdraw' to credit your ROI Wallet, or 'Reinvest' to compound."}
+              : "Returns unlock upon daily protocol closing. Click 'Claim' to credit your ROI Wallet, or 'Reinvest' to compound."}
           </span>
         </div>
         <span className="text-slate-500">2X Contract Allocation Engine &bull; Slide 10-12</span>
