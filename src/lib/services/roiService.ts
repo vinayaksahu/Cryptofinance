@@ -129,6 +129,13 @@ export async function executeDailyRoiDistribution(adminId?: string, forceManual:
       newDaysUnlocked = Math.min(contract.tenureDays, Math.max(currentUnlocked, eligibleDaysTotal));
     }
 
+    // Auto-claim rule:
+    // If next cycle arrives (closing executed), all previous cycles that user did not claim/reinvest
+    // are automatically claimed into ROI Wallet!
+    if (contract.daysPaid < newDaysUnlocked - 1) {
+      await autoClaimPreviousCycles(contract.id, newDaysUnlocked - 1);
+    }
+
     if (newDaysUnlocked > currentUnlocked) {
       const additionalCycles = newDaysUnlocked - currentUnlocked;
       const amountUsdtDec = new Decimal(contract.amountInUsdt.toString());
@@ -155,6 +162,99 @@ export async function executeDailyRoiDistribution(adminId?: string, forceManual:
     totalContracts: activeContracts.length,
     processedCount,
     totalDistributedUsdt: totalDistributedUsdt.toFixed(8),
+  };
+}
+
+/**
+ * Auto-claims all previous cycles for a contract that were left unclaimed
+ * when a new cycle arrives. Only the single latest cycle remains pending for user choice.
+ */
+export async function autoClaimPreviousCycles(
+  contractId: string,
+  targetUpToDay: number
+) {
+  const contract = await db.investmentContract.findUnique({
+    where: { id: contractId },
+  });
+  if (!contract || contract.status !== "ACTIVE") return null;
+
+  const dubInfo = getDubaiTimeInfo(new Date());
+  const amountUsdtDec = new Decimal(contract.amountInUsdt.toString());
+  const rateDec = new Decimal(contract.dailyRoiRate.toString());
+  const standardDailyRoiUsdt = amountUsdtDec.times(rateDec.dividedBy(100));
+  const max2xCapDec = amountUsdtDec.times(2.0);
+
+  let currentDaysPaid = contract.daysPaid;
+  let currentEarned = new Decimal(contract.totalEarned.toString());
+  let totalAutoClaimed = new Decimal(0);
+
+  while (currentDaysPaid < targetUpToDay) {
+    if (currentDaysPaid >= contract.tenureDays) break;
+
+    const remainingTo2X = max2xCapDec.minus(currentEarned);
+    if (remainingTo2X.lessThanOrEqualTo(0)) break;
+
+    let roiToPay = standardDailyRoiUsdt;
+    let isCapped = false;
+    if (roiToPay.greaterThan(remainingTo2X)) {
+      roiToPay = remainingTo2X;
+      isCapped = true;
+    }
+
+    const nextDayNum = currentDaysPaid + 1;
+    const refKey = `ROI_CLAIM_${contract.id}_Day${nextDayNum}_${dubInfo.dateStr}`;
+
+    const ledgerRes = await executeLedgerTransaction({
+      userId: contract.userId,
+      type: "BASIC_ROI",
+      wallet: "INCOME",
+      amount: roiToPay,
+      referenceKey: refKey,
+      description: isCapped
+        ? `Auto-Claimed Final 2X Capped Daily ROI on Contract ${contract.id} (Day ${nextDayNum}/${contract.tenureDays})`
+        : `Auto-Claimed Daily ROI (${rateDec}%) on Contract ${contract.id} (Day ${nextDayNum}/${contract.tenureDays})`,
+    });
+
+    if (ledgerRes.success || ledgerRes.alreadyProcessed) {
+      currentDaysPaid = nextDayNum;
+      currentEarned = currentEarned.plus(roiToPay);
+      totalAutoClaimed = totalAutoClaimed.plus(roiToPay);
+
+      try {
+        await processLevelIncomeForRoi(
+          contract.userId,
+          contract.id,
+          contract.packageType,
+          roiToPay,
+          `${dubInfo.dateStr}_D${nextDayNum}`
+        );
+      } catch (err) {
+        console.error("Level income error during auto-claim:", err);
+      }
+    } else {
+      break;
+    }
+
+    if (isCapped || currentEarned.greaterThanOrEqualTo(max2xCapDec)) {
+      break;
+    }
+  }
+
+  const isMatured = currentDaysPaid >= contract.tenureDays || currentEarned.greaterThanOrEqualTo(max2xCapDec);
+
+  const updatedContract = await db.investmentContract.update({
+    where: { id: contract.id },
+    data: {
+      daysPaid: currentDaysPaid,
+      totalEarned: currentEarned.toFixed(8),
+      status: isMatured ? "COMPLETED" : "ACTIVE",
+    },
+  });
+
+  return {
+    contract: updatedContract,
+    daysPaid: currentDaysPaid,
+    totalAutoClaimed: totalAutoClaimed.toFixed(4),
   };
 }
 

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getSession } from "@/lib/auth";
 import { db } from "@/lib/db";
-import { getDubaiTimeInfo } from "@/lib/services/roiService";
+import { getDubaiTimeInfo, autoClaimPreviousCycles } from "@/lib/services/roiService";
 import { executeLedgerTransaction } from "@/lib/ledger";
 import { processLevelIncomeForRoi } from "@/lib/services/levelIncomeService";
 import { recordActivity } from "@/lib/auditLogger";
@@ -50,19 +50,6 @@ export async function GET(req: NextRequest) {
     const roiRate = Number(contract.dailyRoiRate || 4.0); // e.g. 4% on capital = 2% on 2X pool
     const dailyRoiAmount = +(principalUsdt * (roiRate / 100)).toFixed(4);
 
-    // Query ledger entries for this contract's daily ROI
-    const roiLedgers = await db.ledgerEntry.findMany({
-      where: {
-        userId: session.userId,
-        OR: [
-          { referenceKey: { startsWith: `ROI_${contract.id}_` } },
-          { referenceKey: { startsWith: `ROI_CLAIM_${contract.id}_` } },
-          { referenceKey: { startsWith: `ROI_REINVEST_${contract.id}_` } },
-        ],
-      },
-      orderBy: { createdAt: "asc" },
-    });
-
     // Determine how many days have elapsed since contract activation in Dubai days
     const contractCreatedDubai = getDubaiTimeInfo(contract.createdAt);
     const msSinceStart = Math.max(0, dubaiInfo.startOfDayMs - contractCreatedDubai.startOfDayMs);
@@ -77,6 +64,32 @@ export async function GET(req: NextRequest) {
       contract.tenureDays,
       Math.max(contractDaysUnlocked, contract.daysPaid, calendarDaysElapsed)
     );
+
+    // Auto-claim previous cycles rule:
+    // If next cycle has arrived (totalUnlockedDays) and user has not claimed or reinvested
+    // previous cycles (daysPaid < totalUnlockedDays - 1), auto-claim all prior unclaimed cycles
+    // directly into ROI Wallet so only the single current cycle remains pending!
+    if (contract.status === "ACTIVE" && totalUnlockedDays > contract.daysPaid + 1) {
+      const autoRes = await autoClaimPreviousCycles(contract.id, totalUnlockedDays - 1);
+      if (autoRes?.contract) {
+        contract.daysPaid = autoRes.contract.daysPaid;
+        contract.totalEarned = autoRes.contract.totalEarned;
+        contract.status = autoRes.contract.status;
+      }
+    }
+
+    // Query ledger entries for this contract's daily ROI (after auto-claiming previous cycles)
+    const roiLedgers = await db.ledgerEntry.findMany({
+      where: {
+        userId: session.userId,
+        OR: [
+          { referenceKey: { startsWith: `ROI_${contract.id}_` } },
+          { referenceKey: { startsWith: `ROI_CLAIM_${contract.id}_` } },
+          { referenceKey: { startsWith: `ROI_REINVEST_${contract.id}_` } },
+        ],
+      },
+      orderBy: { createdAt: "asc" },
+    });
 
     // Activation Day Rule: New contracts have zero ROI on investment day (Day 0) if not manually closed
     const isActivationDay = calendarDaysElapsed === 0 && totalUnlockedDays === 0;

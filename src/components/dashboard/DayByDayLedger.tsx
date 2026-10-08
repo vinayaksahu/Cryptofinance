@@ -261,7 +261,7 @@ export function DayByDayLedger({ user, onRefresh, onNavigateTab }: DayByDayLedge
             <p className="text-[11px] text-muted-foreground mt-0.5">
               {data?.isActivationDay
                 ? "Your stake is active! Day 1 yield cycle begins tomorrow at 00:00 GST (Dubai Midnight). Today is the activation period, so zero ROI is deducted or claimed today."
-                : "Daily yield cycles unlock at 00:00 GST upon closing. Click Claim to transfer into your ROI Wallet or Reinvest to compound into your active stake pool!"}
+                : "Daily yield cycles close at 23:59:59 GST. Claim or Reinvest before the next cycle closes; if left unclaimed, the current cycle automatically claims into your ROI Wallet when the next cycle arrives!"}
             </p>
           </div>
         </div>
