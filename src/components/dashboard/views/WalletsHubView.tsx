@@ -568,7 +568,7 @@ export function WalletsHubView({
                       type="text"
                       value={p2pRecipientId}
                       onChange={(e) => setP2pRecipientId(e.target.value.toUpperCase())}
-                      placeholder="e.g. CF10001"
+                      placeholder="e.g. CN10001"
                       className="w-full bg-background border border-input focus:border-primary rounded-xl px-4 py-3 text-base font-bold text-foreground placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                       required
                     />

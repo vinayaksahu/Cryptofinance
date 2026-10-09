@@ -302,14 +302,14 @@ export async function sendWelcomeCredentialsEmail({
 
   // Resolve official portal login URL
   // Prioritize dynamically detected appUrl (from request origin), then NEXT_PUBLIC_APP_URL, with strict fallback to official domain
-  let baseUrl = (appUrl || process.env.NEXT_PUBLIC_APP_URL || "https://cryptonova.online").trim();
+  let baseUrl = (appUrl || process.env.NEXT_PUBLIC_APP_URL || "https://cryptonova.world").trim();
 
   // Strip trailing slashes
   baseUrl = baseUrl.replace(/\/+$/, "");
 
   // Prevent old/obsolete domains (such as nexarise.us) from ever leaking into user emails
   if (!baseUrl || baseUrl.includes("nexarise") || (baseUrl.includes("localhost") && process.env.NODE_ENV === "production")) {
-    baseUrl = "https://cryptonova.online";
+    baseUrl = "https://cryptonova.world";
   }
 
   const loginUrl = `${baseUrl}/login`;

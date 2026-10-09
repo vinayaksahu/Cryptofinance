@@ -50,8 +50,8 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
   const origin =
     typeof window !== "undefined" && window.location.hostname === "localhost"
       ? window.location.origin
-      : "https://cryptonova.online";
-  const customId = user?.customId || "CF478752";
+      : "https://cryptonova.world";
+  const customId = user?.customId || "CN478752";
   const referralUrl = `${origin}/register?r=${customId}`;
 
   const copyReferral = () => {

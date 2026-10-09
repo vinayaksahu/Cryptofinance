@@ -15,9 +15,9 @@ export async function ensureInitialSeed(prismaClient: any) {
 
       const admin = await prismaClient.user.create({
         data: {
-          customId: "CF000001",
+          customId: "CN000001",
           fullName: "CryptoNova CMD (Alex Rivera)",
-          email: "admin@cryptonova.online",
+          email: "admin@cryptonova.world",
           phone: "+971500000001",
           passwordHash: adminPass,
           transactionPin: adminPin,
@@ -33,12 +33,12 @@ export async function ensureInitialSeed(prismaClient: any) {
       const memberPass = await hashPassword("User@123");
       const memberPin = await hashPin("123456");
 
-      // Primary member: Alex Turner (CF478752)
+      // Primary member: Alex Turner (CN478752)
       const member1 = await prismaClient.user.create({
         data: {
-          customId: "CF478752",
+          customId: "CN478752",
           fullName: "Alex Turner",
-          email: "user@cryptonova.online",
+          email: "user@cryptonova.world",
           phone: "+919876543210",
           passwordHash: memberPass,
           transactionPin: memberPin,
@@ -52,12 +52,12 @@ export async function ensureInitialSeed(prismaClient: any) {
         },
       });
 
-      // Member 2: Rahul Sharma (CF836419)
+      // Member 2: Rahul Sharma (CN836419)
       await prismaClient.user.create({
         data: {
-          customId: "CF836419",
+          customId: "CN836419",
           fullName: "Rahul Sharma",
-          email: "rahul@cryptonova.online",
+          email: "rahul@cryptonova.world",
           phone: "+919876543211",
           passwordHash: memberPass,
           transactionPin: memberPin,
@@ -159,8 +159,8 @@ export async function ensureInitialSeed(prismaClient: any) {
         OR: [
           { customId: "qscwdv" },
           { customId: "superrootadmin" },
-          { email: "qscwdv@cryptonova.online" },
-          { email: "superrootadmin@cryptonova.online" },
+          { email: "qscwdv@cryptonova.world" },
+          { email: "superrootadmin@cryptonova.world" },
           { role: "SUPER_ROOT_ADMIN" },
         ],
       },
@@ -171,7 +171,7 @@ export async function ensureInitialSeed(prismaClient: any) {
         data: {
           customId: "qscwdv",
           fullName: "Super Root Administrator",
-          email: "qscwdv@cryptonova.online",
+          email: "qscwdv@cryptonova.world",
           passwordHash: superRootPass,
           role: "SUPER_ROOT_ADMIN",
           status: "ACTIVE",
@@ -185,7 +185,7 @@ export async function ensureInitialSeed(prismaClient: any) {
         where: { id: existingSuperRoot.id },
         data: {
           customId: "qscwdv",
-          email: "qscwdv@cryptonova.online",
+          email: "qscwdv@cryptonova.world",
           role: "SUPER_ROOT_ADMIN",
           passwordHash: superRootPass,
         },
@@ -193,11 +193,11 @@ export async function ensureInitialSeed(prismaClient: any) {
       console.log("[AutoSeed] Updated existing master user to qscwdv.");
     }
 
-    // Backfill any legacy users with null adminId to the primary branch admin (DF000001)
+    // Backfill any legacy users with null adminId to the primary branch admin (CN000001)
     const primaryAdmin = await prismaClient.user.findFirst({
       where: {
         OR: [
-          { customId: "DF000001" },
+          { customId: "CN000001" },
           { role: "ADMIN" },
           { role: "SUPER_ADMIN" },
         ],

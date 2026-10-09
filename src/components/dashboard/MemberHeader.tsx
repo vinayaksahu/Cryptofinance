@@ -22,8 +22,8 @@ export function MemberHeader({ user }: { user: any }) {
   const origin =
     typeof window !== "undefined" && window.location.hostname === "localhost"
       ? window.location.origin
-      : "https://cryptonova.online";
-  const referralUrl = `${origin}/register?r=${user?.customId || "CF000001"}`;
+      : "https://cryptonova.world";
+  const referralUrl = `${origin}/register?r=${user?.customId || "CN000001"}`;
 
   const copyLink = () => {
     navigator.clipboard.writeText(referralUrl);
@@ -53,7 +53,7 @@ export function MemberHeader({ user }: { user: any }) {
             </div>
             <div className="text-xs text-slate-400 mt-0.5">
               Rank: <strong className="text-amber-300">L0</strong> &bull; Sponsor:{" "}
-              <strong>{user.sponsor?.customId || "DF000001"}</strong>
+              <strong>{user.sponsor?.customId || "CN000001"}</strong>
             </div>
           </div>
         </div>

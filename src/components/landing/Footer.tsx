@@ -154,7 +154,7 @@ export function Footer() {
                 Audited BEP-20 Smart Contract Standard
               </span>
               <span className="block">
-                Official Portal: cryptonova.online
+                Official Portal: cryptonova.world
               </span>
             </div>
           </div>

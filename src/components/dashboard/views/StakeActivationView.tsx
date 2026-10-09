@@ -256,7 +256,7 @@ export function StakeActivationView({ user, onRefresh, onRefreshUser, onNavigate
                     type="text"
                     value={targetCustomId}
                     onChange={(e) => setTargetCustomId(e.target.value)}
-                    placeholder="Enter Member ID (e.g. CF478752)"
+                    placeholder="Enter Member ID (e.g. CN478752)"
                     className="w-full bg-background border border-input rounded-xl px-4 py-2.5 text-foreground text-sm uppercase placeholder-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary"
                   />
                   {verifyingId && (

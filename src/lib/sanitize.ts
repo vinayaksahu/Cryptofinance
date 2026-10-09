@@ -39,7 +39,7 @@ export function sanitizeText(input: unknown, maxLength?: number): string {
 }
 
 /**
- * Sanitizes alphanumeric identifiers (e.g. custom IDs like DF000001, hashes, wallet addresses).
+ * Sanitizes alphanumeric identifiers (e.g. custom IDs like CN000001, hashes, wallet addresses).
  */
 export function sanitizeIdentifier(input: unknown, allowedExtraChars = "_-"): string {
   if (!input) return "";

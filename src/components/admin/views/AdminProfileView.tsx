@@ -272,7 +272,7 @@ export function AdminProfileView({ user, onRefresh }: AdminProfileViewProps) {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@cryptonova.online"
+                  placeholder="admin@cryptonova.world"
                   className="w-full px-3.5 py-2.5 rounded-xl bg-[var(--bg-main)] border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white outline-none focus:border-amber-400 text-xs"
                 />
                 {isChangingEmail && (

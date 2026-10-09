@@ -1,8 +1,8 @@
 export const APP_CONFIG = {
   name: "CryptoNova",
   tagline: "Decentralized Quantitative Yield Protocol • Swiss Algo & DeFi Arbitrage",
-  domain: "cryptonova.online",
-  officialEmail: "support@cryptonova.online",
+  domain: "cryptonova.world",
+  officialEmail: "support@cryptonova.world",
   cmd: "Mr. Alex Rivera",
   cmdTitle: "Chairman & Managing Director (CMD)",
   cmdBio: "Veteran quantitative architect and FinTech strategist with over 15 years directing algorithmic trading desks across Zurich, London, and Singapore.",

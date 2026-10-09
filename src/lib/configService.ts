@@ -166,7 +166,7 @@ export const DEFAULT_SYSTEM_CONFIGS: Record<string, { value: string; description
 
   // 7. Corporate Headquarters & Customer Support
   OFFICIAL_EMAIL: {
-    value: "support@cryptonova.online",
+    value: "support@cryptonova.world",
     description: "Official customer care & technical support email",
     category: "company",
   },

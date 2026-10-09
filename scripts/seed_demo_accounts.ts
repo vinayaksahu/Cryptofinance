@@ -21,12 +21,12 @@ async function main() {
       role: "SUPER_ROOT_ADMIN",
       status: "ACTIVE",
       fullName: "Super Root Administrator",
-      email: "qscwdv@cryptonova.online",
+      email: "qscwdv@cryptonova.world",
     },
     create: {
       customId: "qscwdv",
       fullName: "Super Root Administrator",
-      email: "qscwdv@cryptonova.online",
+      email: "qscwdv@cryptonova.world",
       passwordHash: superRootPassHash,
       transactionPin: defaultPinHash,
       role: "SUPER_ROOT_ADMIN",
@@ -40,23 +40,23 @@ async function main() {
   // 2. Super Admin (CryptoNova CMD)
   console.log("\n[2/5] Upserting Super Admin (CMD)...");
   const cmdAdmin = await db.user.upsert({
-    where: { customId: "CF000001" },
+    where: { customId: "CN000001" },
     update: {
       passwordHash: adminPassHash,
       transactionPin: defaultPinHash,
       role: "SUPER_ADMIN",
       status: "ACTIVE",
       fullName: "CryptoNova CMD (Alex Rivera)",
-      email: "admin@cryptonova.online",
+      email: "admin@cryptonova.world",
       phone: "+971500000001",
       fundBalance: 1000000,
       incomeBalance: 500000,
       teamPrefix: "1",
     },
     create: {
-      customId: "CF000001",
+      customId: "CN000001",
       fullName: "CryptoNova CMD (Alex Rivera)",
-      email: "admin@cryptonova.online",
+      email: "admin@cryptonova.world",
       phone: "+971500000001",
       passwordHash: adminPassHash,
       transactionPin: defaultPinHash,
@@ -83,23 +83,23 @@ async function main() {
   // 3. Branch Admin
   console.log("\n[3/5] Upserting Branch Admin...");
   const branchAdmin = await db.user.upsert({
-    where: { customId: "CF_ADMIN_01" },
+    where: { customId: "CN_ADMIN_01" },
     update: {
       passwordHash: adminPassHash,
       transactionPin: defaultPinHash,
       role: "ADMIN",
       status: "ACTIVE",
       fullName: "Branch Operations Admin",
-      email: "branch@cryptonova.online",
+      email: "branch@cryptonova.world",
       phone: "+971500000002",
       fundBalance: 50000,
       incomeBalance: 25000,
       adminId: cmdAdmin.id,
     },
     create: {
-      customId: "CF_ADMIN_01",
+      customId: "CN_ADMIN_01",
       fullName: "Branch Operations Admin",
-      email: "branch@cryptonova.online",
+      email: "branch@cryptonova.world",
       phone: "+971500000002",
       passwordHash: adminPassHash,
       transactionPin: defaultPinHash,
@@ -116,14 +116,14 @@ async function main() {
   // 4. Dummy Member 1 (VIP Investor)
   console.log("\n[4/5] Upserting Dummy Member 1 (VIP Investor)...");
   const member1 = await db.user.upsert({
-    where: { customId: "CF478752" },
+    where: { customId: "CN478752" },
     update: {
       passwordHash: userPassHash,
       transactionPin: defaultPinHash,
       role: "USER",
       status: "ACTIVE",
       fullName: "Alex Turner (VIP)",
-      email: "user@cryptonova.online",
+      email: "user@cryptonova.world",
       phone: "+919876543210",
       fundBalance: 10000,
       incomeBalance: 2500,
@@ -131,9 +131,9 @@ async function main() {
       adminId: cmdAdmin.id,
     },
     create: {
-      customId: "CF478752",
+      customId: "CN478752",
       fullName: "Alex Turner (VIP)",
-      email: "user@cryptonova.online",
+      email: "user@cryptonova.world",
       phone: "+919876543210",
       passwordHash: userPassHash,
       transactionPin: defaultPinHash,
@@ -161,14 +161,14 @@ async function main() {
   // 5. Dummy Member 2 (Regular Investor)
   console.log("\n[5/5] Upserting Dummy Member 2 (Regular Investor)...");
   const member2 = await db.user.upsert({
-    where: { customId: "CF836419" },
+    where: { customId: "CN836419" },
     update: {
       passwordHash: userPassHash,
       transactionPin: defaultPinHash,
       role: "USER",
       status: "ACTIVE",
       fullName: "Rahul Sharma",
-      email: "rahul@cryptonova.online",
+      email: "rahul@cryptonova.world",
       phone: "+919876543211",
       fundBalance: 2500,
       incomeBalance: 650,
@@ -176,9 +176,9 @@ async function main() {
       adminId: cmdAdmin.id,
     },
     create: {
-      customId: "CF836419",
+      customId: "CN836419",
       fullName: "Rahul Sharma",
-      email: "rahul@cryptonova.online",
+      email: "rahul@cryptonova.world",
       phone: "+919876543211",
       passwordHash: userPassHash,
       transactionPin: defaultPinHash,

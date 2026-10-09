@@ -118,12 +118,12 @@ export async function POST(req: NextRequest) {
       }
     }
 
-    // Generate unique customId like CF123456, CF223456, CF323456
+    // Generate unique customId like CN123456, CN223456, CN323456
     let customId = "";
     let isUnique = false;
     while (!isUnique) {
       const rand5 = Math.floor(10000 + Math.random() * 90000); // 5 random digits
-      customId = `CF${teamPrefix}${rand5}`;
+      customId = `CN${teamPrefix}${rand5}`;
       const found = await db.user.findUnique({ where: { customId } });
       if (!found) isUnique = true;
     }

@@ -231,7 +231,7 @@ export default function RegisterPage() {
                 required
                 value={sponsorCode}
                 onChange={(e) => setSponsorCode(e.target.value)}
-                placeholder="CFXXXXX"
+                placeholder="CNXXXXX"
                 className="w-full pl-10 pr-4 py-2.5 rounded-xl bg-black/50 border border-amber-500/40 focus:border-amber-400 text-amber-300 text-sm font-bold outline-none"
               />
             </div>

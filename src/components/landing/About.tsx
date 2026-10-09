@@ -176,10 +176,10 @@ export function About() {
             <div className="mt-8 pt-4 border-t border-slate-200/80 dark:border-cyan-500/20 flex flex-wrap items-center justify-between gap-3 text-xs text-[var(--text-subtle)]">
               <span className="flex items-center gap-1.5">
                 <Mail className="w-3.5 h-3.5 text-sky-500 dark:text-sky-400" />
-                support@cryptonova.online
+                support@cryptonova.world
               </span>
               <span className="font-bold text-sky-600 dark:text-sky-400">
-                cryptonova.online
+                cryptonova.world
               </span>
             </div>
           </div>

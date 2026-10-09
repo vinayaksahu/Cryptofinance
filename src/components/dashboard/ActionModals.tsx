@@ -582,7 +582,7 @@ export function ActionModals({ user, onRefresh }: { user: any; onRefresh: () => 
                       required
                       value={p2pRecipient}
                       onChange={(e) => setP2pRecipient(e.target.value)}
-                      placeholder="e.g. CF836419"
+                      placeholder="e.g. CN836419"
                       className="w-full px-3.5 py-2.5 rounded-xl bg-black/50 border border-slate-700 text-white text-sm outline-none uppercase font-bold"
                     />
                   </div>

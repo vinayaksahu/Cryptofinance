@@ -273,7 +273,7 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                   {user?.teamPrefix && (
                     <p className="text-[10px] text-primary mt-1 flex items-center gap-1 font-semibold">
                       <Tag className="w-3 h-3 text-primary" />
-                      Branch Prefix: CF{user.teamPrefix}xxxxx
+                      Branch Prefix: CN{user.teamPrefix}xxxxx
                     </p>
                   )}
                 </div>
@@ -411,7 +411,7 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                   type="email"
                   value={profileEmail}
                   onChange={(e) => setProfileEmail(e.target.value)}
-                  placeholder="admin@cryptonova.online"
+                  placeholder="admin@cryptonova.world"
                   className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
                   required
                 />

@@ -50,7 +50,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
   // Fallback root node using actual logged-in user data if treeData hasn't loaded yet
   const fallbackRoot: TreeNodeData = {
     id: user?.id || "root",
-    customId: user?.customId || "DF000001",
+    customId: user?.customId || "CN000001",
     name: user?.fullName ? `${user.fullName} (You)` : "You",
     username: user?.email ? `@${user.email.split("@")[0]}` : `@${user?.customId?.toLowerCase() || "member"}`,
     status: user?.status === "INACTIVE" ? "INACTIVE" : "ACTIVE",
@@ -141,8 +141,8 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
     const origin =
       typeof window !== "undefined" && window.location.hostname === "localhost"
         ? window.location.origin
-        : "https://cryptonova.online";
-    const refUrl = `${origin}/register?r=${user?.customId || "CF000001"}`;
+        : "https://cryptonova.world";
+    const refUrl = `${origin}/register?r=${user?.customId || "CN000001"}`;
     navigator.clipboard.writeText(refUrl);
     setCopiedId(true);
     setTimeout(() => setCopiedId(false), 2000);

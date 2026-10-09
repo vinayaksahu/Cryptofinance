@@ -2380,7 +2380,7 @@ export default function SuperRootAdminPage() {
                   required
                   value={adjustTargetId}
                   onChange={(e) => setAdjustTargetId(e.target.value)}
-                  placeholder="e.g. DF836419 or DF000001"
+                  placeholder="e.g. CN836419 or CN000001"
                   className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-emerald-500"
                 />
               </div>
@@ -2544,7 +2544,7 @@ export default function SuperRootAdminPage() {
                   required
                   value={createForm.email}
                   onChange={(e) => setCreateForm({ ...createForm, email: e.target.value })}
-                  placeholder="admin2@cryptonova.online"
+                  placeholder="admin2@cryptonova.world"
                   className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-rose-500"
                 />
               </div>
@@ -2763,7 +2763,7 @@ export default function SuperRootAdminPage() {
                   required
                   value={editForm.email}
                   onChange={(e) => setEditForm({ ...editForm, email: e.target.value })}
-                  placeholder="admin@cryptonova.online"
+                  placeholder="admin@cryptonova.world"
                   className="w-full px-3.5 py-2.5 rounded-xl bg-slate-950 border border-slate-700 text-white outline-none focus:border-amber-400 text-xs"
                 />
               </div>
