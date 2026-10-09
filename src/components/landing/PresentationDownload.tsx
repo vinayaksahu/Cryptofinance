@@ -29,7 +29,7 @@ export function PresentationDownload() {
             Download Business Presentation
           </h2>
           <p className="text-[var(--text-muted)] text-base sm:text-lg mt-3 font-medium">
-            Get the official <strong>Crypto Finance</strong> institutional pitch deck featuring the dynamic 4% daily yield formula, 2X allocation pool, 35-day compounding engine, and complete 10-tier compensation blueprints.
+            Get the official <strong>CryptoNova</strong> institutional pitch deck featuring the dynamic 4% daily yield formula, 2X allocation pool, 35-day compounding engine, and complete 10-tier compensation blueprints.
           </p>
         </div>
 
@@ -49,7 +49,7 @@ export function PresentationDownload() {
               </div>
 
               <h3 className="font-display text-3xl sm:text-4xl font-black text-[var(--text-main)]">
-                Crypto Finance Presentation Deck
+                CryptoNova Presentation Deck
               </h3>
 
               <p className="text-sm text-[var(--text-muted)] max-w-xl leading-relaxed">

@@ -93,7 +93,7 @@ def generate_header(badge_text):
 def generate_footer(topic, slide_num):
     return f"""
     <div class="slide-footer">
-        <span class="footer-left">Crypto Finance • {topic}</span>
+        <span class="footer-left">CryptoNova • {topic}</span>
         <span class="footer-right">Slide {slide_num:02d} / 23</span>
     </div>
     """
@@ -102,7 +102,7 @@ html_content = f"""<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Crypto Finance - Official Business Presentation</title>
+<title>CryptoNova - Official Business Presentation</title>
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -434,7 +434,7 @@ html_content = f"""<!DOCTYPE html>
 
     <div style="display: flex; align-items: center; gap: 36px;">
         <div class="btn-emerald" style="font-size: 24px; padding: 16px 44px;">JOIN WITH AS LOW AS $5 USDT</div>
-        <div style="font-size: 22px; color: #94A3B8; font-weight: 700;">🌐 cryptofinance.online</div>
+        <div style="font-size: 22px; color: #94A3B8; font-weight: 700;">🌐 cryptonova.online</div>
         <div style="font-size: 22px; color: #94A3B8; font-weight: 700;">📍 Crypto Valley Tower, Zug / Zurich, Switzerland</div>
     </div>
 </div>
@@ -444,7 +444,7 @@ html_content = f"""<!DOCTYPE html>
     {generate_header("Corporate Profile")}
     <div class="slide-content">
         <div class="category-title">Institutional Financial Strength</div>
-        <h2 class="main-title">About Crypto Finance</h2>
+        <h2 class="main-title">About CryptoNova</h2>
         <p class="subtitle">A premier global quantitative trading conglomerate with 15+ years of algorithmic mastery and 10+ years of crypto market leadership.</p>
 
         <div class="grid-2" style="align-items: center;">
@@ -510,16 +510,16 @@ html_content = f"""<!DOCTYPE html>
                     <div style="display: flex; flex-direction: column; gap: 12px; font-size: 18px;">
                         <div style="display: flex; gap: 14px;"><span style="color: #00FFA3; font-size: 20px;">📍</span> <span><strong>Office Address:</strong> Crypto Valley Tower, Dammstrasse 19, 6300 Zug, Switzerland</span></div>
                         <div style="display: flex; gap: 14px;"><span style="color: #38BDF8; font-size: 20px;">🗓️</span> <span><strong>Official Launch Date:</strong> Pre-Launching Phase</span></div>
-                        <div style="display: flex; gap: 14px;"><span style="color: #00FFA3; font-size: 20px;">✉️</span> <span><strong>Official Email:</strong> support@cryptofinance.online</span></div>
-                        <div style="display: flex; gap: 14px;"><span style="color: #FBBF24; font-size: 20px;">🌐</span> <span><strong>Web Portal:</strong> cryptofinance.online</span></div>
+                        <div style="display: flex; gap: 14px;"><span style="color: #00FFA3; font-size: 20px;">✉️</span> <span><strong>Official Email:</strong> support@cryptonova.online</span></div>
+                        <div style="display: flex; gap: 14px;"><span style="color: #FBBF24; font-size: 20px;">🌐</span> <span><strong>Web Portal:</strong> cryptonova.online</span></div>
                     </div>
                 </div>
             </div>
 
             <div class="visual-box">
-                <img src="{office_b64}" alt="Crypto Finance Headquarters">
+                <img src="{office_b64}" alt="CryptoNova Headquarters">
                 <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(3,7,18,0.95)); padding: 20px; text-align: center;">
-                    <div style="color: #00FFA3; font-size: 22px; font-weight: 800;">CRYPTO FINANCE HEADQUARTERS</div>
+                    <div style="color: #00FFA3; font-size: 22px; font-weight: 800;">CRYPTONOVA HEADQUARTERS</div>
                     <div style="color: #94A3B8; font-size: 16px; font-weight: 600;">Crypto Valley Tower, Dammstrasse 19, 6300 Zug, Switzerland</div>
                 </div>
             </div>
@@ -528,12 +528,12 @@ html_content = f"""<!DOCTYPE html>
     {generate_footer("Executive Leadership & Headquarters", 3)}
 </div>
 
-<!-- ==================== SLIDE 04: WHY CRYPTO FINANCE ==================== -->
+<!-- ==================== SLIDE 04: WHY CRYPTONOVA ==================== -->
 <div class="slide">
     {generate_header("Core Advantages")}
     <div class="slide-content">
-        <div class="category-title">The Crypto Finance Edge</div>
-        <h2 class="main-title">Why Crypto Finance?</h2>
+        <div class="category-title">The CryptoNova Edge</div>
+        <h2 class="main-title">Why CryptoNova?</h2>
         <p class="subtitle">Built on trust, blockchain transparency, and industry-leading payout parameters designed for maximum investor wealth.</p>
 
         <div class="grid-4" style="margin-top: 10px;">
@@ -1425,7 +1425,7 @@ html_content = f"""<!DOCTYPE html>
     <div class="slide-content">
         <div class="category-title">Leadership Recognition</div>
         <h2 class="main-title">Mega Milestone & Rank Rewards</h2>
-        <p class="subtitle">Accelerate your status with Crypto Finance. Hit team turnover milestones and win prestigious luxury assets or instant USDT cash!</p>
+        <p class="subtitle">Accelerate your status with CryptoNova. Hit team turnover milestones and win prestigious luxury assets or instant USDT cash!</p>
 
         <div class="grid-2" style="align-items: center; margin-top: 10px;">
             <div style="display: flex; flex-direction: column; gap: 20px;">
@@ -1433,7 +1433,7 @@ html_content = f"""<!DOCTYPE html>
                     <div style="font-size: 46px; font-weight: 900; color: #00FFA3; line-height: 1; margin-bottom: 10px;">LUXURY VIP LIFESTYLE</div>
                     <div style="font-size: 22px; color: #FFFFFF; font-weight: 800; margin-bottom: 14px;">Guaranteed Physical Gifts or Cash Equivalent</div>
                     <p style="font-size: 19px; color: #94A3B8; line-height: 1.5;">
-                        As your network expands and business volume compounds, Crypto Finance honors your dedication with elite rewards: from Smart Gadgets and Swiss Tours to Luxury Watches and Elite Sports Cars!
+                        As your network expands and business volume compounds, CryptoNova honors your dedication with elite rewards: from Smart Gadgets and Swiss Tours to Luxury Watches and Elite Sports Cars!
                     </p>
                 </div>
 
@@ -1692,10 +1692,10 @@ html_content = f"""<!DOCTYPE html>
                 <div class="card" style="padding: 30px;">
                     <div style="font-size: 16px; color: #94A3B8; font-weight: 800; text-transform: uppercase; letter-spacing: 2px;">Official Communications</div>
                     <div style="font-size: 22px; font-weight: 800; color: #00FFA3; margin-top: 6px;">
-                        📧 support@cryptofinance.online
+                        📧 support@cryptonova.online
                     </div>
                     <div style="font-size: 22px; font-weight: 800; color: #38BDF8; margin-top: 6px;">
-                        🌐 cryptofinance.online
+                        🌐 cryptonova.online
                     </div>
                 </div>
             </div>
@@ -1703,7 +1703,7 @@ html_content = f"""<!DOCTYPE html>
             <div class="visual-box">
                 <img src="{office_b64}" alt="Crypto Valley Office">
                 <div style="position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(3,7,18,0.95)); padding: 20px; text-align: center;">
-                    <div style="color: #00FFA3; font-size: 22px; font-weight: 800;">CRYPTO FINANCE HEADQUARTERS</div>
+                    <div style="color: #00FFA3; font-size: 22px; font-weight: 800;">CRYPTONOVA HEADQUARTERS</div>
                     <div style="color: #94A3B8; font-size: 16px; font-weight: 600;">Crypto Valley Tower, Zug / Zurich, Switzerland</div>
                 </div>
             </div>
@@ -1729,7 +1729,7 @@ html_content = f"""<!DOCTYPE html>
     </div>
 
     <h1 style="font-family: 'Inter', sans-serif; font-size: 80px; font-weight: 900; color: #FFFFFF; line-height: 1.1; margin-bottom: 20px;">
-        Thank You & Welcome to <br><span style="background: linear-gradient(135deg, #00FFA3 0%, #00D2FF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Crypto Finance</span>
+        Thank You & Welcome to <br><span style="background: linear-gradient(135deg, #00FFA3 0%, #00D2FF 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">CryptoNova</span>
     </h1>
 
     <p style="font-size: 28px; color: #94A3B8; max-width: 1100px; line-height: 1.4; margin-bottom: 40px;">
@@ -1737,13 +1737,13 @@ html_content = f"""<!DOCTYPE html>
     </p>
 
     <div style="display: flex; gap: 24px; margin-bottom: 48px;">
-        <div class="btn-emerald" style="font-size: 26px; padding: 20px 54px;">REGISTER ON CRYPTOFINANCE.ONLINE</div>
+        <div class="btn-emerald" style="font-size: 26px; padding: 20px 54px;">REGISTER ON CRYPTONOVA.ONLINE</div>
     </div>
 
     <div style="display: flex; gap: 48px; font-size: 22px; color: #94A3B8; font-weight: 700;">
         <div>🏢 Mr. Alex Rivera</div>
         <div>📍 Crypto Valley Tower, Zug / Zurich, Switzerland</div>
-        <div>✉️ support@cryptofinance.online</div>
+        <div>✉️ support@cryptonova.online</div>
     </div>
 </div>
 

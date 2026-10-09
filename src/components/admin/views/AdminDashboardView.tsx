@@ -86,7 +86,7 @@ export function AdminDashboardView({
               Executive Overview
             </h2>
             <p className="text-xs text-slate-500 dark:text-slate-400">
-              Real-time analytics for Crypto Finance Protocol &bull; Binance Smart Chain (BEP-20)
+              Real-time analytics for CryptoNova Protocol &bull; Binance Smart Chain (BEP-20)
             </p>
           </div>
         </div>

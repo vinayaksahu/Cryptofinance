@@ -214,7 +214,7 @@ export function CountdownBanner({
 
                 {/* Grand Headline */}
                 <h3 className="font-display text-2xl sm:text-4xl lg:text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-sky-200 to-amber-300 tracking-tight leading-tight max-w-2xl">
-                  WELCOME TO CRYPTO FINANCE
+                  WELCOME TO CRYPTONOVA
                 </h3>
 
                 <p className="text-xs sm:text-sm text-slate-300 mt-3 max-w-xl leading-relaxed">

@@ -351,7 +351,7 @@ export function MilestoneRewardsView({
 
   const handlePdf = () => {
     printOrExportPdf(
-      "Crypto Finance • Milestone Rewards Schedule",
+      "CryptoNova • Milestone Rewards Schedule",
       exportColumns,
       filteredRanks,
       `Total Unlocked Rewards: $${rankAnalysis.totalUnlockedCash.toLocaleString()} USDT`,
@@ -361,7 +361,7 @@ export function MilestoneRewardsView({
 
   const handlePrint = () => {
     printOrExportPdf(
-      "Crypto Finance • Milestone Rewards Schedule",
+      "CryptoNova • Milestone Rewards Schedule",
       exportColumns,
       filteredRanks,
       `Total Unlocked Rewards: $${rankAnalysis.totalUnlockedCash.toLocaleString()} USDT`,

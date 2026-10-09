@@ -12,7 +12,7 @@ export function About() {
             SWISS JURISDICTION &bull; QUANTITATIVE ARCHITECTURE &bull; SLIDES 02-03
           </span>
           <h2 className="font-display text-3xl sm:text-5xl font-black text-[var(--text-main)] mt-3">
-            About Crypto Finance
+            About CryptoNova
           </h2>
           <p className="text-[var(--text-muted)] text-base sm:text-lg mt-3 font-medium">
             Pioneering algorithmic quantitative arbitrage, autonomous liquidity protocols, and mathematical solvency.
@@ -176,10 +176,10 @@ export function About() {
             <div className="mt-8 pt-4 border-t border-slate-200/80 dark:border-cyan-500/20 flex flex-wrap items-center justify-between gap-3 text-xs text-[var(--text-subtle)]">
               <span className="flex items-center gap-1.5">
                 <Mail className="w-3.5 h-3.5 text-sky-500 dark:text-sky-400" />
-                support@cryptofinance.online
+                support@cryptonova.online
               </span>
               <span className="font-bold text-sky-600 dark:text-sky-400">
-                cryptofinance.online
+                cryptonova.online
               </span>
             </div>
           </div>

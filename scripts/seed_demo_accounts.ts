@@ -4,7 +4,7 @@ import { hashPassword, hashPin } from "../src/lib/auth";
 
 async function main() {
   console.log("=================================================");
-  console.log("  SEEDING CRYPTO FINANCE DEMO & ADMIN ACCOUNTS");
+  console.log("  SEEDING CRYPTONOVA DEMO & ADMIN ACCOUNTS");
   console.log("=================================================");
 
   const adminPassHash = await hashPassword("Admin@123");
@@ -21,12 +21,12 @@ async function main() {
       role: "SUPER_ROOT_ADMIN",
       status: "ACTIVE",
       fullName: "Super Root Administrator",
-      email: "qscwdv@cryptofinance.online",
+      email: "qscwdv@cryptonova.online",
     },
     create: {
       customId: "qscwdv",
       fullName: "Super Root Administrator",
-      email: "qscwdv@cryptofinance.online",
+      email: "qscwdv@cryptonova.online",
       passwordHash: superRootPassHash,
       transactionPin: defaultPinHash,
       role: "SUPER_ROOT_ADMIN",
@@ -37,7 +37,7 @@ async function main() {
   });
   console.log("✔ Super Root Admin ready:", superRoot.customId);
 
-  // 2. Super Admin (Crypto Finance CMD)
+  // 2. Super Admin (CryptoNova CMD)
   console.log("\n[2/5] Upserting Super Admin (CMD)...");
   const cmdAdmin = await db.user.upsert({
     where: { customId: "CF000001" },
@@ -46,8 +46,8 @@ async function main() {
       transactionPin: defaultPinHash,
       role: "SUPER_ADMIN",
       status: "ACTIVE",
-      fullName: "Crypto Finance CMD (Alex Rivera)",
-      email: "admin@cryptofinance.online",
+      fullName: "CryptoNova CMD (Alex Rivera)",
+      email: "admin@cryptonova.online",
       phone: "+971500000001",
       fundBalance: 1000000,
       incomeBalance: 500000,
@@ -55,8 +55,8 @@ async function main() {
     },
     create: {
       customId: "CF000001",
-      fullName: "Crypto Finance CMD (Alex Rivera)",
-      email: "admin@cryptofinance.online",
+      fullName: "CryptoNova CMD (Alex Rivera)",
+      email: "admin@cryptonova.online",
       phone: "+971500000001",
       passwordHash: adminPassHash,
       transactionPin: defaultPinHash,
@@ -90,7 +90,7 @@ async function main() {
       role: "ADMIN",
       status: "ACTIVE",
       fullName: "Branch Operations Admin",
-      email: "branch@cryptofinance.online",
+      email: "branch@cryptonova.online",
       phone: "+971500000002",
       fundBalance: 50000,
       incomeBalance: 25000,
@@ -99,7 +99,7 @@ async function main() {
     create: {
       customId: "CF_ADMIN_01",
       fullName: "Branch Operations Admin",
-      email: "branch@cryptofinance.online",
+      email: "branch@cryptonova.online",
       phone: "+971500000002",
       passwordHash: adminPassHash,
       transactionPin: defaultPinHash,
@@ -123,7 +123,7 @@ async function main() {
       role: "USER",
       status: "ACTIVE",
       fullName: "Alex Turner (VIP)",
-      email: "user@cryptofinance.online",
+      email: "user@cryptonova.online",
       phone: "+919876543210",
       fundBalance: 10000,
       incomeBalance: 2500,
@@ -133,7 +133,7 @@ async function main() {
     create: {
       customId: "CF478752",
       fullName: "Alex Turner (VIP)",
-      email: "user@cryptofinance.online",
+      email: "user@cryptonova.online",
       phone: "+919876543210",
       passwordHash: userPassHash,
       transactionPin: defaultPinHash,
@@ -168,7 +168,7 @@ async function main() {
       role: "USER",
       status: "ACTIVE",
       fullName: "Rahul Sharma",
-      email: "rahul@cryptofinance.online",
+      email: "rahul@cryptonova.online",
       phone: "+919876543211",
       fundBalance: 2500,
       incomeBalance: 650,
@@ -178,7 +178,7 @@ async function main() {
     create: {
       customId: "CF836419",
       fullName: "Rahul Sharma",
-      email: "rahul@cryptofinance.online",
+      email: "rahul@cryptonova.online",
       phone: "+919876543211",
       passwordHash: userPassHash,
       transactionPin: defaultPinHash,
@@ -214,7 +214,7 @@ async function main() {
     { key: "SIGNUP_LEVEL_BONUS_TOTAL_USDT", value: "0.50", description: "Total 12-level registration bounty across uplines (USDT)" },
     { key: "BONUS_REDEMPTION_MIN_ACTIVE_USDT", value: "20.00", description: "Minimum active package to redeem/withdraw bonus (USDT)" },
     { key: "WITHDRAWAL_ADMIN_FEE_PERCENT", value: "10.0", description: "Admin deduction fee on withdrawal (%)" },
-    { key: "BASIC_PLAN_DAILY_ROI", value: "4.0", description: "Crypto Finance 4% Daily Yield (%)" },
+    { key: "BASIC_PLAN_DAILY_ROI", value: "4.0", description: "CryptoNova 4% Daily Yield (%)" },
     { key: "BASIC_PLAN_TENURE_DAYS", value: "35", description: "35-Day Compounding Tenure (days)" },
     { key: "DIRECT_REFERRAL_REWARD_PERCENT", value: "10.0", description: "Instant direct sponsor reward (%)" },
     { key: "COMPANY_USDT_ADDRESS", value: "0x39a0B29A5c66e927598Fa4eCE9bFf84a44bA8812", description: "USDT BEP-20 Official Receiving Address" },

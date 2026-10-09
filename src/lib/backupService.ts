@@ -94,7 +94,7 @@ export async function getFullDatabaseDump(): Promise<DatabaseBackupPayload> {
 
   return {
     metadata: {
-      platform: "Crypto Finance",
+      platform: "CryptoNova",
       version: "1.0.0",
       exportedAt: new Date().toISOString(),
       totalRecords,

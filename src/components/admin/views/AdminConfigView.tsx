@@ -336,7 +336,7 @@ export function AdminConfigView() {
               Protocol Configuration &amp; Governance
             </h1>
             <p className="text-slate-400 text-xs sm:text-sm mt-1 max-w-xl">
-              Configure parameters strictly matching the Crypto Finance Protocol plan: 4% Daily Yield, 2X Allocation Pool, 10% Bonus Wallet utility, 10-Level Royalties, and 10% Liquidity Fee.
+              Configure parameters strictly matching the CryptoNova Protocol plan: 4% Daily Yield, 2X Allocation Pool, 10% Bonus Wallet utility, 10-Level Royalties, and 10% Liquidity Fee.
             </p>
           </div>
 

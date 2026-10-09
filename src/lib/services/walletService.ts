@@ -13,7 +13,7 @@ export interface WalletBalances {
 }
 
 /**
- * Calculates accurate real-time balances for all ledgers in the Crypto Finance ecosystem:
+ * Calculates accurate real-time balances for all ledgers in the CryptoNova ecosystem:
  * 1. Bonus Wallet (Non-withdrawable, max 10% utility for ID activations)
  * 2. ROI Wallet (Daily 4% returns from 2X pool, can transfer to Main or Secondary)
  * 3. Working Wallet (Direct + 10-Level Royalty + Milestones, can transfer to Main or Secondary)

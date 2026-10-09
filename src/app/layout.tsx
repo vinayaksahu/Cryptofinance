@@ -9,10 +9,10 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Crypto Finance - Quantitative Algo & DeFi Arbitrage Protocol | 4% Daily Yield",
-  description: "Official Crypto Finance Protocol Portal. Next-generation quantitative wealth protocol engineered for mathematical certainty, sustainable 4% daily yields, and triple-isolated liquidity. Powered by USDT BEP-20.",
+  title: "CryptoNova - Quantitative Algo & DeFi Arbitrage Protocol | 4% Daily Yield",
+  description: "Official CryptoNova Protocol Portal. Next-generation quantitative wealth protocol engineered for mathematical certainty, sustainable 4% daily yields, and triple-isolated liquidity. Powered by USDT BEP-20.",
   icons: {
-    icon: "/crypto_coin_hero.png",
+    icon: "/logo_transparent.png",
   },
 };
 

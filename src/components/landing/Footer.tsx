@@ -65,8 +65,8 @@ export function Footer() {
               <div className="w-11 h-11 rounded-xl overflow-hidden bg-gradient-to-br from-cyan-400 via-sky-500 to-blue-600 p-0.5 shadow-md shadow-cyan-500/30">
                 <div className="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center overflow-hidden">
                   <Image
-                    src="/crypto_coin_hero.png"
-                    alt="Crypto Finance Logo"
+                    src="/logo_transparent.png"
+                    alt="CryptoNova Logo"
                     width={40}
                     height={40}
                     className="object-contain"
@@ -75,7 +75,7 @@ export function Footer() {
               </div>
               <div>
                 <span className="font-display font-black text-xl tracking-wider text-sky-600 dark:text-cyan-400 uppercase">
-                  CRYPTO FINANCE
+                  CRYPTONOVA
                 </span>
                 <span className="block text-[10px] text-[var(--text-subtle)] tracking-widest uppercase">
                   QUANTITATIVE ALGO PROTOCOL &bull; BEP-20
@@ -154,7 +154,7 @@ export function Footer() {
                 Audited BEP-20 Smart Contract Standard
               </span>
               <span className="block">
-                Official Portal: cryptofinance.online
+                Official Portal: cryptonova.online
               </span>
             </div>
           </div>
@@ -163,7 +163,7 @@ export function Footer() {
         {/* Copyright & Disclaimer */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[var(--text-subtle)]">
           <p>
-            &copy; {new Date().getFullYear()} Crypto Finance Protocol. All Rights Reserved. Headquartered in Zug, Switzerland.
+            &copy; {new Date().getFullYear()} CryptoNova Protocol. All Rights Reserved. Headquartered in Zug, Switzerland.
           </p>
           <div className="flex items-center gap-4 text-[11px]">
             <span>Minimum Entry: $2 USDT</span>

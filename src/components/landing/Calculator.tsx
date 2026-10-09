@@ -187,7 +187,7 @@ export function Calculator() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `CryptoFinance_Simulator_${safeCap}USDT_${mode}.csv`;
+    a.download = `CryptoNova_Simulator_${safeCap}USDT_${mode}.csv`;
     a.click();
   };
 
@@ -241,7 +241,7 @@ export function Calculator() {
           Live Yield &amp; Compounding Engine
         </h2>
         <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base mt-3 font-medium">
-          Experience the mathematical precision of Crypto Finance: dynamic 4% daily yield, 10% bonus subsidy, 2X decaying balance pool, and 35-day exponential compounding.
+          Experience the mathematical precision of CryptoNova: dynamic 4% daily yield, 10% bonus subsidy, 2X decaying balance pool, and 35-day exponential compounding.
         </p>
       </div>
 

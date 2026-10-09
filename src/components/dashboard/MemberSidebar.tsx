@@ -126,8 +126,8 @@ export function MemberSidebar({
           <div className="flex items-center gap-3 overflow-hidden">
             <div className="w-9 h-9 rounded-full overflow-hidden border border-amber-500/40 bg-black p-0.5 shadow-sm shrink-0 flex items-center justify-center">
               <Image
-                src="/crypto_coin_hero.png"
-                alt="Crypto Finance Logo"
+                src="/logo_transparent.png"
+                alt="CryptoNova Logo"
                 width={28}
                 height={28}
                 className="object-contain"
@@ -136,7 +136,7 @@ export function MemberSidebar({
             </div>
             <div className={`flex flex-col leading-none ${isCollapsed ? "lg:hidden" : "block"}`}>
               <span className="text-sm font-black tracking-tight text-foreground uppercase whitespace-nowrap">
-                CRYPTO <span className="text-amber-500 dark:text-amber-400">FINANCE</span>
+                CRYPTO<span className="text-amber-500 dark:text-amber-400">NOVA</span>
               </span>
               <span className="text-[9px] font-extrabold text-muted-foreground uppercase tracking-widest whitespace-nowrap mt-0.5">
                 QUANTITATIVE PROTOCOL

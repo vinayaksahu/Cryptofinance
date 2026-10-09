@@ -63,7 +63,7 @@ export function Hero() {
         {/* Floating Glass Protocol Badge */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-pill text-sky-400 text-xs sm:text-sm font-bold uppercase tracking-wider mb-6 shadow-sm">
           <Sparkles className="w-4 h-4 text-sky-400 animate-pulse" />
-          <span>CRYPTO FINANCE &bull; DYNAMIC 4% DAILY YIELD &bull; BEP-20 PROTOCOL</span>
+          <span>CRYPTONOVA &bull; DYNAMIC 4% DAILY YIELD &bull; BEP-20 PROTOCOL</span>
         </div>
 
         {/* High-Impact Modern Headline */}

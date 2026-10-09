@@ -166,7 +166,7 @@ export const DEFAULT_SYSTEM_CONFIGS: Record<string, { value: string; description
 
   // 7. Corporate Headquarters & Customer Support
   OFFICIAL_EMAIL: {
-    value: "support@cryptofinance.online",
+    value: "support@cryptonova.online",
     description: "Official customer care & technical support email",
     category: "company",
   },
@@ -183,7 +183,7 @@ export const DEFAULT_SYSTEM_CONFIGS: Record<string, { value: string; description
     category: "system_mode",
   },
   MAINTENANCE_NOTICE_TEXT: {
-    value: "Crypto Finance Protocol is undergoing scheduled infrastructure upgrades. All assets and ledger balances are completely safe.",
+    value: "CryptoNova Protocol is undergoing scheduled infrastructure upgrades. All assets and ledger balances are completely safe.",
     description: "Notice message displayed to visitors when Maintenance mode is active",
     category: "system_mode",
   },

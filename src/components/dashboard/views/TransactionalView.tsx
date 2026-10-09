@@ -645,7 +645,7 @@ export function TransactionalView({ user, mode, onRefresh }: TransactionalViewPr
             {/* Bottom Footer Divider */}
             <div className="w-full border-t border-slate-100 dark:border-slate-800/80 mt-6 pt-3 text-center">
               <p className="text-[11px] sm:text-xs text-slate-400 dark:text-slate-500 font-medium">
-                Powered by Crypto Finance
+                Powered by CryptoNova
               </p>
             </div>
           </div>

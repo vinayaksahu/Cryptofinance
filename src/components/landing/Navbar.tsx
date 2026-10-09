@@ -84,8 +84,8 @@ export function Navbar() {
             <div className="relative w-9 h-9 rounded-2xl overflow-hidden bg-gradient-to-br from-sky-400 via-indigo-500 to-purple-600 p-0.5 shadow-md shadow-sky-500/25 group-hover:scale-105 transition-transform duration-200 shrink-0">
               <div className="w-full h-full rounded-[14px] bg-slate-950 flex items-center justify-center overflow-hidden">
                 <Image
-                  src="/crypto_coin_hero.png"
-                  alt="Crypto Finance Logo"
+                  src="/logo_transparent.png"
+                  alt="CryptoNova Logo"
                   width={32}
                   height={32}
                   className="object-contain"
@@ -96,7 +96,7 @@ export function Navbar() {
 
             <div className="flex flex-col justify-center shrink-0">
               <span className="font-bold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white uppercase whitespace-nowrap leading-none">
-                CRYPTO FINANCE
+                CRYPTONOVA
               </span>
               <span className="text-[9px] text-sky-600 dark:text-sky-400 font-bold tracking-widest uppercase mt-0.5 whitespace-nowrap leading-none">
                 QUANTITATIVE PROTOCOL

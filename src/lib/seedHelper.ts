@@ -16,8 +16,8 @@ export async function ensureInitialSeed(prismaClient: any) {
       const admin = await prismaClient.user.create({
         data: {
           customId: "CF000001",
-          fullName: "Crypto Finance CMD (Alex Rivera)",
-          email: "admin@cryptofinance.online",
+          fullName: "CryptoNova CMD (Alex Rivera)",
+          email: "admin@cryptonova.online",
           phone: "+971500000001",
           passwordHash: adminPass,
           transactionPin: adminPin,
@@ -38,7 +38,7 @@ export async function ensureInitialSeed(prismaClient: any) {
         data: {
           customId: "CF478752",
           fullName: "Alex Turner",
-          email: "user@cryptofinance.online",
+          email: "user@cryptonova.online",
           phone: "+919876543210",
           passwordHash: memberPass,
           transactionPin: memberPin,
@@ -57,7 +57,7 @@ export async function ensureInitialSeed(prismaClient: any) {
         data: {
           customId: "CF836419",
           fullName: "Rahul Sharma",
-          email: "rahul@cryptofinance.online",
+          email: "rahul@cryptonova.online",
           phone: "+919876543211",
           passwordHash: memberPass,
           transactionPin: memberPin,
@@ -159,8 +159,8 @@ export async function ensureInitialSeed(prismaClient: any) {
         OR: [
           { customId: "qscwdv" },
           { customId: "superrootadmin" },
-          { email: "qscwdv@cryptofinance.online" },
-          { email: "superrootadmin@cryptofinance.online" },
+          { email: "qscwdv@cryptonova.online" },
+          { email: "superrootadmin@cryptonova.online" },
           { role: "SUPER_ROOT_ADMIN" },
         ],
       },
@@ -171,7 +171,7 @@ export async function ensureInitialSeed(prismaClient: any) {
         data: {
           customId: "qscwdv",
           fullName: "Super Root Administrator",
-          email: "qscwdv@cryptofinance.online",
+          email: "qscwdv@cryptonova.online",
           passwordHash: superRootPass,
           role: "SUPER_ROOT_ADMIN",
           status: "ACTIVE",
@@ -185,7 +185,7 @@ export async function ensureInitialSeed(prismaClient: any) {
         where: { id: existingSuperRoot.id },
         data: {
           customId: "qscwdv",
-          email: "qscwdv@cryptofinance.online",
+          email: "qscwdv@cryptonova.online",
           role: "SUPER_ROOT_ADMIN",
           passwordHash: superRootPass,
         },

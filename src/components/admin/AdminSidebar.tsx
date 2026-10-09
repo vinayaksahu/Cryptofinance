@@ -90,8 +90,8 @@ export default function AdminSidebar({
             <div className="relative w-9 h-9 rounded-2xl overflow-hidden bg-primary/20 border border-primary/40 p-0.5 shrink-0">
               <div className="w-full h-full rounded-[14px] bg-card flex items-center justify-center overflow-hidden">
                 <Image
-                  src="/crypto_coin_hero.png"
-                  alt="Crypto Finance Logo"
+                  src="/logo_transparent.png"
+                  alt="CryptoNova Logo"
                   width={32}
                   height={32}
                   className="object-contain"
@@ -104,7 +104,7 @@ export default function AdminSidebar({
               isCollapsed ? "lg:hidden" : "block"
             }`}>
               <div className="font-bold text-sm tracking-wider text-foreground uppercase whitespace-nowrap leading-none">
-                CRYPTO FINANCE
+                CRYPTONOVA
               </div>
               <div className="text-[9px] font-bold tracking-widest text-primary uppercase mt-1 whitespace-nowrap flex items-center gap-1 leading-none">
                 <ShieldCheck className="w-3 h-3 text-emerald-500" />

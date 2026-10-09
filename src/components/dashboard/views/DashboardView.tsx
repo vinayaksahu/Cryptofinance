@@ -50,7 +50,7 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
   const origin =
     typeof window !== "undefined" && window.location.hostname === "localhost"
       ? window.location.origin
-      : "https://cryptofinance.online";
+      : "https://cryptonova.online";
   const customId = user?.customId || "CF478752";
   const referralUrl = `${origin}/register?r=${customId}`;
 
@@ -542,7 +542,7 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
               <span>{copied ? "Copied" : "Copy Link"}</span>
             </button>
             <a
-              href={`https://wa.me/?text=${encodeURIComponent(`Join Crypto Finance quantitative protocol: ${referralUrl}`)}`}
+              href={`https://wa.me/?text=${encodeURIComponent(`Join CryptoNova quantitative protocol: ${referralUrl}`)}`}
               target="_blank"
               rel="noreferrer"
               className="px-4 py-2.5 rounded-xl border border-border bg-card hover:bg-muted text-foreground text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer shrink-0"
@@ -954,7 +954,7 @@ export function DashboardView({ user, setActiveTab, onRefresh }: DashboardViewPr
 
       {/* Footer */}
       <footer className="pt-6 pb-2 text-center text-xs text-slate-500 font-medium">
-        &copy; 2026 Crypto Finance Protocol. Swiss Quantitative Ecosystem &bull; BEP-20 Architecture &bull; Crypto Valley Tower, Zug, Switzerland.
+        &copy; 2026 CryptoNova Protocol. Swiss Quantitative Ecosystem &bull; BEP-20 Architecture &bull; Crypto Valley Tower, Zug, Switzerland.
       </footer>
     </div>
   );

@@ -89,7 +89,7 @@ export default function MemberDashboardPage() {
         <div className="flex flex-col items-center gap-3">
           <div className="w-12 h-12 rounded-full border-4 border-primary border-t-transparent animate-spin" />
           <p className="text-primary font-extrabold tracking-widest text-sm uppercase">
-            Loading Crypto Finance Portal...
+            Loading CryptoNova Portal...
           </p>
         </div>
       </div>

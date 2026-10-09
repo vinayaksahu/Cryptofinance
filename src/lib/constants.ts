@@ -1,8 +1,8 @@
 export const APP_CONFIG = {
-  name: "Crypto Finance",
+  name: "CryptoNova",
   tagline: "Decentralized Quantitative Yield Protocol • Swiss Algo & DeFi Arbitrage",
-  domain: "cryptofinance.online",
-  officialEmail: "support@cryptofinance.online",
+  domain: "cryptonova.online",
+  officialEmail: "support@cryptonova.online",
   cmd: "Mr. Alex Rivera",
   cmdTitle: "Chairman & Managing Director (CMD)",
   cmdBio: "Veteran quantitative architect and FinTech strategist with over 15 years directing algorithmic trading desks across Zurich, London, and Singapore.",
@@ -222,7 +222,7 @@ export function getWithdrawalWindowStatus(config?: Record<string, any>): Withdra
     config?.WITHDRAWAL_24H_OPEN === true ||
     config?.WITHDRAWAL_24H_OPEN === "true" ||
     config?.WITHDRAWAL_24H_OPEN === "1" ||
-    true; // Default 24/7 automated Web3 withdrawals for Crypto Finance
+    true; // Default 24/7 automated Web3 withdrawals for CryptoNova
 
   let startTime = "10:00";
   if (config?.WITHDRAWAL_START_TIME && String(config.WITHDRAWAL_START_TIME).includes(":")) {

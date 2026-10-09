@@ -95,7 +95,7 @@ export function AdminBackupView() {
       const a = document.createElement("a");
       a.href = url;
       const timestamp = new Date().toISOString().slice(0, 10);
-      a.download = `cryptofinance_backup_${timestamp}.${format === "excel" ? "xlsx" : "json"}`;
+      a.download = `cryptonova_backup_${timestamp}.${format === "excel" ? "xlsx" : "json"}`;
       document.body.appendChild(a);
       a.click();
       a.remove();

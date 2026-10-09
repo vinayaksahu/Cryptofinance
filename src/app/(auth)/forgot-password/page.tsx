@@ -133,8 +133,8 @@ export default function ForgotPasswordPage() {
             <div className="w-12 h-12 rounded-xl overflow-hidden bg-gradient-to-br from-amber-400 to-amber-700 p-0.5 shadow-lg shadow-amber-500/30">
               <div className="w-full h-full rounded-[10px] bg-slate-950 flex items-center justify-center overflow-hidden">
                 <img
-                  src="/crypto_coin_hero.png"
-                  alt="Crypto Finance Logo"
+                  src="/logo_transparent.png"
+                  alt="CryptoNova Logo"
                   className="w-10 h-10 object-contain"
                 />
               </div>

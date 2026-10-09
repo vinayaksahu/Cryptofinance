@@ -22,7 +22,7 @@ try:
 except:
     font = ImageFont.load_default()
 
-text = "CRYPTO FINANCE"
+text = "CRYPTONOVA"
 # Center text in box (width: 460, height: 65)
 # text length in 46px is approx 380px
 draw.text((722, 432), text, font=font, fill=(0, 255, 163, 160))

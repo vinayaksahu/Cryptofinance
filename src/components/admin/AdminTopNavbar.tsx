@@ -411,7 +411,7 @@ export function AdminTopNavbar({ user, onToggleSidebar, isCollapsed = false, onR
                   type="email"
                   value={profileEmail}
                   onChange={(e) => setProfileEmail(e.target.value)}
-                  placeholder="admin@cryptofinance.online"
+                  placeholder="admin@cryptonova.online"
                   className="w-full bg-muted/50 border border-border rounded-xl px-3.5 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary"
                   required
                 />

@@ -1,5 +1,5 @@
 /**
- * Crypto Finance Input Sanitization & Anti-XSS Utility
+ * CryptoNova Input Sanitization & Anti-XSS Utility
  * Protects against Stored XSS, HTML injection, and malicious payloads.
  */
 

@@ -25,13 +25,13 @@ export default function LoginPage() {
             setSystemMode("MAINTENANCE");
             setNoticeText(
               data.configs.MAINTENANCE_NOTICE_TEXT ||
-                "Crypto Finance is currently undergoing scheduled infrastructure upgrades. Public member access will resume shortly."
+                "CryptoNova is currently undergoing scheduled infrastructure upgrades. Public member access will resume shortly."
             );
           } else if (data.configs.PRELAUNCH_MODE === "true") {
             setSystemMode("PRELAUNCH");
             setNoticeText(
               data.configs.PRELAUNCH_NOTICE_TEXT ||
-                "Crypto Finance is currently in its official Pre-Launch phase. Public member registration and user dashboards will open shortly."
+                "CryptoNova is currently in its official Pre-Launch phase. Public member registration and user dashboards will open shortly."
             );
           } else {
             setSystemMode("LIVE");

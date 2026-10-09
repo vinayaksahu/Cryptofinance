@@ -141,7 +141,7 @@ export function GenealogyTreeView({ user, onNavigateTab }: GenealogyTreeViewProp
     const origin =
       typeof window !== "undefined" && window.location.hostname === "localhost"
         ? window.location.origin
-        : "https://cryptofinance.online";
+        : "https://cryptonova.online";
     const refUrl = `${origin}/register?r=${user?.customId || "CF000001"}`;
     navigator.clipboard.writeText(refUrl);
     setCopiedId(true);

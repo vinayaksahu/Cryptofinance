@@ -8,7 +8,7 @@ export function Faq() {
 
   const faqs = [
     {
-      q: "How does Crypto Finance generate sustainable 4% daily yields?",
+      q: "How does CryptoNova generate sustainable 4% daily yields?",
       a: "Our yields are backed by institutional quantitative excellence: high-frequency algorithmic arbitrage across major decentralized liquidity venues, triangular spreads, and multi-exchange AI bots. 60% of staked capital is deployed in quant arbitrage, 35% is locked in smart contract liquidity reserves to guarantee instant cashouts, and 5% is dedicated to compliance and dev security.",
     },
     {
@@ -45,7 +45,7 @@ export function Faq() {
             Got Questions? We Have Answers.
           </h2>
           <p className="text-[var(--text-muted)] text-base sm:text-lg mt-3 font-medium">
-            Everything you need to know about the official Crypto Finance quantitative architecture and yield protocol.
+            Everything you need to know about the official CryptoNova quantitative architecture and yield protocol.
           </p>
         </div>
 
